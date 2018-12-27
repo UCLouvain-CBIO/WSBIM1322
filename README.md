@@ -1,2 +1,1 @@
-# WSBIM1322
-Bioinformatics
+WSBIM1322 - Bioinformatics
