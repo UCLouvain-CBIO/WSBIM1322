@@ -1,0 +1,150 @@
+---
+title: "Bioinformatics"
+author: "Laurent Gatto"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+knit: bookdown::preview_chapter
+description: "Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain."
+output:
+  msmbstyle::msmb_html_book:
+    toc: TRUE
+    toc_depth: 1
+    split_by: chapter
+    split_bib: no
+    css: style.css
+link-citations: yes
+bibliography: [refs.bib, packages.bib]
+---
+
+# Preamble {-}
+
+The [WSBIM1322](https://uclouvain.be/cours-2019-wsbim1322.html) course
+is teaches the basics of statistical data analysis applied to high
+throughput biology. It is aimed at biology and biomedical students
+that are already familiar with the R langauge (see the pre-requisits
+section below). The students will familiarise themselves with
+statitical learning concepts such as unsupervised and supervised
+learning, hypothesis testing, and extend their understanding and
+practive in R data structures and programming and the Bioconductor
+project.
+
+The course will be followed by *Omics data analysis*
+([WSBIM2122](https://github.com/UCLouvain-CBIO/WSBIM2122)).
+
+
+## Motivation {-}
+
+Today, it is difficult to overestimate the very broad importance and
+impact of *data*. Given the abundance of data around us, and the
+sophistication of tools for their analysis and interpretation that are
+readily available, data has become a tool of profound social
+change. Resarch in general, and biomedical research in particular, is
+at the centre of this evolution. And while bioinformatics has been
+playing a central role in bio-medical research for many years now,
+bioinformatics skills aren't well integrated in life science
+curricula, limiting students in their career prospects and research
+horizon [@WilsonSayres:2018]. It is important for young researchers to
+acquire quantitative, computational and data skills to address the
+challenges that lie ahead.
+
+This course will focus on the application of data analysis methods and
+algorithms, and the interpretation of their outputs.  We will be using
+the [R](https://www.R-project.org/) language and environment [@R] and
+the [RStudio integrated development
+environment](https://www.rstudio.com/products/RStudio/) to acquire
+these data skills. Other interactive language such as
+[Python](https://www.R-project.org/) and the interactive [jupyer
+notebooks](https://jupyter.org/) would also have been a good fit. One
+motivation of this choice is the availability of numerous
+R/[Bionductor](https://www.bioconductor.org/) packages [@Huber:2015]
+for the analysis of high throughput biology data.
+
+## References and credits {-}
+
+References are provided throughout the course. Several stand out
+however, as they cover large parts of the material or provide
+complementary resources.
+
+- **Modern Statistical for Modern Biology**, by Susan Holmes and
+  Wolfgang Huber [@MSMB]. A free online version of the book is
+  available [here](https://www-huber.embl.de/msmb/).
+
+- **An Introduction to Statistical Learning with Applications in R**
+  by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani
+  [@ISLR]. A free pdf of the book is available
+  [here](http://faculty.marshall.usc.edu/gareth-james/ISL/index.html).
+
+This course is being tought by Prof Laurent Gatto with invaluable
+assistance from Dr Axelle Loriot and Mr Kevin Missault at the Faculty
+of Pharmacy and Biomedical Sciences (FASB) at the UCLouvain, Belgium.
+
+## Pre-requisites {-}
+
+Students taking this course should be familiar with data analysis and
+visualisation in R. A formal pre-requisite for students taking the
+class is the introductory course
+[WSBIM1207](https://UCLouvain-CBIO.github.io/WSBIM1207). The first
+chapter of this course provides a refresher, grouding and links in R
+skills needed for the rest of the course.
+
+Software requirements are documented in the *Setup* section below.
+
+## About this course material {-}
+
+This material is written in R markdown [@R-rmarkdown] and compiled as a
+book using `knitr` [@R-knitr] `bookdown` [@R-bookdown]. The source
+code is publicly available in a Github repository
+[https://github.com/uclouvain-cbio/WSBIM1322](https://github.com/uclouvain-cbio/WSBIM1322)
+and the compiled material can be read at http://bit.ly/WSBIM1322.
+
+Contributions to this material are welcome. The best way to contribute
+or contact the maintainers is by means of pull requests and
+[issues](https://github.com/uclouvain-cbio/WSBIM1322/issues). Please
+familiarise yourself with the [code of
+conduct](https://github.com/UCLouvain-CBIO/WSBIM1322/blob/master/CONDUCT.md). By
+participating in this project you agree to abide by its terms.
+
+## Citation {-}
+
+If you use this course, please cite it as
+
+> Laurent Gatto. *UCLouvain-CBIO/WSBIM1322: Bioinformatics.*
+> https://github.com/UCLouvain-CBIO/WSBIM1322.
+
+
+
+## License {-}
+
+This material is licensed under the [Creative Commons
+Attribution-ShareAlike 4.0
+License](https://creativecommons.org/licenses/by-sa/4.0/).
+
+
+## Setup {-}
+
+We will be using the [R environment for statistical
+computing](https://www.r-project.org/) as main data science language.
+We will also use the
+[RStudio](https://www.rstudio.com/products/RStudio/) interface to
+interact with R and write scripts and reports. Both R and RStudio are
+easy to install and works on all major operating systems.
+
+Once R and RStudio are installed, a set of packages will need to be
+installed. See section \@ref(sec:setup2) for details.
+
+To build this book, you'll need `bookdown` [@R-bookdown] and a
+fork[^msmbfork] of [`msmbstyle`
+style](https://github.com/grimbough/msmbstyle/) [@R-msmbstyle].
+
+[^msmbfork]: https://github.com/lgatto/msmbstyle
+
+```{r combilebook1, eval=FALSE}
+install.packages("bookdown")
+devtools::install_github("lgatto/msmbstyle")
+```
+
+In the course's work directory, simply type
+
+```{r combilebook2, eval=FALSE}
+bookdown::render_book(".")
+```

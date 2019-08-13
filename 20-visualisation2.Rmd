@@ -1,0 +1,5 @@
+# Data visualisation
+
+This chapter is based on Chapter 3 [*High Quality Graphics in
+R*](https://www-huber.embl.de/msmb/Chap-Graphics.html) of the *Modern
+Statistics for Modern Biology* book.
