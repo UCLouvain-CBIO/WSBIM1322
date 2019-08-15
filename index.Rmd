@@ -141,7 +141,7 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 
 and then loaded with 
 
-```{r rwsbim1322, message = FALSE}
+```{r rwsbim1322, message = FALSE, warning = FALSE}
 library("rWSBIM1322")
 ```
 

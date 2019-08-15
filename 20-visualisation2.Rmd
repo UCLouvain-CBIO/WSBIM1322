@@ -16,7 +16,7 @@ suppressPackageStartupMessages(library("plotly"))
 
 The goal of data visualisation is to 
 
-- interactively explore and understant data, i.e. *exploratory data
+- interactively explore and understand data, i.e. *exploratory data
   analysis*;
 - to present and *communicate results*, whether as a preliminary
   analysis or final results.
@@ -30,7 +30,15 @@ Our learning objectives are
 - Learn about `plotly`, one package for ploducing interactive
   visualisations.
 
-# Base plotting
+The different between this chapter, and the [*Data
+Visualisation*](ttps://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html)
+of the introductory WSBIM1207 course is that here we focus on
+understanding and communicating data through visualisation, rather
+than on the syntax of the plotting packages. Hence, as a introduction,
+let's observe a couple of [*visualisation horror picture show*](./horror.pdf) from a
+lecture by Wolfgang Huber.
+
+## Base plotting
 
 The default graphics system that comes with R, often called base R
 graphics is simple and fast. It is based on the painter's model or
@@ -82,7 +90,7 @@ split by run.
 
 `r msmbstyle::solution_begin()`
 ```{r hist_boxplot, fig.width = 14, fig.height = 7, fig.cap = "The base `hist` and `boxplot` functions, the latter using the formula interface."}
-par(mfrow = c(1, 2)
+par(mfrow = c(1, 2))
 hist(DNase$density) 
 boxplot(density ~ Run, DNase) 
 ```
@@ -104,7 +112,7 @@ code.
 
 Finally, defaults, and colours in particular, are poorly chosen.
 
-# The `ggplot2` package
+## The `ggplot2` package
 
 **`ggplot2`** is a plotting package that makes it simple to create
 complex plots from data in a data frame. It provides a more
@@ -230,9 +238,8 @@ ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at))  +
   geom_point(aes(color = sampleColour), shape = 19) +
   geom_smooth(method = "loess")
 ```
-  
-  
-# Visualising 1D data
+ 
+## Visualising 1D data
 
 Let's start by exploring some 1 dimensional visualisation. This is
 very relevant for omics data such as transcriptomics or quantitative
@@ -246,25 +253,19 @@ Gata6 and Sox2.
 
 
 ```{r selprobes}
-selectedProbes <- c(Fgf4 = "1420085_at", Gata4 = "1418863_at",
-                    Gata6 = "1425463_at",  Sox2 = "1416967_at")
-```
-
-```{r gather0}
-library("dplyr")
-library("tidyr")
-tmp <- data.frame(t(exprs(hiiragi2013[selectedProbes, ])))
-names(tmp) <- names(selectedProbes)
-tmp$sample <- rownames(tmp)
-head(tmp)
+selected_genes <- c(Fgf4 = "X1420085_at", Gata4 = "X1418863_at",
+                    Gata6 = "X1425463_at",  Sox2 = "X1416967_at")
+dfx <- hiiragi2013df1[, selected_genes]
 ```
 
 ```{r gather}
-genes <- gather(tmp, key = "gene", value = "expression", -sample)
+library("dplyr")
+library("tidyr")
+genes <- gather(dfx, key = "gene", value = "expression")
 head(genes)
 ```
 
-## Histogram
+### Histogram
 
 ```{r hist, fig.cap = "Distribution of the Gata4 expression"}
 genes %>%
@@ -273,7 +274,7 @@ genes %>%
 ```
 
 
-## Box plots
+### Box plots
 
 ```{r boxplot, fig.cap = "A boxplot of expression values."}
 p <- ggplot(genes, aes(x = gene, y = expression, fill = gene))
@@ -296,8 +297,7 @@ vlnplot
 `r msmbstyle::solution_end()`
 
 
-
-## Dot plots and beeswarm plots
+### Dot plots and beeswarm plots
 
 When the data aren't too large, it is also possibly to visualise all
 points to get a sense of their distribution.
@@ -333,7 +333,7 @@ library(patchwork)
 jtrplot + dotplot + beeplot
 ```
 
-## Density and ecdf plots
+### Density and ecdf plots
 
 
 ```{r dens}
@@ -353,7 +353,7 @@ ecdfplot <- ggplot(genes, aes(x = expression, color = gene)) +
 densplot + ecdfplot
 ```
 
-## Summary
+### Summary
 
 - **Boxplot** makes sense for unimodal distributions (see below).
 
@@ -370,6 +370,8 @@ densplot + ecdfplot
 
 - **beeswarm**: for up to a few dozens of points, just show the data.
 
+
+## Number of modes
 
 The number of modes of a distribution depends on scale transformation
 of the data.
@@ -390,12 +392,14 @@ p1 + p2
 
 This also applies to density plots.
 
-# Visualising 2D data
+## Visualising 2D data
 
 ```{r sc1, fig.cap = "Scatter plot comparing the expression of a wild-type vs. FGF4 KO."}
-dfx <- as.data.frame(Biobase::exprs(hiiragi2013))
-scp <- ggplot(dfx, aes(x= `59 E4.5 (PE)`, 
-                       y = `92 E4.5 (FGF4-KO)`)) 
+data(hiiragi2013df2)
+head(hiiragi2013df2)
+scp <- ggplot(hiiragi2013df2,
+              aes(x= `59 E4.5 (PE)`, 
+                  y = `92 E4.5 (FGF4-KO)`)) 
 scp + geom_point()
 ```
 
@@ -421,7 +425,7 @@ scp + geom_density2d(h = 0.5, bins = 60)
 scp + geom_hex() 
 ```
 
-# Visualising data along more dimensions
+## Visualising data along more dimensions
 
 When visualising data along additional dimension, we can parameterise
 the points by setting their shape, colour, size and transparency, that
@@ -465,12 +469,12 @@ ggplot(genes, aes(x = expression)) +
 `r msmbstyle::solution_end()`
 
 
-# Interactive visualisation
+## Interactive visualisation
 
 ```{r plotly, fig.cap = "Interactive visualisation with plotly"}
 library("plotly")
 
-scp <- ggplot(dfx[1:100, ],
+scp <- ggplot(hiiragi2013df2[1:100, ],
               aes(x= `59 E4.5 (PE)`, y = `92 E4.5 (FGF4-KO)`))
 
 scp2 <- scp + geom_point()
@@ -478,4 +482,43 @@ ggplotly(scp2)
 ```
 
 See https://plot.ly/r for  examples of interactive graphics online.
+
+
+## Additional exercise
+
+`r msmbstyle::question_begin()`
+
+Load the `barley` data that comes with the `lattice` package (that is
+already installed on your computer). The data describe the yield from
+a Minnesota barley trial as a data frame with 120 observations on the
+following 4 variables.
+
+- `yield` Yield (averaged across three blocks) in bushels/acre.
+
+- `variety` Factor with levels `Svansota`, `No. 462`, `Manchuria`,
+  `No. 475`, `Velvet`, `Peatland`, `Glabron`, `No. 457`,`Wisconsin No. 38`, `Trebi`.
+
+- `year` Factor with levels `1932` and `1931`.
+
+- `site` Factor with 6 levels: `Grand Rapids`, `Duluth`,
+  `University Farm`, `Morris`, `Crookston`, `Waseca`.
+
+Familiarise yourself with the data
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Visualise the yield for each variety on all site in 1932 and 1931
+using `ggplot2`. Try to generate a figure on your own. If you
+struggle, discuss with your fellow students. If you need additional
+help, or as a check, execute the code in the `barley` manual page
+example.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+Can you spot an issue with the data?
+`r msmbstyle::question_end()`
 
