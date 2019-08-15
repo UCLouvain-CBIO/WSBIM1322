@@ -1,4 +1,4 @@
-- Recap: Rstudio, R data structure, plotting, programming
+- Recap: Rstudio, R data structure, programming
 - Visualisation (chap 3 MSMB)
 - Data normalisation: centering, scaling, quantile normalisation
 - Advanced R data structures: object and Bioconductor data structures
