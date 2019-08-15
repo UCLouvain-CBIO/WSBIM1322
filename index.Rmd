@@ -132,6 +132,19 @@ easy to install and works on all major operating systems.
 Once R and RStudio are installed, a set of packages will need to be
 installed. See section \@ref(sec:setup2) for details.
 
+The `rWSBIM1322` package provides some pre-formatted data used in this
+course. It can be installed with
+
+```{r, eval = FALSE}
+BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
+```
+
+and then loaded with 
+
+```{r rwsbim1322, message = FALSE}
+library("rWSBIM1322")
+```
+
 To build this book, you'll need `bookdown` [@R-bookdown] and a
 fork[^msmbfork] of [`msmbstyle`
 style](https://github.com/grimbough/msmbstyle/) [@R-msmbstyle].
