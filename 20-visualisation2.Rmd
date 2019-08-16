@@ -2,4 +2,523 @@
 
 This chapter is based on Chapter 3 [*High Quality Graphics in
 R*](https://www-huber.embl.de/msmb/Chap-Graphics.html) of the *Modern
-Statistics for Modern Biology* book.
+Statistics for Modern Biology* book book by Susan Holmes and Wolfgang
+Huber.
+
+```{r env, message = FALSE, echo = FALSE}
+suppressPackageStartupMessages(library("ggplot2"))
+suppressPackageStartupMessages(library("dplyr"))
+suppressPackageStartupMessages(library("Hmisc"))
+suppressPackageStartupMessages(library("plotly"))
+```
+
+## Introduction
+
+The goal of data visualisation is to 
+
+- interactively explore and understand data, i.e. *exploratory data
+  analysis*;
+- to present and *communicate results*, whether as a preliminary
+  analysis or final results.
+
+Our learning objectives are
+
+- Familiarise ourselves with plotting in R using base graphics and
+  `ggplot2`;
+- Understand the concepts behind the gramar of graphics and `ggplot2`;
+- Learn how to visualiste data along 1, 2 or more dimensions;
+- Learn about `plotly`, one package for ploducing interactive
+  visualisations.
+
+The different between this chapter, and the [*Data
+Visualisation*](ttps://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html)
+of the introductory WSBIM1207 course is that here we focus on
+understanding and communicating data through visualisation, rather
+than on the syntax of the plotting packages. Hence, as a introduction,
+let's observe a couple of [*visualisation horror picture show*](./horror.pdf) from a
+lecture by Wolfgang Huber.
+
+## Base plotting
+
+The default graphics system that comes with R, often called base R
+graphics is simple and fast. It is based on the painter's model or
+canvas, where different output are directly overlaid on top of each
+other.
+
+Below, we display the relation between the optical density of the
+deoxyribonuclease (DNase) protein as measure by an enzyme-linked
+immunosorbent assay (ELISA) assay for all observations.
+
+```{r dnase, fig.cap = "The default base `plot` function on the `DNase` data."}
+head(DNase)
+plot(DNase$con, DNase$density)
+```
+
+We can add some features on the plot, such vertical dotted lines for
+all observed observations and customise the look and feel of the plot
+by setting specific arguments to the `plot` function.
+
+```{r dnase2, fig.cap = "Customising a base figure using function arguments and overlaying new graphical features."}
+plot(DNase$con, DNase$density,
+     xlab = "DNase concentration (ng/ml)",
+     ylab = "Optical density",
+     pch = 1,
+     col = "steelblue")
+abline(v = unique(DNase$conc), lty = "dotted")
+```
+
+If we wanted to change anything to that figures, we would need to
+repeat all the commands and modify accordingly. Any additinal command
+would be added to the existing canvas.
+
+`r msmbstyle::question_begin()`
+How would you produce a figure that differentiates the different runs
+using base graphics?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r colbyrun}
+plot(DNase$con, DNase$density, col = DNase$Run)
+```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Use the `hist` and `boxplot` functions to produce and
+histogram of all optical densities and a boxplot of the densities
+split by run.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r hist_boxplot, fig.width = 14, fig.height = 7, fig.cap = "The base `hist` and `boxplot` functions, the latter using the formula interface."}
+par(mfrow = c(1, 2))
+hist(DNase$density) 
+boxplot(density ~ Run, DNase) 
+```
+`r msmbstyle::solution_end()`
+
+The base graphics function are very effective to quickly produce out
+of the box figures. However, there is not global overview and
+parametrisation of the visualisation. The layout decisions have to be
+made up upfront (and if not adequate, the figure needs to be redrawn)
+and every aspect of the figure is customised locally as function
+arguments.
+
+More generally, base graphics functions will work with various inputs:
+above we have worked with a `data.frame`, vectors and a formula. There
+is no unified type of data across all functions which makes it
+efficient for some types of data (if they match), but also very
+heterogeneous in terms of interface, leading to a lot of customisation
+code.
+
+Finally, defaults, and colours in particular, are poorly chosen.
+
+## The `ggplot2` package
+
+**`ggplot2`** is a plotting package that makes it simple to create
+complex plots from data in a data frame. It provides a more
+programmatic interface for specifying what variables to plot, how they
+are displayed, and general visual properties. The theoretical
+foundation that supports the `ggplot2` is the *Grammar of
+Graphics*[^gg]. Instead of producing the figure, the user defines and
+assembles the visual components into an object that is the
+displayed. There is a book about ggplot2[^ggbook] that provides a good
+overview, but it is outdated. The ggplot2 web page
+(https://ggplot2.tidyverse.org) provides ample documentation.
+
+
+[^gg]: Wilkinson, Leland. 2005. The Grammar of Graphics (Statistics
+    and Computing). Berlin, Heidelberg: Springer-Verlag.
+
+[^ggbook]: Wickham, Hadley. 2016. ggplot2: Elegant Graphics for Data
+    Analysis. Springer-Verlag New York.
+
+
+To build a ggplot, we will use the following basic template that can
+be used for different types of plots:
+
+```
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
+```
+
+We need first to load the `ggplot2` package:
+
+```{r ggload}
+library("ggplot2")
+```
+
+- use the `ggplot()` function and bind the plot to a specific data frame using the
+      `data` argument
+
+```{r gg0, fig.cap = "We have only specified the data, and there's nothing to display yet."}
+ggplot(data = DNase)
+```
+
+- define a mapping (using the aesthetic (`aes`) function), by
+  selecting the variables to be plotted and specifying how to present
+  them in the graph, e.g. as x/y positions or characteristics such as
+  size, shape, colour, etc.
+
+```{r gg1, fig.cap = "`ggplot2` can now generate the axes, ticks and ranges based on the data."}
+ggplot(data = DNase,
+       mapping = aes(x = conc, y = density))
+```
+
+- add *geoms* – graphical representations of the data in the plot
+  (points, lines, bars). To add a geom to the plot use the `+`
+  operator. Because we have two continuous variables, let's use
+  `geom_point()` first:
+
+```{r gg2, fig.cap = "Final figures with rendering of the data as a scatter plot."}
+ggplot(data = DNase,
+       mapping = aes(x = conc, y = density)) + 
+  geom_point()
+```
+
+
+`r msmbstyle::question_begin()`
+Compare the `ggplot2` and base graphics version of the density
+vs. concentration plot. Which one do you prefer, and why?
+`r msmbstyle::question_end()`
+
+It is possible to store the output of the `ggplot` function into a
+variable that can be visualised by either typing its name in the
+console or explicitly printing it (like any other variable).
+
+```{r ggobj, fig.cap = "Saving and printing an object."}
+gg <- ggplot(data = DNase,
+             mapping = aes(x = conc, y = density)) + 
+    geom_point()
+print(gg)
+```
+
+Let's immediately customise this visualisation to 
+- highlight how to re-use the `gg` object without repeating the
+  plotting code and
+- how we can add additional (identical or different) *geoms* to a
+  plot.
+
+```{r gg3, fig.cap = "Adding another `geom_point` with its own (local) aesthetics. "}
+gg + geom_point(aes(colour = Run))
+```
+
+
+`r msmbstyle::question_begin()`
+What do you think of the colours used to differentiate the different
+runs above?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r ggex, fig.cap = "Setting the Run to a category by coercing it to a character, rather than a numeric."}
+gg + geom_point(aes(colour = as.character(Run)))
+```
+`r msmbstyle::solution_end()`
+
+Below is an example of more elaborated composition, overlaying points
+and a non-linear *loess* regression. But first, let's load a object
+containing microarray data from the `hiiragi2013df1` data. The data is
+originally available from the
+[`Hiiragi2013`](http://bioconductor.org/packages/release/data/experiment/html/Hiiragi2013.html)
+package and describes the cell-to-cell expression variability followed
+by signal reinforcement progressively segregates early mouse lineages
+[@Ohnishi:2014].
+
+
+```{r gg4, fig.cap = "Modelling the relation between the expression of X1426642_at and X1418765_at."}
+library(rWSBIM1322)
+data(hiiragi2013df1)
+ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at)) +
+    geom_point(shape = 1) +
+    geom_smooth(method = "loess")
+```
+
+And, adding colours representing the different samples
+
+```{r gg5, fig.cap = "Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples."}
+ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at))  +
+  geom_point(aes(color = sampleColour), shape = 19) +
+  geom_smooth(method = "loess")
+```
+ 
+## Visualising 1D data
+
+Let's start by exploring some 1 dimensional visualisation. This is
+very relevant for omics data such as transcriptomics or quantitative
+proteomics, when contrasting the expression values across multiple
+samples.
+
+
+First, we convert a microarray gene expression data to a data.frame,
+fit for some `ggplot2` visualisation, focusing on genes Fgf4, Gata4,
+Gata6 and Sox2.
+
+
+```{r selprobes}
+selected_genes <- c(Fgf4 = "X1420085_at", Gata4 = "X1418863_at",
+                    Gata6 = "X1425463_at",  Sox2 = "X1416967_at")
+dfx <- hiiragi2013df1[, selected_genes]
+```
+
+```{r gather}
+library("dplyr")
+library("tidyr")
+genes <- gather(dfx, key = "gene", value = "expression")
+head(genes)
+```
+
+### Histogram
+
+```{r hist, fig.cap = "Distribution of the Gata4 expression"}
+genes %>%
+    filter(gene == "Gata4") %>%
+    ggplot(aes(x = expression)) + geom_histogram()
+```
+
+
+### Box plots
+
+```{r boxplot, fig.cap = "A boxplot of expression values."}
+p <- ggplot(genes, aes(x = gene, y = expression, fill = gene))
+bxplot <- p + geom_boxplot()
+bxplot
+```
+
+
+`r msmbstyle::question_begin()`
+Repeat the above figure replacing the boxes by violins using the
+`geom_violin`. Which one do you think does a better job?
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r violin, fig.cap = "A violin plot of expression values."}
+vlnplot <- p + geom_violin()
+vlnplot
+```
+`r msmbstyle::solution_end()`
+
+
+### Dot plots and beeswarm plots
+
+When the data aren't too large, it is also possibly to visualise all
+points to get a sense of their distribution.
+
+
+```{r jitter}
+jtrplot <- p +
+    geom_jitter(aes(colour = gene)) +
+    theme(legend.position = "none")
+```
+
+In a dotplot, the position of the points along the y axis is
+discretised into bins (set as 1/6 below) and the points are then
+stacked next to each other.
+
+```{r dot}
+dotplot <- p + geom_dotplot(binaxis = "y", binwidth = 1/6,
+                            stackdir = "center", stackratio = 0.75,
+                            aes(color = gene)) +
+    theme(legend.position = "none")
+```
+
+The beeswarm algorithms tries to avoid overlapping points.
+
+```{r bee}
+library("ggbeeswarm")
+beeplot <- p + geom_beeswarm(aes(color = gene)) + 
+    theme(legend.position = "none")
+```
+
+```{r showdots, fig.cap = "Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot.", fig.with = 16, fig.height = 4}
+library(patchwork)
+jtrplot + dotplot + beeplot
+```
+
+### Density and ecdf plots
+
+
+```{r dens}
+densplot <- ggplot(genes, aes(x = expression, color = gene)) +
+    geom_density() +
+    theme(legend.position = "none")
+```
+
+```{r ecdf}
+ecdfplot <- ggplot(genes, aes(x = expression, color = gene)) +
+    stat_ecdf() +
+    theme(legend.position = "none")
+```
+
+
+```{r, fig.cap = "Density and cumulative density functions of expression values.", fig.with = 12, fig.height = 6}
+densplot + ecdfplot
+```
+
+### Summary
+
+- **Boxplot** makes sense for unimodal distributions (see below).
+
+- **Histogram** requires definition of bins (width, positions) and can
+  create visual artefacts especially if the number of data points is
+  not large.
+
+- **Density** requires the choice of bandwidth; obscures the sample
+  size (i.e. the uncertainty of the estimate).
+  
+- **ecdf** does not have these problems; but is more abstract and
+  interpretation requires more training. Good for reading off
+  quantiles and shifts in location in comparative plots.
+
+- **beeswarm**: for up to a few dozens of points, just show the data.
+
+
+## Number of modes
+
+The number of modes of a distribution depends on scale transformation
+of the data.
+
+```{r sim, fig.cap = "Histograms of the same data without (left) and with (right) log-transformation."}
+sim <- data.frame(x = exp(rnorm(n = 1e5,
+                                mean = sample(c(2, 5),
+                                              size = 1e5,
+                                              replace = TRUE))))
+
+p1 <-  ggplot(sim, aes(x)) +
+    geom_histogram(binwidth = 10, boundary = 0) +
+    xlim(0, 400)
+p2 <-  ggplot(sim, aes(log(x))) +
+    geom_histogram(bins = 30)
+p1 + p2
+```
+
+This also applies to density plots.
+
+## Visualising 2D data
+
+```{r sc1, fig.cap = "Scatter plot comparing the expression of a wild-type vs. FGF4 KO."}
+data(hiiragi2013df2)
+head(hiiragi2013df2)
+scp <- ggplot(hiiragi2013df2,
+              aes(x= `59 E4.5 (PE)`, 
+                  y = `92 E4.5 (FGF4-KO)`)) 
+scp + geom_point()
+```
+
+`r msmbstyle::question_begin()`
+The over-plotting of the dots stops us from learning anything about
+the density of the different regions of the plot. Use the `alpha`
+parameter to `geom_points` between 0 (full transparency) to 1 (opaque,
+default).
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r scp2, fig.cap = "Transparency can help distinguish regions of different densities."}
+scp + geom_point(alpha = 0.1)
+```
+`r msmbstyle::solution_end()`
+
+
+```{r scp3, fig.cap = "Focusing on contours rather that individual values."}
+scp + geom_density2d(h = 0.5, bins = 60)
+```
+
+```{r scp5, fig.cap = "Local density summaries."}
+scp + geom_hex() 
+```
+
+## Visualising data along more dimensions
+
+When visualising data along additional dimension, we can parameterise
+the points by setting their shape, colour, size and transparency, that
+can be set with point aesthetics such as `fill`, `color` (or
+`colour`), `shape`, `size` and `alpha`.
+
+A very powerful way to represent data along additional dimensions is
+facetting, i.e. producing sub-plots for different subsets of the
+data. Below, we first re-annotate the data using some regular
+expressions 
+
+
+```{r facet1, fig.cap = "Different sub-plots for different lineages using colours (left) of facets(right) to distinguish the different lineages."}
+p1 <- ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at, colour = lineage)) +
+  geom_point()
+p2 <- ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at)) +
+  geom_point() +
+    facet_grid( . ~ lineage )
+p1 + p2
+```
+
+```{r facet2, fig.cap = "Different sub-plots for different lineages and embryonic stages."}
+ggplot(hiiragi2013df1,
+       aes(x = X1426642_at, y = X1418765_at)) +
+    geom_point() +
+    facet_grid( Embryonic.day ~ lineage )
+```
+
+`r msmbstyle::question_begin()`
+Use facets to visualise the distribution of the four Fgf4, Gata4,
+Gata6 and Sox2 genes in the `genes` data using histograms.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r hist2}
+ggplot(genes, aes(x = expression)) +
+    geom_histogram() +
+    facet_wrap(~ gene)
+```
+`r msmbstyle::solution_end()`
+
+
+## Interactive visualisation
+
+```{r plotly, fig.cap = "Interactive visualisation with plotly"}
+library("plotly")
+
+scp <- ggplot(hiiragi2013df2[1:100, ],
+              aes(x= `59 E4.5 (PE)`, y = `92 E4.5 (FGF4-KO)`))
+
+scp2 <- scp + geom_point()
+ggplotly(scp2)
+```
+
+See https://plot.ly/r for  examples of interactive graphics online.
+
+
+## Additional exercise
+
+`r msmbstyle::question_begin()`
+
+Load the `barley` data that comes with the `lattice` package (that is
+already installed on your computer). The data describe the yield from
+a Minnesota barley trial as a data frame with 120 observations on the
+following 4 variables.
+
+- `yield` Yield (averaged across three blocks) in bushels/acre.
+
+- `variety` Factor with levels `Svansota`, `No. 462`, `Manchuria`,
+  `No. 475`, `Velvet`, `Peatland`, `Glabron`, `No. 457`,`Wisconsin No. 38`, `Trebi`.
+
+- `year` Factor with levels `1932` and `1931`.
+
+- `site` Factor with 6 levels: `Grand Rapids`, `Duluth`,
+  `University Farm`, `Morris`, `Crookston`, `Waseca`.
+
+Familiarise yourself with the data
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Visualise the yield for each variety on all site in 1932 and 1931
+using `ggplot2`. Try to generate a figure on your own. If you
+struggle, discuss with your fellow students. If you need additional
+help, or as a check, execute the code in the `barley` manual page
+example.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+Can you spot an issue with the data?
+`r msmbstyle::question_end()`
+

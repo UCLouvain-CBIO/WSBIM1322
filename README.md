@@ -1,5 +1,7 @@
 # Bioinformatics (WSBIM1322)
 
+Read the course at http://bit.ly/WSBIM1322
+
 ## License
 
 This material is licensed under the [Creative Commons

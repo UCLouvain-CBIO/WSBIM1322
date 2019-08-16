@@ -1,1 +1,22 @@
 # R refresher
+
+### Basic data structures
+
+- vectors
+- dataframes (and tibbles)
+- matrices
+- lists
+
+### Tidyvers
+
+- dplyr
+- piping
+- wide and long data
+
+### Programming
+
+- functions
+- if/else
+- for loops
+- apply functions
+
