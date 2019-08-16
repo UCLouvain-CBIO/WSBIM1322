@@ -19,4 +19,5 @@ Other possible topics:
 - networks
 - Seminars about several databases/datasets of interest (could also be
   given as part of the masters course)
-- DBMS and SQL
+- **DBMS and SQL**
+- **terminal and ssh**
