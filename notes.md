@@ -9,7 +9,7 @@
   p-value distributions), empirical approximations of probabilites
   (see https://bearloga.github.io/approximating-probability/)
 - Unsupervised learning and clustering
-- Dimensionality reduction
+- Dimensionality reduction (see http://rpubs.com/Saskia/520216 for useful info)
 - Supervised learning and classification
 - Plotting omics data: GViz, volcano plots, MA plots, heatmaps,
 
@@ -17,7 +17,7 @@
 Other possible topics:
 - evolution
 - networks
-- Seminars about several databases/datasets of interest (could also be
-  given as part of the masters course)
+- Seminars about several **databases/datasets of interest** (could
+  also be given as part of the masters course)
 - **DBMS and SQL**
 - **terminal and ssh**

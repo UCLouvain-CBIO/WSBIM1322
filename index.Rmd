@@ -45,7 +45,12 @@ bioinformatics skills aren't well integrated in life science
 curricula, limiting students in their career prospects and research
 horizon [@WilsonSayres:2018]. It is important for young researchers to
 acquire quantitative, computational and data skills to address the
-challenges that lie ahead.
+challenges that lie ahead[^motiv1].
+
+[^motiv1]: See also the [motivations behind the introductory
+course](https://uclouvain-cbio.github.io/WSBIM1207/#motivation), which
+still hold
+
 
 This course will focus on the application of data analysis methods and
 algorithms, and the interpretation of their outputs.  We will be using
@@ -84,8 +89,8 @@ Students taking this course should be familiar with data analysis and
 visualisation in R. A formal pre-requisite for students taking the
 class is the introductory course
 [WSBIM1207](https://UCLouvain-CBIO.github.io/WSBIM1207). The first
-chapter of this course provides a refresher, grouding and links in R
-skills needed for the rest of the course.
+chapter provides a refresher of the R skills needed for the rest of
+the course.
 
 Software requirements are documented in the *Setup* section below.
 
@@ -139,7 +144,7 @@ course. It can be installed with
 BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 ```
 
-and then loaded with 
+and then loaded with
 
 ```{r rwsbim1322, message = FALSE, warning = FALSE}
 library("rWSBIM1322")

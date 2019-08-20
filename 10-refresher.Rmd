@@ -1,22 +1,55 @@
 # R refresher
 
-### Basic data structures
+### Administration
 
-- vectors
-- dataframes (and tibbles)
-- matrices
-- lists
+- Setting up an [RStudio project](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up)
+- [Install](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#r-packages)
+  packages from CRAN and
+  [Bioconductor](https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec:bioconductor).
+
+```{r, eval = FALSE}
+BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
+```
+
+
+### Basic data structures and operations
+
+- [vectors](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#introduction-to-r),
+  generating and subsetting vectors.
+- [Factors](https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#factors)
+- [Dataframes](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#introduction-to-r) (and tibbles)
+- [Matrices](https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#matrices)
+- [Lists](https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#lists)
+
 
 ### Tidyvers
 
-- dplyr
+- The [dplyr](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html) package
 - piping
-- wide and long data
+- Wide and long data (converting with `gather` and `spread` - see also
+  the [new `pivot_longer` and `pivot_wider`
+  functions](https://tidyr.tidyverse.org/dev/articles/pivot.html))
+
+### Misc
+
+- `save()` and `load()` binary data.
+- `saveRDS` and `readRDS` binary data.
+- [Exporting
+  data](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#exporting-data-1)
+  with `write.csv` and `read.csv` (or `write_csv` and `read_csv`) and
+  same for other types of spreadsheets.
+- [Avoid saving and loading your
+  workspace](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up)
+  (the `.RData` file).
+- [Saving
+  figures](https://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html#exporting-plots)
+  (`ggsave` and file devices such as `png()`, `pdf()`, ...).
 
 ### Programming
 
-- functions
-- if/else
-- for loops
-- apply functions
-
+- [Writing
+  functions](https://uclouvain-cbio.github.io/WSBIM1207/sec-prog.html#writing-new-functions)
+- [Conditionals](https://uclouvain-cbio.github.io/WSBIM1207/sec-prog.html#conditionals)
+  `if`/`else`
+- [Iteration](https://uclouvain-cbio.github.io/WSBIM1207/sec-prog.html#iteration):
+  `for` loops and `apply` functions
