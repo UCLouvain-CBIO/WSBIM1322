@@ -16,6 +16,7 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 
 - [vectors](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#introduction-to-r),
   generating and subsetting vectors.
+- Missing values.
 - [Factors](https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#factors)
 - [Dataframes](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#introduction-to-r) (and tibbles)
 - [Matrices](https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#matrices)
@@ -44,6 +45,7 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 - [Saving
   figures](https://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html#exporting-plots)
   (`ggsave` and file devices such as `png()`, `pdf()`, ...).
+- Provenance: `sessionInfo()`
 
 ### Programming
 
