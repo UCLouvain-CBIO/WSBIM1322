@@ -1,6 +1,6 @@
 # R refresher
 
-### Administration
+## Administration
 
 - Setting up an [RStudio project](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up)
 - [Install](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#r-packages)
@@ -12,7 +12,7 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 ```
 
 
-### Basic data structures and operations
+## Basic data structures and operations
 
 - [vectors](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#introduction-to-r),
   generating and subsetting vectors.
@@ -20,18 +20,31 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 - [Factors](https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#factors)
 - [Dataframes](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#introduction-to-r) (and tibbles)
 - [Matrices](https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#matrices)
+- Arrays
 - [Lists](https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#lists)
 
+**Summary**
 
-### Tidyvers
+
+|            | number of dimensions | number of data types |
+|------------+----------------------+----------------------|
+| **vector** | 1 (length)           | 1                    |
+| **matrix** | 2                    | 1                    |
+| **array**  | n                    | 1                    |
+| **dataframe** | 2                 | n                    |
+| **list**   | 1 (length)           | n                    |
+
+
+
+## Tidyvers
 
 - The [dplyr](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html) package
-- piping
+- [Piping](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#pipes)
 - Wide and long data (converting with `gather` and `spread` - see also
   the [new `pivot_longer` and `pivot_wider`
   functions](https://tidyr.tidyverse.org/dev/articles/pivot.html))
 
-### Misc
+## Saving and exporting
 
 - `save()` and `load()` binary data.
 - `saveRDS` and `readRDS` binary data.
@@ -47,7 +60,7 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
   (`ggsave` and file devices such as `png()`, `pdf()`, ...).
 - Provenance: `sessionInfo()`
 
-### Programming
+## Programming
 
 - [Writing
   functions](https://uclouvain-cbio.github.io/WSBIM1207/sec-prog.html#writing-new-functions)

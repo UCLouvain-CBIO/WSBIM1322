@@ -14,7 +14,7 @@ suppressPackageStartupMessages(library("plotly"))
 
 ## Introduction
 
-The goal of data visualisation is to 
+The goal of data visualisation is to
 
 - interactively explore and understand data, i.e. *exploratory data
   analysis*;
@@ -91,8 +91,8 @@ split by run.
 `r msmbstyle::solution_begin()`
 ```{r hist_boxplot, fig.width = 14, fig.height = 7, fig.cap = "The base `hist` and `boxplot` functions, the latter using the formula interface."}
 par(mfrow = c(1, 2))
-hist(DNase$density) 
-boxplot(density ~ Run, DNase) 
+hist(DNase$density)
+boxplot(density ~ Run, DNase)
 ```
 `r msmbstyle::solution_end()`
 
@@ -170,7 +170,7 @@ ggplot(data = DNase,
 
 ```{r gg2, fig.cap = "Final figures with rendering of the data as a scatter plot."}
 ggplot(data = DNase,
-       mapping = aes(x = conc, y = density)) + 
+       mapping = aes(x = conc, y = density)) +
   geom_point()
 ```
 
@@ -186,12 +186,12 @@ console or explicitly printing it (like any other variable).
 
 ```{r ggobj, fig.cap = "Saving and printing an object."}
 gg <- ggplot(data = DNase,
-             mapping = aes(x = conc, y = density)) + 
+             mapping = aes(x = conc, y = density)) +
     geom_point()
 print(gg)
 ```
 
-Let's immediately customise this visualisation to 
+Let's immediately customise this visualisation to
 - highlight how to re-use the `gg` object without repeating the
   plotting code and
 - how we can add additional (identical or different) *geoms* to a
@@ -238,7 +238,7 @@ ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at))  +
   geom_point(aes(color = sampleColour), shape = 19) +
   geom_smooth(method = "loess")
 ```
- 
+
 ## Visualising 1D data
 
 Let's start by exploring some 1 dimensional visualisation. This is
@@ -324,7 +324,7 @@ The beeswarm algorithms tries to avoid overlapping points.
 
 ```{r bee}
 library("ggbeeswarm")
-beeplot <- p + geom_beeswarm(aes(color = gene)) + 
+beeplot <- p + geom_beeswarm(aes(color = gene)) +
     theme(legend.position = "none")
 ```
 
@@ -363,7 +363,7 @@ densplot + ecdfplot
 
 - **Density** requires the choice of bandwidth; obscures the sample
   size (i.e. the uncertainty of the estimate).
-  
+
 - **ecdf** does not have these problems; but is more abstract and
   interpretation requires more training. Good for reading off
   quantiles and shifts in location in comparative plots.
@@ -398,8 +398,8 @@ This also applies to density plots.
 data(hiiragi2013df2)
 head(hiiragi2013df2)
 scp <- ggplot(hiiragi2013df2,
-              aes(x= `59 E4.5 (PE)`, 
-                  y = `92 E4.5 (FGF4-KO)`)) 
+              aes(x= `59 E4.5 (PE)`,
+                  y = `92 E4.5 (FGF4-KO)`))
 scp + geom_point()
 ```
 
@@ -422,7 +422,7 @@ scp + geom_density2d(h = 0.5, bins = 60)
 ```
 
 ```{r scp5, fig.cap = "Local density summaries."}
-scp + geom_hex() 
+scp + geom_hex()
 ```
 
 ## Visualising data along more dimensions
@@ -435,7 +435,7 @@ can be set with point aesthetics such as `fill`, `color` (or
 A very powerful way to represent data along additional dimensions is
 facetting, i.e. producing sub-plots for different subsets of the
 data. Below, we first re-annotate the data using some regular
-expressions 
+expressions
 
 
 ```{r facet1, fig.cap = "Different sub-plots for different lineages using colours (left) of facets(right) to distinguish the different lineages."}
@@ -507,6 +507,11 @@ Familiarise yourself with the data
 `r msmbstyle::question_end()`
 
 
+```{r bar1, echo = FALSE}
+library(lattice)
+data(barley)
+```
+
 `r msmbstyle::question_begin()`
 
 Visualise the yield for each variety on all site in 1932 and 1931
@@ -517,8 +522,12 @@ example.
 
 `r msmbstyle::question_end()`
 
+```{r, echo = FALSE, include = FALSE}
+ggplot(barley, aes(x = yield, y = variety, colour = year)) +
+    geom_point() +
+    facet_grid(site ~ .)
+```
 
 `r msmbstyle::question_begin()`
 Can you spot an issue with the data?
 `r msmbstyle::question_end()`
-
