@@ -1,4 +1,4 @@
-# Session information
+# Session information {#sec:si}
 
 The following packages have been used to generate this document.
 
@@ -34,4 +34,3 @@ if (!require("BiocManager"))
    install.packages("BiocManager")
 BiocManager::install(pkgs)
 ```
-

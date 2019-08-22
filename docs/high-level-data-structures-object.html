@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 7 Hypothesis testing | Bioinformatics" />
+<meta property="og:title" content="Chapter 3 High-level data structures: object | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -20,7 +20,7 @@
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 7 Hypothesis testing | Bioinformatics</title>
+<title>Chapter 3 High-level data structures: object | Bioinformatics</title>
 
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
@@ -138,11 +138,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="index.html">Preamble</a>
 <a href="r-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
 <a href="data-visualisation.html"><span class="toc-section-number">2</span> Data visualisation</a>
-<a href="high-level-data-structures-object.html"><span class="toc-section-number">3</span> High-level data structures: object</a>
+<a id="active-page" href="high-level-data-structures-object.html"><span class="toc-section-number">3</span> High-level data structures: object</a><ul class="toc-sections">
+<li class="toc"><a href="#introduction-1"> Introduction</a></li>
+<li class="toc"><a href="#objects"> Objects</a></li>
+<li class="toc"><a href="#examples-from-the-bioconductor-project"> Examples from the Bioconductor project</a></li>
+<li class="toc"><a href="#implementations"> Implementations</a></li>
+</ul>
 <a href="data-normalisation-centering-scaling-quantile-normalisation.html"><span class="toc-section-number">4</span> Data normalisation: centering, scaling, quantile normalisation</a>
 <a href="manipulating-sequences-with-biostrings.html"><span class="toc-section-number">5</span> Manipulating sequences with <em><span>Biostrings</span></em></a>
 <a href="introduction-to-statistical-learning.html"><span class="toc-section-number">6</span> Introduction to statistical learning</a>
-<a id="active-page" href="hypothesis-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="hypothesis-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
 <a href="unsupervised-learning.html"><span class="toc-section-number">8</span> Unsupervised learning</a>
 <a href="dimensionality-reduction.html"><span class="toc-section-number">9</span> Dimensionality reduction</a>
 <a href="supervised-learning.html"><span class="toc-section-number">10</span> Supervised learning</a>
@@ -158,22 +163,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="hypothesis-testing" class="section level1">
+<html><body><div id="high-level-data-structures-object" class="section level1">
 <h1>
-<span class="header-section-number">Chapter 7</span> Hypothesis testing</h1>
+<span class="header-section-number">Chapter 3</span> High-level data structures: object</h1>
+<p><strong>Learning objectives</strong></p>
 <ul>
-<li>hypthesis testing</li>
-<li>t-test</li>
-<li>p-value distributions</li>
-<li>multiple testing</li>
-<li>linear regression</li>
-<li>empirical approximations of probabilites</li>
+<li>Understand the difference between basic data structures and
+high-level objects.</li>
+<li>Understand the concept of high-level object.</li>
+<li>Know how to learn about objects and access data from them.</li>
+<li>Learn about import Bioconductor objects widely used in omics data
+analysis.</li>
+<li>Become familiar with how objects are implemented.</li>
 </ul>
+<div id="introduction-1" class="section level2">
+<h2>
+<span class="header-section-number">3.1</span> Introduction</h2>
+<p>The term <em>object</em> stems from the widely used objet-oriented
+programming (OOP) paradigm. OOP is however outside of scope of this
+course (see part III of <span class="citation">(Wickham <label for="tufte-mn-12" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-12" class="margin-toggle">2014<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced R</em>. Chapman &amp; Hall/Crc the R Series. Taylor &amp; Francis.</span>)</span>, which is also <a href="https://adv-r.hadley.nz/">freely available
+online</a>).</p>
+</div>
+<div id="objects" class="section level2">
+<h2>
+<span class="header-section-number">3.2</span> Objects</h2>
+<p>Why objects?</p>
+<ul>
+<li><p>Store data and metadata together.</p></li>
+<li><p>Self describing: a object to store HTS data contains HTS data.</p></li>
+<li><p>If all information is stored in a single object, it is easier to
+save it, to share it with others, and to use it as an input to a
+function. (Consistent with the notion that you would like to place
+all the data relevant to an expriment nito a single folder).</p></li>
+<li><p>Specialised behaviour (functions): for example plotting, summary,
+subsetting (<code>[</code> and <code>[[</code>), …</p></li>
+<li><p>abstraction</p></li>
+<li><p>ecapsulates data (state)</p></li>
+<li><p>inheritance</p></li>
+<li><p>polymorphism</p></li>
+</ul>
+<p>Note on class (describes general properties for groups of objects) vs
+object (instantiation of a class, encapsulates state information and
+control behaviour).</p>
+</div>
+<div id="examples-from-the-bioconductor-project" class="section level2">
+<h2>
+<span class="header-section-number">3.3</span> Examples from the Bioconductor project</h2>
+</div>
+<div id="implementations" class="section level2">
+<h2>
+<span class="header-section-number">3.4</span> Implementations</h2>
+<div id="s3-objects" class="section level3">
+<h3>
+<span class="header-section-number">3.4.1</span> S3 objects</h3>
+</div>
+<div id="s4-objects" class="section level3">
+<h3>
+<span class="header-section-number">3.4.2</span> S4 objects</h3>
+
+</div>
+</div>
 </div></body></html>
 
 <p style="text-align: center;">
-<a href="introduction-to-statistical-learning.html"><button class="btn btn-default">Previous</button></a>
-<a href="unsupervised-learning.html"><button class="btn btn-default">Next</button></a>
+<a href="data-visualisation.html"><button class="btn btn-default">Previous</button></a>
+<a href="data-normalisation-centering-scaling-quantile-normalisation.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
 2019-08-22

@@ -136,19 +136,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
 <a href="index.html">Preamble</a>
-<a href="r-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
-<a href="data-visualisation.html"><span class="toc-section-number">2</span> Data visualisation</a>
-<a href="high-level-data-structures-object.html"><span class="toc-section-number">3</span> High-level data structures: object</a>
-<a href="data-normalisation-centering-scaling-quantile-normalisation.html"><span class="toc-section-number">4</span> Data normalisation: centering, scaling, quantile normalisation</a>
-<a href="manipulating-sequences-with-biostrings.html"><span class="toc-section-number">5</span> Manipulating sequences with <em><span>Biostrings</span></em></a>
-<a href="introduction-to-statistical-learning.html"><span class="toc-section-number">6</span> Introduction to statistical learning</a>
-<a href="hypothesis-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a href="unsupervised-learning.html"><span class="toc-section-number">8</span> Unsupervised learning</a>
-<a href="dimensionality-reduction.html"><span class="toc-section-number">9</span> Dimensionality reduction</a>
-<a href="supervised-learning.html"><span class="toc-section-number">10</span> Supervised learning</a>
-<a href="visualising-biomolecular-data.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-norm.html"><span class="toc-section-number">4</span> Data normalisation: centering, scaling, quantile normalisation</a>
+<a href="sec-biostrings.html"><span class="toc-section-number">5</span> Manipulating sequences with <em><span>Biostrings</span></em></a>
+<a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical learning</a>
+<a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-ul.html"><span class="toc-section-number">8</span> Unsupervised learning</a>
+<a href="sec-dimred.html"><span class="toc-section-number">9</span> Dimensionality reduction</a>
+<a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
+<a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
 <a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
-<a id="active-page" href="session-information.html"><span class="toc-section-number">13</span> Session information</a><ul class="toc-sections">
+<a id="active-page" href="sec-si.html"><span class="toc-section-number">13</span> Session information</a><ul class="toc-sections">
 <li class="toc"><a href="#sec:setup2"> R package setup</a></li>
 </ul>
 </div>
@@ -160,11 +160,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="session-information" class="section level1">
+<html><body><div id="sec:si" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 13</span> Session information</h1>
 <p>The following packages have been used to generate this document.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="session-information.html#cb47-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="sec-si.html#cb47-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 3.6.0 RC (2019-04-21 r76409)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Manjaro Linux
@@ -261,9 +261,9 @@ the following code:</p>
           "Rtsne", "rWSBIM1322", "S4Vectors", "stats", "stats4", "stringr",
           "SummarizedExperiment", "survival", "tibble", "tidyr",
           "tidyverse", "utils", "XVector")</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="session-information.html#cb50-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"BiocManager"</span>))</span>
-<span id="cb50-2"><a href="session-information.html#cb50-2"></a>   <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
-<span id="cb50-3"><a href="session-information.html#cb50-3"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(pkgs)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sec-si.html#cb50-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"BiocManager"</span>))</span>
+<span id="cb50-2"><a href="sec-si.html#cb50-2"></a>   <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb50-3"><a href="sec-si.html#cb50-3"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(pkgs)</span></code></pre></div>
 
 </div>
 </div></body></html>

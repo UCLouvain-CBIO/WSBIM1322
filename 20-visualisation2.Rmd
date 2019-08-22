@@ -1,4 +1,4 @@
-# Data visualisation
+# Data visualisation {#sec:vis}
 
 This chapter is based on Chapter 3 [*High Quality Graphics in
 R*](https://www-huber.embl.de/msmb/Chap-Graphics.html) of the *Modern
@@ -14,14 +14,14 @@ suppressPackageStartupMessages(library("plotly"))
 
 ## Introduction
 
-The goal of data visualisation is to
+The **goal** of data visualisation is to
 
 - interactively explore and understand data, i.e. *exploratory data
   analysis*;
 - to present and *communicate results*, whether as a preliminary
   analysis or final results.
 
-Our learning objectives are
+Our **learning objectives** are
 
 - Familiarise ourselves with plotting in R using base graphics and
   `ggplot2`;

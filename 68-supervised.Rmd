@@ -1,1 +1,1 @@
-# Supervised learning
+# Supervised learning {#sec:sl}

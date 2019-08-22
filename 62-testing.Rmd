@@ -1,1 +1,8 @@
-# Hypothesis testing
+# Hypothesis testing {#sec:testing}
+
+- hypthesis testing
+- t-test
+- p-value distributions
+- multiple testing
+- linear regression
+- empirical approximations of probabilites

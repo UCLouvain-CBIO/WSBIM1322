@@ -1,18 +1,18 @@
-- Recap: Rstudio, R data structure, programming
-- Visualisation (chap 3 MSMB)
-- Data normalisation: centering, scaling, quantile normalisation
-- Advanced R data structures: object and Bioconductor data structures
-- Manipulating biologial sequences using Biostrings and application
-  (finding motif in protein sequences).
-- Introduction to statistical learning
-- Hypothesis testing (t-test, linear regression, multiple testing,
-  p-value distributions), empirical approximations of probabilites
-  (see https://bearloga.github.io/approximating-probability/)
-- Unsupervised learning and clustering
-- Dimensionality reduction (see http://rpubs.com/Saskia/520216 for useful info)
-- Supervised learning and classification
-- Plotting omics data: GViz, volcano plots, MA plots, heatmaps,
-
+1. Recap: Rstudio, R data structure, programming
+2. Visualisation (chap 3 MSMB)
+3. Advanced R data structures: object and Bioconductor data structures
+4. Data normalisation: centering, scaling, quantile normalisation
+5. Manipulating biologial sequences using Biostrings and application
+   (finding motif in protein sequences).
+6. Introduction to statistical learning
+7. Hypothesis testing (t-test, linear regression, multiple testing,
+   p-value distributions), empirical approximations of probabilites
+   (see https://bearloga.github.io/approximating-probability/)
+8. Unsupervised learning and clustering
+9. Dimensionality reduction (see http://rpubs.com/Saskia/520216 for useful info)
+10. Supervised learning and classification
+11. Plotting omics data: GViz, volcano plots, MA plots, heatmaps,
+12. Conclusions
 
 Other possible topics:
 - evolution

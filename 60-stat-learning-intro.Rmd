@@ -1,1 +1,1 @@
-# Introduction to statistics and statistical learning
+# Introduction to statistical learning {#sec:mlintro}

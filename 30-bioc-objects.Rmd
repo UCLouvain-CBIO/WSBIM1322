@@ -1,1 +1,55 @@
-# Advanced R data structures: object and Bioconductor data structures
+# High-level data structures  {#sec:obj}
+
+**Learning objectives**
+
+- Understand the difference between basic data structures and
+  high-level objects.
+- Understand the concept of high-level object.
+- Know how to learn about objects and access data from them.
+- Learn about import Bioconductor objects widely used in omics data
+  analysis.
+- Become familiar with how objects are implemented.
+
+## Introduction
+
+The term *object* stems from the widely used objet-oriented
+programming (OOP) paradigm. OOP is however outside of scope of this
+course (see part III of [@advancedR], which is also [freely available
+online](https://adv-r.hadley.nz/)). In the *R refresher* chapter
+\@ref(sec:refresher), we have seen the base types of R, which we have
+efficiently used in many situations. Sometimes, however, these aren't
+enough.
+
+We have also use object, for example in chapter 2 \@ref(sec:vis), when
+generating ggplot visualisation. We have seen that it is possible to
+store the output of `ggplot2` in a variable, that contain all the data
+and information necessary to produce the figure.
+
+## Why objects?
+
+- Store data and metadata together.
+- Self describing: a object to store HTS data contains HTS data.
+- If all information is stored in a single object, it is easier to
+  save it, to share it with others, and to use it as an input to a
+  function. (Consistent with the notion that you would like to place
+  all the data relevant to an expriment nito a single folder).
+- Specialised behaviour (functions): for example plotting, summary,
+  subsetting (`[` and `[[`), ...
+
+
+- abstraction
+- ecapsulates data (state)
+- inheritance
+- polymorphism
+
+Note on class (describes general properties for groups of objects) vs
+object (instantiation of a class, encapsulates state information and
+control behaviour).
+
+## Examples from the Bioconductor project
+
+## Implementations
+
+### S3 objects
+
+### S4 objects

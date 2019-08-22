@@ -1,4 +1,7 @@
-# R refresher
+# R refresher {#sec:refresher}
+
+The objectives of this chapter is to review some R syntax, functions
+and data structures that will be needed for the following chapters.
 
 ## Administration
 
