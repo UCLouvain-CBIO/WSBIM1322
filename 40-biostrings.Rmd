@@ -1,5 +1,6 @@
-# Manipulating sequences with `r BiocStyle::Biocpkg("Biostrings")` {#sec:biostrings}
+# Manipulating sequences with Biostrings {#sec:biostrings}
 
 **Learning objectives**
 
--
+In this chapter, we will learn about a new object, that is specialised
+for the manipulation of biological sequences.

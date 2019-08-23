@@ -94,7 +94,7 @@ Object of class person:
 ```
 
 `r msmbstyle::question_begin()`
-Describe two objects that would describe a teaching assistant and a
+Write down two objects that would describe a teaching assistant and a
 student.
 `r msmbstyle::question_end()`
 
@@ -156,7 +156,7 @@ The `fit` variable is an object of class `lm`, which we can check with
 the `class` function.
 
 ```{r lmclass}
-class(lm)
+class(fit)
 ```
 
 It contains much more than simply the intercept and the slope of the
