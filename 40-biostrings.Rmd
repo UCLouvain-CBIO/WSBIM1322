@@ -1,0 +1,5 @@
+# Manipulating sequences with `r BiocStyle::Biocpkg("Biostrings")` {#sec:biostrings}
+
+**Learning objectives**
+
+-
