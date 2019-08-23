@@ -2,8 +2,7 @@
 
 This chapter is based on Chapter 3 [*High Quality Graphics in
 R*](https://www-huber.embl.de/msmb/Chap-Graphics.html) of the *Modern
-Statistics for Modern Biology* book book by Susan Holmes and Wolfgang
-Huber.
+Statistics for Modern Biology* book [@MSMB].
 
 ```{r env, message = FALSE, echo = FALSE}
 suppressPackageStartupMessages(library("ggplot2"))
@@ -484,7 +483,7 @@ ggplotly(scp2)
 See https://plot.ly/r for  examples of interactive graphics online.
 
 
-## Additional exercise
+## Additional exercises
 
 `r msmbstyle::question_begin()`
 

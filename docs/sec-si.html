@@ -170,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>
 <span class="header-section-number">Chapter 13</span> Session information</h1>
 <p>The following packages have been used to generate this document.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="sec-si.html#cb54-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="sec-si.html#cb119-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 3.6.0 RC (2019-04-21 r76409)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Manjaro Linux
@@ -192,74 +192,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  [8] datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] patchwork_0.0.1             ggbeeswarm_0.6.0           
-##  [3] Hmisc_4.2-0                 Formula_1.2-3              
-##  [5] survival_2.44-1.1           rWSBIM1322_0.1.0           
-##  [7] cluster_2.1.0               class_7.3-15               
-##  [9] e1071_1.7-2                 caret_6.0-84               
-## [11] lattice_0.20-38             Gviz_1.29.1                
-## [13] ggbio_1.33.1                plotly_4.9.0               
-## [15] Rtsne_0.15                  Biostrings_2.53.2          
-## [17] XVector_0.25.0              ALL_1.27.0                 
-## [19] curatedTCGAData_1.7.0       MultiAssayExperiment_1.11.5
-## [21] forcats_0.4.0               stringr_1.4.0              
-## [23] dplyr_0.8.3                 purrr_0.3.2                
-## [25] readr_1.3.1                 tidyr_0.8.3                
-## [27] tibble_2.1.3                tidyverse_1.2.1            
-## [29] ggplot2_3.2.1               pRolocdata_1.23.0          
-## [31] MSnbase_2.11.5              ProtGenerics_1.17.4        
-## [33] mzR_2.19.3                  Rcpp_1.0.2                 
-## [35] SummarizedExperiment_1.15.7 DelayedArray_0.11.4        
-## [37] BiocParallel_1.19.2         matrixStats_0.54.0         
-## [39] Biobase_2.45.0              GenomicRanges_1.37.14      
-## [41] GenomeInfoDb_1.21.1         IRanges_2.19.11            
-## [43] S4Vectors_0.23.19           BiocGenerics_0.31.5        
+##  [1] airway_1.5.0                BiocStyle_2.13.2           
+##  [3] patchwork_0.0.1             ggbeeswarm_0.6.0           
+##  [5] Hmisc_4.2-0                 Formula_1.2-3              
+##  [7] survival_2.44-1.1           rWSBIM1322_0.1.0           
+##  [9] cluster_2.1.0               class_7.3-15               
+## [11] e1071_1.7-2                 caret_6.0-84               
+## [13] lattice_0.20-38             Gviz_1.29.1                
+## [15] ggbio_1.33.1                plotly_4.9.0               
+## [17] Rtsne_0.15                  Biostrings_2.53.2          
+## [19] XVector_0.25.0              ALL_1.27.0                 
+## [21] curatedTCGAData_1.7.0       MultiAssayExperiment_1.11.5
+## [23] forcats_0.4.0               stringr_1.4.0              
+## [25] dplyr_0.8.3                 purrr_0.3.2                
+## [27] readr_1.3.1                 tidyr_0.8.3                
+## [29] tibble_2.1.3                tidyverse_1.2.1            
+## [31] ggplot2_3.2.1               pRolocdata_1.23.0          
+## [33] MSnbase_2.11.5              ProtGenerics_1.17.4        
+## [35] mzR_2.19.3                  Rcpp_1.0.2                 
+## [37] SummarizedExperiment_1.15.7 DelayedArray_0.11.4        
+## [39] BiocParallel_1.19.2         matrixStats_0.54.0         
+## [41] Biobase_2.45.0              GenomicRanges_1.37.14      
+## [43] GenomeInfoDb_1.21.1         IRanges_2.19.11            
+## [45] S4Vectors_0.23.19           BiocGenerics_0.31.5        
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] tidyselect_0.2.5       RSQLite_2.1.2          AnnotationDbi_1.47.1  
-##   [4] htmlwidgets_1.3        munsell_0.5.0          codetools_0.2-16      
-##   [7] preprocessCore_1.47.1  withr_2.1.2            colorspace_1.4-1      
-##  [10] OrganismDbi_1.27.1     highr_0.8              knitr_1.24            
-##  [13] rstudioapi_0.10        mzID_1.23.0            labeling_0.3          
-##  [16] GenomeInfoDbData_1.2.1 bit64_0.9-7            vctrs_0.2.0           
-##  [19] generics_0.0.2         ipred_0.9-9            xfun_0.9              
-##  [22] biovizBase_1.33.0      BiocFileCache_1.9.1    R6_2.4.0              
-##  [25] doParallel_1.0.15      AnnotationFilter_1.9.0 bitops_1.0-6          
-##  [28] reshape_0.8.8          assertthat_0.2.1       promises_1.0.1        
-##  [31] scales_1.0.0           nnet_7.3-12            beeswarm_0.2.3        
-##  [34] gtable_0.3.0           affy_1.63.0            ensembldb_2.9.4       
-##  [37] timeDate_3043.102      rlang_0.4.0            zeallot_0.1.0         
-##  [40] splines_3.6.0          rtracklayer_1.45.3     lazyeval_0.2.2        
-##  [43] ModelMetrics_1.2.2     acepack_1.4.1          impute_1.59.0         
-##  [46] hexbin_1.27.3          dichromat_2.0-0        broom_0.5.2           
-##  [49] checkmate_1.9.4        BiocManager_1.30.4     yaml_2.2.0            
-##  [52] reshape2_1.4.3         modelr_0.1.5           crosstalk_1.0.0       
-##  [55] GenomicFeatures_1.37.4 backports_1.1.4        httpuv_1.5.1          
-##  [58] RBGL_1.61.0            lava_1.6.6             tools_3.6.0           
-##  [61] bookdown_0.13          affyio_1.55.0          RColorBrewer_1.1-2    
-##  [64] plyr_1.8.4             base64enc_0.1-3        progress_1.2.2        
-##  [67] zlibbioc_1.31.0        RCurl_1.95-4.12        prettyunits_1.0.2     
-##  [70] rpart_4.1-15           openssl_1.4.1          haven_2.1.1           
-##  [73] magrittr_1.5           data.table_1.12.2      pcaMethods_1.77.0     
-##  [76] msmbstyle_0.0.11       hms_0.5.0              mime_0.7              
-##  [79] evaluate_0.14          xtable_1.8-4           XML_3.98-1.20         
-##  [82] readxl_1.3.1           gridExtra_2.3          compiler_3.6.0        
-##  [85] biomaRt_2.41.8         ncdf4_1.16.1           crayon_1.3.4          
-##  [88] htmltools_0.3.6        later_0.8.0            lubridate_1.7.4       
-##  [91] DBI_1.0.0              ExperimentHub_1.11.4   dbplyr_1.4.2          
-##  [94] MASS_7.3-51.4          rappdirs_0.3.1         BiocStyle_2.13.2      
+##   [1] utf8_1.1.4             tidyselect_0.2.5       RSQLite_2.1.2         
+##   [4] AnnotationDbi_1.47.1   htmlwidgets_1.3        munsell_0.5.0         
+##   [7] codetools_0.2-16       preprocessCore_1.47.1  withr_2.1.2           
+##  [10] colorspace_1.4-1       OrganismDbi_1.27.1     highr_0.8             
+##  [13] knitr_1.24             rstudioapi_0.10        mzID_1.23.0           
+##  [16] labeling_0.3           GenomeInfoDbData_1.2.1 bit64_0.9-7           
+##  [19] vctrs_0.2.0            generics_0.0.2         ipred_0.9-9           
+##  [22] xfun_0.9               biovizBase_1.33.0      BiocFileCache_1.9.1   
+##  [25] R6_2.4.0               doParallel_1.0.15      AnnotationFilter_1.9.0
+##  [28] bitops_1.0-6           reshape_0.8.8          assertthat_0.2.1      
+##  [31] promises_1.0.1         scales_1.0.0           nnet_7.3-12           
+##  [34] beeswarm_0.2.3         gtable_0.3.0           affy_1.63.0           
+##  [37] ensembldb_2.9.4        timeDate_3043.102      rlang_0.4.0           
+##  [40] zeallot_0.1.0          splines_3.6.0          rtracklayer_1.45.3    
+##  [43] lazyeval_0.2.2         ModelMetrics_1.2.2     acepack_1.4.1         
+##  [46] impute_1.59.0          hexbin_1.27.3          dichromat_2.0-0       
+##  [49] broom_0.5.2            checkmate_1.9.4        BiocManager_1.30.4    
+##  [52] yaml_2.2.0             reshape2_1.4.3         modelr_0.1.5          
+##  [55] crosstalk_1.0.0        GenomicFeatures_1.37.4 backports_1.1.4       
+##  [58] httpuv_1.5.1           RBGL_1.61.0            lava_1.6.6            
+##  [61] tools_3.6.0            bookdown_0.13          affyio_1.55.0         
+##  [64] RColorBrewer_1.1-2     plyr_1.8.4             base64enc_0.1-3       
+##  [67] progress_1.2.2         zlibbioc_1.31.0        RCurl_1.95-4.12       
+##  [70] prettyunits_1.0.2      rpart_4.1-15           openssl_1.4.1         
+##  [73] haven_2.1.1            magrittr_1.5           data.table_1.12.2     
+##  [76] pcaMethods_1.77.0      msmbstyle_0.0.11       hms_0.5.1             
+##  [79] mime_0.7               evaluate_0.14          xtable_1.8-4          
+##  [82] XML_3.98-1.20          readxl_1.3.1           gridExtra_2.3         
+##  [85] compiler_3.6.0         biomaRt_2.41.8         ncdf4_1.16.1          
+##  [88] crayon_1.3.4           htmltools_0.3.6        later_0.8.0           
+##  [91] lubridate_1.7.4        DBI_1.0.0              ExperimentHub_1.11.4  
+##  [94] dbplyr_1.4.2           MASS_7.3-51.4          rappdirs_0.3.1        
 ##  [97] Matrix_1.2-17          cli_1.1.0              vsn_3.53.0            
 ## [100] gower_0.2.1           
-##  [ reached getOption("max.print") -- omitted 37 entries ]</code></pre>
+##  [ reached getOption("max.print") -- omitted 38 entries ]</code></pre>
 <div id="sec:setup2" class="section level2">
 <h2>
 <span class="header-section-number">13.1</span> R package setup</h2>
 <p>To install all necessary packages to run all the code, please execute
 the following code:</p>
-<pre><code>pkgs &lt;- c("ALL", "base", "Biobase", "BiocGenerics",
-          "BiocParallel", "Biostrings", "caret", "class", "cluster",
-          "curatedTCGAData", "datasets", "DelayedArray", "dplyr", "e1071",
-          "forcats", "Formula", "GenomeInfoDb", "GenomicRanges",
+<pre><code>pkgs &lt;- c("airway", "ALL", "base", "Biobase", "BiocGenerics",
+          "BiocParallel", "BiocStyle", "Biostrings", "caret", "class",
+          "cluster", "curatedTCGAData", "datasets", "DelayedArray", "dplyr",
+          "e1071", "forcats", "Formula", "GenomeInfoDb", "GenomicRanges",
           "ggbeeswarm", "ggbio", "ggplot2", "graphics", "grDevices", "grid",
           "Gviz", "Hmisc", "IRanges", "lattice", "matrixStats", "methods",
           "MSnbase", "MultiAssayExperiment", "mzR", "parallel", "patchwork",
@@ -267,9 +268,9 @@ the following code:</p>
           "Rtsne", "rWSBIM1322", "S4Vectors", "stats", "stats4", "stringr",
           "SummarizedExperiment", "survival", "tibble", "tidyr",
           "tidyverse", "utils", "XVector")</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="sec-si.html#cb57-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"BiocManager"</span>))</span>
-<span id="cb57-2"><a href="sec-si.html#cb57-2"></a>   <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
-<span id="cb57-3"><a href="sec-si.html#cb57-3"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(pkgs)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="sec-si.html#cb122-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"BiocManager"</span>))</span>
+<span id="cb122-2"><a href="sec-si.html#cb122-2"></a>   <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb122-3"><a href="sec-si.html#cb122-3"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(pkgs)</span></code></pre></div>
 
 </div>
 </div></body></html>

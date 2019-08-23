@@ -14,7 +14,7 @@
 
 The term *object* stems from the widely used objet-oriented
 programming (OOP) paradigm. OOP is however outside of scope of this
-course (see part III of [@advancedR], which is also [freely available
+course (see part III of @advancedR, which is also [freely available
 online](https://adv-r.hadley.nz/)). In the *R refresher* chapter
 \@ref(sec:refresher), we have seen the base types of R, which we have
 efficiently used in many situations. Sometimes, however, these aren't
@@ -123,7 +123,7 @@ We will focus on objects and their usage here.
 Let's start by generating a testing dataset composed of two correlated
 variables, `x` and `y`:
 
-```{r df}
+```{r df, fig.cap = "The `x` and `y` variables display a linear relationship."}
 set.seed(1)
 x <- rnorm(100)
 y <- x + rnorm(100)
@@ -135,17 +135,372 @@ plot(y ~ x, df)
 We are now going to model the linear relation between `x` and `y`
 using the `lm` (linear model) function. The resulting variable `fit`
 is the result of computing the linear regression
-$y = \beta_0 + beta_1 x + \epsilon$:
+$y = \beta_{0} + \beta_{1} x + \epsilon$.
+When printing the object, we see the call we performed, the
+intercept ($\beta_0$) and the slope ($\beta_1$) of the regression.
 
 ```{r lm1}
 fit <- lm(y ~ x, df)
+fit
 ```
 
+We can plot the linear regression line with `abline` and passing the
+`fit` variable.
+
+```{r plotlm, fig.cap = "The regression line modelling the linear regression between the two `x` and `y` variables."}
+plot(y ~ x)
+abline(fit, col = "red")
+```
+
+The `fit` variable is an object of class `lm`, which we can check with
+the `class` function.
+
+```{r lmclass}
+class(lm)
+```
+
+It contains much more than simply the intercept and the slope of the
+regression line.
+
+
+`r msmbstyle::question_begin()`
+Find out what an object of class `lm` contains by exploring the
+content of the `fit` object (try the `names` and `str` functions) and
+reading the `lm` manual page.
+`r msmbstyle::question_end()`
+
+Finally, to demonstrate **polymorphism**, let's try to plot the `fit`
+variable.
+
+```{r lmplot, fig.width = 10, fig.height = 7,fig.cap = "Plotting an instance of class `lm` produces a set of diagnostic plots, that inform us about the quality of the regression."}
+par(mfrow = c(2, 2))
+plot(fit)
+```
 
 ## Examples from the Bioconductor project
 
-## Implementations
+```{r, echo = FALSE, message = FALSE}
+library("BiocStyle")
+```
 
-### S3 objects
+We have already briefly seen the [Bioconductor
+project](https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec:bioconductor). It
+initiated by Robert Gentleman (@Gentleman:2004;@Huber:2015), one of
+the two creators of the R language, and centrally offers dedicated R
+packages for bioinformatics.
 
-### S4 objects
+> Bioconductor provides tools for the analysis and comprehension of
+> high-throughput genomic data. Bioconductor uses the R statistical
+> programming language, and is open source and open development. It
+> has two releases each year, and an active user community.
+
+Bioconductor provides a rich set of [classes for omics
+data](https://bioconductor.org/developers/how-to/commonMethodsAndClasses/),
+summarised below.
+
+### Common Bioconductor classes
+
+- Rectangular feature x sample data – `r Biocpkg("SummarizedExperiment")``::SummarizedExperiment()` (RNAseq count matrix, microarray, ...)
+- Genomic coordinates – `r Biocpkg("GenomicRanges")``::GRanges()` (1-based, closed interval)
+- DNA / RNA / AA sequences – `r Biocpkg("Biostrings")``::*StringSet()`
+- Gene sets – `r Biocpkg("GSEABase")``::GeneSet()` `r Biocpkg("GSEABase")``::GeneSetCollection()`
+- Multi-omics data – `r Biocpkg("MultiAssayExperiment")``::MultiAssayExperiment()`
+- Single cell data – `r Biocpkg("SingleCellExperiment")``::SingleCellExperiment()`
+- Mass spectrometry data – `r Biocpkg("MSnbase")``::MSnExp()`
+- Quantitative proteomics data – `r Biocpkg("MSnbase")``::MSnSet()`
+
+### The `SummarizedExperiment` class
+
+Let's start by installing[^require] the`r Biocpkg("SummarizedExperiment")`
+package, that implements the class, and the `r Biocpkg("airway")`
+data package, that provides an RNA-Seq example data.
+
+[^require]: Before installing the package, we first check if they are
+    available with `require`. If they are missing, the call to
+    `require` will return `FALSE`, otherwise it returns `TRUE` and
+    loads the packages. Given that we negate the return value of
+    `require` using `!`, the packages will be installed only when
+    missing.
+
+```{r seinstall, message = FALSE}
+if (!require("SummarizedExperiment"))
+    BiocManager::install("SummarizedExperiment")
+if (!require("airway"))
+    BiocManager::install("airway")
+```
+
+If you know you have the packages, it is more straightforward to
+directly load the packages.
+
+```{r seload, message = FALSE}
+library("SummarizedExperiment")
+library("airway")
+```
+
+The `airway` package provides a data for an RNA-Seq experiment on four
+human airway smooth muscle cell lines treated with dexamethason
+published by @Himes:2014. It contains the RNA expression data for
+64102 transcripts and 8 samples. These 8 samples correspond to treated
+and untreated condition in 4 different cell lines.
+
+Objects if the class `SummarizedExperiment` contain one or more assays
+(i.e. sets if quantitative expresson data), each represented by a
+matrix-like object (typically) of numeric mode. The rows represent
+features such as genes, transcripts, proteins or more generally
+genomic ranges and the columns represent samples. The figure below
+represents its anatomy in greater details.
+
+```{r sefig, echo = FALSE, fig.cap = "Schematic representation of the anatomy if a `SummarizedExperiment` object. (Figure taken from the `SummarizedExperiment` package vignette.)"}
+knitr::include_graphics("./figs/SE.svg")
+```
+
+- The sample (columns) metadata can be access with the `colData()`
+  function.
+- The features (rows) metadata can be access with the `rowData()`
+  column.
+- If the features represent ranges along genomic coordinates, these
+  can be accessed with `rowRanges()`
+- Additional metadata describing the overall experiment can be
+  accessed with `metadata()`.
+- The quantiative data can be accessed with `assay()`.
+- `assays()` returns a list of matrix-like assays.
+
+
+`r msmbstyle::question_begin()`
+Load the `airway` data and display it in your R console. Make sure you
+understand all parts in the short text summary that is displayed. What
+class is `airway` of.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::question_begin()`
+Extract the quantitative assay data, the rows and columns metadata,
+the row ranges and the experiment metadata. What are the classes of
+these individual parts of the `SummarizedExperiment` object.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r seex1}
+data(airway)
+airway
+class(airway)
+assay(airway)
+class(assay(airway))
+colData(airway)
+class(colData(airway))
+rowData(airway)
+class(rowData(airway))
+rowRanges(airway)
+class(rowRanges(airway))
+```
+`r msmbstyle::solution_end()`
+
+The row and column metadata are stored as a special `data.frame`
+implementation[^dfimp], that has been developed in the Bioconductor
+project. It behaves like like a classical `data.frame`.
+
+`r msmbstyle::question_begin()`
+What biological sample names in the `airway` dataset were treated with
+dexamethason?  Which ones weren't?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r seex2a}
+dex_treated <- airway$dex == "trt"
+## shorthand for colData(airway)$dex == "trt"
+## Treated samples
+colData(airway)[dex_treated, "BioSample"]
+## Control samples
+colData(airway)[!dex_treated, "BioSample"]
+```
+
+It is also possible to use the `tidyverse` for this by first coercing
+the `DataFrame` to a `tibble`.
+
+```{r seex2b}
+as_tibble(colData(airway)) %>%
+    filter(dex == "trt") %>%
+    select(BioSample)
+
+as_tibble(colData(airway)) %>%
+    filter(dex != "trt") %>%
+    select(BioSample)
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+What are the dimensions of the assay data, and the row and column
+metadata? What can you way about these?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r seex3}
+dim(airway)
+dim(colData(airway))
+dim(rowData(airway))
+```
+`r msmbstyle::solution_end()`
+
+
+[^dfimp]: Like the `tibble`, that is an implememtation specific to the
+    `tidyverse` packages.
+
+
+### Subsetting `SummarizedExperiment` objects
+
+As mentioned in the introduction, it is possible to redefine common
+functions to have a special behaviour with objects. This is the case
+for the `[` operator, that will automatically subset all parts of the
+object. Below, we create a new instance of class
+`SummarizedExperiment` that contains only the 5 first features for the
+3 first samples.
+
+```{r sesub}
+se <- airway[1:5, 1:3]
+se
+```
+
+`r msmbstyle::question_begin()`
+Verfiy that the assay data, the column and row metadata and the row
+ranges have been preserved.
+`r msmbstyle::question_end()`
+
+Subsetting can be performed with numberics (as shown above), but also
+with characters of logicals, just like with dataframes or matrices.
+
+`r msmbstyle::question_begin()`
+Create a new object that contains the data for features (rows)
+`"ENSG00000166963"`, `"ENSG00000267970"` and `"ENSG00000254663"` and
+samples (columns) `"SRR1039517"` and `"SRR1039521"`.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r seex4}
+airway[c("ENSG00000166963", "ENSG00000267970", "ENSG00000254663"),
+       c("SRR1039517", "SRR1039521")]
+```
+`r msmbstyle::solution_end()`
+
+The row ranges are defined as a list of genomic ranges (`GRanges`
+objects), one genomic range per row in the
+`SummarizedExperiment`. This `GRangesList` object behaves like a list,
+albeit a list that specifically contains `GRanges` objects.
+
+If we look at the first feature, corresponding to gene
+`ENSG00000000003`, we see that is is composed of 17 exons
+(`ENSE00001459322` to `ENSE00001828996`) and their detailed positions
+on chromosome X.
+
+```{r}
+rowRanges(airway)[[1]]
+```
+
+The position of genes can also be used to subset a
+`SummarizedExperiment`. In the example below, we select all features
+that overlap with positions 100000 to 1100000 on chromosome 1. To do
+this we first create a new `GRanges` object that matches the region of
+interest:
+
+```{r roi}
+roi <- GRanges(seqnames="1", ranges=100000:1100000)
+roi
+```
+
+We can now use `roi` to extract the feature of interest with the
+`subsetByOverlaps` function, which returns a new
+`SummarizedExperiment` object that contains 74 features.
+
+```{r sbo}
+se <- subsetByOverlaps(airway, roi)
+se
+```
+
+
+`r msmbstyle::question_begin()`
+How many genes are present on chromosome X between position 100000 et 1000000.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r}
+roi <- GRanges(seqnames = "X", ranges = 1e5:1e6)
+nrow(subsetByOverlaps(airway, roi))
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Visit the Ensembl page and look up the Ensembl gene identifier
+(`ENSG00...`) of the BRCA1 gene. Verify if these match the information
+in the `airway` data. If not, why could this be? How many exons are
+there in the `airway` data for this gene?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+gr <- rowRanges(airway["ENSG00000012048", ])
+gr
+length(gr[[1]])
+```
+`r msmbstyle::solution_end()`
+
+
+### Constructing a `SummarizedExperiment`
+
+
+Complex object such as `SummarizedExperiment` are generally
+constructed by functions (called **constructors**) from files. It is
+possible to construct a `SummarizedExperiment` by hand. To do so, we
+first need to construct the different parts of the object.
+
+Let's create an expression matrix for 200 genes and 6 samples by
+randomly sample values between 1 and 10000.
+
+```{r newse1}
+nrows <- 200
+ncols <- 6
+counts <- matrix(runif(nrows * ncols, 1, 1e4), nrows)
+```
+
+Below, we create a the `colData` part using the appropriate
+constructor for the class of data needed:
+
+```{r newse2}
+cd <- DataFrame(Treatment=rep(c("ChIP", "Input"), 3),
+                row.names=LETTERS[1:6])
+```
+
+Let's also create some ranges. Here, we will have one range per
+features, as opposed to the `airway` data, that has multiple ranges
+(exons) per feature (gene). The ranges below to chromosomes 1 and 2
+(50 and 150 respectively), with ranges (constructure with the
+`IRanges` constructor) starting between 1e5 and 1e6 with width 100,
+and strand chosing randomly as the positive or negative strand.
+
+
+```{r newse3}
+rng <- GRanges(rep(c("chr1", "chr2"), c(50, 150)),
+               IRanges(floor(runif(200, 1e5, 1e6)), width = 100),
+               strand = sample(c("+", "-"), 200, TRUE))
+```
+
+We can now put the different parts together using the
+`SummarizedExperiment` constructor:
+
+```{r newse4}
+se <- SummarizedExperiment(assays = list(counts = counts),
+                           colData = cd,
+                           rowRanges = rng)
+se
+```
+
+
+We can also create a `rowData` object and add it to our `se` object:
+
+```{r newse5}
+rowData(se) <- DataFrame(some_value = sample(200))
+se
+```
+
+## Additional exercises
