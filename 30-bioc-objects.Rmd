@@ -27,24 +27,120 @@ and information necessary to produce the figure.
 
 ## Why objects?
 
-- Store data and metadata together.
-- Self describing: a object to store HTS data contains HTS data.
-- If all information is stored in a single object, it is easier to
-  save it, to share it with others, and to use it as an input to a
-  function. (Consistent with the notion that you would like to place
-  all the data relevant to an expriment nito a single folder).
-- Specialised behaviour (functions): for example plotting, summary,
-  subsetting (`[` and `[[`), ...
+- Combine many parts of a complext data, for example store data (and
+  possibly different forms thereof (see chapter \@ref(sec:norm)) and
+  metadata together.
 
+- Objects are **self describing**: an object to store high-throughput
+  sequencing (HTS) data contains high-throughput sequencing
+  data. Replace high-throughput sequencing data by DNA sequences (see
+  chapter \@ref(sec:biostrings)), proteomics, ... and it will still
+  hold.
 
-- abstraction
-- ecapsulates data (state)
-- inheritance
-- polymorphism
+- Using object enables **consistency**[^flex]: whoever prepares the
+  HTS data, it will always have the same structure.
 
-Note on class (describes general properties for groups of objects) vs
-object (instantiation of a class, encapsulates state information and
-control behaviour).
+[^flex]: This consistency comes however at the cost of flexibility,
+    hence the importance of well designed objects, that fit several
+    use cases for the type of data at hand.
+
+- If all information is stored in a single object[^oneobj], it is
+  easier to save it, to share it with others, and to use it as an
+  input to a function.
+
+[^oneobj]: This idea is consistent with the notion that you would like
+    to place all the data relevant to an expriment into a single
+    folder.
+
+The above properties lead to greater **robustness** and
+**interoperability** when working with objects modelling complex data.
+
+- Common behaviour (functions) can be specialised to match the
+  particular data type (this is called **polymorphism**): for example
+  plotting (a vector, a matrix, NGS data), summary, subsetting (`[`
+  and `[[`), ...
+
+- Another import benefit of using objects to model complex data is
+  **abstraction**: it is possible to hide all the (unnecessary for its
+  usage) complexity of a particular type of data and present/give
+  access to its most imporant parts in a user-friendly **interface**
+  and efficient way.
+
+- Relations between object can be recorded (this is called
+  **inheritance**).
+
+To avoid confusion, it is useful to define and separate objects and
+classes. A **class** describes (models) the general properties for
+groups of objects. For example, we could define a class to describe
+people in this course as follows:
+
+```
+Class person:
+- Name: a character
+- Surname: a character
+- Noma: an optional numeric
+- Role: a character (student, teaching assistant, instructor)
+```
+
+An **object** is and instantiation of a class with specific values in
+its fields:
+
+```
+Object of class person:
+- Name: Laurent
+- Surname: Gatto
+- Noma: NA
+- Role: instructor
+```
+
+`r msmbstyle::question_begin()`
+Describe two objects that would describe a teaching assistant and a
+student.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```
+Object of class person:
+- Name: Axelle
+- Surname: Loriot
+- Noma: NA
+- Role: teaching assistant
+
+Object of class person:
+- Name: Object of class person:
+- Name: Alejandra
+- Surname: Sanchez-Cortez
+- Noma: 123456
+- Role: student
+```
+
+`r msmbstyle::solution_end()`
+
+We will focus on objects and their usage here.
+
+## Examples in base R
+
+Let's start by generating a testing dataset composed of two correlated
+variables, `x` and `y`:
+
+```{r df}
+set.seed(1)
+x <- rnorm(100)
+y <- x + rnorm(100)
+df <- data.frame(x, y)
+head(df)
+plot(y ~ x, df)
+```
+
+We are now going to model the linear relation between `x` and `y`
+using the `lm` (linear model) function. The resulting variable `fit`
+is the result of computing the linear regression
+$y = \beta_0 + beta_1 x + \epsilon$:
+
+```{r lm1}
+fit <- lm(y ~ x, df)
+```
+
 
 ## Examples from the Bioconductor project
 

@@ -14,6 +14,7 @@ and data structures that will be needed for the following chapters.
 BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 ```
 
+- Starting a markdown document.
 
 ## Basic data structures and operations
 
@@ -36,7 +37,6 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 | **array**  | n                    | 1                    |
 | **dataframe** | 2                 | n                    |
 | **list**   | 1 (length)           | n                    |
-
 
 
 ## Tidyvers
