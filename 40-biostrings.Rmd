@@ -2,5 +2,9 @@
 
 **Learning objectives**
 
-In this chapter, we will learn about a new object, that is specialised
-for the manipulation of biological sequences.
+In this chapter, we will learn about a new object, that is
+specialised for the manipulation of biological sequences.
+
+- Learn about the fasta format format for biological sequences.
+- Learn about the `*StingSet` classes.
+- Find patterns in sequence data.
