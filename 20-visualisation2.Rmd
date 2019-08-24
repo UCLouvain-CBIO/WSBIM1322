@@ -437,7 +437,7 @@ data. Below, we first re-annotate the data using some regular
 expressions
 
 
-```{r facet1, fig.cap = "Different sub-plots for different lineages using colours (left) of facets(right) to distinguish the different lineages."}
+```{r facet1, fig.cap = "Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages."}
 p1 <- ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at, colour = lineage)) +
   geom_point()
 p2 <- ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at)) +

@@ -508,12 +508,12 @@ se
 
 `r msmbstyle::question_begin()`
 
-Using the function `kem2.tsv`, import the cout and annotation data
-into R and use them to create an object of class
-`SummarizedExperiment`.
+Using the function `kem2.tsv` from the `rWSBIM1207` package, import
+the cout and annotation data into R and use them to create an object
+of class `SummarizedExperiment`.
 `r msmbstyle::question_end()`
 
-```{r kemse, echo = FALSE}
+```{r kemse, echo = FALSE, message = FALSE}
 library("rWSBIM1207")
 fls <- rWSBIM1207::kem2.tsv()
 counts <- as.matrix(read.delim(fls[1], row.names = "ref"))

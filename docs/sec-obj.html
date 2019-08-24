@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-08-23" />
+<meta name="date" content="2019-08-24" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -124,7 +124,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="toc"><a href="#examples-from-the-bioconductor-project"> Examples from the Bioconductor project</a></li>
 <li class="toc"><a href="#additional-exercises-1"> Additional exercises</a></li>
 </ul>
-<a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with <em><a href="https://bioconductor.org/packages/3.9/Biostrings">Biostrings</a></em></a>
+<a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
 <a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centering, scaling, quantile normalisation</a>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
@@ -194,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ► Question
 </p>
 <div class="question-body">
-<p>Describe two objects that would describe a teaching assistant and a student.</p>
+<p>Write down two objects that would describe a teaching assistant and a student.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -269,8 +269,8 @@ Figure 3.2: The regression line modelling the linear regression between the two 
 <img src="WSBIM1207_files/figure-html/plotlm-1.png" alt="The regression line modelling the linear regression between the two `x` and `y` variables." width="672">
 </div>
 <p>The <code>fit</code> variable is an object of class <code>lm</code>, which we can check with the <code>class</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(lm)</code></pre></div>
-<pre><code>## [1] "function"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(fit)</code></pre></div>
+<pre><code>## [1] "lm"</code></pre>
 <p>It contains much more than simply the intercept and the slope of the regression line.</p>
 <div class="question">
 <p class="question-begin">
@@ -879,6 +879,17 @@ se</code></pre></div>
 <div id="additional-exercises-1" class="section level2">
 <h2>
 <span class="header-section-number">3.5</span> Additional exercises</h2>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Using the function <code>kem2.tsv</code> from the <code>rWSBIM1207</code> package, import the cout and annotation data into R and use them to create an object of class <code>SummarizedExperiment</code>.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 
 </div>
 </div></body></html>
@@ -888,7 +899,7 @@ se</code></pre></div>
 <a href="sec-biostrings.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-08-23
+2019-08-24
 </p>
 </div>
 </div>
