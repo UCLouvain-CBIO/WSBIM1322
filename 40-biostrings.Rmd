@@ -7,4 +7,345 @@ specialised for the manipulation of biological sequences.
 
 - Learn about the fasta format format for biological sequences.
 - Learn about the `*StingSet` classes.
+- Working with whole genomes.
 - Find patterns in sequence data.
+
+This chapter is based on the course material presented by Martin
+Morgan during the [Bioinformatics Summer School
+2019](https://uclouvain-cbio.github.io/BSS2019/) at Louvain-la-Neuve,
+Belgium.
+
+## Working with sequences - a first start
+
+It is easy to use standard R character vectors to define DNA
+sequences. Below, we create a vector with three short sequences.
+
+
+```{r seq1}
+sequences <- c("AAATCGA", "ATACAACAT", "TTGCCA")
+sequences
+```
+
+We can ask about properties of these sequences and perform some
+operations using base R function:
+
+
+```{r seqop}
+length(sequences)
+nchar(sequences)
+sequences[c(1, 3)]
+sample(sequences)
+```
+
+However, once is we want to perform biologically relevant operations,
+base R fails us; it has no notion of operations relevant to DNA
+sequences, e.g.,
+
+```{r, eval=FALSE}
+reverseComplement(sequences)
+```
+
+Likewise, we can name a variable anything, the semantic meaning
+of the variable name is not enforced by R
+
+
+```{r}
+not_a_dna_sequence <- "I love R"
+```
+
+## Working with sequences - using `Biostrings`
+
+The Bioconductor `r BiocStyle::Biocpkg("Biostrings")` 
+package can do all that base R can do, in addition to knowing about
+the semantics of the sequences is handles. Let's start by loading the
+package:
+
+```{r loadbiostr, message = FALSE}
+library("Biostrings")
+```
+
+### `DNAStringSet()`
+
+The `DNAStringSet` class that *knows* about DNA sequences. We can
+easily create a `DNAStringSet` from our character vector with
+
+```{r dna1}
+dna <- DNAStringSet(sequences)
+dna
+```
+
+`r msmbstyle::question_begin()`
+Does the object `dna` support the operations illustrated above for a
+character vector, especially `length()`, `nchar()`, `[`, and
+`sample()`?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r dnaex1}
+length(dna)
+nchar(dna)
+dna[c(1, 3)]
+sample(dna)
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Prove to yourself that at least some other useful, DNA-specific,
+functions exist, e.g., `reverse()` and `reverseComplement()`.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r dnaex2}
+reverse(dna)
+reverseComplement(dna)
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+What happens when you try to create a `DNAStringSet()` from an object
+such as `not_a_dna_sequence`, defined above, that does not contain a
+DNA sequence? Warning: the message is quite cryptic, can you provide a
+'human' translation?
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r dnaex3}
+try(DNAStringSet(not_a_dna_sequence))
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Why does `DNAStringSet("ACGTMRW")` not create an error, since `MRW`
+are not standard nucleotides? For hints, see the section 'The DNA
+alphabet:" on the help page `?DNAString`.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+What is the difference between a `DNAString` and a `DNAStringSet`?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+DNAString("AGACCATG")
+DNAStringSet(c("AGACCATG", "AAAAAATTTA"))
+```
+`r msmbstyle::solution_end()`
+
+
+### Learning more about a class
+
+The function `DNAStringSet()` returns an _object_ that has a
+particular class
+
+```{r}
+class(dna)
+```
+
+Associated with the class are a series of _methods_ (i.e. functions
+that have a behaviour that is tuned for that class) that operate on
+the class.
+
+
+`r msmbstyle::question_begin()`
+Discover many (unfortunately, not all) methods acting on
+an object of class `DNAStringSet` using `methods(class =
+"DNAStringSet")`. Verify that `reverseComplement` is among those
+methods.
+`r msmbstyle::question_end()`
+
+Help pages describing a particular method can be found using `?`, with
+the search query quoted and with tab-completion providing hints on
+what the appropriate help topic is.
+
+
+`r msmbstyle::question_begin()`
+Find the help page for the `reverseComplement` method operating on a
+`DNAStringSet` object, using `?reverseComplement`.
+`r msmbstyle::question_end()`
+
+
+Help pages provide a description of the technical details required for
+creating classes and using methods. Vignettes provide a more narrative
+description of overall package use.
+
+`r msmbstyle::question_begin()`
+Use `browseVignettes(package = "Biostrings")` to see vignettes
+available for this package; explore a few vignettes to get a sense of
+possible content.
+`r msmbstyle::question_end()`
+
+## Reading DNA sequence data from a file
+
+It is unlikely that we would enter 1000's of DNA sequences 'by
+hand'. Instead, we might read the data from a standard file
+format. For DNA sequences the standard file format is often a 'FASTA'
+file, sometimes abbreviated with an extension `.fa` and often
+compressed with an additional extension `.fa.gz`. An example of a
+FASTA file containing DNA sequences of the 2000bp upstream nucleotides
+of all genes annotated in the _Drosophila melanogaster_ `dm3` genome
+build, is distributed with the `Biostrings` package. Here's the path
+to the FASTA file.
+
+```{r fa_file}
+fa_file <-
+    system.file(package="Biostrings", "extdata", "dm3_upstream2000.fa.gz")
+```
+
+
+`r msmbstyle::question_begin()`
+Take a peak at the structure of a FASTA file by looking at the first
+five lines. You can use the `readLines` function, setting the `n`
+parameter to read only a limited number of files (see `readLines`).
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r faex1}
+readLines(fa_file, 5)
+```
+`r msmbstyle::solution_end()`
+
+In this case, the first line is an identifier, containing information
+about the gene `NM_078863` as well as the genomic coordinates of the
+sequence `chr2L:16764737-16766736`. The next lines are the DNA
+sequence. After a certain number of lines, a new record starts.
+
+```{r}
+tail(readLines(fa_file, 44), 5)
+```
+
+We could fairly *easily* write our own parser for this format, but
+this would be error-prone and unnecessary. Instread, we want to use
+the `readDNAStringSet` function from the `Biostrings` package for
+that.
+
+```{r}
+dna <- readDNAStringSet(fa_file)
+dna
+```
+
+
+`r msmbstyle::question_begin()`
+Query the object for basic properties, e.g., it's `length()` and that
+the number of characters in each sequence is 2000
+`unique(nchar(dna))`.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+Use `letterFrequency()` to determine GC content of each of the DNA
+sequences in `dna`. The `letters` argument should be `"GC"`; `as.prob
+= TRUE` returns values between 0 and 1. The data is returned as a
+matrix with 1 column.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r letterfreqex1}
+gc_content <- letterFrequency(dna, letters = "GC", as.prob = TRUE)
+gc_content
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+What are the mean and standard deviation of the GC contents in the `r length(dna)` genes?
+What genes(s) has the highes GC content?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r letterfreqex2}
+mean(gc_content)
+sd(gc_content)
+range(gc_content)
+dna[which(gc_content == max(gc_content))]
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Plot the distribution of GC frequencies in the `dna` object using base
+graphics `hist()` and `plot(density())`, and using `ggplot()`.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r letterfreqex3a}
+hist(gc_content)
+plot(density(gc_content))
+```
+
+```{r letterfreqex3b}
+library("tidyverse") 
+p <- as_tibble(gc_content) %>%
+    ggplot(aes(x = `G|C`))
+p + geom_histogram()
+p + geom_density()
+```
+`r msmbstyle::solution_end()`
+
+
+## Tidy _Bioconductor_?
+
+Although _Bioconductor_ emphasizes formal objects like `DNAStringSet`
+rather than `tibble`-like data frames, some of the ways one interacts
+with tidy data can be applied to _Bioconductor_ objects. For instance,
+the GC content example might be written in 'traditional' form as
+
+```{r}
+gc <- letterFrequency(dna, "GC", as.prob = TRUE)
+```
+
+but could be written using pipes and to reesult in a tibble for easier
+down-stream manipulation
+
+```{r}
+gc <- 
+    dna %>%
+    letterFrequency("GC", as.prob = TRUE) %>%
+    tibble::as_tibble()
+gc
+```
+
+
+## Working with genomes
+
+`BSgenome` packages inside Bioconductor contain whole genome sequences
+as distributed by ENSEMBL, NCBI and others. In this next example we
+will load the whole genome sequence for Homo sapiens from UCSC's hg19
+build, and calculate the GC content across chromosome 14.
+
+
+```{r bs1, message = FALSE}
+library("Biostrings")
+library("BSgenome.Hsapiens.UCSC.hg19")
+chr14_range <- GRanges("chr14", IRanges(1, seqlengths(Hsapiens)["chr14"]))
+chr14_range
+```
+
+```{r bs2, message = FALSE}
+chr14_dna <- getSeq(Hsapiens, chr14_range)
+chr14_dna
+letterFrequency(chr14_dna, "GC", as.prob=TRUE)
+```
+
+`r msmbstyle::question_begin()`
+Using `letterFrequency`, calculate the number and frequency of A, G, C
+and T nucleotides in chromosome 14.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r acgtex}
+letterFrequency(chr14_dna, c("A", "G", "C", "T"))
+letterFrequency(chr14_dna, c("A", "G", "C", "T"), as.prob = FALSE)
+```
+`r msmbstyle::solution_end()`
+
+
+## Additional exercises
+
+

@@ -118,7 +118,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
 <a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
 <a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
-<a id="active-page" href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a id="active-page" href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a><ul class="toc-sections">
+<li class="toc"><a href="#working-with-sequences---a-first-start"> Working with sequences - a first start</a></li>
+<li class="toc"><a href="#working-with-sequences---using-biostrings"> Working with sequences - using <code>Biostrings</code></a></li>
+<li class="toc"><a href="#reading-dna-sequence-data-from-a-file"> Reading DNA sequence data from a file</a></li>
+<li class="toc"><a href="#tidy-bioconductor"> Tidy <em>Bioconductor</em>?</a></li>
+<li class="toc"><a href="#working-with-genomes"> Working with genomes</a></li>
+<li class="toc"><a href="#additional-exercises-2"> Additional exercises</a></li>
+</ul>
 <a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centering, scaling, quantile normalisation</a>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
@@ -145,8 +152,967 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>Learn about the fasta format format for biological sequences.</li>
 <li>Learn about the <code>*StingSet</code> classes.</li>
+<li>Working with whole genomes.</li>
 <li>Find patterns in sequence data.</li>
 </ul>
+<p>This chapter is based on the course material presented by Martin Morgan during the <a href="https://uclouvain-cbio.github.io/BSS2019/">Bioinformatics Summer School 2019</a> at Louvain-la-Neuve, Belgium.</p>
+<div id="working-with-sequences---a-first-start" class="section level2">
+<h2>
+<span class="header-section-number">4.1</span> Working with sequences - a first start</h2>
+<p>It is easy to use standard R character vectors to define DNA sequences. Below, we create a vector with three short sequences.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sequences &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"AAATCGA"</span>, <span class="st">"ATACAACAT"</span>, <span class="st">"TTGCCA"</span>)
+sequences</code></pre></div>
+<pre><code>## [1] "AAATCGA"   "ATACAACAT" "TTGCCA"</code></pre>
+<p>We can ask about properties of these sequences and perform some operations using base R function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(sequences)</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nchar</span>(sequences)</code></pre></div>
+<pre><code>## [1] 7 9 6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sequences[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</code></pre></div>
+<pre><code>## [1] "AAATCGA" "TTGCCA"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(sequences)</code></pre></div>
+<pre><code>## [1] "TTGCCA"    "AAATCGA"   "ATACAACAT"</code></pre>
+<p>However, once is we want to perform biologically relevant operations, base R fails us; it has no notion of operations relevant to DNA sequences, e.g.,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverseComplement</span>(sequences)</code></pre></div>
+<p>Likewise, we can name a variable anything, the semantic meaning of the variable name is not enforced by R</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">not_a_dna_sequence &lt;-<span class="st"> "I love R"</span></code></pre></div>
+</div>
+<div id="working-with-sequences---using-biostrings" class="section level2">
+<h2>
+<span class="header-section-number">4.2</span> Working with sequences - using <code>Biostrings</code>
+</h2>
+<p>The Bioconductor <em><a href="https://bioconductor.org/packages/3.9/Biostrings">Biostrings</a></em> package can do all that base R can do, in addition to knowing about the semantics of the sequences is handles. Let’s start by loading the package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"Biostrings"</span>)</code></pre></div>
+<div id="dnastringset" class="section level3">
+<h3>
+<span class="header-section-number">4.2.1</span> <code>DNAStringSet()</code>
+</h3>
+<p>The <code>DNAStringSet</code> class that <em>knows</em> about DNA sequences. We can easily create a <code>DNAStringSet</code> from our character vector with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dna &lt;-<span class="st"> </span><span class="kw">DNAStringSet</span>(sequences)
+dna</code></pre></div>
+<pre><code>##   A DNAStringSet instance of length 3
+##     width seq
+## [1]     7 AAATCGA
+## [2]     9 ATACAACAT
+## [3]     6 TTGCCA</code></pre>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Does the object <code>dna</code> support the operations illustrated above for a character vector, especially <code>length()</code>, <code>nchar()</code>, <code>[</code>, and <code>sample()</code>?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-14" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-14', 'sol-start-14')"></span>
+</p>
+<div id="sol-body-14" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(dna)</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nchar</span>(dna)</code></pre></div>
+<pre><code>## [1] 7 9 6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dna[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</code></pre></div>
+<pre><code>##   A DNAStringSet instance of length 2
+##     width seq
+## [1]     7 AAATCGA
+## [2]     6 TTGCCA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(dna)</code></pre></div>
+<pre><code>##   A DNAStringSet instance of length 3
+##     width seq
+## [1]     9 ATACAACAT
+## [2]     6 TTGCCA
+## [3]     7 AAATCGA</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Prove to yourself that at least some other useful, DNA-specific, functions exist, e.g., <code>reverse()</code> and <code>reverseComplement()</code>.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-15" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-15', 'sol-start-15')"></span>
+</p>
+<div id="sol-body-15" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverse</span>(dna)</code></pre></div>
+<pre><code>##   A DNAStringSet instance of length 3
+##     width seq
+## [1]     7 AGCTAAA
+## [2]     9 TACAACATA
+## [3]     6 ACCGTT</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverseComplement</span>(dna)</code></pre></div>
+<pre><code>##   A DNAStringSet instance of length 3
+##     width seq
+## [1]     7 TCGATTT
+## [2]     9 ATGTTGTAT
+## [3]     6 TGGCAA</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>What happens when you try to create a <code>DNAStringSet()</code> from an object such as <code>not_a_dna_sequence</code>, defined above, that does not contain a DNA sequence? Warning: the message is quite cryptic, can you provide a ‘human’ translation?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-16" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-16', 'sol-start-16')"></span>
+</p>
+<div id="sol-body-16" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">DNAStringSet</span>(not_a_dna_sequence))</code></pre></div>
+<pre><code>## Error in .Call2("new_XString_from_CHARACTER", class(x0), string, start,  : 
+##   key 73 (char 'I') not in lookup table</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Why does <code>DNAStringSet("ACGTMRW")</code> not create an error, since <code>MRW</code> are not standard nucleotides? For hints, see the section ’The DNA alphabet:" on the help page <code>?DNAString</code>.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>What is the difference between a <code>DNAString</code> and a <code>DNAStringSet</code>?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-17" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-17', 'sol-start-17')"></span>
+</p>
+<div id="sol-body-17" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">DNAString</span>(<span class="st">"AGACCATG"</span>)</code></pre></div>
+<pre><code>##   8-letter "DNAString" instance
+## seq: AGACCATG</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">DNAStringSet</span>(<span class="kw">c</span>(<span class="st">"AGACCATG"</span>, <span class="st">"AAAAAATTTA"</span>))</code></pre></div>
+<pre><code>##   A DNAStringSet instance of length 2
+##     width seq
+## [1]     8 AGACCATG
+## [2]    10 AAAAAATTTA</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="learning-more-about-a-class" class="section level3">
+<h3>
+<span class="header-section-number">4.2.2</span> Learning more about a class</h3>
+<p>The function <code>DNAStringSet()</code> returns an <em>object</em> that has a particular class</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(dna)</code></pre></div>
+<pre><code>## [1] "DNAStringSet"
+## attr(,"package")
+## [1] "Biostrings"</code></pre>
+<p>Associated with the class are a series of <em>methods</em> (i.e. functions that have a behaviour that is tuned for that class) that operate on the class.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Discover many (unfortunately, not all) methods acting on an object of class <code>DNAStringSet</code> using <code>methods(class = "DNAStringSet")</code>. Verify that <code>reverseComplement</code> is among those methods.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Help pages describing a particular method can be found using <code>?</code>, with the search query quoted and with tab-completion providing hints on what the appropriate help topic is.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Find the help page for the <code>reverseComplement</code> method operating on a <code>DNAStringSet</code> object, using <code>?reverseComplement</code>.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Help pages provide a description of the technical details required for creating classes and using methods. Vignettes provide a more narrative description of overall package use.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Use <code>browseVignettes(package = "Biostrings")</code> to see vignettes available for this package; explore a few vignettes to get a sense of possible content.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="reading-dna-sequence-data-from-a-file" class="section level2">
+<h2>
+<span class="header-section-number">4.3</span> Reading DNA sequence data from a file</h2>
+<p>It is unlikely that we would enter 1000’s of DNA sequences ‘by hand’. Instead, we might read the data from a standard file format. For DNA sequences the standard file format is often a ‘FASTA’ file, sometimes abbreviated with an extension <code>.fa</code> and often compressed with an additional extension <code>.fa.gz</code>. An example of a FASTA file containing DNA sequences of the 2000bp upstream nucleotides of all genes annotated in the <em>Drosophila melanogaster</em> <code>dm3</code> genome build, is distributed with the <code>Biostrings</code> package. Here’s the path to the FASTA file.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa_file &lt;-
+<span class="st">    </span><span class="kw">system.file</span>(<span class="dt">package=</span><span class="st">"Biostrings"</span>, <span class="st">"extdata"</span>, <span class="st">"dm3_upstream2000.fa.gz"</span>)</code></pre></div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Take a peak at the structure of a FASTA file by looking at the first five lines. You can use the <code>readLines</code> function, setting the <code>n</code> parameter to read only a limited number of files (see <code>readLines</code>).</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-18" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-18', 'sol-start-18')"></span>
+</p>
+<div id="sol-body-18" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(fa_file, <span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] "&gt;NM_078863_up_2000_chr2L_16764737_f chr2L:16764737-16766736"
+## [2] "gttggtggcccaccagtgccaaaatacacaagaagaagaaacagcatctt"         
+## [3] "gacactaaaatgcaaaaattgctttgcgtcaatgactcaaaacgaaaatg"         
+## [4] "tttttgtgcttttcgaacaaaaaattgggagcagaatattggattcgctt"         
+## [5] "ttttcgcatcgaatatcttaagggagcaagggaagaaccatctagaataa"</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>In this case, the first line is an identifier, containing information about the gene <code>NM_078863</code> as well as the genomic coordinates of the sequence <code>chr2L:16764737-16766736</code>. The next lines are the DNA sequence. After a certain number of lines, a new record starts.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(<span class="kw">readLines</span>(fa_file, <span class="dv">44</span>), <span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] "cacgcacaccgatcgtcgaatcgaaaagctttcggggtcttacgggatcc"         
+## [2] "atgggtatcaagttgccccgtataaaaggcaagtttaccggttgcacggt"         
+## [3] "&gt;NM_001201794_up_2000_chr2L_8382455_f chr2L:8382455-8384454"
+## [4] "ttatttatgtaggcgcccgttcccgcagccaaagcactcagaattccggg"         
+## [5] "cgtgtagcgcaacgaccatctacaaggcaatattttgatcgcttgttagg"</code></pre>
+<p>We could fairly <em>easily</em> write our own parser for this format, but this would be error-prone and unnecessary. Instread, we want to use the <code>readDNAStringSet</code> function from the <code>Biostrings</code> package for that.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dna &lt;-<span class="st"> </span><span class="kw">readDNAStringSet</span>(fa_file)
+dna</code></pre></div>
+<pre><code>##   A DNAStringSet instance of length 26454
+##         width seq                                      names               
+##     [1]  2000 GTTGGTGGCCCACCAGTGC...GTTTACCGGTTGCACGGT NM_078863_up_2000...
+##     [2]  2000 TTATTTATGTAGGCGCCCG...CGGAAAGTCATCCTCGAT NM_001201794_up_2...
+##     [3]  2000 TTATTTATGTAGGCGCCCG...CGGAAAGTCATCCTCGAT NM_001201795_up_2...
+##     [4]  2000 TTATTTATGTAGGCGCCCG...CGGAAAGTCATCCTCGAT NM_001201796_up_2...
+##     [5]  2000 TTATTTATGTAGGCGCCCG...CGGAAAGTCATCCTCGAT NM_001201797_up_2...
+##     ...   ... ...
+## [26450]  2000 ATTTACAAGACTAATAAAG...ATTAAATTTCAATAAAAC NM_001111010_up_2...
+## [26451]  2000 GATATACGAAGGACGACCT...TTTGAGTTGTTATATATT NM_001015258_up_2...
+## [26452]  2000 GATATACGAAGGACGACCT...TTTGAGTTGTTATATATT NM_001110997_up_2...
+## [26453]  2000 GATATACGAAGGACGACCT...TTTGAGTTGTTATATATT NM_001276245_up_2...
+## [26454]  2000 CGTATGTATTAGTTAACTC...AAGTGTAAGAACAAATTG NM_001015497_up_2...</code></pre>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Query the object for basic properties, e.g., it’s <code>length()</code> and that the number of characters in each sequence is 2000 <code>unique(nchar(dna))</code>.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Use <code>letterFrequency()</code> to determine GC content of each of the DNA sequences in <code>dna</code>. The <code>letters</code> argument should be <code>"GC"</code>; <code>as.prob = TRUE</code> returns values between 0 and 1. The data is returned as a matrix with 1 column.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-19" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-19', 'sol-start-19')"></span>
+</p>
+<div id="sol-body-19" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gc_content &lt;-<span class="st"> </span><span class="kw">letterFrequency</span>(dna, <span class="dt">letters =</span> <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)
+gc_content</code></pre></div>
+<pre><code>##                G|C
+##     [1,] 0.3785000
+##     [2,] 0.4300000
+##     [3,] 0.4300000
+##     [4,] 0.4300000
+##     [5,] 0.4300000
+##     [6,] 0.4300000
+##     [7,] 0.4300000
+##     [8,] 0.4300000
+##     [9,] 0.4300000
+##    [10,] 0.4300000
+##    [11,] 0.3645000
+##    [12,] 0.3645000
+##    [13,] 0.3785000
+##    [14,] 0.3785000
+##    [15,] 0.3785000
+##    [16,] 0.3785000
+##    [17,] 0.3785000
+##    [18,] 0.3930000
+##    [19,] 0.3785000
+##    [20,] 0.3785000
+##    [21,] 0.3785000
+##    [22,] 0.3775000
+##    [23,] 0.3775000
+##    [24,] 0.3775000
+##    [25,] 0.3785000
+##    [26,] 0.3785000
+##    [27,] 0.3790000
+##    [28,] 0.3625000
+##    [29,] 0.3930000
+##    [30,] 0.3930000
+##    [31,] 0.3785000
+##    [32,] 0.4010000
+##    [33,] 0.4010000
+##    [34,] 0.3550000
+##    [35,] 0.3550000
+##    [36,] 0.3790000
+##    [37,] 0.3550000
+##    [38,] 0.3790000
+##    [39,] 0.4230000
+##    [40,] 0.3820000
+##    [41,] 0.3875000
+##    [42,] 0.3875000
+##    [43,] 0.3875000
+##    [44,] 0.4440000
+##    [45,] 0.4440000
+##    [46,] 0.4440000
+##    [47,] 0.4440000
+##    [48,] 0.3875000
+##    [49,] 0.3665000
+##    [50,] 0.4530000
+##    [51,] 0.3240000
+##    [52,] 0.4240000
+##    [53,] 0.4240000
+##    [54,] 0.3360000
+##    [55,] 0.4035000
+##    [56,] 0.4660000
+##    [57,] 0.3995000
+##    [58,] 0.3995000
+##    [59,] 0.3950000
+##    [60,] 0.3995000
+##    [61,] 0.3835000
+##    [62,] 0.3240000
+##    [63,] 0.3360000
+##    [64,] 0.3360000
+##    [65,] 0.3950000
+##    [66,] 0.3360000
+##    [67,] 0.4240000
+##    [68,] 0.3985000
+##    [69,] 0.5060000
+##    [70,] 0.5060000
+##    [71,] 0.4505000
+##    [72,] 0.4105000
+##    [73,] 0.3980000
+##    [74,] 0.3985000
+##    [75,] 0.3985000
+##    [76,] 0.3965000
+##    [77,] 0.4070000
+##    [78,] 0.4070000
+##    [79,] 0.4245000
+##    [80,] 0.3680000
+##    [81,] 0.3595000
+##    [82,] 0.3850000
+##    [83,] 0.3915000
+##    [84,] 0.3965000
+##    [85,] 0.3900000
+##    [86,] 0.3920000
+##    [87,] 0.3920000
+##    [88,] 0.4805000
+##    [89,] 0.4805000
+##    [90,] 0.4220000
+##    [91,] 0.4340000
+##    [92,] 0.4340000
+##    [93,] 0.4290000
+##    [94,] 0.4190000
+##    [95,] 0.4520000
+##    [96,] 0.3425000
+##    [97,] 0.4450000
+##    [98,] 0.4600000
+##    [99,] 0.4560000
+##   [100,] 0.3920000
+##   [101,] 0.4475000
+##   [102,] 0.4975000
+##   [103,] 0.4975000
+##   [104,] 0.4975000
+##   [105,] 0.4975000
+##   [106,] 0.4975000
+##   [107,] 0.3985000
+##   [108,] 0.3985000
+##   [109,] 0.3985000
+##   [110,] 0.3985000
+##   [111,] 0.3750000
+##   [112,] 0.4510000
+##   [113,] 0.4690000
+##   [114,] 0.3890000
+##   [115,] 0.3970000
+##   [116,] 0.4230000
+##   [117,] 0.4280000
+##   [118,] 0.4280000
+##   [119,] 0.4290000
+##   [120,] 0.4115000
+##   [121,] 0.4115000
+##   [122,] 0.4045000
+##   [123,] 0.4045000
+##   [124,] 0.3985000
+##   [125,] 0.3895000
+##   [126,] 0.3855000
+##   [127,] 0.3915000
+##   [128,] 0.3915000
+##   [129,] 0.3560000
+##   [130,] 0.3695000
+##   [131,] 0.3695000
+##   [132,] 0.3695000
+##   [133,] 0.3560000
+##   [134,] 0.4120000
+##   [135,] 0.4355000
+##   [136,] 0.3955000
+##   [137,] 0.3840000
+##   [138,] 0.4165000
+##   [139,] 0.4165000
+##   [140,] 0.4165000
+##   [141,] 0.4165000
+##   [142,] 0.4165000
+##   [143,] 0.3700000
+##   [144,] 0.3700000
+##   [145,] 0.4165000
+##   [146,] 0.4165000
+##   [147,] 0.4165000
+##   [148,] 0.4165000
+##   [149,] 0.3700000
+##   [150,] 0.3700000
+##   [151,] 0.4055000
+##   [152,] 0.4055000
+##   [153,] 0.4830000
+##   [154,] 0.3965000
+##   [155,] 0.3965000
+##   [156,] 0.3965000
+##   [157,] 0.3965000
+##   [158,] 0.3775000
+##   [159,] 0.3775000
+##   [160,] 0.3975000
+##   [161,] 0.4245000
+##   [162,] 0.4245000
+##   [163,] 0.4165000
+##   [164,] 0.4130000
+##   [165,] 0.4130000
+##   [166,] 0.3940000
+##   [167,] 0.4130000
+##   [168,] 0.4165000
+##   [169,] 0.4165000
+##   [170,] 0.3860000
+##   [171,] 0.5205000
+##   [172,] 0.4745000
+##   [173,] 0.4250000
+##   [174,] 0.5205000
+##   [175,] 0.3905000
+##   [176,] 0.4420000
+##   [177,] 0.4420000
+##   [178,] 0.4420000
+##   [179,] 0.4420000
+##   [180,] 0.4750000
+##   [181,] 0.3935000
+##   [182,] 0.4115000
+##   [183,] 0.3725000
+##   [184,] 0.4035000
+##   [185,] 0.4275000
+##   [186,] 0.4390000
+##   [187,] 0.4390000
+##   [188,] 0.3400000
+##   [189,] 0.3400000
+##   [190,] 0.3400000
+##   [191,] 0.3400000
+##   [192,] 0.3400000
+##   [193,] 0.4020000
+##   [194,] 0.4020000
+##   [195,] 0.4020000
+##   [196,] 0.4150000
+##   [197,] 0.4150000
+##   [198,] 0.4150000
+##   [199,] 0.4150000
+##   [200,] 0.4265000
+##   [201,] 0.4150000
+##   [202,] 0.4150000
+##   [203,] 0.4150000
+##   [204,] 0.4225000
+##   [205,] 0.3990000
+##   [206,] 0.4095000
+##   [207,] 0.4095000
+##   [208,] 0.4095000
+##   [209,] 0.4095000
+##   [210,] 0.4095000
+##   [211,] 0.4095000
+##   [212,] 0.4095000
+##   [213,] 0.3990000
+##   [214,] 0.4140000
+##   [215,] 0.4140000
+##   [216,] 0.4225000
+##   [217,] 0.3990000
+##   [218,] 0.3990000
+##   [219,] 0.3990000
+##   [220,] 0.3990000
+##   [221,] 0.4260000
+##   [222,] 0.4025000
+##   [223,] 0.3740000
+##   [224,] 0.3740000
+##   [225,] 0.4390000
+##   [226,] 0.4025000
+##   [227,] 0.4295000
+##   [228,] 0.3820000
+##   [229,] 0.3820000
+##   [230,] 0.3820000
+##   [231,] 0.3820000
+##   [232,] 0.3820000
+##   [233,] 0.3740000
+##   [234,] 0.3740000
+##   [235,] 0.3740000
+##   [236,] 0.3740000
+##   [237,] 0.4325000
+##   [238,] 0.4325000
+##   [239,] 0.4015000
+##   [240,] 0.4230000
+##   [241,] 0.4160000
+##   [242,] 0.4865000
+##   [243,] 0.3995000
+##   [244,] 0.4400000
+##   [245,] 0.3775000
+##   [246,] 0.3790000
+##   [247,] 0.3790000
+##   [248,] 0.4020000
+##   [249,] 0.3895000
+##   [250,] 0.4010000
+##   [251,] 0.4120000
+##   [252,] 0.4190000
+##   [253,] 0.4560000
+##   [254,] 0.4160000
+##   [255,] 0.4400000
+##   [256,] 0.4620000
+##   [257,] 0.4785000
+##   [258,] 0.5080000
+##   [259,] 0.4170000
+##   [260,] 0.4170000
+##   [261,] 0.4170000
+##   [262,] 0.4540000
+##   [263,] 0.4540000
+##   [264,] 0.3665000
+##   [265,] 0.3860000
+##   [266,] 0.3745000
+##   [267,] 0.3745000
+##   [268,] 0.3445000
+##   [269,] 0.4235000
+##   [270,] 0.3745000
+##   [271,] 0.3540000
+##   [272,] 0.3645000
+##   [273,] 0.3645000
+##   [274,] 0.4025000
+##   [275,] 0.4090000
+##   [276,] 0.4090000
+##   [277,] 0.4090000
+##   [278,] 0.3760000
+##   [279,] 0.4090000
+##   [280,] 0.4090000
+##   [281,] 0.4090000
+##   [282,] 0.4090000
+##   [283,] 0.4090000
+##   [284,] 0.4090000
+##   [285,] 0.4090000
+##   [286,] 0.4090000
+##   [287,] 0.4320000
+##   [288,] 0.4320000
+##   [289,] 0.4320000
+##   [290,] 0.4320000
+##   [291,] 0.4700000
+##   [292,] 0.4575000
+##   [293,] 0.4545000
+##   [294,] 0.3925000
+##   [295,] 0.3480000
+##   [296,] 0.3480000
+##   [297,] 0.3480000
+##   [298,] 0.3480000
+##   [299,] 0.4085000
+##   [300,] 0.4085000
+##   [301,] 0.4400000
+##   [302,] 0.4085000
+##   [303,] 0.4085000
+##   [304,] 0.4085000
+##   [305,] 0.4235000
+##   [306,] 0.4235000
+##   [307,] 0.3690000
+##   [308,] 0.4790000
+##   [309,] 0.4250000
+##   [310,] 0.4250000
+##   [311,] 0.4790000
+##   [312,] 0.4810000
+##   [313,] 0.5265000
+##   [314,] 0.4790000
+##   [315,] 0.4250000
+##   [316,] 0.4250000
+##   [317,] 0.4250000
+##   [318,] 0.4060000
+##   [319,] 0.4060000
+##   [320,] 0.3650000
+##   [321,] 0.4060000
+##   [322,] 0.4060000
+##   [323,] 0.4790000
+##   [324,] 0.4445000
+##   [325,] 0.3690000
+##   [326,] 0.4340000
+##   [327,] 0.4340000
+##   [328,] 0.4340000
+##   [329,] 0.4340000
+##   [330,] 0.3985000
+##   [331,] 0.4715000
+##   [332,] 0.4715000
+##   [333,] 0.4340000
+##   [334,] 0.4340000
+##   [335,] 0.4340000
+##   [336,] 0.3515000
+##   [337,] 0.3510000
+##   [338,] 0.3950000
+##   [339,] 0.4110000
+##   [340,] 0.4400000
+##   [341,] 0.3325000
+##   [342,] 0.3325000
+##   [343,] 0.3325000
+##   [344,] 0.3330000
+##   [345,] 0.3680000
+##   [346,] 0.3205000
+##   [347,] 0.3205000
+##   [348,] 0.3205000
+##   [349,] 0.3205000
+##   [350,] 0.3205000
+##   [351,] 0.3285000
+##   [352,] 0.4030000
+##   [353,] 0.3750000
+##   [354,] 0.3925000
+##   [355,] 0.3270000
+##   [356,] 0.3425000
+##   [357,] 0.3425000
+##   [358,] 0.4430000
+##   [359,] 0.4215000
+##   [360,] 0.4185000
+##   [361,] 0.4185000
+##   [362,] 0.4185000
+##   [363,] 0.4215000
+##   [364,] 0.4215000
+##   [365,] 0.4215000
+##   [366,] 0.4185000
+##   [367,] 0.4185000
+##   [368,] 0.4590000
+##   [369,] 0.3695000
+##   [370,] 0.4235000
+##   [371,] 0.4235000
+##   [372,] 0.4235000
+##   [373,] 0.4235000
+##   [374,] 0.4235000
+##   [375,] 0.3800000
+##   [376,] 0.3800000
+##   [377,] 0.4235000
+##   [378,] 0.4125000
+##   [379,] 0.4125000
+##   [380,] 0.3670000
+##   [381,] 0.3485000
+##   [382,] 0.3270000
+##   [383,] 0.3145000
+##   [384,] 0.3145000
+##   [385,] 0.4180000
+##   [386,] 0.4180000
+##   [387,] 0.4180000
+##   [388,] 0.4180000
+##   [389,] 0.4180000
+##   [390,] 0.4180000
+##   [391,] 0.4180000
+##   [392,] 0.4180000
+##   [393,] 0.4180000
+##   [394,] 0.3555000
+##   [395,] 0.3835000
+##   [396,] 0.3835000
+##   [397,] 0.3835000
+##   [398,] 0.3835000
+##   [399,] 0.3835000
+##   [400,] 0.3835000
+##   [401,] 0.3835000
+##   [402,] 0.3735000
+##   [403,] 0.3485000
+##   [404,] 0.3605000
+##   [405,] 0.3605000
+##   [406,] 0.3605000
+##   [407,] 0.3605000
+##   [408,] 0.3455000
+##   [409,] 0.3925000
+##   [410,] 0.4300000
+##   [411,] 0.3800000
+##   [412,] 0.3670000
+##   [413,] 0.3270000
+##   [414,] 0.4430000
+##   [415,] 0.4395000
+##   [416,] 0.3850000
+##   [417,] 0.4105000
+##   [418,] 0.4185000
+##   [419,] 0.5045000
+##   [420,] 0.4310000
+##   [421,] 0.4310000
+##   [422,] 0.4510000
+##   [423,] 0.4310000
+##   [424,] 0.4545000
+##   [425,] 0.4490000
+##   [426,] 0.4310000
+##   [427,] 0.4310000
+##   [428,] 0.4510000
+##   [429,] 0.4510000
+##   [430,] 0.4005000
+##   [431,] 0.4030000
+##   [432,] 0.4530000
+##   [433,] 0.4875000
+##   [434,] 0.4875000
+##   [435,] 0.4555000
+##   [436,] 0.4305000
+##   [437,] 0.4305000
+##   [438,] 0.4440000
+##   [439,] 0.4350000
+##   [440,] 0.4350000
+##   [441,] 0.4310000
+##   [442,] 0.4430000
+##   [443,] 0.4105000
+##   [444,] 0.4105000
+##   [445,] 0.4105000
+##   [446,] 0.4105000
+##   [447,] 0.4105000
+##   [448,] 0.3730000
+##   [449,] 0.3730000
+##   [450,] 0.3730000
+##   [451,] 0.3105000
+##   [452,] 0.4735000
+##   [453,] 0.3980000
+##   [454,] 0.3965000
+##   [455,] 0.3965000
+##   [456,] 0.4445000
+##   [457,] 0.3730000
+##   [458,] 0.5065000
+##   [459,] 0.5065000
+##   [460,] 0.4320000
+##   [461,] 0.3590000
+##   [462,] 0.4005000
+##   [463,] 0.4445000
+##   [464,] 0.4445000
+##   [465,] 0.4445000
+##   [466,] 0.4445000
+##   [467,] 0.4380000
+##   [468,] 0.4440000
+##   [469,] 0.4715000
+##   [470,] 0.4285000
+##   [471,] 0.4220000
+##   [472,] 0.4850000
+##   [473,] 0.4260000
+##   [474,] 0.4440000
+##   [475,] 0.4440000
+##   [476,] 0.4445000
+##   [477,] 0.4695000
+##   [478,] 0.3980000
+##   [479,] 0.3855000
+##   [480,] 0.3865000
+##   [481,] 0.4265000
+##   [482,] 0.4660000
+##   [483,] 0.4660000
+##   [484,] 0.4430000
+##   [485,] 0.4375000
+##   [486,] 0.4375000
+##   [487,] 0.4470000
+##   [488,] 0.4470000
+##   [489,] 0.3305000
+##   [490,] 0.3305000
+##   [491,] 0.3305000
+##   [492,] 0.4610000
+##   [493,] 0.4610000
+##   [494,] 0.4610000
+##   [495,] 0.4490000
+##   [496,] 0.4805000
+##   [497,] 0.4595000
+##   [498,] 0.4595000
+##   [499,] 0.4725000
+##   [500,] 0.4195000
+##  [ reached getOption("max.print") -- omitted 25954 rows ]</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>What are the mean and standard deviation of the GC contents in the 26454 genes? What genes(s) has the highes GC content?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-20" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-20', 'sol-start-20')"></span>
+</p>
+<div id="sol-body-20" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(gc_content)</code></pre></div>
+<pre><code>## [1] 0.4228301</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(gc_content)</code></pre></div>
+<pre><code>## [1] 0.04935743</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range</span>(gc_content)</code></pre></div>
+<pre><code>## [1] 0.0800 0.6145</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dna[<span class="kw">which</span>(gc_content <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(gc_content))]</code></pre></div>
+<pre><code>##   A DNAStringSet instance of length 1
+##     width seq                                          names               
+## [1]  2000 CGCTACTACGGCGCCAGTTCG...CTTGCTAAAGCACTCTGGTC NM_133087_up_2000...</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Plot the distribution of GC frequencies in the <code>dna</code> object using base graphics <code>hist()</code> and <code>plot(density())</code>, and using <code>ggplot()</code>.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-21" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-21', 'sol-start-21')"></span>
+</p>
+<div id="sol-body-21" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(gc_content)</code></pre></div>
+<p><img src="WSBIM1207_files/figure-html/letterfreqex3a-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(gc_content))</code></pre></div>
+<p><img src="WSBIM1207_files/figure-html/letterfreqex3a-2.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"tidyverse"</span>) 
+p &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(gc_content) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">G|C</span><span class="st">`</span>))
+p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="WSBIM1207_files/figure-html/letterfreqex3b-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
+<p><img src="WSBIM1207_files/figure-html/letterfreqex3b-2.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="tidy-bioconductor" class="section level2">
+<h2>
+<span class="header-section-number">4.4</span> Tidy <em>Bioconductor</em>?</h2>
+<p>Although <em>Bioconductor</em> emphasizes formal objects like <code>DNAStringSet</code> rather than <code>tibble</code>-like data frames, some of the ways one interacts with tidy data can be applied to <em>Bioconductor</em> objects. For instance, the GC content example might be written in ‘traditional’ form as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gc &lt;-<span class="st"> </span><span class="kw">letterFrequency</span>(dna, <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>but could be written using pipes and to reesult in a tibble for easier down-stream manipulation</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gc &lt;-<span class="st"> </span>
+<span class="st">    </span>dna <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">letterFrequency</span>(<span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span>tibble<span class="op">::</span><span class="kw">as_tibble</span>()
+gc</code></pre></div>
+<pre><code>## # A tibble: 26,454 x 1
+##    `G|C`
+##    &lt;dbl&gt;
+##  1 0.378
+##  2 0.43 
+##  3 0.43 
+##  4 0.43 
+##  5 0.43 
+##  6 0.43 
+##  7 0.43 
+##  8 0.43 
+##  9 0.43 
+## 10 0.43 
+## # … with 26,444 more rows</code></pre>
+</div>
+<div id="working-with-genomes" class="section level2">
+<h2>
+<span class="header-section-number">4.5</span> Working with genomes</h2>
+<p><code>BSgenome</code> packages inside Bioconductor contain whole genome sequences as distributed by ENSEMBL, NCBI and others. In this next example we will load the whole genome sequence for Homo sapiens from UCSC’s hg19 build, and calculate the GC content across chromosome 14.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"Biostrings"</span>)
+<span class="kw">library</span>(<span class="st">"BSgenome.Hsapiens.UCSC.hg19"</span>)
+chr14_range &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="st">"chr14"</span>, <span class="kw">IRanges</span>(<span class="dv">1</span>, <span class="kw">seqlengths</span>(Hsapiens)[<span class="st">"chr14"</span>]))
+chr14_range</code></pre></div>
+<pre><code>## GRanges object with 1 range and 0 metadata columns:
+##       seqnames      ranges strand
+##          &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt;
+##   [1]    chr14 1-107349540      *
+##   -------
+##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chr14_dna &lt;-<span class="st"> </span><span class="kw">getSeq</span>(Hsapiens, chr14_range)
+chr14_dna</code></pre></div>
+<pre><code>##   A DNAStringSet instance of length 1
+##         width seq
+## [1] 107349540 NNNNNNNNNNNNNNNNNNNNNNNNNNNNN...NNNNNNNNNNNNNNNNNNNNNNNNNNNNN</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr14_dna, <span class="st">"GC"</span>, <span class="dt">as.prob=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>##           G|C
+## [1,] 0.336276</code></pre>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Using <code>letterFrequency</code>, calculate the number and frequency of A, G, C and T nucleotides in chromosome 14.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-22" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-22', 'sol-start-22')"></span>
+</p>
+<div id="sol-body-22" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr14_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>))</code></pre></div>
+<pre><code>##             A        G        C        T
+## [1,] 25992966 18071947 18027132 26197495</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr14_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>), <span class="dt">as.prob =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>##             A        G        C        T
+## [1,] 25992966 18071947 18027132 26197495</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="additional-exercises-2" class="section level2">
+<h2>
+<span class="header-section-number">4.6</span> Additional exercises</h2>
+
+</div>
 </div></body></html>
 
 <p style="text-align: center;">

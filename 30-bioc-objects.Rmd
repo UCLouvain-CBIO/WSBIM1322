@@ -55,7 +55,7 @@ and information necessary to produce the figure.
 The above properties lead to greater **robustness** and
 **interoperability** when working with objects modelling complex data.
 
-- Common behaviour (functions) can be specialised to match the
+- Common behaviour (methods) can be specialised to match the
   particular data type (this is called **polymorphism**): for example
   plotting (a vector, a matrix, NGS data), summary, subsetting (`[`
   and `[[`), ...
