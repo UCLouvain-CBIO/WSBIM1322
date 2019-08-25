@@ -349,3 +349,19 @@ letterFrequency(chr14_dna, c("A", "G", "C", "T"), as.prob = FALSE)
 ## Additional exercises
 
 
+`r msmbstyle::question_begin()`
+Visit the UniProt web page at
+[https://www.uniprot.org/](https://www.uniprot.org/) and download the
+manually reviewed complete human proteome (containing about 20500
+proteins). Do to so, choose *Proteomes* on the main page, then search
+for *Homo sapiens*, select it among the list of hits, choose the
+reviewed Swiss-Prot release, and download all entries in compressed
+fasta format.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+Load the file into R. Beware though that these are protein sequences,
+composed of amino acids. Read the `?readDNAStringSet` manual page to
+find a more appropriate function.
+`r msmbstyle::question_end()`
