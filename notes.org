@@ -17,6 +17,7 @@
 Other possible topics:
 - evolution
 - networks
+- GSEA
 - Seminars about several **databases/datasets of interest** (could
   also be given as part of the masters course)
 - **DBMS and SQL**

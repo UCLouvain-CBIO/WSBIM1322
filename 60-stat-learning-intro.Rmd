@@ -1,1 +1,9 @@
 # Introduction to statistical learning {#sec:mlintro}
+
+The next chapter will focus on statistical (hypothesis testing in
+chapter \@ref(sec:testing)) and general machine learning (chapters
+\@ref(sec:ul), \@ref(sec:dimred) and \@ref(sec:sl)).
+
+- experimental designs
+- about 'seeing' patterns
+- curse of dimensionality

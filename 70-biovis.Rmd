@@ -1,1 +1,7 @@
 # Visualising biomolecular data {#sec:biovis}
+
+Plan is to see
+
+- Heatmaps, with note on distances
+- Venn and UpSet plots
+- GVis
