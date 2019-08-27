@@ -33,9 +33,88 @@ The different between this chapter, and the [*Data
 Visualisation*](ttps://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html)
 of the introductory WSBIM1207 course is that here we focus on
 understanding and communicating data through visualisation, rather
-than on the syntax of the plotting packages. Hence, as a introduction,
-let's observe a couple of [*visualisation horror picture show*](./horror.pdf) from a
-lecture by Wolfgang Huber.
+than on the syntax of the plotting packages. Here are a couple couple
+of [*visualisation horror picture show*](./horror.pdf) from a lecture
+by Wolfgang Huber to illustrate what not to do.
+
+Let's use the famous [*Anscombe's
+quartet*](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) data as
+a motivating example. This data is composed of 4 pairs of
+values, $(x_1, y_1)$ to $(x_4, y_4)$:
+
+```{r anscombe, echo = FALSE, results='asis'}
+knitr::kable(anscombe)
+```
+
+Each of these $x$ and $y$ sets have the same variance, mean and
+correlation:
+
+```{r anscombetab, echo=FALSE}
+tab <- matrix(NA, 5, 4)
+colnames(tab) <- 1:4
+rownames(tab) <- c("var(x)", "mean(x)",
+				   "var(y)", "mean(y)",
+				   "cor(x,y)")
+for (i in 1:4)
+	tab[, i] <- c(var(anscombe[, i]),
+				  mean(anscombe[, i]),
+				  var(anscombe[, i+4]),
+				  mean(anscombe[, i+4]),
+				  cor(anscombe[, i], anscombe[, i+4]))
+```
+
+```{r anstabdisplay, echo=FALSE}
+knitr::kable(tab)
+```
+
+But...
+
+While the *residuals* of the linear regression (see chapter
+\@ref(sec:obj)) clearly indicate fundamental differences in these
+data, the most simple and straightforward approach is *visualisation*
+to highlight the fundamental differences in the datasets.
+
+```{r anscombefig, echo=FALSE}
+ff <- y ~ x
+mods <- setNames(as.list(1:4), paste0("lm", 1:4))
+par(mfrow = c(2, 2), mar = c(4, 4, 1, 1))
+for (i in 1:4) {
+	ff[2:3] <- lapply(paste0(c("y","x"), i), as.name)
+	plot(ff, data = anscombe, pch = 19, xlim = c(3, 19), ylim = c(3, 13))
+	mods[[i]] <- lm(ff, data = anscombe)
+	abline(mods[[i]])
+}
+```
+
+See also another, more recent example:
+[The Datasaurus Dozen dataset](https://www.autodeskresearch.com/publications/samestats).
+
+![](https://d2f99xq7vri1nk.cloudfront.net/DinoSequentialSmaller.gif)
+
+
+Throughout this course we will focus on producing visualisations that
+will enable **understanding important features** of biomolecular data
+or the effect of their transformation and analyses. With this in mind,
+the beauty of the visualisations we will produce won't be assessed by
+how visually attractive the figures are, but how they advance our
+understanding the data. In the process of data exploration and data
+analysis, we want to be able to quickly generate and interpret
+figures. It is of course important to polish the graphics to make them
+visually appealing and improve communication with the audience, once a
+useful figure has been chosen as a means of communication.
+
+An important aspect of data visualisation is data **manipulation**,
+transformation and the format of the data: as seen in
+[WSBIM1207](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html),
+its scale (see below) and normalisation of the data (see chapter
+\@ref(sec:norm)).
+
+A last feature of data that is intimately associated with its
+manipulation and visualisation is its **structure**: long and wide
+dataframes (as introduced in
+[WSBIM1207](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html)
+or dedicated objects (see chapter \@ref(sec:obj)). Some visualisations
+will be much easier when the data is formatted in a certain way.
 
 ## Base plotting
 
