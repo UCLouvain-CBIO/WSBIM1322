@@ -14,6 +14,10 @@ and data structures that will be needed for the following chapters.
 BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 ```
 
+- [Avoid saving and loading your
+  workspace](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up)
+  (the `.RData` file).
+- [UTF-8 character encoding](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up).
 - Starting a markdown document.
 
 ## Basic data structures and operations
@@ -55,9 +59,6 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
   data](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#exporting-data-1)
   with `write.csv` and `read.csv` (or `write_csv` and `read_csv`) and
   same for other types of spreadsheets.
-- [Avoid saving and loading your
-  workspace](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up)
-  (the `.RData` file).
 - [Saving
   figures](https://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html#exporting-plots)
   (`ggsave` and file devices such as `png()`, `pdf()`, ...).
