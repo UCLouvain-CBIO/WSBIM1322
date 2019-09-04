@@ -118,7 +118,7 @@ Object of class person:
 
 We will focus on objects and their usage here.
 
-## Examples in base R
+## Examples in base R {#sec:lm}
 
 Let's start by generating a testing dataset composed of two correlated
 variables, `x` and `y`:
@@ -523,4 +523,3 @@ library("SummarizedExperiment")
 se <- SummarizedExperiment(assays = list(counts = counts),
                            colData = cd)
 ```
-

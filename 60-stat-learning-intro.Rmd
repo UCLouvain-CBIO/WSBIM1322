@@ -1,9 +1,94 @@
 # Introduction to statistical learning {#sec:mlintro}
 
-The next chapter will focus on statistical (hypothesis testing in
+The next chapters will focus on statistical (hypothesis testing in
 chapter \@ref(sec:testing)) and general machine learning (chapters
-\@ref(sec:ul), \@ref(sec:dimred) and \@ref(sec:sl)).
+\@ref(sec:ul), \@ref(sec:dimred) and \@ref(sec:sl)). Before diving
+into the technical details, it is useful to learn (or remind
+outselves) why these techniques are so incredibly important when
+considering generating and analysing high throughput biomedical
+data. Indeed, these tools will not only help in extracting meaningful
+results from a data, but (1) understanding what they do, how to apply
+them, and their respective limitations, allows to frame the questions
+more accurately, and (2) to define what data is needed before
+generating it.
 
-- experimental designs
+
+Let's start with the following experiment. Researchers are interested
+in the expression of three genes,
+[A1CF](https://www.genecards.org/cgi-bin/carddisp.pl?gene=A1CF),
+[BRCA1](https://www.genecards.org/cgi-bin/carddisp.pl?gene=BRCA1) and
+[TP53](https://www.genecards.org/cgi-bin/carddisp.pl?gene=TP53) in the
+absence and presence of a certain drug in a model cell line. The
+expression of these genes is measured four times.
+
+```{r, echo = FALSE, fig.fullwidth = TRUE, fig.cap = "Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5."}
+expd <- ge <- data.frame(sample = paste0("S", 1:12),
+                         group = rep(c("CTRL", "DRUG", "DRUG"), each = 4),
+                         concentration = factor(rep(c(0, 1, 5), each = 4)),
+                         replicate = rep(1:4, 3),
+                         stringsAsFactors = FALSE)
+set.seed(1)
+ge$A1CF <- rnorm(12, 6, 2)
+ge$BRCA1 <- c(abs(rnorm(4, 2, 1)), rnorm(4, 8, 2), rnorm(4, 13, 2))
+ge$TP53 <-  c(rnorm(4, 10, 5), rnorm(4, 10, 3), rnorm(4, 10, 2))
+ge <- tidyr::gather(ge, key = gene, value = expression, A1CF, BRCA1, TP53)
+
+ggplot2::ggplot(ge, aes(x = concentration, y = expression,
+                        colour = concentration, label = replicate)) +
+    ggplot2::geom_point() +
+        ggplot2::facet_grid(. ~ gene) +
+        ggplot2::theme(legend.position="none") +
+        ggrepel::geom_text_repel(nudge_x = 0.2, segment.size = 0.5)
+```
+
+`r msmbstyle::question_begin()`
+Make sure you understand the visualisation above.
+
+1. What genes would you call differentially expressed, i.e. that show
+different expressions between any condition.
+
+2. What criteria do you rely on to conclude whether the genes are or
+   aren't differentially expressed?
+`r msmbstyle::question_end()`
+
+Now imagine if instead of having 3 genes, we had 20000.
+
+`r msmbstyle::question_begin()`
+Formalise the experiemental design, i.e. all the variables that define
+what the experiment measures using a table.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r expdex1}
+knitr::kable(expd)
+```
+`r msmbstyle::solution_end()`
+
+
+Statistical hypothesis testing (chapter in chapter \@ref(sec:testing))
+will help us formalise when to call genes differentially expressed.
+
+There are many more types of patterns that we wold be interested in
+identifying in omics data. Let's reconsider the linear regression
+model from section \@ref(sec:lm). Below is a figure from
+@Majumder2013. Among the 20 scatter plots below, one represents the
+actual data, and 19 are simulations that are based on the real
+data.
+
+- Which plot is the most different from the others, in the sense that
+  there is the steepest slope?
+
+- Do you think this is the real data? If it is not, what would you
+  conclude as to whether the trend in the real data is relevant or
+  not?
+
+```{r regsim, echo = FALSE, fig.cap = "One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true)."}
+knitr::include_graphics("./figs/uasa_a_808157_o_f0004g.jpg")
+```
+
+
+
+
+
 - about 'seeing' patterns
 - curse of dimensionality
