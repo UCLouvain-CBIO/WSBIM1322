@@ -51,7 +51,7 @@ different expressions between any condition.
    aren't differentially expressed?
 `r msmbstyle::question_end()`
 
-Now imagine if instead of having 3 genes, we had 20000.
+Now imagine if instead of having 3 genes, we had 20000!
 
 `r msmbstyle::question_begin()`
 Formalise the experiemental design, i.e. all the variables that define
@@ -75,20 +75,73 @@ model from section \@ref(sec:lm). Below is a figure from
 actual data, and 19 are simulations that are based on the real
 data.
 
+```{r regsim, echo = FALSE, fig.cap = "One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true)."}
+knitr::include_graphics("./figs/uasa_a_808157_o_f0004g.jpg")
+```
+
+`r msmbstyle::question_begin()`
 - Which plot is the most different from the others, in the sense that
   there is the steepest slope?
 
 - Do you think this is the real data? If it is not, what would you
   conclude as to whether the trend in the real data is relevant or
   not?
+`r msmbstyle::question_end()`
 
-```{r regsim, echo = FALSE, fig.cap = "One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true)."}
-knitr::include_graphics("./figs/uasa_a_808157_o_f0004g.jpg")
+As before, imagine that instead of 20 correlations, we would need to
+consider thousands thereof!
+
+
+In additionnal complication with large data is the appearance of
+spurious positive results, called **false positives**. In the example
+below, we calculate [Pearon correlation
+coefficients](https://en.m.wikipedia.org/wiki/Pearson_correlation_coefficient)
+between two vectors$x$ and$y$:
+
+$$r_{xy} = \frac{\sum_{i = 1}^{n}(x_{i} - \bar x)(y_{i} - \bar y)}{\sqrt{\sum_{i = 1}^{n}(x_{i} - \bar x)^{2}} \sqrt{\sum_{i = 1}^{n}(y_{i} - \bar y)^{2}}}$$
+
+where $n$ is the length of the vector, $x_{i}$ and $y_{i}$ are the $i_{th}$
+elements of the $x$ and y$ vectors, $\bar x$ and $\bar y$ are the respective means.
+
+A correlation coefficient ranges between -1 (for anti-correlated
+vectors) to 1 (for perfectly correlated vectors). Non-correlated data
+have a correlation coefficient close to 0.
+
+```{r corfig, fig.cap = "Example of correlation, anti-correlation and lack thereof."}
+x <- rnorm(60)
+y1  <- x + rnorm(60, 0, 0.1)
+y2 <- -y1
+y3 <- rnorm(60)
+plot(x, y1, main = paste("Correlation coefficient:", round(cor(x, y1), 2)))
+plot(x, y2, main = paste("Correlation coefficient:", round(cor(x, y2), 2)))
+plot(x, y3, main = paste("Correlation coefficient:", round(cor(x, y3), 2)))
 ```
 
+`r msmbstyle::question_begin()`
+Generate two random vectors `x` and `y` of length 60 using
+`rnorm`. Plot them and calulate their correlation coefficient using
+the `cor` function.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r corex1}
+x <- rnorm(60)
+y <- rnorm(60)
+plot(x, y)
+cor(x, y)
+```
+`r msmbstyle::solution_end()`
+
+As part of the experiment a random $x$ using is generated using `rnorm(60)`.
+That vector is then compared to a certain number of other random
+vectors$y_i$ and the best (i.e. highest) correlation coefficient is computed.
 
 
 
+```{r spurcor, cache = TRUE, fig.cap = "Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions. Based on @Fan:2014.", echo=FALSE}
+## Generated with https://gist.github.com/lgatto/d8eb59effb815996eac789debb51690d
+knitr::include_graphics("./figs/spurcor.svg")
+```
 
 - about 'seeing' patterns
 - curse of dimensionality

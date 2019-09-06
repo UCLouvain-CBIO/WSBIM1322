@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-09-04" />
+<meta name="date" content="2019-09-06" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -208,7 +208,7 @@ aren’t differentially expressed?</p></li>
 </p>
 </div>
 </div>
-<p>Now imagine if instead of having 3 genes, we had 20000.</p>
+<p>Now imagine if instead of having 3 genes, we had 20000!</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -321,13 +321,110 @@ identifying in omics data. Let’s reconsider the linear regression
 model from section <a href="sec-obj.html#sec:lm">3.3</a>. Below is a figure from
 <span class="citation">Majumder, Hofmann, and Cook (<label for="tufte-mn-17" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-17" class="margin-toggle">2013<span class="marginnote">Majumder, Mahbubul, Heike Hofmann, and Dianne Cook. 2013. “Validation of Visual Statistical Inference, Applied to Linear Models.” <em>Journal of the American Statistical Association</em> 108 (503): 942–56. <a href="https://doi.org/10.1080/01621459.2013.808157">https://doi.org/10.1080/01621459.2013.808157</a>.</span>)</span>. Among the 20 scatter plots below, one represents the
 actual data, and 19 are simulations that are based on the real
-data. Which one strikes out? Do you think this is the real data?</p>
+data.</p>
 <div class="figure">
 <span id="fig:regsim"></span>
 <p class="caption marginnote shownote">
-Figure 6.2: One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect (<span class="math inline">\(H_{0}\)</span> is true). Which plot is the most different from the others, in the sense that there is the steepest slope?
+Figure 6.2: One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect (<span class="math inline">\(H_{0}\)</span> is true).
 </p>
-<img src="figs/uasa_a_808157_o_f0004g.jpg" alt="One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true). Which plot is the most different from the others, in the sense that there is the steepest slope?">
+<img src="figs/uasa_a_808157_o_f0004g.jpg" alt="One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true).">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Which plot is the most different from the others, in the sense that
+there is the steepest slope?</p></li>
+<li><p>Do you think this is the real data? If it is not, what would you
+conclude as to whether the trend in the real data is relevant or
+not?</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>As before, imagine that instead of 20 correlations, we would need to
+consider thousands thereof!</p>
+<p>In additionnal complication with large data is the appearance of
+spurious positive results, called <strong>false positives</strong>. In the example
+below, we calculate <a href="https://en.m.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearon correlation
+coefficients</a>
+between two vectors<span class="math inline">\(x\)</span> and<span class="math inline">\(y\)</span>:</p>
+<p><span class="math display">\[r_{xy} = \frac{\sum_{i = 1}^{n}(x_{i} - \bar x)(y_{i} - \bar y)}{\sqrt{\sum_{i = 1}^{n}(x_{i} - \bar x)^{2}} \sqrt{\sum_{i = 1}^{n}(y_{i} - \bar y)^{2}}}\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the length of the vector, <span class="math inline">\(x_{i}\)</span> and <span class="math inline">\(y_{i}\)</span> are the <span class="math inline">\(i_{th}\)</span>
+elements of the <span class="math inline">\(x\)</span> and y$ vectors, <span class="math inline">\(\bar x\)</span> and <span class="math inline">\(\bar y\)</span> are the respective means.</p>
+<p>A correlation coefficient ranges between -1 (for anti-correlated
+vectors) to 1 (for perfectly correlated vectors). Non-correlated data
+have a correlation coefficient close to 0.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="sec-mlintro.html#cb190-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb190-2"><a href="sec-mlintro.html#cb190-2"></a>y1  &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>, <span class="dv">0</span>, <span class="fl">0.1</span>)</span>
+<span id="cb190-3"><a href="sec-mlintro.html#cb190-3"></a>y2 &lt;-<span class="st"> </span><span class="op">-</span>y1</span>
+<span id="cb190-4"><a href="sec-mlintro.html#cb190-4"></a>y3 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb190-5"><a href="sec-mlintro.html#cb190-5"></a><span class="kw">plot</span>(x, y1, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">"Correlation coefficient:"</span>, <span class="kw">round</span>(<span class="kw">cor</span>(x, y1), <span class="dv">2</span>)))</span></code></pre></div>
+<div class="figure">
+<span id="fig:corfig1"></span>
+<p class="caption marginnote shownote">
+Figure 6.3: Example of correlation, anti-correlation and lack thereof.
+</p>
+<img src="WSBIM1207_files/figure-html/corfig-1.png" alt="Example of correlation, anti-correlation and lack thereof." width="672">
+</div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sec-mlintro.html#cb191-1"></a><span class="kw">plot</span>(x, y2, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">"Correlation coefficient:"</span>, <span class="kw">round</span>(<span class="kw">cor</span>(x, y2), <span class="dv">2</span>)))</span></code></pre></div>
+<div class="figure">
+<span id="fig:corfig2"></span>
+<p class="caption marginnote shownote">
+Figure 6.4: Example of correlation, anti-correlation and lack thereof.
+</p>
+<img src="WSBIM1207_files/figure-html/corfig-2.png" alt="Example of correlation, anti-correlation and lack thereof." width="672">
+</div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="sec-mlintro.html#cb192-1"></a><span class="kw">plot</span>(x, y3, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">"Correlation coefficient:"</span>, <span class="kw">round</span>(<span class="kw">cor</span>(x, y3), <span class="dv">2</span>)))</span></code></pre></div>
+<div class="figure">
+<span id="fig:corfig3"></span>
+<p class="caption marginnote shownote">
+Figure 6.5: Example of correlation, anti-correlation and lack thereof.
+</p>
+<img src="WSBIM1207_files/figure-html/corfig-3.png" alt="Example of correlation, anti-correlation and lack thereof." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Generate two random vectors <code>x</code> and <code>y</code> of length 60 using
+<code>rnorm</code>. Plot them and calulate their correlation coefficient using
+the <code>cor</code> function.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-24" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-24', 'sol-start-24')"></span>
+</p>
+<div id="sol-body-24" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="sec-mlintro.html#cb193-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb193-2"><a href="sec-mlintro.html#cb193-2"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb193-3"><a href="sec-mlintro.html#cb193-3"></a><span class="kw">plot</span>(x, y)</span></code></pre></div>
+<p><img src="WSBIM1207_files/figure-html/corex1-1.png" width="672"></p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sec-mlintro.html#cb194-1"></a><span class="kw">cor</span>(x, y)</span></code></pre></div>
+<pre><code>## [1] 0.08567754</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>As part of the experiment a random <span class="math inline">\(x\)</span> using is generated using <code>rnorm(60)</code>.
+That vector is then compared to a certain number of other random
+vectors<span class="math inline">\(y_i\)</span> and the best (i.e. highest) correlation coefficient is computed.</p>
+<div class="figure">
+<span id="fig:spurcor"></span>
+<p class="caption marginnote shownote">
+Figure 6.6: Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions. Based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. “Challenges of Big Data analysis.” <em>National Science Review</em> 1 (2): 293–314. <a href="https://doi.org/10.1093/nsr/nwt032">https://doi.org/10.1093/nsr/nwt032</a>.</span>)</span>.
+</p>
+<img src="./figs/spurcor.svg" alt="Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions. Based on @Fan:2014.">
 </div>
 <ul>
 <li>about ‘seeing’ patterns</li>
@@ -340,7 +437,7 @@ Figure 6.2: One of these plots is the plot of the actual data, and the remaining
 <a href="sec-testing.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-09-04
+2019-09-06
 </p>
 </div>
 </div>
