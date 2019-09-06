@@ -111,15 +111,18 @@ A correlation coefficient ranges between -1 (for anti-correlated
 vectors) to 1 (for perfectly correlated vectors). Non-correlated data
 have a correlation coefficient close to 0.
 
-```{r corfig, fig.cap = "Example of correlation, anti-correlation and lack thereof.", echo = FALSE, fig.width = 12}
+```{r corfig, fig.cap = "Example of correlation, anti-correlation and lack thereof.", echo = FALSE, fig.fullwidth = TRUE, fig.width = 10}
 x <- rnorm(60)
 y1  <- x + rnorm(60, 0, 0.3)
 y2 <- -y1
 y3 <- rnorm(60)
 df <- data.frame(x = c(x, x, x),
            y = c(y1, y2, y3),
-           type = rep(c("correlation", "anti-correlation",
-                        "no correlation"), each = 60))
+           type = rep(c(paste0("correlation (coefficient ", round(cor(x, y1), 2), ")"),
+                        paste0("anti-correlation (coefficient ", round(cor(x, y2), 2), ")"),
+                        paste0("no correlation (coefficient ", round(cor(x, y3), 2), ")")),
+                      each = 60))
+
 ggplot(df, aes(x = x, y = y)) +
     geom_point() +
     geom_smooth(method = "lm") +
@@ -128,17 +131,26 @@ ggplot(df, aes(x = x, y = y)) +
 
 `r msmbstyle::question_begin()`
 Generate two random vectors `x` and `y` of length 60 using
-`rnorm`. Plot them and calulate their correlation coefficient using
-the `cor` function.
+`rnorm`. Plot them, add a linear regression line and calculate their
+correlation coefficient using the `cor` function.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
 ```{r corex1}
 x <- rnorm(60)
 y <- rnorm(60)
+
+## with base graphics
 plot(x, y)
+abline(lm(y ~ x))
 cor(x, y)
+
+## or with ggplot2
+ggplot(data.frame(x, y),
+       aes(x, y)) +
+    geom_point() + geom_smooth(method = "lm")
 ```
+
 `r msmbstyle::solution_end()`
 
 As part of the experiment a random $x$ using is generated using `rnorm(60)`.
@@ -149,7 +161,7 @@ vectors$y_i$ and the best (i.e. highest) correlation coefficient is computed.
 
 ```{r spurcor, cache = TRUE, fig.cap = "Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions. Based on @Fan:2014.", echo=FALSE}
 ## Generated with https://gist.github.com/lgatto/d8eb59effb815996eac789debb51690d
-knitr::include_graphics("./figs/spurcor.svg")
+knitr::include_graphics("./figs/spurcor.png")
 ```
 
 - about 'seeing' patterns
