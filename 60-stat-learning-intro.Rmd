@@ -150,19 +150,47 @@ ggplot(data.frame(x, y),
        aes(x, y)) +
     geom_point() + geom_smooth(method = "lm")
 ```
-
 `r msmbstyle::solution_end()`
 
-As part of the experiment a random $x$ using is generated using `rnorm(60)`.
-That vector is then compared to a certain number of other random
-vectors$y_i$ and the best (i.e. highest) correlation coefficient is computed.
 
 
+Let's expand the code above and calculate the correlation coefficient
+between hundreds of random vectors and choose the choose the best one
+(in abolute terms) among those. Let's repeat this procedure 1000 times
+to obtain 1000 best correlations (based on @Fan:2014). The figure
+below shows the distribution of these 1000 best correlations when
+comparing 800 or 6400 vectors. We see that with more (random) data, we
+see that the risk of obtaining spurious correlations if substantially
+increased.
 
-```{r spurcor, cache = TRUE, fig.cap = "Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions. Based on @Fan:2014.", echo=FALSE}
+
+```{r spurcor, cache = TRUE, fig.cap = "Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions.", echo=FALSE}
 ## Generated with https://gist.github.com/lgatto/d8eb59effb815996eac789debb51690d
 knitr::include_graphics("./figs/spurcor.png")
 ```
+
+`r msmbstyle::question_begin()`
+Calculate 100 correlation coefficients for pairs of random vectors or
+length 60. What are the mean, maximum and minumum of your simulated
+coefficients? Out of those 100 coefficients, how many would you
+consider of interest if you didn't know they were produced by random
+data?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r corex2}
+set.seed(42)
+rs <- replicate(100, cor(rnorm(10), rnorm(10)))
+summary(rs)
+## Assuming a totally arbitrary value of 0.75, we would get
+rs[abs(rs) > .75]
+
+hist(rs)
+rug(rs)
+abline(v = rs[abs(rs) > .75], col = "red", lty = "dotted")
+```
+`r msmbstyle::solution_begin()`
 
 - about 'seeing' patterns
 - curse of dimensionality

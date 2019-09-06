@@ -402,20 +402,73 @@ correlation coefficient using the <code>cor</code> function.</p>
 </p>
 </div>
 </div>
-<p>As part of the experiment a random <span class="math inline">\(x\)</span> using is generated using <code>rnorm(60)</code>.
-That vector is then compared to a certain number of other random
-vectors<span class="math inline">\(y_i\)</span> and the best (i.e. highest) correlation coefficient is computed.</p>
+<p>Let’s expand the code above and calculate the correlation coefficient
+between hundreds of random vectors and choose the choose the best one
+(in abolute terms) among those. Let’s repeat this procedure 1000 times
+to obtain 1000 best correlations (based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. “Challenges of Big Data analysis.” <em>National Science Review</em> 1 (2): 293–314. <a href="https://doi.org/10.1093/nsr/nwt032">https://doi.org/10.1093/nsr/nwt032</a>.</span>)</span>). The figure
+below shows the distribution of these 1000 best correlations when
+comparing 800 or 6400 vectors. We see that with more (random) data, we
+see that the risk of obtaining spurious correlations if substantially
+increased.</p>
 <div class="figure">
 <span id="fig:spurcor"></span>
 <p class="caption marginnote shownote">
-Figure 6.4: Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions. Based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. “Challenges of Big Data analysis.” <em>National Science Review</em> 1 (2): 293–314. <a href="https://doi.org/10.1093/nsr/nwt032">https://doi.org/10.1093/nsr/nwt032</a>.</span>)</span>.
+Figure 6.4: Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions.
 </p>
-<img src="figs/spurcor.png" alt="Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions. Based on @Fan:2014." width="672">
+<img src="figs/spurcor.png" alt="Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions." width="672">
 </div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Calculate 100 correlation coefficients for pairs of random vectors or
+length 60. What are the mean, maximum and minumum of your simulated
+coefficients? Out of those 100 coefficients, how many would you
+consider of interest if you didn’t know they were produced by random
+data?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-25" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-25', 'sol-start-25')"></span>
+</p>
+<div class="solution-body" id="sol-body-25" style="display: none;">
+
+
+
+
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sec-mlintro.html#cb194-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb194-2"><a href="sec-mlintro.html#cb194-2"></a>rs &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">cor</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>)))</span>
+<span id="cb194-3"><a href="sec-mlintro.html#cb194-3"></a><span class="kw">summary</span>(rs)</span></code></pre></div>
+<pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+## -0.8194367 -0.2280550 -0.0009475  0.0055000  0.2118503  0.7977295</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sec-mlintro.html#cb196-1"></a><span class="co">## Assuming a totally arbitrary value of 0.75, we would get</span></span>
+<span id="cb196-2"><a href="sec-mlintro.html#cb196-2"></a>rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>]</span></code></pre></div>
+<pre><code>## [1]  0.7941876  0.7977295 -0.8194367</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sec-mlintro.html#cb198-1"></a><span class="kw">hist</span>(rs)</span>
+<span id="cb198-2"><a href="sec-mlintro.html#cb198-2"></a><span class="kw">rug</span>(rs)</span>
+<span id="cb198-3"><a href="sec-mlintro.html#cb198-3"></a><span class="kw">abline</span>(<span class="dt">v =</span> rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>], <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
+<p><img src="WSBIM1207_files/figure-html/corex2-1.png" width="672"></p>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-26" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-26', 'sol-start-26')"></span>
+</p>
+<div class="solution-body" id="sol-body-26" style="display: none;">
+
+
+
 <ul>
 <li>about ‘seeing’ patterns</li>
 <li>curse of dimensionality</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
 </div></body></html>
 
 <p style="text-align: center;">
