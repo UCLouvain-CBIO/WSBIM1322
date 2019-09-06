@@ -1,5 +1,9 @@
 # Introduction to statistical learning {#sec:mlintro}
 
+```{r env_ml, echo = FALSE, message = FALSE}
+library("ggplot2")
+```
+
 The next chapters will focus on statistical (hypothesis testing in
 chapter \@ref(sec:testing)) and general machine learning (chapters
 \@ref(sec:ul), \@ref(sec:dimred) and \@ref(sec:sl)). Before diving
@@ -33,12 +37,12 @@ ge$BRCA1 <- c(abs(rnorm(4, 2, 1)), rnorm(4, 8, 2), rnorm(4, 13, 2))
 ge$TP53 <-  c(rnorm(4, 10, 5), rnorm(4, 10, 3), rnorm(4, 10, 2))
 ge <- tidyr::gather(ge, key = gene, value = expression, A1CF, BRCA1, TP53)
 
-ggplot2::ggplot(ge, aes(x = concentration, y = expression,
-                        colour = concentration, label = replicate)) +
-    ggplot2::geom_point() +
-        ggplot2::facet_grid(. ~ gene) +
-        ggplot2::theme(legend.position="none") +
-        ggrepel::geom_text_repel(nudge_x = 0.2, segment.size = 0.5)
+ggplot(ge, aes(x = concentration, y = expression,
+               colour = concentration, label = replicate)) +
+    geom_point() +
+    facet_grid(. ~ gene) +
+    theme(legend.position="none") +
+    ggrepel::geom_text_repel(nudge_x = 0.2, segment.size = 0.5)
 ```
 
 `r msmbstyle::question_begin()`
@@ -107,14 +111,19 @@ A correlation coefficient ranges between -1 (for anti-correlated
 vectors) to 1 (for perfectly correlated vectors). Non-correlated data
 have a correlation coefficient close to 0.
 
-```{r corfig, fig.cap = "Example of correlation, anti-correlation and lack thereof."}
+```{r corfig, fig.cap = "Example of correlation, anti-correlation and lack thereof.", echo = FALSE, fig.width = 12}
 x <- rnorm(60)
-y1  <- x + rnorm(60, 0, 0.1)
+y1  <- x + rnorm(60, 0, 0.3)
 y2 <- -y1
 y3 <- rnorm(60)
-plot(x, y1, main = paste("Correlation coefficient:", round(cor(x, y1), 2)))
-plot(x, y2, main = paste("Correlation coefficient:", round(cor(x, y2), 2)))
-plot(x, y3, main = paste("Correlation coefficient:", round(cor(x, y3), 2)))
+df <- data.frame(x = c(x, x, x),
+           y = c(y1, y2, y3),
+           type = rep(c("correlation", "anti-correlation",
+                        "no correlation"), each = 60))
+ggplot(df, aes(x = x, y = y)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    facet_grid(. ~ type)
 ```
 
 `r msmbstyle::question_begin()`
