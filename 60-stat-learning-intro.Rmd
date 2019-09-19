@@ -17,6 +17,8 @@ more accurately, and (2) to define what data is needed before
 generating it.
 
 
+## Hypothesis testing
+
 Let's start with the following experiment. Researchers are interested
 in the expression of three genes,
 [A1CF](https://www.genecards.org/cgi-bin/carddisp.pl?gene=A1CF),
@@ -69,8 +71,10 @@ knitr::kable(expd)
 `r msmbstyle::solution_end()`
 
 
-Statistical hypothesis testing (chapter in chapter \@ref(sec:testing))
-will help us formalise when to call genes differentially expressed.
+Statistical hypothesis testing (chapter \@ref(sec:testing)) will help
+us formalise when to call genes differentially expressed.
+
+## Handling more data
 
 There are many more types of patterns that we wold be interested in
 identifying in omics data. Let's reconsider the linear regression
@@ -92,11 +96,12 @@ knitr::include_graphics("./figs/uasa_a_808157_o_f0004g.jpg")
   not?
 `r msmbstyle::question_end()`
 
-As before, imagine that instead of 20 correlations, we would need to
-consider thousands thereof!
+`r msmbstyle::question_begin()`
+Imagine that instead of 20 correlations, we have thousands thereof!
+How would you address that challenge?
+`r msmbstyle::question_begin()`
 
-
-In additionnal complication with large data is the appearance of
+An additionnal complication with large data is the appearance of
 spurious positive results, called **false positives**. In the example
 below, we calculate [Pearon correlation
 coefficients](https://en.m.wikipedia.org/wiki/Pearson_correlation_coefficient)
@@ -131,8 +136,9 @@ ggplot(df, aes(x = x, y = y)) +
 
 `r msmbstyle::question_begin()`
 Generate two random vectors `x` and `y` of length 60 using
-`rnorm`. Plot them, add a linear regression line and calculate their
-correlation coefficient using the `cor` function.
+`rnorm`. Plot them, add a linear regression line, find the slope of
+the regression line, and calculate their correlation coefficient using
+the `cor` function.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
@@ -142,7 +148,9 @@ y <- rnorm(60)
 
 ## with base graphics
 plot(x, y)
-abline(lm(y ~ x))
+fit <- lm(y ~ x)
+fit
+abline(fit)
 cor(x, y)
 
 ## or with ggplot2
@@ -151,8 +159,6 @@ ggplot(data.frame(x, y),
     geom_point() + geom_smooth(method = "lm")
 ```
 `r msmbstyle::solution_end()`
-
-
 
 Let's expand the code above and calculate the correlation coefficient
 between hundreds of random vectors and choose the choose the best one
@@ -190,7 +196,107 @@ hist(rs)
 rug(rs)
 abline(v = rs[abs(rs) > .75], col = "red", lty = "dotted")
 ```
-`r msmbstyle::solution_begin()`
+`r msmbstyle::solution_end()`
 
-- about 'seeing' patterns
-- curse of dimensionality
+
+Along the lines of what we have seen above, we are often interested in
+identifying outliers, i.e. points that are different from the
+others. One way to define *different* is by measuring distances
+between all the samples, or each sample to a virtual *average
+sample*. Let's try this ourselves for a dataset of 5 sample that have
+each been characterised by measuring the expression of genes $x$ and $y$.
+
+```{r dist0, fig.cap = "A simulated dataset composed of 10 samples."}
+set.seed(111)
+samples <- data.frame(x = rnorm(5, 5, 1),
+                      y = rnorm(5, 5, 1))
+plot(samples, cex = 3)
+text(samples$x, samples$y, 1:5)
+```
+
+Visually, we could consider sample 4 to be an outlier. Let's start by
+calculating all pairwise [Euclidean
+distances](https://en.wikipedia.org/wiki/Euclidean_distance) with the
+`dist`.
+
+```{r dist1}
+dist(samples)
+```
+
+
+`r msmbstyle::question_begin()`
+- Familiarise yourself with the Euclidean distance.
+- What other distances can be calculated with the `dist` function?
+- What can you say about our assumption that sample 4 is an outlier
+  given the distance matrix above?
+`r msmbstyle::question_end()`
+
+
+
+`r msmbstyle::question_begin()`
+An alternative approach would be to calculate the distance of each
+sample to an average samples, represented by a red point on the figure
+below.
+
+```{r avgsample, echo = FALSE, fig.cap = "The average sample is shown as a red point among the 5 samples simulated above."}
+avg_sample <- colMeans(samples)
+plot(samples, cex = 3)
+text(samples$x, samples$y, 1:5)
+points(avg_sample["x"], avg_sample["y"], pch = 19, col = "red", cex = 2)
+```
+
+- Compute such an average sample and visualise it as suggested above.
+- Calculate the distance between that average sample and each of the 5
+  real data points.
+- Verify that sample 4 is still an outlier.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r dist2}
+avg_sample <- colMeans(samples)
+plot(samples, cex = 3)
+text(samples$x, samples$y, 1:5)
+points(avg_sample["x"], avg_sample["y"], pch = 19, col = "red", cex = 2)
+dists <- dist(rbind(samples, avg_sample))
+## convert the object of `dist` to a matrix that we can subset easily
+dists <- as.matrix(dists)
+dists[6, ]
+which.max(dists[6, ])
+```
+`r msmbstyle::solution_end()`
+
+The concept out outlier is very intuitive, but becomes murky when the
+number of dimensions becomes very high.
+
+## The curse of dimensionality
+
+
+There is one very well documented feature of high dimension data,
+known as the curse of dimensionality. When the numbers of dimensions
+increase, data become increasingly sparse, the definition of distance
+or density becomes difficult to define and more and more points become
+outliers.
+
+Below, we demonstrate how the number of outliers increases with the
+number of dimenstion ([source](https://lgatto.github.io/curse-dimensionality/)):
+
+> The simulation generates N points in hypercubes of d dimensions and
+> counts how many of those points are outliers, defined as being in
+> the 1% outer shell of the space. In 1 dimension, we have 1% of the
+> uniformely distributed points that are outliers. In 50 dimension,
+> there are already 60% of the points that are outliers; in 100
+> dimensions, almost 90% of the points are outliers.
+
+```{r curse, cache = FALSE}
+d <- 1:200
+N <- 1000
+dat <- lapply(d, function(i) replicate(i, runif(N)))
+nout <- function(m) mean(apply(m, 1, function(i) any(i < 0.01 | i > 0.99)))
+res <- sapply(dat, nout)
+plot(res, type = "l",
+     xlab = "Number of dimensions",
+     ylab = "Proportion of 1% outliers",
+     main = "Curse of Dimensionality")
+grid()
+```

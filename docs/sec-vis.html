@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-09-18" />
+<meta name="date" content="2019-09-19" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -379,7 +379,7 @@ correlation:</p>
 <a href="sec-obj.html#sec:obj">3</a>) clearly indicate fundamental differences in these
 data, the most simple and straightforward approach is <em>visualisation</em>
 to highlight the fundamental differences in the datasets.</p>
-<p><img src="WSBIM1207_files/figure-html/anscombefig-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/anscombefig-1.png" width="672"></p>
 <p>See also another, more recent example:
 <a href="https://www.autodeskresearch.com/publications/samestats">The Datasaurus Dozen dataset</a>.</p>
 <p><img src="https://d2f99xq7vri1nk.cloudfront.net/DinoSequentialSmaller.gif"></p>
@@ -430,7 +430,7 @@ immunosorbent assay (ELISA) assay for all observations.</p>
 <p class="caption marginnote shownote">
 Figure 2.1: The default base <code>plot</code> function on the <code>DNase</code> data.
 </p>
-<img src="WSBIM1207_files/figure-html/dnase-1.png" alt="The default base `plot` function on the `DNase` data." width="672">
+<img src="WSBIM1322_files/figure-html/dnase-1.png" alt="The default base `plot` function on the `DNase` data." width="672">
 </div>
 <p>We can add some features on the plot, such vertical dotted lines for
 all observed observations and customise the look and feel of the plot
@@ -446,7 +446,7 @@ by setting specific arguments to the <code>plot</code> function.</p>
 <p class="caption marginnote shownote">
 Figure 2.2: Customising a base figure using function arguments and overlaying new graphical features.
 </p>
-<img src="WSBIM1207_files/figure-html/dnase2-1.png" alt="Customising a base figure using function arguments and overlaying new graphical features." width="672">
+<img src="WSBIM1322_files/figure-html/dnase2-1.png" alt="Customising a base figure using function arguments and overlaying new graphical features." width="672">
 </div>
 <p>If we wanted to change anything to that figures, we would need to
 repeat all the commands and modify accordingly. Any additinal command
@@ -469,7 +469,7 @@ using base graphics?</p>
 </p>
 <div id="sol-body-1" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sec-vis.html#cb10-1"></a><span class="kw">plot</span>(DNase<span class="op">$</span>con, DNase<span class="op">$</span>density, <span class="dt">col =</span> DNase<span class="op">$</span>Run)</span></code></pre></div>
-<p><img src="WSBIM1207_files/figure-html/colbyrun-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/colbyrun-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -500,7 +500,7 @@ split by run.</p>
 <p class="caption marginnote shownote">
 (#fig:hist_boxplot)The base <code>hist</code> and <code>boxplot</code> functions, the latter using the formula interface.
 </p>
-<img src="WSBIM1207_files/figure-html/hist_boxplot-1.png" alt="The base `hist` and `boxplot` functions, the latter using the formula interface." width="1344">
+<img src="WSBIM1322_files/figure-html/hist_boxplot-1.png" alt="The base `hist` and `boxplot` functions, the latter using the formula interface." width="1344">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -549,7 +549,7 @@ be used for different types of plots:</p>
 <p class="caption marginnote shownote">
 Figure 2.3: We have only specified the data, and there’s nothing to display yet.
 </p>
-<img src="WSBIM1207_files/figure-html/gg0-1.png" alt="We have only specified the data, and there's nothing to display yet." width="672">
+<img src="WSBIM1322_files/figure-html/gg0-1.png" alt="We have only specified the data, and there's nothing to display yet." width="672">
 </div>
 <ul>
 <li>define a mapping (using the aesthetic (<code>aes</code>) function), by
@@ -564,7 +564,7 @@ size, shape, colour, etc.</li>
 <p class="caption marginnote shownote">
 Figure 2.4: <code>ggplot2</code> can now generate the axes, ticks and ranges based on the data.
 </p>
-<img src="WSBIM1207_files/figure-html/gg1-1.png" alt="`ggplot2` can now generate the axes, ticks and ranges based on the data." width="672">
+<img src="WSBIM1322_files/figure-html/gg1-1.png" alt="`ggplot2` can now generate the axes, ticks and ranges based on the data." width="672">
 </div>
 <ul>
 <li>add <em>geoms</em> – graphical representations of the data in the plot
@@ -580,7 +580,7 @@ operator. Because we have two continuous variables, let’s use
 <p class="caption marginnote shownote">
 Figure 2.5: Final figures with rendering of the data as a scatter plot.
 </p>
-<img src="WSBIM1207_files/figure-html/gg2-1.png" alt="Final figures with rendering of the data as a scatter plot." width="672">
+<img src="WSBIM1322_files/figure-html/gg2-1.png" alt="Final figures with rendering of the data as a scatter plot." width="672">
 </div>
 <div class="question">
 <p class="question-begin">
@@ -606,7 +606,7 @@ console or explicitly printing it (like any other variable).</p>
 <p class="caption marginnote shownote">
 Figure 2.6: Saving and printing an object.
 </p>
-<img src="WSBIM1207_files/figure-html/ggobj-1.png" alt="Saving and printing an object." width="672">
+<img src="WSBIM1322_files/figure-html/ggobj-1.png" alt="Saving and printing an object." width="672">
 </div>
 <p>Let’s immediately customise this visualisation to
 - highlight how to re-use the <code>gg</code> object without repeating the
@@ -619,7 +619,7 @@ plot.</p>
 <p class="caption marginnote shownote">
 Figure 2.7: Adding another <code>geom_point</code> with its own (local) aesthetics.
 </p>
-<img src="WSBIM1207_files/figure-html/gg3-1.png" alt="Adding another `geom_point` with its own (local) aesthetics. " width="672">
+<img src="WSBIM1322_files/figure-html/gg3-1.png" alt="Adding another `geom_point` with its own (local) aesthetics. " width="672">
 </div>
 <div class="question">
 <p class="question-begin">
@@ -644,7 +644,7 @@ runs above?</p>
 <p class="caption marginnote shownote">
 Figure 2.8: Setting the Run to a category by coercing it to a character, rather than a numeric.
 </p>
-<img src="WSBIM1207_files/figure-html/ggex-1.png" alt="Setting the Run to a category by coercing it to a character, rather than a numeric." width="672">
+<img src="WSBIM1322_files/figure-html/ggex-1.png" alt="Setting the Run to a category by coercing it to a character, rather than a numeric." width="672">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -669,7 +669,7 @@ by signal reinforcement progressively segregates early mouse lineages
 <p class="caption marginnote shownote">
 Figure 2.9: Modelling the relation between the expression of X1426642_at and X1418765_at.
 </p>
-<img src="WSBIM1207_files/figure-html/gg4-1.png" alt="Modelling the relation between the expression of X1426642_at and X1418765_at." width="672">
+<img src="WSBIM1322_files/figure-html/gg4-1.png" alt="Modelling the relation between the expression of X1426642_at and X1418765_at." width="672">
 </div>
 <p>And, adding colours representing the different samples</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="sec-vis.html#cb21-1"></a><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at))  <span class="op">+</span></span>
@@ -680,7 +680,7 @@ Figure 2.9: Modelling the relation between the expression of X1426642_at and X14
 <p class="caption marginnote shownote">
 Figure 2.10: Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples.
 </p>
-<img src="WSBIM1207_files/figure-html/gg5-1.png" alt="Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples." width="672">
+<img src="WSBIM1322_files/figure-html/gg5-1.png" alt="Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples." width="672">
 </div>
 </div>
 <div id="visualising-1d-data" class="section level2">
@@ -718,7 +718,7 @@ Gata6 and Sox2.</p>
 <p class="caption marginnote shownote">
 Figure 2.11: Distribution of the Gata4 expression
 </p>
-<img src="WSBIM1207_files/figure-html/hist-1.png" alt="Distribution of the Gata4 expression" width="672">
+<img src="WSBIM1322_files/figure-html/hist-1.png" alt="Distribution of the Gata4 expression" width="672">
 </div>
 </div>
 <div id="box-plots" class="section level3">
@@ -732,7 +732,7 @@ Figure 2.11: Distribution of the Gata4 expression
 <p class="caption marginnote shownote">
 Figure 2.12: A boxplot of expression values.
 </p>
-<img src="WSBIM1207_files/figure-html/boxplot-1.png" alt="A boxplot of expression values." width="672">
+<img src="WSBIM1322_files/figure-html/boxplot-1.png" alt="A boxplot of expression values." width="672">
 </div>
 <div class="question">
 <p class="question-begin">
@@ -758,7 +758,7 @@ Figure 2.12: A boxplot of expression values.
 <p class="caption marginnote shownote">
 Figure 2.13: A violin plot of expression values.
 </p>
-<img src="WSBIM1207_files/figure-html/violin-1.png" alt="A violin plot of expression values." width="672">
+<img src="WSBIM1322_files/figure-html/violin-1.png" alt="A violin plot of expression values." width="672">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -792,7 +792,7 @@ stacked next to each other.</p>
 <p class="caption marginnote shownote">
 Figure 2.14: Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot.
 </p>
-<img src="WSBIM1207_files/figure-html/showdots-1.png" alt="Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot." width="672">
+<img src="WSBIM1322_files/figure-html/showdots-1.png" alt="Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot." width="672">
 </div>
 </div>
 <div id="density-and-ecdf-plots" class="section level3">
@@ -810,7 +810,7 @@ Figure 2.14: Showing all expression values using jittering (left), a dotplot (ce
 <p class="caption marginnote shownote">
 Figure 2.15: Density and cumulative density functions of expression values.
 </p>
-<img src="WSBIM1207_files/figure-html/unnamed-chunk-3-1.png" alt="Density and cumulative density functions of expression values." width="672">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-3-1.png" alt="Density and cumulative density functions of expression values." width="672">
 </div>
 </div>
 <div id="summary" class="section level3">
@@ -851,7 +851,7 @@ of the data.</p>
 <p class="caption marginnote shownote">
 Figure 2.16: Histograms of the same data without (left) and with (right) log-transformation.
 </p>
-<img src="WSBIM1207_files/figure-html/sim-1.png" alt="Histograms of the same data without (left) and with (right) log-transformation." width="672">
+<img src="WSBIM1322_files/figure-html/sim-1.png" alt="Histograms of the same data without (left) and with (right) log-transformation." width="672">
 </div>
 <p>This also applies to density plots.</p>
 </div>
@@ -876,7 +876,7 @@ Figure 2.16: Histograms of the same data without (left) and with (right) log-tra
 <p class="caption marginnote shownote">
 Figure 2.17: Scatter plot comparing the expression of a wild-type vs. FGF4 KO.
 </p>
-<img src="WSBIM1207_files/figure-html/sc1-1.png" alt="Scatter plot comparing the expression of a wild-type vs. FGF4 KO." width="672">
+<img src="WSBIM1322_files/figure-html/sc1-1.png" alt="Scatter plot comparing the expression of a wild-type vs. FGF4 KO." width="672">
 </div>
 <div class="question">
 <p class="question-begin">
@@ -903,7 +903,7 @@ default).</p>
 <p class="caption marginnote shownote">
 Figure 2.18: Transparency can help distinguish regions of different densities.
 </p>
-<img src="WSBIM1207_files/figure-html/scp2-1.png" alt="Transparency can help distinguish regions of different densities." width="672">
+<img src="WSBIM1322_files/figure-html/scp2-1.png" alt="Transparency can help distinguish regions of different densities." width="672">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -916,7 +916,7 @@ Figure 2.18: Transparency can help distinguish regions of different densities.
 <p class="caption marginnote shownote">
 Figure 2.19: Focusing on contours rather that individual values.
 </p>
-<img src="WSBIM1207_files/figure-html/scp3-1.png" alt="Focusing on contours rather that individual values." width="672">
+<img src="WSBIM1322_files/figure-html/scp3-1.png" alt="Focusing on contours rather that individual values." width="672">
 </div>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sec-vis.html#cb41-1"></a>scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_hex</span>()</span></code></pre></div>
 <div class="figure">
@@ -924,7 +924,7 @@ Figure 2.19: Focusing on contours rather that individual values.
 <p class="caption marginnote shownote">
 Figure 2.20: Local density summaries.
 </p>
-<img src="WSBIM1207_files/figure-html/scp5-1.png" alt="Local density summaries." width="672">
+<img src="WSBIM1322_files/figure-html/scp5-1.png" alt="Local density summaries." width="672">
 </div>
 </div>
 <div id="visualising-data-along-more-dimensions" class="section level2">
@@ -949,7 +949,7 @@ expressions</p>
 <p class="caption marginnote shownote">
 Figure 2.21: Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages.
 </p>
-<img src="WSBIM1207_files/figure-html/facet1-1.png" alt="Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages." width="672">
+<img src="WSBIM1322_files/figure-html/facet1-1.png" alt="Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages." width="672">
 </div>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sec-vis.html#cb43-1"></a><span class="kw">ggplot</span>(hiiragi2013df1,</span>
 <span id="cb43-2"><a href="sec-vis.html#cb43-2"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at)) <span class="op">+</span></span>
@@ -960,7 +960,7 @@ Figure 2.21: Different sub-plots for different lineages using colours (left) of 
 <p class="caption marginnote shownote">
 Figure 2.22: Different sub-plots for different lineages and embryonic stages.
 </p>
-<img src="WSBIM1207_files/figure-html/facet2-1.png" alt="Different sub-plots for different lineages and embryonic stages." width="672">
+<img src="WSBIM1322_files/figure-html/facet2-1.png" alt="Different sub-plots for different lineages and embryonic stages." width="672">
 </div>
 <div class="question">
 <p class="question-begin">
@@ -983,7 +983,7 @@ Gata6 and Sox2 genes in the <code>genes</code> data using histograms.</p>
 <span id="cb44-2"><a href="sec-vis.html#cb44-2"></a><span class="st">    </span><span class="kw">geom_histogram</span>() <span class="op">+</span></span>
 <span id="cb44-3"><a href="sec-vis.html#cb44-3"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>gene)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="WSBIM1207_files/figure-html/hist2-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/hist2-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1064,7 +1064,7 @@ example.</p>
 <a href="sec-obj.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-09-18
+2019-09-19
 </p>
 </div>
 </div>
