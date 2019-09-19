@@ -48,14 +48,6 @@ if(f.classList.contains('fa-plus-square')) {
 
 }
 </script>
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<script src="libs/jquery-1.11.3/jquery.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -226,7 +218,7 @@ what the experiment measures using a table.</p>
 ► Solution<span id="sol-start-23" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-23', 'sol-start-23')"></span>
 </p>
 <div id="sol-body-23" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="sec-mlintro.html#cb189-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(expd)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="sec-mlintro.html#cb190-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(expd)</span></code></pre></div>
 <table>
 <thead><tr class="header">
 <th align="left">sample</th>
@@ -383,19 +375,19 @@ correlation coefficient using the <code>cor</code> function.</p>
 ► Solution<span id="sol-start-24" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-24', 'sol-start-24')"></span>
 </p>
 <div id="sol-body-24" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="sec-mlintro.html#cb190-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
-<span id="cb190-2"><a href="sec-mlintro.html#cb190-2"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
-<span id="cb190-3"><a href="sec-mlintro.html#cb190-3"></a></span>
-<span id="cb190-4"><a href="sec-mlintro.html#cb190-4"></a><span class="co">## with base graphics</span></span>
-<span id="cb190-5"><a href="sec-mlintro.html#cb190-5"></a><span class="kw">plot</span>(x, y)</span>
-<span id="cb190-6"><a href="sec-mlintro.html#cb190-6"></a><span class="kw">abline</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x))</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sec-mlintro.html#cb191-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb191-2"><a href="sec-mlintro.html#cb191-2"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb191-3"><a href="sec-mlintro.html#cb191-3"></a></span>
+<span id="cb191-4"><a href="sec-mlintro.html#cb191-4"></a><span class="co">## with base graphics</span></span>
+<span id="cb191-5"><a href="sec-mlintro.html#cb191-5"></a><span class="kw">plot</span>(x, y)</span>
+<span id="cb191-6"><a href="sec-mlintro.html#cb191-6"></a><span class="kw">abline</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x))</span></code></pre></div>
 <p><img src="WSBIM1207_files/figure-html/corex1-1.png" width="672"></p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sec-mlintro.html#cb191-1"></a><span class="kw">cor</span>(x, y)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="sec-mlintro.html#cb192-1"></a><span class="kw">cor</span>(x, y)</span></code></pre></div>
 <pre><code>## [1] 0.08567754</code></pre>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="sec-mlintro.html#cb193-1"></a><span class="co">## or with ggplot2</span></span>
-<span id="cb193-2"><a href="sec-mlintro.html#cb193-2"></a><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(x, y),</span>
-<span id="cb193-3"><a href="sec-mlintro.html#cb193-3"></a>       <span class="kw">aes</span>(x, y)) <span class="op">+</span></span>
-<span id="cb193-4"><a href="sec-mlintro.html#cb193-4"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"lm"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sec-mlintro.html#cb194-1"></a><span class="co">## or with ggplot2</span></span>
+<span id="cb194-2"><a href="sec-mlintro.html#cb194-2"></a><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(x, y),</span>
+<span id="cb194-3"><a href="sec-mlintro.html#cb194-3"></a>       <span class="kw">aes</span>(x, y)) <span class="op">+</span></span>
+<span id="cb194-4"><a href="sec-mlintro.html#cb194-4"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"lm"</span>)</span></code></pre></div>
 <p><img src="WSBIM1207_files/figure-html/corex1-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -441,17 +433,17 @@ data?</p>
 
 
 
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sec-mlintro.html#cb194-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb194-2"><a href="sec-mlintro.html#cb194-2"></a>rs &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">cor</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>)))</span>
-<span id="cb194-3"><a href="sec-mlintro.html#cb194-3"></a><span class="kw">summary</span>(rs)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="sec-mlintro.html#cb195-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb195-2"><a href="sec-mlintro.html#cb195-2"></a>rs &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">cor</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>)))</span>
+<span id="cb195-3"><a href="sec-mlintro.html#cb195-3"></a><span class="kw">summary</span>(rs)</span></code></pre></div>
 <pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
 ## -0.8194367 -0.2280550 -0.0009475  0.0055000  0.2118503  0.7977295</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sec-mlintro.html#cb196-1"></a><span class="co">## Assuming a totally arbitrary value of 0.75, we would get</span></span>
-<span id="cb196-2"><a href="sec-mlintro.html#cb196-2"></a>rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="sec-mlintro.html#cb197-1"></a><span class="co">## Assuming a totally arbitrary value of 0.75, we would get</span></span>
+<span id="cb197-2"><a href="sec-mlintro.html#cb197-2"></a>rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>]</span></code></pre></div>
 <pre><code>## [1]  0.7941876  0.7977295 -0.8194367</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sec-mlintro.html#cb198-1"></a><span class="kw">hist</span>(rs)</span>
-<span id="cb198-2"><a href="sec-mlintro.html#cb198-2"></a><span class="kw">rug</span>(rs)</span>
-<span id="cb198-3"><a href="sec-mlintro.html#cb198-3"></a><span class="kw">abline</span>(<span class="dt">v =</span> rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>], <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="sec-mlintro.html#cb199-1"></a><span class="kw">hist</span>(rs)</span>
+<span id="cb199-2"><a href="sec-mlintro.html#cb199-2"></a><span class="kw">rug</span>(rs)</span>
+<span id="cb199-3"><a href="sec-mlintro.html#cb199-3"></a><span class="kw">abline</span>(<span class="dt">v =</span> rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>], <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
 <p><img src="WSBIM1207_files/figure-html/corex2-1.png" width="672"></p>
 <div class="solution">
 <p class="solution-begin">

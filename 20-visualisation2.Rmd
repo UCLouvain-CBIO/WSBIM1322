@@ -53,14 +53,14 @@ correlation:
 tab <- matrix(NA, 5, 4)
 colnames(tab) <- 1:4
 rownames(tab) <- c("var(x)", "mean(x)",
-				   "var(y)", "mean(y)",
-				   "cor(x,y)")
+                   "var(y)", "mean(y)",
+                   "cor(x,y)")
 for (i in 1:4)
-	tab[, i] <- c(var(anscombe[, i]),
-				  mean(anscombe[, i]),
-				  var(anscombe[, i+4]),
-				  mean(anscombe[, i+4]),
-				  cor(anscombe[, i], anscombe[, i+4]))
+    tab[, i] <- c(var(anscombe[, i]),
+                  mean(anscombe[, i]),
+                  var(anscombe[, i+4]),
+                  mean(anscombe[, i+4]),
+                  cor(anscombe[, i], anscombe[, i+4]))
 ```
 
 ```{r anstabdisplay, echo=FALSE}
@@ -79,10 +79,10 @@ ff <- y ~ x
 mods <- setNames(as.list(1:4), paste0("lm", 1:4))
 par(mfrow = c(2, 2), mar = c(4, 4, 1, 1))
 for (i in 1:4) {
-	ff[2:3] <- lapply(paste0(c("y","x"), i), as.name)
-	plot(ff, data = anscombe, pch = 19, xlim = c(3, 19), ylim = c(3, 13))
-	mods[[i]] <- lm(ff, data = anscombe)
-	abline(mods[[i]])
+    ff[2:3] <- lapply(paste0(c("y","x"), i), as.name)
+    plot(ff, data = anscombe, pch = 19, xlim = c(3, 19), ylim = c(3, 13))
+    mods[[i]] <- lm(ff, data = anscombe)
+    abline(mods[[i]])
 }
 ```
 
@@ -549,13 +549,18 @@ ggplot(genes, aes(x = expression)) +
 
 ## Interactive visualisation
 
-```{r plotly, fig.cap = "Interactive visualisation with plotly"}
-library("plotly")
-
+```{r plotly0}
 scp <- ggplot(hiiragi2013df2[1:100, ],
               aes(x= `59 E4.5 (PE)`, y = `92 E4.5 (FGF4-KO)`))
 
 scp2 <- scp + geom_point()
+```
+
+Once we have stored ggplot object in a variable, we can simply pass it
+to the `plotly::ggplotly` function to generate an interactive figure.
+
+```{r plotly, eval = FALSE}
+library("plotly")
 ggplotly(scp2)
 ```
 
