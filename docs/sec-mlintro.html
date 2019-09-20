@@ -116,6 +116,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="toc"><a href="#hypothesis-testing"> Hypothesis testing</a></li>
 <li class="toc"><a href="#handling-more-data"> Handling more data</a></li>
 <li class="toc"><a href="#the-curse-of-dimensionality"> The curse of dimensionality</a></li>
+<li class="toc"><a href="#machine-learning"> Machine learning</a></li>
 </ul>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
 <a href="sec-ul.html"><span class="toc-section-number">8</span> Unsupervised learning</a>
@@ -316,7 +317,7 @@ Figure 6.2: One of these plots is the plot of the actual data, and the remaining
 
 
 
-<p>An additionnal complication with large data is the appearance of spurious positive results, called <strong>false positives</strong>. In the example below, we calculate <a href="https://en.m.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearon correlation coefficients</a> between two vectors<span class="math inline">\(x\)</span> and<span class="math inline">\(y\)</span>:</p>
+<p>An additionnal complication with large data is the appearance of spurious positive results, called <strong>false positives</strong>. In the example below, we calculate <a href="https://en.m.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearon correlation coefficients</a> between two vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>:</p>
 <p><span class="math display">\[r_{xy} = \frac{\sum_{i = 1}^{n}(x_{i} - \bar x)(y_{i} - \bar y)}{\sqrt{\sum_{i = 1}^{n}(x_{i} - \bar x)^{2}} \sqrt{\sum_{i = 1}^{n}(y_{i} - \bar y)^{2}}}\]</span></p>
 <p>where <span class="math inline">\(n\)</span> is the length of the vector, <span class="math inline">\(x_{i}\)</span> and <span class="math inline">\(y_{i}\)</span> are the <span class="math inline">\(i_{th}\)</span> elements of the <span class="math inline">\(x\)</span> and y$ vectors, <span class="math inline">\(\bar x\)</span> and <span class="math inline">\(\bar y\)</span> are the respective means.</p>
 <p>A correlation coefficient ranges between -1 (for anti-correlated vectors) to 1 (for perfectly correlated vectors). Non-correlated data have a correlation coefficient close to 0.</p>
@@ -345,9 +346,10 @@ Figure 6.3: Example of correlation, anti-correlation and lack thereof.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)
 y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)
 
-## with base graphics
-<span class="kw">plot</span>(x, y)
+## fit linear model
 fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)
+
+## slope
 fit</code></pre></div>
 <pre><code>## 
 ## Call:
@@ -356,10 +358,13 @@ fit</code></pre></div>
 ## Coefficients:
 ## (Intercept)            x  
 ##     0.03864      0.09221</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">abline</span>(fit)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/corex1-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(x, y)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## correlation
+<span class="kw">cor</span>(x, y)</code></pre></div>
 <pre><code>## [1] 0.08567754</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## with base graphics
+<span class="kw">plot</span>(x, y)
+<span class="kw">abline</span>(fit)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/corex1-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## or with ggplot2
 <span class="kw">ggplot</span>(<span class="kw">data.frame</span>(x, y),
        <span class="kw">aes</span>(x, y)) <span class="op">+</span>
@@ -370,7 +375,7 @@ fit</code></pre></div>
 </p>
 </div>
 </div>
-<p>Let’s expand the code above and calculate the correlation coefficient between hundreds of random vectors and choose the choose the best one (in abolute terms) among those. Let’s repeat this procedure 1000 times to obtain 1000 best correlations (based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. “Challenges of Big Data analysis.” <em>National Science Review</em> 1 (2): 293–314. doi:<a href="https://doi.org/10.1093/nsr/nwt032">10.1093/nsr/nwt032</a>.</span>)</span>). The figure below shows the distribution of these 1000 best correlations when comparing 800 or 6400 vectors. We see that with more (random) data, we see that the risk of obtaining spurious correlations if substantially increased.</p>
+<p>Let’s expand the code above and calculate the correlation coefficient between hundreds of random vectors and choose the best one (in abolute terms) among those. Let’s repeat this procedure 1000 times to obtain 1000 best correlations (based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. “Challenges of Big Data analysis.” <em>National Science Review</em> 1 (2): 293–314. doi:<a href="https://doi.org/10.1093/nsr/nwt032">10.1093/nsr/nwt032</a>.</span>)</span>). The figure below shows the distribution of these 1000 best correlations when comparing 800 or 6400 vectors. We see that with more (random) data, we increase that the risk of obtaining spurious correlations.</p>
 <div class="figure">
 <span id="fig:spurcor"></span>
 <p class="caption marginnote shownote">
@@ -383,7 +388,7 @@ Figure 6.4: Illustration of spurious correlation. Distribution of the maximum ab
 ► Question
 </p>
 <div class="question-body">
-<p>Calculate 100 correlation coefficients for pairs of random vectors or length 60. What are the mean, maximum and minumum of your simulated coefficients? Out of those 100 coefficients, how many would you consider of interest if you didn’t know they were produced by random data?</p>
+<p>Calculate 100 correlation coefficients for pairs of random vectors or length 10. What are the mean, maximum and minumum of your simulated coefficients? Out of those 100 coefficients, how many would you consider of interest if you didn’t know they were produced by random data?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -411,7 +416,7 @@ rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st">
 </p>
 </div>
 </div>
-<p>Along the lines of what we have seen above, we are often interested in identifying outliers, i.e. points that are different from the others. One way to define <em>different</em> is by measuring distances between all the samples, or each sample to a virtual <em>average sample</em>. Let’s try this ourselves for a dataset of 5 sample that have each been characterised by measuring the expression of genes <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<p>We are often interested in identifying outliers, i.e. points that are different from the others. One way to define <em>different</em> is by measuring distances between all the samples, or each sample to a virtual <em>average sample</em>. Let’s try this ourselves for a dataset of 5 sample that have each been characterised by measuring the expression of genes<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">111</span>)
 samples &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),
                       <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))
@@ -420,9 +425,9 @@ samples &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span c
 <div class="figure">
 <span id="fig:dist0"></span>
 <p class="caption marginnote shownote">
-Figure 6.5: A simulated dataset composed of 10 samples.
+Figure 6.5: A simulated dataset composed of 5 samples.
 </p>
-<img src="WSBIM1322_files/figure-html/dist0-1.png" alt="A simulated dataset composed of 10 samples." width="672">
+<img src="WSBIM1322_files/figure-html/dist0-1.png" alt="A simulated dataset composed of 5 samples." width="672">
 </div>
 <p>Visually, we could consider sample 4 to be an outlier. Let’s start by calculating all pairwise <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean distances</a> with the <code>dist</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dist</span>(samples)</code></pre></div>
@@ -514,6 +519,62 @@ res &lt;-<span class="st"> </span><span class="kw">sapply</span>(dat, nout)
      <span class="dt">main =</span> <span class="st">"Curse of Dimensionality"</span>)
 <span class="kw">grid</span>()</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/curse-1.png" width="672"></p>
+</div>
+<div id="machine-learning" class="section level2">
+<h2>
+<span class="header-section-number">6.4</span> Machine learning</h2>
+<p>The dataset below is composed of 100 data points. For each data point, we have measured values x and y. We have a dataset of 100 points in 2 dimensions.</p>
+<div class="figure">
+<span id="fig:unlabex"></span>
+<p class="caption marginnote shownote">
+Figure 6.7: A dataset of 100 unlabelled points measured along two dimensions.
+</p>
+<img src="WSBIM1322_files/figure-html/unlabex-1.png" alt="A dataset of 100 unlabelled points measured along two dimensions." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li>How many groups do you think there are among these 100 observations?</li>
+<li>How would you intuitively define them?</li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Now imagine that we know about number of group (which would be called classes in this setting) and the label of each point. In the figure below, we have two classes, red and black, and we know exactly which points below to the red class and the black class.</p>
+<div class="figure">
+<span id="fig:labex"></span>
+<p class="caption marginnote shownote">
+Figure 6.8: A dataset of 100 labelled points measured along two dimensions.
+</p>
+<img src="WSBIM1322_files/figure-html/labex-1.png" alt="A dataset of 100 labelled points measured along two dimensions." width="672">
+</div>
+<p>We now obtain data for three new points, annotated as 1, 2, and 3 below.</p>
+<div class="figure">
+<span id="fig:labex2"></span>
+<p class="caption marginnote shownote">
+Figure 6.9: A dataset of 100 labelled and three new, unlalled, points.
+</p>
+<img src="WSBIM1322_files/figure-html/labex2-1.png" alt="A dataset of 100 labelled and three new, unlalled, points." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>To what class red or black should points 1, 2, and 3 be assigned to?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>The examples presented above fall squarely into the discipline of machine learning. The first example is a case of <strong>unsupervised learning</strong>. In unsupervised learning we aim at find patterns in a dataset without the help of any additional information or labels. Typical applications of unsupervised learning is clustering (as in our first example and chapter <a href="sec-ul.html#sec:ul">8</a>) or dimensionality reduction (chapter <a href="sec-dimred.html#sec:dimred">9</a>)</p>
+<p>In our second example, we were given labels for each observation. This is an example of <strong>supervised learning</strong>, that aims at learning inputs and mapping them to certain target outputs with the help of known labels. Example of supervised learning are classification as in the example above (see chapter <a href="sec-sl.html#sec:sl">10</a>) and regression, where the target isn’t a category, but a value.</p>
+<p>There are additional types of machine learning, such as semi-supervised learning (combining the two approaches above), self-supervised learning (supervised without any labels, i.e. where they need to be identified automatically), reinforcement learning (automatic tuning of the learning when new information is received), but these are beyond the scope of this course.</p>
 
 </div>
 </div>

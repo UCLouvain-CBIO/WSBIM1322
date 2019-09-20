@@ -311,11 +311,11 @@ grid()
 
 ## Machine learning
 
-The dataset below is composed of 100 data points. For each data point,
-we have measured values x and y. We have a dataset of 100 points in 2
-dimensions.
+The dataset below is composed of 100 data points (samples). For each
+data point, we have measured values x and y (two genes). We have a
+dataset of 100 points in 2 dimensions.
 
-```{r, fig.cap = "A dataset of 100 points measured along two dimensions.", echo = FALSE}
+```{r unlabex, fig.cap = "A dataset of 100 unlabelled points measured along two dimensions.", echo = FALSE}
 set.seed(123)
 dat <- rbind(mvtnorm::rmvnorm(50, c(0, 0)),
              mvtnorm::rmvnorm(50, c(3, 3)))
@@ -329,11 +329,52 @@ plot(dat)
 - How would you intuitively define them?
 `r msmbstyle::question_end()`
 
-Now imagine we know 
+Now imagine that we know about number of group (which would be called
+classes in this setting) and the label of each point. In the figure
+below, we have two classes, red and black, and we know exactly which
+points below to the red class and the black class.
 
-```{r}
+```{r labex, fig.cap = "A dataset of 100 labelled points measured along two dimensions.", echo = FALSE}
 dat$class <- factor(rep(c("A", "B"), each = 50))
 plot(dat[, 1:2], col = dat$class, pch = 19)
-new_point <- c(1.65, 1.5)
-points(new_point[1], new_point[2])
 ```
+
+We now obtain data for three new points (samples), annotated as 1, 2,
+and 3 below.
+
+
+```{r labex2, fig.cap = "A dataset of 100 labelled and three new, unlalled, points.", echo = FALSE}
+plot(dat[, 1:2], col = dat$class, pch = 19)
+new_points <- data.frame(x = c(0, 4, 1.65),
+                         y = c(0, 5, 1.7))
+points(new_points$x, new_points$y, cex = 2.5)
+text(new_points$x, new_points$y, 1:3)
+```
+
+`r msmbstyle::question_begin()`
+To what class (red or black) should points 1, 2, and 3 be assigned to?
+`r msmbstyle::question_end()`
+
+The examples presented above fall squarely into the discipline of
+machine learning. The first example is a case of **unsupervised
+learning**. In unsupervised learning we aim at find patterns in a
+dataset without the help of any additional information or
+labels. Typical applications of unsupervised learning is clustering
+(as in our first example and chapter \@ref(sec:ul)) or dimensionality
+reduction (chapter \@ref(sec:dimred))
+
+
+In our second example, we were given labels for each observation. This
+is an example of **supervised learning**, that aims at learning inputs
+and mapping them to certain target outputs with the help of known
+labels. Example of supervised learning are classification as in the
+example above (see chapter \@ref(sec:sl)) and regression, where the
+target isn't a category, but a value.
+
+There are additional types of machine learning, such as
+semi-supervised learning (combining the two approaches above),
+self-supervised learning (supervised without any labels, i.e. where
+they need to be identified automatically), reinforcement learning
+(automatic tuning of the learning when new information is received),
+but these are beyond the scope of this course.
+
