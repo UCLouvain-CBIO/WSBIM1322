@@ -3,3 +3,16 @@
 **Learning objectives**
 
 - What is data normalisation and why do we need it?
+- What are centering and scaling?
+- What is quantile normalisation?
+- How to assess if normalisation worked.
+
+
+In a typical high throughput experiment, we assay thousands of
+features (gene transcripts, proteins, metabolites, ...) is a certain
+number of biologically diverse samples (from about 6 to hundreds of
+thousands).
+
+But what do you think would happen is we took the same sample, such as
+a suspension of U2OS cells (a cell line stemming from bone cancer),
+split it in two, and measured 
