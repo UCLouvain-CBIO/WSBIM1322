@@ -80,8 +80,8 @@ complementary resources.
   [here](http://faculty.marshall.usc.edu/gareth-james/ISL/index.html).
 
 This course is being tought by Prof Laurent Gatto with invaluable
-assistance from Dr Axelle Loriot and Mr Kevin Missault at the Faculty
-of Pharmacy and Biomedical Sciences (FASB) at the UCLouvain, Belgium.
+assistance from Dr Axelle Loriot at the Faculty of Pharmacy and
+Biomedical Sciences (FASB) at the UCLouvain, Belgium.
 
 ## Pre-requisites {-}
 

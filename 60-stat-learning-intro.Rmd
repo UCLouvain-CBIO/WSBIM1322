@@ -1,21 +1,24 @@
-# Introduction to statistical learning {#sec:mlintro}
+# Introduction to statistical machine learning {#sec:mlintro}
 
 ```{r env_ml, echo = FALSE, message = FALSE}
 library("ggplot2")
 ```
 
-The next chapters will focus on statistical (hypothesis testing in
-chapter \@ref(sec:testing)) and general machine learning (chapters
-\@ref(sec:ul), \@ref(sec:dimred) and \@ref(sec:sl)). Before diving
-into the technical details, it is useful to learn (or remind
-outselves) why these techniques are so incredibly important when
-considering generating and analysing high throughput biomedical
-data. Indeed, these tools will not only help in extracting meaningful
-results from a data, but (1) understanding what they do, how to apply
-them, and their respective limitations, allows to frame the questions
-more accurately, and (2) to define what data is needed before
-generating it.
+The next chapters will focus on concepts from statistical (hypothesis
+testing in chapter \@ref(sec:testing)) and general machine learning
+(chapters \@ref(sec:ul), \@ref(sec:dimred) and \@ref(sec:sl)). Before
+diving into the technical details, it is useful to learn (or remind
+ourselves) why these techniques are so incredibly important when
+analysing (i.e. looking to understand) high throughput biomedical
+data. The goals of these chapters is to
 
+- understanding what these techniques do, how to apply them, and their
+  respective limitations;
+- learn to frame the questions more accurately in the light of
+  available analysis techniques;
+- be in a position to formalise a research question and define what
+  data is needed before generating it;
+- to ultimately extracting meaningful results from a dataset.
 
 ## Hypothesis testing
 
@@ -105,7 +108,7 @@ An additionnal complication with large data is the appearance of
 spurious positive results, called **false positives**. In the example
 below, we calculate [Pearon correlation
 coefficients](https://en.m.wikipedia.org/wiki/Pearson_correlation_coefficient)
-between two vectors$x$ and$y$:
+between two vectors $x$ and $y$:
 
 $$r_{xy} = \frac{\sum_{i = 1}^{n}(x_{i} - \bar x)(y_{i} - \bar y)}{\sqrt{\sum_{i = 1}^{n}(x_{i} - \bar x)^{2}} \sqrt{\sum_{i = 1}^{n}(y_{i} - \bar y)^{2}}}$$
 
@@ -146,12 +149,18 @@ the `cor` function.
 x <- rnorm(60)
 y <- rnorm(60)
 
+## fit linear model
+fit <- lm(y ~ x)
+
+## slope
+fit
+
+## correlation
+cor(x, y)
+
 ## with base graphics
 plot(x, y)
-fit <- lm(y ~ x)
-fit
 abline(fit)
-cor(x, y)
 
 ## or with ggplot2
 ggplot(data.frame(x, y),
@@ -161,13 +170,12 @@ ggplot(data.frame(x, y),
 `r msmbstyle::solution_end()`
 
 Let's expand the code above and calculate the correlation coefficient
-between hundreds of random vectors and choose the choose the best one
-(in abolute terms) among those. Let's repeat this procedure 1000 times
-to obtain 1000 best correlations (based on @Fan:2014). The figure
-below shows the distribution of these 1000 best correlations when
-comparing 800 or 6400 vectors. We see that with more (random) data, we
-see that the risk of obtaining spurious correlations if substantially
-increased.
+between hundreds of random vectors and choose the best one (in abolute
+terms) among those. Let's repeat this procedure 1000 times to obtain
+1000 best correlations (based on @Fan:2014). The figure below shows
+the distribution of these 1000 best correlations when comparing 800 or
+6400 vectors. We see that with more (random) data, we increase that
+the risk of obtaining spurious correlations.
 
 
 ```{r spurcor, cache = TRUE, fig.cap = "Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions.", echo=FALSE}
@@ -177,7 +185,7 @@ knitr::include_graphics("./figs/spurcor.png")
 
 `r msmbstyle::question_begin()`
 Calculate 100 correlation coefficients for pairs of random vectors or
-length 60. What are the mean, maximum and minumum of your simulated
+length 10. What are the mean, maximum and minumum of your simulated
 coefficients? Out of those 100 coefficients, how many would you
 consider of interest if you didn't know they were produced by random
 data?
@@ -199,14 +207,14 @@ abline(v = rs[abs(rs) > .75], col = "red", lty = "dotted")
 `r msmbstyle::solution_end()`
 
 
-Along the lines of what we have seen above, we are often interested in
-identifying outliers, i.e. points that are different from the
-others. One way to define *different* is by measuring distances
-between all the samples, or each sample to a virtual *average
-sample*. Let's try this ourselves for a dataset of 5 sample that have
-each been characterised by measuring the expression of genes $x$ and $y$.
+We are often interested in identifying outliers, i.e. points that are
+different from the others. One way to define *different* is by
+measuring distances between all the samples, or each sample to a
+virtual *average sample*. Let's try this ourselves for a dataset of 5
+sample that have each been characterised by measuring the expression
+of genes$x$ and $y$.
 
-```{r dist0, fig.cap = "A simulated dataset composed of 10 samples."}
+```{r dist0, fig.cap = "A simulated dataset composed of 5 samples."}
 set.seed(111)
 samples <- data.frame(x = rnorm(5, 5, 1),
                       y = rnorm(5, 5, 1))
@@ -299,4 +307,33 @@ plot(res, type = "l",
      ylab = "Proportion of 1% outliers",
      main = "Curse of Dimensionality")
 grid()
+```
+
+## Machine learning
+
+The dataset below is composed of 100 data points. For each data point,
+we have measured values x and y. We have a dataset of 100 points in 2
+dimensions.
+
+```{r, fig.cap = "A dataset of 100 points measured along two dimensions.", echo = FALSE}
+set.seed(123)
+dat <- rbind(mvtnorm::rmvnorm(50, c(0, 0)),
+             mvtnorm::rmvnorm(50, c(3, 3)))
+dat <- as.data.frame(dat)
+colnames(dat) <- c("x", "y")
+plot(dat)
+```
+
+`r msmbstyle::question_begin()`
+- How many groups do you think there are among these 100 observations?
+- How would you intuitively define them?
+`r msmbstyle::question_end()`
+
+Now imagine we know 
+
+```{r}
+dat$class <- factor(rep(c("A", "B"), each = 50))
+plot(dat[, 1:2], col = dat$class, pch = 19)
+new_point <- c(1.65, 1.5)
+points(new_point[1], new_point[2])
 ```
