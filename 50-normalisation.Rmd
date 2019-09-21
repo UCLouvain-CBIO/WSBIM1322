@@ -15,4 +15,19 @@ thousands).
 
 But what do you think would happen is we took the same sample, such as
 a suspension of U2OS cells (a cell line stemming from bone cancer),
-split it in two, and measured 
+split it in two, and measured it twice using the exact same protocol?
+Will the measurements be exactly identical? Why? These would be
+**technical replicates**.
+
+If we now take two independent different cell cultures of the same
+cell line, do you expect there to be larger, similar or smaller
+difference than in the examples above? One would refer to **biological
+replicates** in this case.
+
+- See technical replication in RNA-Seq paper from Irizayry group.
+- Find some data with tech and bio reps.
+
+Experiment aims at measuring biological variability comparing
+biological conditions in a controlled setting. The be able to measure
+any biologically signal in the data, the biological variability must
+be larger than the technical variability.
