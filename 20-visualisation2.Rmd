@@ -305,7 +305,7 @@ by signal reinforcement progressively segregates early mouse lineages
 
 
 ```{r gg4, fig.cap = "Modelling the relation between the expression of X1426642_at and X1418765_at."}
-library(rWSBIM1322)
+library("rWSBIM1322")
 data(hiiragi2013df1)
 ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at)) +
     geom_point(shape = 1) +
@@ -622,3 +622,36 @@ ggplot(barley, aes(x = yield, y = variety, colour = year)) +
 `r msmbstyle::question_begin()`
 Can you spot an issue with the data?
 `r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Write a function named `(gg)plot_probe_sets` that takes two probe sets
+and the `hiiragi2013df1` data (from the `rWSBIM1322` package) as input
+and produces a scatterplot. Your function should test if the provided
+probe sets are valid before producing the plot and inform
+otherwise. Below are some example outputs.
+
+```{r plot_probe_sets, echo = FALSE}
+plot_probe_sets <- function(x, y, data = hiiragi2013df1) {
+    stopifnot(x %in% colnames(hiiragi2013df1)[1:6])
+    stopifnot(y %in% colnames(hiiragi2013df1)[1:6])
+    plot(data[, x], data[, y], xlab = x, ylab = y)
+}
+ggplot_probe_sets <- function(x, y, data = hiiragi2013df1) {
+    stopifnot(x %in% colnames(hiiragi2013df1)[1:6])
+    stopifnot(y %in% colnames(hiiragi2013df1)[1:6])
+    ggplot(data = hiiragi2013df1,
+           aes(x = .data[[x]], y = .data[[y]])) +
+        geom_point()
+}
+```
+
+```{r visfun, fig.width = 8, echo = TRUE}
+plot_probe_sets("X1426642_at", "X1420085_at", data = hiiragi2013df1)
+ggplot_probe_sets("X1426642_at", "X1420085_at", data = hiiragi2013df1)
+try(plot_probe_sets("X1416967_at", "123_at"))
+```
+`r msmbstyle::question_end()`
+
+
