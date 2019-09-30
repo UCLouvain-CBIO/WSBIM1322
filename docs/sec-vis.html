@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-09-23" />
+<meta name="date" content="2019-09-30" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -144,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="toc"><a href="#visualising-2d-data"> Visualising 2D data</a></li>
 <li class="toc"><a href="#visualising-data-along-more-dimensions"> Visualising data along more dimensions</a></li>
 <li class="toc"><a href="#interactive-visualisation"> Interactive visualisation</a></li>
-<li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
+<li class="toc"><a href="#additional-exercises-1"> Additional exercises</a></li>
 </ul>
 <a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
 <a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
@@ -781,7 +781,9 @@ stacked next to each other.</p>
 <span id="cb29-2"><a href="sec-vis.html#cb29-2"></a>                            <span class="dt">stackdir =</span> <span class="st">"center"</span>, <span class="dt">stackratio =</span> <span class="fl">0.75</span>,</span>
 <span id="cb29-3"><a href="sec-vis.html#cb29-3"></a>                            <span class="kw">aes</span>(<span class="dt">color =</span> gene)) <span class="op">+</span></span>
 <span id="cb29-4"><a href="sec-vis.html#cb29-4"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
-<p>The beeswarm algorithms tries to avoid overlapping points.</p>
+<p>The beeswarm algorithms tries to avoid overlapping points: if a point
+were to overlap an existing point, it is shifted along the <span class="math inline">\(x\)</span>-axis
+by a small amount sufficient to avoid overlap.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sec-vis.html#cb30-1"></a><span class="kw">library</span>(<span class="st">"ggbeeswarm"</span>)</span>
 <span id="cb30-2"><a href="sec-vis.html#cb30-2"></a>beeplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_beeswarm</span>(<span class="kw">aes</span>(<span class="dt">color =</span> gene)) <span class="op">+</span></span>
 <span id="cb30-3"><a href="sec-vis.html#cb30-3"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
@@ -806,11 +808,11 @@ Figure 2.14: Showing all expression values using jittering (left), a dotplot (ce
 <span id="cb33-3"><a href="sec-vis.html#cb33-3"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sec-vis.html#cb34-1"></a>densplot <span class="op">+</span><span class="st"> </span>ecdfplot</span></code></pre></div>
 <div class="figure">
-<span id="fig:unnamed-chunk-3"></span>
+<span id="fig:unnamed-chunk-4"></span>
 <p class="caption marginnote shownote">
 Figure 2.15: Density and cumulative density functions of expression values.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-3-1.png" alt="Density and cumulative density functions of expression values." width="672">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-4-1.png" alt="Density and cumulative density functions of expression values." width="672">
 </div>
 </div>
 <div id="summary" class="section level3">
@@ -1003,7 +1005,7 @@ to the <code>plotly::ggplotly</code> function to generate an interactive figure.
 <span id="cb47-2"><a href="sec-vis.html#cb47-2"></a><span class="kw">ggplotly</span>(scp2)</span></code></pre></div>
 <p>See <a href="https://plot.ly/r" class="uri">https://plot.ly/r</a> for examples of interactive graphics online.</p>
 </div>
-<div id="additional-exercises" class="section level2">
+<div id="additional-exercises-1" class="section level2">
 <h2>
 <span class="header-section-number">2.9</span> Additional exercises</h2>
 <div class="question">
@@ -1064,7 +1066,7 @@ example.</p>
 <a href="sec-obj.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-09-23
+2019-09-30
 </p>
 </div>
 </div>

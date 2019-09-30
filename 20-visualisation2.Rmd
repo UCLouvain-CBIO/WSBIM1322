@@ -398,7 +398,10 @@ dotplot <- p + geom_dotplot(binaxis = "y", binwidth = 1/6,
     theme(legend.position = "none")
 ```
 
-The beeswarm algorithms tries to avoid overlapping points.
+The beeswarm algorithms tries to avoid overlapping points: if a point
+were to overlap an existing point, it is shifted along the $x$-axis
+by a small amount sufficient to avoid overlap.
+
 
 ```{r bee}
 library("ggbeeswarm")

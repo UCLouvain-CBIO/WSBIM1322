@@ -72,3 +72,50 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
   `if`/`else`
 - [Iteration](https://uclouvain-cbio.github.io/WSBIM1207/sec-prog.html#iteration):
   `for` loops and `apply` functions
+
+## Additional exercises
+
+
+
+`r msmbstyle::question_begin()`
+Read the `interro2.rds` from the `rWSBIM1207` package (version 0.1.9
+of later) file into R. The path to the file can be found with the
+`rWSBIM1207::interro2.rds()` function.
+
+This dataframe provides the scores for 4 tests for 10 students.
+
+- Write a function that calculates the average score for the 3 best
+  tests.
+- Calculate this average score for the 10 students.
+
+This can be done using the `apply` function or using `dplyr`
+functions. For the latter, see `rowwise()`
+
+`r msmbstyle::question_end()`
+
+
+```{r, include = FALSE}
+stopifnot(packageVersion("rWSBIM1207") >= "0.1.9")
+
+moy <- function(x) {
+    x <- sort(x, decreasing = TRUE)[1:3] ## gets rid of NAs
+    mean(x, na.rm = TRUE)
+}
+
+
+interro2 <- readRDS(rWSBIM1207::interro2.rds())
+interro2$m <- apply(interro2[, -1], 1, moy)
+
+
+interro2 <- readRDS(rWSBIM1207::interro2.rds())
+
+interro2 %>%
+    rowwise() %>%
+    mutate(m = moy(c(interro1, interro2, interro3, interro4)))
+
+interro2 %>%
+    gather(key = interro, value = score, -noma) %>%
+    group_by(noma) %>%
+    summarise(m = moy(score)) %>%
+    full_join(interro2)
+```
