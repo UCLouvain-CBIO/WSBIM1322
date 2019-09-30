@@ -270,10 +270,13 @@ print(gg)
 ```
 
 Let's immediately customise this visualisation to
+
 - highlight how to re-use the `gg` object without repeating the
   plotting code and
+  
 - how we can add additional (identical or different) *geoms* to a
   plot.
+
 
 ```{r gg3, fig.cap = "Adding another `geom_point` with its own (local) aesthetics. "}
 gg + geom_point(aes(colour = Run))
@@ -334,6 +337,7 @@ Gata6 and Sox2.
 selected_genes <- c(Fgf4 = "X1420085_at", Gata4 = "X1418863_at",
                     Gata6 = "X1425463_at",  Sox2 = "X1416967_at")
 dfx <- hiiragi2013df1[, selected_genes]
+colnames(dfx) <- names(selected_genes)
 ```
 
 ```{r gather}
@@ -579,7 +583,8 @@ following 4 variables.
 - `yield` Yield (averaged across three blocks) in bushels/acre.
 
 - `variety` Factor with levels `Svansota`, `No. 462`, `Manchuria`,
-  `No. 475`, `Velvet`, `Peatland`, `Glabron`, `No. 457`,`Wisconsin No. 38`, `Trebi`.
+  `No. 475`, `Velvet`, `Peatland`, `Glabron`, `No. 457`, `Wisconsin No. 38`
+  and `Trebi`.
 
 - `year` Factor with levels `1932` and `1931`.
 

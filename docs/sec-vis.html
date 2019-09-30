@@ -503,7 +503,11 @@ Figure 2.6: Saving and printing an object.
 </p>
 <img src="WSBIM1322_files/figure-html/ggobj-1.png" alt="Saving and printing an object." width="672">
 </div>
-<p>Let’s immediately customise this visualisation to - highlight how to re-use the <code>gg</code> object without repeating the plotting code and - how we can add additional (identical or different) <em>geoms</em> to a plot.</p>
+<p>Let’s immediately customise this visualisation to</p>
+<ul>
+<li><p>highlight how to re-use the <code>gg</code> object without repeating the plotting code and</p></li>
+<li><p>how we can add additional (identical or different) <em>geoms</em> to a plot.</p></li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gg <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> Run))</code></pre></div>
 <div class="figure">
 <span id="fig:gg3"></span>
@@ -573,24 +577,26 @@ Figure 2.10: Modelling the relation between the expression of X1426642_at and X1
 <p>First, we convert a microarray gene expression data to a data.frame, fit for some <code>ggplot2</code> visualisation, focusing on genes Fgf4, Gata4, Gata6 and Sox2.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">selected_genes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Fgf4 =</span> <span class="st">"X1420085_at"</span>, <span class="dt">Gata4 =</span> <span class="st">"X1418863_at"</span>,
                     <span class="dt">Gata6 =</span> <span class="st">"X1425463_at"</span>,  <span class="dt">Sox2 =</span> <span class="st">"X1416967_at"</span>)
-dfx &lt;-<span class="st"> </span>hiiragi2013df1[, selected_genes]</code></pre></div>
+dfx &lt;-<span class="st"> </span>hiiragi2013df1[, selected_genes]
+<span class="kw">colnames</span>(dfx) &lt;-<span class="st"> </span><span class="kw">names</span>(selected_genes)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"dplyr"</span>)
 <span class="kw">library</span>(<span class="st">"tidyr"</span>)
 genes &lt;-<span class="st"> </span><span class="kw">gather</span>(dfx, <span class="dt">key =</span> <span class="st">"gene"</span>, <span class="dt">value =</span> <span class="st">"expression"</span>)
 <span class="kw">head</span>(genes)</code></pre></div>
-<pre><code>##          gene expression
-## 1 X1420085_at   3.027715
-## 2 X1420085_at   9.293016
-## 3 X1420085_at   2.940142
-## 4 X1420085_at   9.715243
-## 5 X1420085_at   8.924228
-## 6 X1420085_at  11.325952</code></pre>
+<pre><code>##   gene expression
+## 1 Fgf4   3.027715
+## 2 Fgf4   9.293016
+## 3 Fgf4   2.940142
+## 4 Fgf4   9.715243
+## 5 Fgf4   8.924228
+## 6 Fgf4  11.325952</code></pre>
 <div id="histogram" class="section level3">
 <h3>
 <span class="header-section-number">2.4.1</span> Histogram</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genes <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">filter</span>(gene <span class="op">==</span><span class="st"> "Gata4"</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <div class="figure">
 <span id="fig:hist"></span>
 <p class="caption marginnote shownote">
@@ -871,7 +877,7 @@ scp2 &lt;-<span class="st"> </span>scp <span class="op">+</span><span class="st"
 <p>Load the <code>barley</code> data that comes with the <code>lattice</code> package (that is already installed on your computer). The data describe the yield from a Minnesota barley trial as a data frame with 120 observations on the following 4 variables.</p>
 <ul>
 <li><p><code>yield</code> Yield (averaged across three blocks) in bushels/acre.</p></li>
-<li><p><code>variety</code> Factor with levels <code>Svansota</code>, <code>No. 462</code>, <code>Manchuria</code>, <code>No. 475</code>, <code>Velvet</code>, <code>Peatland</code>, <code>Glabron</code>, <code>No. 457</code>,<code>Wisconsin No. 38</code>, <code>Trebi</code>.</p></li>
+<li><p><code>variety</code> Factor with levels <code>Svansota</code>, <code>No. 462</code>, <code>Manchuria</code>, <code>No. 475</code>, <code>Velvet</code>, <code>Peatland</code>, <code>Glabron</code>, <code>No. 457</code>, <code>Wisconsin No. 38</code> and <code>Trebi</code>.</p></li>
 <li><p><code>year</code> Factor with levels <code>1932</code> and <code>1931</code>.</p></li>
 <li><p><code>site</code> Factor with 6 levels: <code>Grand Rapids</code>, <code>Duluth</code>, <code>University Farm</code>, <code>Morris</code>, <code>Crookston</code>, <code>Waseca</code>.</p></li>
 </ul>
