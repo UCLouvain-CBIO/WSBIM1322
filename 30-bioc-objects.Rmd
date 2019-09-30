@@ -509,7 +509,7 @@ se
 `r msmbstyle::question_begin()`
 
 Using the function `kem2.tsv` from the `rWSBIM1207` package, import
-the cout and annotation data into R and use them to create an object
+the *count* and *annotation* data into R and use them to create an object
 of class `SummarizedExperiment`.
 `r msmbstyle::question_end()`
 

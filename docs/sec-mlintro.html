@@ -231,7 +231,7 @@ what the experiment measures using a table.</p>
 ► Solution<span id="sol-start-23" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-23', 'sol-start-23')"></span>
 </p>
 <div id="sol-body-23" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="sec-mlintro.html#cb189-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(expd)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="sec-mlintro.html#cb190-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(expd)</span></code></pre></div>
 <table>
 <thead><tr class="header">
 <th align="left">sample</th>
@@ -408,14 +408,14 @@ the <code>cor</code> function.</p>
 ► Solution<span id="sol-start-24" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-24', 'sol-start-24')"></span>
 </p>
 <div id="sol-body-24" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="sec-mlintro.html#cb190-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
-<span id="cb190-2"><a href="sec-mlintro.html#cb190-2"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
-<span id="cb190-3"><a href="sec-mlintro.html#cb190-3"></a></span>
-<span id="cb190-4"><a href="sec-mlintro.html#cb190-4"></a><span class="co">## fit linear model</span></span>
-<span id="cb190-5"><a href="sec-mlintro.html#cb190-5"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
-<span id="cb190-6"><a href="sec-mlintro.html#cb190-6"></a></span>
-<span id="cb190-7"><a href="sec-mlintro.html#cb190-7"></a><span class="co">## slope</span></span>
-<span id="cb190-8"><a href="sec-mlintro.html#cb190-8"></a>fit</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sec-mlintro.html#cb191-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb191-2"><a href="sec-mlintro.html#cb191-2"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb191-3"><a href="sec-mlintro.html#cb191-3"></a></span>
+<span id="cb191-4"><a href="sec-mlintro.html#cb191-4"></a><span class="co">## fit linear model</span></span>
+<span id="cb191-5"><a href="sec-mlintro.html#cb191-5"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb191-6"><a href="sec-mlintro.html#cb191-6"></a></span>
+<span id="cb191-7"><a href="sec-mlintro.html#cb191-7"></a><span class="co">## slope</span></span>
+<span id="cb191-8"><a href="sec-mlintro.html#cb191-8"></a>fit</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x)
@@ -423,17 +423,17 @@ the <code>cor</code> function.</p>
 ## Coefficients:
 ## (Intercept)            x  
 ##     0.03864      0.09221</code></pre>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="sec-mlintro.html#cb192-1"></a><span class="co">## correlation</span></span>
-<span id="cb192-2"><a href="sec-mlintro.html#cb192-2"></a><span class="kw">cor</span>(x, y)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="sec-mlintro.html#cb193-1"></a><span class="co">## correlation</span></span>
+<span id="cb193-2"><a href="sec-mlintro.html#cb193-2"></a><span class="kw">cor</span>(x, y)</span></code></pre></div>
 <pre><code>## [1] 0.08567754</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sec-mlintro.html#cb194-1"></a><span class="co">## with base graphics</span></span>
-<span id="cb194-2"><a href="sec-mlintro.html#cb194-2"></a><span class="kw">plot</span>(x, y)</span>
-<span id="cb194-3"><a href="sec-mlintro.html#cb194-3"></a><span class="kw">abline</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="sec-mlintro.html#cb195-1"></a><span class="co">## with base graphics</span></span>
+<span id="cb195-2"><a href="sec-mlintro.html#cb195-2"></a><span class="kw">plot</span>(x, y)</span>
+<span id="cb195-3"><a href="sec-mlintro.html#cb195-3"></a><span class="kw">abline</span>(fit)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/corex1-1.png" width="672"></p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="sec-mlintro.html#cb195-1"></a><span class="co">## or with ggplot2</span></span>
-<span id="cb195-2"><a href="sec-mlintro.html#cb195-2"></a><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(x, y),</span>
-<span id="cb195-3"><a href="sec-mlintro.html#cb195-3"></a>       <span class="kw">aes</span>(x, y)) <span class="op">+</span></span>
-<span id="cb195-4"><a href="sec-mlintro.html#cb195-4"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"lm"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sec-mlintro.html#cb196-1"></a><span class="co">## or with ggplot2</span></span>
+<span id="cb196-2"><a href="sec-mlintro.html#cb196-2"></a><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(x, y),</span>
+<span id="cb196-3"><a href="sec-mlintro.html#cb196-3"></a>       <span class="kw">aes</span>(x, y)) <span class="op">+</span></span>
+<span id="cb196-4"><a href="sec-mlintro.html#cb196-4"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"lm"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/corex1-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -474,17 +474,17 @@ data?</p>
 ► Solution<span id="sol-start-25" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-25', 'sol-start-25')"></span>
 </p>
 <div id="sol-body-25" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sec-mlintro.html#cb196-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb196-2"><a href="sec-mlintro.html#cb196-2"></a>rs &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">cor</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>)))</span>
-<span id="cb196-3"><a href="sec-mlintro.html#cb196-3"></a><span class="kw">summary</span>(rs)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="sec-mlintro.html#cb197-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb197-2"><a href="sec-mlintro.html#cb197-2"></a>rs &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">cor</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>)))</span>
+<span id="cb197-3"><a href="sec-mlintro.html#cb197-3"></a><span class="kw">summary</span>(rs)</span></code></pre></div>
 <pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
 ## -0.8194367 -0.2280550 -0.0009475  0.0055000  0.2118503  0.7977295</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sec-mlintro.html#cb198-1"></a><span class="co">## Assuming a totally arbitrary value of 0.75, we would get</span></span>
-<span id="cb198-2"><a href="sec-mlintro.html#cb198-2"></a>rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="sec-mlintro.html#cb199-1"></a><span class="co">## Assuming a totally arbitrary value of 0.75, we would get</span></span>
+<span id="cb199-2"><a href="sec-mlintro.html#cb199-2"></a>rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>]</span></code></pre></div>
 <pre><code>## [1]  0.7941876  0.7977295 -0.8194367</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="sec-mlintro.html#cb200-1"></a><span class="kw">hist</span>(rs)</span>
-<span id="cb200-2"><a href="sec-mlintro.html#cb200-2"></a><span class="kw">rug</span>(rs)</span>
-<span id="cb200-3"><a href="sec-mlintro.html#cb200-3"></a><span class="kw">abline</span>(<span class="dt">v =</span> rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>], <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="sec-mlintro.html#cb201-1"></a><span class="kw">hist</span>(rs)</span>
+<span id="cb201-2"><a href="sec-mlintro.html#cb201-2"></a><span class="kw">rug</span>(rs)</span>
+<span id="cb201-3"><a href="sec-mlintro.html#cb201-3"></a><span class="kw">abline</span>(<span class="dt">v =</span> rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>], <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/corex2-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -497,11 +497,11 @@ measuring distances between all the samples, or each sample to a
 virtual <em>average sample</em>. Let’s try this ourselves for a dataset of 5
 sample that have each been characterised by measuring the expression
 of genes<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="sec-mlintro.html#cb201-1"></a><span class="kw">set.seed</span>(<span class="dv">111</span>)</span>
-<span id="cb201-2"><a href="sec-mlintro.html#cb201-2"></a>samples &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb201-3"><a href="sec-mlintro.html#cb201-3"></a>                      <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb201-4"><a href="sec-mlintro.html#cb201-4"></a><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</span>
-<span id="cb201-5"><a href="sec-mlintro.html#cb201-5"></a><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="sec-mlintro.html#cb202-1"></a><span class="kw">set.seed</span>(<span class="dv">111</span>)</span>
+<span id="cb202-2"><a href="sec-mlintro.html#cb202-2"></a>samples &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb202-3"><a href="sec-mlintro.html#cb202-3"></a>                      <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
+<span id="cb202-4"><a href="sec-mlintro.html#cb202-4"></a><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb202-5"><a href="sec-mlintro.html#cb202-5"></a><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span></code></pre></div>
 <div class="figure">
 <span id="fig:dist0"></span>
 <p class="caption marginnote shownote">
@@ -513,7 +513,7 @@ Figure 6.5: A simulated dataset composed of 5 samples.
 calculating all pairwise <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean
 distances</a> with the
 <code>dist</code>.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="sec-mlintro.html#cb202-1"></a><span class="kw">dist</span>(samples)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="sec-mlintro.html#cb203-1"></a><span class="kw">dist</span>(samples)</span></code></pre></div>
 <pre><code>##           1         2         3         4
 ## 2 1.7327389                              
 ## 3 1.2738181 0.4876129                    
@@ -566,18 +566,18 @@ real data points.</li>
 ► Solution<span id="sol-start-26" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-26', 'sol-start-26')"></span>
 </p>
 <div id="sol-body-26" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="sec-mlintro.html#cb204-1"></a>avg_sample &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samples)</span>
-<span id="cb204-2"><a href="sec-mlintro.html#cb204-2"></a><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</span>
-<span id="cb204-3"><a href="sec-mlintro.html#cb204-3"></a><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
-<span id="cb204-4"><a href="sec-mlintro.html#cb204-4"></a><span class="kw">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="sec-mlintro.html#cb205-1"></a>avg_sample &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samples)</span>
+<span id="cb205-2"><a href="sec-mlintro.html#cb205-2"></a><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb205-3"><a href="sec-mlintro.html#cb205-3"></a><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb205-4"><a href="sec-mlintro.html#cb205-4"></a><span class="kw">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/dist2-1.png" width="672"></p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="sec-mlintro.html#cb205-1"></a>dists &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">rbind</span>(samples, avg_sample))</span>
-<span id="cb205-2"><a href="sec-mlintro.html#cb205-2"></a><span class="co">## convert the object of `dist` to a matrix that we can subset easily</span></span>
-<span id="cb205-3"><a href="sec-mlintro.html#cb205-3"></a>dists &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(dists)</span>
-<span id="cb205-4"><a href="sec-mlintro.html#cb205-4"></a>dists[<span class="dv">6</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="sec-mlintro.html#cb206-1"></a>dists &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">rbind</span>(samples, avg_sample))</span>
+<span id="cb206-2"><a href="sec-mlintro.html#cb206-2"></a><span class="co">## convert the object of `dist` to a matrix that we can subset easily</span></span>
+<span id="cb206-3"><a href="sec-mlintro.html#cb206-3"></a>dists &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(dists)</span>
+<span id="cb206-4"><a href="sec-mlintro.html#cb206-4"></a>dists[<span class="dv">6</span>, ]</span></code></pre></div>
 <pre><code>##         1         2         3         4         5         6 
 ## 1.2133510 0.7753119 0.3627020 1.7363209 0.4858024 0.0000000</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="sec-mlintro.html#cb207-1"></a><span class="kw">which.max</span>(dists[<span class="dv">6</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="sec-mlintro.html#cb208-1"></a><span class="kw">which.max</span>(dists[<span class="dv">6</span>, ])</span></code></pre></div>
 <pre><code>## 4 
 ## 4</code></pre>
 <p class="solution-end">
@@ -606,16 +606,16 @@ uniformely distributed points that are outliers. In 50 dimension,
 there are already 60% of the points that are outliers; in 100
 dimensions, almost 90% of the points are outliers.</p>
 </blockquote>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="sec-mlintro.html#cb209-1"></a>d &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">200</span></span>
-<span id="cb209-2"><a href="sec-mlintro.html#cb209-2"></a>N &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb209-3"><a href="sec-mlintro.html#cb209-3"></a>dat &lt;-<span class="st"> </span><span class="kw">lapply</span>(d, <span class="cf">function</span>(i) <span class="kw">replicate</span>(i, <span class="kw">runif</span>(N)))</span>
-<span id="cb209-4"><a href="sec-mlintro.html#cb209-4"></a>nout &lt;-<span class="st"> </span><span class="cf">function</span>(m) <span class="kw">mean</span>(<span class="kw">apply</span>(m, <span class="dv">1</span>, <span class="cf">function</span>(i) <span class="kw">any</span>(i <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.01</span> <span class="op">|</span><span class="st"> </span>i <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.99</span>)))</span>
-<span id="cb209-5"><a href="sec-mlintro.html#cb209-5"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(dat, nout)</span>
-<span id="cb209-6"><a href="sec-mlintro.html#cb209-6"></a><span class="kw">plot</span>(res, <span class="dt">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb209-7"><a href="sec-mlintro.html#cb209-7"></a>     <span class="dt">xlab =</span> <span class="st">"Number of dimensions"</span>,</span>
-<span id="cb209-8"><a href="sec-mlintro.html#cb209-8"></a>     <span class="dt">ylab =</span> <span class="st">"Proportion of 1% outliers"</span>,</span>
-<span id="cb209-9"><a href="sec-mlintro.html#cb209-9"></a>     <span class="dt">main =</span> <span class="st">"Curse of Dimensionality"</span>)</span>
-<span id="cb209-10"><a href="sec-mlintro.html#cb209-10"></a><span class="kw">grid</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="sec-mlintro.html#cb210-1"></a>d &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">200</span></span>
+<span id="cb210-2"><a href="sec-mlintro.html#cb210-2"></a>N &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb210-3"><a href="sec-mlintro.html#cb210-3"></a>dat &lt;-<span class="st"> </span><span class="kw">lapply</span>(d, <span class="cf">function</span>(i) <span class="kw">replicate</span>(i, <span class="kw">runif</span>(N)))</span>
+<span id="cb210-4"><a href="sec-mlintro.html#cb210-4"></a>nout &lt;-<span class="st"> </span><span class="cf">function</span>(m) <span class="kw">mean</span>(<span class="kw">apply</span>(m, <span class="dv">1</span>, <span class="cf">function</span>(i) <span class="kw">any</span>(i <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.01</span> <span class="op">|</span><span class="st"> </span>i <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.99</span>)))</span>
+<span id="cb210-5"><a href="sec-mlintro.html#cb210-5"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(dat, nout)</span>
+<span id="cb210-6"><a href="sec-mlintro.html#cb210-6"></a><span class="kw">plot</span>(res, <span class="dt">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb210-7"><a href="sec-mlintro.html#cb210-7"></a>     <span class="dt">xlab =</span> <span class="st">"Number of dimensions"</span>,</span>
+<span id="cb210-8"><a href="sec-mlintro.html#cb210-8"></a>     <span class="dt">ylab =</span> <span class="st">"Proportion of 1% outliers"</span>,</span>
+<span id="cb210-9"><a href="sec-mlintro.html#cb210-9"></a>     <span class="dt">main =</span> <span class="st">"Curse of Dimensionality"</span>)</span>
+<span id="cb210-10"><a href="sec-mlintro.html#cb210-10"></a><span class="kw">grid</span>()</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/curse-1.png" width="672"></p>
 </div>
 <div id="machine-learning" class="section level2">
