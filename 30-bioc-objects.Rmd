@@ -20,7 +20,7 @@ online](https://adv-r.hadley.nz/)). In the *R refresher* chapter
 efficiently used in many situations. Sometimes, however, these aren't
 enough.
 
-We have also use object, for example in chapter 2 \@ref(sec:vis), when
+We have also use object, for example in chapter \@ref(sec:vis), when
 generating ggplot visualisation. We have seen that it is possible to
 store the output of `ggplot2` in a variable, that contain all the data
 and information necessary to produce the figure.
