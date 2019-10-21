@@ -505,8 +505,7 @@ that.</p>
 </p>
 <div class="question-body">
 <p>Query the object for basic properties, e.g., it’s <code>length()</code> and that
-the number of characters in each sequence is 2000
-<code>unique(nchar(dna))</code>.</p>
+number of character in each sequence (try <code>table(nchar(dna))</code>).</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -531,109 +530,14 @@ matrix with 1 column.</p>
 </p>
 <div id="sol-body-19" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sec-biostrings.html#cb166-1"></a>gc_content &lt;-<span class="st"> </span><span class="kw">letterFrequency</span>(dna, <span class="dt">letters =</span> <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb166-2"><a href="sec-biostrings.html#cb166-2"></a>gc_content</span></code></pre></div>
-<pre><code>##                G|C
-##     [1,] 0.3785000
-##     [2,] 0.4300000
-##     [3,] 0.4300000
-##     [4,] 0.4300000
-##     [5,] 0.4300000
-##     [6,] 0.4300000
-##     [7,] 0.4300000
-##     [8,] 0.4300000
-##     [9,] 0.4300000
-##    [10,] 0.4300000
-##    [11,] 0.3645000
-##    [12,] 0.3645000
-##    [13,] 0.3785000
-##    [14,] 0.3785000
-##    [15,] 0.3785000
-##    [16,] 0.3785000
-##    [17,] 0.3785000
-##    [18,] 0.3930000
-##    [19,] 0.3785000
-##    [20,] 0.3785000
-##    [21,] 0.3785000
-##    [22,] 0.3775000
-##    [23,] 0.3775000
-##    [24,] 0.3775000
-##    [25,] 0.3785000
-##    [26,] 0.3785000
-##    [27,] 0.3790000
-##    [28,] 0.3625000
-##    [29,] 0.3930000
-##    [30,] 0.3930000
-##    [31,] 0.3785000
-##    [32,] 0.4010000
-##    [33,] 0.4010000
-##    [34,] 0.3550000
-##    [35,] 0.3550000
-##    [36,] 0.3790000
-##    [37,] 0.3550000
-##    [38,] 0.3790000
-##    [39,] 0.4230000
-##    [40,] 0.3820000
-##    [41,] 0.3875000
-##    [42,] 0.3875000
-##    [43,] 0.3875000
-##    [44,] 0.4440000
-##    [45,] 0.4440000
-##    [46,] 0.4440000
-##    [47,] 0.4440000
-##    [48,] 0.3875000
-##    [49,] 0.3665000
-##    [50,] 0.4530000
-##    [51,] 0.3240000
-##    [52,] 0.4240000
-##    [53,] 0.4240000
-##    [54,] 0.3360000
-##    [55,] 0.4035000
-##    [56,] 0.4660000
-##    [57,] 0.3995000
-##    [58,] 0.3995000
-##    [59,] 0.3950000
-##    [60,] 0.3995000
-##    [61,] 0.3835000
-##    [62,] 0.3240000
-##    [63,] 0.3360000
-##    [64,] 0.3360000
-##    [65,] 0.3950000
-##    [66,] 0.3360000
-##    [67,] 0.4240000
-##    [68,] 0.3985000
-##    [69,] 0.5060000
-##    [70,] 0.5060000
-##    [71,] 0.4505000
-##    [72,] 0.4105000
-##    [73,] 0.3980000
-##    [74,] 0.3985000
-##    [75,] 0.3985000
-##    [76,] 0.3965000
-##    [77,] 0.4070000
-##    [78,] 0.4070000
-##    [79,] 0.4245000
-##    [80,] 0.3680000
-##    [81,] 0.3595000
-##    [82,] 0.3850000
-##    [83,] 0.3915000
-##    [84,] 0.3965000
-##    [85,] 0.3900000
-##    [86,] 0.3920000
-##    [87,] 0.3920000
-##    [88,] 0.4805000
-##    [89,] 0.4805000
-##    [90,] 0.4220000
-##    [91,] 0.4340000
-##    [92,] 0.4340000
-##    [93,] 0.4290000
-##    [94,] 0.4190000
-##    [95,] 0.4520000
-##    [96,] 0.3425000
-##    [97,] 0.4450000
-##    [98,] 0.4600000
-##    [99,] 0.4560000
-##   [100,] 0.3920000
-##  [ reached getOption("max.print") -- omitted 26354 rows ]</code></pre>
+<span id="cb166-2"><a href="sec-biostrings.html#cb166-2"></a><span class="kw">head</span>(gc_content)</span></code></pre></div>
+<pre><code>##         G|C
+## [1,] 0.3785
+## [2,] 0.4300
+## [3,] 0.4300
+## [4,] 0.4300
+## [5,] 0.4300
+## [6,] 0.4300</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -645,7 +549,7 @@ matrix with 1 column.</p>
 </p>
 <div class="question-body">
 <p>What are the mean and standard deviation of the GC contents in the 26454 genes?
-What genes(s) has the highes GC content?</p>
+What genes(s) has/have the highes GC content?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>

@@ -231,9 +231,10 @@ dna
 
 
 `r msmbstyle::question_begin()`
+
 Query the object for basic properties, e.g., it's `length()` and that
-the number of characters in each sequence is 2000
-`unique(nchar(dna))`.
+number of character in each sequence (try `table(nchar(dna))`).
+
 `r msmbstyle::question_end()`
 
 
@@ -247,14 +248,14 @@ matrix with 1 column.
 `r msmbstyle::solution_begin()`
 ```{r letterfreqex1}
 gc_content <- letterFrequency(dna, letters = "GC", as.prob = TRUE)
-gc_content
+head(gc_content)
 ```
 `r msmbstyle::solution_end()`
 
 
 `r msmbstyle::question_begin()`
 What are the mean and standard deviation of the GC contents in the `r length(dna)` genes?
-What genes(s) has the highes GC content?
+What genes(s) has/have the highes GC content?
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
