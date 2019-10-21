@@ -1,9 +1,9 @@
-# Data normalisation: centering, scaling, quantile normalisation {#sec:norm}
+# Data normalisation: centring, scaling, quantile normalisation {#sec:norm}
 
 **Learning objectives**
 
 - What is data normalisation and why do we need it?
-- What are centering and scaling?
+- What are centring and scaling?
 - What is quantile normalisation?
 - How to assess if normalisation worked.
 
@@ -25,8 +25,8 @@ cell line, do you expect there to be larger, similar or smaller
 difference than in the examples above? One would refer to **biological
 replicates** in this case.
 
-- See technical replication in RNA-Seq paper from Irizayry group.
-- Find some data with tech and bio reps.
+<!-- - See technical replication in RNA-Seq paper from Irizayry group. -->
+<!-- - Find some data with tech and bio reps. -->
 
 Experiments aim at measuring biological variability by comparing
 biological conditions in a controlled setting. The be able to measure
@@ -38,21 +38,18 @@ be larger than the technical variability.
 ## Centring and scaling
 
 
-### Generating data
-
-
 `r msmbstyle::question_begin()`
 We are going to start by generating a data set to precisely illustrate
 the effect of the methods.
 
-1. Use the `rnorm()` function to generate a distrubition of 1000
+1. Use the `rnorm()` function to generate a distribution of 1000
    values centred around 0 and with a standard deviation
    of 2. Visualise these data.
 
 2. Generate four such distribution with parameters *N(6, 2)*,
    *N(4,2)*, *N(4, 1)*, *N(7, 3)* and create a matrix or dataframe
    with rownames `gene1` to `gene1000` and colnames `sample1` to
-   `sample4`. Visualise these data and disucss whether these samples
+   `sample4`. Visualise these data and discuss whether these samples
    could be compared against each other. Do assure replication of this
    simulation, set the random number generation seed to 123.
 `r msmbstyle::question_end()`
@@ -72,14 +69,14 @@ boxplot(x)
 `r msmbstyle::solution_end()`
 
 
-Centering refers to the action of modifying the mean value of a set of
-values by subtracting a fixed value from each indivual value. On the
+**Centring** refers to the operation of modifying the mean value of a set of
+values by subtracting a fixed value from each individual value. On the
 figure above, this equates to shifting the values up to down. A
 typical value is the mean of all the data to be centred.
 
 `r msmbstyle::question_begin()`
 For each column, calculate its mean value and subtract it from the
-values. Visualise and interprete the centred data.
+values. Visualise and interpret the centred data.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
@@ -90,3 +87,5 @@ for (i in 1:ncol(x))
 boxplot(x)
 ```
 `r msmbstyle::solution_end()`
+
+**Scaling** refers to the operation of

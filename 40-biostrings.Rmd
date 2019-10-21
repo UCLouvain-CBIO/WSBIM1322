@@ -368,14 +368,16 @@ the average. max and min length of the proteins?
 `r msmbstyle::question_end()`
 
 
-`r msmbstyle::solution_begin()`
-```{r pattern1}
-library("Biostrings")
-up <- readAAStringSet("./data/uniprot-proteome_UP000005640_reviewed.fasta.gz")
-length(up)
-summary(width(up))
-```
-`r msmbstyle::solution_end()`
+<!-- `r msmbstyle::solution_begin()` -->
+<!-- ```{r pattern1} -->
+<!-- library("Biostrings") -->
+<!-- ## this line assumes that the uniprot database resides in the data -->
+<!-- ## directory in the RStudio project -->
+<!-- up <- readAAStringSet("./data/uniprot-proteome_UP000005640_reviewed.fasta.gz") -->
+<!-- length(up) -->
+<!-- summary(width(up)) -->
+<!-- ``` -->
+<!-- `r msmbstyle::solution_end()` -->
 
 
 `r msmbstyle::question_begin()`
@@ -386,18 +388,19 @@ identifiers from that vector and the names of the `AAStringSet`
 above.
 `r msmbstyle::question_end()`
 
-`r msmbstyle::solution_begin()`
-```{r pattern2, message = FALSE}
-library("rWSBIM1322")
-data(up_selected)
-head(up_selected)
-names(up)
-## update names to match the uniprot identifier
-names(up) <- sub("\\|.+$", "", sub("^sp\\|", "", names(up)))
-## only those in up_selected
-up2 <- up[names(up) %in% up_selected]
-```
-`r msmbstyle::solution_end()`
+<!-- `r msmbstyle::solution_begin()` -->
+<!-- ```{r pattern2, message = FALSE} -->
+<!-- library("rWSBIM1322") -->
+<!-- data(up_selected) -->
+<!-- head(up_selected) -->
+<!-- head(names(up)) -->
+<!-- ## update names to match the uniprot identifier -->
+<!-- names(up) <- sub("\\|.+$", "", sub("^sp\\|", "", names(up))) -->
+<!-- ## only those in up_selected -->
+<!-- up2 <- up[names(up) %in% up_selected] -->
+<!-- up2 -->
+<!-- ``` -->
+<!-- `r msmbstyle::solution_end()` -->
 
 `r msmbstyle::question_begin()`
 Among the proteins of interest (that where also found in the original
@@ -412,18 +415,21 @@ define *letter D or E* as `[DE]`. To find the pattern of interest, use
 the `str_detect` function from the `stringi` package.
 `r msmbstyle::question_end()`
 
-`r msmbstyle::solution_begin()`
-```{r pattern3}
-library("stringi")
-## Which ones have the pattern?
-sel <- str_detect(as.character(up2), "[DE][DE]VF")
-table(sel)
-sum(sel)/length(up2) * 100
-up3 <- up2[sel]
-elementMetadata(up3)$n_pattern <- str_count(as.character(up3), "[DE][DE]VF")
-elementMetadata(up3)$start <- str_locate(as.character(up3), "[DE][DE]VF")[, 1]
-```
-`r msmbstyle::solution_end()`
+<!-- `r msmbstyle::solution_begin()` -->
+<!-- ```{r pattern3} -->
+<!-- library("stringi") -->
+<!-- ## Which ones have the pattern? -->
+<!-- sel <- str_detect(as.character(up2), "[DE][DE]VF") -->
+<!-- table(sel) -->
+<!-- sum(sel)/length(up2) * 100 -->
+<!-- up3 <- up2[sel] -->
+
+<!-- ## optional, to record the number and position of the matches -->
+<!-- elementMetadata(up3)$n_pattern <- str_count(as.character(up3), "[DE][DE]VF") -->
+<!-- elementMetadata(up3)$start <- str_locate(as.character(up3), "[DE][DE]VF")[, 1] -->
+<!-- ``` -->
+<!-- `r msmbstyle::solution_end()` -->
+
 
 `r msmbstyle::question_begin()`
 To assess if there is an overrepresentation of that pattern in the
@@ -431,10 +437,13 @@ sequences of interest, repeat the calculation on all the other
 proteins.
 `r msmbstyle::question_end()`
 
-`r msmbstyle::solution_begin()`
-```{r pattern4}
-up4 <- up[!names(up) %in% up_selected]
-sel4 <- str_detect(as.character(up4), "[DE][DE]VF")
-sum(sel4)/length(up4) * 100
-```
-`r msmbstyle::solution_end()`
+
+<!-- `r msmbstyle::solution_begin()` -->
+
+<!-- ```{r pattern4} -->
+<!-- up4 <- up[!names(up) %in% up_selected] -->
+<!-- sel4 <- str_detect(as.character(up4), "[DE][DE]VF") -->
+<!-- sum(sel4)/length(up4) * 100 -->
+<!-- ``` -->
+
+<!-- `r msmbstyle::solution_end()` -->
