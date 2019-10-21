@@ -290,12 +290,12 @@ p + geom_density()
 `r msmbstyle::solution_end()`
 
 
-## Tidy _Bioconductor_?
+## Tidy Bioconductor
 
 Although _Bioconductor_ emphasizes formal objects like `DNAStringSet`
-rather than `tibble`-like data frames, some of the ways one interacts
-with tidy data can be applied to _Bioconductor_ objects. For instance,
-the GC content example might be written in 'traditional' form as
+rather than `tibble`-like data frames, some of the ways one interacts with tidy data can be
+applied to Bioconductor objects. For instance, the GC content example
+might be written in 'traditional' form as
 
 ```{r}
 gc <- letterFrequency(dna, "GC", as.prob = TRUE)
@@ -303,6 +303,7 @@ gc <- letterFrequency(dna, "GC", as.prob = TRUE)
 
 but could be written using pipes and to reesult in a tibble for easier
 down-stream manipulation
+
 
 ```{r}
 gc <-
@@ -312,9 +313,48 @@ gc <-
 gc
 ```
 
+## Subsetting sequences
 
+As `[` is used to subset a `DNAStringSet`, it can't be used to take
+substrings of a sequence. This can be done by 
+
+- creating a new `DNAStringSet` (or `DNAString` for only one sequence)
+  object and specifying start or end positions, or their width or
+  nchar:
+
+```{r}
+DNAStringSet(dna, start = 1, end = 100)
+DNAStringSet(dna, start = 1, width = 100)
+DNAString(dna[[1]], start = 1, nchar = 10)
+```
+
+- or by using the `subseq` function:
+
+```{r}
+subseq(dna, start = 1, end = 100)
+subseq(dna, start = 1, width = 100)
+subseq(dna[[1]], start = 1, end = 10)
+subseq(dna[[1]], start = 1, width = 10)
+```
+
+`r msmbstyle::question_begin()`
+The start, end and with arguments can be vector of length > 1
+themselves so as to generate sequences of different lengths. Create a
+new object that contains subsets of the first sequence of `dna` with,
+respectively nucleotides 1 to 1, 1 to 2, 1 to 3, ..., 1 to 10.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r subseqsln}
+dna[rep(1, 10)] %>%               # DNAStringSet with first sequence 10 times
+    subseq(start = 1, end = 1:10) # subsequences of 1, 2, ... 10 nucleotides
+```
+`r msmbstyle::solution_end()`
+ 
 ## Working with genomes
-
+ 
+ 
 `BSgenome` packages inside Bioconductor contain whole genome sequences
 as distributed by ENSEMBL, NCBI and others. In this next example we
 will load the whole genome sequence for Homo sapiens from UCSC's hg19

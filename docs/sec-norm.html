@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
@@ -52,68 +52,41 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 
@@ -175,25 +148,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="introduction-2" class="section level2">
 <h2>
 <span class="header-section-number">5.1</span> Introduction</h2>
-<p>In a typical high throughput experiment, we assay thousands of
-features (gene transcripts, proteins, metabolites, …) is a certain
-number of biologically diverse samples (from about 6 to hundreds of
-thousands).</p>
-<p>But what do you think would happen is we took the same sample, such as
-a suspension of U2OS cells (a cell line stemming from bone cancer),
-split it in two, and measured it twice using the exact same protocol?
-Will the measurements be exactly identical? Why? These would be
-<strong>technical replicates</strong>.</p>
-<p>If we now take two independent different cell cultures of the same
-cell line, do you expect there to be larger, similar or smaller
-difference than in the examples above? One would refer to <strong>biological
-replicates</strong> in this case.</p>
+<p>In a typical high throughput experiment, we assay thousands of features (gene transcripts, proteins, metabolites, …) is a certain number of biologically diverse samples (from about 6 to hundreds of thousands).</p>
+<p>But what do you think would happen is we took the same sample, such as a suspension of U2OS cells (a cell line stemming from bone cancer), split it in two, and measured it twice using the exact same protocol? Will the measurements be exactly identical? Why? These would be <strong>technical replicates</strong>.</p>
+<p>If we now take two independent different cell cultures of the same cell line, do you expect there to be larger, similar or smaller difference than in the examples above? One would refer to <strong>biological replicates</strong> in this case.</p>
 <!-- - See technical replication in RNA-Seq paper from Irizayry group. -->
 <!-- - Find some data with tech and bio reps. -->
-<p>Experiments aim at measuring biological variability by comparing
-biological conditions in a controlled setting. The be able to measure
-any biologically signal in the data, the biological variability must
-be larger than the technical variability.</p>
+<p>Experiments aim at measuring biological variability by comparing biological conditions in a controlled setting. The be able to measure any biologically signal in the data, the biological variability must be larger than the technical variability.</p>
 </div>
 <div id="data-transformation" class="section level2">
 <h2>
@@ -207,18 +167,10 @@ be larger than the technical variability.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>We are going to start by generating a data set to precisely illustrate
-the effect of the methods.</p>
+<p>We are going to start by generating a data set to precisely illustrate the effect of the methods.</p>
 <ol style="list-style-type: decimal">
-<li><p>Use the <code>rnorm()</code> function to generate a distribution of 1000
-values centred around 0 and with a standard deviation
-of 2. Visualise these data.</p></li>
-<li><p>Generate four such distribution with parameters <em>N(6, 2)</em>,
-<em>N(4,2)</em>, <em>N(4, 1)</em>, <em>N(7, 3)</em> and create a matrix or dataframe
-with rownames <code>gene1</code> to <code>gene1000</code> and colnames <code>sample1</code> to
-<code>sample4</code>. Visualise these data and discuss whether these samples
-could be compared against each other. Do assure replication of this
-simulation, set the random number generation seed to 123.</p></li>
+<li><p>Use the <code>rnorm()</code> function to generate a distribution of 1000 values centred around 0 and with a standard deviation of 2. Visualise these data.</p></li>
+<li><p>Generate four such distribution with parameters <em>N(6, 2)</em>, <em>N(4,2)</em>, <em>N(4, 1)</em>, <em>N(7, 3)</em> and create a matrix or dataframe with rownames <code>gene1</code> to <code>gene1000</code> and colnames <code>sample1</code> to <code>sample4</code>. Visualise these data and discuss whether these samples could be compared against each other. Do assure replication of this simulation, set the random number generation seed to 123.</p></li>
 </ol>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -227,16 +179,16 @@ simulation, set the random number generation seed to 123.</p></li>
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-27" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-27', 'sol-start-27')"></span>
+► Solution<span id="sol-start-28" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-28', 'sol-start-28')"></span>
 </p>
-<div id="sol-body-27" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sec-norm.html#cb194-1"></a>n &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb194-2"><a href="sec-norm.html#cb194-2"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb194-3"><a href="sec-norm.html#cb194-3"></a>x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sample1 =</span> <span class="kw">rnorm</span>(n, <span class="dv">6</span>, <span class="dv">2</span>),</span>
-<span id="cb194-4"><a href="sec-norm.html#cb194-4"></a>                <span class="dt">sample2 =</span> <span class="kw">rnorm</span>(n, <span class="dv">4</span>, <span class="dv">2</span>),</span>
-<span id="cb194-5"><a href="sec-norm.html#cb194-5"></a>                <span class="dt">sample3 =</span> <span class="kw">rnorm</span>(n, <span class="dv">4</span>, <span class="dv">1</span>),</span>
-<span id="cb194-6"><a href="sec-norm.html#cb194-6"></a>                <span class="dt">sample4 =</span> <span class="kw">rnorm</span>(n, <span class="dv">7</span>, <span class="dv">3</span>))</span>
-<span id="cb194-7"><a href="sec-norm.html#cb194-7"></a><span class="kw">head</span>(x)</span></code></pre></div>
+<div id="sol-body-28" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1000</span>
+<span class="kw">set.seed</span>(<span class="dv">123</span>)
+x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sample1 =</span> <span class="kw">rnorm</span>(n, <span class="dv">6</span>, <span class="dv">2</span>),
+                <span class="dt">sample2 =</span> <span class="kw">rnorm</span>(n, <span class="dv">4</span>, <span class="dv">2</span>),
+                <span class="dt">sample3 =</span> <span class="kw">rnorm</span>(n, <span class="dv">4</span>, <span class="dv">1</span>),
+                <span class="dt">sample4 =</span> <span class="kw">rnorm</span>(n, <span class="dv">7</span>, <span class="dv">3</span>))
+<span class="kw">head</span>(x)</code></pre></div>
 <pre><code>##    sample1   sample2  sample3   sample4
 ## 1 4.879049  2.008403 3.488396  6.549078
 ## 2 5.539645  1.920090 4.236938  6.016729
@@ -244,7 +196,7 @@ simulation, set the random number generation seed to 123.</p></li>
 ## 4 6.141017  3.735650 5.219228  4.908146
 ## 5 6.258575 -1.098686 4.174136 14.795471
 ## 6 9.430130  6.081147 3.384732  6.887755</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sec-norm.html#cb196-1"></a><span class="kw">boxplot</span>(x)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(x)</code></pre></div>
 <div class="figure">
 <span id="fig:sln1"></span>
 <p class="caption marginnote shownote">
@@ -257,49 +209,13 @@ Figure 5.1: Simulated data for 4 samples and 1000 genes.
 </p>
 </div>
 </div>
-<p><strong>Centring</strong> refers to the operation of modifying the mean value of a set of
-values by subtracting a fixed value from each individual value. On the
-figure above, this equates to shifting the values up to down. A
-typical value is the mean of all the data to be centred.</p>
+<p><strong>Centring</strong> refers to the operation of modifying the mean value of a set of values by subtracting a fixed value from each individual value. On the figure above, this equates to shifting the values up to down. A typical value is the mean of all the data to be centred.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>For each column, calculate its mean value and subtract it from the
-values. Visualise and interpret the centred data.</p>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-28" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-28', 'sol-start-28')"></span>
-</p>
-<div id="sol-body-28" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="sec-norm.html#cb197-1"></a>cmns &lt;-<span class="st"> </span><span class="kw">colMeans</span>(x)</span>
-<span id="cb197-2"><a href="sec-norm.html#cb197-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x))</span>
-<span id="cb197-3"><a href="sec-norm.html#cb197-3"></a>    x[, i] &lt;-<span class="st"> </span>x[, i] <span class="op">-</span><span class="st"> </span>cmns[i]</span>
-<span id="cb197-4"><a href="sec-norm.html#cb197-4"></a><span class="kw">boxplot</span>(x)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<p><strong>Scaling</strong> refers to the operation of rescaling a set of values to
-scale in the range of 0 and 1 (or -1 and 1). On the figure above, this
-equates to changing the boxes so as to all have similar heights. A
-typical scaling method is to dividing the values by their standard
-devitations.</p>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<p>Calculate the standard deviation of each column and divide the values
-by it. Visualise and interpret the centred data.</p>
+<p>For each column, calculate its mean value and subtract it from the values. Visualise and interpret the centred data.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -310,11 +226,38 @@ by it. Visualise and interpret the centred data.</p>
 ► Solution<span id="sol-start-29" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-29', 'sol-start-29')"></span>
 </p>
 <div id="sol-body-29" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sec-norm.html#cb198-1"></a>csdvs &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, sd)</span>
-<span id="cb198-2"><a href="sec-norm.html#cb198-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x))</span>
-<span id="cb198-3"><a href="sec-norm.html#cb198-3"></a>    x[, i] &lt;-<span class="st"> </span>x[, i] <span class="op">/</span><span class="st"> </span>csdvs[i]</span>
-<span id="cb198-4"><a href="sec-norm.html#cb198-4"></a><span class="kw">boxplot</span>(x)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cmns &lt;-<span class="st"> </span><span class="kw">colMeans</span>(x)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x))
+    x[, i] &lt;-<span class="st"> </span>x[, i] <span class="op">-</span><span class="st"> </span>cmns[i]
+<span class="kw">boxplot</span>(x)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-20-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p><strong>Scaling</strong> refers to the operation of rescaling a set of values to scale in the range of 0 and 1 (or -1 and 1). On the figure above, this equates to changing the boxes so as to all have similar heights. A typical scaling method is to dividing the values by their standard devitations.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Calculate the standard deviation of each column and divide the values by it. Visualise and interpret the centred data.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-30" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-30', 'sol-start-30')"></span>
+</p>
+<div id="sol-body-30" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">csdvs &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, sd)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x))
+    x[, i] &lt;-<span class="st"> </span>x[, i] <span class="op">/</span><span class="st"> </span>csdvs[i]
+<span class="kw">boxplot</span>(x)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -325,10 +268,7 @@ by it. Visualise and interpret the centred data.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>The above oberations can also be performed with R’s <code>scale</code>
-function. Familiarise yourself with it by reading the documentation,
-then regenerate the data above and repeat the scaling/centring
-operations using <code>scale</code>.</p>
+<p>The above oberations can also be performed with R’s <code>scale</code> function. Familiarise yourself with it by reading the documentation, then regenerate the data above and repeat the scaling/centring operations using <code>scale</code>.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
