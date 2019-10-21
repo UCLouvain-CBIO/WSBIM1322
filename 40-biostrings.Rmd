@@ -55,7 +55,7 @@ not_a_dna_sequence <- "I love R"
 
 ## Working with sequences - using `Biostrings`
 
-The Bioconductor `r BiocStyle::Biocpkg("Biostrings")` 
+The Bioconductor `r BiocStyle::Biocpkg("Biostrings")`
 package can do all that base R can do, in addition to knowing about
 the semantics of the sequences is handles. Let's start by loading the
 package:
@@ -280,7 +280,7 @@ plot(density(gc_content))
 ```
 
 ```{r letterfreqex3b}
-library("tidyverse") 
+library("tidyverse")
 p <- as_tibble(gc_content) %>%
     ggplot(aes(x = `G|C`))
 p + geom_histogram()
@@ -304,7 +304,7 @@ but could be written using pipes and to reesult in a tibble for easier
 down-stream manipulation
 
 ```{r}
-gc <- 
+gc <-
     dna %>%
     letterFrequency("GC", as.prob = TRUE) %>%
     tibble::as_tibble()
@@ -363,5 +363,78 @@ fasta format.
 `r msmbstyle::question_begin()`
 Load the file into R. Beware though that these are protein sequences,
 composed of amino acids. Read the `?readDNAStringSet` manual page to
-find a more appropriate function.
+find a more appropriate function. How many sequences are there? What's
+the average. max and min length of the proteins?
 `r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r pattern1}
+library("Biostrings")
+up <- readAAStringSet("./data/uniprot-proteome_UP000005640_reviewed.fasta.gz")
+length(up)
+summary(width(up))
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Load the `up_selected` data from the `rWSBIM1322` data (version 0.1.1
+or later) and use it to create a subset of the object created
+above. To to so, you will need to match the matching protein
+identifiers from that vector and the names of the `AAStringSet`
+above.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r pattern2, message = FALSE}
+library("rWSBIM1322")
+data(up_selected)
+head(up_selected)
+names(up)
+## update names to match the uniprot identifier
+names(up) <- sub("\\|.+$", "", sub("^sp\\|", "", names(up)))
+## only those in up_selected
+up2 <- up[names(up) %in% up_selected]
+```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Among the proteins of interest (that where also found in the original
+data), how many match the following patterns: `DDVF`, `DEVF` `EDVF` or
+`EEVF`? Do you consider this to be a high number?
+
+
+The identification of patterns in sequences (not specifically
+biological sequences) is called pattern matching, which defines a
+whole syntax to define patterns. In particular, it is possible to
+define *letter D or E* as `[DE]`. To find the pattern of interest, use
+the `str_detect` function from the `stringi` package.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r pattern3}
+library("stringi")
+## Which ones have the pattern?
+sel <- str_detect(as.character(up2), "[DE][DE]VF")
+table(sel)
+sum(sel)/length(up2) * 100
+up3 <- up2[sel]
+elementMetadata(up3)$n_pattern <- str_count(as.character(up3), "[DE][DE]VF")
+elementMetadata(up3)$start <- str_locate(as.character(up3), "[DE][DE]VF")[, 1]
+```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+To assess if there is an overrepresentation of that pattern in the
+sequences of interest, repeat the calculation on all the other
+proteins.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r pattern4}
+up4 <- up[!names(up) %in% up_selected]
+sel4 <- str_detect(as.character(up4), "[DE][DE]VF")
+sum(sel4)/length(up4) * 100
+```
+`r msmbstyle::solution_end()`
