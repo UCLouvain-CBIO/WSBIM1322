@@ -142,6 +142,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="toc"><a href="#introduction-2"> Introduction</a></li>
 <li class="toc"><a href="#data-transformation"> Data transformation</a></li>
 <li class="toc"><a href="#centring-and-scaling"> Centring and scaling</a></li>
+<li class="toc"><a href="#quantile-normalisation"> Quantile normalisation</a></li>
+<li class="toc"><a href="#additinal-exercises"> Additinal exercises</a></li>
 </ul>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
@@ -243,7 +245,13 @@ simulation, set the random number generation seed to 123.</p></li>
 ## 5 6.258575 -1.098686 4.174136 14.795471
 ## 6 9.430130  6.081147 3.384732  6.887755</code></pre>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sec-norm.html#cb196-1"></a><span class="kw">boxplot</span>(x)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/sln1-1.png" width="672"></p>
+<div class="figure">
+<span id="fig:sln1"></span>
+<p class="caption marginnote shownote">
+Figure 5.1: Simulated data for 4 samples and 1000 genes.
+</p>
+<img src="WSBIM1322_files/figure-html/sln1-1.png" alt="Simulated data for 4 samples and 1000 genes." width="672">
+</div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -280,7 +288,60 @@ values. Visualise and interpret the centred data.</p>
 </p>
 </div>
 </div>
-<p><strong>Scaling</strong> refers to the operation of</p>
+<p><strong>Scaling</strong> refers to the operation of rescaling a set of values to
+scale in the range of 0 and 1 (or -1 and 1). On the figure above, this
+equates to changing the boxes so as to all have similar heights. A
+typical scaling method is to dividing the values by their standard
+devitations.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Calculate the standard deviation of each column and divide the values
+by it. Visualise and interpret the centred data.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-29" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-29', 'sol-start-29')"></span>
+</p>
+<div id="sol-body-29" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sec-norm.html#cb198-1"></a>csdvs &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, sd)</span>
+<span id="cb198-2"><a href="sec-norm.html#cb198-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x))</span>
+<span id="cb198-3"><a href="sec-norm.html#cb198-3"></a>    x[, i] &lt;-<span class="st"> </span>x[, i] <span class="op">/</span><span class="st"> </span>csdvs[i]</span>
+<span id="cb198-4"><a href="sec-norm.html#cb198-4"></a><span class="kw">boxplot</span>(x)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>The above oberations can also be performed with R’s <code>scale</code>
+function. Familiarise yourself with it by reading the documentation,
+then regenerate the data above and repeat the scaling/centring
+operations using <code>scale</code>.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="quantile-normalisation" class="section level2">
+<h2>
+<span class="header-section-number">5.4</span> Quantile normalisation</h2>
+</div>
+<div id="additinal-exercises" class="section level2">
+<h2>
+<span class="header-section-number">5.5</span> Additinal exercises</h2>
 
 </div>
 </div></body></html>
