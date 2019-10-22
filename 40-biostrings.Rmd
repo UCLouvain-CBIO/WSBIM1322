@@ -64,6 +64,10 @@ package:
 library("Biostrings")
 ```
 
+For more information about the `Biostrings` package, see the vignettes
+available online the [package
+package](https://www.bioconductor.org/packages/release/bioc/html/Biostrings.html).
+
 ### `DNAStringSet()`
 
 The `DNAStringSet` class that *knows* about DNA sequences. We can
@@ -316,19 +320,7 @@ gc
 ## Subsetting sequences
 
 As `[` is used to subset a `DNAStringSet`, it can't be used to take
-substrings of a sequence. This can be done by 
-
-- creating a new `DNAStringSet` (or `DNAString` for only one sequence)
-  object and specifying start or end positions, or their width or
-  nchar:
-
-```{r}
-DNAStringSet(dna, start = 1, end = 100)
-DNAStringSet(dna, start = 1, width = 100)
-DNAString(dna[[1]], start = 1, nchar = 10)
-```
-
-- or by using the `subseq` function:
+substrings of a sequence. This can be done with the `subseq` sequence.
 
 ```{r}
 subseq(dna, start = 1, end = 100)
@@ -351,10 +343,10 @@ dna[rep(1, 10)] %>%               # DNAStringSet with first sequence 10 times
     subseq(start = 1, end = 1:10) # subsequences of 1, 2, ... 10 nucleotides
 ```
 `r msmbstyle::solution_end()`
- 
+
 ## Working with genomes
- 
- 
+
+
 `BSgenome` packages inside Bioconductor contain whole genome sequences
 as distributed by ENSEMBL, NCBI and others. In this next example we
 will load the whole genome sequence for Homo sapiens from UCSC's hg19
@@ -371,7 +363,7 @@ chr14_range
 ```{r bs2, message = FALSE}
 chr14_dna <- getSeq(Hsapiens, chr14_range)
 chr14_dna
-letterFrequency(chr14_dna, "GC", as.prob=TRUE)
+letterFrequency(chr14_dna, "GC", as.prob = TRUE)
 ```
 
 `r msmbstyle::question_begin()`
@@ -382,13 +374,34 @@ and T nucleotides in chromosome 14.
 `r msmbstyle::solution_begin()`
 ```{r acgtex}
 letterFrequency(chr14_dna, c("A", "G", "C", "T"))
-letterFrequency(chr14_dna, c("A", "G", "C", "T"), as.prob = FALSE)
+letterFrequency(chr14_dna, c("A", "G", "C", "T"), as.prob = TRUE)
 ```
 `r msmbstyle::solution_end()`
 
 
 ## Additional exercises
 
+`r msmbstyle::question_begin()`
+Focusing on the region from base 10 to 10.1 million along chromosome
+14, calculate the GC content across a sliding window of 1000
+nucleotides (you can use the `letterFrequencyInSlidingView` functionn)
+and visualise it (see an example below). On that plot, show the mean
+GC content and highlight the regions that have a GC content > 0.7 and
+< 0.3.
+`r msmbstyle::question_end()`
+
+
+```{r, echo = FALSE, fig.cap = "GC content for chomosome 14 (10 - 10.1 Mb)"}
+x <- subseq(chr14_dna[[1]], 10 * 10e6, 10.1 * 10e6)
+gc_content <- letterFrequencyInSlidingView(x, 1e3,
+                                           letters = "GC",
+                                           as.prob = TRUE)
+
+plot(gc_content, type = "l", main = "Chromosome 14: 10 - 10.1 Mb")
+abline(h = mean(gc_content))
+abline(v = which(gc_content > 0.7), col = "#FF0000")
+abline(v = which(gc_content < 0.3), col = "#0000FF")
+```
 
 `r msmbstyle::question_begin()`
 Visit the UniProt web page at
@@ -409,16 +422,14 @@ the average. max and min length of the proteins?
 `r msmbstyle::question_end()`
 
 
-<!-- `r msmbstyle::solution_begin()` -->
-<!-- ```{r pattern1} -->
-<!-- library("Biostrings") -->
-<!-- ## this line assumes that the uniprot database resides in the data -->
-<!-- ## directory in the RStudio project -->
-<!-- up <- readAAStringSet("./data/uniprot-proteome_UP000005640_reviewed.fasta.gz") -->
-<!-- length(up) -->
-<!-- summary(width(up)) -->
-<!-- ``` -->
-<!-- `r msmbstyle::solution_end()` -->
+```{r pattern1, echo = FALSE, include = FALSE}
+library("Biostrings")
+## this line assumes that the uniprot database resides in the data
+## directory in the RStudio project
+up <- readAAStringSet("./data/uniprot-proteome_UP000005640_reviewed.fasta.gz")
+length(up)
+summary(width(up))
+```
 
 
 `r msmbstyle::question_begin()`
@@ -429,19 +440,17 @@ identifiers from that vector and the names of the `AAStringSet`
 above.
 `r msmbstyle::question_end()`
 
-<!-- `r msmbstyle::solution_begin()` -->
-<!-- ```{r pattern2, message = FALSE} -->
-<!-- library("rWSBIM1322") -->
-<!-- data(up_selected) -->
-<!-- head(up_selected) -->
-<!-- head(names(up)) -->
-<!-- ## update names to match the uniprot identifier -->
-<!-- names(up) <- sub("\\|.+$", "", sub("^sp\\|", "", names(up))) -->
-<!-- ## only those in up_selected -->
-<!-- up2 <- up[names(up) %in% up_selected] -->
-<!-- up2 -->
-<!-- ``` -->
-<!-- `r msmbstyle::solution_end()` -->
+```{r pattern2, message = FALSE, echo = FALSE, include = FALSE}
+library("rWSBIM1322")
+data(up_selected)
+head(up_selected)
+head(names(up))
+## update names to match the uniprot identifier
+names(up) <- sub("\\|.+$", "", sub("^sp\\|", "", names(up)))
+## only those in up_selected
+up2 <- up[names(up) %in% up_selected]
+up2
+```
 
 `r msmbstyle::question_begin()`
 Among the proteins of interest (that where also found in the original
@@ -456,20 +465,22 @@ define *letter D or E* as `[DE]`. To find the pattern of interest, use
 the `str_detect` function from the `stringi` package.
 `r msmbstyle::question_end()`
 
-<!-- `r msmbstyle::solution_begin()` -->
-<!-- ```{r pattern3} -->
-<!-- library("stringi") -->
-<!-- ## Which ones have the pattern? -->
-<!-- sel <- str_detect(as.character(up2), "[DE][DE]VF") -->
-<!-- table(sel) -->
-<!-- sum(sel)/length(up2) * 100 -->
-<!-- up3 <- up2[sel] -->
 
-<!-- ## optional, to record the number and position of the matches -->
-<!-- elementMetadata(up3)$n_pattern <- str_count(as.character(up3), "[DE][DE]VF") -->
-<!-- elementMetadata(up3)$start <- str_locate(as.character(up3), "[DE][DE]VF")[, 1] -->
-<!-- ``` -->
-<!-- `r msmbstyle::solution_end()` -->
+
+```{r pattern3, echo = FALSE, include = FALSE}
+library("stringi")
+## Which ones have the pattern?
+sel <- str_detect(as.character(up2), "[DE][DE]VF")
+table(sel)
+sum(sel)/length(up2) * 100
+up3 <- up2[sel]
+
+## optional, to record the number and position of the matches
+elementMetadata(up3)$n_pattern <- str_count(as.character(up3), "[DE][DE]VF")
+elementMetadata(up3)$start <- str_locate(as.character(up3), "[DE][DE]VF")[, 1]
+elementMetadata(up3)
+```
+
 
 
 `r msmbstyle::question_begin()`
@@ -479,12 +490,8 @@ proteins.
 `r msmbstyle::question_end()`
 
 
-<!-- `r msmbstyle::solution_begin()` -->
-
-<!-- ```{r pattern4} -->
-<!-- up4 <- up[!names(up) %in% up_selected] -->
-<!-- sel4 <- str_detect(as.character(up4), "[DE][DE]VF") -->
-<!-- sum(sel4)/length(up4) * 100 -->
-<!-- ``` -->
-
-<!-- `r msmbstyle::solution_end()` -->
+```{r pattern4, echo = FALSE, include = FALSE}
+up4 <- up[!names(up) %in% up_selected]
+sel4 <- str_detect(as.character(up4), "[DE][DE]VF")
+sum(sel4)/length(up4) * 100
+```
