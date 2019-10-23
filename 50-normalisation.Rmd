@@ -325,8 +325,36 @@ There are two approaches to deal with missing values:
    imputation methods can only be applied to data missing at random,
    while others can only be applied to data missing not at random.
 
-## Additional exercises
+`r msmbstyle::question_begin()`
+Load the `naset` object available in the `MSnbase` package. You can
+either use the data as an `MSnSet` (as it currently is), or convert it
+to an `SummarizedExperiment` with `as(naset, "SummarizedExperiment")`.
 
+Calculate the number of missing values along the rows and sample, then
+visualise these data and represent them as tables showing the number
+of occurences of 1, 2, 3, ... missing values.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r}
+library("MSnbase")
+data(naset)
+col_na <- colSums(is.na(exprs(naset)))
+col_na
+barplot(col_na)
+
+row_na <- rowSums(is.na(exprs(naset)))
+table(row_na)
+hist(row_na)
+```
+`r msmbstyle::solution_end()`
+
+All the concepts and methods seen in this chapter will be paramount in
+the next ones, once we will test, cluster or classify our data.
+
+## Additional exercises
 
 `r msmbstyle::question_begin()`
 You are provided with a dataset show below (2 biological groups A

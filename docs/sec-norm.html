@@ -116,7 +116,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="toc"><a href="#data-transformation"> Data transformation</a></li>
 <li class="toc"><a href="#normalisation"> Normalisation</a></li>
 <li class="toc"><a href="#missing-data"> Missing data</a></li>
-<li class="toc"><a href="#additinal-exercises"> Additinal exercises</a></li>
+<li class="toc"><a href="#additional-exercises-4"> Additional exercises</a></li>
 </ul>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
@@ -427,22 +427,72 @@ cptac_quant &lt;-<span class="st"> </span><span class="kw">normalise</span>(cpta
 </p>
 </div>
 </div>
+<p>Whenever new data is presented, one of the first steps is to assess the need for normalisation by verifying the data distributions. Large variations thereof should indicate that extra care should be taken and point to possible more serious issues in the data acquisition. Visualisation of these distributions after normalisation will necessarily comply with the normalisation strategy employed (scaling, centering, quantile normalisation).</p>
+<p>In the later chapters, we will see dimensionality reduction and clustering methods, that can be used to assess the grouping of the samples in an experiment. These methods are useful to check the effect of the normalisation procedure, and for example verify it the samples tend to cluster more according to the biological groups defined by the experiment.</p>
 </div>
 </div>
 <div id="missing-data" class="section level2">
 <h2>
 <span class="header-section-number">5.4</span> Missing data</h2>
+<p>In some omics experiments, a substantial faction of the data can be missing. Missing values are encoded as <code>NA</code> in R, and should be represented as such in omics data.</p>
+<p>Missing data can be very tricky to handle, as they can arise for different reasons. The first one is related to the absence of the feature, or an abundance that is below the detection limit of the device. These data would typically be missing for biological reasons and thus aren’t appearing at random. Such missing values are often denoted <em>missing not at random</em> (MNAR).</p>
+<p>However, missing values can also appear randomly, due to uneven or absent cDNA amplification in transcriptomics from low amounts of RNA (for instance in in single cell RNA sequencing) or due the semi-stochastic nature of mass spectrometry in proteomics. Such missing values are denoted <em>missing (completely) at random</em> (M(C)AR).</p>
+<p>There are two approaches to deal with missing values:</p>
+<ol style="list-style-type: decimal">
+<li><p>Filtering: remove features that have missing values, or a certain proportion of missing values.</p></li>
+<li><p>Imputation: replacing missing values by sensible values. Some imputation methods can only be applied to data missing at random, while others can only be applied to data missing not at random.</p></li>
+</ol>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Load the <code>naset</code> object available in the <code>MSnbase</code> package. You can either use the data as an <code>MSnSet</code> (as it currently is), or convert it to an <code>SummarizedExperiment</code> with <code>as(naset, "SummarizedExperiment")</code>.</p>
+<p>Calculate the number of missing values along the rows and sample, then visualise these data and represent them as tables showing the number of occurences of 1, 2, 3, … missing values.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
 </div>
-<div id="additinal-exercises" class="section level2">
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-29" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-29', 'sol-start-29')"></span>
+</p>
+<div id="sol-body-29" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"MSnbase"</span>)
+<span class="kw">data</span>(naset)
+col_na &lt;-<span class="st"> </span><span class="kw">colSums</span>(<span class="kw">is.na</span>(<span class="kw">exprs</span>(naset)))
+col_na</code></pre></div>
+<pre><code>##  M1F1A  M1F4A  M1F7A M1F11A  M1F2B  M1F5B  M1F8B M1F11B  M2F1A  M2F4A 
+##     34     45     56     39     47     52     49     61     41     42 
+##  M2F7A M2F11A  M2F2B  M2F5B  M2F8B M2F11B 
+##     55     45     51     43     57     53</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(col_na)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">row_na &lt;-<span class="st"> </span><span class="kw">rowSums</span>(<span class="kw">is.na</span>(<span class="kw">exprs</span>(naset)))
+<span class="kw">table</span>(row_na)</code></pre></div>
+<pre><code>## row_na
+##   0   1   2   3   4   8   9  10 
+## 301 247  91  13   2  23  10   2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(row_na)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-2.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>All the concepts and methods seen in this chapter will be paramount in the next ones, once we will test, cluster or classify our data.</p>
+</div>
+<div id="additional-exercises-4" class="section level2">
 <h2>
-<span class="header-section-number">5.5</span> Additinal exercises</h2>
+<span class="header-section-number">5.5</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
 <p>You are provided with a dataset show below (2 biological groups A (red) and B (green) with 3 replicates in each) and asked to analyse it. What are you thoughts about these data and what are the implications for the normalisation step?</p>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>

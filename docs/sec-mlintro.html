@@ -149,8 +149,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="header-section-number">6.1</span> Hypothesis testing</h2>
 <p>Let’s start with the following experiment. Researchers are interested in the expression of three genes, <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=A1CF">A1CF</a>, <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=BRCA1">BRCA1</a> and <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=TP53">TP53</a> in the absence and presence of a certain drug in a model cell line. The expression of these genes is measured four times.</p>
 <div class="figure fullwidth">
-<span id="fig:unnamed-chunk-25"></span>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-25-1.png" alt="Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5." width="672"><p class="caption marginnote shownote">
+<span id="fig:unnamed-chunk-26"></span>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-26-1.png" alt="Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5." width="672"><p class="caption marginnote shownote">
 Figure 6.1: Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5.
 </p>
 </div>
@@ -183,9 +183,9 @@ Figure 6.1: Distributions of the expression of the genes A1CF, BRCA1 and TP53 un
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-29" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-29', 'sol-start-29')"></span>
+► Solution<span id="sol-start-30" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-30', 'sol-start-30')"></span>
 </p>
-<div id="sol-body-29" class="solution-body" style="display: none;">
+<div id="sol-body-30" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(expd)</code></pre></div>
 <table>
 <thead><tr class="header">
@@ -340,9 +340,9 @@ Figure 6.3: Example of correlation, anti-correlation and lack thereof.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-30" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-30', 'sol-start-30')"></span>
+► Solution<span id="sol-start-31" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-31', 'sol-start-31')"></span>
 </p>
-<div id="sol-body-30" class="solution-body" style="display: none;">
+<div id="sol-body-31" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)
 y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)
 
@@ -396,9 +396,9 @@ Figure 6.4: Illustration of spurious correlation. Distribution of the maximum ab
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-31" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-31', 'sol-start-31')"></span>
+► Solution<span id="sol-start-32" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-32', 'sol-start-32')"></span>
 </p>
-<div id="sol-body-31" class="solution-body" style="display: none;">
+<div id="sol-body-32" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
 rs &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">cor</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>)))
 <span class="kw">summary</span>(rs)</code></pre></div>
@@ -476,9 +476,9 @@ Figure 6.6: The average sample is shown as a red point among the 5 samples simul
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-32" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-32', 'sol-start-32')"></span>
+► Solution<span id="sol-start-33" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-33', 'sol-start-33')"></span>
 </p>
-<div id="sol-body-32" class="solution-body" style="display: none;">
+<div id="sol-body-33" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_sample &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samples)
 <span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)
 <span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
