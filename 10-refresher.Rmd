@@ -109,6 +109,8 @@ interro2$m <- apply(interro2[, -1], 1, moy)
 
 interro2 <- readRDS(rWSBIM1207::interro2.rds())
 
+library("tidyverse")
+
 interro2 %>%
     rowwise() %>%
     mutate(m = moy(c(interro1, interro2, interro3, interro4)))

@@ -11,32 +11,125 @@
 
 In a typical high throughput experiment, we assay thousands of
 features (gene transcripts, proteins, metabolites, ...) is a certain
-number of biologically diverse samples (from about 6 to hundreds of
+number of biologically diverse samples (from about 6 to hundreds or
 thousands).
 
-But what do you think would happen is we took the same sample, such as
-a suspension of U2OS cells (a cell line stemming from bone cancer),
-split it in two, and measured it twice using the exact same protocol?
-Will the measurements be exactly identical? Why? These would be
-**technical replicates**.
+- But what do you think would happen is we took the same sample, such
+  as a suspension of U2OS cells (a cell line stemming from bone
+  cancer), split it in two, and measured it twice using the exact same
+  protocol? Will the measurements be exactly identical? Why?
 
-If we now take two independent different cell cultures of the same
-cell line, do you expect there to be larger, similar or smaller
-difference than in the examples above? One would refer to **biological
-replicates** in this case.
+  These two samples would be **technical replicates** and the observed
+  differences would be solely the result of **technical variability**.
 
-<!-- - See technical replication in RNA-Seq paper from Irizayry group. -->
-<!-- - Find some data with tech and bio reps. -->
+- If we now take two independent different cell cultures of the same
+  cell line, do you expect there to be larger, similar or smaller
+  difference than in the example above? Why?
 
-Experiments aim at measuring biological variability by comparing
-biological conditions in a controlled setting. The be able to measure
-any biologically signal in the data, the biological variability must
-be larger than the technical variability.
+  One would refer to thes two samples as **biological replicates**,
+  and the observed differences would be due to **technical** and
+  **biological variability**.
+
+- In biomedical research, experiments aim at measuring biological
+  variability by comparing two or more biological conditions in a
+  controlled setting. If we now take two independent cell cultures and
+  treat one of them using a drug, and them measure the two samples, do
+  you expect there to be larger, similar or smaller difference than in
+  the examples above? Why?
+
+  The observed differences between the two samples would comprise
+  **technical variability**, **biological variability** and additional
+  **biological variability due to the treatment**. The be able to
+  measure any biologically signal in the data, the biological
+  variability, and the one produced by the treatment of interest in
+  particular, must be larger than the technical variability.
+
+However, to before analysing any data, it is often (always) necessary
+to make the samples as comparable as possible by removing the
+technical variability (that should be shared among all samples)
+without removing biological variability (that will differantiate the
+samples biologically).
 
 ## Data transformation
 
-## Centring and scaling
+The very first step in preparing a dataset is to visualise the
+distribution of the values. Below we see the density plots for 6
+proteomics samples and about 4000 peptides from the CPTAC study that
+compares the reproducibility of quantiative mass spectrometry using
+human proteins spiked into a yeast proteome background.
 
+```{r logtans, echo = FALSE, message = FALSE, fig.cap = "Raw quantiation values from the proteomics CPTAC data."}
+library("rWSBIM1322")
+library("MSnbase")
+data(cptac)
+as_tibble(exprs(cptac)) %>%
+    gather(key = sample, value = expression) %>%
+    ggplot(aes(x = expression, colour = sample)) +
+    geom_density() 
+```
+
+We see that the vast majority of the data are at very low values with
+some very high values:
+
+```{r, echo = FALSE}
+summary(exprs(cptac))
+```
+
+Such data are difficult to visualise and to analyse, because their
+distribution of their skewness. The first step is thus generally (but
+not always[^negbinom]) to log-transform the data, as shown below.
+
+[^negbinom]: When analysing count data, such as in the case of RNASeq
+    of spectral counting in proteomics, it is better not to transform
+    the data and use dedicated distribution for count-based data. In
+    the cases above, the [negative binomial
+    distribution](https://en.wikipedia.org/wiki/Negative_binomial_distribution)
+    has been show to accurately model technical and biological
+    variability of such experimental data.
+
+```{r logtrans2, echo = FALSE, fig.cap = "CPTAC data after log transformation"}
+as_tibble(exprs(cptac)) %>%
+    gather(key = sample, value = expression) %>%
+    ggplot(aes(x = log2(expression), colour = sample)) +
+    geom_density()
+```
+
+`r msmbstyle::question_begin()`
+Load the CPTAC data from the `rWSBIM1322` package (version 0.1.3 or
+later) and reproduce the figures above. See `?cptac` for details .
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r, eval = FALSE}
+library("rWSBIM1322")
+library("MSnbase")
+data(cptac)
+
+library("tidyverse")
+as_tibble(exprs(cptac)) %>%
+    gather(key = sample, value = expression) %>%
+    ggplot(aes(x = expression, colour = sample)) +
+    geom_density()
+
+as_tibble(exprs(cptac)) %>%
+    gather(key = sample, value = expression) %>%
+    ggplot(aes(x = log2(expression), colour = sample)) +
+    geom_density()
+```
+`r msmbstyle::solution_end()`
+
+## Normalisation
+
+In addition to possible transformation of the data, it is necessary to
+further process the data to remove as much as technical variability as
+possible while keeping biological variability. This step is called
+**normalisation**. One of the important requriements of most
+normalisation techniques is that most proteins aren't expected to
+change among biological conditions. In other words, normalisation
+expects only a minority of biological features to be differentially
+expressed in the conditions of interest.
+
+### Centring and scaling
 
 `r msmbstyle::question_begin()`
 We are going to start by generating a data set to precisely illustrate
@@ -119,6 +212,95 @@ then regenerate the data above and repeat the scaling/centring
 operations using `scale`.
 `r msmbstyle::question_end()`
 
-## Quantile normalisation
+
+### Quantile normalisation
+
+Quantile normalisation is a method that will make different data
+distributions identical. The method works shown below using a small
+dataset with quantitation data for three samples (S1, S2, and S3) and
+4 genes (A to D) (example taken from the Wikipedia page).
+
+```{r quantex1}
+x <- cbind(S1 = c(5, 2, 3, 4),
+           S2 = c(4, 1, 4, 2),
+           S3 = c(3, 4, 6, 8))
+rownames(x) <- LETTERS[1:4]
+x
+```
+
+The first step is to rank (from lowest to largest) each value in each
+sample (column). For sample S1, gene B has the lowest value, hence
+rank 1, then gene C gets rank 2, gene D gets rank 3, then gene A, with
+the highest value, gets rank 4. We store these in a new matrix `rnk`.
+
+```{r quantex2}
+(rnk <- apply(x, 2, rank, ties.method = "min"))
+```
+
+We now arrange the values according to their rang (i.e. sorting) and
+calculate row-wise means: the mean of all lowest values, ... up to the
+mean of all highest values.
+
+```{r quantex3}
+sorted_x <- apply(x, 2, sort)
+ranked_means <- rowMeans(sorted_x)
+cbind(sorted_x, ranked_means)
+```
+
+The final step is to replace the ranks in `rnk` by the respective
+respective `ranked_means`: the gene with the lowest expression in each
+samples gets the lowest ranked mean, ..., the gene with the highest
+expression in each sample get the highest ranked mean.
+
+```{r quantex4}
+x_norm <- matrix(ranked_means[rnk], ncol = 3)
+dimnames(x_norm) <- dimnames(x)
+round(x_norm, 2)
+```
+
+`r msmbstyle::question_begin()`
+Using the `cptac` data (`MSnSet` object), normalise it using quantile
+normalisation and visualise the data before and after. To normalise
+the data, you can use the `normalise` function, defining `method = "quantiles"`.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r quantnormex}
+data(cptac)
+cptac <- log(cptac, base = 2)
+cptac_quant <- normalise(cptac, method = "quantiles")
+
+as_tibble(exprs(cptac)) %>%
+    gather(key = sample, value = expression) %>%
+    ggplot(aes(x = expression, colour = sample)) +
+    geom_density()
+
+as_tibble(exprs(cptac_quant)) %>%
+    gather(key = sample, value = expression) %>%
+    ggplot(aes(x = expression, colour = sample)) +
+    geom_density()
+```
+`r msmbstyle::solution_end()`
+
+## Missing data
 
 ## Additinal exercises
+
+
+`r msmbstyle::question_begin()`
+You are provided with a dataset show below (2 biological groups A
+(red) and B (green) with 3 replicates in each) and asked to analyse
+it. What are you thoughts about these data and what are the
+implications for the normalisation step?
+
+```{r, echo = FALSE}
+n <- 1000
+x <- data.frame(A1 = rnorm(n, 5, 2),
+                A2 = rnorm(n, 5, 2),
+                A3 = rnorm(n, 5, 2),
+                B1 = rnorm(n, 10, 2),
+                B2 = rnorm(n, 10, 2),
+                B3 = rnorm(n, 10, 2))
+boxplot(x, col = rep(2:3, each = 3))
+```
+`r msmbstyle::question_end()`
