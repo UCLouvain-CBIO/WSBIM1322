@@ -284,7 +284,29 @@ as_tibble(exprs(cptac_quant)) %>%
 
 ## Missing data
 
-## Additinal exercises
+In some omics experiments, a substantial faction of the data can be
+missing. Missing values are encoded as `NA` in R, and should be
+represented as such in omics data. 
+
+Missing data can be very tricky to handle, as they can arise for
+different reasons. The first one is related to the absence of the
+feature, or an abundance that is below the detection limit of the
+device. These data would typically be missing for biological reasons
+and thus aren't appearing at random. Such missing values are often
+denoted *missing not at random* (MNAR).
+
+However, missing values can also appear randomly, due to uneven or
+absent cDNA amplification in transcriptomics from low amounts of RNA
+(for instance in in single cell RNA sequencing) or due the
+semi-stochastic nature of mass spectrometry in proteomics. Such
+missing values are denoted *missing (completely) at random* (M(C)AR).
+
+There are two approaches to deal with missing values:
+
+1. 
+
+
+## Additional exercises
 
 
 `r msmbstyle::question_begin()`
