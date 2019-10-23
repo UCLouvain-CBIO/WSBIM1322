@@ -282,6 +282,21 @@ as_tibble(exprs(cptac_quant)) %>%
 ```
 `r msmbstyle::solution_end()`
 
+Whenever new data is presented, one of the first steps is to assess
+the need for normalisation by verifying the data distributions. Large
+variations thereof should indicate that extra care should be taken and
+point to possible more serious issues in the data
+acquisition. Visualisation of these distributions after normalisation
+will necessarily comply with the normalisation strategy employed
+(scaling, centering, quantile normalisation). 
+
+In the later chapters, we will see dimensionality reduction and
+clustering methods, that can be used to assess the grouping of the
+samples in an experiment. These methods are useful to check the effect
+of the normalisation procedure, and for example verify it the samples
+tend to cluster more according to the biological groups defined by the
+experiment.
+
 ## Missing data
 
 In some omics experiments, a substantial faction of the data can be
@@ -303,8 +318,12 @@ missing values are denoted *missing (completely) at random* (M(C)AR).
 
 There are two approaches to deal with missing values:
 
-1. 
-
+1. Filtering: remove features that have missing values, or a certain
+   proportion of missing values.
+   
+2. Imputation: replacing missing values by sensible values. Some
+   imputation methods can only be applied to data missing at random,
+   while others can only be applied to data missing not at random.
 
 ## Additional exercises
 
