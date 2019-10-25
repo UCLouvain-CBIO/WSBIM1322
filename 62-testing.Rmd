@@ -1,8 +1,90 @@
 # Hypothesis testing {#sec:testing}
 
+Prerequisites, see WFARM1247 (Traitement statistique des données)
+
+## Refresher
+
+- Tossing a coin.
+- Binomial distribution
+- p-value 
+
+## A biological example
+
+We are going to use the `tdata1` dataset from the `rWSBIM1322` package
+that provide gene expression data for 100 genes and 6 samples, three
+in group A and 3 in group B.
+
+```{r}
+library("rWSBIM1322")
+data(tdata2)
+head(tdata1)
+```
+
+`r msmbstyle::question_begin()`
+Visualise the distribution of the `tdata1` data and, if necessary,
+log-transform it.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r tex1}
+log_tdata1 <- log2(tdata1)
+par(mfrow = c(1, 2))
+limma::plotDensities(tdata1)
+limma::plotDensities(log_tdata1)
+```
+`r msmbstyle::solution_end()`
+
+
+We are now going to apply a t-test to feature 73, comparing the
+expression intensities in groups A and B. In R, this can be done with
+the `t.test` function:
+
+```{r}
+x <- log_tdata1[73, ]
+t.test(x[1:3], x[4:6])
+```
+
+`r msmbstyle::question_begin()`
+- Interpret the results of the test above.
+- Repeat it on another features.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+We would now like to repeat the same analysis on the 100 genes. 
+- Write a function that will take a vector as input and perform a
+  t-test of the first values (our group A) against the 3 last values
+  (our group B) and returns the p-values.
+- Apply the test to all the genes.
+- How many *significantly differentically expressed genes do you find?
+  What features are of possible biological interest?
+`r msmbstyle::question_end()`
+
+
+```{r}
+my_t_test <- function(x) {
+    t.test(x[1:3], x[4:6])$p.value
+}
+pvals <- apply(log_tdata1, 1, my_t_test)
+table(pvals < 0.05)
+head(sort(pvals))
+```
+
+
+## Adjustment for multiple testing
+
 - hypthesis testing
-- t-test
+- multiple testing (FWER and FDR)
 - p-value distributions
-- multiple testing
-- linear regression
-- empirical approximations of probabilites
+
+## Linear regression
+
+## Empirical approximations 
+
+- Bootstrapping to generate null distributions
+
+## A word of caution
+
+- p-hacking and p-harking
+
+
