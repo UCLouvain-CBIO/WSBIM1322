@@ -4,6 +4,8 @@ Prerequisites, see WFARM1247 (Traitement statistique des données)
 
 ## Refresher
 
+
+
 - Tossing a coin.
 - Binomial distribution
 - p-value 
@@ -56,7 +58,7 @@ We would now like to repeat the same analysis on the 100 genes.
   t-test of the first values (our group A) against the 3 last values
   (our group B) and returns the p-values.
 - Apply the test to all the genes.
-- How many *significantly differentically expressed genes do you find?
+- How many significantly differentically expressed genes do you find?
   What features are of possible biological interest?
 `r msmbstyle::question_end()`
 
@@ -70,12 +72,34 @@ table(pvals < 0.05)
 head(sort(pvals))
 ```
 
+`r msmbstyle::question_begin()`
+The data above have been generated with the `rnorm` function for all
+samples. 
+- Do you still think any of the features show significant differences?
+- Why are there still some features (around 5%) that show a
+  significant p-value at an alpha of 0.05?
+`r msmbstyle::question_end()`
+
+
+
+
+```{r}
+hist(pvals)
+```
 
 ## Adjustment for multiple testing
 
-- hypthesis testing
-- multiple testing (FWER and FDR)
-- p-value distributions
+Given the multitue of test, the type I error is not controlled
+anymore. We need to take this into account and adjust the p-values for
+multiple testing. Below we apply the Benjamini-Hochberg procedure
+using the `p.adjust` function and confirm that none of the features
+are differentially expressed.
+
+```{r}
+adj_pvals <- p.adjust(pvals, method = "BH")
+any(adj_pvals < 0.05)
+min(adj_pvals)
+```
 
 ## Linear regression
 
@@ -88,3 +112,12 @@ head(sort(pvals))
 - p-hacking and p-harking
 
 
+## Additional exercises
+
+`r msmbstyle::question_begin()`
+Generate random data using `rnorm` for 100 genes and 6 samples and
+test for differential expression, comparing for each gene the 3 first
+samples against the 3 last samples. Verify that you identify about 5
+p-values smaller that 0.05. Visualise and interprete the histogramme
+of these p-values.
+`r msmbstyle::question_end()`
