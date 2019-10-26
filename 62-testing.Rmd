@@ -1,14 +1,86 @@
 # Hypothesis testing {#sec:testing}
 
-Prerequisites, see WFARM1247 (Traitement statistique des données)
+For prerequisites within the Biomedical sciences masters degree at the
+UCLouvain, see *WFARM1247* (Traitement statistique des données).
 
 ## Refresher
 
+```{r toss, echo = FALSE}
+set.seed(2) 
+n <- 100
+p <- 0.59
+flips <- sample(c("H", "T"), size = n,
+                replace = TRUE,
+                prob = c(p, 1 - p))
+```
+
+We have flipped a coing 100 times and have obtained the following results.
+
+```{r tossres, echo = FALSE}
+table(flips)
+```
+
+If the coin were unbiased we expect roughly 50 heads. Can we make any
+claims regarding the biaised or unbiaised nature of that coin?
+
+A coin toss can be modeled by a binomial distribution. The histogram
+below shows the binomial statistic for 0 to 100 heads; it represents
+the binomial density of for an unbiased coin. The vertical line shows
+the number of head observed.
 
 
-- Tossing a coin.
-- Binomial distribution
-- p-value 
+```{r tosshist, echo = FALSE, fig.cap = "Binomial density of for an unbiased coin to get 0 to 100 heads. The full area of the histogram sums to 1."}
+num_heads <- sum(flips == "H")
+binomial_dens <-
+    tibble(k = 0:n) %>%
+    mutate(p = dbinom(k, size = n, prob = 0.5))
+
+ggplot(binomial_dens, aes(x = k, y = p)) +
+    geom_bar(stat = "identity") +
+    geom_vline(xintercept = num_heads)
+```
+
+Above, we see that the most likely outcome would be 50 heads with a
+probability of `r max(binomial_dens$p)`. No head and 100 heads have respectively 
+`r binomial_dens$p[binomial_dens$k == 0]` and 
+`r binomial_dens$p[binomial_dens$k == 100]` probability.
+
+We set
+
+- $H_0$: the coin is fair
+- $H_1$: the coin is baised
+
+If `r num_heads` isn't deemed too *extreme*, then we won't reject $H_0$ and 
+conclude that the coin in faire. If `r num_heads`, then we reject $H_0$ and 
+accept $H_1$, and conclude that the coin is baised.
+
+To define *extreme*, we set $\alpha = 0.05$ and rejet $H_0$ if our result is 
+outside of the 95% most probably values. 
+
+```{r tossstat, echo = FALSE}
+alpha <- 0.05
+binomial_dens <-
+    arrange(binomial_dens, p) %>%
+    mutate(reject = (cumsum(p) <= alpha))
+```
+
+```{r tosshist2, echo = FALSE, fig.cap = "Binomial density of for an unbiased coin to get 0 to 100 heads. The areas in red sum to 0.05."}
+ggplot(binomial_dens) +
+    geom_bar(aes(x = k, y = p, fill = reject), stat = "identity") +
+    scale_fill_manual(
+        values = c(`TRUE` = "red", `FALSE` = "#5a5a5a")) + 
+    geom_vline(xintercept = num_heads, col = "blue") +
+    theme(legend.position = "none")
+```
+
+We can also compute the p-value, the tells us how likely we are to see
+such a extreme or more extreme value under $H_0$.
+
+```{r binom_test}
+binom.test(x = 62, n = 100, p = 0.5)
+```
+
+See below for a step by step guide to this example.
 
 ## A biological example
 
@@ -121,3 +193,130 @@ samples against the 3 last samples. Verify that you identify about 5
 p-values smaller that 0.05. Visualise and interprete the histogramme
 of these p-values.
 `r msmbstyle::question_end()`
+
+
+### The coin example, step by step {-}
+
+> This step by step example is taken from Oliver Crook's intro lecture
+> on statistics from the [2019 Bioinformatics Summer
+> School](https://uclouvain-cbio.github.io/BSS2019/) at the UCLouvain.
+
+The following code chunk simulates 100 coin toss from a biased coin.
+
+```{r}
+set.seed(2) 
+n <- 100
+p <- 0.59
+flips <- sample(c("H", "T"), size = n,
+                replace = TRUE,
+                prob = c(p, 1 - p))
+```
+
+If the coin were unbiased we expect roughly 50 heads. Let us see how
+many heads and tails there are.
+
+```{r}
+table(flips)
+```
+
+We calculate the binomial statistic for a number of flips between 0
+and 100. This is the binomial density for an unbiased coin.
+
+```{r}
+library("dplyr")
+num_heads <- sum(flips == "H")
+binomial_dens <-
+    tibble(k = 0:n) %>%
+    mutate(p = dbinom(k, size = n, prob = 0.5))
+```
+
+`r msmbstyle::question_begin()`
+- Write some code to check that the probabilties from the binomial
+  statistic sum to $1$.
+
+- Change the `prob` argument and show that the probabilities still sum
+  to $1$.
+`r msmbstyle::question_end()`
+
+The following code chunk plots the binomial statistic and the number
+of heads observed is marked in blue.
+
+
+```{r,}
+library("ggplot2")
+ggplot(binomial_dens, aes(x = k, y = p)) +
+    geom_bar(stat = "identity") +
+    geom_vline(xintercept = num_heads)
+```
+
+`r msmbstyle::question_begin()`
+- Change the prob argument above and re-plot the binomial statistic,
+  what do you notice about how the distribution is centered?
+`r msmbstyle::question_end()`
+
+Now, we set the size of the reject threshold, this is a choice and
+corresponds to how many false discoveries we are happy to allow.
+
+```{r}
+alpha <- 0.05
+```
+
+`r msmbstyle::question_begin()`
+- Without looking below use the arrange function from `dplyr` to order
+  the probabilities, smallest first.
+
+- Looking at the output, what is the most unlikely number of heads to
+  observe?
+
+- Looking at the output, what is the most likely number of heads to
+  observe?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+binomial_dens %>%
+    filter(p == max(p))
+
+binomial_dens %>%
+    filter(p == min(p))
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+
+- What does the following code chunk do?
+
+
+```{r}
+binomial_dens <-
+    arrange(binomial_dens, p) %>%
+    mutate(reject = (cumsum(p) <= alpha))
+
+```
+`r msmbstyle::question_end()`
+
+
+Let us plot the reject region in red
+
+```{r}
+ggplot(binomial_dens) +
+    geom_bar(aes(x = k, y = p, fill = reject), stat = "identity") +
+    scale_fill_manual(
+        values = c(`TRUE` = "red", `FALSE` = "#5a5a5a")) + 
+    geom_vline(xintercept = num_heads, col = "blue") +
+    theme(legend.position = "none")
+```
+
+`r msmbstyle::question_begin()`
+- Is there evidence that our coin is biased?
+- Change the size of the reject region to a smaller value, what is our
+  conclusion now?
+`r msmbstyle::question_end()`
+
+
+The above test already has an easy to use funciton in R:
+
+```{r}
+binom.test(x = num_heads, n = n, p = 0.5)
+```
