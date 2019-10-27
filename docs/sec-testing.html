@@ -118,8 +118,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="toc"><a href="#a-biological-example"> A biological example</a></li>
 <li class="toc"><a href="#a-more-realistic-biological-example"> A more realistic biological example</a></li>
 <li class="toc"><a href="#adjustment-for-multiple-testing"> Adjustment for multiple testing</a></li>
-<li class="toc"><a href="#linear-regression"> Linear regression</a></li>
-<li class="toc"><a href="#empirical-approximations"> Empirical approximations</a></li>
 <li class="toc"><a href="#a-word-of-caution"> A word of caution</a></li>
 <li class="toc"><a href="#additional-exercises-5"> Additional exercises</a></li>
 </ul>
@@ -141,7 +139,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <html><body><div id="sec:testing" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 7</span> Hypothesis testing</h1>
-<p>For prerequisites within the Biomedical sciences masters degree at the UCLouvain, see <em>WFARM1247</em> (Traitement statistique des données).</p>
+<p>The goal of this chapter is to demonstrate some of the fundamentals of hypothesis testing as used in bioinformatics. For prerequisites within the Biomedical sciences masters degree at the UCLouvain, see <em>WFARM1247</em> (Traitement statistique des données).</p>
 <div id="refresher" class="section level2">
 <h2>
 <span class="header-section-number">7.1</span> Refresher</h2>
@@ -273,7 +271,15 @@ Figure 7.3: Expression of a gene in two populations with randomly chosen triplic
 t = \frac{ \bar X_{1} - \bar X_{2} }
          { \sqrt{ \frac{ s_{1}^{2} }{ N_{1} } \frac{ s_{2}^{2} }{ N_{2} } } }
 \]</span></p>
-<p>where <span class="math inline">\(\bar X_i\)</span>, <span class="math inline">\(s_{i}^{2}\)</span> and <span class="math inline">\(N_i\)</span> are the mean, variance and size of samples 1 and 2. In R, we do this with</p>
+<p>where <span class="math inline">\(\bar X_i\)</span>, <span class="math inline">\(s_{i}^{2}\)</span> and <span class="math inline">\(N_i\)</span> are the mean, variance and size of samples 1 and 2.</p>
+<p>A t-test has the following assumptions:</p>
+<ul>
+<li>the data is normally distributed.</li>
+<li>the data are independent and identically distributed.</li>
+<li>equal or un-equal (Welch test) variances.</li>
+</ul>
+<p>Note that the t-test is robust to deviations<label for="tufte-sn-10" class="margin-toggle sidenote-number">10</label><input type="checkbox" id="tufte-sn-10" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">10</span> All models are wrong. Some are useful.</span>.</p>
+<p>In R, we do this with</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(s1, s2)</code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
@@ -478,34 +484,98 @@ Figure 7.7: Principle behind the false discovery rate p-value adjustment (<a hre
 </p>
 </div>
 </div>
-</div>
-<div id="linear-regression" class="section level2">
-<h2>
-<span class="header-section-number">7.5</span> Linear regression</h2>
-</div>
-<div id="empirical-approximations" class="section level2">
-<h2>
-<span class="header-section-number">7.6</span> Empirical approximations</h2>
-<ul>
-<li>Bootstrapping to generate null distributions</li>
-</ul>
+<!-- TODO -->
+<!-- ## Linear regression -->
+<!-- Suggested TODO  -->
+<!-- ## Empirical approximations  -->
+<!-- - Bootstrapping to generate null distributions -->
 </div>
 <div id="a-word-of-caution" class="section level2">
 <h2>
-<span class="header-section-number">7.7</span> A word of caution</h2>
-<ul>
-<li>p-hacking and p-harking</li>
-</ul>
+<span class="header-section-number">7.5</span> A word of caution</h2>
+<p>Summary of statistical inference:</p>
+<ol style="list-style-type: decimal">
+<li><p>Set up a model of reality: null hypothesis <span class="math inline">\(H_0\)</span> (no difference) and <em>alternative hypothesis</em> <span class="math inline">\(H_1\)</span> (there is a difference).</p></li>
+<li><p>Do an experiment to collect data.</p></li>
+<li><p>Perform the statistical inference with the collected data.</p></li>
+<li><p>Make a decision: reject <span class="math inline">\(H_0\)</span> if the computed probability is deemed too small.</p></li>
+</ol>
+<p>What not to do:</p>
+<div id="p-hacking" class="section level3 unnumbered">
+<h3>p-hacking</h3>
+<p>Instead of setting up one statistical hypothesis before data collection and then testing it, collect data at large, then try lots of different tests until one give a statistically significant result <span class="citation">(Head et al. <label for="tufte-mn-19" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-19" class="margin-toggle">2015<span class="marginnote">Head, M. L., L. Holman, R. Lanfear, A. T. Kahn, and M. D. Jennions. 2015. “The extent and consequences of p-hacking in science.” <em>PLoS Biol</em> 13: e1002106. doi:<a href="https://doi.org/10.1371/journal.pbio.1002106">10.1371/journal.pbio.1002106</a>.</span>)</span>.</p>
+</div>
+<div id="p-harking" class="section level3 unnumbered">
+<h3>p-harking</h3>
+<p>HARKing (Hypothesizing After the Results are Known) is the fraudulous practice of presenting a post hoc hypothesis, i.e., one based on prior result, as a priori hypotheses <span class="citation">(Kerr <label for="tufte-mn-20" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-20" class="margin-toggle">1998<span class="marginnote">Kerr, N. L. 1998. “HARKing: hypothesizing after the results are known.” <em>Pers Soc Psychol Rev</em> 2: 196–217. doi:<a href="https://doi.org/10.1207/s15327957pspr0203_4">10.1207/s15327957pspr0203_4</a>.</span>)</span>.</p>
+</div>
 </div>
 <div id="additional-exercises-5" class="section level2">
 <h2>
-<span class="header-section-number">7.8</span> Additional exercises</h2>
+<span class="header-section-number">7.6</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Generate random data using <code>rnorm</code> for 100 genes and 6 samples and test for differential expression, comparing for each gene the 3 first samples against the 3 last samples. Verify that you identify about 5 p-values smaller that 0.05. Visualise and interprete the histogramme of these p-values.</p>
+<ul>
+<li><p>Draw three values from two distributions <span class="math inline">\(N(6, 2)\)</span> and <span class="math inline">\(N(8, 2)\)</span>, perform a t-test and interpret the results.</p></li>
+<li><p>Repeat the above experiment multiple times. Do you get <em>similar</em> results? Why?</p></li>
+<li><p>Repeat with values from distributions <span class="math inline">\(N(5, 1)\)</span> and <span class="math inline">\(N(8, 1)\)</span>.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Generate random data using <code>rnorm</code> for 100 genes and 6 samples and test for differential expression, comparing for each gene the 3 first samples against the 3 last samples. Verify that you identify about 5 p-values smaller that 0.05. Visualise and interprete the histogram of these p-values.</p></li>
+<li><p>Adjust the 100 p-values for multiple testing and compare the initial and adjusted p-values.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>We have used two-sided two-sample t-tests above. Also familiarise yourselves with one-sided, one-sample and paired tests. In particular, verify how to implement these with the <code>t.test</code> function.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Simulate a dataset of log2 fold-changes measured in triplicate for 1000 genes.</p>
+<ul>
+<li><p>What function would you use to generate these data?</p></li>
+<li><p>What test would you use to test for differential expression? Apply it to calculate 1000 p-values.</p></li>
+<li><p>Visualise and interpret the histogram of p-values.</p></li>
+<li><p>FDR-adjust the p-values.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Load the <code>tdata2</code> dataset from the <code>rWSBIM1322</code> package. These data represent the measurement of a inflammation biomarker in the blood of 15 patients, before and after treatment for a acute liver inflammation. Visualise the data and run a test to verify if the treatment has had an effect or not.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -553,7 +623,7 @@ binomial_dens &lt;-
 <span class="kw">ggplot</span>(binomial_dens, <span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> p)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">"identity"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-37-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-39-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -630,7 +700,7 @@ binomial_dens &lt;-
         <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">TRUE</span><span class="st">`</span> =<span class="st"> "red"</span>, <span class="st">`</span><span class="dt">FALSE</span><span class="st">`</span> =<span class="st"> "#5a5a5a"</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads, <span class="dt">col =</span> <span class="st">"blue"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-41-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-43-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
 ► Question

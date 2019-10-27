@@ -140,7 +140,21 @@ t = \frac{ \bar X_{1} - \bar X_{2} }
 $$
 
 
-where $\bar X_i$, $s_{i}^{2}$ and $N_i$ are the mean, variance and size of samples 1 and 2. In R, we do this with
+where $\bar X_i$, $s_{i}^{2}$ and $N_i$ are the mean, variance and size of samples 1 and 2. 
+
+
+A t-test has the following assumptions:
+
+- the data is normally distributed.
+- the data are independent and identically distributed.
+- equal or un-equal (Welch test) variances.
+
+Note that the t-test is robust to deviations[^models].
+
+[^models]: All models are wrong. Some are useful.
+
+
+In R, we do this with
 
 ```{r}
 t.test(s1, s2)
@@ -149,6 +163,8 @@ t.test(s1, s2)
 Note that in practice, we would apply moderated versions of the
 t-test, such as the one provided in the `r Biocpkg("limma")` package 
 and also widely applied to RNA-Seq count data.
+
+
 
 ## A more realistic biological example
 
@@ -320,16 +336,47 @@ min(adj_pvals)
 ```
 `r msmbstyle::solution_end()`
 
-## Linear regression
 
-## Empirical approximations 
+## Result visualisation
 
-- Bootstrapping to generate null distributions
+
+<!-- TODO -->
+
+<!-- ## Linear regression -->
+
+<!-- Suggested TODO  -->
+
+<!-- ## Empirical approximations  -->
+<!-- - Bootstrapping to generate null distributions -->
+
 
 ## A word of caution
 
-- p-hacking and p-harking
+Summary of statistical inference:
 
+1. Set up a model of reality: null hypothesis $H_0$ (no difference) and *alternative hypothesis*
+   $H_1$ (there is a difference).
+
+2. Do an experiment to collect data.
+
+3. Perform the statistical inference with the collected data.
+
+4. Make a decision: reject $H_0$ if the computed probability is deemed too small.
+
+What not to do:
+
+### p-hacking {-}
+
+Instead of setting up one statistical hypothesis before data
+collection and then testing it, collect data at large, then try lots
+of different tests until one give a statistically significant result
+[@Head:2015].
+
+### p-harking {-}
+
+HARKing (Hypothesizing After the Results are Known) is the fraudulous
+practice of presenting a post hoc hypothesis, i.e., one based on prior
+result, as a priori hypotheses [@Kerr:1998].
 
 ## Additional exercises
 
@@ -338,21 +385,84 @@ min(adj_pvals)
 
 - Draw three values from two distributions $N(6, 2)$ and $N(8, 2)$, perform a t-test and interpret the results.
 
-- Repeat the above experiment multiple times. Do you get the *same* results? Why?
+- Repeat the above experiment multiple times. Do you get *similar* results? Why?
 
-- Repeat with values from distributions $N(6, 3)$ and $N(7, 2)$.
+- Repeat with values from distributions $N(5, 1)$ and $N(8, 1)$.
 
+`r msmbstyle::question_end()`
+
+```{r, include = FALSE}
+s1 <- rnorm(3, 6, 2)
+s2 <- rnorm(3, 8, 2)
+t.test(s1, s2)
+
+s1 <- rnorm(3, 5, 1)
+s2 <- rnorm(3, 8, 1)
+t.test(s1, s2)
+```
+
+`r msmbstyle::question_begin()`
+- Generate random data using `rnorm` for 100 genes and 6 samples and
+  test for differential expression, comparing for each gene the 3
+  first samples against the 3 last samples. Verify that you identify
+  about 5 p-values smaller that 0.05. Visualise and interprete the
+  histogram of these p-values.
+  
+- Adjust the 100 p-values for multiple testing and compare the initial
+  and adjusted p-values. 
+`r msmbstyle::question_end()`
+
+`r msmbstyle::question_begin()`
+We have used two-sided two-sample t-tests above. Also familiarise
+yourselves with one-sided, one-sample and paired tests. In particular,
+verify how to implement these with the `t.test` function.
 `r msmbstyle::question_end()`
 
 
 `r msmbstyle::question_begin()`
-Generate random data using `rnorm` for 100 genes and 6 samples and
-test for differential expression, comparing for each gene the 3 first
-samples against the 3 last samples. Verify that you identify about 5
-p-values smaller that 0.05. Visualise and interprete the histogramme
-of these p-values.
+
+Simulate a dataset of log2 fold-changes measured in triplicate for
+1000 genes. 
+
+- What function would you use to generate these data?
+
+- What test would you use to test for differential expression? Apply
+  it to calculate 1000 p-values.
+
+- Visualise and interpret the histogram of p-values.
+
+- FDR-adjust the p-values.
+
 `r msmbstyle::question_end()`
 
+
+
+`r msmbstyle::question_begin()`
+
+Load the `tdata2` dataset from the `rWSBIM1322` package. These data
+represent the measurement of a inflammation biomarker in the blood of
+15 patients, before and after treatment for a acute liver
+inflammation.  Visualise the data and run a test to verify if the
+treatment has had an effect or not.
+`r msmbstyle::question_end()`
+
+```{r, include = FALSE}
+library("rWSBIM1322")
+data(tdata2)
+tdata2$patient <- 1:15
+
+library("tidyverse")
+gather(tdata2, key = time, value = biomarker, -patient) %>%
+    ggplot(aes(x = factor(time, levels = c("before", "after")), y = biomarker)) +
+    geom_boxplot() +
+    geom_point(aes(colour = factor(patient)), size = 3) +
+    geom_segment(data = tdata2,
+                 aes(x = 1, xend = 2,
+                     y = before, yend = after),
+                     colour = "black")
+
+t.test(tdata2$before, tdata2$after, paired = TRUE)
+```
 
 ### The coin example, step by step {-}
 
