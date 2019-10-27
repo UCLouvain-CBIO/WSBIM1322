@@ -404,9 +404,17 @@ pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(log_tdata1, <s
 </p>
 </div>
 </div>
-<p>To answer these questions, let’s visualise the calculated p-values with a histogramme.</p>
+<p>To answer these questions, let’s refer to <a href="https://xkcd.com/882/">this xkcd cartoon</a> that depicts scientists testing whether eating jelly beans causes acne.</p>
+<div class="figure" style="text-align: center">
+<span id="fig:unnamed-chunk-31"></span>
+<p class="caption marginnote shownote">
+Figure 7.4: Do jelly beans cause acne? Scientists investigate. From <a href="https://xkcd.com/882/">xkcd</a>.
+</p>
+<img src="figs/jellybeans.png" alt="Do jelly beans cause acne? Scientists investigate. From [xkcd](https://xkcd.com/882/)." width="700">
+</div>
+<p>More formally, let’s visualise the calculated p-values with a histogramme.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(pvals)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-31-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-32-1.png" width="672"></p>
 </div>
 <div id="adjustment-for-multiple-testing" class="section level2">
 <h2>
@@ -492,7 +500,7 @@ binomial_dens &lt;-
 <span class="kw">ggplot</span>(binomial_dens, <span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> p)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">"identity"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-36-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-37-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -569,7 +577,7 @@ binomial_dens &lt;-
         <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">TRUE</span><span class="st">`</span> =<span class="st"> "red"</span>, <span class="st">`</span><span class="dt">FALSE</span><span class="st">`</span> =<span class="st"> "#5a5a5a"</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads, <span class="dt">col =</span> <span class="st">"blue"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-40-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-41-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
 ► Question

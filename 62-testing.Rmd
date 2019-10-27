@@ -226,12 +226,23 @@ samples.
 `r msmbstyle::question_end()`
 
 
-To answer these questions, let's visualise the calculated p-values
-with a histogramme.
+To answer these questions, let's refer to [this xkcd
+cartoon](https://xkcd.com/882/) that depicts scientists testing
+whether eating jelly beans causes acne.
+
+
+```{r, results='markup', fig.cap="Do jelly beans cause acne? Scientists investigate. From [xkcd](https://xkcd.com/882/).", echo=FALSE, purl=FALSE, fig.align='center'}
+knitr::include_graphics("./figs/jellybeans.png")
+```
+
+More formally, let's visualise the calculated p-values with a histogramme.
+
 
 ```{r}
 hist(pvals)
 ```
+
+
 
 ## Adjustment for multiple testing
 
