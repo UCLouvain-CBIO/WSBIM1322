@@ -264,9 +264,9 @@ Figure 7.3: Expression of a gene in two populations with randomly chosen triplic
 <p>We set our hypothesis as</p>
 <ul>
 <li>
-<span class="math inline">\(H_0\)</span>: the means of the two groups are the same.</li>
+<span class="math inline">\(H_0\)</span>: the means of the two groups are the same, <span class="math inline">\(\mu_{1} = \mu_{2}\)</span>.</li>
 <li>
-<span class="math inline">\(H_1\)</span>: the means of the two groups are different.</li>
+<span class="math inline">\(H_1\)</span>: the means of the two groups are different, <span class="math inline">\(\mu_{1} \neq \mu_{2}\)</span>.</li>
 </ul>
 <p>and calculate a two-sided, two-sample t-test (assuming unequal variances) with</p>
 <p><span class="math display">\[
@@ -412,19 +412,72 @@ Figure 7.4: Do jelly beans cause acne? Scientists investigate. From <a href="htt
 </p>
 <img src="figs/jellybeans.png" alt="Do jelly beans cause acne? Scientists investigate. From [xkcd](https://xkcd.com/882/)." width="700">
 </div>
-<p>More formally, let’s visualise the calculated p-values with a histogramme.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(pvals)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-32-1.png" width="672"></p>
+<p>The data that was used to calculate the p-values was all drawn from the same distribution <span class="math inline">\(N(10, 2)\)</span>.</p>
+<p>As a result, we should not expect to find a statistically significant result, unless we repeat the test enought times. Enough here depends on the <span class="math inline">\(\alpha\)</span> we set to control the type I error. If we set <span class="math inline">\(\alpha\)</span> to 0.05, we accept that rejecting <span class="math inline">\(H_{0}\)</span> in 5% of the extreme cases where we shouldn’t reject it. This is an acceptable threshold that however doesn’t hold when we repeat the test many time.</p>
+<p>An important visualistion when performing statistical test repeatedly, is to visualise the distribution of computed p-values. Below, we see the histogram of the <code>tdata1</code> data and 100 values drawn from a uniform distribution between 0 and 1. Both are very similar; they are flat.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">hist</span>(pvals)
+<span class="kw">hist</span>(<span class="kw">runif</span>(<span class="dv">100</span>))</code></pre></div>
+<div class="figure">
+<span id="fig:pvalhist"></span>
+<p class="caption marginnote shownote">
+Figure 7.5: Distribution of p-values for the <code>tdata1</code> dataset (left) and 100 (p-)values uniformely distributed between 0 and 1 (right).
+</p>
+<img src="WSBIM1322_files/figure-html/pvalhist-1.png" alt="Distribution of p-values for the `tdata1` dataset (left) and 100 (p-)values uniformely distributed between 0 and 1 (right)." width="672">
+</div>
+<p>Below we see the expected trends of p-values for different scenarios. This example comes from the <a href="http://varianceexplained.org/statistics/interpreting-pvalue-histogram/">Variance explained</a>.</p>
+<div class="figure" style="text-align: center">
+<span id="fig:pvalhists2"></span>
+<p class="caption marginnote shownote">
+Figure 7.6: Expected trends of p-values for different scenarios (<a href="http://varianceexplained.org/statistics/interpreting-pvalue-histogram/">source</a>).
+</p>
+<img src="figs/plot_melted-1.png" alt="Expected trends of p-values for different scenarios ([source](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/))." width="100%">
+</div>
+<p>In an experiment with enough truly differentially expression features, on expects to observe a substantial increase of small p-values (anti-conservative). In other words, we expect to see more small p-values that at random, or when no statistically significant are present (uniform). All other scenarios warrent further inspection, as they might point to issue with the data of the tests.</p>
 </div>
 <div id="adjustment-for-multiple-testing" class="section level2">
 <h2>
 <span class="header-section-number">7.4</span> Adjustment for multiple testing</h2>
-<p>Given the multitue of test, the type I error is not controlled anymore. We need to take this into account and adjust the p-values for multiple testing. Below we apply the Benjamini-Hochberg procedure using the <code>p.adjust</code> function and confirm that none of the features are differentially expressed.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">adj_pvals &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">"BH"</span>)
-<span class="kw">any</span>(adj_pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</code></pre></div>
+<p>There are two classes of multiple testing adjumstment methods:</p>
+<ul>
+<li><p><strong>Family-wise error rate</strong> (FWER) that gives the probability of one or more false positives. The <strong>Bonferroni correction</strong> for <em>m</em> tests multiplies each p-value by <em>m</em>. One then checks if any results still remains below significance threshold.</p></li>
+<li><p><strong>False discovery rate</strong> (FDR) that computes the expected fraction of false positives among all discoveries. It allows us to choose <em>n</em> results with a given FDR. Widely used examples are Benjamini-Hochberg or q-values.</p></li>
+</ul>
+<p>The figure below illustrates the principle behind the FDR adjustment. The procedure estimate the proportion of hypthesis that are null and then adjust the p-values accordingly.</p>
+<div class="figure" style="text-align: center">
+<span id="fig:fdrhist"></span>
+<p class="caption marginnote shownote">
+Figure 7.7: Principle behind the false discovery rate p-value adjustment (<a href="http://varianceexplained.org/statistics/interpreting-pvalue-histogram/">source</a>).
+</p>
+<img src="figs/fdr.png" alt="Principle behind the false discovery rate p-value adjustment ([source](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/))." width="100%">
+</div>
+<p>Back to our <code>tdata1</code> example, we need to take this into account and adjust the p-values for multiple testing. Below we apply the Benjamini-Hochberg FDR procedure using the <code>p.adjust</code> function and confirm that none of the features are differentially expressed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">adj_pvals &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">"BH"</span>)</code></pre></div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Are there any adjusted p-values that are still significant?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-36" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-36', 'sol-start-36')"></span>
+</p>
+<div id="sol-body-36" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">any</span>(adj_pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(adj_pvals)</code></pre></div>
 <pre><code>## [1] 0.899736</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 </div>
 <div id="linear-regression" class="section level2">
 <h2>
@@ -533,9 +586,9 @@ binomial_dens &lt;-
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-36" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-36', 'sol-start-36')"></span>
+► Solution<span id="sol-start-37" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-37', 'sol-start-37')"></span>
 </p>
-<div id="sol-body-36" class="solution-body" style="display: none;">
+<div id="sol-body-37" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">binomial_dens <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">filter</span>(p <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(p))</code></pre></div>
 <pre><code>## # A tibble: 1 x 2

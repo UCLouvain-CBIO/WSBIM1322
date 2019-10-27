@@ -1,7 +1,9 @@
 # Hypothesis testing {#sec:testing}
 
-For prerequisites within the Biomedical sciences masters degree at the
-UCLouvain, see *WFARM1247* (Traitement statistique des données).
+The goal of this chapter is to demonstrate some of the fundamentals of
+hypothesis testing as used in bioinformatics. For prerequisites within
+the Biomedical sciences masters degree at the UCLouvain, see
+*WFARM1247* (Traitement statistique des données).
 
 ## Refresher
 
@@ -126,8 +128,8 @@ knitr::kable(df)
 
 We set our hypothesis as
 
-- $H_0$: the means of the two groups are the same.
-- $H_1$: the means of the two groups are different.
+- $H_0$: the means of the two groups are the same, $\mu_{1} = \mu_{2}$.
+- $H_1$: the means of the two groups are different, $\mu_{1} \neq \mu_{2}$.
 
 and calculate a two-sided, two-sample t-test (assuming unequal
 variances) with
@@ -235,28 +237,88 @@ whether eating jelly beans causes acne.
 knitr::include_graphics("./figs/jellybeans.png")
 ```
 
-More formally, let's visualise the calculated p-values with a histogramme.
+The data that was used to calculate the p-values was all drawn from the same distribution $N(10, 2)$.
+
+As a result, we should not expect to find a statistically significant
+result, unless we repeat the test enought times. Enough here depends 
+on the $\alpha$ we set to control the type I error. If we set $\alpha$ 
+to 0.05, we accept that rejecting $H_{0}$ 
+in 5% of the extreme cases where we shouldn't reject it. This is an
+acceptable threshold that however doesn't hold when we repeat the test
+many time.
 
 
-```{r}
+An important visualistion when performing statistical test repeatedly,
+is to visualise the distribution of computed p-values. Below, we see
+the histogram of the `tdata1` data and 100 values drawn from a uniform
+distribution between 0 and 1. Both are very similar; they are flat.
+
+
+```{r pvalhist, fig.cap = "Distribution of p-values for the `tdata1` dataset (left) and 100 (p-)values uniformely distributed between 0 and 1 (right)."}
+par(mfrow = c(1, 2))
 hist(pvals)
+hist(runif(100))
 ```
 
+Below we see the expected trends of p-values for different
+scenarios. This example comes from the [Variance
+explained](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/).
+
+```{r pvalhists2, results='markup', fig.cap="Expected trends of p-values for different scenarios ([source](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/)).", echo=FALSE, purl=FALSE, fig.align='center', out.width='100%', fig.align='center'}
+knitr::include_graphics("./figs/plot_melted-1.png")
+```
+
+In an experiment with enough truly differentially expression features,
+on expects to observe a substantial increase of small p-values
+(anti-conservative). In other words, we expect to see more small
+p-values that at random, or when no statistically significant are
+present (uniform). All other scenarios warrent further inspection, as
+they might point to issue with the data of the tests.
 
 
 ## Adjustment for multiple testing
 
-Given the multitue of test, the type I error is not controlled
-anymore. We need to take this into account and adjust the p-values for
-multiple testing. Below we apply the Benjamini-Hochberg procedure
-using the `p.adjust` function and confirm that none of the features
-are differentially expressed.
+There are two classes of multiple testing adjumstment methods:
+
+- **Family-wise error rate** (FWER) that gives the probability of one
+  or more false positives. The **Bonferroni correction** for *m* tests
+  multiplies each p-value by *m*. One then checks if any results still
+  remains below significance threshold.
+
+- **False discovery rate** (FDR) that computes the expected fraction
+  of false positives among all discoveries. It allows us to choose *n*
+  results with a given FDR. Widely used examples are
+  Benjamini-Hochberg or q-values.
+
+
+The figure below illustrates the principle behind the FDR
+adjustment. The procedure estimate the proportion of hypthesis that
+are null and then adjust the p-values accordingly.
+
+```{r fdrhist, results='markup', fig.cap="Principle behind the false discovery rate p-value adjustment ([source](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/)).", echo=FALSE, purl=FALSE, fig.align='center', out.width='100%', fig.align='center'}
+knitr::include_graphics("./figs/fdr.png")
+```
+
+Back to our `tdata1` example, we need to take this into account and
+adjust the p-values for multiple testing. Below we apply the
+Benjamini-Hochberg FDR procedure using the `p.adjust` function and
+confirm that none of the features are differentially expressed.
 
 ```{r}
 adj_pvals <- p.adjust(pvals, method = "BH")
+```
+
+`r msmbstyle::question_begin()`
+Are there any adjusted p-values that are still significant?
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r}
 any(adj_pvals < 0.05)
 min(adj_pvals)
 ```
+`r msmbstyle::solution_end()`
 
 ## Linear regression
 
@@ -270,6 +332,18 @@ min(adj_pvals)
 
 
 ## Additional exercises
+
+
+`r msmbstyle::question_begin()`
+
+- Draw three values from two distributions $N(6, 2)$ and $N(8, 2)$, perform a t-test and interpret the results.
+
+- Repeat the above experiment multiple times. Do you get the *same* results? Why?
+
+- Repeat with values from distributions $N(6, 3)$ and $N(7, 2)$.
+
+`r msmbstyle::question_end()`
+
 
 `r msmbstyle::question_begin()`
 Generate random data using `rnorm` for 100 genes and 6 samples and
