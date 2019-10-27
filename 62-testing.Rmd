@@ -80,17 +80,83 @@ such a extreme or more extreme value under $H_0$.
 binom.test(x = 62, n = 100, p = 0.5)
 ```
 
+Whenever we make such a decision, we will be in one of the following situations:
+
+|                     | $H_0$ is true           | $H_1$ is true            |
+|---------------------|-------------------------|--------------------------|
+| Reject $H_0$        | Type I (false positive) | True positive            |
+| Do not reject $H_0$ | True negative           | Type II (false negative) |
+
+
 See below for a step by step guide to this example.
 
 ## A biological example
 
-We are going to use the `tdata1` dataset from the `rWSBIM1322` package
-that provide gene expression data for 100 genes and 6 samples, three
-in group A and 3 in group B.
+A typical biological example consists in measuring a gene of interest
+in two populations of interest (say control and group), represented by
+biological replicates. The figure below represents the distribution of
+the gene of interest in the two populations, with the expression
+intensities of triplicates in each population. 
+
+```{r exdists, echo = FALSE, fig.cap = "Expression of a gene in two populations with randomly chosen triplicates."}
+set.seed(123)
+s1 <- rnorm(3, 6, 1.2)
+s2 <- rnorm(3, 11, 1.5)
+tibble(groups = rep(c("control", "group"), each = 100),
+       expression = c(rnorm(100, 6, 1.2), rnorm(100, 11, 1.5))) %>%
+    ggplot(aes(x = expression, fill = groups, colour = groups)) +
+    geom_density(alpha = 0.5) +
+    geom_vline(xintercept = s1, colour = "#F8766D") +
+    geom_vline(xintercept = s2, colour = "#00BFC4")
+```
+
+We don't have access to the whole population and thus use a sample
+thereof (the replicated measurements) to estimate the population
+parameters. We have
+
+```{r extab, echo = FALSE}
+df <- data.frame(control = s1, group = s2)
+df <- rbind(df,
+            c(mean(s1), mean(s2)),
+            c(sd(s1), sd(s2)))
+rownames(df) <- c(paste("rep", 1:3, sep = "."),
+                  "mean", "sd")
+knitr::kable(df)
+```
+
+We set our hypothesis as
+
+- $H_0$: the means of the two groups are the same.
+- $H_1$: the means of the two groups are different.
+
+and calculate a two-sided, two-sample t-test (assuming unequal
+variances) with
+
+$$
+t = \frac{ \bar X_{1} - \bar X_{2} }
+         { \sqrt{ \frac{ s_{1}^{2} }{ N_{1} } \frac{ s_{2}^{2} }{ N_{2} } } }
+$$
+
+
+where $\bar X_i$, $s_{i}^{2}$ and $N_i$ are the mean, variance and size of samples 1 and 2. In R, we do this with
+
+```{r}
+t.test(s1, s2)
+```
+
+Note that in practice, we would apply moderated versions of the
+t-test, such as the one provided in the `r Biocpkg("limma")` package 
+and also widely applied to RNA-Seq count data.
+
+## A more realistic biological example
+
+Let's now use the `tdata1` dataset from the `rWSBIM1322` package that
+provide gene expression data for 100 genes and 6 samples, three in
+group A and 3 in group B.
 
 ```{r}
 library("rWSBIM1322")
-data(tdata2)
+data(tdata1)
 head(tdata1)
 ```
 
@@ -108,10 +174,10 @@ limma::plotDensities(log_tdata1)
 ```
 `r msmbstyle::solution_end()`
 
-
 We are now going to apply a t-test to feature 73, comparing the
 expression intensities in groups A and B. In R, this can be done with
 the `t.test` function:
+
 
 ```{r}
 x <- log_tdata1[73, ]
@@ -120,21 +186,26 @@ t.test(x[1:3], x[4:6])
 
 `r msmbstyle::question_begin()`
 - Interpret the results of the test above.
-- Repeat it on another features.
+- Repeat it with another features.
 `r msmbstyle::question_end()`
 
 
 `r msmbstyle::question_begin()`
 We would now like to repeat the same analysis on the 100 genes. 
+
 - Write a function that will take a vector as input and perform a
   t-test of the first values (our group A) against the 3 last values
   (our group B) and returns the p-values.
+  
 - Apply the test to all the genes.
+
 - How many significantly differentically expressed genes do you find?
   What features are of possible biological interest?
+  
 `r msmbstyle::question_end()`
 
 
+`r msmbstyle::solution_begin()`
 ```{r}
 my_t_test <- function(x) {
     t.test(x[1:3], x[4:6])$p.value
@@ -143,6 +214,8 @@ pvals <- apply(log_tdata1, 1, my_t_test)
 table(pvals < 0.05)
 head(sort(pvals))
 ```
+`r msmbstyle::solution_end()`
+
 
 `r msmbstyle::question_begin()`
 The data above have been generated with the `rnorm` function for all
@@ -153,7 +226,8 @@ samples.
 `r msmbstyle::question_end()`
 
 
-
+To answer these questions, let's visualise the calculated p-values
+with a histogramme.
 
 ```{r}
 hist(pvals)
