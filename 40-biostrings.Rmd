@@ -382,7 +382,7 @@ letterFrequency(chr14_dna, c("A", "G", "C", "T"), as.prob = TRUE)
 ## Additional exercises
 
 `r msmbstyle::question_begin()`
-Focusing on the region from base 10 to 10.1 million along chromosome
+Focusing on the region from base 100 million to 101 million along chromosome
 14, calculate the GC content across a sliding window of 1000
 nucleotides (you can use the `letterFrequencyInSlidingView` functionn)
 and visualise it (see an example below). On that plot, show the mean
@@ -391,13 +391,13 @@ GC content and highlight the regions that have a GC content > 0.7 and
 `r msmbstyle::question_end()`
 
 
-```{r, echo = FALSE, fig.cap = "GC content for chomosome 14 (10 - 10.1 Mb)"}
-x <- subseq(chr14_dna[[1]], 10 * 10e6, 10.1 * 10e6)
+```{r, echo = FALSE, fig.cap = "GC content for chomosome 14 (100 - 101 Mb)"}
+x <- subseq(chr14_dna[[1]], 100 * 1e6, 101 * 1e6)
 gc_content <- letterFrequencyInSlidingView(x, 1e3,
                                            letters = "GC",
                                            as.prob = TRUE)
-
-plot(gc_content, type = "l", main = "Chromosome 14: 10 - 10.1 Mb")
+plot(gc_content, type = "l",
+     main = "Chromosome 14: 100 - 101 Mb")
 abline(h = mean(gc_content))
 abline(v = which(gc_content > 0.7), col = "#FF0000")
 abline(v = which(gc_content < 0.3), col = "#0000FF")
