@@ -440,7 +440,7 @@ identifiers from that vector and the names of the `AAStringSet`
 above.
 `r msmbstyle::question_end()`
 
-```{r pattern2, message = FALSE, echo = FALSE, include = FALSE}
+```{r pattern2, message = FALSE, include = FALSE}
 library("rWSBIM1322")
 data(up_selected)
 head(up_selected)
@@ -462,13 +462,13 @@ The identification of patterns in sequences (not specifically
 biological sequences) is called pattern matching, which defines a
 whole syntax to define patterns. In particular, it is possible to
 define *letter D or E* as `[DE]`. To find the pattern of interest, use
-the `str_detect` function from the `stringi` package.
+the `str_detect` function from the `stringr` package.
 `r msmbstyle::question_end()`
 
 
 
-```{r pattern3, echo = FALSE, include = FALSE}
-library("stringi")
+```{r pattern3, include = FALSE}
+library("stringr")
 ## Which ones have the pattern?
 sel <- str_detect(as.character(up2), "[DE][DE]VF")
 table(sel)
@@ -490,7 +490,7 @@ proteins.
 `r msmbstyle::question_end()`
 
 
-```{r pattern4, echo = FALSE, include = FALSE}
+```{r pattern4, include = FALSE}
 up4 <- up[!names(up) %in% up_selected]
 sel4 <- str_detect(as.character(up4), "[DE][DE]VF")
 sum(sel4)/length(up4) * 100
