@@ -8,7 +8,7 @@ the Biomedical sciences masters degree at the UCLouvain, see
 ## Refresher
 
 ```{r toss, echo = FALSE}
-set.seed(2) 
+set.seed(2)
 n <- 100
 p <- 0.59
 flips <- sample(c("H", "T"), size = n,
@@ -43,8 +43,8 @@ ggplot(binomial_dens, aes(x = k, y = p)) +
 ```
 
 Above, we see that the most likely outcome would be 50 heads with a
-probability of `r max(binomial_dens$p)`. No head and 100 heads have respectively 
-`r binomial_dens$p[binomial_dens$k == 0]` and 
+probability of `r max(binomial_dens$p)`. No head and 100 heads have respectively
+`r binomial_dens$p[binomial_dens$k == 0]` and
 `r binomial_dens$p[binomial_dens$k == 100]` probability.
 
 We set
@@ -52,12 +52,12 @@ We set
 - $H_0$: the coin is fair
 - $H_1$: the coin is baised
 
-If `r num_heads` isn't deemed too *extreme*, then we won't reject $H_0$ and 
-conclude that the coin in faire. If `r num_heads`, then we reject $H_0$ and 
+If `r num_heads` isn't deemed too *extreme*, then we won't reject $H_0$ and
+conclude that the coin in faire. If `r num_heads`, then we reject $H_0$ and
 accept $H_1$, and conclude that the coin is baised.
 
-To define *extreme*, we set $\alpha = 0.05$ and rejet $H_0$ if our result is 
-outside of the 95% most probably values. 
+To define *extreme*, we set $\alpha = 0.05$ and rejet $H_0$ if our result is
+outside of the 95% most probably values.
 
 ```{r tossstat, echo = FALSE}
 alpha <- 0.05
@@ -70,7 +70,7 @@ binomial_dens <-
 ggplot(binomial_dens) +
     geom_bar(aes(x = k, y = p, fill = reject), stat = "identity") +
     scale_fill_manual(
-        values = c(`TRUE` = "red", `FALSE` = "#5a5a5a")) + 
+        values = c(`TRUE` = "red", `FALSE` = "#5a5a5a")) +
     geom_vline(xintercept = num_heads, col = "blue") +
     theme(legend.position = "none")
 ```
@@ -98,7 +98,7 @@ A typical biological example consists in measuring a gene of interest
 in two populations of interest (say control and group), represented by
 biological replicates. The figure below represents the distribution of
 the gene of interest in the two populations, with the expression
-intensities of triplicates in each population. 
+intensities of triplicates in each population.
 
 ```{r exdists, echo = FALSE, fig.cap = "Expression of a gene in two populations with randomly chosen triplicates."}
 set.seed(123)
@@ -140,7 +140,7 @@ t = \frac{ \bar X_{1} - \bar X_{2} }
 $$
 
 
-where $\bar X_i$, $s_{i}^{2}$ and $N_i$ are the mean, variance and size of samples 1 and 2. 
+where $\bar X_i$, $s_{i}^{2}$ and $N_i$ are the mean, variance and size of samples 1 and 2.
 
 
 A t-test has the following assumptions:
@@ -161,7 +161,7 @@ t.test(s1, s2)
 ```
 
 Note that in practice, we would apply moderated versions of the
-t-test, such as the one provided in the `r Biocpkg("limma")` package 
+t-test, such as the one provided in the `r Biocpkg("limma")` package
 and also widely applied to RNA-Seq count data.
 
 
@@ -209,17 +209,17 @@ t.test(x[1:3], x[4:6])
 
 
 `r msmbstyle::question_begin()`
-We would now like to repeat the same analysis on the 100 genes. 
+We would now like to repeat the same analysis on the 100 genes.
 
 - Write a function that will take a vector as input and perform a
   t-test of the first values (our group A) against the 3 last values
   (our group B) and returns the p-values.
-  
+
 - Apply the test to all the genes.
 
 - How many significantly differentically expressed genes do you find?
   What features are of possible biological interest?
-  
+
 `r msmbstyle::question_end()`
 
 
@@ -237,7 +237,7 @@ head(sort(pvals))
 
 `r msmbstyle::question_begin()`
 The data above have been generated with the `rnorm` function for all
-samples. 
+samples.
 - Do you still think any of the features show significant differences?
 - Why are there still some features (around 5%) that show a
   significant p-value at an alpha of 0.05?
@@ -256,9 +256,9 @@ knitr::include_graphics("./figs/jellybeans.png")
 The data that was used to calculate the p-values was all drawn from the same distribution $N(10, 2)$.
 
 As a result, we should not expect to find a statistically significant
-result, unless we repeat the test enought times. Enough here depends 
-on the $\alpha$ we set to control the type I error. If we set $\alpha$ 
-to 0.05, we accept that rejecting $H_{0}$ 
+result, unless we repeat the test enought times. Enough here depends
+on the $\alpha$ we set to control the type I error. If we set $\alpha$
+to 0.05, we accept that rejecting $H_{0}$
 in 5% of the extreme cases where we shouldn't reject it. This is an
 acceptable threshold that however doesn't hold when we repeat the test
 many time.
@@ -407,9 +407,9 @@ t.test(s1, s2)
   first samples against the 3 last samples. Verify that you identify
   about 5 p-values smaller that 0.05. Visualise and interprete the
   histogram of these p-values.
-  
+
 - Adjust the 100 p-values for multiple testing and compare the initial
-  and adjusted p-values. 
+  and adjusted p-values.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::question_begin()`
@@ -422,7 +422,7 @@ verify how to implement these with the `t.test` function.
 `r msmbstyle::question_begin()`
 
 Simulate a dataset of log2 fold-changes measured in triplicate for
-1000 genes. 
+1000 genes.
 
 - What function would you use to generate these data?
 
@@ -464,6 +464,54 @@ gather(tdata2, key = time, value = biomarker, -patient) %>%
 t.test(tdata2$before, tdata2$after, paired = TRUE)
 ```
 
+`r msmbstyle::question_begin()`
+
+Load the `tdata3` data from the `rWSBIM1322` package (version >=
+0.1.5). 100 genes have been measures in 2 groups (A and B) in
+triplicates.
+
+- Perform a t-test, visualise the p-value on a histogram. Do you
+  expect to see any genes significantly differentially expressed?
+  Verify your expectation by adjusting the p-values for multiple
+  comparisions. Are there any significant results after adjustment?
+
+- Unless you haven't already done so, visualise the distributions of
+  the genes for the 6 samples. What do you observe? Re-interpret the
+  results obtained above in the light of these findings.
+
+- Normalise your data using centring. Visualise the distributions
+  before and after transformation and make sure you understand the
+  differences.
+
+- Repeat the first point above on the normalised data. Do you still
+  find any differentially expressed genes? Explain why.
+
+`r msmbstyle::question_end()`
+
+```{r, include = FALSE}
+library("rWSBIM1322")
+data(tdata3)
+
+my_t_test <- function(x) t.test(x[1:3], x[4:6])$p.value
+
+pvals1 <- apply(tdata3, 1, my_t_test)
+hist(pvals1)
+## Anti-conservative distribution, hence expecting significant result(s).
+pvals1_adj <- p.adjust(pvals1, method = "BH")
+head(sort(pvals1_adj))
+
+tdata3_cent <- scale(tdata3, scale = FALSE, center = TRUE)
+par(mfrow = c(1, 2))
+boxplot(tdata3)
+boxplot(tdata3_cent)
+## Systematic effect in group B. Cancelled out by centring.
+
+pvals2 <- apply(tdata3_cent, 1, my_t_test)
+hist(pvals2)
+## Uniform distribution, expecting no significant results.
+head(sort(p.adjust(pvals2, method = "BH")))
+```
+
 ### The coin example, step by step {-}
 
 > This step by step example is taken from Oliver Crook's intro lecture
@@ -473,7 +521,7 @@ t.test(tdata2$before, tdata2$after, paired = TRUE)
 The following code chunk simulates 100 coin toss from a biased coin.
 
 ```{r}
-set.seed(2) 
+set.seed(2)
 n <- 100
 p <- 0.59
 flips <- sample(c("H", "T"), size = n,
@@ -572,7 +620,7 @@ Let us plot the reject region in red
 ggplot(binomial_dens) +
     geom_bar(aes(x = k, y = p, fill = reject), stat = "identity") +
     scale_fill_manual(
-        values = c(`TRUE` = "red", `FALSE` = "#5a5a5a")) + 
+        values = c(`TRUE` = "red", `FALSE` = "#5a5a5a")) +
     geom_vline(xintercept = num_heads, col = "blue") +
     theme(legend.position = "none")
 ```

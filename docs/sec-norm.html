@@ -15,14 +15,14 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-10-29" />
+<meta name="date" content="2019-10-30" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
@@ -52,41 +52,68 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -148,25 +175,56 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="introduction-2" class="section level2">
 <h2>
 <span class="header-section-number">5.1</span> Introduction</h2>
-<p>In a typical high throughput experiment, we assay thousands of features (gene transcripts, proteins, metabolites, …) is a certain number of biologically diverse samples (from about 6 to hundreds or thousands).</p>
+<p>In a typical high throughput experiment, we assay thousands of
+features (gene transcripts, proteins, metabolites, …) is a certain
+number of biologically diverse samples (from about 6 to hundreds or
+thousands).</p>
 <ul>
-<li>But what do you think would happen is we took the same sample, such as a suspension of U2OS cells (a cell line stemming from bone cancer), split it in two, and measured it twice using the exact same protocol? Will the measurements be exactly identical? Why?</li>
+<li>
+<p>But what do you think would happen is we took the same sample, such
+as a suspension of U2OS cells (a cell line stemming from bone
+cancer), split it in two, and measured it twice using the exact same
+protocol? Will the measurements be exactly identical? Why?</p>
+<p>These two samples would be <strong>technical replicates</strong> and the observed
+differences would be solely the result of <strong>technical variability</strong>.</p>
+</li>
+<li>
+<p>If we now take two independent different cell cultures of the same
+cell line, do you expect there to be larger, similar or smaller
+difference than in the example above? Why?</p>
+<p>One would refer to thes two samples as <strong>biological replicates</strong>,
+and the observed differences would be due to <strong>technical</strong> and
+<strong>biological variability</strong>.</p>
+</li>
+<li>
+<p>In biomedical research, experiments aim at measuring biological
+variability by comparing two or more biological conditions in a
+controlled setting. If we now take two independent cell cultures and
+treat one of them using a drug, and them measure the two samples, do
+you expect there to be larger, similar or smaller difference than in
+the examples above? Why?</p>
+<p>The observed differences between the two samples would comprise
+<strong>technical variability</strong>, <strong>biological variability</strong> and additional
+<strong>biological variability due to the treatment</strong>. The be able to
+measure any biologically signal in the data, the biological
+variability, and the one produced by the treatment of interest in
+particular, must be larger than the technical variability.</p>
+</li>
 </ul>
-<p>These two samples would be <strong>technical replicates</strong> and the observed differences would be solely the result of <strong>technical variability</strong>.</p>
-<ul>
-<li>If we now take two independent different cell cultures of the same cell line, do you expect there to be larger, similar or smaller difference than in the example above? Why?</li>
-</ul>
-<p>One would refer to thes two samples as <strong>biological replicates</strong>, and the observed differences would be due to <strong>technical</strong> and <strong>biological variability</strong>.</p>
-<ul>
-<li>In biomedical research, experiments aim at measuring biological variability by comparing two or more biological conditions in a controlled setting. If we now take two independent cell cultures and treat one of them using a drug, and them measure the two samples, do you expect there to be larger, similar or smaller difference than in the examples above? Why?</li>
-</ul>
-<p>The observed differences between the two samples would comprise <strong>technical variability</strong>, <strong>biological variability</strong> and additional <strong>biological variability due to the treatment</strong>. The be able to measure any biologically signal in the data, the biological variability, and the one produced by the treatment of interest in particular, must be larger than the technical variability.</p>
-<p>However, to before analysing any data, it is often (always) necessary to make the samples as comparable as possible by removing the technical variability (that should be shared among all samples) without removing biological variability (that will differantiate the samples biologically).</p>
+<p>However, to before analysing any data, it is often (always) necessary
+to make the samples as comparable as possible by removing the
+technical variability (that should be shared among all samples)
+without removing biological variability (that will differantiate the
+samples biologically).</p>
 </div>
 <div id="data-transformation" class="section level2">
 <h2>
 <span class="header-section-number">5.2</span> Data transformation</h2>
-<p>The very first step in preparing a dataset is to visualise the distribution of the values. Below we see the density plots for 6 proteomics samples and about 4000 peptides from the CPTAC study that compares the reproducibility of quantiative mass spectrometry using human proteins spiked into a yeast proteome background.</p>
+<p>The very first step in preparing a dataset is to visualise the
+distribution of the values. Below we see the density plots for 6
+proteomics samples and about 4000 peptides from the CPTAC study that
+compares the reproducibility of quantiative mass spectrometry using
+human proteins spiked into a yeast proteome background.</p>
 <div class="figure">
 <span id="fig:logtans"></span>
 <p class="caption marginnote shownote">
@@ -174,7 +232,8 @@ Figure 5.1: Raw quantiation values from the proteomics CPTAC data.
 </p>
 <img src="WSBIM1322_files/figure-html/logtans-1.png" alt="Raw quantiation values from the proteomics CPTAC data." width="672">
 </div>
-<p>We see that the vast majority of the data are at very low values with some very high values:</p>
+<p>We see that the vast majority of the data are at very low values with
+some very high values:</p>
 <pre><code>##       6A_7                6A_8                6A_9          
 ##  Min.   :    15014   Min.   :    14940   Min.   :    19946  
 ##  1st Qu.:   154475   1st Qu.:   155875   1st Qu.:   169510  
@@ -189,7 +248,9 @@ Figure 5.1: Raw quantiation values from the proteomics CPTAC data.
 ##  Mean   :  1677453   Mean   : 1454185   Mean   :  1743025  
 ##  3rd Qu.:   948920   3rd Qu.:  881775   3rd Qu.:  1060350  
 ##  Max.   :112820000   Max.   :94944000   Max.   :128870000</code></pre>
-<p>Such data are difficult to visualise and to analyse, because their distribution of their skewness. The first step is thus generally (but not always<label for="tufte-sn-9" class="margin-toggle sidenote-number">9</label><input type="checkbox" id="tufte-sn-9" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">9</span> When analysing count data, such as in the case of RNASeq of spectral counting in proteomics, it is better not to transform the data and use dedicated distribution for count-based data. In the cases above, the <a href="https://en.wikipedia.org/wiki/Negative_binomial_distribution">negative binomial distribution</a> has been show to accurately model technical and biological variability of such experimental data.</span>) to log-transform the data, as shown below.</p>
+<p>Such data are difficult to visualise and to analyse, because their
+distribution of their skewness. The first step is thus generally (but
+not always<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>) to log-transform the data, as shown below.</p>
 <div class="figure">
 <span id="fig:logtrans2"></span>
 <p class="caption marginnote shownote">
@@ -202,7 +263,8 @@ Figure 5.2: CPTAC data after log transformation
 ► Question
 </p>
 <div class="question-body">
-<p>Load the CPTAC data from the <code>rWSBIM1322</code> package (version 0.1.3 or later) and reproduce the figures above. See <code>?cptac</code> for details .</p>
+<p>Load the CPTAC data from the <code>rWSBIM1322</code> package (version 0.1.3 or
+later) and reproduce the figures above. See <code>?cptac</code> for details .</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -213,20 +275,20 @@ Figure 5.2: CPTAC data after log transformation
 ► Solution<span id="sol-start-24" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-24', 'sol-start-24')"></span>
 </p>
 <div id="sol-body-24" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)
-<span class="kw">library</span>(<span class="st">"MSnbase"</span>)
-<span class="kw">data</span>(cptac)
-
-<span class="kw">library</span>(<span class="st">"tidyverse"</span>)
-<span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_density</span>()
-
-<span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">log2</span>(expression), <span class="dt">colour =</span> sample)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_density</span>()</code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="sec-norm.html#cb206-1"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb206-2"><a href="sec-norm.html#cb206-2"></a><span class="kw">library</span>(<span class="st">"MSnbase"</span>)</span>
+<span id="cb206-3"><a href="sec-norm.html#cb206-3"></a><span class="kw">data</span>(cptac)</span>
+<span id="cb206-4"><a href="sec-norm.html#cb206-4"></a></span>
+<span id="cb206-5"><a href="sec-norm.html#cb206-5"></a><span class="kw">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb206-6"><a href="sec-norm.html#cb206-6"></a><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span></span>
+<span id="cb206-7"><a href="sec-norm.html#cb206-7"></a><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span></span>
+<span id="cb206-8"><a href="sec-norm.html#cb206-8"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span></span>
+<span id="cb206-9"><a href="sec-norm.html#cb206-9"></a><span class="st">    </span><span class="kw">geom_density</span>()</span>
+<span id="cb206-10"><a href="sec-norm.html#cb206-10"></a></span>
+<span id="cb206-11"><a href="sec-norm.html#cb206-11"></a><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span></span>
+<span id="cb206-12"><a href="sec-norm.html#cb206-12"></a><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span></span>
+<span id="cb206-13"><a href="sec-norm.html#cb206-13"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">log2</span>(expression), <span class="dt">colour =</span> sample)) <span class="op">+</span></span>
+<span id="cb206-14"><a href="sec-norm.html#cb206-14"></a><span class="st">    </span><span class="kw">geom_density</span>()</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -236,7 +298,14 @@ Figure 5.2: CPTAC data after log transformation
 <div id="normalisation" class="section level2">
 <h2>
 <span class="header-section-number">5.3</span> Normalisation</h2>
-<p>In addition to possible transformation of the data, it is necessary to further process the data to remove as much as technical variability as possible while keeping biological variability. This step is called <strong>normalisation</strong>. One of the important requriements of most normalisation techniques is that most proteins aren’t expected to change among biological conditions. In other words, normalisation expects only a minority of biological features to be differentially expressed in the conditions of interest.</p>
+<p>In addition to possible transformation of the data, it is necessary to
+further process the data to remove as much as technical variability as
+possible while keeping biological variability. This step is called
+<strong>normalisation</strong>. One of the important requriements of most
+normalisation techniques is that most proteins aren’t expected to
+change among biological conditions. In other words, normalisation
+expects only a minority of biological features to be differentially
+expressed in the conditions of interest.</p>
 <div id="centring-and-scaling" class="section level3">
 <h3>
 <span class="header-section-number">5.3.1</span> Centring and scaling</h3>
@@ -245,10 +314,18 @@ Figure 5.2: CPTAC data after log transformation
 ► Question
 </p>
 <div class="question-body">
-<p>We are going to start by generating a data set to precisely illustrate the effect of the methods.</p>
+<p>We are going to start by generating a data set to precisely illustrate
+the effect of the methods.</p>
 <ol style="list-style-type: decimal">
-<li><p>Use the <code>rnorm()</code> function to generate a distribution of 1000 values centred around 0 and with a standard deviation of 2. Visualise these data.</p></li>
-<li><p>Generate four such distribution with parameters <em>N(6, 2)</em>, <em>N(4,2)</em>, <em>N(4, 1)</em>, <em>N(7, 3)</em> and create a matrix or dataframe with rownames <code>gene1</code> to <code>gene1000</code> and colnames <code>sample1</code> to <code>sample4</code>. Visualise these data and discuss whether these samples could be compared against each other. Do assure replication of this simulation, set the random number generation seed to 123.</p></li>
+<li><p>Use the <code>rnorm()</code> function to generate a distribution of 1000
+values centred around 0 and with a standard deviation
+of 2. Visualise these data.</p></li>
+<li><p>Generate four such distribution with parameters <em>N(6, 2)</em>,
+<em>N(4,2)</em>, <em>N(4, 1)</em>, <em>N(7, 3)</em> and create a matrix or dataframe
+with rownames <code>gene1</code> to <code>gene1000</code> and colnames <code>sample1</code> to
+<code>sample4</code>. Visualise these data and discuss whether these samples
+could be compared against each other. Do assure replication of this
+simulation, set the random number generation seed to 123.</p></li>
 </ol>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -260,13 +337,13 @@ Figure 5.2: CPTAC data after log transformation
 ► Solution<span id="sol-start-25" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-25', 'sol-start-25')"></span>
 </p>
 <div id="sol-body-25" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1000</span>
-<span class="kw">set.seed</span>(<span class="dv">123</span>)
-x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sample1 =</span> <span class="kw">rnorm</span>(n, <span class="dv">6</span>, <span class="dv">2</span>),
-                <span class="dt">sample2 =</span> <span class="kw">rnorm</span>(n, <span class="dv">4</span>, <span class="dv">2</span>),
-                <span class="dt">sample3 =</span> <span class="kw">rnorm</span>(n, <span class="dv">4</span>, <span class="dv">1</span>),
-                <span class="dt">sample4 =</span> <span class="kw">rnorm</span>(n, <span class="dv">7</span>, <span class="dv">3</span>))
-<span class="kw">head</span>(x)</code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="sec-norm.html#cb207-1"></a>n &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb207-2"><a href="sec-norm.html#cb207-2"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb207-3"><a href="sec-norm.html#cb207-3"></a>x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sample1 =</span> <span class="kw">rnorm</span>(n, <span class="dv">6</span>, <span class="dv">2</span>),</span>
+<span id="cb207-4"><a href="sec-norm.html#cb207-4"></a>                <span class="dt">sample2 =</span> <span class="kw">rnorm</span>(n, <span class="dv">4</span>, <span class="dv">2</span>),</span>
+<span id="cb207-5"><a href="sec-norm.html#cb207-5"></a>                <span class="dt">sample3 =</span> <span class="kw">rnorm</span>(n, <span class="dv">4</span>, <span class="dv">1</span>),</span>
+<span id="cb207-6"><a href="sec-norm.html#cb207-6"></a>                <span class="dt">sample4 =</span> <span class="kw">rnorm</span>(n, <span class="dv">7</span>, <span class="dv">3</span>))</span>
+<span id="cb207-7"><a href="sec-norm.html#cb207-7"></a><span class="kw">head</span>(x)</span></code></pre></div>
 <pre><code>##    sample1   sample2  sample3   sample4
 ## 1 4.879049  2.008403 3.488396  6.549078
 ## 2 5.539645  1.920090 4.236938  6.016729
@@ -274,7 +351,7 @@ x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="
 ## 4 6.141017  3.735650 5.219228  4.908146
 ## 5 6.258575 -1.098686 4.174136 14.795471
 ## 6 9.430130  6.081147 3.384732  6.887755</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(x)</code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="sec-norm.html#cb209-1"></a><span class="kw">boxplot</span>(x)</span></code></pre></div>
 <div class="figure">
 <span id="fig:sln1"></span>
 <p class="caption marginnote shownote">
@@ -287,13 +364,17 @@ Figure 5.3: Simulated data for 4 samples and 1000 genes.
 </p>
 </div>
 </div>
-<p><strong>Centring</strong> refers to the operation of modifying the mean value of a set of values by subtracting a fixed value from each individual value. On the figure above, this equates to shifting the values up to down. A typical value is the mean of all the data to be centred.</p>
+<p><strong>Centring</strong> refers to the operation of modifying the mean value of a set of
+values by subtracting a fixed value from each individual value. On the
+figure above, this equates to shifting the values up to down. A
+typical value is the mean of all the data to be centred.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>For each column, calculate its mean value and subtract it from the values. Visualise and interpret the centred data.</p>
+<p>For each column, calculate its mean value and subtract it from the
+values. Visualise and interpret the centred data.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -304,23 +385,28 @@ Figure 5.3: Simulated data for 4 samples and 1000 genes.
 ► Solution<span id="sol-start-26" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-26', 'sol-start-26')"></span>
 </p>
 <div id="sol-body-26" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cmns &lt;-<span class="st"> </span><span class="kw">colMeans</span>(x)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x))
-    x[, i] &lt;-<span class="st"> </span>x[, i] <span class="op">-</span><span class="st"> </span>cmns[i]
-<span class="kw">boxplot</span>(x)</code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="sec-norm.html#cb210-1"></a>cmns &lt;-<span class="st"> </span><span class="kw">colMeans</span>(x)</span>
+<span id="cb210-2"><a href="sec-norm.html#cb210-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x))</span>
+<span id="cb210-3"><a href="sec-norm.html#cb210-3"></a>    x[, i] &lt;-<span class="st"> </span>x[, i] <span class="op">-</span><span class="st"> </span>cmns[i]</span>
+<span id="cb210-4"><a href="sec-norm.html#cb210-4"></a><span class="kw">boxplot</span>(x)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-22-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
-<p><strong>Scaling</strong> refers to the operation of rescaling a set of values to scale in the range of 0 and 1 (or -1 and 1). On the figure above, this equates to changing the boxes so as to all have similar heights. A typical scaling method is to dividing the values by their standard devitations.</p>
+<p><strong>Scaling</strong> refers to the operation of rescaling a set of values to
+scale in the range of 0 and 1 (or -1 and 1). On the figure above, this
+equates to changing the boxes so as to all have similar heights. A
+typical scaling method is to dividing the values by their standard
+devitations.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Calculate the standard deviation of each column and divide the values by it. Visualise and interpret the centred data.</p>
+<p>Calculate the standard deviation of each column and divide the values
+by it. Visualise and interpret the centred data.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -331,10 +417,10 @@ Figure 5.3: Simulated data for 4 samples and 1000 genes.
 ► Solution<span id="sol-start-27" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-27', 'sol-start-27')"></span>
 </p>
 <div id="sol-body-27" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">csdvs &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, sd)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x))
-    x[, i] &lt;-<span class="st"> </span>x[, i] <span class="op">/</span><span class="st"> </span>csdvs[i]
-<span class="kw">boxplot</span>(x)</code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="sec-norm.html#cb211-1"></a>csdvs &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, sd)</span>
+<span id="cb211-2"><a href="sec-norm.html#cb211-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(x))</span>
+<span id="cb211-3"><a href="sec-norm.html#cb211-3"></a>    x[, i] &lt;-<span class="st"> </span>x[, i] <span class="op">/</span><span class="st"> </span>csdvs[i]</span>
+<span id="cb211-4"><a href="sec-norm.html#cb211-4"></a><span class="kw">boxplot</span>(x)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-23-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -346,7 +432,10 @@ Figure 5.3: Simulated data for 4 samples and 1000 genes.
 ► Question
 </p>
 <div class="question-body">
-<p>The above oberations can also be performed with R’s <code>scale</code> function. Familiarise yourself with it by reading the documentation, then regenerate the data above and repeat the scaling/centring operations using <code>scale</code>.</p>
+<p>The above oberations can also be performed with R’s <code>scale</code>
+function. Familiarise yourself with it by reading the documentation,
+then regenerate the data above and repeat the scaling/centring
+operations using <code>scale</code>.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -356,37 +445,48 @@ Figure 5.3: Simulated data for 4 samples and 1000 genes.
 <div id="quantile-normalisation" class="section level3">
 <h3>
 <span class="header-section-number">5.3.2</span> Quantile normalisation</h3>
-<p>Quantile normalisation is a method that will make different data distributions identical. The method works shown below using a small dataset with quantitation data for three samples (S1, S2, and S3) and 4 genes (A to D) (example taken from the Wikipedia page).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">S1 =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),
-           <span class="dt">S2 =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>),
-           <span class="dt">S3 =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>))
-<span class="kw">rownames</span>(x) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
-x</code></pre></div>
+<p>Quantile normalisation is a method that will make different data
+distributions identical. The method works shown below using a small
+dataset with quantitation data for three samples (S1, S2, and S3) and
+4 genes (A to D) (example taken from the Wikipedia page).</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="sec-norm.html#cb212-1"></a>x &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">S1 =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb212-2"><a href="sec-norm.html#cb212-2"></a>           <span class="dt">S2 =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>),</span>
+<span id="cb212-3"><a href="sec-norm.html#cb212-3"></a>           <span class="dt">S3 =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb212-4"><a href="sec-norm.html#cb212-4"></a><span class="kw">rownames</span>(x) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span>
+<span id="cb212-5"><a href="sec-norm.html#cb212-5"></a>x</span></code></pre></div>
 <pre><code>##   S1 S2 S3
 ## A  5  4  3
 ## B  2  1  4
 ## C  3  4  6
 ## D  4  2  8</code></pre>
-<p>The first step is to rank (from lowest to largest) each value in each sample (column). For sample S1, gene B has the lowest value, hence rank 1, then gene C gets rank 2, gene D gets rank 3, then gene A, with the highest value, gets rank 4. We store these in a new matrix <code>rnk</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(rnk &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, rank, <span class="dt">ties.method =</span> <span class="st">"min"</span>))</code></pre></div>
+<p>The first step is to rank (from lowest to largest) each value in each
+sample (column). For sample S1, gene B has the lowest value, hence
+rank 1, then gene C gets rank 2, gene D gets rank 3, then gene A, with
+the highest value, gets rank 4. We store these in a new matrix <code>rnk</code>.</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="sec-norm.html#cb214-1"></a>(rnk &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, rank, <span class="dt">ties.method =</span> <span class="st">"min"</span>))</span></code></pre></div>
 <pre><code>##   S1 S2 S3
 ## A  4  3  1
 ## B  1  1  2
 ## C  2  3  3
 ## D  3  2  4</code></pre>
-<p>We now arrange the values according to their rang (i.e. sorting) and calculate row-wise means: the mean of all lowest values, … up to the mean of all highest values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sorted_x &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, sort)
-ranked_means &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(sorted_x)
-<span class="kw">cbind</span>(sorted_x, ranked_means)</code></pre></div>
+<p>We now arrange the values according to their rang (i.e. sorting) and
+calculate row-wise means: the mean of all lowest values, … up to the
+mean of all highest values.</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="sec-norm.html#cb216-1"></a>sorted_x &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, sort)</span>
+<span id="cb216-2"><a href="sec-norm.html#cb216-2"></a>ranked_means &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(sorted_x)</span>
+<span id="cb216-3"><a href="sec-norm.html#cb216-3"></a><span class="kw">cbind</span>(sorted_x, ranked_means)</span></code></pre></div>
 <pre><code>##      S1 S2 S3 ranked_means
 ## [1,]  2  1  3     2.000000
 ## [2,]  3  2  4     3.000000
 ## [3,]  4  4  6     4.666667
 ## [4,]  5  4  8     5.666667</code></pre>
-<p>The final step is to replace the ranks in <code>rnk</code> by the respective respective <code>ranked_means</code>: the gene with the lowest expression in each samples gets the lowest ranked mean, …, the gene with the highest expression in each sample get the highest ranked mean.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x_norm &lt;-<span class="st"> </span><span class="kw">matrix</span>(ranked_means[rnk], <span class="dt">ncol =</span> <span class="dv">3</span>)
-<span class="kw">dimnames</span>(x_norm) &lt;-<span class="st"> </span><span class="kw">dimnames</span>(x)
-<span class="kw">round</span>(x_norm, <span class="dv">2</span>)</code></pre></div>
+<p>The final step is to replace the ranks in <code>rnk</code> by the respective
+respective <code>ranked_means</code>: the gene with the lowest expression in each
+samples gets the lowest ranked mean, …, the gene with the highest
+expression in each sample get the highest ranked mean.</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="sec-norm.html#cb218-1"></a>x_norm &lt;-<span class="st"> </span><span class="kw">matrix</span>(ranked_means[rnk], <span class="dt">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb218-2"><a href="sec-norm.html#cb218-2"></a><span class="kw">dimnames</span>(x_norm) &lt;-<span class="st"> </span><span class="kw">dimnames</span>(x)</span>
+<span id="cb218-3"><a href="sec-norm.html#cb218-3"></a><span class="kw">round</span>(x_norm, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##     S1   S2   S3
 ## A 5.67 4.67 2.00
 ## B 2.00 2.00 3.00
@@ -397,7 +497,9 @@ ranked_means &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(sort
 ► Question
 </p>
 <div class="question-body">
-<p>Using the <code>cptac</code> data (<code>MSnSet</code> object), normalise it using quantile normalisation and visualise the data before and after. To normalise the data, you can use the <code>normalise</code> function, defining <code>method = "quantiles"</code>.</p>
+<p>Using the <code>cptac</code> data (<code>MSnSet</code> object), normalise it using quantile
+normalisation and visualise the data before and after. To normalise
+the data, you can use the <code>normalise</code> function, defining <code>method = "quantiles"</code>.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -408,47 +510,76 @@ ranked_means &lt;-<span class="st"> </span><span class="kw">rowMeans</span>(sort
 ► Solution<span id="sol-start-28" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-28', 'sol-start-28')"></span>
 </p>
 <div id="sol-body-28" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cptac)
-cptac &lt;-<span class="st"> </span><span class="kw">log</span>(cptac, <span class="dt">base =</span> <span class="dv">2</span>)
-cptac_quant &lt;-<span class="st"> </span><span class="kw">normalise</span>(cptac, <span class="dt">method =</span> <span class="st">"quantiles"</span>)
-
-<span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_density</span>()</code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="sec-norm.html#cb220-1"></a><span class="kw">data</span>(cptac)</span>
+<span id="cb220-2"><a href="sec-norm.html#cb220-2"></a>cptac &lt;-<span class="st"> </span><span class="kw">log</span>(cptac, <span class="dt">base =</span> <span class="dv">2</span>)</span>
+<span id="cb220-3"><a href="sec-norm.html#cb220-3"></a>cptac_quant &lt;-<span class="st"> </span><span class="kw">normalise</span>(cptac, <span class="dt">method =</span> <span class="st">"quantiles"</span>)</span>
+<span id="cb220-4"><a href="sec-norm.html#cb220-4"></a></span>
+<span id="cb220-5"><a href="sec-norm.html#cb220-5"></a><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span></span>
+<span id="cb220-6"><a href="sec-norm.html#cb220-6"></a><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span></span>
+<span id="cb220-7"><a href="sec-norm.html#cb220-7"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span></span>
+<span id="cb220-8"><a href="sec-norm.html#cb220-8"></a><span class="st">    </span><span class="kw">geom_density</span>()</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/quantnormex-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac_quant)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_density</span>()</code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="sec-norm.html#cb221-1"></a><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac_quant)) <span class="op">%&gt;%</span></span>
+<span id="cb221-2"><a href="sec-norm.html#cb221-2"></a><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span></span>
+<span id="cb221-3"><a href="sec-norm.html#cb221-3"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span></span>
+<span id="cb221-4"><a href="sec-norm.html#cb221-4"></a><span class="st">    </span><span class="kw">geom_density</span>()</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/quantnormex-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
-<p>Whenever new data is presented, one of the first steps is to assess the need for normalisation by verifying the data distributions. Large variations thereof should indicate that extra care should be taken and point to possible more serious issues in the data acquisition. Visualisation of these distributions after normalisation will necessarily comply with the normalisation strategy employed (scaling, centering, quantile normalisation).</p>
-<p>In the later chapters, we will see dimensionality reduction and clustering methods, that can be used to assess the grouping of the samples in an experiment. These methods are useful to check the effect of the normalisation procedure, and for example verify it the samples tend to cluster more according to the biological groups defined by the experiment.</p>
+<p>Whenever new data is presented, one of the first steps is to assess
+the need for normalisation by verifying the data distributions. Large
+variations thereof should indicate that extra care should be taken and
+point to possible more serious issues in the data
+acquisition. Visualisation of these distributions after normalisation
+will necessarily comply with the normalisation strategy employed
+(scaling, centering, quantile normalisation).</p>
+<p>In the later chapters, we will see dimensionality reduction and
+clustering methods, that can be used to assess the grouping of the
+samples in an experiment. These methods are useful to check the effect
+of the normalisation procedure, and for example verify it the samples
+tend to cluster more according to the biological groups defined by the
+experiment.</p>
 </div>
 </div>
 <div id="missing-data" class="section level2">
 <h2>
 <span class="header-section-number">5.4</span> Missing data</h2>
-<p>In some omics experiments, a substantial faction of the data can be missing. Missing values are encoded as <code>NA</code> in R, and should be represented as such in omics data.</p>
-<p>Missing data can be very tricky to handle, as they can arise for different reasons. The first one is related to the absence of the feature, or an abundance that is below the detection limit of the device. These data would typically be missing for biological reasons and thus aren’t appearing at random. Such missing values are often denoted <em>missing not at random</em> (MNAR).</p>
-<p>However, missing values can also appear randomly, due to uneven or absent cDNA amplification in transcriptomics from low amounts of RNA (for instance in in single cell RNA sequencing) or due the semi-stochastic nature of mass spectrometry in proteomics. Such missing values are denoted <em>missing (completely) at random</em> (M(C)AR).</p>
+<p>In some omics experiments, a substantial faction of the data can be
+missing. Missing values are encoded as <code>NA</code> in R, and should be
+represented as such in omics data.</p>
+<p>Missing data can be very tricky to handle, as they can arise for
+different reasons. The first one is related to the absence of the
+feature, or an abundance that is below the detection limit of the
+device. These data would typically be missing for biological reasons
+and thus aren’t appearing at random. Such missing values are often
+denoted <em>missing not at random</em> (MNAR).</p>
+<p>However, missing values can also appear randomly, due to uneven or
+absent cDNA amplification in transcriptomics from low amounts of RNA
+(for instance in in single cell RNA sequencing) or due the
+semi-stochastic nature of mass spectrometry in proteomics. Such
+missing values are denoted <em>missing (completely) at random</em> (M(C)AR).</p>
 <p>There are two approaches to deal with missing values:</p>
 <ol style="list-style-type: decimal">
-<li><p>Filtering: remove features that have missing values, or a certain proportion of missing values.</p></li>
-<li><p>Imputation: replacing missing values by sensible values. Some imputation methods can only be applied to data missing at random, while others can only be applied to data missing not at random.</p></li>
+<li><p>Filtering: remove features that have missing values, or a certain
+proportion of missing values.</p></li>
+<li><p>Imputation: replacing missing values by sensible values. Some
+imputation methods can only be applied to data missing at random,
+while others can only be applied to data missing not at random.</p></li>
 </ol>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>naset</code> object available in the <code>MSnbase</code> package. You can either use the data as an <code>MSnSet</code> (as it currently is), or convert it to an <code>SummarizedExperiment</code> with <code>as(naset, "SummarizedExperiment")</code>.</p>
-<p>Calculate the number of missing values along the rows and sample, then visualise these data and represent them as tables showing the number of occurences of 1, 2, 3, … missing values.</p>
+<p>Load the <code>naset</code> object available in the <code>MSnbase</code> package. You can
+either use the data as an <code>MSnSet</code> (as it currently is), or convert it
+to an <code>SummarizedExperiment</code> with <code>as(naset, "SummarizedExperiment")</code>.</p>
+<p>Calculate the number of missing values along the rows and sample, then
+visualise these data and represent them as tables showing the number
+of occurences of 1, 2, 3, … missing values.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -459,29 +590,30 @@ cptac_quant &lt;-<span class="st"> </span><span class="kw">normalise</span>(cpta
 ► Solution<span id="sol-start-29" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-29', 'sol-start-29')"></span>
 </p>
 <div id="sol-body-29" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"MSnbase"</span>)
-<span class="kw">data</span>(naset)
-col_na &lt;-<span class="st"> </span><span class="kw">colSums</span>(<span class="kw">is.na</span>(<span class="kw">exprs</span>(naset)))
-col_na</code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="sec-norm.html#cb222-1"></a><span class="kw">library</span>(<span class="st">"MSnbase"</span>)</span>
+<span id="cb222-2"><a href="sec-norm.html#cb222-2"></a><span class="kw">data</span>(naset)</span>
+<span id="cb222-3"><a href="sec-norm.html#cb222-3"></a>col_na &lt;-<span class="st"> </span><span class="kw">colSums</span>(<span class="kw">is.na</span>(<span class="kw">exprs</span>(naset)))</span>
+<span id="cb222-4"><a href="sec-norm.html#cb222-4"></a>col_na</span></code></pre></div>
 <pre><code>##  M1F1A  M1F4A  M1F7A M1F11A  M1F2B  M1F5B  M1F8B M1F11B  M2F1A  M2F4A 
 ##     34     45     56     39     47     52     49     61     41     42 
 ##  M2F7A M2F11A  M2F2B  M2F5B  M2F8B M2F11B 
 ##     55     45     51     43     57     53</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(col_na)</code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="sec-norm.html#cb224-1"></a><span class="kw">barplot</span>(col_na)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">row_na &lt;-<span class="st"> </span><span class="kw">rowSums</span>(<span class="kw">is.na</span>(<span class="kw">exprs</span>(naset)))
-<span class="kw">table</span>(row_na)</code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="sec-norm.html#cb225-1"></a>row_na &lt;-<span class="st"> </span><span class="kw">rowSums</span>(<span class="kw">is.na</span>(<span class="kw">exprs</span>(naset)))</span>
+<span id="cb225-2"><a href="sec-norm.html#cb225-2"></a><span class="kw">table</span>(row_na)</span></code></pre></div>
 <pre><code>## row_na
 ##   0   1   2   3   4   8   9  10 
 ## 301 247  91  13   2  23  10   2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(row_na)</code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="sec-norm.html#cb227-1"></a><span class="kw">hist</span>(row_na)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
-<p>All the concepts and methods seen in this chapter will be paramount in the next ones, once we will test, cluster or classify our data.</p>
+<p>All the concepts and methods seen in this chapter will be paramount in
+the next ones, once we will test, cluster or classify our data.</p>
 </div>
 <div id="additional-exercises-4" class="section level2">
 <h2>
@@ -491,7 +623,10 @@ col_na</code></pre></div>
 ► Question
 </p>
 <div class="question-body">
-<p>You are provided with a dataset show below (2 biological groups A (red) and B (green) with 3 replicates in each) and asked to analyse it. What are you thoughts about these data and what are the implications for the normalisation step?</p>
+<p>You are provided with a dataset show below (2 biological groups A
+(red) and B (green) with 3 replicates in each) and asked to analyse
+it. What are you thoughts about these data and what are the
+implications for the normalisation step?</p>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -507,7 +642,7 @@ col_na</code></pre></div>
 <a href="sec-mlintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-10-29
+2019-10-30
 </p>
 </div>
 </div>
