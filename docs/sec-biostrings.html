@@ -634,25 +634,26 @@ gc</code></pre></div>
 <div id="working-with-genomes" class="section level2">
 <h2>
 <span class="header-section-number">4.6</span> Working with genomes</h2>
-<p><code>BSgenome</code> packages inside Bioconductor contain whole genome sequences as distributed by ENSEMBL, NCBI and others. In this next example we will load the whole genome sequence for Homo sapiens from UCSC’s hg19 build, and calculate the GC content across chromosome 14.</p>
+<p><code>BSgenome</code> packages inside Bioconductor contain whole genome sequences as distributed by ENSEMBL, NCBI and others. In this next example we will load the whole genome sequence for Drosophila melanogaster from UCSC’s dm2 build, and calculate the GC content across chromosome 2L.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"Biostrings"</span>)
-<span class="kw">library</span>(<span class="st">"BSgenome.Hsapiens.UCSC.hg19"</span>)
-chr14_range &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="st">"chr14"</span>, <span class="kw">IRanges</span>(<span class="dv">1</span>, <span class="kw">seqlengths</span>(Hsapiens)[<span class="st">"chr14"</span>]))
-chr14_range</code></pre></div>
+<span class="kw">library</span>(<span class="st">"BSgenome.Dmelanogaster.UCSC.dm2"</span>)
+
+chr2L_range &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="st">"chr2L"</span>, <span class="kw">IRanges</span>(<span class="dv">1</span>, <span class="kw">seqlengths</span>(Dmelanogaster)[<span class="st">"chr2L"</span>]))
+chr2L_range</code></pre></div>
 <pre><code>## GRanges object with 1 range and 0 metadata columns:
-##       seqnames      ranges strand
-##          &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt;
-##   [1]    chr14 1-107349540      *
+##       seqnames     ranges strand
+##          &lt;Rle&gt;  &lt;IRanges&gt;  &lt;Rle&gt;
+##   [1]    chr2L 1-22407834      *
 ##   -------
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chr14_dna &lt;-<span class="st"> </span><span class="kw">getSeq</span>(Hsapiens, chr14_range)
-chr14_dna</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chr2L_dna &lt;-<span class="st"> </span><span class="kw">getSeq</span>(Dmelanogaster, chr2L_range)
+chr2L_dna</code></pre></div>
 <pre><code>##   A DNAStringSet instance of length 1
-##         width seq
-## [1] 107349540 NNNNNNNNNNNNNNNNNNNNNNNNNNNNN...NNNNNNNNNNNNNNNNNNNNNNNNNNNNN</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr14_dna, <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##           G|C
-## [1,] 0.336276</code></pre>
+##        width seq
+## [1] 22407834 CGACAATGCACGACAGAGGAAGCAGAACAG...GTTTCGAGTTAGTTGAAGGTGAGGGTGCT</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr2L_dna, <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>##            G|C
+## [1,] 0.4190165</code></pre>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -669,12 +670,12 @@ chr14_dna</code></pre></div>
 ► Solution<span id="sol-start-23" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-23', 'sol-start-23')"></span>
 </p>
 <div id="sol-body-23" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr14_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>))</code></pre></div>
-<pre><code>##             A        G        C        T
-## [1,] 25992966 18071947 18027132 26197495</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr14_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>), <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr2L_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>))</code></pre></div>
+<pre><code>##            A       G       C       T
+## [1,] 6512712 4697776 4691476 6505770</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr2L_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>), <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>##              A         G         C         T
-## [1,] 0.2421339 0.1683468 0.1679293 0.2440392</code></pre>
+## [1,] 0.2906444 0.2096488 0.2093677 0.2903346</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -689,7 +690,7 @@ chr14_dna</code></pre></div>
 ► Question
 </p>
 <div class="question-body">
-<p>Focusing on the region from base 100 million to 101 million along chromosome 14, calculate the GC content across a sliding window of 1000 nucleotides (you can use the <code>letterFrequencyInSlidingView</code> functionn) and visualise it (see an example below). On that plot, show the mean GC content and highlight the regions that have a GC content &gt; 0.7 and &lt; 0.3.</p>
+<p>Focusing on the region from base 10 million to 11 million along chromosome 2L, calculate the GC content across a sliding window of 5000 nucleotides (you can use the <code>letterFrequencyInSlidingView</code> functionn) and visualise it (see an example below). On that plot, show the mean GC content and highlight the regions that have a GC content &gt; 0.5 and &lt; 0.35.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -698,9 +699,9 @@ chr14_dna</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-19"></span>
 <p class="caption marginnote shownote">
-Figure 4.1: GC content for chomosome 14 (100 - 101 Mb)
+Figure 4.1: GC content for chomosome 2L (10 - 11 Mb)
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-19-1.png" alt="GC content for chomosome 14 (100 - 101 Mb)" width="672">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-19-1.png" alt="GC content for chomosome 2L (10 - 11 Mb)" width="672">
 </div>
 <div class="question">
 <p class="question-begin">

@@ -387,7 +387,7 @@ chromosome 2L, calculate the GC content across a sliding window of
 5000 nucleotides (you can use the `letterFrequencyInSlidingView`
 functionn) and visualise it (see an example below). On that plot, show
 the mean GC content and highlight the regions that have a GC content >
-0.6 and < 0.25.
+0.5 and < 0.35.
 `r msmbstyle::question_end()`
 
 
