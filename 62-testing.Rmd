@@ -387,6 +387,37 @@ hist(lfc)
 `r msmbstyle::solution_end()`
 
 
+We generally want to consider both the statistical significance (the
+p-value) and the magnitude of the difference of expression (the
+fold-change) to provide a biological interpretation of the data. For
+this, we use a *volcano plot* as shown below. The most interesting
+features are those towards to top corners given that they have a small
+p-value (i.e. a large value for *-log10(p-value)*) and large (in
+absolute value) fold-changes.
+
+
+```{r volc, echo = FALSE, fig.cap = "A volcano plot."}
+plot(lfc, -log10(adjp))
+grid()
+abline(h = -log10(0.05))
+abline(v = c(-1, 1))
+```
+
+`r msmbstyle::question_begin()`
+Reproduce the volcano plot above using the `adjp` and `lfc` variables
+computed above.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r volcex}
+plot(lfc, -log10(adjp))
+grid()
+abline(h = -log10(0.05))
+abline(v = c(-1, 1))
+```
+`r msmbstyle::solution_end()`
+
 
 <!-- ## Linear regression -->
 
