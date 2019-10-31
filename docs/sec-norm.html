@@ -232,6 +232,14 @@ Figure 5.2: CPTAC data after log transformation
 </p>
 </div>
 </div>
+<p>This is particularly important for fold-changes, as illustrated below. Typical threshold are 0.5 and 2 for down- and up-regulation, with lack of changes around 1. In log space these become -1 and 1, and symmetrically centred around 0.</p>
+<div class="figure">
+<span id="fig:lfc"></span>
+<p class="caption marginnote shownote">
+Figure 5.3: Non-symetric fold-changes (left) and symetric log fold-changes (right) distributions..
+</p>
+<img src="WSBIM1322_files/figure-html/lfc-1.png" alt="Non-symetric fold-changes (left) and symetric log fold-changes (right) distributions.." width="672">
+</div>
 </div>
 <div id="normalisation" class="section level2">
 <h2>
@@ -278,7 +286,7 @@ x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="
 <div class="figure">
 <span id="fig:sln1"></span>
 <p class="caption marginnote shownote">
-Figure 5.3: Simulated data for 4 samples and 1000 genes.
+Figure 5.4: Simulated data for 4 samples and 1000 genes.
 </p>
 <img src="WSBIM1322_files/figure-html/sln1-1.png" alt="Simulated data for 4 samples and 1000 genes." width="672">
 </div>
