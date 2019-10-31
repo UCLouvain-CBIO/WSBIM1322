@@ -339,8 +339,54 @@ min(adj_pvals)
 
 ## Result visualisation
 
+`r msmbstyle::question_begin()`
+The `tdata4` dataset is already log2 and can be processed as
+is. Practice what we have see so far and identify differentiall
+expressed genes in group A vs B.
+`r msmbstyle::question_end()`
 
-<!-- TODO -->
+
+`r msmbstyle::solution_begin()`
+```{r tdata4ex1}
+library("rWSBIM1322")
+data(tdata4)
+
+my_t_test <- function(x)
+    t.test(x[1:3], x[4:6])$p.value
+
+pvals <- apply(tdata4, 1, my_t_test)
+hist(pvals)
+table(pvals < 0.05)
+
+adjp <- p.adjust(pvals, method = "BH")
+head(sort(adjp))
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Calculate a log2 fold-change between groups A and B. Do do so, you
+need to subtract mean expression of group B from mean of group
+A[^l2fc]. Repeat this for all genes. Visualise and interpret the distribution
+of the log2 fold-changes.
+
+
+[^l2fc]: We need to subtract the means because the data are already log-transformed and $log\frac{a}{b} = log(a) - log(c)$.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r tdata4ex2}
+my_lfc <- function(x)
+    mean(x[1:3]) - mean(x[4:6])
+lfc <- apply(tdata4, 1, my_lfc)
+hist(lfc)
+
+```
+`r msmbstyle::solution_end()`
+
+
 
 <!-- ## Linear regression -->
 
