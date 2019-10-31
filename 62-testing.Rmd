@@ -552,6 +552,8 @@ triplicates.
   Verify your expectation by adjusting the p-values for multiple
   comparisions. Are there any significant results after adjustment?
 
+- Produce a volcano plot for these results and interpret what you see.
+
 - Unless you haven't already done so, visualise the distributions of
   the genes for the 6 samples. What do you observe? Re-interpret the
   results obtained above in the light of these findings.
@@ -576,6 +578,11 @@ hist(pvals1)
 ## Anti-conservative distribution, hence expecting significant result(s).
 pvals1_adj <- p.adjust(pvals1, method = "BH")
 head(sort(pvals1_adj))
+
+my_lfc <- function(x) mean(x[1:3]) - mean(x[4:6])
+lfc <- apply(tdata3, 1, my_lfc)
+plot(lfc, -log10(pvals1_adj))
+grid()
 
 tdata3_cent <- scale(tdata3, scale = FALSE, center = TRUE)
 par(mfrow = c(1, 2))
