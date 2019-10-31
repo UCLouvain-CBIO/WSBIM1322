@@ -346,24 +346,24 @@ dna[rep(1, 10)] %>%               # DNAStringSet with first sequence 10 times
 
 ## Working with genomes
 
-
 `BSgenome` packages inside Bioconductor contain whole genome sequences
 as distributed by ENSEMBL, NCBI and others. In this next example we
-will load the whole genome sequence for Homo sapiens from UCSC's hg19
-build, and calculate the GC content across chromosome 14.
+will load the whole genome sequence for Drosophila melanogaster from
+UCSC's dm2 build, and calculate the GC content across chromosome 2L.
 
 
 ```{r bs1, message = FALSE}
 library("Biostrings")
-library("BSgenome.Hsapiens.UCSC.hg19")
-chr14_range <- GRanges("chr14", IRanges(1, seqlengths(Hsapiens)["chr14"]))
-chr14_range
+library("BSgenome.Dmelanogaster.UCSC.dm2")
+
+chr2L_range <- GRanges("chr2L", IRanges(1, seqlengths(Dmelanogaster)["chr2L"]))
+chr2L_range
 ```
 
 ```{r bs2, message = FALSE}
-chr14_dna <- getSeq(Hsapiens, chr14_range)
-chr14_dna
-letterFrequency(chr14_dna, "GC", as.prob = TRUE)
+chr2L_dna <- getSeq(Dmelanogaster, chr2L_range)
+chr2L_dna
+letterFrequency(chr2L_dna, "GC", as.prob = TRUE)
 ```
 
 `r msmbstyle::question_begin()`
@@ -373,8 +373,8 @@ and T nucleotides in chromosome 14.
 
 `r msmbstyle::solution_begin()`
 ```{r acgtex}
-letterFrequency(chr14_dna, c("A", "G", "C", "T"))
-letterFrequency(chr14_dna, c("A", "G", "C", "T"), as.prob = TRUE)
+letterFrequency(chr2L_dna, c("A", "G", "C", "T"))
+letterFrequency(chr2L_dna, c("A", "G", "C", "T"), as.prob = TRUE)
 ```
 `r msmbstyle::solution_end()`
 
@@ -382,25 +382,25 @@ letterFrequency(chr14_dna, c("A", "G", "C", "T"), as.prob = TRUE)
 ## Additional exercises
 
 `r msmbstyle::question_begin()`
-Focusing on the region from base 100 million to 101 million along chromosome
-14, calculate the GC content across a sliding window of 1000
-nucleotides (you can use the `letterFrequencyInSlidingView` functionn)
-and visualise it (see an example below). On that plot, show the mean
-GC content and highlight the regions that have a GC content > 0.7 and
-< 0.3.
+Focusing on the region from base 10 million to 11 million along
+chromosome 2L, calculate the GC content across a sliding window of
+5000 nucleotides (you can use the `letterFrequencyInSlidingView`
+functionn) and visualise it (see an example below). On that plot, show
+the mean GC content and highlight the regions that have a GC content >
+0.6 and < 0.25.
 `r msmbstyle::question_end()`
 
 
-```{r, echo = FALSE, fig.cap = "GC content for chomosome 14 (100 - 101 Mb)"}
-x <- subseq(chr14_dna[[1]], 100 * 1e6, 101 * 1e6)
-gc_content <- letterFrequencyInSlidingView(x, 1e3,
+```{r, echo = FALSE, fig.cap = "GC content for chomosome 2L (10 - 11 Mb)"}
+x <- subseq(chr2L_dna[[1]], 10 * 1e6, 11 * 1e6)
+gc_content <- letterFrequencyInSlidingView(x, 5e3,
                                            letters = "GC",
                                            as.prob = TRUE)
-plot(gc_content, type = "l",
-     main = "Chromosome 14: 100 - 101 Mb")
+plot(gc_content, type = "l", main = "Chromosome 2L (10 - 11 Mb)")
 abline(h = mean(gc_content))
-abline(v = which(gc_content > 0.7), col = "#FF0000")
-abline(v = which(gc_content < 0.3), col = "#0000FF")
+abline(v = which(gc_content > 0.5), col = "#FF0000")
+abline(v = which(gc_content < 0.35), col = "#0000FF")
+lines(gc_content)
 ```
 
 `r msmbstyle::question_begin()`
