@@ -136,7 +136,7 @@ variances) with
 
 $$
 t = \frac{ \bar X_{1} - \bar X_{2} }
-         { \sqrt{ \frac{ s_{1}^{2} }{ N_{1} } \frac{ s_{2}^{2} }{ N_{2} } } }
+         { \sqrt{ \frac{ s_{1}^{2} }{ N_{1} } + \frac{ s_{2}^{2} }{ N_{2} } } }
 $$
 
 
