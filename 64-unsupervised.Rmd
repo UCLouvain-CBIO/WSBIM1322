@@ -15,8 +15,12 @@ input data. One generally differentiates between
   interpretation and assessment of the data.
 
 There is however one important caveat with clustering: clustering
-algorithms will always find clusters, even when none exists. See the
-additional exercise for an illustration of this risk.
+algorithms will always find clusters, even when none
+exists[^rndex]. It is thus essential to critically assess and validate
+(for example using existing domain knowledge) the results of any
+clustering algorithm.
+
+[^rndex]: See the additional exercise for an illustration of this risk. 
 
 - **Dimensionality reduction**, where the goal is to summarise the
   data in a reduced number of dimensations, i.e. using a reduced
@@ -38,7 +42,7 @@ UML presents specific challenges and benefits:
 
 The k-means clustering algorithms aims at partitioning *n*
 observations into a fixed number of *k* clusters. The algorithm will
-find homogeneous clusters. 
+find homogeneous clusters.
 
 In R, we use
 
@@ -53,6 +57,7 @@ where
 - the k-means algorithm has a random component and can be repeated
   `nstart` times to improve the returned model
 
+`r msmbstyle::question_begin()`
 > Challenge:
 >
 > - To learn about k-means, let's use the `iris` dataset with the sepal and
@@ -80,6 +85,8 @@ cl <- kmeans(x, 3, nstart = 10)
 ```{r solkmplot, echo=FALSE, fig.cap = "k-means algorithm on sepal and petal lengths"}
 plot(x, col = cl$cluster)
 ```
+
+`r msmbstyle::question_end()`
 
 <details>
 ```{r soliris, eval=FALSE}

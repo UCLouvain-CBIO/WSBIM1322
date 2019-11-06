@@ -121,6 +121,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="toc"><a href="#pre-processing"> Pre-processing</a></li>
 <li class="toc"><a href="#principal-component-analysis-pca"> Principal component analysis (PCA)</a></li>
 <li class="toc"><a href="#t-distributed-stochastic-neighbour-embedding"> t-Distributed Stochastic Neighbour Embedding</a></li>
+<li class="toc"><a href="#additional-exercises-6"> Additional exercises</a></li>
 </ul>
 <a href="sec-dimred.html"><span class="toc-section-number">9</span> Dimensionality reduction</a>
 <a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
@@ -144,13 +145,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="header-section-number">8.1</span> Introduction</h2>
 <p>In <strong>unsupervised learning</strong> (UML), no labels are provided, and the learning algorithm focuses solely on detecting structure in unlabelled input data. One generally differentiates between</p>
 <ul>
-<li><p><strong>Clustering</strong>, where the goal is to find homogeneous subgroups within the data; the grouping is based on distance between observations.</p></li>
-<li><p><strong>Dimensionality reduction</strong>, where the goal is to identify patterns in the features of the data. Dimensionality reduction is often used to facilitate visualisation of the data, as well as a pre-processing method before supervised learning.</p></li>
+<li>
+<strong>Clustering</strong>, where the goal is to find homogeneous subgroups within the data; the grouping is based on similiarities (or distance) between observations. The result of a clustering algorithm is to group the observations (features) into distinct (generally non-overlapping) groups. These groups are, even of imperfect (i.e. ignoring intermediate states) are often very useful in interpretation and assessment of the data.</li>
+</ul>
+<p>There is however one important caveat with clustering: clustering algorithms will always find clusters, even when none exists. See the additional exercise for an illustration of this risk.</p>
+<ul>
+<li>
+<strong>Dimensionality reduction</strong>, where the goal is to summarise the data in a reduced number of dimensations, i.e. using a reduced number of (newly computer) variables. A typical example in omics is to summarise (and visualise) the relation between samples along two dimensions (which can easily be plotted) even if the data consists of tens of thousands of dimensions ( genes). Dimensionality reduction is often used to facilitate visualisation of the data, as well as a pre-processing method before supervised learning.</li>
 </ul>
 <p>UML presents specific challenges and benefits:</p>
 <ul>
-<li>there is no single goal in UML</li>
-<li>there is generally much more unlabelled data available than labelled data.</li>
+<li>Challenge: there is no single goal in UML</li>
+<li>Benefit: there is generally much more unlabelled data available than labelled data.</li>
 </ul>
 </div>
 <div id="k-means-clustering" class="section level2">
@@ -625,8 +631,23 @@ iristsne &lt;-<span class="st"> </span><span class="kw">Rtsne</span>(uiris[, <sp
 <div class="figure">
 <img src="https://raw.githubusercontent.com/lgatto/visualisation/master/figure/tsneex-1.png" alt="PCA and t-SNE on hyperLOPIT"><p class="caption">PCA and t-SNE on hyperLOPIT</p>
 </div>
-
 </div>
+</div>
+<div id="additional-exercises-6" class="section level2">
+<h2>
+<span class="header-section-number">8.7</span> Additional exercises</h2>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>An important caveat of clustering is that a clustering algorithm such as <em>k-means</em> will always find clusters, even when there is none. Illustrate this by creating a 2-dimensional random data by generation a matrix of 100 rows and 2 columns from <em>N(0, 1)</em> and searching for 2, 3, 4, 5 and 6 cluster. Visualise these results and assess whether they look convincing or not.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+
 </div>
 </div></body></html>
 
