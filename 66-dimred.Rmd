@@ -1,30 +1,140 @@
 # Dimensionality reduction {#sec:dimred}
 
-**Dimensionality reduction** techniques are widely used and versatile
-techniques that can be used to:
+## Introduction
 
-- find structure in features
-- pre-processing for other ML algorithms, and
-- aid in visualisation.
+In this chapter, we are going to learn about dimensionality reduction,
+also called ordination. The goal of dimensionality reduction is to
+transform a high-dimensinal data into data of lesser dimensions while
+minimise the loss of information.
 
-The basic principle of dimensionality reduction techniques is to
-transform the data into a new space that summarise properties of the
-whole data set along a reduced number of dimensions. These are then
-ideal candidates used to visualise the data along these reduced number
-of informative dimensions.
+Dimensionality reduction is used as a data transformation technique
+for input to other machine learning methods such as classifications,
+or as a very efficient visualisation technique, which is the use case
+we will focus on here. We are going to focus on a widerly used method
+called Principal Component Analysis (PCA).
 
-## Principal component analysis (PCA)
+
+```{r pcaexdata, echo = FALSE}
+set.seed(122)
+n <- 20
+gene_x <- sort(rnorm(n, 6, 1))
+gene_y <- gene_x + rnorm(10)
+xy0 <- data.frame(gene_x, gene_y)
+xy <- data.frame(scale(xy0))
+```
+
+We are going to use the following dataset to illustrate some important
+concepts that are scale and central to PCA. The small dataset show
+below represents the measurement of genes *x* and *y* in 20
+samples. We will be using the scaled and centred version of this data.
+
+```{r xyplot, echo = FALSE, fig.cap = "Raw (left) and scale/centred (right) expression data for genes *x* and *y* in 20 samples", fig.width = 5, fig.width = 11}
+library("ggplot2")
+library("patchwork")
+
+## original data
+p0 <- ggplot(xy0, aes(x = gene_x, y = gene_y)) +
+    geom_point(shape = 21, size = 3)
+
+## scaled data
+p <- ggplot(xy, aes(x = gene_x, y = gene_y)) +
+    geom_point(shape = 21, size = 3)
+
+p0 + p
+```
+
+## Lower-dimensional projections
+
+The goal of dimensionality reduction is to reduce the number of
+dimensions in a way that the new data remains useful. One way to
+reduce a 2-dimensional data is by projecting the data onto a
+lines. Below, we project our data on the x and y axes. These are
+called **linear projections**.
+
+```{r linproj, echo = FALSE, fig.cap = "Projection of the data on the x (left) and y (right) axes.", fig.width = 5, fig.width = 11}
+
+## projection on y = 0
+py <- p + 
+    geom_point(aes(y = 0), colour = "red") +
+    geom_segment(aes(xend = gene_x, yend = 0), linetype = "dashed")
+
+## projection on x = 0
+px <- p + 
+    geom_point(aes(x = 0), colour = "red") +
+    geom_segment(aes(yend = gene_y, xend = 0), linetype = "dashed")
+
+## projections on x = 0 and y = 0
+py + px
+```
+
+In general, and in particular in the projections above, we loose
+information when reducing the number of dimensions (above, from 2
+(plane) to 1 (line)). In the first example above (left), we loose all
+the measurements of gene *y*. In the second example (right), we loose
+all the measurements of gene *x*. 
+
+The goal of dimensionality reduction is to limit this loss.
+
+We know already about **linear regression**. Below, we use the `lm`
+function to regress *y* onto *x* (left) and *x* onto *y*
+(right). These regression lines give us an approximate linear
+relationship between the expression of genes *x* and *y*. The
+relationship differs depending on which gene we choose to be the
+predictor adn the response.
+
+
+```{r linreg, echo = FALSE, fig.cap = "Regression of y onto x (left) minimisises the sums of squares of vertical residuals (red). Regression of x onto y (right) minimisises the sums of squares of horizontal residuals (orange).", fig.width = 5, fig.width = 11}
+reg1 <- lm(gene_y ~ gene_x, data = xy)
+a1 <- reg1$coefficients[1] # intercept
+b1 <- reg1$coefficients[2] # slope
+pline1 <- p +
+    geom_abline(intercept = a1, slope = b1, col = "blue", lwd = 1.5) +
+    geom_segment(aes(xend = gene_x, yend = reg1$fitted),
+                 colour = "red",
+                 arrow = arrow(length = unit(0.15, "cm")))
+
+reg2 <- lm(gene_x ~ gene_y, data = xy)
+a2 <- reg2$coefficients[1] # intercept
+b2 <- reg2$coefficients[2] # slope
+pline2 <- p +
+    geom_abline(intercept = -a2/b2, slope = 1/b2,
+                col = "blue", lwd = 1.5) +
+    geom_segment(aes(xend = reg2$fitted, yend = gene_y),
+                 colour = "orange",
+                 arrow = arrow(length = unit(0.15, "cm")))
+
+pline1 + pline2
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Old material
 
 Principal Component Analysis (PCA) is a technique that transforms the
-original n-dimensional data into a new n-dimensional space. 
+original n-dimensional data into a new n-dimensional space.
 
 - These new dimensions are linear combinations of the original data,
   i.e.  they are composed of proportions of the original variables.
+  
 - Along these new dimensions, called principal components, the data
   expresses most of its variability along the first PC, then second,
   ... 
+  
 - Principal components are orthogonal to each other,
   i.e. non-correlated.
+
+
 
 
 ```{r pcaex, echo=FALSE, fig.width=12, fig.height=4, fig.cap="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right)."}
