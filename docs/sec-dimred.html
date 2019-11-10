@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-09" />
+<meta name="date" content="2019-11-10" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -172,6 +172,14 @@ Figure 9.3: Regression of y onto x (left) minimisises the sums of squares of ver
 </p>
 <img src="WSBIM1322_files/figure-html/linreg-1.png" alt="Regression of y onto x (left) minimisises the sums of squares of vertical residuals (red). Regression of x onto y (right) minimisises the sums of squares of horizontal residuals (orange)." width="1056">
 </div>
+<p>We now want a line that minimises distances in both directions, as shown below. This line, called <strong>principal compoment</strong>, is also the ones that maximises the variance of the projections along itself.</p>
+<div class="figure">
+<span id="fig:pxaex"></span>
+<p class="caption marginnote shownote">
+Figure 9.4: The prinicpal component minimises the sum of squares of the orthogonal projections.
+</p>
+<img src="WSBIM1322_files/figure-html/pxaex-1.png" alt="The prinicpal component minimises the sum of squares of the orthogonal projections." width="1056">
+</div>
 </div>
 <div id="old-material" class="section level2">
 <h2>
@@ -185,7 +193,7 @@ Figure 9.3: Regression of y onto x (left) minimisises the sums of squares of ver
 <div class="figure">
 <span id="fig:pcaex"></span>
 <p class="caption marginnote shownote">
-Figure 9.4: Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).
+Figure 9.5: Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).
 </p>
 <img src="WSBIM1322_files/figure-html/pcaex-1.png" alt="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right)." width="1152">
 </div>
@@ -205,7 +213,7 @@ Figure 9.4: Original data (left). PC1 will maximise the variability while minimi
 <div class="figure">
 <span id="fig:histpc1"></span>
 <p class="caption marginnote shownote">
-Figure 9.5: Iris data along PC1.
+Figure 9.6: Iris data along PC1.
 </p>
 <img src="WSBIM1322_files/figure-html/histpc1-1.png" alt="Iris data along PC1." width="672">
 </div>
@@ -323,7 +331,7 @@ iristsne &lt;-<span class="st"> </span><span class="kw">Rtsne</span>(uiris[, <sp
 <a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-09
+2019-11-10
 </p>
 </div>
 </div>

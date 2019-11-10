@@ -28,7 +28,7 @@ concepts that are scale and central to PCA. The small dataset show
 below represents the measurement of genes *x* and *y* in 20
 samples. We will be using the scaled and centred version of this data.
 
-```{r xyplot, echo = FALSE, fig.cap = "Raw (left) and scale/centred (right) expression data for genes *x* and *y* in 20 samples", fig.width = 5, fig.width = 11}
+```{r xyplot, echo = FALSE, fig.cap = "Raw (left) and scale/centred (right) expression data for genes *x* and *y* in 20 samples", fig.height = 5, fig.width = 11}
 library("ggplot2")
 library("patchwork")
 
@@ -51,7 +51,7 @@ reduce a 2-dimensional data is by projecting the data onto a
 lines. Below, we project our data on the x and y axes. These are
 called **linear projections**.
 
-```{r linproj, echo = FALSE, fig.cap = "Projection of the data on the x (left) and y (right) axes.", fig.width = 5, fig.width = 11}
+```{r linproj, echo = FALSE, fig.cap = "Projection of the data on the x (left) and y (right) axes.", fig.heigth = 5, fig.width = 11}
 
 ## projection on y = 0
 py <- p + 
@@ -106,7 +106,33 @@ pline2 <- p +
 pline1 + pline2
 ```
 
+We now want a line that minimises distances in both directions, as
+shown below. This line, called **principal compoment**, is also the
+ones that maximises the variance of the projections along itself.
 
+```{r pxaex, echo = FALSE, fig.cap = "The prinicpal component minimises the sum of squares of the orthogonal projections.", fig.height = 5.8, fig.width = 11}
+svda <- svd(xy)
+pc <- as.matrix(xy) %*% svda$v[, 1] %*% t(svda$v[, 1])
+bp <- svda$v[2, 1] / svda$v[1, 1]
+ap <- mean(pc[, 2]) - bp * mean(pc[, 1])
+pline3 <- p +
+    geom_segment(xend = pc[, 1], yend = pc[, 2]) +
+    geom_abline(intercept = ap, slope = bp,
+                col = "purple", lwd = 1.5)
+
+ppdf <- tibble(PC1n = -svda$u[, 1] * svda$d[1],
+               PC2n = svda$u[, 2] * svda$d[2])
+
+pca <- ggplot(ppdf, aes(x = PC1n, y = PC2n)) +
+    geom_point(shape = 21, size = 3) +
+    xlab("PC1 ") + ylab("PC2") +
+    geom_point(aes(x = PC1n, y = 0), color = "red") +
+    geom_segment(aes(xend = PC1n, yend = 0)) +
+    geom_hline(yintercept = 0, color = "purple",
+               lwd=1.5)
+
+pline3 + pca
+```
 
 
 

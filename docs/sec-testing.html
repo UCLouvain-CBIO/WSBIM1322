@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-09" />
+<meta name="date" content="2019-11-10" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -141,6 +141,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>
 <span class="header-section-number">Chapter 7</span> Hypothesis testing</h1>
 <p>The goal of this chapter is to demonstrate some of the fundamentals of hypothesis testing as used in bioinformatics. For prerequisites within the Biomedical sciences masters degree at the UCLouvain, see <em>WFARM1247</em> (Traitement statistique des données).</p>
+<p>Parts of this chapter are based on chapter 6 from <em>Modern Statistical for Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-19" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-19" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>.</p>
 <div id="refresher" class="section level2">
 <h2>
 <span class="header-section-number">7.1</span> Refresher</h2>
@@ -591,6 +592,12 @@ Figure 7.8: A volcano plot.
 </p>
 </div>
 </div>
+<p><a href="https://www.huber.embl.de/msmb/Chap-Testing.html">Chapter 6 on <em>testing</em></a> of <em>Modern Statistical for Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-20" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-20" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>, and in particlar section 6.5, provides additional details about the t-test.</p>
+<p>The t-test comes in multiple flavors, all of which can be chosen through parameters of the <code>t.test</code> function. What we did above is called a two-sided two-sample unpaired test with unequal variance. <strong>Two-sided</strong> refers to the fact that we were open to reject the null hypothesis if the weight of the treated plants was either larger or smaller than that of the untreated ones.</p>
+<p><strong>Two-sample</strong> indicates that we compared the means of two groups to each other; another option is to compare the mean of one group against a given, fixed number.</p>
+<p><strong>Unpaired</strong> means that there was no direct 1:1 mapping between the measurements in the two groups. If, on the other hand, the data had been measured on the same plants before and after treatment, then a paired test would be more appropriate, as it looks at the change of weight within each plant, rather than their absolute weights.</p>
+<p><strong>Equal variance</strong> refers to the way the statistic is calculated. That expression is most appropriate if the variances within each group are about the same. If they are very different, an alternative form, called the Welch t-test exist.</p>
+<p>An important assumption when performing a t-test is the <strong>independence assumption</strong> among the observations in a sample. A additional exercise below demonstrate the risk of dependence between samples.</p>
 <!-- ## Linear regression -->
 <!-- Suggested TODO  -->
 <!-- ## Empirical approximations  -->
@@ -609,11 +616,11 @@ Figure 7.8: A volcano plot.
 <p>What not to do:</p>
 <div id="p-hacking" class="section level3 unnumbered">
 <h3>p-hacking</h3>
-<p>Instead of setting up one statistical hypothesis before data collection and then testing it, collect data at large, then try lots of different tests until one give a statistically significant result <span class="citation">(Head et al. <label for="tufte-mn-19" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-19" class="margin-toggle">2015<span class="marginnote">Head, M. L., L. Holman, R. Lanfear, A. T. Kahn, and M. D. Jennions. 2015. “The extent and consequences of p-hacking in science.” <em>PLoS Biol</em> 13: e1002106. doi:<a href="https://doi.org/10.1371/journal.pbio.1002106">10.1371/journal.pbio.1002106</a>.</span>)</span>.</p>
+<p>Instead of setting up one statistical hypothesis before data collection and then testing it, collect data at large, then try lots of different tests until one give a statistically significant result <span class="citation">(Head et al. <label for="tufte-mn-21" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-21" class="margin-toggle">2015<span class="marginnote">Head, M. L., L. Holman, R. Lanfear, A. T. Kahn, and M. D. Jennions. 2015. “The extent and consequences of p-hacking in science.” <em>PLoS Biol</em> 13: e1002106. doi:<a href="https://doi.org/10.1371/journal.pbio.1002106">10.1371/journal.pbio.1002106</a>.</span>)</span>.</p>
 </div>
 <div id="p-harking" class="section level3 unnumbered">
 <h3>p-harking</h3>
-<p>HARKing (Hypothesizing After the Results are Known) is the fraudulous practice of presenting a post hoc hypothesis, i.e., one based on prior result, as a priori hypotheses <span class="citation">(Kerr <label for="tufte-mn-20" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-20" class="margin-toggle">1998<span class="marginnote">Kerr, N. L. 1998. “HARKing: hypothesizing after the results are known.” <em>Pers Soc Psychol Rev</em> 2: 196–217. doi:<a href="https://doi.org/10.1207/s15327957pspr0203_4">10.1207/s15327957pspr0203_4</a>.</span>)</span>.</p>
+<p>HARKing (Hypothesizing After the Results are Known) is the fraudulous practice of presenting a post hoc hypothesis, i.e., one based on prior result, as a priori hypotheses <span class="citation">(Kerr <label for="tufte-mn-22" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-22" class="margin-toggle">1998<span class="marginnote">Kerr, N. L. 1998. “HARKing: hypothesizing after the results are known.” <em>Pers Soc Psychol Rev</em> 2: 196–217. doi:<a href="https://doi.org/10.1207/s15327957pspr0203_4">10.1207/s15327957pspr0203_4</a>.</span>)</span>.</p>
 </div>
 </div>
 <div id="additional-exercises-5" class="section level2">
@@ -705,11 +712,22 @@ Figure 7.8: A volcano plot.
 </p>
 </div>
 </div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Load the <code>cptac_prot</code> data and extract the first feature, <code>P00918ups|CAH2_HUMAN_UPS</code>, a protein in this case. Perform a t-test between the groups 6A and 6B.</p></li>
+<li><p>Duplicate the data of that first feature to obtain a vector of 12 values and repeat the t-test (now 6 against 6) above. Interpret the</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 <div id="the-coin-example-step-by-step" class="section level3 unnumbered">
 <h3>The coin example, step by step</h3>
-<blockquote>
-<p>This step by step example is taken from Oliver Crook’s intro lecture on statistics from the <a href="https://uclouvain-cbio.github.io/BSS2019/">2019 Bioinformatics Summer School</a> at the UCLouvain.</p>
-</blockquote>
 <p>The following code chunk simulates 100 coin toss from a biased coin.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2</span>)
 n &lt;-<span class="st"> </span><span class="dv">100</span>
@@ -747,7 +765,7 @@ binomial_dens &lt;-
 <span class="kw">ggplot</span>(binomial_dens, <span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> p)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">"identity"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-40-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-41-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -824,7 +842,7 @@ binomial_dens &lt;-
         <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">TRUE</span><span class="st">`</span> =<span class="st"> "red"</span>, <span class="st">`</span><span class="dt">FALSE</span><span class="st">`</span> =<span class="st"> "#5a5a5a"</span>)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads, <span class="dt">col =</span> <span class="st">"blue"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-44-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-45-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -863,7 +881,7 @@ binomial_dens &lt;-
 <a href="sec-ul.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-09
+2019-11-10
 </p>
 </div>
 </div>
