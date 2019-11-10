@@ -599,6 +599,34 @@ hist(pvals2)
 head(sort(p.adjust(pvals2, method = "BH")))
 ```
 
+
+`r msmbstyle::question_begin()`
+- Load the `cptac_prot` data and extract the first feature,
+  `P00918ups|CAH2_HUMAN_UPS`, a protein in this case. Perform a
+  t-test between the groups 6A and 6B.
+
+- Duplicate the data of that first feature to obtain a vector of 12
+  values and repeat the t-test (now 6 against 6) above. Interpret the
+`r msmbstyle::question_end()`
+
+
+```{r, include = FALSE}
+data(cptac_prot)
+x1 <- exprs(cptac_prot)[1, 1:3]
+x2 <- exprs(cptac_prot)[1, 4:6]
+
+t.test(x1, x2)
+t.test(rep(x1, 2), rep(x2, 2))
+## - The power of the t -test depends on the sample size. Even if the
+##   underlying biolog- ical differences are the same, a dataset with
+##   more observations tends to give more significant results. This can
+##   also be seen from the way the numbers N1 and N2 appear in the t-test
+##   formulat.
+## - The assumption of independence between the measurements is really
+##   important, and in the case above, the duplicated data are clearly
+##   dependent.
+```
+
 ### The coin example, step by step {-}
 
 > This step by step example is taken from Oliver Crook's intro lecture
