@@ -5,6 +5,9 @@ hypothesis testing as used in bioinformatics. For prerequisites within
 the Biomedical sciences masters degree at the UCLouvain, see
 *WFARM1247* (Traitement statistique des données).
 
+Parts of this chapter are based on chapter 6 from *Modern Statistical
+for Modern Biology* [@MSMB].
+
 ## Refresher
 
 ```{r toss, echo = FALSE}
@@ -422,6 +425,40 @@ abline(v = c(-1, 1))
 `r msmbstyle::solution_end()`
 
 
+[Chapter 6 on
+*testing*](https://www.huber.embl.de/msmb/Chap-Testing.html) of
+*Modern Statistical for Modern Biology* [@MSMB], and in particlar
+section 6.5, provides additional details about the t-test.
+
+The t-test comes in multiple flavors, all of which can be chosen
+through parameters of the `t.test` function. What we did above is
+called a two-sided two-sample unpaired test with unequal
+variance. **Two-sided** refers to the fact that we were open to reject
+the null hypothesis if the weight of the treated plants was either
+larger or smaller than that of the untreated ones.
+
+
+**Two-sample** indicates that we compared the means of two groups to
+each other; another option is to compare the mean of one group against
+a given, fixed number.
+
+
+**Unpaired** means that there was no direct 1:1 mapping between the
+measurements in the two groups. If, on the other hand, the data had
+been measured on the same plants before and after treatment, then a
+paired test would be more appropriate, as it looks at the change of
+weight within each plant, rather than their absolute weights.
+
+**Equal variance** refers to the way the statistic is calculated. That
+expression is most appropriate if the variances within each group are
+about the same. If they are very different, an alternative form,
+called the Welch t-test exist.
+
+An important assumption when performing a t-test is the **independence
+assumption** among the observations in a sample. A additional exercise
+below demonstrate the risk of dependence between samples. 
+
+
 <!-- ## Linear regression -->
 
 <!-- Suggested TODO  -->
@@ -628,10 +665,6 @@ t.test(rep(x1, 2), rep(x2, 2))
 ```
 
 ### The coin example, step by step {-}
-
-> This step by step example is taken from Oliver Crook's intro lecture
-> on statistics from the [2019 Bioinformatics Summer
-> School](https://uclouvain-cbio.github.io/BSS2019/) at the UCLouvain.
 
 The following code chunk simulates 100 coin toss from a biased coin.
 
