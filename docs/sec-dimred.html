@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-10" />
+<meta name="date" content="2019-11-11" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -118,6 +118,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a id="active-page" href="sec-dimred.html"><span class="toc-section-number">9</span> Dimensionality reduction</a><ul class="toc-sections">
 <li class="toc"><a href="#introduction-4"> Introduction</a></li>
 <li class="toc"><a href="#lower-dimensional-projections"> Lower-dimensional projections</a></li>
+<li class="toc"><a href="#the-new-linear-combinations"> The new linear combinations</a></li>
 <li class="toc"><a href="#old-material"> Old material</a></li>
 <li class="toc"><a href="#t-distributed-stochastic-neighbour-embedding"> t-Distributed Stochastic Neighbour Embedding</a></li>
 </ul>
@@ -176,14 +177,40 @@ Figure 9.3: Regression of y onto x (left) minimisises the sums of squares of ver
 <div class="figure">
 <span id="fig:pxaex"></span>
 <p class="caption marginnote shownote">
-Figure 9.4: The prinicpal component minimises the sum of squares of the orthogonal projections.
+Figure 9.4: The first prinicpal component minimises the sum of squares of the orthogonal projections.
 </p>
-<img src="WSBIM1322_files/figure-html/pxaex-1.png" alt="The prinicpal component minimises the sum of squares of the orthogonal projections." width="1056">
+<img src="WSBIM1322_files/figure-html/pxaex-1.png" alt="The first prinicpal component minimises the sum of squares of the orthogonal projections." width="1056">
 </div>
+<p>The second principal component is then chosen to be orthogonal to the first one. In our case above, there is only one possibility.</p>
+<div class="figure">
+<span id="fig:pxaex2"></span>
+<p class="caption marginnote shownote">
+Figure 9.5: The second prinicpal component is orthogonal to the second one.
+</p>
+<img src="WSBIM1322_files/figure-html/pxaex2-1.png" alt="The second prinicpal component is orthogonal to the second one." width="1056">
+</div>
+<p>In the example above the variance, the variance along the PCs are 1.83 and 0.17. The first one explains 91.7% or that variance, and the second one merely 8.3%. This is also reflected in the different scales along the x and y axis.</p>
+<p>To account for these differences in variation along the different PCs, it is better to represent a PCA plot as a rectangle, using a ratio that is proportional to the respective variances.</p>
+<div class="figure">
+<span id="fig:pxaex3"></span>
+<p class="caption marginnote shownote">
+Figure 9.6: Final principal component analysis of the data.
+</p>
+<img src="WSBIM1322_files/figure-html/pxaex3-1.png" alt="Final principal component analysis of the data." width="960">
+</div>
+</div>
+<div id="the-new-linear-combinations" class="section level2">
+<h2>
+<span class="header-section-number">9.3</span> The new linear combinations</h2>
+<p>Principal components are linear combinations of the variables that were originally measured, they provide a new coordinate system. The PC in the previous example is a linear combination of <em>gene_x</em> and <em>gene_y</em>, more specifically</p>
+<p><span class="math display">\[ PC = c__1 gene_x + c_2 gene_y \]</span></p>
+<p>It has coefficients <span class="math inline">\((c_1, c_2)\)</span>, also called loading.</p>
+<p>PCA in general will find linear combinations of the original variables. These new linear combinations will maximise the variance of the data.</p>
+<p>TEXT: explain linear combinations and loadings; optimal lines (camel example).</p>
 </div>
 <div id="old-material" class="section level2">
 <h2>
-<span class="header-section-number">9.3</span> Old material</h2>
+<span class="header-section-number">9.4</span> Old material</h2>
 <p>Principal Component Analysis (PCA) is a technique that transforms the original n-dimensional data into a new n-dimensional space.</p>
 <ul>
 <li><p>These new dimensions are linear combinations of the original data, i.e. they are composed of proportions of the original variables.</p></li>
@@ -193,7 +220,7 @@ Figure 9.4: The prinicpal component minimises the sum of squares of the orthogon
 <div class="figure">
 <span id="fig:pcaex"></span>
 <p class="caption marginnote shownote">
-Figure 9.5: Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).
+Figure 9.7: Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).
 </p>
 <img src="WSBIM1322_files/figure-html/pcaex-1.png" alt="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right)." width="1152">
 </div>
@@ -213,13 +240,13 @@ Figure 9.5: Original data (left). PC1 will maximise the variability while minimi
 <div class="figure">
 <span id="fig:histpc1"></span>
 <p class="caption marginnote shownote">
-Figure 9.6: Iris data along PC1.
+Figure 9.8: Iris data along PC1.
 </p>
 <img src="WSBIM1322_files/figure-html/histpc1-1.png" alt="Iris data along PC1." width="672">
 </div>
 <div id="visualisation" class="section level3">
 <h3>
-<span class="header-section-number">9.3.1</span> Visualisation</h3>
+<span class="header-section-number">9.4.1</span> Visualisation</h3>
 <p>A <strong>biplot</strong> features all original points re-mapped (rotated) along the first two PCs as well as the original features as vectors along the same PCs. Feature vectors that are in the same direction in PC space are also correlated in the original data space.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(irispca)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/irisbiplot-1.png" width="672"></p>
@@ -246,7 +273,7 @@ Figure 9.6: Iris data along PC1.
 </div>
 <div id="data-pre-processing" class="section level3">
 <h3>
-<span class="header-section-number">9.3.2</span> Data pre-processing</h3>
+<span class="header-section-number">9.4.2</span> Data pre-processing</h3>
 <p>We haven’t looked at other <code>prcomp</code> parameters, other that the first one, <code>x</code>. There are two other ones that are or importance, in particular in the light of the section on pre-processing above, which are <code>center</code> and <code>scale.</code>. The former is set to <code>TRUE</code> by default, while the second one is set the <code>FALSE</code>.</p>
 <blockquote>
 <p>Challenge</p>
@@ -261,7 +288,7 @@ Figure 9.6: Iris data along PC1.
 </div>
 <div id="final-comments-on-pca" class="section level3">
 <h3>
-<span class="header-section-number">9.3.3</span> Final comments on PCA</h3>
+<span class="header-section-number">9.4.3</span> Final comments on PCA</h3>
 <p>Real datasets often come with <strong>missing values</strong>. In R, these should be encoded using <code>NA</code>. Unfortunately, PCA cannot deal with missing values, and observations containing <code>NA</code> values will be dropped automatically. This is a viable solution only when the proportion of missing values is low.</p>
 <p>It is also possible to impute missing values. This is described in greater details in the <em>Data pre-processing</em> section in the supervised machine learning chapter.</p>
 <p>Finally, we should be careful when using categorical data in any of the unsupervised methods described above. Categories are generally represented as factors, which are encoded as integer levels, and might give the impression that a distance between levels is a relevant measure (which it is not, unless the factors are ordered). In such situations, categorical data can be dropped, or it is possible to encode categories as binary <strong>dummy variables</strong>. For example, if we have 3 categories, say <code>A</code>, <code>B</code> and <code>C</code>, we would create two dummy variables to encode the categories as:</p>
@@ -294,7 +321,7 @@ Figure 9.6: Iris data along PC1.
 </div>
 <div id="t-distributed-stochastic-neighbour-embedding" class="section level2">
 <h2>
-<span class="header-section-number">9.4</span> t-Distributed Stochastic Neighbour Embedding</h2>
+<span class="header-section-number">9.5</span> t-Distributed Stochastic Neighbour Embedding</h2>
 <p><a href="https://lvdmaaten.github.io/tsne/">t-Distributed Stochastic Neighbour Embedding</a> (t-SNE) is a <em>non-linear</em> dimensionality reduction technique, i.e. that different regions of the data space will be subjected to different transformations. t-SNE will compress small distances, thus bringing close neighbours together, and will ignore large distances. It is particularly well suited for <a href="https://distill.pub/2016/misread-tsne/">very high dimensional data</a>.</p>
 <p>In R, we can use the <code>Rtsne</code> function from the <em><a href="https://CRAN.R-project.org/package=Rtsne">Rtsne</a></em>. Before, we however need to remove any duplicated entries in the dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"Rtsne"</span>)
@@ -305,7 +332,7 @@ iristsne &lt;-<span class="st"> </span><span class="kw">Rtsne</span>(uiris[, <sp
 <p>As with PCA, the data can be scaled and centred prior the running t-SNE (see the <code>pca_center</code> and <code>pca_scale</code> arguments). The algorithm is stochastic, and will produce different results at each repetition.</p>
 <div id="parameter-tuning" class="section level3">
 <h3>
-<span class="header-section-number">9.4.1</span> Parameter tuning</h3>
+<span class="header-section-number">9.5.1</span> Parameter tuning</h3>
 <p>t-SNE (as well as many other methods, in particular classification algorithms) has two important parameters that can substantially influence the clustering of the data</p>
 <ul>
 <li>
@@ -331,7 +358,7 @@ iristsne &lt;-<span class="st"> </span><span class="kw">Rtsne</span>(uiris[, <sp
 <a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-10
+2019-11-11
 </p>
 </div>
 </div>

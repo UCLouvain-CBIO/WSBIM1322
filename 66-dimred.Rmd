@@ -110,7 +110,7 @@ We now want a line that minimises distances in both directions, as
 shown below. This line, called **principal compoment**, is also the
 ones that maximises the variance of the projections along itself.
 
-```{r pxaex, echo = FALSE, fig.cap = "The prinicpal component minimises the sum of squares of the orthogonal projections.", fig.height = 5.8, fig.width = 11}
+```{r pxaex, echo = FALSE, fig.cap = "The first prinicpal component minimises the sum of squares of the orthogonal projections.", fig.height = 5.8, fig.width = 11}
 svda <- svd(xy)
 pc <- as.matrix(xy) %*% svda$v[, 1] %*% t(svda$v[, 1])
 bp <- svda$v[2, 1] / svda$v[1, 1]
@@ -134,21 +134,69 @@ pca <- ggplot(ppdf, aes(x = PC1n, y = PC2n)) +
 pline3 + pca
 ```
 
+The second principal component is then chosen to be orthogonal to the
+first one. In our case above, there is only one possibility. 
 
 
+```{r pxaex2, echo = FALSE, fig.cap = "The second prinicpal component is orthogonal to the second one.", fig.height = 5.8, fig.width = 11}
+pca2 <- ggplot(ppdf, aes(x = PC1n, y = PC2n)) +
+    geom_point(shape = 21, size = 3) +
+    xlab("PC1 ") + ylab("PC2") +
+    geom_point(aes(x = PC1n, y = 0), color = "red") +
+    geom_segment(aes(xend = PC1n, yend = 0), linetype = "dotted") +    
+    geom_segment(aes(x = PC1n, xend = 0, y = PC2n, yend = PC2n)) +
+    geom_hline(yintercept = 0, color = "purple",
+               lwd=1) + 
+    geom_vline(xintercept = 0, color = "purple",
+               lwd=1.5)
+
+pca + pca2
+```
+
+```{r prcomp, echo = FALSE}
+.pca <- prcomp(xy)
+var <- .pca$sdev^2
+pve <- var/sum(var)
+```
+In the example above the variance, the variance along the PCs are 
+`r round(var[1], 2)` and `r round(var[2], 2)`. The first one explains 
+`r round(pve[1] * 100, 1)`% or that variance, and the second one merely 
+`r round(pve[2] * 100, 1)`%. This is also reflected in the different 
+scales along the x and y axis. 
+
+To account for these differences in variation along the different PCs,
+it is better to represent a PCA plot as a rectangle, using an aspect
+ratio that is illustrative of the respective variances.
+
+```{r pxaex3, echo = FALSE, fig.cap = "Final principal component analysis of the data.", fig.height = 2, fig.width = 10}
+pca_final <- pca2 <- ggplot(ppdf, aes(x = PC1n, y = PC2n)) +
+    geom_point(shape = 21, size = 3) +
+    xlab("PC1 ") + ylab("PC2") 
+    ## geom_hline(yintercept = 0) + 
+    ## geom_vline(xintercept = 0)
+pca_final
+```
 
 
+## The new linear combinations
 
+Principal components are linear combinations of the variables that
+were originally measured, they provide a new coordinate system. The
+PC in the previous example is a linear combination of *gene_x* and
+*gene_y*, more specifically 
 
+$$ PC = c__1 gene_x + c_2 gene_y $$
 
+It has coefficients $(c_1, c_2)$, also called loading.
 
+PCA in general will find linear combinations of the original
+variables. These new linear combinations will maximise the variance
+of the data.
 
-
-
-## Old material
+## Summary
 
 Principal Component Analysis (PCA) is a technique that transforms the
-original n-dimensional data into a new n-dimensional space.
+original n-dimensional data into a new  space.
 
 - These new dimensions are linear combinations of the original data,
   i.e.  they are composed of proportions of the original variables.
@@ -161,41 +209,25 @@ original n-dimensional data into a new n-dimensional space.
   i.e. non-correlated.
 
 
-
-
 ```{r pcaex, echo=FALSE, fig.width=12, fig.height=4, fig.cap="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right)."}
-set.seed(1)
-xy <- data.frame(x = (x <- rnorm(50, 2, 1)),
-                 y = x + rnorm(50, 1, 0.5))
 pca <- prcomp(xy)
-
 z <- cbind(x = c(-1, 1), y = c(0, 0))
 zhat <- z %*% t(pca$rotation[, 1:2])
 zhat <- scale(zhat, center = colMeans(xy), scale = FALSE)
 par(mfrow = c(1, 3))
 plot(xy, main = "Orignal data (2 dimensions)")
 plot(xy, main = "Orignal data with PC1")
-abline(lm(y ~ x, data = data.frame(zhat - 10)), lty = "dashed")
+abline(lm(gene_y ~ gene_x, data = data.frame(zhat - 10)), lty = "dashed")
 grid()
-plot(pca$x, main = "Data in PCA space")
+plot(pca$x, main = "Data in PCA space", ylim = c(-2, 2))
 grid()
 ```
 
-In R, we can use the `prcomp` function. 
-
-Let's explore PCA on the `iris` data. While it contains only 4
-variables, is already becomes difficult to visualise the 3 groups
-along all these dimensions.
-
-```{r irispairs, fig.cap=""}
-pairs(iris[, -5], col = iris[, 5], pch = 19)
-```
-
-Let's use PCA to reduce the dimension. 
+In R, we can use the `prcomp` function:
 
 ```{r irispca}
-irispca <- prcomp(iris[, -5])
-summary(irispca)
+pca_xy <- prcomp(xy)
+summary(pca_xy)
 ```
 
 A summary of the `prcomp` output shows that along PC1 along, we are
