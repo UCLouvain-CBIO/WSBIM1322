@@ -14,13 +14,9 @@ we will focus on here. We are going to focus on a widerly used method
 called Principal Component Analysis (PCA).
 
 
-```{r pcaexdata, echo = FALSE}
-set.seed(122)
-n <- 20
-gene_x <- sort(rnorm(n, 6, 1))
-gene_y <- gene_x + rnorm(10)
-xy0 <- data.frame(gene_x, gene_y)
-xy <- data.frame(scale(xy0))
+```{r pcaexdata, echo = FALSE, message = FALSE}
+library("rWSBIM1322")
+data(xy)
 ```
 
 We are going to use the following dataset to illustrate some important
@@ -185,7 +181,7 @@ were originally measured, they provide a new coordinate system. The
 PC in the previous example is a linear combination of *gene_x* and
 *gene_y*, more specifically 
 
-$$ PC = c__1 gene_x + c_2 gene_y $$
+$$ PC = c_{1} ~ gene_{x} + c_{2} ~ gene_{y} $$
 
 It has coefficients $(c_1, c_2)$, also called loading.
 
@@ -193,7 +189,7 @@ PCA in general will find linear combinations of the original
 variables. These new linear combinations will maximise the variance
 of the data.
 
-## Summary
+## Summary and application
 
 Principal Component Analysis (PCA) is a technique that transforms the
 original n-dimensional data into a new  space.
@@ -209,7 +205,7 @@ original n-dimensional data into a new  space.
   i.e. non-correlated.
 
 
-```{r pcaex, echo=FALSE, fig.width=12, fig.height=4, fig.cap="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right)."}
+```{r pcaex, echo=FALSE, fig.width=12, fig.height=4, fig.cap="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).", fig.fullwidth = TRUE}
 pca <- prcomp(xy)
 z <- cbind(x = c(-1, 1), y = c(0, 0))
 zhat <- z %*% t(pca$rotation[, 1:2])
@@ -223,80 +219,117 @@ plot(pca$x, main = "Data in PCA space", ylim = c(-2, 2))
 grid()
 ```
 
-In R, we can use the `prcomp` function:
+In R, we can use the `prcomp` function. A summary of the `prcomp`
+output shows that along PC1 along, we are able to retain close to 92%
+of the total variability in the data.
 
-```{r irispca}
+
+```{r pcaxy}
 pca_xy <- prcomp(xy)
 summary(pca_xy)
 ```
 
-A summary of the `prcomp` output shows that along PC1 along, we are
-able to retain over 92% of the total variability in the data.
+This `pca_xy` variable is an object of class `prcomp`. To learn what
+it contains, we can look at its structure with `str` and read the
+`?prcomp` manual page.
 
-```{r histpc1, echo=FALSE, fig.cap="Iris data along PC1."}
-## boxplot(irispca$x[, 1] ~ iris[, 5], ylab = "PC1")
-hist(irispca$x[iris$Species == "setosa", 1],
-     xlim = range(irispca$x[, 1]), col = "#FF000030",
-     xlab = "PC1", main = "PC1 variance explained 92%")
-rug(irispca$x[iris$Species == "setosa", 1], col = "red")
-hist(irispca$x[iris$Species == "versicolor", 1], add = TRUE, col = "#00FF0030")
-rug(irispca$x[iris$Species == "versicolor", 1], col = "green")
-hist(irispca$x[iris$Species == "virginica", 1],  add = TRUE, col = "#0000FF30")
-rug(irispca$x[iris$Species == "virginica", 1], col = "blue")
+```{r}
+str(pca_xy)
 ```
 
-### Visualisation
+We are going to focus on two elements:
+
+- **sdev** contains the standard deviations along the respective PCs
+  (as also displayed in the summary). From these, we can compute the
+  variances, the percentages of variance explained by the individual
+  PCs, and the cumulative variances.
+
+```{r pcavar}
+(var <- pca_xy$sdev^2)
+(pve <- var/sum(var))
+cumsum(pve)
+```
+
+- **x** contains the coordinates of the data along the PCs. These are
+  the values we could use to produce the PCA plot as above by hand.
+  
+```{r pcaplot, fig.cap = ""}
+pca_xy$x
+plot(pca_xy$x)
+```
+
+
+## Visualisation
 
 A **biplot** features all original points re-mapped (rotated) along the
 first two PCs as well as the original features as vectors along the
 same PCs. Feature vectors that are in the same direction in PC space
 are also correlated in the original data space.
 
-```{r irisbiplot, fig.cap=""}
-biplot(irispca)
+```{r biplot, fig.cap = "A biplot shows both the variables (arrows) and observations of the PCA analysis."}
+biplot(pca_xy)
 ```
 
 One important piece of information when using PCA is the proportion of
-variance explained along the PCs, in particular when dealing with high
-dimensional data, as PC1 and PC2 (that are generally used for
-visualisation), might only account for an insufficient proportion of
-variance to be relevant on their own. 
+variance explained along the PCs (see above), in particular when
+dealing with high dimensional data, as PC1 and PC2 (that are generally
+used for visualisation), might only account for an insufficient
+proportion of variance to be relevant on their own. This can be
+visualised on a **screeplot**, that can be produced with 
 
-In the code chunk below, I extract the standard deviations from the
-PCA result to calculate the variances, then obtain the percentage of
-and cumulative variance along the PCs.
-  
-```{r irispcavar}
-var <- irispca$sdev^2
-(pve <- var/sum(var))
-cumsum(pve)
+```{r screeplot, fig.cap = "Screeplot showing the variances for the PCs."}
+plot(pca_xy)
 ```
 
-> Challenge
-> 
-> - Repeat the PCA analysis on the iris dataset above, reproducing the
->   biplot and preparing a barplot of the percentage of variance
->   explained by each PC.
-> - It is often useful to produce custom figures using the data
->   coordinates in PCA space, which can be accessed as `x` in the
->   `prcomp` object. Reproduce the PCA plots below, along PC1 and PC2
->   and PC3 and PC4 respectively.
+`r msmbstyle::question_begin()`
 
-```{r irispcax, echo=FALSE, fig.width=12, fig.cap=""}
-par(mfrow = c(1, 2))
-plot(irispca$x[, 1:2], col = iris$Species)
-plot(irispca$x[, 3:4], col = iris$Species)
+- Repeat the analysis above with the `xy0` data, that you can load
+  from the `rWSBIM1207` data. First scale it, then repeat the PCA
+  analysis as shown above.
+
+- Load the `cptac` data, perform the PCA analysis and interpret
+  it. Also produce a PCA for PCs 2 and 3.
+
+- In the exercise above, the PCA was performed on the features
+  (proteins). Transpose the data and produce a PCA of the samples.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r pcaex1, fig.cap = ""}
+xy <- scale(xy0)
+pca1 <- prcomp(xy)
+summary(pca1)
+screeplot(pca1)
+biplot(pca1)
 ```
 
-<details>
-```{r irispcaxcol, eval=FALSE}
-par(mfrow = c(1, 2))
-plot(irispca$x[, 1:2], col = iris$Species)
-plot(irispca$x[, 3:4], col = iris$Species)
+```{r pcaex2, fig.cap = ""}
+library("MSnbase")
+data(cptac)
+x <- exprs(cptac)
+pca2 <- prcomp(x)
+summary(pca2)
+screeplot(pca2)
+biplot(pca2)
+plot(pca2$x[, 2:3])
+biplot(pca2, choices = 2:3)
 ```
-</details>
 
-### Data pre-processing 
+```{r, warning = FALSE}
+x_t <- t(x)
+pca3 <- prcomp(x_t)
+summary(pca3)
+screeplot(pca3)
+biplot(pca3)
+```
+
+`r msmbstyle::solution_end()`
+
+
+## Pre-processing and missing values with PCA
 
 We haven't looked at other `prcomp` parameters, other that the first
 one, `x`. There are two other ones that are or importance, in
@@ -304,13 +337,17 @@ particular in the light of the section on pre-processing above, which
 are `center` and `scale.`. The former is set to `TRUE` by default,
 while the second one is set the `FALSE`.
 
-> Challenge
-> 
-> Repeat the analysis comparing the need for scaling on the `mtcars`
-> dataset, but using PCA instead of hierarchical clustering. When
-> comparing the two.
 
-<details>
+`r msmbstyle::question_begin()`
+
+Perform a PCA analysis on the `mtcars` dataset with and without
+scaling. Compare and interpret the results.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
 ```{r scalepcasol, fig.with=12, fig.cap=""}
 par(mfrow = c(1, 2))
 biplot(prcomp(mtcars, scale = FALSE), main = "No scaling")  ## 1
@@ -320,83 +357,38 @@ biplot(prcomp(mtcars, scale = TRUE), main = "With scaling") ## 2
 Without scaling, `disp` and `hp` are the features with the highest
 loadings along PC1 and 2 (all others are negligible), which are also
 those with the highest units of measurement. Scaling removes this
-effect.  </details>
+effect.
 
-### Final comments on PCA
+`r msmbstyle::solution_end()`
 
-Real datasets often come with **missing values**. In R, these should
-be encoded using `NA`. Unfortunately, PCA cannot deal with missing
+Real datasets often come with *missing values*. In R, these should be
+encoded using `NA`. Unfortunately, PCA cannot deal with missing
 values, and observations containing `NA` values will be dropped
 automatically. This is a viable solution only when the proportion of
-missing values is low.
-
-It is also possible to impute missing values. This is described in
-greater details in the *Data pre-processing* section in the supervised
-machine learning chapter. 
+missing values is low. Otherwise, it is possible to impute missing
+values (which often requires great care) or use an implementation of
+PCA such as *non-linear iterative partial least squares* (NIPALS),
+that support missing values.
 
 Finally, we should be careful when using categorical data in any of
-the unsupervised methods described above. Categories are generally
-represented as factors, which are encoded as integer levels, and might
-give the impression that a distance between levels is a relevant
-measure (which it is not, unless the factors are ordered). In such
-situations, categorical data can be dropped, or it is possible to
-encode categories as binary **dummy variables**. For example, if we
-have 3 categories, say `A`, `B` and `C`, we would create two dummy
-variables to encode the categories as:
+the unsupervised methods. Categories are generally represented as
+factors, which are encoded as integer levels, and might give the
+impression that a distance between levels is a relevant measure (which
+it is not, unless the factors are ordered). In such situations,
+categorical data can be dropped, or it is possible to encode
+categories as binary *dummy variables*. For example, if we have 3
+categories, say `A`, `B` and `C`, we would create two dummy variables
+to encode the categories as:
 
 ```{r dummvar, echo=FALSE}
 dfr <- data.frame(x = c(1, 0, 0),
                   y = c(0, 1, 0))
 rownames(dfr) <- LETTERS[1:3]
-knitr::kable(dfr)
+dfr
 ```
 
-so that the distance between each category are approximately equal to
-1. 
+so that the distance between each category are approximately equal to 1. 
 
-## t-Distributed Stochastic Neighbour Embedding
+## The full PCA workflow
 
-[t-Distributed Stochastic Neighbour Embedding](https://lvdmaaten.github.io/tsne/) (t-SNE)
-is a *non-linear* dimensionality reduction technique, i.e. that
-different regions of the data space will be subjected to different
-transformations. t-SNE will compress small distances, thus bringing
-close neighbours together, and will ignore large distances. It is
-particularly well suited
-for
-[very high dimensional data](https://distill.pub/2016/misread-tsne/).
 
-In R, we can use the `Rtsne` function from the `r CRANpkg("Rtsne")`. 
-Before, we however need to remove any duplicated entries in the
-dataset.
-
-```{r iristsne, fig.cap=""}
-library("Rtsne")
-uiris <- unique(iris[, 1:5])
-iristsne <- Rtsne(uiris[, 1:4])
-plot(iristsne$Y, col = uiris$Species)
-```
-
-As with PCA, the data can be scaled and centred prior the running
-t-SNE (see the `pca_center` and `pca_scale` arguments). The algorithm
-is stochastic, and will produce different results at each repetition.
-
-### Parameter tuning
-
-t-SNE (as well as many other methods, in particular classification
-algorithms) has two important parameters that can substantially
-influence the clustering of the data
-
-- **Perplexity**: balances global and local aspects of the data.
-- **Iterations**: number of iterations before the clustering is
-  stopped.
-
-It is important to adapt these for different data. The figure below
-shows a 5032 by 20 dataset that represent protein sub-cellular
-localisation.
-
-![Effect of different perplexity and iterations when running t-SNE](https://raw.githubusercontent.com/lgatto/visualisation/master/figure/tsnesplots-1.png)
-
-As a comparison, below are the same data with PCA (left) and t-SNE
-(right).
-
-![PCA and t-SNE on hyperLOPIT](https://raw.githubusercontent.com/lgatto/visualisation/master/figure/tsneex-1.png)

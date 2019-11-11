@@ -119,8 +119,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="toc"><a href="#introduction-4"> Introduction</a></li>
 <li class="toc"><a href="#lower-dimensional-projections"> Lower-dimensional projections</a></li>
 <li class="toc"><a href="#the-new-linear-combinations"> The new linear combinations</a></li>
-<li class="toc"><a href="#old-material"> Old material</a></li>
-<li class="toc"><a href="#t-distributed-stochastic-neighbour-embedding"> t-Distributed Stochastic Neighbour Embedding</a></li>
+<li class="toc"><a href="#summary-and-application"> Summary and application</a></li>
+<li class="toc"><a href="#visualisation"> Visualisation</a></li>
+<li class="toc"><a href="#pre-processing-and-missing-values-with-pca"> Pre-processing and missing values with PCA</a></li>
+<li class="toc"><a href="#the-full-pca-workflow"> The full PCA workflow</a></li>
 </ul>
 <a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
 <a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
@@ -189,8 +191,8 @@ Figure 9.5: The second prinicpal component is orthogonal to the second one.
 </p>
 <img src="WSBIM1322_files/figure-html/pxaex2-1.png" alt="The second prinicpal component is orthogonal to the second one." width="1056">
 </div>
-<p>In the example above the variance, the variance along the PCs are 1.83 and 0.17. The first one explains 91.7% or that variance, and the second one merely 8.3%. This is also reflected in the different scales along the x and y axis.</p>
-<p>To account for these differences in variation along the different PCs, it is better to represent a PCA plot as a rectangle, using a ratio that is proportional to the respective variances.</p>
+<p>In the example above the variance, the variance along the PCs are 1.77 and 0.23. The first one explains 88.6% or that variance, and the second one merely 11.4%. This is also reflected in the different scales along the x and y axis.</p>
+<p>To account for these differences in variation along the different PCs, it is better to represent a PCA plot as a rectangle, using an aspect ratio that is illustrative of the respective variances.</p>
 <div class="figure">
 <span id="fig:pxaex3"></span>
 <p class="caption marginnote shownote">
@@ -203,153 +205,228 @@ Figure 9.6: Final principal component analysis of the data.
 <h2>
 <span class="header-section-number">9.3</span> The new linear combinations</h2>
 <p>Principal components are linear combinations of the variables that were originally measured, they provide a new coordinate system. The PC in the previous example is a linear combination of <em>gene_x</em> and <em>gene_y</em>, more specifically</p>
-<p><span class="math display">\[ PC = c__1 gene_x + c_2 gene_y \]</span></p>
+<p><span class="math display">\[ PC = c_{1} ~ gene_{x} + c_{2} ~ gene_{y} \]</span></p>
 <p>It has coefficients <span class="math inline">\((c_1, c_2)\)</span>, also called loading.</p>
 <p>PCA in general will find linear combinations of the original variables. These new linear combinations will maximise the variance of the data.</p>
-<p>TEXT: explain linear combinations and loadings; optimal lines (camel example).</p>
 </div>
-<div id="old-material" class="section level2">
+<div id="summary-and-application" class="section level2">
 <h2>
-<span class="header-section-number">9.4</span> Old material</h2>
-<p>Principal Component Analysis (PCA) is a technique that transforms the original n-dimensional data into a new n-dimensional space.</p>
+<span class="header-section-number">9.4</span> Summary and application</h2>
+<p>Principal Component Analysis (PCA) is a technique that transforms the original n-dimensional data into a new space.</p>
 <ul>
 <li><p>These new dimensions are linear combinations of the original data, i.e. they are composed of proportions of the original variables.</p></li>
 <li><p>Along these new dimensions, called principal components, the data expresses most of its variability along the first PC, then second, …</p></li>
 <li><p>Principal components are orthogonal to each other, i.e. non-correlated.</p></li>
 </ul>
-<div class="figure">
+<div class="figure fullwidth">
 <span id="fig:pcaex"></span>
-<p class="caption marginnote shownote">
+<img src="WSBIM1322_files/figure-html/pcaex-1.png" alt="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right)." width="1152"><p class="caption marginnote shownote">
 Figure 9.7: Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).
 </p>
-<img src="WSBIM1322_files/figure-html/pcaex-1.png" alt="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right)." width="1152">
 </div>
-<p>In R, we can use the <code>prcomp</code> function.</p>
-<p>Let’s explore PCA on the <code>iris</code> data. While it contains only 4 variables, is already becomes difficult to visualise the 3 groups along all these dimensions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(iris[, <span class="dv">-5</span>], <span class="dt">col =</span> iris[, <span class="dv">5</span>], <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/irispairs-1.png" width="672"></p>
-<p>Let’s use PCA to reduce the dimension.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">irispca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris[, <span class="dv">-5</span>])
-<span class="kw">summary</span>(irispca)</code></pre></div>
+<p>In R, we can use the <code>prcomp</code> function. A summary of the <code>prcomp</code> output shows that along PC1 along, we are able to retain close to 92% of the total variability in the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_xy &lt;-<span class="st"> </span><span class="kw">prcomp</span>(xy)
+<span class="kw">summary</span>(pca_xy)</code></pre></div>
 <pre><code>## Importance of components:
-##                           PC1     PC2    PC3     PC4
-## Standard deviation     2.0563 0.49262 0.2797 0.15439
-## Proportion of Variance 0.9246 0.05307 0.0171 0.00521
-## Cumulative Proportion  0.9246 0.97769 0.9948 1.00000</code></pre>
-<p>A summary of the <code>prcomp</code> output shows that along PC1 along, we are able to retain over 92% of the total variability in the data.</p>
-<div class="figure">
-<span id="fig:histpc1"></span>
-<p class="caption marginnote shownote">
-Figure 9.8: Iris data along PC1.
-</p>
-<img src="WSBIM1322_files/figure-html/histpc1-1.png" alt="Iris data along PC1." width="672">
-</div>
-<div id="visualisation" class="section level3">
-<h3>
-<span class="header-section-number">9.4.1</span> Visualisation</h3>
-<p>A <strong>biplot</strong> features all original points re-mapped (rotated) along the first two PCs as well as the original features as vectors along the same PCs. Feature vectors that are in the same direction in PC space are also correlated in the original data space.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(irispca)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/irisbiplot-1.png" width="672"></p>
-<p>One important piece of information when using PCA is the proportion of variance explained along the PCs, in particular when dealing with high dimensional data, as PC1 and PC2 (that are generally used for visualisation), might only account for an insufficient proportion of variance to be relevant on their own.</p>
-<p>In the code chunk below, I extract the standard deviations from the PCA result to calculate the variances, then obtain the percentage of and cumulative variance along the PCs.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">var &lt;-<span class="st"> </span>irispca<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>
-(pve &lt;-<span class="st"> </span>var<span class="op">/</span><span class="kw">sum</span>(var))</code></pre></div>
-<pre><code>## [1] 0.924618723 0.053066483 0.017102610 0.005212184</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(pve)</code></pre></div>
-<pre><code>## [1] 0.9246187 0.9776852 0.9947878 1.0000000</code></pre>
-<blockquote>
-<p>Challenge</p>
+##                           PC1    PC2
+## Standard deviation     1.3308 0.4784
+## Proportion of Variance 0.8856 0.1144
+## Cumulative Proportion  0.8856 1.0000</code></pre>
+<p>This <code>pca_xy</code> variable is an object of class <code>prcomp</code>. To learn what it contains, we can look at its structure with <code>str</code> and read the <code>?prcomp</code> manual page.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(pca_xy)</code></pre></div>
+<pre><code>## List of 5
+##  $ sdev    : num [1:2] 1.331 0.478
+##  $ rotation: num [1:2, 1:2] 0.707 0.707 -0.707 0.707
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:2] "gene_x" "gene_y"
+##   .. ..$ : chr [1:2] "PC1" "PC2"
+##  $ center  : Named num [1:2] 4.05e-16 1.53e-17
+##   ..- attr(*, "names")= chr [1:2] "gene_x" "gene_y"
+##  $ scale   : logi FALSE
+##  $ x       : num [1:20, 1:2] -2.728 -2.4 -2.257 -0.945 -0.14 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : NULL
+##   .. ..$ : chr [1:2] "PC1" "PC2"
+##  - attr(*, "class")= chr "prcomp"</code></pre>
+<p>We are going to focus on two elements:</p>
 <ul>
-<li>Repeat the PCA analysis on the iris dataset above, reproducing the biplot and preparing a barplot of the percentage of variance explained by each PC.</li>
-<li>It is often useful to produce custom figures using the data coordinates in PCA space, which can be accessed as <code>x</code> in the <code>prcomp</code> object. Reproduce the PCA plots below, along PC1 and PC2 and PC3 and PC4 respectively.</li>
+<li>
+<strong>sdev</strong> contains the standard deviations along the respective PCs (as also displayed in the summary). From these, we can compute the variances, the percentages of variance explained by the individual PCs, and the cumulative variances.</li>
 </ul>
-</blockquote>
-<p><img src="WSBIM1322_files/figure-html/irispcax-1.png" width="1152"></p>
-<p><details></details></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-<span class="kw">plot</span>(irispca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">col =</span> iris<span class="op">$</span>Species)
-<span class="kw">plot</span>(irispca<span class="op">$</span>x[, <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">col =</span> iris<span class="op">$</span>Species)</code></pre></div>
-<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(var &lt;-<span class="st"> </span>pca_xy<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 1.7711407 0.2288593</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(pve &lt;-<span class="st"> </span>var<span class="op">/</span><span class="kw">sum</span>(var))</code></pre></div>
+<pre><code>## [1] 0.8855704 0.1144296</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(pve)</code></pre></div>
+<pre><code>## [1] 0.8855704 1.0000000</code></pre>
+<ul>
+<li>
+<strong>x</strong> contains the coordinates of the data along the PCs. These are the values we could use to produce the PCA plot as above by hand.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_xy<span class="op">$</span>x</code></pre></div>
+<pre><code>##               PC1         PC2
+##  [1,] -2.72848772  0.17019003
+##  [2,] -2.40018291  0.11371158
+##  [3,] -2.25654153 -0.17987834
+##  [4,] -0.94491834  0.14224604
+##  [5,] -0.14044618  0.86760695
+##  [6,] -0.85917747  0.06485259
+##  [7,] -1.26714805 -0.38570171
+##  [8,] -0.13426336  0.01962124
+##  [9,]  0.14678704  0.14527416
+## [10,]  1.08677349  0.67252884
+## [11,]  0.93793985  0.43069778
+## [12,]  0.62416628  0.08630825
+## [13,]  0.05477564 -0.56143151
+## [14,]  1.20838962  0.46257985
+## [15,]  0.58230063 -0.44200381
+## [16,]  1.48091889  0.42011071
+## [17,]  1.13374563 -0.12764440
+## [18,]  1.28218805 -0.32631519
+## [19,]  1.46938699 -0.32768480
+## [20,]  0.72379344 -1.24506826</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca_xy<span class="op">$</span>x)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/pcaplot-1.png" width="672"></p>
 </div>
-<div id="data-pre-processing" class="section level3">
-<h3>
-<span class="header-section-number">9.4.2</span> Data pre-processing</h3>
+<div id="visualisation" class="section level2">
+<h2>
+<span class="header-section-number">9.5</span> Visualisation</h2>
+<p>A <strong>biplot</strong> features all original points re-mapped (rotated) along the first two PCs as well as the original features as vectors along the same PCs. Feature vectors that are in the same direction in PC space are also correlated in the original data space.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca_xy)</code></pre></div>
+<div class="figure">
+<span id="fig:biplot"></span>
+<p class="caption marginnote shownote">
+Figure 9.8: A biplot shows both the variables (arrows) and observations of the PCA analysis.
+</p>
+<img src="WSBIM1322_files/figure-html/biplot-1.png" alt="A biplot shows both the variables (arrows) and observations of the PCA analysis." width="672">
+</div>
+<p>One important piece of information when using PCA is the proportion of variance explained along the PCs (see above), in particular when dealing with high dimensional data, as PC1 and PC2 (that are generally used for visualisation), might only account for an insufficient proportion of variance to be relevant on their own. This can be visualised on a <strong>screeplot</strong>, that can be produced with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca_xy)</code></pre></div>
+<div class="figure">
+<span id="fig:screeplot"></span>
+<p class="caption marginnote shownote">
+Figure 9.9: Screeplot showing the variances for the PCs.
+</p>
+<img src="WSBIM1322_files/figure-html/screeplot-1.png" alt="Screeplot showing the variances for the PCs." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Repeat the analysis above with the <code>xy0</code> data, that you can load from the <code>rWSBIM1207</code> data. First scale it, then repeat the PCA analysis as shown above.</p></li>
+<li><p>Load the <code>cptac</code> data, perform the PCA analysis and interpret it. Also produce a PCA for PCs 2 and 3.</p></li>
+<li><p>In the exercise above, the PCA was performed on the features (proteins). Transpose the data and produce a PCA of the samples.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-41" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-41', 'sol-start-41')"></span>
+</p>
+<div id="sol-body-41" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xy &lt;-<span class="st"> </span><span class="kw">scale</span>(xy0)
+pca1 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(xy)
+<span class="kw">summary</span>(pca1)</code></pre></div>
+<pre><code>## Importance of components:
+##                           PC1    PC2
+## Standard deviation     1.3308 0.4784
+## Proportion of Variance 0.8856 0.1144
+## Cumulative Proportion  0.8856 1.0000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screeplot</span>(pca1)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/pcaex1-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca1)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/pcaex1-2.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"MSnbase"</span>)
+<span class="kw">data</span>(cptac)
+x &lt;-<span class="st"> </span><span class="kw">exprs</span>(cptac)
+pca2 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x)
+<span class="kw">summary</span>(pca2)</code></pre></div>
+<pre><code>## Importance of components:
+##                              PC1       PC2       PC3       PC4       PC5
+## Standard deviation     1.211e+07 2.208e+06 1.419e+06 1.249e+06 1.106e+06
+## Proportion of Variance 9.347e-01 3.110e-02 1.283e-02 9.950e-03 7.810e-03
+## Cumulative Proportion  9.347e-01 9.658e-01 9.787e-01 9.886e-01 9.964e-01
+##                              PC6
+## Standard deviation     7.484e+05
+## Proportion of Variance 3.570e-03
+## Cumulative Proportion  1.000e+00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screeplot</span>(pca2)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/pcaex2-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca2)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/pcaex2-2.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca2<span class="op">$</span>x[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/pcaex2-3.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca2, <span class="dt">choices =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/pcaex2-4.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x_t &lt;-<span class="st"> </span><span class="kw">t</span>(x)
+pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
+<span class="kw">summary</span>(pca3)</code></pre></div>
+<pre><code>## Importance of components:
+##                              PC1       PC2       PC3       PC4       PC5
+## Standard deviation     6.322e+07 4.081e+07 4.015e+07 3.441e+07 2.157e+07
+## Proportion of Variance 4.479e-01 1.867e-01 1.807e-01 1.327e-01 5.215e-02
+## Cumulative Proportion  4.479e-01 6.345e-01 8.152e-01 9.478e-01 1.000e+00
+##                             PC6
+## Standard deviation     4.76e-08
+## Proportion of Variance 0.00e+00
+## Cumulative Proportion  1.00e+00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screeplot</span>(pca3)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-50-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca3)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-50-2.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="pre-processing-and-missing-values-with-pca" class="section level2">
+<h2>
+<span class="header-section-number">9.6</span> Pre-processing and missing values with PCA</h2>
 <p>We haven’t looked at other <code>prcomp</code> parameters, other that the first one, <code>x</code>. There are two other ones that are or importance, in particular in the light of the section on pre-processing above, which are <code>center</code> and <code>scale.</code>. The former is set to <code>TRUE</code> by default, while the second one is set the <code>FALSE</code>.</p>
-<blockquote>
-<p>Challenge</p>
-<p>Repeat the analysis comparing the need for scaling on the <code>mtcars</code> dataset, but using PCA instead of hierarchical clustering. When comparing the two.</p>
-</blockquote>
-<p><details></details></p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Perform a PCA analysis on the <code>mtcars</code> dataset with and without scaling. Compare and interpret the results.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-42" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-42', 'sol-start-42')"></span>
+</p>
+<div id="sol-body-42" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">biplot</span>(<span class="kw">prcomp</span>(mtcars, <span class="dt">scale =</span> <span class="ot">FALSE</span>), <span class="dt">main =</span> <span class="st">"No scaling"</span>)  ## 1
 <span class="kw">biplot</span>(<span class="kw">prcomp</span>(mtcars, <span class="dt">scale =</span> <span class="ot">TRUE</span>), <span class="dt">main =</span> <span class="st">"With scaling"</span>) ## 2</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/scalepcasol-1.png" width="672"></p>
-<p>Without scaling, <code>disp</code> and <code>hp</code> are the features with the highest loadings along PC1 and 2 (all others are negligible), which are also those with the highest units of measurement. Scaling removes this effect. </p>
+<p>Without scaling, <code>disp</code> and <code>hp</code> are the features with the highest loadings along PC1 and 2 (all others are negligible), which are also those with the highest units of measurement. Scaling removes this effect.</p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
 </div>
-<div id="final-comments-on-pca" class="section level3">
-<h3>
-<span class="header-section-number">9.4.3</span> Final comments on PCA</h3>
-<p>Real datasets often come with <strong>missing values</strong>. In R, these should be encoded using <code>NA</code>. Unfortunately, PCA cannot deal with missing values, and observations containing <code>NA</code> values will be dropped automatically. This is a viable solution only when the proportion of missing values is low.</p>
-<p>It is also possible to impute missing values. This is described in greater details in the <em>Data pre-processing</em> section in the supervised machine learning chapter.</p>
-<p>Finally, we should be careful when using categorical data in any of the unsupervised methods described above. Categories are generally represented as factors, which are encoded as integer levels, and might give the impression that a distance between levels is a relevant measure (which it is not, unless the factors are ordered). In such situations, categorical data can be dropped, or it is possible to encode categories as binary <strong>dummy variables</strong>. For example, if we have 3 categories, say <code>A</code>, <code>B</code> and <code>C</code>, we would create two dummy variables to encode the categories as:</p>
-<table>
-<thead><tr class="header">
-<th></th>
-<th align="right">x</th>
-<th align="right">y</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td>B</td>
-<td align="right">0</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td>C</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-</tbody>
-</table>
+</div>
+<p>Real datasets often come with <em>missing values</em>. In R, these should be encoded using <code>NA</code>. Unfortunately, PCA cannot deal with missing values, and observations containing <code>NA</code> values will be dropped automatically. This is a viable solution only when the proportion of missing values is low. Otherwise, it is possible to impute missing values (which often requires great care) or use an implementation of PCA such as <em>non-linear iterative partial least squares</em> (NIPALS), that support missing values.</p>
+<p>Finally, we should be careful when using categorical data in any of the unsupervised methods. Categories are generally represented as factors, which are encoded as integer levels, and might give the impression that a distance between levels is a relevant measure (which it is not, unless the factors are ordered). In such situations, categorical data can be dropped, or it is possible to encode categories as binary <em>dummy variables</em>. For example, if we have 3 categories, say <code>A</code>, <code>B</code> and <code>C</code>, we would create two dummy variables to encode the categories as:</p>
+<pre><code>##   x y
+## A 1 0
+## B 0 1
+## C 0 0</code></pre>
 <p>so that the distance between each category are approximately equal to 1.</p>
 </div>
-</div>
-<div id="t-distributed-stochastic-neighbour-embedding" class="section level2">
+<div id="the-full-pca-workflow" class="section level2">
 <h2>
-<span class="header-section-number">9.5</span> t-Distributed Stochastic Neighbour Embedding</h2>
-<p><a href="https://lvdmaaten.github.io/tsne/">t-Distributed Stochastic Neighbour Embedding</a> (t-SNE) is a <em>non-linear</em> dimensionality reduction technique, i.e. that different regions of the data space will be subjected to different transformations. t-SNE will compress small distances, thus bringing close neighbours together, and will ignore large distances. It is particularly well suited for <a href="https://distill.pub/2016/misread-tsne/">very high dimensional data</a>.</p>
-<p>In R, we can use the <code>Rtsne</code> function from the <em><a href="https://CRAN.R-project.org/package=Rtsne">Rtsne</a></em>. Before, we however need to remove any duplicated entries in the dataset.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"Rtsne"</span>)
-uiris &lt;-<span class="st"> </span><span class="kw">unique</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])
-iristsne &lt;-<span class="st"> </span><span class="kw">Rtsne</span>(uiris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
-<span class="kw">plot</span>(iristsne<span class="op">$</span>Y, <span class="dt">col =</span> uiris<span class="op">$</span>Species)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/iristsne-1.png" width="672"></p>
-<p>As with PCA, the data can be scaled and centred prior the running t-SNE (see the <code>pca_center</code> and <code>pca_scale</code> arguments). The algorithm is stochastic, and will produce different results at each repetition.</p>
-<div id="parameter-tuning" class="section level3">
-<h3>
-<span class="header-section-number">9.5.1</span> Parameter tuning</h3>
-<p>t-SNE (as well as many other methods, in particular classification algorithms) has two important parameters that can substantially influence the clustering of the data</p>
-<ul>
-<li>
-<strong>Perplexity</strong>: balances global and local aspects of the data.</li>
-<li>
-<strong>Iterations</strong>: number of iterations before the clustering is stopped.</li>
-</ul>
-<p>It is important to adapt these for different data. The figure below shows a 5032 by 20 dataset that represent protein sub-cellular localisation.</p>
-<div class="figure">
-<img src="https://raw.githubusercontent.com/lgatto/visualisation/master/figure/tsnesplots-1.png" alt="Effect of different perplexity and iterations when running t-SNE"><p class="caption">Effect of different perplexity and iterations when running t-SNE</p>
-</div>
-<p>As a comparison, below are the same data with PCA (left) and t-SNE (right).</p>
-<div class="figure">
-<img src="https://raw.githubusercontent.com/lgatto/visualisation/master/figure/tsneex-1.png" alt="PCA and t-SNE on hyperLOPIT"><p class="caption">PCA and t-SNE on hyperLOPIT</p>
-</div>
+<span class="header-section-number">9.7</span> The full PCA workflow</h2>
 
-</div>
 </div>
 </div></body></html>
 
