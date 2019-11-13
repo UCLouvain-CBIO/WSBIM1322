@@ -668,6 +668,11 @@ fviz_pca_ind(pca_hl, geom = "point",
 
 ## Additional exercises
 
+`r msmbstyle::question_begin()`
+Load the `tdata1` dataset from the `rWSBIM1207` package and run a PCA
+analysis on the samples. Interpret the results, knowing that these
+data are random.
+`r msmbstyle::question_end()`
 
 `r msmbstyle::question_begin()`
 Using the function `kem2.tsv` from the `rWSBIM1207` package, import
