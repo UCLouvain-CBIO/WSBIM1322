@@ -1,5 +1,13 @@
 # Dimensionality reduction {#sec:dimred}
 
+This chapter has as objectives to 
+
+- introduce dimensionality reduction techniques;
+- provide the students with an understanding of what principal
+  compoment analysis achieves;
+- show how to perform a PCA analysis;
+- provide real-case scenarios of PCA analyses on omics data.
+
 ## Introduction
 
 In this chapter, we are going to learn about dimensionality reduction,
@@ -447,7 +455,7 @@ pData(mulvey2015)
 `r msmbstyle::solution_end()`
 
 Here, we will want to do a PCA analysis on the samples. We want to remap the 
-`r ncol(mulvey2015)` samples from a `r nrow(mulvey2015)`-dimensional space into 2, 
+`r ncol(mulvey2015)` samples from a `r nrow(mulvey2015)`-dimensional space into 2, or
 possibly 3 dimensions. This will require to transpose the data matrix
 before passing it to the `prcomp` function.
 
@@ -555,9 +563,10 @@ mouse pluripotent stem cell by Christoforou *et al.*
 
 
 `r msmbstyle::question_begin()`
-Load the `hyperLOPIT2015` data from the `pRolocdata` package. Check its
-class and familiarise yourself with its feature annotation stored in the
-*featureData* slot that can be accessed with the `fData` function.
+Load the `hyperLOPIT2015` data from the `pRolocdata` package. Check
+its class and familiarise yourself with its experimetnal design and
+its feature annotation stored in the *featureData* slot that can be
+accessed with the `fData` function.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
@@ -565,18 +574,20 @@ class and familiarise yourself with its feature annotation stored in the
 ```{r}
 library(pRolocdata)
 data(hyperLOPIT2015)
-fData(hyperLOPIT2015)[, c("entry.name", 
+pData(hyperLOPIT2015)
+head(fData(hyperLOPIT2015)[, c("entry.name", "markers")])
 ```
 `r msmbstyle::solution_end()`
 
-Here, we will want to do a PCA analysis on the samples. We want to remap the 
-`r ncol(mulvey2015)` samples from a `r nrow(mulvey2015)`-dimensional space into 2, 
-possibly 3 dimensions. This will require to transpose the data matrix
-before passing it to the `prcomp` function.
+Here, we will want to do a PCA analysis on the features. We want to
+remap the `r nrow(hyperLOPIT2015)` proteins from a 
+`r ncol(hyperLOPIT2015)`-dimensional space into 2, or
+possibly 3 dimensions. Here, we can use the data as it when 
+passing it to the `prcomp` function.
 
 `r msmbstyle::question_begin()`
 
-- Run a PCA analysis on the samples of the `mulvey2015` data and
+- Run a PCA analysis on the features of the `hyperLOPIT2015` data and
   display a summary of the results.
   
 `r msmbstyle::question_end()`
@@ -584,14 +595,14 @@ before passing it to the `prcomp` function.
 `r msmbstyle::solution_begin()`
 
 ```{r}
-pca_mulvey2015 <- prcomp(t(exprs(mulvey2015)), scale. = TRUE)
-summary(pca_mulvey2015)
+pca_hl <- prcomp(exprs(hyperLOPIT2015), scale. = TRUE)
+summary(pca_hl)
 ```
 
 `r msmbstyle::solution_end()`
 
 `r msmbstyle::question_begin()`
-- Assuming we are happy with a reduced space explaining 90% of the
+- Assuming we are happy with a reduced space explaining 75% of the
   variance of the data, how many PCs do we need?
   
 - Visualise the variance captured by the 18 PCs. To do so, you can use
@@ -602,9 +613,9 @@ summary(pca_mulvey2015)
 
 `r msmbstyle::solution_begin()`
 
-```{r, fig.cap = "Scree plot for the `mulvey2015` data showing the percentage of explained variance onlong the principal components.", message = FALSE}
+```{r, fig.cap = "Scree plot for the `hyperLOPIT2015` data showing the percentage of explained variance onlong the principal components.", message = FALSE}
 library("factoextra")
-fviz_screeplot(pca_mulvey2015)
+fviz_screeplot(pca_hl)
 ```
 
 `r msmbstyle::solution_end()`
@@ -612,44 +623,55 @@ fviz_screeplot(pca_mulvey2015)
 `r msmbstyle::question_begin()`
 
 - Visualise your PCA analysis on a biplot. You can use the `fviz_pca`
-  function from the `factoextra` package, or the `fviz_pca_ind`
-  function to focus on the individuals (the rows of the orgininal
+  function from the `factoextra` package, or the `fviz_pca_var`
+  function to focus on the variables (the columns of the orgininal
   input).
+  
+- Interpret the variables on the biplot. Which ones are correlated? Is
+  this to be expected in the light of the experimental design.
 
-- Use the `habillage` argument of the `fviz_pca_ind` function to
-  highlight the time experimental variable. Interpret the figures in
-  the light of the experimental design.
+- Use the `fviz_pca_ind` function to focus on the individuals (the
+  rows of the orgininal input). Use the `habillage` argument of the
+  `fviz_pca_ind` function to highlight sub-cellular locations of the
+  proteins (use the `"markers"` feature variable) and set the `geom`
+  argument to `"point"` to drop the feature names from the plot (which
+  correspond to `geom = "text"`). Interpret the figures in the light of 
+  the spatial proteomics experiment.
+
+  
+- Repeat the figure above setting the `"final.assignment"` variable to
+  annotate the plot. Compare and interpret the two plots.
 
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-```{r, fig.cap = "Biplot of the `mulvey2015` data.", fig.width = 8, fig.height = 4}
-fviz_pca(pca_mulvey2015)
-fviz_pca_ind(pca_mulvey2015)
-fviz_pca_ind(pca_mulvey2015, habillage = pData(mulvey2015)$time)
-```
-`r msmbstyle::solution_end()`
-
-
-`r msmbstyle::question_begin()`
-To visualise the data in 3 dimension, you can use the `plot3d`
-function from the `rgl` package, that provides means to rotate the
-cube along the three first PCs.
-`r msmbstyle::question_end()`
-
-
-`r msmbstyle::solution_begin()`
-```{r}
-library("rgl")
-plot3d(pca_mulvey2015$x[, 1],
-       pca_mulvey2015$x[, 2],
-       pca_mulvey2015$x[, 3],
-       col = mulvey2015$time,
-       size = 10)
+```{r, fig.cap = "Biplot of the `hyperLOPIT2015` data.", fig.width = 8, fig.height = 4}
+fviz_pca(pca_hl)
+fviz_pca_var(pca_hl)
 ```
 
+```{r, fig.cap = "Biplot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins.", fig.width = 8, fig.height = 4}
+## Manual colour palette (from the pRoloc package)
+
+cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
+         "#333333", "#00CED1", "#A65628", "#F781BF", "#984EA3",
+         "#9ACD32", "#B0C4DE", "#00008A", "#8B795E", "#E0E0E060")
+
+fviz_pca_ind(pca_hl, geom = "point",
+             habillage = fData(hyperLOPIT2015)$markers,
+             palette = cls)
+fviz_pca_ind(pca_hl, geom = "point",
+             habillage = fData(hyperLOPIT2015)$final.assignment,
+             palette = cls)
+```
 `r msmbstyle::solution_end()`
 
 ## Additional exercises
+
+
+`r msmbstyle::question_begin()`
+Using the function `kem2.tsv` from the `rWSBIM1207` package, import
+the RNA-seq data and perform a PCA analysis on the samples.
+`r msmbstyle::question_end()`
 
 

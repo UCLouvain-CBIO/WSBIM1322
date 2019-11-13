@@ -141,6 +141,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <html><body><div id="sec:dimred" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 9</span> Dimensionality reduction</h1>
+<p>This chapter has as objectives to</p>
+<ul>
+<li>introduce dimensionality reduction techniques;</li>
+<li>provide the students with an understanding of what principal compoment analysis achieves;</li>
+<li>show how to perform a PCA analysis;</li>
+<li>provide real-case scenarios of PCA analyses on omics data.</li>
+</ul>
 <div id="introduction-4" class="section level2">
 <h2>
 <span class="header-section-number">9.1</span> Introduction</h2>
@@ -432,7 +439,7 @@ pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>mulvey2015</code> data from the <code>pRolocdata</code> package. Check its class familiarise yourself with its experimental design stored in the <em>phenoData</em> slot that can be accessed with the <code>pData</code> function.</p>
+<p>Load the <code>mulvey2015</code> data from the <code>pRolocdata</code> package. Check its class and familiarise yourself with its experimental design stored in the <em>phenoData</em> slot that can be accessed with the <code>pData</code> function.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -473,7 +480,7 @@ pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
 </p>
 </div>
 </div>
-<p>Here, we will want to do a PCA analysis on the samples. We want to remap the 18 samples from a 2337-dimensional space into 2, possibly 3 dimensions. This will require to transpose the data matrix before passing it to the <code>prcomp</code> function.</p>
+<p>Here, we will want to do a PCA analysis on the samples. We want to remap the 18 samples from a 2337-dimensional space into 2, or possibly 3 dimensions. This will require to transpose the data matrix before passing it to the <code>prcomp</code> function.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -609,11 +616,12 @@ Figure 9.13: Biplot of the <code>mulvey2015</code> data.
 ► Solution<span id="sol-start-47" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-47', 'sol-start-47')"></span>
 </p>
 <div id="sol-body-47" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rgl<span class="op">::</span><span class="kw">plot3d</span>(pca_mulvey2015<span class="op">$</span>x[, <span class="dv">1</span>],
-            pca_mulvey2015<span class="op">$</span>x[, <span class="dv">2</span>],
-            pca_mulvey2015<span class="op">$</span>x[, <span class="dv">3</span>],
-            <span class="dt">col =</span> mulvey2015<span class="op">$</span>time,
-            <span class="dt">size =</span> <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rgl"</span>)
+<span class="kw">plot3d</span>(pca_mulvey2015<span class="op">$</span>x[, <span class="dv">1</span>],
+       pca_mulvey2015<span class="op">$</span>x[, <span class="dv">2</span>],
+       pca_mulvey2015<span class="op">$</span>x[, <span class="dv">3</span>],
+       <span class="dt">col =</span> mulvey2015<span class="op">$</span>time,
+       <span class="dt">size =</span> <span class="dv">10</span>)</code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -627,6 +635,224 @@ Figure 9.13: Biplot of the <code>mulvey2015</code> data.
 <blockquote>
 <p>Knowledge of the subcellular distribution of proteins is vital for understanding cellular mechanisms. Capturing the subcellular proteome in a single experiment has proven challenging, with studies focusing on specific compartments or assigning proteins to subcellular niches with low resolution and/or accuracy. Here we introduce hyperLOPIT, a method that couples extensive fractionation, quantitative high-resolution accurate mass spectrometry with multivariate data analysis. We apply hyperLOPIT to a pluripotent stem cell population whose subcellular proteome has not been extensively studied. We provide localization data on over 5,000 proteins with unprecedented spatial resolution to reveal the organization of organelles, sub-organellar compartments, protein complexes, functional networks and steady-state dynamics of proteins and unexpected subcellular locations. The method paves the way for characterizing the impact of post-transcriptional and post-translational modification on protein location and studies involving proteome-level locational changes on cellular perturbation. An interactive open-source resource is presented that enables exploration of these data.</p>
 </blockquote>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Load the <code>hyperLOPIT2015</code> data from the <code>pRolocdata</code> package. Check its class and familiarise yourself with its experimetnal design and its feature annotation stored in the <em>featureData</em> slot that can be accessed with the <code>fData</code> function.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-48" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-48', 'sol-start-48')"></span>
+</p>
+<div id="sol-body-48" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pRolocdata)
+<span class="kw">data</span>(hyperLOPIT2015)
+<span class="kw">pData</span>(hyperLOPIT2015)</code></pre></div>
+<pre><code>##            Replicate TMT.Reagent Acquisiton.Method Gradient.Fraction
+## X126.rep1          1        X126               MS3           Cytosol
+## X127N.rep1         1       X127N               MS3   1 to 6 (pooled)
+## X127C.rep1         1       X127C               MS3   8 to 9 (pooled)
+## X128N.rep1         1       X128N               MS3 10 to 11 (pooled)
+## X128C.rep1         1       X128C               MS3                12
+## X129N.rep1         1       X129N               MS3                14
+## X129C.rep1         1       X129C               MS3                16
+## X130N.rep1         1       X130N               MS3                18
+## X130C.rep1         1       X130C               MS3         Chromatin
+## X131.rep1          1        X131               MS3                19
+## X126.rep2          2        X126               MS3           Cytosol
+## X127N.rep2         2       X127N               MS3   1 to 6 (pooled)
+## X127C.rep2         2       X127C               MS3   7 to 9 (pooled)
+## X128N.rep2         2       X128N               MS3 10 to 11 (pooled)
+## X128C.rep2         2       X128C               MS3                12
+## X129N.rep2         2       X129N               MS3 14 to 15 (pooled)
+## X129C.rep2         2       X129C               MS3                17
+## X130N.rep2         2       X130N               MS3 18 to 19 (pooled)
+## X130C.rep2         2       X130C               MS3         Chromatin
+## X131.rep2          2        X131               MS3                20
+##            Iodixonal.Density
+## X126.rep1                0.0
+## X127N.rep1               6.0
+## X127C.rep1              11.0
+## X128N.rep1              13.3
+## X128C.rep1              14.6
+## X129N.rep1              17.4
+## X129C.rep1              20.1
+## X130N.rep1              26.8
+## X130C.rep1                NA
+## X131.rep1               34.5
+## X126.rep2                0.0
+## X127N.rep2               5.2
+## X127C.rep2              10.0
+## X128N.rep2              12.5
+## X128C.rep2              14.0
+## X129N.rep2              17.3
+## X129C.rep2              20.9
+## X130N.rep2              24.7
+## X130C.rep2                NA
+## X131.rep2               31.9</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">fData</span>(hyperLOPIT2015)[, <span class="kw">c</span>(<span class="st">"entry.name"</span>, <span class="st">"markers"</span>)])</code></pre></div>
+<pre><code>##           entry.name            markers
+## Q9JHU4   DYHC1_MOUSE            unknown
+## Q9QXS1-3  PLEC_MOUSE            unknown
+## Q9ERU9    RBP2_MOUSE            unknown
+## P26039    TLN1_MOUSE Actin cytoskeleton
+## Q8BTM8    FLNA_MOUSE            unknown
+## A2ARV4    LRP2_MOUSE            unknown</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Here, we will want to do a PCA analysis on the features. We want to remap the 5032 proteins from a 20-dimensional space into 2, or possibly 3 dimensions. Here, we can use the data as it when passing it to the <code>prcomp</code> function.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li>Run a PCA analysis on the features of the <code>hyperLOPIT2015</code> data and display a summary of the results.</li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-49" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-49', 'sol-start-49')"></span>
+</p>
+<div id="sol-body-49" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_hl &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">exprs</span>(hyperLOPIT2015), <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
+<span class="kw">summary</span>(pca_hl)</code></pre></div>
+<pre><code>## Importance of components:
+##                          PC1    PC2     PC3     PC4     PC5     PC6
+## Standard deviation     3.111 2.1843 1.27979 1.10039 0.77542 0.69215
+## Proportion of Variance 0.484 0.2386 0.08189 0.06054 0.03006 0.02395
+## Cumulative Proportion  0.484 0.7226 0.80450 0.86504 0.89510 0.91906
+##                            PC7     PC8     PC9    PC10    PC11    PC12
+## Standard deviation     0.66758 0.48081 0.43346 0.40047 0.33093 0.32881
+## Proportion of Variance 0.02228 0.01156 0.00939 0.00802 0.00548 0.00541
+## Cumulative Proportion  0.94134 0.95290 0.96229 0.97031 0.97579 0.98119
+##                          PC13    PC14    PC15    PC16    PC17    PC18
+## Standard deviation     0.2864 0.27239 0.26359 0.23686 0.22918 0.20449
+## Proportion of Variance 0.0041 0.00371 0.00347 0.00281 0.00263 0.00209
+## Cumulative Proportion  0.9853 0.98900 0.99248 0.99528 0.99791 1.00000
+##                            PC19     PC20
+## Standard deviation     0.003022 0.002842
+## Proportion of Variance 0.000000 0.000000
+## Cumulative Proportion  1.000000 1.000000</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Assuming we are happy with a reduced space explaining 75% of the variance of the data, how many PCs do we need?</p></li>
+<li><p>Visualise the variance captured by the 18 PCs. To do so, you can use the <code>fviz_screeplot</code> function from the <code>factoextra</code> package.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-50" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-50', 'sol-start-50')"></span>
+</p>
+<div id="sol-body-50" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"factoextra"</span>)
+<span class="kw">fviz_screeplot</span>(pca_hl)</code></pre></div>
+<div class="figure">
+<span id="fig:unnamed-chunk-58"></span>
+<p class="caption marginnote shownote">
+Figure 9.14: Scree plot for the <code>hyperLOPIT2015</code> data showing the percentage of explained variance onlong the principal components.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-58-1.png" alt="Scree plot for the `hyperLOPIT2015` data showing the percentage of explained variance onlong the principal components." width="672">
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Visualise your PCA analysis on a biplot. You can use the <code>fviz_pca</code> function from the <code>factoextra</code> package, or the <code>fviz_pca_var</code> function to focus on the variables (the columns of the orgininal input).</p></li>
+<li><p>Interpret the variables on the biplot. Which ones are correlated? Is this to be expected in the light of the experimental design.</p></li>
+<li><p>Use the <code>fviz_pca_ind</code> function to focus on the individuals (the rows of the orgininal input). Use the <code>habillage</code> argument of the <code>fviz_pca_ind</code> function to highlight sub-cellular locations of the proteins (use the <code>"markers"</code> feature variable) and set the <code>geom</code> argument to <code>"point"</code> to drop the feature names from the plot (which correspond to <code>geom = "text"</code>). Interpret the figures in the light of the spatial proteomics experiment.</p></li>
+<li><p>Repeat the figure above setting the <code>"final.assignment"</code> variable to annotate the plot. Compare and interpret the two plots.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-51" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-51', 'sol-start-51')"></span>
+</p>
+<div id="sol-body-51" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca</span>(pca_hl)</code></pre></div>
+<div class="figure">
+<span id="fig:unnamed-chunk-591"></span>
+<p class="caption marginnote shownote">
+Figure 9.15: Biplot of the <code>hyperLOPIT2015</code> data.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-59-1.png" alt="Biplot of the `hyperLOPIT2015` data." width="768">
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_var</span>(pca_hl)</code></pre></div>
+<div class="figure">
+<span id="fig:unnamed-chunk-592"></span>
+<p class="caption marginnote shownote">
+Figure 9.16: Biplot of the <code>hyperLOPIT2015</code> data.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-59-2.png" alt="Biplot of the `hyperLOPIT2015` data." width="768">
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Manual colour palette (from the pRoloc package)
+
+cls &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,
+         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,
+         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)
+
+<span class="kw">fviz_pca_ind</span>(pca_hl, <span class="dt">geom =</span> <span class="st">"point"</span>,
+             <span class="dt">habillage =</span> <span class="kw">fData</span>(hyperLOPIT2015)<span class="op">$</span>markers,
+             <span class="dt">palette =</span> cls)</code></pre></div>
+<div class="figure">
+<span id="fig:unnamed-chunk-601"></span>
+<p class="caption marginnote shownote">
+Figure 9.17: Biplot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-60-1.png" alt="Biplot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_ind</span>(pca_hl, <span class="dt">geom =</span> <span class="st">"point"</span>,
+             <span class="dt">habillage =</span> <span class="kw">fData</span>(hyperLOPIT2015)<span class="op">$</span>final.assignment,
+             <span class="dt">palette =</span> cls)</code></pre></div>
+<div class="figure">
+<span id="fig:unnamed-chunk-602"></span>
+<p class="caption marginnote shownote">
+Figure 9.18: Biplot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-60-2.png" alt="Biplot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 </div>
 </div>
 <div id="additional-exercises-7" class="section level2">
