@@ -590,25 +590,25 @@ Figure 8.10: Scree plot for the <code>mulvey2015</code> data showing the percent
 <div class="figure">
 <span id="fig:unnamed-chunk-521"></span>
 <p class="caption marginnote shownote">
-Figure 8.11: Biplot of the <code>mulvey2015</code> data.
+Figure 8.11: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-52-1.png" alt="Biplot of the `mulvey2015` data." width="768">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-52-1.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_ind</span>(pca_mulvey2015)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-522"></span>
 <p class="caption marginnote shownote">
-Figure 8.12: Biplot of the <code>mulvey2015</code> data.
+Figure 8.12: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-52-2.png" alt="Biplot of the `mulvey2015` data." width="768">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-52-2.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_ind</span>(pca_mulvey2015, <span class="dt">habillage =</span> <span class="kw">pData</span>(mulvey2015)<span class="op">$</span>time)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-523"></span>
 <p class="caption marginnote shownote">
-Figure 8.13: Biplot of the <code>mulvey2015</code> data.
+Figure 8.13: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-52-3.png" alt="Biplot of the `mulvey2015` data." width="768">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-52-3.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -825,17 +825,17 @@ Figure 8.14: Scree plot for the <code>hyperLOPIT2015</code> data showing the per
 <div class="figure">
 <span id="fig:unnamed-chunk-571"></span>
 <p class="caption marginnote shownote">
-Figure 8.15: Biplot of the <code>hyperLOPIT2015</code> data.
+Figure 8.15: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-57-1.png" alt="Biplot of the `hyperLOPIT2015` data." width="768">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-57-1.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_var</span>(pca_hl)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-572"></span>
 <p class="caption marginnote shownote">
-Figure 8.16: Biplot of the <code>hyperLOPIT2015</code> data.
+Figure 8.16: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-57-2.png" alt="Biplot of the `hyperLOPIT2015` data." width="768">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-57-2.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Manual colour palette (from the pRoloc package)
 
@@ -849,9 +849,9 @@ cls &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"#E
 <div class="figure">
 <span id="fig:unnamed-chunk-581"></span>
 <p class="caption marginnote shownote">
-Figure 8.17: Biplot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
+Figure 8.17: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-58-1.png" alt="Biplot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-58-1.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_ind</span>(pca_hl, <span class="dt">geom =</span> <span class="st">"point"</span>,
              <span class="dt">habillage =</span> <span class="kw">fData</span>(hyperLOPIT2015)<span class="op">$</span>final.assignment,
@@ -859,9 +859,9 @@ Figure 8.17: Biplot of the <code>hyperLOPIT2015</code> data showing the sub-cell
 <div class="figure">
 <span id="fig:unnamed-chunk-582"></span>
 <p class="caption marginnote shownote">
-Figure 8.18: Biplot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
+Figure 8.18: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-58-2.png" alt="Biplot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-58-2.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -890,6 +890,17 @@ Figure 8.18: Biplot of the <code>hyperLOPIT2015</code> data showing the sub-cell
 </p>
 <div class="question-body">
 <p>Using the function <code>kem2.tsv</code> from the <code>rWSBIM1207</code> package, import the RNA-seq data and perform a PCA analysis on the samples.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Load the <code>mat1xcms</code> data from the <code>rWSBIM1207</code> package and perform a PCA analysis on the samples. These data represent mass spectrometry-based metabolomics data.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>

@@ -541,7 +541,7 @@ fviz_screeplot(pca_mulvey2015)
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-```{r, fig.cap = "Biplot of the `mulvey2015` data.", fig.width = 8, fig.height = 4}
+```{r, fig.cap = "Biplot and variables PCA plot of the `mulvey2015` data.", fig.width = 8, fig.height = 4}
 fviz_pca(pca_mulvey2015)
 fviz_pca_ind(pca_mulvey2015)
 fviz_pca_ind(pca_mulvey2015, habillage = pData(mulvey2015)$time)
@@ -678,12 +678,12 @@ fviz_screeplot(pca_hl)
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-```{r, fig.cap = "Biplot of the `hyperLOPIT2015` data.", fig.width = 8, fig.height = 4}
+```{r, fig.cap = "Biplot and variables PCA plot of the `hyperLOPIT2015` data.", fig.width = 8, fig.height = 4}
 fviz_pca(pca_hl)
 fviz_pca_var(pca_hl)
 ```
 
-```{r, fig.cap = "Biplot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins.", fig.width = 8, fig.height = 4}
+```{r, fig.cap = "Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins.", fig.width = 8, fig.height = 4}
 ## Manual colour palette (from the pRoloc package)
 
 cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
@@ -712,4 +712,10 @@ Using the function `kem2.tsv` from the `rWSBIM1207` package, import
 the RNA-seq data and perform a PCA analysis on the samples.
 `r msmbstyle::question_end()`
 
+
+`r msmbstyle::question_begin()`
+Load the `mat1xcms` data from the `rWSBIM1207` package and perform a
+PCA analysis on the samples. These data represent mass
+spectrometry-based metabolomics data.
+`r msmbstyle::question_end()`
 
