@@ -287,7 +287,8 @@ plot(pca_xy)
   from the `rWSBIM1207` data. First scale it, then repeat the PCA
   analysis as shown above.
 
-- Load the `cptac` data, perform the PCA analysis and interpret
+- Load the `cptac_prot` data, scale the data (see below for why
+  scaling is important), then perform the PCA analysis and interpret
   it. Also produce a PCA for PCs 2 and 3.
 
 - In the exercise above, the PCA was performed on the features
@@ -308,8 +309,8 @@ biplot(pca1)
 
 ```{r pcaex2, fig.cap = ""}
 library("MSnbase")
-data(cptac)
-x <- exprs(cptac)
+data(cptac_prot)
+x <- scale(exprs(cptac_prot))
 pca2 <- prcomp(x)
 summary(pca2)
 screeplot(pca2)
@@ -390,5 +391,265 @@ dfr
 so that the distance between each category are approximately equal to 1. 
 
 ## The full PCA workflow
+
+In this section, we will describe the detailed PCA analysis and
+interpretation of two real-life proteomics datasets. Both of these
+datasets are available in the `pRolocdata` package.
+
+
+### Extra-embryonic endoderm differentiation in mouse embryonic stem cells
+
+We are first going to focus on the data from Mulvey *et al.* (2015),
+where they present the *Dynamic proteomic profiling of extra-embryonic
+endoderm differentiation in mouse embryonic stem cells* [@Mulvey:2015]. 
+
+> During mammalian preimplantation development, the cells of the
+> blastocyst's inner cell mass differentiate into the epiblast and
+> primitive endoderm lineages, which give rise to the fetus and
+> extra-embryonic tissues, respectively. Extra-embryonic endoderm
+> (XEN) differentiation can be modeled in vitro by induced
+> expression of GATA transcription factors in mouse embryonic stem
+> cells. Here, we use this GATA-inducible system to quantitatively
+> monitor the dynamics of global proteomic changes during the early
+> stages of this differentiation event and also investigate the
+> fully differentiated phenotype, as represented by embryo-derived
+> XEN cells. Using mass spectrometry-based quantitative proteomic
+> profiling with multivariate data analysis tools, we reproducibly
+> quantified 2,336 proteins across three biological replicates and
+> have identified clusters of proteins characterized by distinct,
+> dynamic temporal abundance profiles. We first used this approach
+> to highlight novel marker candidates of the pluripotent state and
+> XEN differentiation. Through functional annotation enrichment
+> analysis, we have shown that the downregulation of
+> chromatin-modifying enzymes, the reorganization of membrane
+> trafficking machinery, and the breakdown of cell-cell adhesion are
+> successive steps of the extra-embryonic differentiation process.
+> Thus, applying a range of sophisticated clustering approaches to a
+> time-resolved proteomic dataset has allowed the elucidation of
+> complex biological processes which characterize stem cell
+> differentiation and could establish a general paradigm for the
+> investigation of these processes.
+
+
+`r msmbstyle::question_begin()`
+Load the `mulvey2015` data from the `pRolocdata` package. Check its
+class and familiarise yourself with its experimental design stored in
+the *phenoData* slot that can be accessed with the `pData` function.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+library(pRolocdata)
+data(mulvey2015)
+pData(mulvey2015)
+```
+`r msmbstyle::solution_end()`
+
+Here, we will want to do a PCA analysis on the samples. We want to remap the 
+`r ncol(mulvey2015)` samples from a `r nrow(mulvey2015)`-dimensional space into 2, 
+possibly 3 dimensions. This will require to transpose the data matrix
+before passing it to the `prcomp` function.
+
+`r msmbstyle::question_begin()`
+
+- Run a PCA analysis on the samples of the `mulvey2015` data and
+  display a summary of the results.
+  
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+pca_mulvey2015 <- prcomp(t(exprs(mulvey2015)), scale. = TRUE)
+summary(pca_mulvey2015)
+```
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+- Assuming we are happy with a reduced space explaining 90% of the
+  variance of the data, how many PCs do we need?
+  
+- Visualise the variance captured by the 18 PCs. To do so, you can use
+  the `fviz_screeplot` function from the `factoextra` package.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r, fig.cap = "Scree plot for the `mulvey2015` data showing the percentage of explained variance onlong the principal components.", message = FALSE}
+library("factoextra")
+fviz_screeplot(pca_mulvey2015)
+```
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+
+- Visualise your PCA analysis on a biplot. You can use the `fviz_pca`
+  function from the `factoextra` package, or the `fviz_pca_ind`
+  function to focus on the individuals (the rows of the orgininal
+  input).
+
+- Use the `habillage` argument of the `fviz_pca_ind` function to
+  highlight the time experimental variable. Interpret the figures in
+  the light of the experimental design.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r, fig.cap = "Biplot of the `mulvey2015` data.", fig.width = 8, fig.height = 4}
+fviz_pca(pca_mulvey2015)
+fviz_pca_ind(pca_mulvey2015)
+fviz_pca_ind(pca_mulvey2015, habillage = pData(mulvey2015)$time)
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+To visualise the data in 3 dimension, you can use the `plot3d`
+function from the `rgl` package, that provides means to rotate the
+cube along the three first PCs.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r, eval = FALSE}
+library("rgl")
+plot3d(pca_mulvey2015$x[, 1],
+       pca_mulvey2015$x[, 2],
+       pca_mulvey2015$x[, 3],
+       col = mulvey2015$time,
+       size = 10)
+```
+
+`r msmbstyle::solution_end()`
+
+### A map of the mouse pluripotent stem cell spatial proteome
+
+In this section, we are going to use PCA to explore spatial map of
+mouse pluripotent stem cell by Christoforou *et al.*
+[@Christoforou:2016]. 
+
+> Knowledge of the subcellular distribution of proteins is vital for
+> understanding cellular mechanisms. Capturing the subcellular
+> proteome in a single experiment has proven challenging, with studies
+> focusing on specific compartments or assigning proteins to
+> subcellular niches with low resolution and/or accuracy. Here we
+> introduce hyperLOPIT, a method that couples extensive fractionation,
+> quantitative high-resolution accurate mass spectrometry with
+> multivariate data analysis. We apply hyperLOPIT to a pluripotent
+> stem cell population whose subcellular proteome has not been
+> extensively studied. We provide localization data on over 5,000
+> proteins with unprecedented spatial resolution to reveal the
+> organization of organelles, sub-organellar compartments, protein
+> complexes, functional networks and steady-state dynamics of proteins
+> and unexpected subcellular locations. The method paves the way for
+> characterizing the impact of post-transcriptional and
+> post-translational modification on protein location and studies
+> involving proteome-level locational changes on cellular
+> perturbation. An interactive open-source resource is presented that
+> enables exploration of these data.
+
+
+`r msmbstyle::question_begin()`
+Load the `hyperLOPIT2015` data from the `pRolocdata` package. Check its
+class and familiarise yourself with its feature annotation stored in the
+*featureData* slot that can be accessed with the `fData` function.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+library(pRolocdata)
+data(hyperLOPIT2015)
+fData(hyperLOPIT2015)[, c("entry.name", 
+```
+`r msmbstyle::solution_end()`
+
+Here, we will want to do a PCA analysis on the samples. We want to remap the 
+`r ncol(mulvey2015)` samples from a `r nrow(mulvey2015)`-dimensional space into 2, 
+possibly 3 dimensions. This will require to transpose the data matrix
+before passing it to the `prcomp` function.
+
+`r msmbstyle::question_begin()`
+
+- Run a PCA analysis on the samples of the `mulvey2015` data and
+  display a summary of the results.
+  
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+pca_mulvey2015 <- prcomp(t(exprs(mulvey2015)), scale. = TRUE)
+summary(pca_mulvey2015)
+```
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+- Assuming we are happy with a reduced space explaining 90% of the
+  variance of the data, how many PCs do we need?
+  
+- Visualise the variance captured by the 18 PCs. To do so, you can use
+  the `fviz_screeplot` function from the `factoextra` package.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r, fig.cap = "Scree plot for the `mulvey2015` data showing the percentage of explained variance onlong the principal components.", message = FALSE}
+library("factoextra")
+fviz_screeplot(pca_mulvey2015)
+```
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+
+- Visualise your PCA analysis on a biplot. You can use the `fviz_pca`
+  function from the `factoextra` package, or the `fviz_pca_ind`
+  function to focus on the individuals (the rows of the orgininal
+  input).
+
+- Use the `habillage` argument of the `fviz_pca_ind` function to
+  highlight the time experimental variable. Interpret the figures in
+  the light of the experimental design.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r, fig.cap = "Biplot of the `mulvey2015` data.", fig.width = 8, fig.height = 4}
+fviz_pca(pca_mulvey2015)
+fviz_pca_ind(pca_mulvey2015)
+fviz_pca_ind(pca_mulvey2015, habillage = pData(mulvey2015)$time)
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+To visualise the data in 3 dimension, you can use the `plot3d`
+function from the `rgl` package, that provides means to rotate the
+cube along the three first PCs.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r}
+library("rgl")
+plot3d(pca_mulvey2015$x[, 1],
+       pca_mulvey2015$x[, 2],
+       pca_mulvey2015$x[, 3],
+       col = mulvey2015$time,
+       size = 10)
+```
+
+`r msmbstyle::solution_end()`
+
+## Additional exercises
 
 

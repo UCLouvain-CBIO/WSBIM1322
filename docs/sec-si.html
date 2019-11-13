@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-11" />
+<meta name="date" content="2019-11-13" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -136,7 +136,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="header-section-number">Chapter 13</span> Session information</h1>
 <p>The following packages have been used to generate this document.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
-<pre><code>## R version 3.6.0 RC (2019-04-21 r76417)
+<pre><code>## R version 3.6.1 Patched (2019-11-10 r77398)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 18.04.3 LTS
 ## 
@@ -157,97 +157,106 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## [8] methods   base     
 ## 
 ## other attached packages:
-##  [1] MSnbase_2.10.1                       
-##  [2] ProtGenerics_1.16.0                  
-##  [3] mzR_2.18.1                           
-##  [4] Rcpp_1.0.2                           
-##  [5] BSgenome.Dmelanogaster.UCSC.dm2_1.4.0
-##  [6] BSgenome_1.52.0                      
-##  [7] rtracklayer_1.44.4                   
-##  [8] Biostrings_2.52.0                    
-##  [9] XVector_0.24.0                       
-## [10] rWSBIM1207_0.1.9                     
-## [11] airway_1.4.0                         
-## [12] SummarizedExperiment_1.14.1          
-## [13] DelayedArray_0.10.0                  
-## [14] BiocParallel_1.18.1                  
-## [15] matrixStats_0.55.0                   
-## [16] Biobase_2.44.0                       
-## [17] GenomicRanges_1.36.1                 
-## [18] GenomeInfoDb_1.20.0                  
-## [19] IRanges_2.18.3                       
-## [20] S4Vectors_0.22.1                     
-## [21] BiocGenerics_0.30.0                  
-## [22] BiocStyle_2.12.0                     
-## [23] patchwork_0.0.1                      
-## [24] ggbeeswarm_0.6.0                     
-## [25] plotly_4.9.0                         
-## [26] Hmisc_4.2-0                          
-## [27] Formula_1.2-3                        
-## [28] survival_2.44-1.1                    
-## [29] lattice_0.20-38                      
-## [30] forcats_0.4.0                        
-## [31] stringr_1.4.0                        
-## [32] dplyr_0.8.3                          
-## [33] purrr_0.3.3                          
-## [34] readr_1.3.1                          
-## [35] tidyr_1.0.0                          
-## [36] tibble_2.1.3                         
-## [37] ggplot2_3.2.1                        
-## [38] tidyverse_1.2.1                      
-## [39] rWSBIM1322_0.1.9                     
+##  [1] factoextra_1.0.5                     
+##  [2] pRolocdata_1.22.0                    
+##  [3] MSnbase_2.10.1                       
+##  [4] ProtGenerics_1.16.0                  
+##  [5] mzR_2.18.1                           
+##  [6] Rcpp_1.0.3                           
+##  [7] BSgenome.Dmelanogaster.UCSC.dm2_1.4.0
+##  [8] BSgenome_1.52.0                      
+##  [9] rtracklayer_1.44.4                   
+## [10] Biostrings_2.52.0                    
+## [11] XVector_0.24.0                       
+## [12] rWSBIM1207_0.1.9                     
+## [13] airway_1.4.0                         
+## [14] SummarizedExperiment_1.14.1          
+## [15] DelayedArray_0.10.0                  
+## [16] BiocParallel_1.18.1                  
+## [17] matrixStats_0.55.0                   
+## [18] Biobase_2.44.0                       
+## [19] GenomicRanges_1.36.1                 
+## [20] GenomeInfoDb_1.20.0                  
+## [21] IRanges_2.18.3                       
+## [22] S4Vectors_0.22.1                     
+## [23] BiocGenerics_0.30.0                  
+## [24] BiocStyle_2.12.0                     
+## [25] patchwork_0.0.1                      
+## [26] ggbeeswarm_0.6.0                     
+## [27] plotly_4.9.1                         
+## [28] Hmisc_4.3-0                          
+## [29] Formula_1.2-3                        
+## [30] survival_3.1-7                       
+## [31] lattice_0.20-38                      
+## [32] forcats_0.4.0                        
+## [33] stringr_1.4.0                        
+## [34] dplyr_0.8.3                          
+## [35] purrr_0.3.3                          
+## [36] readr_1.3.1                          
+## [37] tidyr_1.0.0                          
+## [38] tibble_2.1.3                         
+## [39] ggplot2_3.2.1                        
+## [40] tidyverse_1.2.1                      
+## [41] rWSBIM1322_0.1.9                     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] readxl_1.3.1             backports_1.1.5         
-##  [3] plyr_1.8.4               lazyeval_0.2.2          
-##  [5] splines_3.6.0            digest_0.6.22           
-##  [7] msmbstyle_0.0.11         foreach_1.4.7           
-##  [9] htmltools_0.4.0          fansi_0.4.0             
-## [11] magrittr_1.5             checkmate_1.9.4         
-## [13] cluster_2.1.0            doParallel_1.0.15       
-## [15] limma_3.40.6             modelr_0.1.5            
-## [17] colorspace_1.4-1         ggrepel_0.8.1           
-## [19] rvest_0.3.4              haven_2.1.1             
-## [21] xfun_0.10                crayon_1.3.4            
-## [23] RCurl_1.95-4.12          jsonlite_1.6            
-## [25] hexbin_1.27.3            zeallot_0.1.0           
-## [27] impute_1.58.0            iterators_1.0.12        
-## [29] glue_1.3.1               gtable_0.3.0            
-## [31] zlibbioc_1.30.0          scales_1.0.0            
-## [33] mvtnorm_1.0-11           vsn_3.52.0              
-## [35] viridisLite_0.3.0        htmlTable_1.13.2        
-## [37] foreign_0.8-72           preprocessCore_1.46.0   
-## [39] htmlwidgets_1.5.1        httr_1.4.1              
-## [41] RColorBrewer_1.1-2       acepack_1.4.1           
-## [43] ellipsis_0.3.0           pkgconfig_2.0.3         
-## [45] XML_3.98-1.20            nnet_7.3-12             
-## [47] utf8_1.1.4               tidyselect_0.2.5        
-## [49] labeling_0.3             rlang_0.4.0             
-## [51] reshape2_1.4.3           munsell_0.5.0           
-## [53] cellranger_1.1.0         tools_3.6.0             
-## [55] cli_1.1.0                generics_0.0.2          
-## [57] broom_0.5.2              evaluate_0.14           
-## [59] mzID_1.22.0              yaml_2.2.0              
-## [61] knitr_1.25               ncdf4_1.16.1            
-## [63] nlme_3.1-141             xml2_1.2.2              
-## [65] compiler_3.6.0           rstudioapi_0.10         
-## [67] png_0.1-7                beeswarm_0.2.3          
-## [69] affyio_1.54.0            stringi_1.4.3           
-## [71] highr_0.8                Matrix_1.2-17           
-## [73] vctrs_0.2.0              pillar_1.4.2            
-## [75] lifecycle_0.1.0          BiocManager_1.30.9      
-## [77] MALDIquant_1.19.3        data.table_1.12.6       
-## [79] bitops_1.0-6             R6_2.4.0                
-## [81] latticeExtra_0.6-28      pcaMethods_1.76.0       
-## [83] affy_1.62.0              bookdown_0.14           
-## [85] gridExtra_2.3            vipor_0.4.5             
-## [87] codetools_0.2-16         MASS_7.3-51.4           
-## [89] assertthat_0.2.1         withr_2.1.2             
-## [91] GenomicAlignments_1.20.1 Rsamtools_2.0.3         
-## [93] GenomeInfoDbData_1.2.1   hms_0.5.1               
-## [95] grid_3.6.0               rpart_4.1-15            
-## [97] rmarkdown_1.16           lubridate_1.7.4         
-## [99] base64enc_0.1-3</code></pre>
+##   [1] readxl_1.3.1             backports_1.1.5         
+##   [3] plyr_1.8.4               lazyeval_0.2.2          
+##   [5] splines_3.6.1            crosstalk_1.0.0         
+##   [7] digest_0.6.22            msmbstyle_0.0.11        
+##   [9] foreach_1.4.7            htmltools_0.4.0         
+##  [11] fansi_0.4.0              magrittr_1.5            
+##  [13] checkmate_1.9.4          cluster_2.1.0           
+##  [15] doParallel_1.0.15        limma_3.40.6            
+##  [17] modelr_0.1.5             colorspace_1.4-1        
+##  [19] ggrepel_0.8.1            rvest_0.3.5             
+##  [21] haven_2.2.0              xfun_0.10               
+##  [23] crayon_1.3.4             RCurl_1.95-4.12         
+##  [25] jsonlite_1.6             hexbin_1.28.0           
+##  [27] zeallot_0.1.0            impute_1.58.0           
+##  [29] iterators_1.0.12         glue_1.3.1              
+##  [31] gtable_0.3.0             zlibbioc_1.30.0         
+##  [33] webshot_0.5.1            scales_1.0.0            
+##  [35] mvtnorm_1.0-11           vsn_3.52.0              
+##  [37] miniUI_0.1.1.1           xtable_1.8-4            
+##  [39] viridisLite_0.3.0        htmlTable_1.13.2        
+##  [41] foreign_0.8-71           preprocessCore_1.46.0   
+##  [43] htmlwidgets_1.5.1        httr_1.4.1              
+##  [45] RColorBrewer_1.1-2       acepack_1.4.1           
+##  [47] ellipsis_0.3.0           pkgconfig_2.0.3         
+##  [49] XML_3.98-1.20            nnet_7.3-12             
+##  [51] utf8_1.1.4               manipulateWidget_0.10.0 
+##  [53] later_1.0.0              tidyselect_0.2.5        
+##  [55] labeling_0.3             rlang_0.4.1             
+##  [57] reshape2_1.4.3           munsell_0.5.0           
+##  [59] cellranger_1.1.0         tools_3.6.1             
+##  [61] cli_1.1.0                generics_0.0.2          
+##  [63] broom_0.5.2              fastmap_1.0.1           
+##  [65] evaluate_0.14            mzID_1.22.0             
+##  [67] yaml_2.2.0               knitr_1.25              
+##  [69] rgl_0.100.30             ncdf4_1.17              
+##  [71] nlme_3.1-142             mime_0.7                
+##  [73] xml2_1.2.2               compiler_3.6.1          
+##  [75] rstudioapi_0.10          png_0.1-7               
+##  [77] beeswarm_0.2.3           ggsignif_0.6.0          
+##  [79] affyio_1.54.0            stringi_1.4.3           
+##  [81] highr_0.8                Matrix_1.2-17           
+##  [83] vctrs_0.2.0              pillar_1.4.2            
+##  [85] lifecycle_0.1.0          BiocManager_1.30.9      
+##  [87] MALDIquant_1.19.3        data.table_1.12.6       
+##  [89] bitops_1.0-6             httpuv_1.5.2            
+##  [91] R6_2.4.0                 latticeExtra_0.6-28     
+##  [93] pcaMethods_1.76.0        affy_1.62.0             
+##  [95] promises_1.1.0           bookdown_0.14           
+##  [97] gridExtra_2.3            vipor_0.4.5             
+##  [99] codetools_0.2-16         MASS_7.3-51.4           
+## [101] assertthat_0.2.1         withr_2.1.2             
+## [103] GenomicAlignments_1.20.1 Rsamtools_2.0.3         
+## [105] GenomeInfoDbData_1.2.1   hms_0.5.2               
+## [107] grid_3.6.1               rpart_4.1-15            
+## [109] rmarkdown_1.16           ggpubr_0.2.3            
+## [111] shiny_1.4.0              lubridate_1.7.4         
+## [113] base64enc_0.1-3</code></pre>
 <div id="sec:setup2" class="section level2">
 <h2>
 <span class="header-section-number">13.1</span> R package setup</h2>
@@ -255,14 +264,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>pkgs &lt;- c("airway", "base", "Biobase", "BiocGenerics",
           "BiocParallel", "BiocStyle", "Biostrings",
           "BSgenome.Dmelanogaster.UCSC.dm2", "BSgenome", "datasets",
-          "DelayedArray", "dplyr", "forcats", "Formula", "GenomeInfoDb",
-          "GenomicRanges", "ggbeeswarm", "ggplot2", "graphics", "grDevices",
-          "Hmisc", "IRanges", "lattice", "matrixStats", "methods",
-          "MSnbase", "mzR", "parallel", "patchwork", "plotly",
-          "ProtGenerics", "purrr", "Rcpp", "readr", "rtracklayer",
-          "rWSBIM1207", "rWSBIM1322", "S4Vectors", "stats", "stats4",
-          "stringr", "SummarizedExperiment", "survival", "tibble", "tidyr",
-          "tidyverse", "utils", "XVector")</code></pre>
+          "DelayedArray", "dplyr", "factoextra", "forcats", "Formula",
+          "GenomeInfoDb", "GenomicRanges", "ggbeeswarm", "ggplot2",
+          "graphics", "grDevices", "Hmisc", "IRanges", "lattice",
+          "matrixStats", "methods", "MSnbase", "mzR", "parallel",
+          "patchwork", "plotly", "pRolocdata", "ProtGenerics", "purrr",
+          "Rcpp", "readr", "rtracklayer", "rWSBIM1207", "rWSBIM1322",
+          "S4Vectors", "stats", "stats4", "stringr", "SummarizedExperiment",
+          "survival", "tibble", "tidyr", "tidyverse", "utils", "XVector")</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"BiocManager"</span>))
    <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)
 BiocManager<span class="op">::</span><span class="kw">install</span>(pkgs)</code></pre></div>
@@ -274,7 +283,7 @@ BiocManager<span class="op">::</span><span class="kw">install</span>(pkgs)</code
 <a href="sec-ccl.html"><button class="btn btn-default">Previous</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-11
+2019-11-13
 </p>
 </div>
 </div>
