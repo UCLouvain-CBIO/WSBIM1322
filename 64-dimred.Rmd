@@ -1,4 +1,37 @@
-# Dimensionality reduction {#sec:dimred}
+# Unsupervised learning: dimensionality reduction {#sec:dimred}
+
+In **unsupervised learning** (UML), no labels are provided, and the
+learning algorithm focuses solely on detecting structure in unlabelled
+input data. One generally differentiates between
+
+- **Clustering** (see chapter \@ref(sec:ul)), where the goal is to
+  find homogeneous subgroups within the data; the grouping is based on
+  similiarities (or distance) between observations. The result of a
+  clustering algorithm is to group the observations (features) into
+  distinct (generally non-overlapping) groups. These groups are, even
+  of imperfect (i.e. ignoring intermediate states) are often very
+  useful in interpretation and assessment of the data.
+
+There is however one important caveat with clustering: clustering
+algorithms will always find clusters, even when none exists. It is
+thus essential to critically assess and validate (for example using
+existing domain knowledge) the results of any clustering algorithm.
+
+- **Dimensionality reduction** (see chapter \@ref(sec:dimred)), where
+  the goal is to summarise the data in a reduced number of
+  dimensations, i.e. using a reduced number of (newly computer)
+  variables. A typical example in omics is to summarise (and
+  visualise) the relation between samples along two dimensions (which
+  can easily be plotted) even if the data consists of tens of
+  thousands of dimensions ( genes). Dimensionality reduction is often
+  used to facilitate visualisation of the data, as well as a
+  pre-processing method before supervised learning.
+
+UML presents specific challenges and benefits:
+
+- Challenge: there is no single goal in UML
+- Benefit: there is generally much more unlabelled data available than
+  labelled data.
 
 This chapter has as objectives to 
 
@@ -6,7 +39,7 @@ This chapter has as objectives to
 - provide the students with an understanding of what principal
   compoment analysis achieves;
 - show how to perform a PCA analysis;
-- provide real-case scenarios of PCA analyses on omics data.
+- provide real-life scenarios of PCA analyses on omics data.
 
 ## Introduction
 

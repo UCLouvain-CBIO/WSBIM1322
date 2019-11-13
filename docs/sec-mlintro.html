@@ -119,8 +119,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="toc"><a href="#machine-learning"> Machine learning</a></li>
 </ul>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a href="sec-ul.html"><span class="toc-section-number">8</span> Unsupervised learning</a>
-<a href="sec-dimred.html"><span class="toc-section-number">9</span> Dimensionality reduction</a>
+<a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
 <a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
 <a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
 <a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
@@ -137,7 +137,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <html><body><div id="sec:mlintro" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 6</span> Introduction to statistical machine learning</h1>
-<p>The next chapters will focus on concepts from statistical (hypothesis testing in chapter <a href="sec-testing.html#sec:testing">7</a>) and general machine learning (chapters <a href="sec-ul.html#sec:ul">8</a>, <a href="sec-dimred.html#sec:dimred">9</a> and <a href="sec-sl.html#sec:sl">10</a>). Before diving into the technical details, it is useful to learn (or remind ourselves) why these techniques are so incredibly important when analysing (i.e. looking to understand) high throughput biomedical data. The goals of these chapters is to</p>
+<p>The next chapters will focus on concepts from statistical (hypothesis testing in chapter <a href="sec-testing.html#sec:testing">7</a>) and general machine learning (chapters <a href="sec-ul.html#sec:ul">9</a>, <a href="sec-dimred.html#sec:dimred">8</a> and <a href="sec-sl.html#sec:sl">10</a>). Before diving into the technical details, it is useful to learn (or remind ourselves) why these techniques are so incredibly important when analysing (i.e. looking to understand) high throughput biomedical data. The goals of these chapters is to</p>
 <ul>
 <li>understanding what these techniques do, how to apply them, and their respective limitations;</li>
 <li>learn to frame the questions more accurately in the light of available analysis techniques;</li>
@@ -572,7 +572,7 @@ Figure 6.9: A dataset of 100 labelled and three new, unlalled, points.
 </p>
 </div>
 </div>
-<p>The examples presented above fall squarely into the discipline of machine learning. The first example is a case of <strong>unsupervised learning</strong>. In unsupervised learning we aim at find patterns in a dataset without the help of any additional information or labels. Typical applications of unsupervised learning is clustering (as in our first example and chapter <a href="sec-ul.html#sec:ul">8</a>) or dimensionality reduction (chapter <a href="sec-dimred.html#sec:dimred">9</a>)</p>
+<p>The examples presented above fall squarely into the discipline of machine learning. The first example is a case of <strong>unsupervised learning</strong>. In unsupervised learning we aim at find patterns in a dataset without the help of any additional information or labels. Typical applications of unsupervised learning is clustering (as in our first example and chapter <a href="sec-ul.html#sec:ul">9</a>) or dimensionality reduction (chapter <a href="sec-dimred.html#sec:dimred">8</a>)</p>
 <p>In our second example, we were given labels for each observation. This is an example of <strong>supervised learning</strong>, that aims at learning inputs and mapping them to certain target outputs with the help of known labels. Example of supervised learning are classification as in the example above (see chapter <a href="sec-sl.html#sec:sl">10</a>) and regression, where the target isn’t a category, but a value.</p>
 <p>There are additional types of machine learning, such as semi-supervised learning (combining the two approaches above), self-supervised learning (supervised without any labels, i.e. where they need to be identified automatically), reinforcement learning (automatic tuning of the learning when new information is received), but these are beyond the scope of this course.</p>
 

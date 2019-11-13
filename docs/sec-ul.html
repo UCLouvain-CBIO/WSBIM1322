@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 8 Unsupervised learning | Bioinformatics" />
+<meta property="og:title" content="Chapter 9 Unsupervised learning: clustering | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -26,7 +26,7 @@ MathJax.Hub.Config({
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 8 Unsupervised learning | Bioinformatics</title>
+<title>Chapter 9 Unsupervised learning: clustering | Bioinformatics</title>
 
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
@@ -114,14 +114,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a id="active-page" href="sec-ul.html"><span class="toc-section-number">8</span> Unsupervised learning</a><ul class="toc-sections">
-<li class="toc"><a href="#introduction-3"> Introduction</a></li>
+<a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a id="active-page" href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a><ul class="toc-sections">
+<li class="toc"><a href="#introduction-4"> Introduction</a></li>
 <li class="toc"><a href="#k-means-clustering"> k-means clustering</a></li>
 <li class="toc"><a href="#hierarchical-clustering"> Hierarchical clustering</a></li>
 <li class="toc"><a href="#pre-processing"> Pre-processing</a></li>
-<li class="toc"><a href="#additional-exercises-6"> Additional exercises</a></li>
+<li class="toc"><a href="#additional-exercises-7"> Additional exercises</a></li>
 </ul>
-<a href="sec-dimred.html"><span class="toc-section-number">9</span> Dimensionality reduction</a>
 <a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
 <a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
 <a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
@@ -137,25 +137,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:ul" class="section level1">
 <h1>
-<span class="header-section-number">Chapter 8</span> Unsupervised learning</h1>
-<div id="introduction-3" class="section level2">
+<span class="header-section-number">Chapter 9</span> Unsupervised learning: clustering</h1>
+<p>This chapter has as objectives to</p>
+<ul>
+<li>introduce clustering methods;</li>
+<li>provide the students with an understanding of kmeans and hierarchical clustering;</li>
+<li>show how to perform clustering;</li>
+<li>provide real-life example of how to apply clustering on omics data.</li>
+</ul>
+<div id="introduction-4" class="section level2">
 <h2>
-<span class="header-section-number">8.1</span> Introduction</h2>
-<p>In <strong>unsupervised learning</strong> (UML), no labels are provided, and the learning algorithm focuses solely on detecting structure in unlabelled input data. One generally differentiates between</p>
-<ul>
-<li>
-<strong>Clustering</strong>, where the goal is to find homogeneous subgroups within the data; the grouping is based on similiarities (or distance) between observations. The result of a clustering algorithm is to group the observations (features) into distinct (generally non-overlapping) groups. These groups are, even of imperfect (i.e. ignoring intermediate states) are often very useful in interpretation and assessment of the data.</li>
-</ul>
-<p>There is however one important caveat with clustering: clustering algorithms will always find clusters, even when none exists<label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> See the additional exercise for an illustration of this risk.</span>. It is thus essential to critically assess and validate (for example using existing domain knowledge) the results of any clustering algorithm.</p>
-<ul>
-<li>
-<strong>Dimensionality reduction</strong> (see chapter <a href="sec-dimred.html#sec:dimred">9</a>), where the goal is to summarise the data in a reduced number of dimensations, i.e. using a reduced number of (newly computer) variables. A typical example in omics is to summarise (and visualise) the relation between samples along two dimensions (which can easily be plotted) even if the data consists of tens of thousands of dimensions ( genes). Dimensionality reduction is often used to facilitate visualisation of the data, as well as a pre-processing method before supervised learning.</li>
-</ul>
-<p>UML presents specific challenges and benefits:</p>
-<ul>
-<li>Challenge: there is no single goal in UML</li>
-<li>Benefit: there is generally much more unlabelled data available than labelled data.</li>
-</ul>
+<span class="header-section-number">9.1</span> Introduction</h2>
+<p>After learing about dimensionality reduction and PCA, in this chapter we will focus on <strong>clustering</strong>. The goal of clustering algorithms is to find homogeneous subgroups within the data; the grouping is based on similiarities (or distance) between observations. The result of a clustering algorithm is to group the observations (features) into distinct (generally non-overlapping) groups. These groups are, even of imperfect (i.e. ignoring intermediate states) are often very useful in interpretation and assessment of the data.</p>
 <p>In this chapter we will:</p>
 <ul>
 <li>Learn how to use a widely used non-parametric clustering algorithms <strong>k-means</strong>.</li>
@@ -166,7 +159,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="k-means-clustering" class="section level2">
 <h2>
-<span class="header-section-number">8.2</span> k-means clustering</h2>
+<span class="header-section-number">9.2</span> k-means clustering</h2>
 <p>The k-means clustering algorithms aims at partitioning <em>n</em> observations into a fixed number of <em>k</em> clusters. The algorithm will find homogeneous clusters.</p>
 <p>In R, we use</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stats<span class="op">::</span><span class="kw">kmeans</span>(x, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)</code></pre></div>
@@ -203,7 +196,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="figure">
 <span id="fig:solkmplot"></span>
 <p class="caption marginnote shownote">
-Figure 8.1: k-means algorithm on sepal and petal lengths
+Figure 9.1: k-means algorithm on sepal and petal lengths
 </p>
 <img src="WSBIM1322_files/figure-html/solkmplot-1.png" alt="k-means algorithm on sepal and petal lengths" width="672">
 </div>
@@ -220,7 +213,7 @@ cl &lt;-<span class="st"> </span><span class="kw">kmeans</span>(x, <span class="
 <p></p>
 <div id="how-does-k-means-work" class="section level3">
 <h3>
-<span class="header-section-number">8.2.1</span> How does k-means work</h3>
+<span class="header-section-number">9.2.1</span> How does k-means work</h3>
 <p><strong>Initialisation</strong>: randomly assign class membership</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">12</span>)
 init &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">3</span>, <span class="kw">nrow</span>(x), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
@@ -228,7 +221,7 @@ init &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="d
 <div class="figure">
 <span id="fig:kmworksinit"></span>
 <p class="caption marginnote shownote">
-Figure 8.2: k-means random intialisation
+Figure 9.2: k-means random intialisation
 </p>
 <img src="WSBIM1322_files/figure-html/kmworksinit-1.png" alt="k-means random intialisation" width="672">
 </div>
@@ -255,7 +248,7 @@ ki &lt;-<span class="st"> </span>ki[<span class="op">-</span>(<span class="dv">1
 <div class="figure">
 <span id="fig:kmworksiter"></span>
 <p class="caption marginnote shownote">
-Figure 8.3: k-means iteration: calculate centers (left) and assign new cluster membership (right)
+Figure 9.3: k-means iteration: calculate centers (left) and assign new cluster membership (right)
 </p>
 <img src="WSBIM1322_files/figure-html/kmworksiter-1.png" alt="k-means iteration: calculate centers (left) and assign new cluster membership (right)" width="1152">
 </div>
@@ -266,7 +259,7 @@ Figure 8.3: k-means iteration: calculate centers (left) and assign new cluster m
 </div>
 <div id="model-selection" class="section level3">
 <h3>
-<span class="header-section-number">8.2.2</span> Model selection</h3>
+<span class="header-section-number">9.2.2</span> Model selection</h3>
 <p>Due to the random initialisation, one can obtain different clustering results. When k-means is run multiple times, the best outcome, i.e. the one that generates the smallest <em>total within cluster sum of squares (SS)</em>, is selected. The total within SS is calculated as:</p>
 <p>For each cluster results:</p>
 <ul>
@@ -312,7 +305,7 @@ cl2 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(xr, <span class
 <div class="figure">
 <span id="fig:selrep"></span>
 <p class="caption marginnote shownote">
-Figure 8.4: Different k-means results on the same (random) data
+Figure 9.4: Different k-means results on the same (random) data
 </p>
 <img src="WSBIM1322_files/figure-html/selrep-1.png" alt="Different k-means results on the same (random) data" width="1152">
 </div>
@@ -320,7 +313,7 @@ Figure 8.4: Different k-means results on the same (random) data
 </div>
 <div id="how-to-determine-the-number-of-clusters" class="section level3">
 <h3>
-<span class="header-section-number">8.2.3</span> How to determine the number of clusters</h3>
+<span class="header-section-number">9.2.3</span> How to determine the number of clusters</h3>
 <ol style="list-style-type: decimal">
 <li>Run k-means with <code>k=1</code>, <code>k=2</code>, …, <code>k=n</code>
 </li>
@@ -344,10 +337,10 @@ tot_within_ss &lt;-<span class="st"> </span><span class="kw">sapply</span>(ks, <
 </div>
 <div id="hierarchical-clustering" class="section level2">
 <h2>
-<span class="header-section-number">8.3</span> Hierarchical clustering</h2>
+<span class="header-section-number">9.3</span> Hierarchical clustering</h2>
 <div id="how-does-hierarchical-clustering-work" class="section level3">
 <h3>
-<span class="header-section-number">8.3.1</span> How does hierarchical clustering work</h3>
+<span class="header-section-number">9.3.1</span> How does hierarchical clustering work</h3>
 <p><strong>Initialisation</strong>: Starts by assigning each of the n points its own cluster</p>
 <p><strong>Iteration</strong></p>
 <ol style="list-style-type: decimal">
@@ -358,7 +351,7 @@ tot_within_ss &lt;-<span class="st"> </span><span class="kw">sapply</span>(ks, <
 <div class="figure">
 <span id="fig:hcldata"></span>
 <p class="caption marginnote shownote">
-Figure 8.5: Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right).
+Figure 9.5: Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right).
 </p>
 <img src="WSBIM1322_files/figure-html/hcldata-1.png" alt="Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right)." width="1152">
 </div>
@@ -366,7 +359,7 @@ Figure 8.5: Hierarchical clustering: initialisation (left) and colour-coded resu
 <div class="figure">
 <span id="fig:hcldendro"></span>
 <p class="caption marginnote shownote">
-Figure 8.6: Visualisation of the hierarchical clustering results on a dendrogram
+Figure 9.6: Visualisation of the hierarchical clustering results on a dendrogram
 </p>
 <img src="WSBIM1322_files/figure-html/hcldendro-1.png" alt="Visualisation of the hierarchical clustering results on a dendrogram" width="672">
 </div>
@@ -396,12 +389,12 @@ hcl</code></pre></div>
 </div>
 <div id="defining-clusters" class="section level3">
 <h3>
-<span class="header-section-number">8.3.2</span> Defining clusters</h3>
+<span class="header-section-number">9.3.2</span> Defining clusters</h3>
 <p>After producing the hierarchical clustering result, we need to <em>cut the tree (dendrogram)</em> at a specific height to defined the clusters. For example, on our test dataset above, we could decide to cut it at a distance around 1.5, with would produce 2 clusters.</p>
 <div class="figure">
 <span id="fig:cuthcl"></span>
 <p class="caption marginnote shownote">
-Figure 8.7: Cutting the dendrogram at height 1.5.
+Figure 9.7: Cutting the dendrogram at height 1.5.
 </p>
 <img src="WSBIM1322_files/figure-html/cuthcl-1.png" alt="Cutting the dendrogram at height 1.5." width="672">
 </div>
@@ -474,7 +467,7 @@ hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw
 </div>
 <div id="pre-processing" class="section level2">
 <h2>
-<span class="header-section-number">8.4</span> Pre-processing</h2>
+<span class="header-section-number">9.4</span> Pre-processing</h2>
 <p>Many of the machine learning methods that are regularly used are sensitive to difference scales. This applies to unsupervised methods as well as supervised methods, as we will see in the next chapter.</p>
 <p>A typical way to pre-process the data prior to learning is to scale the data, or apply principal component analysis (next section). Scaling assures that all data columns have a mean of 0 and standard deviation of 1.</p>
 <p>In R, scaling is done with the <code>scale</code> function.</p>
@@ -495,9 +488,9 @@ hcl2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="k
 <span class="kw">plot</span>(hcl2, <span class="dt">main =</span> <span class="st">"scaled data"</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/scalesol-1.png" width="1152"></p>
 </div>
-<div id="additional-exercises-6" class="section level2">
+<div id="additional-exercises-7" class="section level2">
 <h2>
-<span class="header-section-number">8.5</span> Additional exercises</h2>
+<span class="header-section-number">9.5</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -514,8 +507,8 @@ hcl2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="k
 </div></body></html>
 
 <p style="text-align: center;">
-<a href="sec-testing.html"><button class="btn btn-default">Previous</button></a>
-<a href="sec-dimred.html"><button class="btn btn-default">Next</button></a>
+<a href="sec-dimred.html"><button class="btn btn-default">Previous</button></a>
+<a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
 2019-11-13
