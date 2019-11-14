@@ -33,7 +33,7 @@ UML presents specific challenges and benefits:
 - Benefit: there is generally much more unlabelled data available than
   labelled data.
 
-This chapter has as objectives to 
+This chapter has as objectives to
 
 - introduce dimensionality reduction techniques;
 - provide the students with an understanding of what principal
@@ -91,12 +91,12 @@ called **linear projections**.
 ```{r linproj, echo = FALSE, fig.cap = "Projection of the data on the x (left) and y (right) axes.", fig.heigth = 5, fig.width = 11}
 
 ## projection on y = 0
-py <- p + 
+py <- p +
     geom_point(aes(y = 0), colour = "red") +
     geom_segment(aes(xend = gene_x, yend = 0), linetype = "dashed")
 
 ## projection on x = 0
-px <- p + 
+px <- p +
     geom_point(aes(x = 0), colour = "red") +
     geom_segment(aes(yend = gene_y, xend = 0), linetype = "dashed")
 
@@ -108,7 +108,7 @@ In general, and in particular in the projections above, we loose
 information when reducing the number of dimensions (above, from 2
 (plane) to 1 (line)). In the first example above (left), we loose all
 the measurements of gene *y*. In the second example (right), we loose
-all the measurements of gene *x*. 
+all the measurements of gene *x*.
 
 The goal of dimensionality reduction is to limit this loss.
 
@@ -172,7 +172,7 @@ pline3 + pca
 ```
 
 The second principal component is then chosen to be orthogonal to the
-first one. In our case above, there is only one possibility. 
+first one. In our case above, there is only one possibility.
 
 
 ```{r pxaex2, echo = FALSE, fig.cap = "The second prinicpal component is orthogonal to the second one.", fig.height = 5.8, fig.width = 11}
@@ -180,10 +180,10 @@ pca2 <- ggplot(ppdf, aes(x = PC1n, y = PC2n)) +
     geom_point(shape = 21, size = 3) +
     xlab("PC1 ") + ylab("PC2") +
     geom_point(aes(x = PC1n, y = 0), color = "red") +
-    geom_segment(aes(xend = PC1n, yend = 0), linetype = "dotted") +    
+    geom_segment(aes(xend = PC1n, yend = 0), linetype = "dotted") +
     geom_segment(aes(x = PC1n, xend = 0, y = PC2n, yend = PC2n)) +
     geom_hline(yintercept = 0, color = "purple",
-               lwd=1) + 
+               lwd=1) +
     geom_vline(xintercept = 0, color = "purple",
                lwd=1.5)
 
@@ -195,11 +195,11 @@ pca + pca2
 var <- .pca$sdev^2
 pve <- var/sum(var)
 ```
-In the example above the variance, the variance along the PCs are 
-`r round(var[1], 2)` and `r round(var[2], 2)`. The first one explains 
-`r round(pve[1] * 100, 1)`% or that variance, and the second one merely 
-`r round(pve[2] * 100, 1)`%. This is also reflected in the different 
-scales along the x and y axis. 
+In the example above the variance, the variance along the PCs are
+`r round(var[1], 2)` and `r round(var[2], 2)`. The first one explains
+`r round(pve[1] * 100, 1)`% or that variance, and the second one merely
+`r round(pve[2] * 100, 1)`%. This is also reflected in the different
+scales along the x and y axis.
 
 To account for these differences in variation along the different PCs,
 it is better to represent a PCA plot as a rectangle, using an aspect
@@ -208,8 +208,8 @@ ratio that is illustrative of the respective variances.
 ```{r pxaex3, echo = FALSE, fig.cap = "Final principal component analysis of the data.", fig.height = 2, fig.width = 10}
 pca_final <- pca2 <- ggplot(ppdf, aes(x = PC1n, y = PC2n)) +
     geom_point(shape = 21, size = 3) +
-    xlab("PC1 ") + ylab("PC2") 
-    ## geom_hline(yintercept = 0) + 
+    xlab("PC1 ") + ylab("PC2")
+    ## geom_hline(yintercept = 0) +
     ## geom_vline(xintercept = 0)
 pca_final
 ```
@@ -220,7 +220,7 @@ pca_final
 Principal components are linear combinations of the variables that
 were originally measured, they provide a new coordinate system. The
 PC in the previous example is a linear combination of *gene_x* and
-*gene_y*, more specifically 
+*gene_y*, more specifically
 
 $$ PC = c_{1} ~ gene_{x} + c_{2} ~ gene_{y} $$
 
@@ -237,11 +237,11 @@ original n-dimensional data into a new  space.
 
 - These new dimensions are linear combinations of the original data,
   i.e.  they are composed of proportions of the original variables.
-  
+
 - Along these new dimensions, called principal components, the data
   expresses most of its variability along the first PC, then second,
-  ... 
-  
+  ...
+
 - Principal components are orthogonal to each other,
   i.e. non-correlated.
 
@@ -293,7 +293,7 @@ cumsum(pve)
 
 - **x** contains the coordinates of the data along the PCs. These are
   the values we could use to produce the PCA plot as above by hand.
-  
+
 ```{r pcaplot, fig.cap = ""}
 pca_xy$x
 plot(pca_xy$x)
@@ -316,7 +316,7 @@ variance explained along the PCs (see above), in particular when
 dealing with high dimensional data, as PC1 and PC2 (that are generally
 used for visualisation), might only account for an insufficient
 proportion of variance to be relevant on their own. This can be
-visualised on a **screeplot**, that can be produced with 
+visualised on a **screeplot**, that can be produced with
 
 ```{r screeplot, fig.cap = "Screeplot showing the variances for the PCs."}
 plot(pca_xy)
@@ -429,7 +429,7 @@ rownames(dfr) <- LETTERS[1:3]
 dfr
 ```
 
-so that the distance between each category are approximately equal to 1. 
+so that the distance between each category are approximately equal to 1.
 
 ## The full PCA workflow
 
@@ -442,7 +442,7 @@ datasets are available in the `pRolocdata` package.
 
 We are first going to focus on the data from Mulvey *et al.* (2015),
 where they present the *Dynamic proteomic profiling of extra-embryonic
-endoderm differentiation in mouse embryonic stem cells* [@Mulvey:2015]. 
+endoderm differentiation in mouse embryonic stem cells* [@Mulvey:2015].
 
 > During mammalian preimplantation development, the cells of the
 > blastocyst's inner cell mass differentiate into the epiblast and
@@ -487,7 +487,7 @@ pData(mulvey2015)
 ```
 `r msmbstyle::solution_end()`
 
-Here, we will want to do a PCA analysis on the samples. We want to remap the 
+Here, we will want to do a PCA analysis on the samples. We want to remap the
 `r ncol(mulvey2015)` samples from a `r nrow(mulvey2015)`-dimensional space into 2, or
 possibly 3 dimensions. This will require to transpose the data matrix
 before passing it to the `prcomp` function.
@@ -496,7 +496,7 @@ before passing it to the `prcomp` function.
 
 - Run a PCA analysis on the samples of the `mulvey2015` data and
   display a summary of the results.
-  
+
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
@@ -511,7 +511,7 @@ summary(pca_mulvey2015)
 `r msmbstyle::question_begin()`
 - Assuming we are happy with a reduced space explaining 90% of the
   variance of the data, how many PCs do we need?
-  
+
 - Visualise the variance captured by the 18 PCs. To do so, you can use
   the `fviz_screeplot` function from the `factoextra` package.
 
@@ -572,7 +572,7 @@ plot3d(pca_mulvey2015$x[, 1],
 
 In this section, we are going to use PCA to explore spatial map of
 mouse pluripotent stem cell by Christoforou *et al.*
-[@Christoforou:2016]. 
+[@Christoforou:2016].
 
 > Knowledge of the subcellular distribution of proteins is vital for
 > understanding cellular mechanisms. Capturing the subcellular
@@ -613,16 +613,16 @@ head(fData(hyperLOPIT2015)[, c("entry.name", "markers")])
 `r msmbstyle::solution_end()`
 
 Here, we will want to do a PCA analysis on the features. We want to
-remap the `r nrow(hyperLOPIT2015)` proteins from a 
+remap the `r nrow(hyperLOPIT2015)` proteins from a
 `r ncol(hyperLOPIT2015)`-dimensional space into 2, or
-possibly 3 dimensions. Here, we can use the data as it when 
+possibly 3 dimensions. Here, we can use the data as it when
 passing it to the `prcomp` function.
 
 `r msmbstyle::question_begin()`
 
 - Run a PCA analysis on the features of the `hyperLOPIT2015` data and
   display a summary of the results.
-  
+
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
@@ -637,7 +637,7 @@ summary(pca_hl)
 `r msmbstyle::question_begin()`
 - Assuming we are happy with a reduced space explaining 75% of the
   variance of the data, how many PCs do we need?
-  
+
 - Visualise the variance captured by the 18 PCs. To do so, you can use
   the `fviz_screeplot` function from the `factoextra` package.
 
@@ -659,7 +659,7 @@ fviz_screeplot(pca_hl)
   function from the `factoextra` package, or the `fviz_pca_var`
   function to focus on the variables (the columns of the orgininal
   input).
-  
+
 - Interpret the variables on the biplot. Which ones are correlated? Is
   this to be expected in the light of the experimental design.
 
@@ -668,10 +668,10 @@ fviz_screeplot(pca_hl)
   `fviz_pca_ind` function to highlight sub-cellular locations of the
   proteins (use the `"markers"` feature variable) and set the `geom`
   argument to `"point"` to drop the feature names from the plot (which
-  correspond to `geom = "text"`). Interpret the figures in the light of 
+  correspond to `geom = "text"`). Interpret the figures in the light of
   the spatial proteomics experiment.
 
-  
+
 - Repeat the figure above setting the `"final.assignment"` variable to
   annotate the plot. Compare and interpret the two plots.
 
@@ -714,8 +714,9 @@ the RNA-seq data and perform a PCA analysis on the samples.
 
 
 `r msmbstyle::question_begin()`
-Load the `mat1xcms` data from the `rWSBIM1207` package and perform a
-PCA analysis on the samples. These data represent mass
-spectrometry-based metabolomics data.
+Load the `metab1` data from the `rWSBIM1207` package (version >=
+`0.1.10`) and perform a PCA analysis on the samples. These data
+represent mass spectrometry-based metabolomics data. Do the samples
+seem to be randomly placed? Do you notice any structure explained by
+the labels?
 `r msmbstyle::question_end()`
-
