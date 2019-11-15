@@ -26,9 +26,42 @@ In this chapter we will:
   **k-means**.
 - Learn how to use reucrsive clustering approaches known as
   **hierarchical clustering**.
-- 
-- Observe the clustering parameters and distance metrics influence of
-  outputs of these algorithms.
+- Observe the influence of clustering parameters and distance metrics
+  on the outputs.
+
+## How to measure similarities?
+
+Clustering algorithms reply on a measurement of similarity between
+between features to group them into clusters. An important step is
+thus to decide how to measure these similarities. A range of distance
+measurements are available:
+
+The **Euclidean** distance between two points $A = (a_{1}, \ldots , a_{p})$ and 
+$B = (b_{1}, \ldots , b_{p})$ in a $p$-dimensional space (for the $p$ features) 
+is the square root of the sum of squares of the differences in all 
+$p$ coordinate directions:
+
+$$ d(A, B) = \sqrt{ (a_{1} - b_{1})^{2} + (a_{2} - b_{2})^{2} + \ldots + (a_{p} - b_{p})^{2} } $$
+
+- Maximum:
+
+- Canberra:
+
+- Manhattan:
+
+- Binary:
+
+- Minkovski:
+
+These are the distances available in the `dist` function. Other that
+are of particular interest are 
+
+- Correlation based distance:
+
+See also section 5.3 from [@MSMB] for additional details.
+
+
+
 
 ## k-means clustering
 
