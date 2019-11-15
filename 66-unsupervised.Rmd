@@ -43,11 +43,17 @@ $p$ coordinate directions:
 
 $$ d(A, B) = \sqrt{ (a_{1} - b_{1})^{2} + (a_{2} - b_{2})^{2} + \ldots + (a_{p} - b_{p})^{2} } $$
 
-- Maximum:
+The **maximum** (or $L_{\inf}$) distance is the maximum of the absolute differences
+between coordinates:
+
+$$ d(A, B) = max_{i} \abs{ a_{i} − b_{i} } $$
+
+The **Manhattan** (or City Block, Taxicab or $L_{1}$) distance takes the sum of the
+absolute differences in all coordinates:
+
+$$ d(A, B) = \abs{a_{1} − b_{1}} + \abs{a_{2} − b_{2}} + \ldots + \abs{a_{p} − b_{p}} $$
 
 - Canberra:
-
-- Manhattan:
 
 - Binary:
 
