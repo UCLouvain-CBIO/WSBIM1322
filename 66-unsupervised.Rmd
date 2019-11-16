@@ -43,6 +43,10 @@ $p$ coordinate directions:
 
 $$ d(A, B) = \sqrt{ (a_{1} - b_{1})^{2} + (a_{2} - b_{2})^{2} + \ldots + (a_{p} - b_{p})^{2} } $$
 
+The **Minkovski** allows the exponent to be $m$ instead of 2, as in the Euclidean distance:
+
+$$ d(A, B) = ( (a_{1} - b_{1})^{m} + (a_{2} - b_{2})^{m} + \ldots + (a_{p} - b_{p})^{m} )^{\frac{1}{m}} $$
+
 The **maximum** (or $L_{\inf}$) distance is the maximum of the absolute differences
 between coordinates:
 
@@ -53,11 +57,23 @@ absolute differences in all coordinates:
 
 $$ d(A, B) = \abs{a_{1} − b_{1}} + \abs{a_{2} − b_{2}} + \ldots + \abs{a_{p} − b_{p}} $$
 
+When computing a **binary** distance, the vectors are regarded as
+binary bits, with non-zero elements are *on* and zero elements are
+*off*.  The distance is the proportion of bits in which only one is on
+amongst those in which at least one is on. For example, the binary
+distance between vectors `x` and `y` is 0.4 because out of the 5 pairs
+of bits that have at least on *1* (all but the second elements), 2
+have only on (the first and fifth).
+
+```{r}
+x <- c(0, 0, 1, 1, 1, 1)
+y <- c(1, 0, 1, 1, 0, 1)
+```
+
+
 - Canberra:
 
-- Binary:
 
-- Minkovski:
 
 These are the distances available in the `dist` function. Other that
 are of particular interest are 
