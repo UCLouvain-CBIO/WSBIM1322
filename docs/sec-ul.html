@@ -548,12 +548,23 @@ Figure 9.11: Visualisation of the hierarchical clustering results on a dendrogra
 <li>Hierarchical clustering on this distance matrix using <code>hclust</code>
 </li>
 </ul>
-<blockquote>
-<p>Challenge</p>
-<p>Apply hierarchical clustering on the <code>iris</code> data and generate a dendrogram using the dedicated <code>plot</code> method.</p>
-</blockquote>
-<p><details></details></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">dist</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Apply hierarchical clustering on the <code>giris</code> data and generate a dendrogram using the dedicated <code>plot</code> method.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-59" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-59', 'sol-start-59')"></span>
+</p>
+<div id="sol-body-59" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">dist</span>(giris[, <span class="dv">-5</span>])
 hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(d)
 hcl</code></pre></div>
 <pre><code>## 
@@ -565,6 +576,11 @@ hcl</code></pre></div>
 ## Number of objects: 150</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(hcl)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/hclsol-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 </div>
 <div id="defining-clusters" class="section level3">
 <h3>
@@ -581,17 +597,28 @@ Figure 9.12: Cutting the dendrogram at height 1.5.
 <ul>
 <li>cut the tree at a specific height: <code>cutree(hcl, h = 1.5)</code>
 </li>
-<li>cut the tree to get a certain number of clusters: <code>cutree(hcl, k = 2)</code>
+<li>cut the tree to get a certain number of clusters: <code>cutree(hcl, k = 3)</code>
 </li>
 </ul>
-<blockquote>
-<p>Challenge</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
 <ul>
-<li>Cut the iris hierarchical clustering result at a height to obtain 3 clusters by setting <code>h</code>.</li>
-<li>Cut the iris hierarchical clustering result at a height to obtain 3 clusters by setting directly <code>k</code>, and verify that both provide the same results.</li>
+<li><p>Cut the iris hierarchical clustering result at a height to obtain 3 clusters by setting <code>h</code>.</p></li>
+<li><p>Cut the iris hierarchical clustering result at a height to obtain 3 clusters by setting directly <code>k</code>, and verify that both provide the same results.</p></li>
 </ul>
-</blockquote>
-<p><details></details></p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-60" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-60', 'sol-start-60')"></span>
+</p>
+<div id="sol-body-60" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(hcl)
 <span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">3.9</span>, <span class="dt">col =</span> <span class="st">"red"</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/cuthclsol-1.png" width="672"></p>
@@ -609,63 +636,48 @@ Figure 9.12: Cutting the dendrogram at height 1.5.
 ## [149] 2 2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(<span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>), <span class="kw">cutree</span>(hcl, <span class="dt">h =</span> <span class="fl">3.9</span>))</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<p></p>
-<blockquote>
-<p>Challenge</p>
-<p>Using the same value <code>k = 3</code>, verify if k-means and hierarchical clustering produce the same results on the <code>iris</code> data.</p>
-<p>Which one, if any, is correct?</p>
-</blockquote>
-<p><details></details></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
-hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))
-<span class="kw">table</span>(km<span class="op">$</span>cluster, <span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>))</code></pre></div>
-<pre><code>##    
-##      1  2  3
-##   1  0 34 28
-##   2  0 38  0
-##   3 50  0  0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
-<span class="kw">plot</span>(iris<span class="op">$</span>Petal.Length, iris<span class="op">$</span>Sepal.Length, <span class="dt">col =</span> km<span class="op">$</span>cluster, <span class="dt">main =</span> <span class="st">"k-means"</span>)
-<span class="kw">plot</span>(iris<span class="op">$</span>Petal.Length, iris<span class="op">$</span>Sepal.Length, <span class="dt">col =</span> <span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>), <span class="dt">main =</span> <span class="st">"Hierarchical clustering"</span>)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/iris2algs-1.png" width="1152"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Checking with the labels provided with the iris data
-<span class="kw">table</span>(iris<span class="op">$</span>Species, km<span class="op">$</span>cluster)</code></pre></div>
-<pre><code>##             
-##               1  2  3
-##   setosa      0  0 50
-##   versicolor 48  2  0
-##   virginica  14 36  0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(iris<span class="op">$</span>Species, <span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>))</code></pre></div>
-<pre><code>##             
-##               1  2  3
-##   setosa     50  0  0
-##   versicolor  0 23 27
-##   virginica   0 49  1</code></pre>
-<p></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 </div>
 </div>
 <div id="pre-processing" class="section level2">
 <h2>
 <span class="header-section-number">9.5</span> Pre-processing</h2>
-<p>Many of the machine learning methods that are regularly used are sensitive to difference scales. This applies to unsupervised methods as well as supervised methods, as we will see in the next chapter.</p>
-<p>A typical way to pre-process the data prior to learning is to scale the data, or apply principal component analysis (next section). Scaling assures that all data columns have a mean of 0 and standard deviation of 1.</p>
+<p>Many of the machine learning methods that are regularly used are sensitive to difference scales. This applies to unsupervised methods as well as supervised methods.</p>
+<p>A typical way to pre-process the data prior to learning is to scale the data (see chapter <a href="sec-norm.html#sec:norm">5</a>), or apply principal component analysis (see chapter <a href="sec-dimred.html#sec:dimred">8</a>).</p>
 <p>In R, scaling is done with the <code>scale</code> function.</p>
-<blockquote>
-<p>Challenge</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
 <p>Using the <code>mtcars</code> data as an example, verify that the variables are of different scales, then scale the data. To observe the effect different scales, compare the hierarchical clusters obtained on the original and scaled data.</p>
-</blockquote>
-<p><details></details></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMeans</span>(mtcars)</code></pre></div>
-<pre><code>##        mpg        cyl       disp         hp       drat         wt       qsec 
-##  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250  17.848750 
-##         vs         am       gear       carb 
-##   0.437500   0.406250   3.687500   2.812500</code></pre>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-61" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-61', 'sol-start-61')"></span>
+</p>
+<div id="sol-body-61" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(mtcars)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/scalesol-1.png" width="1152"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hcl1 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(mtcars))
 hcl2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(mtcars)))
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">plot</span>(hcl1, <span class="dt">main =</span> <span class="st">"original data"</span>)
 <span class="kw">plot</span>(hcl2, <span class="dt">main =</span> <span class="st">"scaled data"</span>)</code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/scalesol-1.png" width="1152"></p>
+<p><img src="WSBIM1322_files/figure-html/scalesol-2.png" width="1152"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 </div>
 <div id="additional-exercises-7" class="section level2">
 <h2>
@@ -681,6 +693,43 @@ hcl2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="k
 </p>
 </div>
 </div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Using the same value <code>k = 3</code>, verify if k-means and hierarchical clustering produce the similar or identical results on the <code>giris</code> data. Visualise the two sets of results on PCA plots.</p>
+<p>Which one, if any, is correct?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(giris[, <span class="dv">-5</span>], <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
+
+hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(giris[, <span class="dv">-5</span>]))
+hcl_res &lt;-<span class="st"> </span><span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>)
+<span class="kw">table</span>(km<span class="op">$</span>cluster, hcl_res)
+
+pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">center =</span> <span class="ot">TRUE</span>)
+
+<span class="kw">library</span>(<span class="st">"factoextra"</span>)
+<span class="kw">library</span>(<span class="st">"patchwork"</span>)
+p1 &lt;-<span class="st"> </span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">habillage =</span> km<span class="op">$</span>cluster) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"kmeans"</span>)
+p2 &lt;-<span class="st"> </span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">habillage =</span> hcl_res) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"hclust"</span>)
+
+p1 <span class="op">+</span><span class="st"> </span>p2
+
+## comparison with expercted results
+<span class="kw">table</span>(km<span class="op">$</span>cluster, giris<span class="op">$</span>GRADE)
+<span class="kw">table</span>(hcl_res, giris<span class="op">$</span>GRADE)
+
+p3 &lt;-<span class="st">  </span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">habillage =</span> giris<span class="op">$</span>GRADE) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"GRADE"</span>)
+
+p1 <span class="op">+</span><span class="st"> </span>p2 <span class="op">+</span><span class="st"> </span>p3</code></pre></div>
 
 </div>
 </div></body></html>

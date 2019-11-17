@@ -420,6 +420,8 @@ plot(hcl)
 ```
 `r msmbstyle::solution_end()`
 
+
+
 ### Defining clusters
 
 After producing the hierarchical clustering result, we need to *cut
@@ -460,37 +462,40 @@ identical(cutree(hcl, k = 3), cutree(hcl, h = 3.9))
 `r msmbstyle::solution_end()`
 
 
-
 ## Pre-processing
 
 Many of the machine learning methods that are regularly used are
 sensitive to difference scales. This applies to unsupervised methods
-as well as supervised methods, as we will see in the next chapter.
+as well as supervised methods.
 
 A typical way to pre-process the data prior to learning is to scale
-the data, or apply principal component analysis (next section). Scaling
-assures that all data columns have a mean of 0 and standard deviation of 1.
+the data (see chapter \@ref(sec:norm)), or apply principal component
+analysis (see chapter \@ref(sec:dimred)).
 
 In R, scaling is done with the `scale` function.
 
-> Challenge
->
-> Using the `mtcars` data as an example, verify that the variables are
-> of different scales, then scale the data. To observe the effect
-> different scales, compare the hierarchical clusters obtained on the
-> original and scaled data.
+`r msmbstyle::question_begin()`
 
-<details>
+Using the `mtcars` data as an example, verify that the variables are
+of different scales, then scale the data. To observe the effect
+different scales, compare the hierarchical clusters obtained on the
+original and scaled data.
+
+`r msmbstyle::question_end()`
+
+
+
+`r msmbstyle::solution_begin()`
+
 ```{r scalesol, fig.width=12, fig.cap=""}
-colMeans(mtcars)
+boxplot(mtcars)
 hcl1 <- hclust(dist(mtcars))
 hcl2 <- hclust(dist(scale(mtcars)))
 par(mfrow = c(1, 2))
 plot(hcl1, main = "original data")
 plot(hcl2, main = "scaled data")
 ```
-</details>
-
+`r msmbstyle::solution_end()`
 
 
 ## Additional exercises
@@ -523,8 +528,9 @@ plot(xy, col = kcl6$cluster)
 
 
 `r msmbstyle::question_begin()`
-Using the same value `k = 3`, verify if k-means and hierarchical
-clustering produce the same results on the `giris` data.
+Using the same value `k = 3`, verify if k-means and hierarchical clustering produce the similar or
+identical results on the `giris` data. Visualise the two sets of
+results on PCA plots.
 
 Which one, if any, is correct?
 `r msmbstyle::question_end()`
@@ -532,12 +538,28 @@ Which one, if any, is correct?
 
 ```{r iris2algs, fig.width = 12, eval = FALSE}
 km <- kmeans(giris[, -5], centers = 3, nstart = 10)
+
 hcl <- hclust(dist(giris[, -5]))
-table(km$cluster, cutree(hcl, k = 3))
-par(mfrow = c(1, 2))
-plot(iris$Petal.Length, iris$Sepal.Length, col = km$cluster, main = "k-means")
-plot(iris$Petal.Length, iris$Sepal.Length, col = cutree(hcl, k = 3), main = "Hierarchical clustering")
-## Checking with the labels provided with the iris data
-table(iris$Species, km$cluster)
-table(iris$Species, cutree(hcl, k = 3))
+hcl_res <- cutree(hcl, k = 3)
+table(km$cluster, hcl_res)
+
+pca <- prcomp(giris[, -5], scale = TRUE, center = TRUE)
+
+library("factoextra")
+library("patchwork")
+p1 <- fviz_pca_ind(pca, habillage = km$cluster) +
+    labs(title = "kmeans")
+p2 <- fviz_pca_ind(pca, habillage = hcl_res) +
+    labs(title = "hclust")
+
+p1 + p2
+
+## comparison with expercted results
+table(km$cluster, giris$GRADE)
+table(hcl_res, giris$GRADE)
+
+p3 <-  fviz_pca_ind(pca, habillage = giris$GRADE) +
+    labs(title = "GRADE")
+
+p1 + p2 + p3
 ```
