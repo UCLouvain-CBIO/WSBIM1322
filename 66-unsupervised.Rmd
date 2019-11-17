@@ -70,7 +70,7 @@ the sum of each the elements of vectors:
 
 $$ \sum{ \frac{ | x_{i} - y_{i} | }{ | x_{i} | + | y_{i} | } } $$
 
-<!-- Correlation based distance: -->
+<!-- TODO: Correlation based distance: -->
 
 These are some of the distances available in the `dist` function. See
 also section 5.3 from [@MSMB] for additional details.
@@ -220,19 +220,10 @@ table(giris$GRADE, cl$cluster)
 
 ### How does k-means work {-}
 
-The algorithm is as follows:
+The algorithm starts from a matrix of *n* features in *p* observations
+and proceeds as follows:
 
-1. Start from a matrix of *n* features in *p* observations.
-2. **Initisalistion**: randomly assign the *p* obervations to *k*
-   clusters.
-3. **Iteration (1)**: Calculate the centre of each subgroup as the
-   average position of all observations is that subgroup.
-4. **Iteration (2)**: Each observation is then assigned to the group
-   of its nearest centre.
-5. **Termination**: Repeat steps 3 and 4 until no obervation changes its
-   cluster membership.
-
-**Initialisation**: randomly assign class membership
+**Initialisation**: randomly assign the *p* obervations to *k* clusters.
 
 ```{r kmworksinit, fig.cap="k-means random intialisation", echo = FALSE, fig.width = 9, fig.heigth = 4}
 set.seed(12)
@@ -285,8 +276,9 @@ p3 <- ggplot(x, aes(x = PC1, y = PC2, colour = iter)) +
 p2 / p3
 ```
 
-**Termination**: Repeat iteration until no point changes its cluster
-membership.
+**Termination**: Repeat the iteration steps until no point changes its
+cluster membership.
+
 
 ```{r, results='markup', fig.cap="k-means convergence (credit Wikipedia).", echo=FALSE, purl=FALSE, out.width='100%', fig.align='center'}
 knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif")
@@ -298,11 +290,10 @@ Due to the random initialisation, one can obtain different clustering
 results. 
 
 ```{r, fig.cap = "Different k-means results on the same `girsi` data", fig.width = 10, fig.height = 8, fig.fullwidth = TRUE, echo = FALSE}
-## set.seed(23)
 set.seed(211)
 cl1 <- kmeans(giris[, -5], centers = 3, nstart = 1)
 cl2 <- kmeans(giris[, -5], centers = 3, nstart = 1)
- table(cl1$cluster, cl2$cluster)
+## table(cl1$cluster, cl2$cluster)
 x <- data.frame(pca$x[, 1:2])
 x$kmeans_1 <- LETTERS[1:3][cl1$cluster]
 x$kmeans_2 <- LETTERS[1:3][cl2$cluster]
@@ -320,8 +311,8 @@ calculated as:
 
 For each cluster results:
 
-- for each observation, determine the squared euclidean distance from
-  observation to centre of cluster
+- for each observation, determine the squared euclidean distance to
+  centre of cluster
 - sum all distances
 
 Note that this is a **local minimum**; there is no guarantee to obtain
@@ -403,7 +394,8 @@ In R:
 
 - Calculate the distance using `dist`, typically the Euclidean
   distance.
-- Hierarchical clustering on this distance matrix using `hclust`
+- Apply hierarchical clustering on this distance matrix using
+  `hclust`.
 
 
 `r msmbstyle::question_begin()`
@@ -420,7 +412,40 @@ plot(hcl)
 ```
 `r msmbstyle::solution_end()`
 
+The `method` argument to `hclust` defines how the clusters are grouped
+together, which depends on how distances between a cluster and an
+obsevation (for example *(3, 5)* and *1* above), or between cluster
+(for example (*(2, 4)* and *(1, (3, 5))* above) are computed. 
 
+The **complete linkage** (default) method defines the distances
+between clusters as the largest one between any to observations in
+them, while the **single linkage** (also called nearest neighbour
+method) will use the smallest distance between observations. The
+**average linkage** method is halfways between the two. **Ward's**
+method takes an analysis of variance approach, and aims at minimising
+the variance within clusters.
+
+See [section 5.6](https://www.huber.embl.de/msmb/Chap-Clustering.html#hierarchical-clustering)
+of *Modern Statistics of Modern Biology* [@MSMB] for further details.
+
+`r msmbstyle::question_begin()`
+Using the `giris` example, compare the linkage methods presented above.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r linkcomp, fig.cap = "Effect of using different linkage methods.", fig.fullwidth = TRUE, fig.width = 8, fig.height = 8}
+d <- dist(giris[, -5])
+hcl_complete <- hclust(d, method = "complete")
+hcl_single <- hclust(d, method = "single")
+hcl_average <- hclust(d, method = "average")
+hcl_ward <- hclust(d, method = "ward.D")
+par(mfrow = c(2, 2))
+plot(hcl_complete)
+plot(hcl_single)
+plot(hcl_average)
+plot(hcl_ward)
+```
+`r msmbstyle::solution_end()`
 
 ### Defining clusters
 
@@ -511,6 +536,7 @@ whether they look convincing or not.
 
 
 ```{r, include = FALSE}
+set.seed(123)
 xy <- matrix(rnorm(200), ncol = 2)
 kcl2 <- kmeans(xy, centers = 2)
 kcl3 <- kmeans(xy, centers = 3)
@@ -528,15 +554,15 @@ plot(xy, col = kcl6$cluster)
 
 
 `r msmbstyle::question_begin()`
-Using the same value `k = 3`, verify if k-means and hierarchical clustering produce the similar or
-identical results on the `giris` data. Visualise the two sets of
-results on PCA plots.
+
+Using the same value `k = 3`, verify if k-means and hierarchical clustering 
+produce the similar or identical results on the `giris` data. Visualise the 
+two sets of results on PCA plots.
 
 Which one, if any, is correct?
 `r msmbstyle::question_end()`
 
-
-```{r iris2algs, fig.width = 12, eval = FALSE}
+```{r iris2algs, fig.width = 12, echo = FALSE, eval = FALSE}
 km <- kmeans(giris[, -5], centers = 3, nstart = 10)
 
 hcl <- hclust(dist(giris[, -5]))
@@ -563,3 +589,4 @@ p3 <-  fviz_pca_ind(pca, habillage = giris$GRADE) +
 
 p1 + p2 + p3
 ```
+

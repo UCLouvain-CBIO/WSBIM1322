@@ -404,19 +404,8 @@ Figure 9.4: PCA analysis of the <code>giris</code> data, highlighting the origin
 </div>
 <div id="how-does-k-means-work" class="section level3 unnumbered">
 <h3>How does k-means work</h3>
-<p>The algorithm is as follows:</p>
-<ol style="list-style-type: decimal">
-<li>Start from a matrix of <em>n</em> features in <em>p</em> observations.</li>
-<li>
-<strong>Initisalistion</strong>: randomly assign the <em>p</em> obervations to <em>k</em> clusters.</li>
-<li>
-<strong>Iteration (1)</strong>: Calculate the centre of each subgroup as the average position of all observations is that subgroup.</li>
-<li>
-<strong>Iteration (2)</strong>: Each observation is then assigned to the group of its nearest centre.</li>
-<li>
-<strong>Termination</strong>: Repeat steps 3 and 4 until no obervation changes its cluster membership.</li>
-</ol>
-<p><strong>Initialisation</strong>: randomly assign class membership</p>
+<p>The algorithm starts from a matrix of <em>n</em> features in <em>p</em> observations and proceeds as follows:</p>
+<p><strong>Initialisation</strong>: randomly assign the <em>p</em> obervations to <em>k</em> clusters.</p>
 <div class="figure">
 <span id="fig:kmworksinit"></span>
 <p class="caption marginnote shownote">
@@ -436,7 +425,7 @@ Figure 9.5: k-means random intialisation
 Figure 9.6: k-means iteration: calculate centers (left) and assign new cluster membership (right)
 </p>
 </div>
-<p><strong>Termination</strong>: Repeat iteration until no point changes its cluster membership.</p>
+<p><strong>Termination</strong>: Repeat the iteration steps until no point changes its cluster membership.</p>
 <div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-65"></span>
 <p class="caption marginnote shownote">
@@ -449,11 +438,6 @@ Figure 9.7: k-means convergence (credit Wikipedia).
 <h3>
 <span class="header-section-number">9.3.1</span> Model selection</h3>
 <p>Due to the random initialisation, one can obtain different clustering results.</p>
-<pre><code>##    
-##      1  2  3
-##   1  0 33  0
-##   2 38  0 58
-##   3  0 17  4</code></pre>
 <div class="figure fullwidth">
 <span id="fig:unnamed-chunk-66"></span>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-66-1.png" alt="Different k-means results on the same `girsi` data" width="960"><p class="caption marginnote shownote">
@@ -463,7 +447,7 @@ Figure 9.8: Different k-means results on the same <code>girsi</code> data
 <p>When k-means is run multiple times (as set by <code>nstart</code>), the best outcome, i.e. the one that generates the smallest <em>total within cluster sum of squares (SS)</em>, is selected. The total within SS is calculated as:</p>
 <p>For each cluster results:</p>
 <ul>
-<li>for each observation, determine the squared euclidean distance from observation to centre of cluster</li>
+<li>for each observation, determine the squared euclidean distance to centre of cluster</li>
 <li>sum all distances</li>
 </ul>
 <p>Note that this is a <strong>local minimum</strong>; there is no guarantee to obtain a global minimum.</p>
@@ -545,8 +529,7 @@ Figure 9.11: Visualisation of the hierarchical clustering results on a dendrogra
 <p>In R:</p>
 <ul>
 <li>Calculate the distance using <code>dist</code>, typically the Euclidean distance.</li>
-<li>Hierarchical clustering on this distance matrix using <code>hclust</code>
-</li>
+<li>Apply hierarchical clustering on this distance matrix using <code>hclust</code>.</li>
 </ul>
 <div class="question">
 <p class="question-begin">
@@ -581,6 +564,46 @@ hcl</code></pre></div>
 </p>
 </div>
 </div>
+<p>The <code>method</code> argument to <code>hclust</code> defines how the clusters are grouped together, which depends on how distances between a cluster and an obsevation (for example <em>(3, 5)</em> and <em>1</em> above), or between cluster (for example (<em>(2, 4)</em> and <em>(1, (3, 5))</em> above) are computed.</p>
+<p>The <strong>complete linkage</strong> (default) method defines the distances between clusters as the largest one between any to observations in them, while the <strong>single linkage</strong> (also called nearest neighbour method) will use the smallest distance between observations. The <strong>average linkage</strong> method is halfways between the two. <strong>Ward’s</strong> method takes an analysis of variance approach, and aims at minimising the variance within clusters.</p>
+<p>See <a href="https://www.huber.embl.de/msmb/Chap-Clustering.html#hierarchical-clustering">section 5.6</a> of <em>Modern Statistics of Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-26" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-26" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for further details.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Using the <code>giris</code> example, compare the linkage methods presented above.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-60" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-60', 'sol-start-60')"></span>
+</p>
+<div id="sol-body-60" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">dist</span>(giris[, <span class="dv">-5</span>])
+hcl_complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"complete"</span>)
+hcl_single &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"single"</span>)
+hcl_average &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"average"</span>)
+hcl_ward &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"ward.D"</span>)
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))
+<span class="kw">plot</span>(hcl_complete)
+<span class="kw">plot</span>(hcl_single)
+<span class="kw">plot</span>(hcl_average)
+<span class="kw">plot</span>(hcl_ward)</code></pre></div>
+<div class="figure fullwidth">
+<span id="fig:linkcomp"></span>
+<img src="WSBIM1322_files/figure-html/linkcomp-1.png" alt="Effect of using different linkage methods." width="768"><p class="caption marginnote shownote">
+Figure 9.12: Effect of using different linkage methods.
+</p>
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 </div>
 <div id="defining-clusters" class="section level3">
 <h3>
@@ -589,7 +612,7 @@ hcl</code></pre></div>
 <div class="figure">
 <span id="fig:cuthcl"></span>
 <p class="caption marginnote shownote">
-Figure 9.12: Cutting the dendrogram at height 1.5.
+Figure 9.13: Cutting the dendrogram at height 1.5.
 </p>
 <img src="WSBIM1322_files/figure-html/cuthcl-1.png" alt="Cutting the dendrogram at height 1.5." width="672">
 </div>
@@ -616,9 +639,9 @@ Figure 9.12: Cutting the dendrogram at height 1.5.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-60" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-60', 'sol-start-60')"></span>
+► Solution<span id="sol-start-61" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-61', 'sol-start-61')"></span>
 </p>
-<div id="sol-body-60" class="solution-body" style="display: none;">
+<div id="sol-body-61" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(hcl)
 <span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">3.9</span>, <span class="dt">col =</span> <span class="st">"red"</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/cuthclsol-1.png" width="672"></p>
@@ -662,9 +685,9 @@ Figure 9.12: Cutting the dendrogram at height 1.5.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-61" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-61', 'sol-start-61')"></span>
+► Solution<span id="sol-start-62" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-62', 'sol-start-62')"></span>
 </p>
-<div id="sol-body-61" class="solution-body" style="display: none;">
+<div id="sol-body-62" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(mtcars)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/scalesol-1.png" width="1152"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hcl1 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(mtcars))
@@ -705,31 +728,6 @@ hcl2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="k
 </p>
 </div>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(giris[, <span class="dv">-5</span>], <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
-
-hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(giris[, <span class="dv">-5</span>]))
-hcl_res &lt;-<span class="st"> </span><span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>)
-<span class="kw">table</span>(km<span class="op">$</span>cluster, hcl_res)
-
-pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">center =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">library</span>(<span class="st">"factoextra"</span>)
-<span class="kw">library</span>(<span class="st">"patchwork"</span>)
-p1 &lt;-<span class="st"> </span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">habillage =</span> km<span class="op">$</span>cluster) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"kmeans"</span>)
-p2 &lt;-<span class="st"> </span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">habillage =</span> hcl_res) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"hclust"</span>)
-
-p1 <span class="op">+</span><span class="st"> </span>p2
-
-## comparison with expercted results
-<span class="kw">table</span>(km<span class="op">$</span>cluster, giris<span class="op">$</span>GRADE)
-<span class="kw">table</span>(hcl_res, giris<span class="op">$</span>GRADE)
-
-p3 &lt;-<span class="st">  </span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">habillage =</span> giris<span class="op">$</span>GRADE) <span class="op">+</span>
-<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"GRADE"</span>)
-
-p1 <span class="op">+</span><span class="st"> </span>p2 <span class="op">+</span><span class="st"> </span>p3</code></pre></div>
 
 </div>
 </div></body></html>
