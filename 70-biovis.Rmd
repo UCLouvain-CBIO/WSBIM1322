@@ -1,4 +1,5 @@
 # Visualising biomolecular data {#sec:biovis}
 
+- Heatmaps (plus ex on effect of distances and scaling)
 - Venn and UpSet plots
 - GVis
