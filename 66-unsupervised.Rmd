@@ -590,3 +590,52 @@ p3 <-  fviz_pca_ind(pca, habillage = giris$GRADE) +
 p1 + p2 + p3
 ```
 
+`r msmbstyle::question_begin()`
+
+- Load the `mulvey2015` data from the `pRolocdata` package. The goal
+  of this exercise is to identify proteins that haev a specific
+  expression pattern over the cell development time. Do do so,
+  permform a k-means clustering setting k = 12.
+
+- Visualise the expression profiles over the development time for the
+  12 clusters identified above. See below for an example of such a
+  visualisation.
+
+`r msmbstyle::question_end()`
+
+```{r, echo = FALSE, fig.fullwidth = TRUE}
+library("pRolocdata")
+data(mulvey2015)
+cl <- kmeans(exprs(mulvey2015), centers = 12, nstart = 10)
+fData(mulvey2015)$cl <- factor(cl$cluster)
+
+mulvey2015 <- mulvey2015[, order(mulvey2015$times)]
+
+ms2df(mulvey2015, fcol = "cl") %>%
+    rownames_to_column(var = "protein") %>%
+    gather(key = sample, value = expression, -cl, -protein) %>%
+    mutate(time = sub("hr", "", sub("^.+_", "", sample))) %>% 
+    mutate(rep = sub("_.+$", "", sub("rep", "", sample))) %>%
+    mutate(sample = paste(time, rep, sep = "_")) %>% 
+    ggplot(aes(x = sample, y = expression, group = protein, colour = cl)) +
+    geom_line() +
+    facet_wrap(. ~ cl)
+```
+
+`r msmbstyle::question_begin()`
+Using the `hyperLOPIT2015` data from the `pRolocdata` package:
+
+- Filter out all features that have an `unknown` under the feature
+  variable `markers`.
+  
+- Then, for all the marker classes (organelles), calculate an average
+  profile by computing the mean value for each column.
+
+- Perform a hierarchical clustering showing the relation between the
+  average marker profiles.
+
+`r msmbstyle::question_end()`
+
+```{r, }
+
+```

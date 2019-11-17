@@ -169,7 +169,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</code></pre></div>
 <p>The <strong>canberra</strong> distance, that computes the sum of the difference to the sum of each the elements of vectors:</p>
 <p><span class="math display">\[ \sum{ \frac{ | x_{i} - y_{i} | }{ | x_{i} | + | y_{i} | } } \]</span></p>
-<!-- Correlation based distance: -->
+<!-- TODO: Correlation based distance: -->
 <p>These are some of the distances available in the <code>dist</code> function. See also section 5.3 from <span class="citation">(Holmes and Huber <label for="tufte-mn-25" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-25" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for additional details.</p>
 <div class="question">
 <p class="question-begin">
@@ -728,6 +728,21 @@ hcl2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="k
 </p>
 </div>
 </div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Load the <code>mulvey2015</code> data from the <code>pRolocdata</code> package. The goal of this exercise is to identify proteins that haev a specific expression pattern over the cell development time. Do do so, permform a k-means clustering setting k = 12.</p></li>
+<li><p>Visualise the expression profiles over the development time for the 12 clusters identified above. See below for an example of such a visualisation.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-68-1.png" width="672"></p>
 
 </div>
 </div></body></html>
