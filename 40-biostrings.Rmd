@@ -391,7 +391,7 @@ the mean GC content and highlight the regions that have a GC content >
 `r msmbstyle::question_end()`
 
 
-```{r, echo = FALSE, fig.cap = "GC content for chomosome 2L (10 - 11 Mb)"}
+```{r, echo = FALSE, fig.cap = "GC content for chomosome 2L (10 - 11 Mb)", cache = TRUE}
 x <- subseq(chr2L_dna[[1]], 10 * 1e6, 11 * 1e6)
 gc_content <- letterFrequencyInSlidingView(x, 5e3,
                                            letters = "GC",

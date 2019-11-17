@@ -1,14 +1,5 @@
 # Unsupervised learning: clustering {#sec:ul}
 
-This chapter has as objectives to 
-
-- introduce clustering methods;
-- provide the students with an understanding of kmeans and
-  hierarchical clustering;
-- show how to perform clustering;
-- provide real-life example of how to apply clustering on omics data.
-  
-
 ## Introduction
 
 After learing about dimensionality reduction and PCA, in this chapter
@@ -20,14 +11,17 @@ distinct (generally non-overlapping) groups. These groups are, even of
 imperfect (i.e. ignoring intermediate states) are often very useful in
 interpretation and assessment of the data.
 
+
 In this chapter we will:
 
+- Introduce clustering methods.
 - Learn how to use a widely used non-parametric clustering algorithms
   **k-means**.
 - Learn how to use reucrsive clustering approaches known as
   **hierarchical clustering**.
 - Observe the influence of clustering parameters and distance metrics
   on the outputs.
+- Provide real-life example of how to apply clustering on omics data.
 
 ## How to measure similarities?
 
@@ -50,12 +44,12 @@ $$ d(A, B) = ( (a_{1} - b_{1})^{m} + (a_{2} - b_{2})^{m} + \ldots + (a_{p} - b_{
 The **maximum** (or $L_{\inf}$) distance is the maximum of the absolute differences
 between coordinates:
 
-$$ d(A, B) = max_{i} \abs{ a_{i} − b_{i} } $$
+$$ d(A, B) = max_{i} | a_{i} − b_{i} | $$
 
 The **Manhattan** (or City Block, Taxicab or $L_{1}$) distance takes the sum of the
 absolute differences in all coordinates:
 
-$$ d(A, B) = \abs{a_{1} − b_{1}} + \abs{a_{2} − b_{2}} + \ldots + \abs{a_{p} − b_{p}} $$
+$$ d(A, B) = | a_{1} − b_{1} | + | a_{2} − b_{2} | + \ldots + |a_{p} − b_{p}| $$
 
 When computing a **binary** distance, the vectors are regarded as
 binary bits, with non-zero elements are *on* and zero elements are
@@ -71,29 +65,76 @@ y <- c(1, 0, 1, 1, 0, 1)
 ```
 
 
-- Canberra:
+The **canberra** distance, that computes the sum of the difference to
+the sum of each the elements of vectors:
+
+$$ \sum{ \frac{ | x_{i} - y_{i} | }{ | x_{i} | + | y_{i} | } } $$
+
+<!-- Correlation based distance: -->
+
+These are some of the distances available in the `dist` function. See
+also section 5.3 from [@MSMB] for additional details.
+
+`r msmbstyle::question_begin()`
+
+Generate the 5 data points along 2 dimensions as illustrated below and
+calculate all their euclidean pairwise distance using `dist`. Interprete the
+output of the function. What class if it?
+
+```{r, fig.cap = "A simulated dataset composed of 5 samples."}
+set.seed(111)
+samples <- data.frame(x = rnorm(5, 5, 1),
+                      y = rnorm(5, 5, 1))
+plot(samples, cex = 3)
+text(samples$x, samples$y, 1:5)
+```
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+dist(samples) 
+class(dist(samples))
+```
+`r msmbstyle::solution_end()`
 
 
+`r msmbstyle::question_begin()`
 
-These are the distances available in the `dist` function. Other that
-are of particular interest are 
+Calculate the position of the *average sample*, visualise it on the
+figure above. Which samples are respectively the closest and furthers
+to the *average sample*?
 
-- Correlation based distance:
-
-See also section 5.3 from [@MSMB] for additional details.
+`r msmbstyle::question_end()`
 
 
+`r msmbstyle::solution_begin()`
+```{r, fig.cap = "Visualisation of the average sample, in red."}
+avg_sample <- colMeans(samples)
+plot(samples, cex = 3)
+text(samples$x, samples$y, 1:5)
+points(avg_sample["x"], avg_sample["y"], pch = 19, col = "red", cex = 2)
+```
+```{r}
+(dists <- dist(rbind(samples, avg_sample)))
+dists <- as.matrix(dists)
+d6 <- dists[6, -6]
+which.min(d6) ## closest
+which.max(d6) ## furthers
+```
+`r msmbstyle::solution_end()`
 
 
 ## k-means clustering
 
-The k-means clustering algorithms aims at partitioning *n*
-observations into a fixed number of *k* clusters. The algorithm will
+The k-means clustering algorithm[^learnkmean] aims at partitioning *n*
+observations into a fixed number of *k* clusters. This algorithm will
 find homogeneous clusters.
+
+[^learnkmean]: We will learn how the algorithm works below.
 
 In R, we use
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 stats::kmeans(x, centers = 3, nstart = 10)
 ```
 
@@ -104,55 +145,103 @@ where
 - the k-means algorithm has a random component and can be repeated
   `nstart` times to improve the returned model
 
+To learn about k-means, let's use the `giris` dataset, that provides
+the expression of 4 genes in 150 patients grouped in categories A, B
+or C.
+
+```{r girisplot, fig.cap = "The *giris* dataset describes 150 patients by the expression of 4 genes. Each patient was assigned a grade A, B or C."}
+library("rWSBIM1322")
+data(giris)
+pairs(giris, col = giris$GRADE)
+```
+
 `r msmbstyle::question_begin()`
-> Challenge:
->
-> - To learn about k-means, let's use the `iris` dataset with the sepal and
->   petal length variables only (to facilitate visualisation). Create
->   such a data matrix and name it `x`
-
-```{r solirisx, echo=FALSE}
-i <- grep("Length", names(iris))
-x <- iris[, i]
-```
-
-> - Run the k-means algorithm on the newly generated data `x`, save
->   the results in a new variable `cl`, and explore its output when
->   printed.
-
-```{r solkmcl, echo=FALSE}
-cl <- kmeans(x, 3, nstart = 10)
-```
-
-> - The actual results of the algorithms, i.e. the cluster membership
->   can be accessed in the `clusters` element of the clustering result
->   output. Use it to colour the inferred clusters to generate a figure
->   like that shown below.
-
-```{r solkmplot, echo=FALSE, fig.cap = "k-means algorithm on sepal and petal lengths"}
-plot(x, col = cl$cluster)
-```
-
+Run the k-means algorithm on the `giris` data, save the results in a
+new variable `cl`, and explore its output when printed. What is the
+class of `cl`?
 `r msmbstyle::question_end()`
 
-<details>
-```{r soliris, eval=FALSE}
-i <- grep("Length", names(iris))
-x <- iris[, i]
-cl <- kmeans(x, 3, nstart = 10)
-plot(x, col = cl$cluster)
-```
-</details>
 
-### How does k-means work
+`r msmbstyle::solution_begin()`
+
+```{r solkmcl1}
+cl <- kmeans(giris[, -5], 3, nstart = 10)
+class(cl)
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+The actual results of the algorithms, i.e. the cluster membership can
+be accessed in the `cluster` element of the clustering result
+output. Extract and interpret these data.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r solkmcl2}
+cl$cluster
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Produce 2 PCA plots, colouring one with the original grade, and the
+other one with the results of the clustering algorithm. Compare the
+two plots.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r solkmcl3, message = FALSE, fig.cap = "PCA analysis of the `giris` data, highlighting the original groups (left) and the clustering results (right).", fig.width = 10, fig.height = 8, fig.fullwidth = TRUE}
+pca <- prcomp(giris[, -5], scale = TRUE, center = TRUE)
+summary(pca)
+
+library("factoextra")
+library("patchwork")
+p1 <- fviz_pca(pca, habillage = giris$GRADE)
+p2 <- fviz_pca(pca, habillage = cl$cluster)
+p1 / p2
+```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Compare the categories and clustering results and count the number of
+matches/mismatches.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r solkmcl4}
+table(giris$GRADE, cl$cluster)
+```
+`r msmbstyle::solution_end()`
+
+### How does k-means work {-}
+
+The algorithm is as follows:
+
+1. Start from a matrix of *n* features in *p* observations.
+2. **Initisalistion**: randomly assign the *p* obervations to *k*
+   clusters.
+3. **Iteration (1)**: Calculate the centre of each subgroup as the
+   average position of all observations is that subgroup.
+4. **Iteration (2)**: Each observation is then assigned to the group
+   of its nearest centre.
+5. **Termination**: Repeat steps 3 and 4 until no obervation changes its
+   cluster membership.
 
 **Initialisation**: randomly assign class membership
 
-
-```{r kmworksinit, fig.cap="k-means random intialisation"}
+```{r kmworksinit, fig.cap="k-means random intialisation", echo = FALSE, fig.width = 9, fig.heigth = 4}
 set.seed(12)
-init <- sample(3, nrow(x), replace = TRUE)
-plot(x, col = init)
+x <- data.frame(pca$x[, 1:2])
+x$init <- sample(LETTERS[1:3], nrow(x), replace = TRUE)
+p1 <- ggplot(x, aes(x = PC1, y = PC2, colour = init)) +
+    geom_point() + 
+    labs(title = "Initialisation") 
+p1
 ```
 
 **Iteration**:
@@ -165,34 +254,69 @@ plot(x, col = init)
 It's also possible to stop the algorithm after a certain number of
 iterations, or once the centres move less than a certain distance.
 
-```{r kmworksiter, fig.width = 12, fig.cap="k-means iteration: calculate centers (left) and assign new cluster membership (right)"}
-par(mfrow = c(1, 2))
-plot(x, col = init)
-centres <- sapply(1:3, function(i) colMeans(x[init == i, ], ))
-centres <- t(centres)
-points(centres[, 1], centres[, 2], pch = 19, col = 1:3)
+```{r kmworksiter, fig.cap="k-means iteration: calculate centers (left) and assign new cluster membership (right)", fig.width = 10, fig.height = 8, fig.fullwidth = TRUE, echo = FALSE}
+library("tidyverse")
+centres <- x %>%
+    group_by(init) %>%
+    summarise(PC1 = mean(PC1),
+              PC2 = mean(PC2)) %>%
+    select(PC1, PC2, init)
 
-tmp <- dist(rbind(centres, x))
+p2 <- p1 +
+    labs(title = "Initialisation with centres") + 
+    geom_point(data = centres, aes(x = PC1, y = PC2, col = init),
+               shape  = 1, size = 5) +
+    theme(legend.position = "none")    
+
+
+tmp <- as.matrix((rbind(centres[, 1:2], x[, 1:2])))
+tmp <- dist(tmp)
 tmp <- as.matrix(tmp)[, 1:3]
-
 ki <- apply(tmp, 1, which.min)
-ki <- ki[-(1:3)]
+ki <- LETTERS[1:3][ki]
+x$iter <- ki[-(1:3)]
 
-plot(x, col = ki)
-points(centres[, 1], centres[, 2], pch = 19, col = 1:3)
+p3 <- ggplot(x, aes(x = PC1, y = PC2, colour = iter)) +
+    labs(title = "Iteration 1") +   
+    geom_point() +
+    geom_point(data = centres, aes(x = PC1, y = PC2, col = init),
+               shape  = 1, size = 5) +
+    theme(legend.position = "none")
+p2 / p3
 ```
 
 **Termination**: Repeat iteration until no point changes its cluster
 membership.
 
-![k-means convergence (credit Wikipedia)](https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif)
+```{r, results='markup', fig.cap="k-means convergence (credit Wikipedia).", echo=FALSE, purl=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif")
+```
 
 ### Model selection
 
 Due to the random initialisation, one can obtain different clustering
-results. When k-means is run multiple times, the best outcome,
-i.e. the one that generates the smallest *total within cluster sum of
-squares (SS)*, is selected. The total within SS is calculated as:
+results. 
+
+```{r, fig.cap = "Different k-means results on the same `girsi` data", fig.width = 10, fig.height = 8, fig.fullwidth = TRUE, echo = FALSE}
+## set.seed(23)
+set.seed(211)
+cl1 <- kmeans(giris[, -5], centers = 3, nstart = 1)
+cl2 <- kmeans(giris[, -5], centers = 3, nstart = 1)
+ table(cl1$cluster, cl2$cluster)
+x <- data.frame(pca$x[, 1:2])
+x$kmeans_1 <- LETTERS[1:3][cl1$cluster]
+x$kmeans_2 <- LETTERS[1:3][cl2$cluster]
+p1 <- ggplot(x, aes(x = PC1, PC2, colour = kmeans_1)) +
+    geom_point()
+p2 <- ggplot(x, aes(x = PC1, PC2, colour = kmeans_2)) +
+    geom_point()
+p1 / p2
+```
+
+When k-means is run multiple times (as set by `nstart`), the best
+outcome, i.e. the one that generates the smallest *total within
+cluster sum of squares (SS)*, is selected. The total within SS is
+calculated as:
 
 For each cluster results:
 
@@ -203,34 +327,6 @@ For each cluster results:
 Note that this is a **local minimum**; there is no guarantee to obtain
 a global minimum.
 
-> Challenge:
->
-> Repeat k-means on our `x` data multiple times, setting the number of
-> iterations to 1 or greater and check whether you repeatedly obtain
-> the same results. Try the same with random data of identical
-> dimensions.
-
-<details>
-```{r selrep, fig.width = 12, fig.cap = "Different k-means results on the same (random) data"}
-cl1 <- kmeans(x, centers = 3, nstart = 10)
-cl2 <- kmeans(x, centers = 3, nstart = 10)
-table(cl1$cluster, cl2$cluster)
-
-cl1 <- kmeans(x, centers = 3, nstart = 1)
-cl2 <- kmeans(x, centers = 3, nstart = 1)
-table(cl1$cluster, cl2$cluster)
-
-set.seed(42)
-xr <- matrix(rnorm(prod(dim(x))), ncol = ncol(x))
-cl1 <- kmeans(xr, centers = 3, nstart = 1)
-cl2 <- kmeans(xr, centers = 3, nstart = 1)
-table(cl1$cluster, cl2$cluster)
-diffres <- cl1$cluster != cl2$cluster
-par(mfrow = c(1, 2))
-plot(xr, col = cl1$cluster, pch = ifelse(diffres, 19, 1))
-plot(xr, col = cl2$cluster, pch = ifelse(diffres, 19, 1))
-```
-</details>
 
 ### How to determine the number of clusters
 
@@ -238,32 +334,33 @@ plot(xr, col = cl2$cluster, pch = ifelse(diffres, 19, 1))
 2. Record total within SS for each value of k.
 3. Choose k at the *elbow* position, as illustrated below.
 
-```{r kmelbow, echo=FALSE, fig.cap = ""}
-ks <- 1:5
-tot_within_ss <- sapply(ks, function(k) {
-    cl <- kmeans(x, k, nstart = 10)
+```{r kmelbow, echo=FALSE, fig.cap = "Total within sum of squared distances for different values is *k*."}
+ks <- data.frame(k = 1:5)
+ks$tot_within_ss <- sapply(ks$k, function(k) {
+    cl <- kmeans(giris[, -5], k, nstart = 10)
     cl$tot.withinss
 })
-plot(ks, tot_within_ss, type = "b",
-     ylab = "Total within squared distances",
-     xlab = "Values of k tested")
+
+ggplot(ks, aes(x = k, y = tot_within_ss)) +
+    geom_line() + geom_point()
 ```
 
-> Challenge
->
-> Calculate the total within sum of squares for k from 1 to 5 for our
-> `x` test data, and reproduce the figure above. 
+`r msmbstyle::question_begin()`
+Calculate the total within sum of squares for k from 1 to 5 for our
+`giris` test data, and reproduce the figure above.
+`r msmbstyle::question_end()`
 
-<details>
+`r msmbstyle::solution_begin()`
+
 ```{r solkmelbow}
 ks <- 1:5
 tot_within_ss <- sapply(ks, function(k) {
-    cl <- kmeans(x, k, nstart = 10)
+    cl <- kmeans(giris[, -5], k, nstart = 10)
     cl$tot.withinss
 })
 plot(ks, tot_within_ss, type = "b")
 ```
-</details>
+`r msmbstyle::solution_end()`
 
 ## Hierarchical clustering
 
@@ -308,19 +405,20 @@ In R:
   distance.
 - Hierarchical clustering on this distance matrix using `hclust`
 
-> Challenge
-> 
-> Apply hierarchical clustering on the `iris` data and generate a
-> dendrogram using the dedicated `plot` method.
 
-<details>
+`r msmbstyle::question_begin()`
+Apply hierarchical clustering on the `giris` data and generate a
+dendrogram using the dedicated `plot` method.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
 ```{r hclsol, fig.cap = ""}
-d <- dist(iris[, 1:4])
+d <- dist(giris[, -5])
 hcl <- hclust(d)
 hcl
 plot(hcl)
 ```
-</details>
+`r msmbstyle::solution_end()`
 
 ### Defining clusters
 
@@ -330,25 +428,28 @@ clusters. For example, on our test dataset above, we could decide to
 cut it at a distance around 1.5, with would produce 2 clusters.
 
 ```{r cuthcl, echo=FALSE, fig.cap = "Cutting the dendrogram at height 1.5."}
-plot(hcr)
+plot(hcl)
 abline(h = 1.5, col = "red")
 ```
 
 In R we can us the `cutree` function to
 
 - cut the tree at a specific height: `cutree(hcl, h = 1.5)`
-- cut the tree to get a certain number of clusters: `cutree(hcl, k = 2)`
-
-> Challenge
-> 
-> - Cut the iris hierarchical clustering result at a height to obtain
->   3 clusters by setting `h`.
-> - Cut the iris hierarchical clustering result at a height to obtain
->   3 clusters by setting directly `k`, and verify that both provide
->   the same results.
+- cut the tree to get a certain number of clusters: `cutree(hcl, k = 3)`
 
 
-<details>
+`r msmbstyle::question_begin()`
+
+- Cut the iris hierarchical clustering result at a height to obtain
+  3 clusters by setting `h`.
+  
+- Cut the iris hierarchical clustering result at a height to obtain
+  3 clusters by setting directly `k`, and verify that both provide
+  the same results.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
 ```{r cuthclsol}
 plot(hcl)
 abline(h = 3.9, col = "red")
@@ -356,30 +457,9 @@ cutree(hcl, k = 3)
 cutree(hcl, h = 3.9)
 identical(cutree(hcl, k = 3), cutree(hcl, h = 3.9))
 ```
-</details>
+`r msmbstyle::solution_end()`
 
 
-> Challenge
-> 
-> Using the same value `k = 3`, verify if k-means and hierarchical
-> clustering produce the same results on the `iris` data.
-> 
-> Which one, if any, is correct?
-
-
-<details>
-```{r iris2algs, fig.width = 12, fig.cap = ""}
-km <- kmeans(iris[, 1:4], centers = 3, nstart = 10)
-hcl <- hclust(dist(iris[, 1:4]))
-table(km$cluster, cutree(hcl, k = 3))
-par(mfrow = c(1, 2))
-plot(iris$Petal.Length, iris$Sepal.Length, col = km$cluster, main = "k-means")
-plot(iris$Petal.Length, iris$Sepal.Length, col = cutree(hcl, k = 3), main = "Hierarchical clustering")
-## Checking with the labels provided with the iris data
-table(iris$Species, km$cluster)
-table(iris$Species, cutree(hcl, k = 3))
-```
-</details>
 
 ## Pre-processing
 
@@ -439,4 +519,25 @@ plot(xy, col = kcl3$cluster)
 plot(xy, col = kcl4$cluster)
 plot(xy, col = kcl5$cluster)
 plot(xy, col = kcl6$cluster)
+```
+
+
+`r msmbstyle::question_begin()`
+Using the same value `k = 3`, verify if k-means and hierarchical
+clustering produce the same results on the `giris` data.
+
+Which one, if any, is correct?
+`r msmbstyle::question_end()`
+
+
+```{r iris2algs, fig.width = 12, eval = FALSE}
+km <- kmeans(giris[, -5], centers = 3, nstart = 10)
+hcl <- hclust(dist(giris[, -5]))
+table(km$cluster, cutree(hcl, k = 3))
+par(mfrow = c(1, 2))
+plot(iris$Petal.Length, iris$Sepal.Length, col = km$cluster, main = "k-means")
+plot(iris$Petal.Length, iris$Sepal.Length, col = cutree(hcl, k = 3), main = "Hierarchical clustering")
+## Checking with the labels provided with the iris data
+table(iris$Species, km$cluster)
+table(iris$Species, cutree(hcl, k = 3))
 ```
