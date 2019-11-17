@@ -196,9 +196,9 @@ Figure 9.1: A simulated dataset composed of 5 samples.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-52" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-52', 'sol-start-52')"></span>
+► Solution<span id="sol-start-54" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-54', 'sol-start-54')"></span>
 </p>
-<div id="sol-body-52" class="solution-body" style="display: none;">
+<div id="sol-body-54" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dist</span>(samples) </code></pre></div>
 <pre><code>##           1         2         3         4
 ## 2 1.7327389                              
@@ -225,9 +225,9 @@ Figure 9.1: A simulated dataset composed of 5 samples.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-53" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-53', 'sol-start-53')"></span>
+► Solution<span id="sol-start-55" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-55', 'sol-start-55')"></span>
 </p>
-<div id="sol-body-53" class="solution-body" style="display: none;">
+<div id="sol-body-55" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_sample &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samples)
 <span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)
 <span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
@@ -298,9 +298,9 @@ Figure 9.3: The <em>giris</em> dataset describes 150 patients by the expression 
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-54" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-54', 'sol-start-54')"></span>
+► Solution<span id="sol-start-56" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-56', 'sol-start-56')"></span>
 </p>
-<div id="sol-body-54" class="solution-body" style="display: none;">
+<div id="sol-body-56" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl &lt;-<span class="st"> </span><span class="kw">kmeans</span>(giris[, <span class="dv">-5</span>], <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)
 <span class="kw">class</span>(cl)</code></pre></div>
 <pre><code>## [1] "kmeans"</code></pre>
@@ -322,9 +322,9 @@ Figure 9.3: The <em>giris</em> dataset describes 150 patients by the expression 
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-55" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-55', 'sol-start-55')"></span>
+► Solution<span id="sol-start-57" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-57', 'sol-start-57')"></span>
 </p>
-<div id="sol-body-55" class="solution-body" style="display: none;">
+<div id="sol-body-57" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl<span class="op">$</span>cluster</code></pre></div>
 <pre><code>##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 ##  [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
@@ -349,9 +349,9 @@ Figure 9.3: The <em>giris</em> dataset describes 150 patients by the expression 
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-56" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-56', 'sol-start-56')"></span>
+► Solution<span id="sol-start-58" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-58', 'sol-start-58')"></span>
 </p>
-<div id="sol-body-56" class="solution-body" style="display: none;">
+<div id="sol-body-58" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">center =</span> <span class="ot">TRUE</span>)
 <span class="kw">summary</span>(pca)</code></pre></div>
 <pre><code>## Importance of components:
@@ -388,9 +388,9 @@ Figure 9.4: PCA analysis of the <code>giris</code> data, highlighting the origin
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-57" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-57', 'sol-start-57')"></span>
+► Solution<span id="sol-start-59" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-59', 'sol-start-59')"></span>
 </p>
-<div id="sol-body-57" class="solution-body" style="display: none;">
+<div id="sol-body-59" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(giris<span class="op">$</span>GRADE, cl<span class="op">$</span>cluster)</code></pre></div>
 <pre><code>##    
 ##      1  2  3
@@ -481,9 +481,9 @@ Figure 9.9: Total within sum of squared distances for different values is <em>k<
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-58" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-58', 'sol-start-58')"></span>
+► Solution<span id="sol-start-60" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-60', 'sol-start-60')"></span>
 </p>
-<div id="sol-body-58" class="solution-body" style="display: none;">
+<div id="sol-body-60" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ks &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
 tot_within_ss &lt;-<span class="st"> </span><span class="kw">sapply</span>(ks, <span class="cf">function</span>(k) {
     cl &lt;-<span class="st"> </span><span class="kw">kmeans</span>(giris[, <span class="dv">-5</span>], k, <span class="dt">nstart =</span> <span class="dv">10</span>)
@@ -544,9 +544,9 @@ Figure 9.11: Visualisation of the hierarchical clustering results on a dendrogra
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-59" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-59', 'sol-start-59')"></span>
+► Solution<span id="sol-start-61" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-61', 'sol-start-61')"></span>
 </p>
-<div id="sol-body-59" class="solution-body" style="display: none;">
+<div id="sol-body-61" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">dist</span>(giris[, <span class="dv">-5</span>])
 hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(d)
 hcl</code></pre></div>
@@ -580,9 +580,9 @@ hcl</code></pre></div>
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-60" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-60', 'sol-start-60')"></span>
+► Solution<span id="sol-start-62" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-62', 'sol-start-62')"></span>
 </p>
-<div id="sol-body-60" class="solution-body" style="display: none;">
+<div id="sol-body-62" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">dist</span>(giris[, <span class="dv">-5</span>])
 hcl_complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"complete"</span>)
 hcl_single &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"single"</span>)
@@ -639,9 +639,9 @@ Figure 9.13: Cutting the dendrogram at height 1.5.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-61" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-61', 'sol-start-61')"></span>
+► Solution<span id="sol-start-63" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-63', 'sol-start-63')"></span>
 </p>
-<div id="sol-body-61" class="solution-body" style="display: none;">
+<div id="sol-body-63" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(hcl)
 <span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">3.9</span>, <span class="dt">col =</span> <span class="st">"red"</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/cuthclsol-1.png" width="672"></p>
@@ -685,9 +685,9 @@ Figure 9.13: Cutting the dendrogram at height 1.5.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-62" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-62', 'sol-start-62')"></span>
+► Solution<span id="sol-start-64" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-64', 'sol-start-64')"></span>
 </p>
-<div id="sol-body-62" class="solution-body" style="display: none;">
+<div id="sol-body-64" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(mtcars)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/scalesol-1.png" width="1152"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hcl1 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(mtcars))

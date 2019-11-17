@@ -266,6 +266,8 @@ of the total variability in the data.
 
 
 ```{r pcaxy}
+library("rWSBIM1322")
+data(xy)
 pca_xy <- prcomp(xy)
 summary(pca_xy)
 ```
@@ -323,20 +325,10 @@ plot(pca_xy)
 ```
 
 `r msmbstyle::question_begin()`
-
-- Repeat the analysis above with the `xy0` data, that you can load
-  from the `rWSBIM1207` data. First scale it, then repeat the PCA
-  analysis as shown above.
-
-- Load the `cptac_prot` data, scale the data (see below for why
-  scaling is important), then perform the PCA analysis and interpret
-  it. Also produce a PCA for PCs 2 and 3.
-
-- In the exercise above, the PCA was performed on the features
-  (proteins). Transpose the data and produce a PCA of the samples.
-
+Repeat the analysis above with the `xy0` data, that you can load
+from the `rWSBIM1207` data. First scale it, then repeat the PCA
+analysis as shown above.
 `r msmbstyle::question_end()`
-
 
 `r msmbstyle::solution_begin()`
 
@@ -347,6 +339,15 @@ summary(pca1)
 screeplot(pca1)
 biplot(pca1)
 ```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Load the `cptac_prot` data, scale the data (see below for why scaling
+is important), then perform the PCA analysis and interpret it. Also
+produce a PCA for PCs 2 and 3.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
 
 ```{r pcaex2, fig.cap = ""}
 library("MSnbase")
@@ -359,6 +360,16 @@ biplot(pca2)
 plot(pca2$x[, 2:3])
 biplot(pca2, choices = 2:3)
 ```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+In the exercise above, the PCA was performed on the features
+(proteins). Transpose the data and produce a PCA of the
+samples. Interprete the figures.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
 
 ```{r, warning = FALSE}
 x_t <- t(x)

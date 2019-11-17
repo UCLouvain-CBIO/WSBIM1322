@@ -248,7 +248,9 @@ Figure 8.7: Original data (left). PC1 will maximise the variability while minimi
 </p>
 </div>
 <p>In R, we can use the <code>prcomp</code> function. A summary of the <code>prcomp</code> output shows that along PC1 along, we are able to retain close to 92% of the total variability in the data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_xy &lt;-<span class="st"> </span><span class="kw">prcomp</span>(xy)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)
+<span class="kw">data</span>(xy)
+pca_xy &lt;-<span class="st"> </span><span class="kw">prcomp</span>(xy)
 <span class="kw">summary</span>(pca_xy)</code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2
@@ -337,11 +339,7 @@ Figure 8.9: Screeplot showing the variances for the PCs.
 ► Question
 </p>
 <div class="question-body">
-<ul>
-<li><p>Repeat the analysis above with the <code>xy0</code> data, that you can load from the <code>rWSBIM1207</code> data. First scale it, then repeat the PCA analysis as shown above.</p></li>
-<li><p>Load the <code>cptac_prot</code> data, scale the data (see below for why scaling is important), then perform the PCA analysis and interpret it. Also produce a PCA for PCs 2 and 3.</p></li>
-<li><p>In the exercise above, the PCA was performed on the features (proteins). Transpose the data and produce a PCA of the samples.</p></li>
-</ul>
+<p>Repeat the analysis above with the <code>xy0</code> data, that you can load from the <code>rWSBIM1207</code> data. First scale it, then repeat the PCA analysis as shown above.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -364,6 +362,27 @@ pca1 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(xy)
 <p><img src="WSBIM1322_files/figure-html/pcaex1-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca1)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/pcaex1-2.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Load the <code>cptac_prot</code> data, scale the data (see below for why scaling is important), then perform the PCA analysis and interpret it. Also produce a PCA for PCs 2 and 3.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-42" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-42', 'sol-start-42')"></span>
+</p>
+<div id="sol-body-42" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"MSnbase"</span>)
 <span class="kw">data</span>(cptac_prot)
 x &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="kw">exprs</span>(cptac_prot))
@@ -382,6 +401,27 @@ pca2 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x)
 <p><img src="WSBIM1322_files/figure-html/pcaex2-3.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca2, <span class="dt">choices =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/pcaex2-4.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>In the exercise above, the PCA was performed on the features (proteins). Transpose the data and produce a PCA of the samples. Interprete the figures.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-43" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-43', 'sol-start-43')"></span>
+</p>
+<div id="sol-body-43" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x_t &lt;-<span class="st"> </span><span class="kw">t</span>(x)
 pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
 <span class="kw">summary</span>(pca3)</code></pre></div>
@@ -417,9 +457,9 @@ pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-42" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-42', 'sol-start-42')"></span>
+► Solution<span id="sol-start-44" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-44', 'sol-start-44')"></span>
 </p>
-<div id="sol-body-42" class="solution-body" style="display: none;">
+<div id="sol-body-44" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 <span class="kw">biplot</span>(<span class="kw">prcomp</span>(mtcars, <span class="dt">scale =</span> <span class="ot">FALSE</span>), <span class="dt">main =</span> <span class="st">"No scaling"</span>)  ## 1
 <span class="kw">biplot</span>(<span class="kw">prcomp</span>(mtcars, <span class="dt">scale =</span> <span class="ot">TRUE</span>), <span class="dt">main =</span> <span class="st">"With scaling"</span>) ## 2</code></pre></div>
@@ -462,9 +502,9 @@ pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-43" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-43', 'sol-start-43')"></span>
+► Solution<span id="sol-start-45" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-45', 'sol-start-45')"></span>
 </p>
-<div id="sol-body-43" class="solution-body" style="display: none;">
+<div id="sol-body-45" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pRolocdata)</code></pre></div>
 <pre><code>## 
 ## This is pRolocdata version 1.22.0.
@@ -511,9 +551,9 @@ pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-44" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-44', 'sol-start-44')"></span>
+► Solution<span id="sol-start-46" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-46', 'sol-start-46')"></span>
 </p>
-<div id="sol-body-44" class="solution-body" style="display: none;">
+<div id="sol-body-46" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_mulvey2015 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">t</span>(<span class="kw">exprs</span>(mulvey2015)), <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
 <span class="kw">summary</span>(pca_mulvey2015)</code></pre></div>
 <pre><code>## Importance of components:
@@ -550,9 +590,9 @@ pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-45" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-45', 'sol-start-45')"></span>
+► Solution<span id="sol-start-47" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-47', 'sol-start-47')"></span>
 </p>
-<div id="sol-body-45" class="solution-body" style="display: none;">
+<div id="sol-body-47" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"factoextra"</span>)
 <span class="kw">fviz_screeplot</span>(pca_mulvey2015)</code></pre></div>
 <div class="figure">
@@ -583,9 +623,9 @@ Figure 8.10: Scree plot for the <code>mulvey2015</code> data showing the percent
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-46" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-46', 'sol-start-46')"></span>
+► Solution<span id="sol-start-48" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-48', 'sol-start-48')"></span>
 </p>
-<div id="sol-body-46" class="solution-body" style="display: none;">
+<div id="sol-body-48" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca</span>(pca_mulvey2015)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-521"></span>
@@ -628,9 +668,9 @@ Figure 8.13: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-47" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-47', 'sol-start-47')"></span>
+► Solution<span id="sol-start-49" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-49', 'sol-start-49')"></span>
 </p>
-<div id="sol-body-47" class="solution-body" style="display: none;">
+<div id="sol-body-49" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rgl"</span>)
 <span class="kw">plot3d</span>(pca_mulvey2015<span class="op">$</span>x[, <span class="dv">1</span>],
        pca_mulvey2015<span class="op">$</span>x[, <span class="dv">2</span>],
@@ -663,9 +703,9 @@ Figure 8.13: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-48" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-48', 'sol-start-48')"></span>
+► Solution<span id="sol-start-50" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-50', 'sol-start-50')"></span>
 </p>
-<div id="sol-body-48" class="solution-body" style="display: none;">
+<div id="sol-body-50" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pRolocdata)
 <span class="kw">data</span>(hyperLOPIT2015)
 <span class="kw">pData</span>(hyperLOPIT2015)</code></pre></div>
@@ -740,9 +780,9 @@ Figure 8.13: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-49" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-49', 'sol-start-49')"></span>
+► Solution<span id="sol-start-51" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-51', 'sol-start-51')"></span>
 </p>
-<div id="sol-body-49" class="solution-body" style="display: none;">
+<div id="sol-body-51" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_hl &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">exprs</span>(hyperLOPIT2015), <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
 <span class="kw">summary</span>(pca_hl)</code></pre></div>
 <pre><code>## Importance of components:
@@ -779,9 +819,9 @@ Figure 8.13: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-50" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-50', 'sol-start-50')"></span>
+► Solution<span id="sol-start-52" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-52', 'sol-start-52')"></span>
 </p>
-<div id="sol-body-50" class="solution-body" style="display: none;">
+<div id="sol-body-52" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"factoextra"</span>)
 <span class="kw">fviz_screeplot</span>(pca_hl)</code></pre></div>
 <div class="figure">
@@ -814,9 +854,9 @@ Figure 8.14: Scree plot for the <code>hyperLOPIT2015</code> data showing the per
 </div>
 <div class="solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-51" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-51', 'sol-start-51')"></span>
+► Solution<span id="sol-start-53" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-53', 'sol-start-53')"></span>
 </p>
-<div id="sol-body-51" class="solution-body" style="display: none;">
+<div id="sol-body-53" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca</span>(pca_hl)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-571"></span>
