@@ -632,10 +632,14 @@ Using the `hyperLOPIT2015` data from the `pRolocdata` package:
   profile by computing the mean value for each column.
 
 - Perform a hierarchical clustering showing the relation between the
-  average marker profiles.
-
+  average marker profiles, such as shown below.
 `r msmbstyle::question_end()`
 
-```{r, }
-
+```{r, echo = FALSE, message = FALSE}
+library("pRolocdata")
+data(hyperLOPIT2015)
+suppressPackageStartupMessages(library("pRoloc"))
+par(oma = c(0, 0, 0, 0),
+    mar = c(15, 0, 0, 0))
+pRoloc::mrkHClust(hyperLOPIT2015)
 ```
