@@ -147,7 +147,7 @@ We now want a line that minimises distances in both directions, as
 shown below. This line, called **principal compoment**, is also the
 ones that maximises the variance of the projections along itself.
 
-```{r pxaex, echo = FALSE, fig.cap = "The first prinicpal component minimises the sum of squares of the orthogonal projections.", fig.height = 5.8, fig.width = 11}
+```{r pxaex, echo = FALSE, fig.cap = "The first prinicpal component minimises the sum of squares of the orthogonal projections.", fig.height = 5.6, fig.width = 11.5}
 svda <- svd(xy)
 pc <- as.matrix(xy) %*% svda$v[, 1] %*% t(svda$v[, 1])
 bp <- svda$v[2, 1] / svda$v[1, 1]
