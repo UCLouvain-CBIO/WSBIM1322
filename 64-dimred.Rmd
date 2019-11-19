@@ -712,6 +712,128 @@ fviz_pca_ind(pca_hl, geom = "point",
 
 ## Additional exercises
 
+
+`r msmbstyle::question_begin()`
+Professor Simpson and her team wanted to test the effect of drug A and
+drug B on fibroblast. They measured gene expression using RNA-Seq in
+three conditions: a control without any drug, cells in presence of
+drug A, and cells in presence of drug B. Each of these were measured
+in triplicates in a single batch by the same operator.
+
+The figure below shows the PCA plot of the 9 samples, coloured by
+condition. Interpreted the figure in the light of the experimentally
+design and suggest how to best analyse these data.
+
+```{r, echo = FALSE, fig.cap = "PCA analysis illustrating the global effect of drug A and B."}
+library("factoextra")
+library("pRolocdata")
+data(mulvey2015)
+x <- mulvey2015[, mulvey2015$times %in% c(1, 2, 6)]
+sampleNames(x) <-  paste(c("CTRL", "DrugA", "DrugB"),
+                         rep(1:3, each = 3))
+x$grp <- sub("[1-3]", "", sampleNames(x))
+p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
+fviz_pca_ind(p, habillage = x$grp)
+```
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+Consider the same experimental design as above, but with the PCA plot
+below. Interpret the figure in the light of the experimental design
+and suggest how to best analyse these data.
+
+```{r, echo = FALSE, fig.cap = "PCA analysis illustrating the global effect of drug A and B."}
+library("factoextra")
+library("pRolocdata")
+data(mulvey2015)
+x <- mulvey2015[, mulvey2015$times %in% c(1, 2, 6)]
+
+sampleNames(x) <-  c(paste0("CTRL", 1:3),
+                     paste0("DrugA", 1:3),
+                     paste0("DrugB", 1:3))
+x$grp <- sub("[1-3]", "", sampleNames(x))
+p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
+fviz_pca_ind(p, habillage = x$grp)
+```
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Researchers of the famous FLVIT (Fosse-La-Ville Institute of
+Technology) wanted to test the effect of a newly identified
+anti-cancer drug C121 on KEK293 cells. They measured proteins
+expression using quantitative mass spectrometry in these two
+conditions and 4 replicates. Each of these were measured in
+triplicates in a single batch.
+
+Interpret the PCA plot in the light of the experimental design. Do you
+think the analysis is likely to provide significant results?
+
+
+```{r, echo = FALSE, fig.cap = "Quantitative proteomics experiment measuring the effect of drug C121."}
+x <- mulvey2015[, mulvey2015$times %in% c(1, 3)]
+sampleNames(x) <-  paste0(c("CTRL.", "C121."),
+                          rep(1:3, each = 2))
+x$grp <- sub("\\.[1-3]", "", sampleNames(x))
+p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
+fviz_pca_ind(p, habillage = x$grp)
+```
+
+`r msmbstyle::question_end()`
+
+
+
+`r msmbstyle::question_begin()`
+
+In the following experimental design, clinicians have used
+quantitative PCR to measure the expression of 96 micro RNAs in the
+blood of three patients and three healthy donor, with the goal of
+identifying novel biomarkers.
+
+In the light of the experimental design, interpret the PCA plot. What
+are the chances to find good biomarkers?
+
+```{r, echo = FALSE, fig.cap = "Quantitative proteomics experiment measuring the effect of drug C121."}
+x <- mulvey2015[, mulvey2015$rep == 1]
+set.seed(123)
+exprs(x) <- exprs(x) + rnorm(prod(dim(x)), 1, 1)
+sampleNames(x) <-  c("DONOR1", "DONOR2", "PATIENT2", "PATIENT1", "PATIENT3", "DONOR3")
+x$grp <- sub("[1-3]", "", sampleNames(x))
+p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
+fviz_pca_ind(p, habillage = x$grp)
+```
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+The team of Professor Von der Brille have quantified the gene
+expression of Jurkat cells using two RNA-Seq protocols. 25 samples
+were tested with kit 1 by operator A and B (12 and 13 samples
+respectively), and 27 samples were processed with kit 2 by operators A
+and C (20 and 7 samples respectively).
+
+
+In the light of the experimental design, interpret the PCA plot. What
+would you suggest to do before testing whether using kit 1 and 2 have
+an impact on the data?
+
+```{r, echo = FALSE, fig.cap = "Testing the effect of RNA sequencing kits 1 and 2."}
+x <- cbind(matrix(rnorm(1000 * (25 + 26)), nrow = 1000),
+           rnorm(1000, 3, 1))
+colnames(x) <- c(paste0("kit1.", 1:25),
+                 paste0("kit2.", 1:27))
+p <- prcomp(t(x))
+fviz_pca_ind(p, habillage = sub("\\.[0-9]+$", "", colnames(x)))
+```
+
+`r msmbstyle::question_end()`
+
 `r msmbstyle::question_begin()`
 Load the `tdata1` dataset from the `rWSBIM1207` package and run a PCA
 analysis on the samples. Interpret the results, knowing that these
