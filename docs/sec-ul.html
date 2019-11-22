@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-18" />
+<meta name="date" content="2019-11-21" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -188,6 +188,10 @@ interpretation and assessment of the data.</p>
 on the outputs.</li>
 <li>Provide real-life example of how to apply clustering on omics data.</li>
 </ul>
+<p>Clustering is a widely used techniques in many areas of omics data
+analysis. The <em>How does gene expression clustering work?</em>
+<span class="citation">(D’haeseleer <label for="tufte-mn-25" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-25" class="margin-toggle">2005<span class="marginnote">D’haeseleer, P. 2005. “How Does Gene Expression Clustering Work?” <em>Nat Biotechnol</em> 23 (12): 1499–1501. <a href="https://doi.org/10.1038/nbt1205-1499">https://doi.org/10.1038/nbt1205-1499</a>.</span>)</span> is a useful reading to put the following chapter
+into context.</p>
 </div>
 <div id="how-to-measure-similarities" class="section level2">
 <h2>
@@ -223,7 +227,7 @@ the sum of each the elements of vectors:</p>
 <p><span class="math display">\[ \sum{ \frac{ | x_{i} - y_{i} | }{ | x_{i} | + | y_{i} | } } \]</span></p>
 <!-- TODO: Correlation based distance: -->
 <p>These are some of the distances available in the <code>dist</code> function. See
-also section 5.3 from <span class="citation">(Holmes and Huber <label for="tufte-mn-25" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-25" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for additional details.</p>
+also section 5.3 from <span class="citation">(Holmes and Huber <label for="tufte-mn-26" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-26" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for additional details.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -254,7 +258,7 @@ Figure 9.1: A simulated dataset composed of 5 samples.
 ► Solution<span id="sol-start-54" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-54', 'sol-start-54')"></span>
 </p>
 <div id="sol-body-54" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="sec-ul.html#cb345-1"></a><span class="kw">dist</span>(samples) </span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="sec-ul.html#cb345-1"></a><span class="kw">dist</span>(samples)</span></code></pre></div>
 <pre><code>##           1         2         3         4
 ## 2 1.7327389                              
 ## 3 1.2738181 0.4876129                    
@@ -663,7 +667,7 @@ method) will use the smallest distance between observations. The
 method takes an analysis of variance approach, and aims at minimising
 the variance within clusters.</p>
 <p>See <a href="https://www.huber.embl.de/msmb/Chap-Clustering.html#hierarchical-clustering">section 5.6</a>
-of <em>Modern Statistics of Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-26" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-26" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for further details.</p>
+of <em>Modern Statistics of Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-27" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-27" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for further details.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -895,7 +899,7 @@ average marker profiles, such as shown below.</p></li>
 <a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-18
+2019-11-21
 </p>
 </div>
 </div>

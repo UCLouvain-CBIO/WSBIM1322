@@ -23,6 +23,11 @@ In this chapter we will:
   on the outputs.
 - Provide real-life example of how to apply clustering on omics data.
 
+Clustering is a widely used techniques in many areas of omics data
+analysis. The *How does gene expression clustering work?*
+[@Dhaeseleer:2005] is a useful reading to put the following chapter
+into context.
+
 ## How to measure similarities?
 
 Clustering algorithms reply on a measurement of similarity between
@@ -30,9 +35,9 @@ between features to group them into clusters. An important step is
 thus to decide how to measure these similarities. A range of distance
 measurements are available:
 
-The **Euclidean** distance between two points $A = (a_{1}, \ldots , a_{p})$ and 
-$B = (b_{1}, \ldots , b_{p})$ in a $p$-dimensional space (for the $p$ features) 
-is the square root of the sum of squares of the differences in all 
+The **Euclidean** distance between two points $A = (a_{1}, \ldots , a_{p})$ and
+$B = (b_{1}, \ldots , b_{p})$ in a $p$-dimensional space (for the $p$ features)
+is the square root of the sum of squares of the differences in all
 $p$ coordinate directions:
 
 $$ d(A, B) = \sqrt{ (a_{1} - b_{1})^{2} + (a_{2} - b_{2})^{2} + \ldots + (a_{p} - b_{p})^{2} } $$
@@ -92,7 +97,7 @@ text(samples$x, samples$y, 1:5)
 
 `r msmbstyle::solution_begin()`
 ```{r}
-dist(samples) 
+dist(samples)
 class(dist(samples))
 ```
 `r msmbstyle::solution_end()`
@@ -138,7 +143,7 @@ In R, we use
 stats::kmeans(x, centers = 3, nstart = 10)
 ```
 
-where 
+where
 
 - `x` is a numeric data matrix
 - `centers` is the pre-defined number of clusters
@@ -230,8 +235,8 @@ set.seed(12)
 x <- data.frame(pca$x[, 1:2])
 x$init <- sample(LETTERS[1:3], nrow(x), replace = TRUE)
 p1 <- ggplot(x, aes(x = PC1, y = PC2, colour = init)) +
-    geom_point() + 
-    labs(title = "Initialisation") 
+    geom_point() +
+    labs(title = "Initialisation")
 p1
 ```
 
@@ -241,7 +246,7 @@ p1
    all observations is that subgroup.
 2. Each observation is then assigned to the group of its nearest
    centre.
- 
+
 It's also possible to stop the algorithm after a certain number of
 iterations, or once the centres move less than a certain distance.
 
@@ -254,10 +259,10 @@ centres <- x %>%
     select(PC1, PC2, init)
 
 p2 <- p1 +
-    labs(title = "Initialisation with centres") + 
+    labs(title = "Initialisation with centres") +
     geom_point(data = centres, aes(x = PC1, y = PC2, col = init),
                shape  = 1, size = 5) +
-    theme(legend.position = "none")    
+    theme(legend.position = "none")
 
 
 tmp <- as.matrix((rbind(centres[, 1:2], x[, 1:2])))
@@ -268,7 +273,7 @@ ki <- LETTERS[1:3][ki]
 x$iter <- ki[-(1:3)]
 
 p3 <- ggplot(x, aes(x = PC1, y = PC2, colour = iter)) +
-    labs(title = "Iteration 1") +   
+    labs(title = "Iteration 1") +
     geom_point() +
     geom_point(data = centres, aes(x = PC1, y = PC2, col = init),
                shape  = 1, size = 5) +
@@ -287,7 +292,7 @@ knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/e/ea/K-m
 ### Model selection
 
 Due to the random initialisation, one can obtain different clustering
-results. 
+results.
 
 ```{r, fig.cap = "Different k-means results on the same `girsi` data", fig.width = 10, fig.height = 8, fig.fullwidth = TRUE, echo = FALSE}
 set.seed(211)
@@ -415,7 +420,7 @@ plot(hcl)
 The `method` argument to `hclust` defines how the clusters are grouped
 together, which depends on how distances between a cluster and an
 obsevation (for example *(3, 5)* and *1* above), or between cluster
-(for example (*(2, 4)* and *(1, (3, 5))* above) are computed. 
+(for example (*(2, 4)* and *(1, (3, 5))* above) are computed.
 
 The **complete linkage** (default) method defines the distances
 between clusters as the largest one between any to observations in
@@ -469,7 +474,7 @@ In R we can us the `cutree` function to
 
 - Cut the iris hierarchical clustering result at a height to obtain
   3 clusters by setting `h`.
-  
+
 - Cut the iris hierarchical clustering result at a height to obtain
   3 clusters by setting directly `k`, and verify that both provide
   the same results.
@@ -555,8 +560,8 @@ plot(xy, col = kcl6$cluster)
 
 `r msmbstyle::question_begin()`
 
-Using the same value `k = 3`, verify if k-means and hierarchical clustering 
-produce the similar or identical results on the `giris` data. Visualise the 
+Using the same value `k = 3`, verify if k-means and hierarchical clustering
+produce the similar or identical results on the `giris` data. Visualise the
 two sets of results on PCA plots.
 
 Which one, if any, is correct?
@@ -612,9 +617,9 @@ fData(mulvey2015)$cl <- factor(cl$cluster)
 ms2df(mulvey2015, fcol = "cl") %>%
     rownames_to_column(var = "protein") %>%
     gather(key = sample, value = expression, -cl, -protein) %>%
-    mutate(time = sub("hr", "", sub("^.+_", "", sample))) %>% 
+    mutate(time = sub("hr", "", sub("^.+_", "", sample))) %>%
     mutate(rep = sub("_.+$", "", sub("rep", "", sample))) %>%
-    mutate(sample = paste(time, rep, sep = "_")) %>% 
+    mutate(sample = paste(time, rep, sep = "_")) %>%
     ggplot(aes(x = sample, y = expression, group = protein, colour = cl)) +
     geom_line() +
     facet_wrap(. ~ cl)
@@ -625,7 +630,7 @@ Using the `hyperLOPIT2015` data from the `pRolocdata` package:
 
 - Filter out all features that have an `unknown` under the feature
   variable `markers`.
-  
+
 - Then, for all the marker classes (organelles), calculate an average
   profile by computing the mean value for each column.
 
