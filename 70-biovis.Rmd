@@ -14,7 +14,103 @@ that are widely used in biomedical data analysis, namely
 Heatmaps (plus ex on effect of distances and scaling)
 
 
-## Visualising sets
+## Visualising intersections between sets
+
+Venn and Euler diagrams are popular representation when comparing sets
+and their intersection. Two useful R packages to generate such plots
+are `r CRANpkg("venneuler")` and `r Githubpkg("js229/Vennerable")`.
+
+We will use the `crc` feature names to generate a test data:
+
+```{r venn}
+set.seed(123)
+library("pRolocdata")
+data(mulvey2015)
+x <- replicate(3, sample(featureNames(mulvey2015), 555), simplify = FALSE)
+names(x) <- LETTERS[1:3]
+library("Vennerable")
+(v <- Venn(x))
+## access the identifiers
+v@IntersectionSets[["110"]]
+plot(v)
+```
+
+The `r CRANpkg("UpSetR")` visualises intersections of sets as a matrix
+in which the rows represent the sets and the columns represent their
+intersection sizes. For each set that is part of a given intersection,
+a black filled circle is placed in the corresponding matrix cell. If a
+set is not part of the intersection, a light gray circle is shown. A
+vertical black line connects the topmost black circle with the
+bottom most black circle in each column to emphasise the column-based
+relationships. The size of the intersections is shown as a bar chart
+placed on top of the matrix so that each column lines up with exactly
+one bar. A second bar chart showing the size of the each set is shown
+to the left of the matrix.
+
+We will first make use of the `fromList` function to convert our list
+to a `UpSetR` compatible input and then generate the figure:
+
+```{r upset1}
+library("UpSetR")
+x2 <- fromList(x)
+upset(x2)
+```
+
+The following
+[tweet](https://twitter.com/ngehlenborg/status/986354574989709312) by
+the author of the package illustrates how Venn and upset diagrams
+relate to each other.
+
+
+```{r upset2}
+upset(x2, order.by = "freq")
+upset(x2, order.by = "degree")
+upset(x2, order.by = c("freq", "degree"))
+upset(x2, order.by = c("degree", "freq"))
+
+upset(x2, sets = c("A", "B"))
+upset(x2, sets = c("B", "C", "A"), keep.order = TRUE)
+
+upset(x2, group.by = "sets")
+
+## Add set D with a single intersection
+x3 <- x2
+x3$D <- 0
+x3[1, "D"] <- 1
+head(x3)
+
+upset(x3)
+upset(x3, empty.intersections = "on")
+```
+
+Visualising intersections with `UpSetR` shines with more that 4 sets,
+as Venn diagrams become practically useless.
+
+
+There is also am UpSetR online app: https://gehlenborglab.shinyapps.io/upsetr/
+
+`r msmbstyle::question_begin()`
+
+Generate a bigger dataset containing 10 sets. Try to generate Venn and
+upset diagrams as shown above.
+
+When the number of sets become larger, the options above, as well as
+`nsets`, the number of sets (default is 5) and `nintersects`, the
+number of intersectios (default is 40) become useful.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r upsetchallenge}
+set.seed(123)
+x <- replicate(10, sample(featureNames(mulvey2015), 555), simplify = FALSE)
+names(x) <- LETTERS[1:10]
+x <- fromList(x)
+upset(x)
+```
+
+`r msmbstyle::solution_end()`
 
 
 ## Data along genomic corrdinates
