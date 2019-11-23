@@ -15,14 +15,14 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-21" />
+<meta name="date" content="2019-11-23" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
@@ -52,68 +52,41 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 
@@ -167,75 +140,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="header-section-number">Chapter 3</span> High-level data structures</h1>
 <p><strong>Learning objectives</strong></p>
 <ul>
-<li>Understand the difference between basic data structures and
-high-level objects.</li>
+<li>Understand the difference between basic data structures and high-level objects.</li>
 <li>Understand the concept of high-level object.</li>
 <li>Know how to learn about objects and access data from them.</li>
-<li>Learn about import Bioconductor objects widely used in omics data
-analysis.</li>
+<li>Learn about import Bioconductor objects widely used in omics data analysis.</li>
 <li>Become familiar with how objects are implemented.</li>
 </ul>
 <div id="introduction-1" class="section level2">
 <h2>
 <span class="header-section-number">3.1</span> Introduction</h2>
-<p>The term <em>object</em> stems from the widely used objet-oriented
-programming (OOP) paradigm. OOP is however outside of scope of this
-course (see part III of <span class="citation">Wickham (<label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">2014<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced R</em>. Chapman &amp; Hall/Crc the R Series. Taylor &amp; Francis.</span>)</span>, which is also <a href="https://adv-r.hadley.nz/">freely available
-online</a>). In the <em>R refresher</em> chapter
-<a href="sec-refresher.html#sec:refresher">1</a>, we have seen the base types of R, which we have
-efficiently used in many situations. Sometimes, however, these aren’t
-enough.</p>
-<p>We have also use object, for example in chapter <a href="sec-vis.html#sec:vis">2</a>, when
-generating ggplot visualisation. We have seen that it is possible to
-store the output of <code>ggplot2</code> in a variable, that contain all the data
-and information necessary to produce the figure.</p>
+<p>The term <em>object</em> stems from the widely used objet-oriented programming (OOP) paradigm. OOP is however outside of scope of this course (see part III of <span class="citation">Wickham (<label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">2014<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced R</em>. Chapman &amp; Hall/Crc the R Series. Taylor &amp; Francis.</span>)</span>, which is also <a href="https://adv-r.hadley.nz/">freely available online</a>). In the <em>R refresher</em> chapter <a href="sec-refresher.html#sec:refresher">1</a>, we have seen the base types of R, which we have efficiently used in many situations. Sometimes, however, these aren’t enough.</p>
+<p>We have also use object, for example in chapter <a href="sec-vis.html#sec:vis">2</a>, when generating ggplot visualisation. We have seen that it is possible to store the output of <code>ggplot2</code> in a variable, that contain all the data and information necessary to produce the figure.</p>
 </div>
 <div id="why-objects" class="section level2">
 <h2>
 <span class="header-section-number">3.2</span> Why objects?</h2>
 <ul>
-<li><p>Combine many parts of a complext data, for example store data (and
-possibly different forms thereof (see chapter <a href="sec-norm.html#sec:norm">5</a>) and
-metadata together.</p></li>
-<li><p>Objects are <strong>self describing</strong>: an object to store high-throughput
-sequencing (HTS) data contains high-throughput sequencing
-data. Replace high-throughput sequencing data by DNA sequences (see
-chapter <a href="sec-biostrings.html#sec:biostrings">4</a>), proteomics, … and it will still
-hold.</p></li>
-<li><p>Using object enables <strong>consistency</strong><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>: whoever prepares the
-HTS data, it will always have the same structure.</p></li>
+<li><p>Combine many parts of a complext data, for example store data (and possibly different forms thereof (see chapter <a href="sec-norm.html#sec:norm">5</a>) and metadata together.</p></li>
+<li><p>Objects are <strong>self describing</strong>: an object to store high-throughput sequencing (HTS) data contains high-throughput sequencing data. Replace high-throughput sequencing data by DNA sequences (see chapter <a href="sec-biostrings.html#sec:biostrings">4</a>), proteomics, … and it will still hold.</p></li>
+<li><p>Using object enables <strong>consistency</strong><label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> This consistency comes however at the cost of flexibility, hence the importance of well designed objects, that fit several use cases for the type of data at hand.</span>: whoever prepares the HTS data, it will always have the same structure.</p></li>
 </ul>
 <ul>
-<li>If all information is stored in a single object<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>, it is
-easier to save it, to share it with others, and to use it as an
-input to a function.</li>
+<li>If all information is stored in a single object<label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> This idea is consistent with the notion that you would like to place all the data relevant to an expriment into a single folder.</span>, it is easier to save it, to share it with others, and to use it as an input to a function.</li>
 </ul>
-<p>The above properties lead to greater <strong>robustness</strong> and
-<strong>interoperability</strong> when working with objects modelling complex data.</p>
+<p>The above properties lead to greater <strong>robustness</strong> and <strong>interoperability</strong> when working with objects modelling complex data.</p>
 <ul>
-<li><p>Common behaviour (methods) can be specialised to match the
-particular data type (this is called <strong>polymorphism</strong>): for example
-plotting (a vector, a matrix, NGS data), summary, subsetting (<code>[</code>
-and <code>[[</code>), …</p></li>
-<li><p>Another import benefit of using objects to model complex data is
-<strong>abstraction</strong>: it is possible to hide all the (unnecessary for its
-usage) complexity of a particular type of data and present/give
-access to its most imporant parts in a user-friendly <strong>interface</strong>
-and efficient way.</p></li>
-<li><p>Relations between object can be recorded (this is called
-<strong>inheritance</strong>).</p></li>
+<li><p>Common behaviour (methods) can be specialised to match the particular data type (this is called <strong>polymorphism</strong>): for example plotting (a vector, a matrix, NGS data), summary, subsetting (<code>[</code> and <code>[[</code>), …</p></li>
+<li><p>Another import benefit of using objects to model complex data is <strong>abstraction</strong>: it is possible to hide all the (unnecessary for its usage) complexity of a particular type of data and present/give access to its most imporant parts in a user-friendly <strong>interface</strong> and efficient way.</p></li>
+<li><p>Relations between object can be recorded (this is called <strong>inheritance</strong>).</p></li>
 </ul>
-<p>To avoid confusion, it is useful to define and separate objects and
-classes. A <strong>class</strong> describes (models) the general properties for
-groups of objects. For example, we could define a class to describe
-people in this course as follows:</p>
+<p>To avoid confusion, it is useful to define and separate objects and classes. A <strong>class</strong> describes (models) the general properties for groups of objects. For example, we could define a class to describe people in this course as follows:</p>
 <pre><code>Class person:
 - Name: a character
 - Surname: a character
 - Noma: an optional numeric
 - Role: a character (student, teaching assistant, instructor)</code></pre>
-<p>An <strong>object</strong> is and instantiation of a class with specific values in
-its fields:</p>
+<p>An <strong>object</strong> is and instantiation of a class with specific values in its fields:</p>
 <pre><code>Object of class person:
 - Name: Laurent
 - Surname: Gatto
@@ -246,8 +186,7 @@ its fields:</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Write down two objects that would describe a teaching assistant and a
-student.</p>
+<p>Write down two objects that would describe a teaching assistant and a student.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -280,13 +219,12 @@ Object of class person:
 <div id="sec:lm" class="section level2">
 <h2>
 <span class="header-section-number">3.3</span> Examples in base R</h2>
-<p>Let’s start by generating a testing dataset composed of two correlated
-variables, <code>x</code> and <code>y</code>:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="sec-obj.html#cb57-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb57-2"><a href="sec-obj.html#cb57-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb57-3"><a href="sec-obj.html#cb57-3"></a>y &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb57-4"><a href="sec-obj.html#cb57-4"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x, y)</span>
-<span id="cb57-5"><a href="sec-obj.html#cb57-5"></a><span class="kw">head</span>(df)</span></code></pre></div>
+<p>Let’s start by generating a testing dataset composed of two correlated variables, <code>x</code> and <code>y</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
+x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
+y &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x, y)
+<span class="kw">head</span>(df)</code></pre></div>
 <pre><code>##            x          y
 ## 1 -0.6264538 -1.2468205
 ## 2  0.1836433  0.2257592
@@ -294,7 +232,7 @@ variables, <code>x</code> and <code>y</code>:</p>
 ## 4  1.5952808  1.7533096
 ## 5  0.3295078 -0.3250769
 ## 6 -0.8204684  0.9468189</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="sec-obj.html#cb59-1"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, df)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, df)</code></pre></div>
 <div class="figure">
 <span id="fig:df"></span>
 <p class="caption marginnote shownote">
@@ -302,14 +240,9 @@ Figure 3.1: The <code>x</code> and <code>y</code> variables display a linear rel
 </p>
 <img src="WSBIM1322_files/figure-html/df-1.png" alt="The `x` and `y` variables display a linear relationship." width="672">
 </div>
-<p>We are now going to model the linear relation between <code>x</code> and <code>y</code>
-using the <code>lm</code> (linear model) function. The resulting variable <code>fit</code>
-is the result of computing the linear regression
-<span class="math inline">\(y = \beta_{0} + \beta_{1} x + \epsilon\)</span>.
-When printing the object, we see the call we performed, the
-intercept (<span class="math inline">\(\beta_0\)</span>) and the slope (<span class="math inline">\(\beta_1\)</span>) of the regression.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="sec-obj.html#cb60-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, df)</span>
-<span id="cb60-2"><a href="sec-obj.html#cb60-2"></a>fit</span></code></pre></div>
+<p>We are now going to model the linear relation between <code>x</code> and <code>y</code> using the <code>lm</code> (linear model) function. The resulting variable <code>fit</code> is the result of computing the linear regression <span class="math inline">\(y = \beta_{0} + \beta_{1} x + \epsilon\)</span>. When printing the object, we see the call we performed, the intercept (<span class="math inline">\(\beta_0\)</span>) and the slope (<span class="math inline">\(\beta_1\)</span>) of the regression.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, df)
+fit</code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x, data = df)
@@ -317,10 +250,9 @@ intercept (<span class="math inline">\(\beta_0\)</span>) and the slope (<span cl
 ## Coefficients:
 ## (Intercept)            x  
 ##    -0.03769      0.99894</code></pre>
-<p>We can plot the linear regression line with <code>abline</code> and passing the
-<code>fit</code> variable.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="sec-obj.html#cb62-1"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
-<span id="cb62-2"><a href="sec-obj.html#cb62-2"></a><span class="kw">abline</span>(fit, <span class="dt">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
+<p>We can plot the linear regression line with <code>abline</code> and passing the <code>fit</code> variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x)
+<span class="kw">abline</span>(fit, <span class="dt">col =</span> <span class="st">"red"</span>)</code></pre></div>
 <div class="figure">
 <span id="fig:plotlm"></span>
 <p class="caption marginnote shownote">
@@ -328,29 +260,24 @@ Figure 3.2: The regression line modelling the linear regression between the two 
 </p>
 <img src="WSBIM1322_files/figure-html/plotlm-1.png" alt="The regression line modelling the linear regression between the two `x` and `y` variables." width="672">
 </div>
-<p>The <code>fit</code> variable is an object of class <code>lm</code>, which we can check with
-the <code>class</code> function.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="sec-obj.html#cb63-1"></a><span class="kw">class</span>(fit)</span></code></pre></div>
+<p>The <code>fit</code> variable is an object of class <code>lm</code>, which we can check with the <code>class</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(fit)</code></pre></div>
 <pre><code>## [1] "lm"</code></pre>
-<p>It contains much more than simply the intercept and the slope of the
-regression line.</p>
+<p>It contains much more than simply the intercept and the slope of the regression line.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Find out what an object of class <code>lm</code> contains by exploring the
-content of the <code>fit</code> object (try the <code>names</code> and <code>str</code> functions) and
-reading the <code>lm</code> manual page.</p>
+<p>Find out what an object of class <code>lm</code> contains by exploring the content of the <code>fit</code> object (try the <code>names</code> and <code>str</code> functions) and reading the <code>lm</code> manual page.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
-<p>Finally, to demonstrate <strong>polymorphism</strong>, let’s try to plot the <code>fit</code>
-variable.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="sec-obj.html#cb65-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb65-2"><a href="sec-obj.html#cb65-2"></a><span class="kw">plot</span>(fit)</span></code></pre></div>
+<p>Finally, to demonstrate <strong>polymorphism</strong>, let’s try to plot the <code>fit</code> variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))
+<span class="kw">plot</span>(fit)</code></pre></div>
 <div class="figure">
 <span id="fig:lmplot"></span>
 <p class="caption marginnote shownote">
@@ -362,65 +289,44 @@ Figure 3.3: Plotting an instance of class <code>lm</code> produces a set of diag
 <div id="examples-from-the-bioconductor-project" class="section level2">
 <h2>
 <span class="header-section-number">3.4</span> Examples from the Bioconductor project</h2>
-<p>We have already briefly seen the <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec:bioconductor">Bioconductor
-project</a>. It
-initiated by Robert Gentleman (<span class="citation">Gentleman et al. (<label for="tufte-mn-14" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-14" class="margin-toggle">2004<span class="marginnote">Gentleman, Robert C., Vincent J. Carey, Douglas M. Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. “Bioconductor: Open Software Development for Computational Biology and Bioinformatics.” <em>Genome Biol</em> 5 (10): –80. <a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/gb-2004-5-10-r80</a>.</span>)</span>;<span class="citation">Huber et al. (<label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">2015<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. “Orchestrating High-Throughput Genomic Analysis with Bioconductor.” <em>Nat Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.</span>)</span>), one of
-the two creators of the R language, and centrally offers dedicated R
-packages for bioinformatics.</p>
+<p>We have already briefly seen the <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec:bioconductor">Bioconductor project</a>. It initiated by Robert Gentleman (<span class="citation">Gentleman et al. (<label for="tufte-mn-14" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-14" class="margin-toggle">2004<span class="marginnote">Gentleman, Robert C., Vincent J. Carey, Douglas M. Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. “Bioconductor: Open Software Development for Computational Biology and Bioinformatics.” <em>Genome Biol</em> 5 (10): –80. doi:<a href="https://doi.org/10.1186/gb-2004-5-10-r80">10.1186/gb-2004-5-10-r80</a>.</span>)</span>;<span class="citation">Huber et al. (<label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">2015<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. “Orchestrating High-Throughput Genomic Analysis with Bioconductor.” <em>Nat Methods</em> 12 (2): 115–21. doi:<a href="https://doi.org/10.1038/nmeth.3252">10.1038/nmeth.3252</a>.</span>)</span>), one of the two creators of the R language, and centrally offers dedicated R packages for bioinformatics.</p>
 <blockquote>
-<p>Bioconductor provides tools for the analysis and comprehension of
-high-throughput genomic data. Bioconductor uses the R statistical
-programming language, and is open source and open development. It
-has two releases each year, and an active user community.</p>
+<p>Bioconductor provides tools for the analysis and comprehension of high-throughput genomic data. Bioconductor uses the R statistical programming language, and is open source and open development. It has two releases each year, and an active user community.</p>
 </blockquote>
-<p>Bioconductor provides a rich set of <a href="https://bioconductor.org/developers/how-to/commonMethodsAndClasses/">classes for omics
-data</a>,
-summarised below.</p>
+<p>Bioconductor provides a rich set of <a href="https://bioconductor.org/developers/how-to/commonMethodsAndClasses/">classes for omics data</a>, summarised below.</p>
 <div id="common-bioconductor-classes" class="section level3">
 <h3>
 <span class="header-section-number">3.4.1</span> Common Bioconductor classes</h3>
 <ul>
-<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.10/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, …)</li>
-<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.10/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
-<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.10/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
+<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.9/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, …)</li>
+<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.9/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
+<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.9/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
 </li>
-<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.10/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.10/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
+<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.9/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.9/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
 </li>
-<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.10/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
+<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.9/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
 </li>
-<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.10/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
+<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.9/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
 </li>
-<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.10/MSnbase">MSnbase</a></em><code>::MSnExp()</code>
+<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.9/MSnbase">MSnbase</a></em><code>::MSnExp()</code>
 </li>
-<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.10/MSnbase">MSnbase</a></em><code>::MSnSet()</code>
+<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.9/MSnbase">MSnbase</a></em><code>::MSnSet()</code>
 </li>
 </ul>
 </div>
 <div id="the-summarizedexperiment-class" class="section level3">
 <h3>
 <span class="header-section-number">3.4.2</span> The <code>SummarizedExperiment</code> class</h3>
-<p>Let’s start by installing<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> the<em><a href="https://bioconductor.org/packages/3.10/SummarizedExperiment">SummarizedExperiment</a></em>
-package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.10/airway">airway</a></em>
-data package, that provides an RNA-Seq example data.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="sec-obj.html#cb66-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"SummarizedExperiment"</span>))</span>
-<span id="cb66-2"><a href="sec-obj.html#cb66-2"></a>    BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb66-3"><a href="sec-obj.html#cb66-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"airway"</span>))</span>
-<span id="cb66-4"><a href="sec-obj.html#cb66-4"></a>    BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"airway"</span>)</span></code></pre></div>
-<p>If you know you have the packages, it is more straightforward to
-directly load the packages.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="sec-obj.html#cb67-1"></a><span class="kw">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb67-2"><a href="sec-obj.html#cb67-2"></a><span class="kw">library</span>(<span class="st">"airway"</span>)</span></code></pre></div>
-<p>The <code>airway</code> package provides a data for an RNA-Seq experiment on four
-human airway smooth muscle cell lines treated with dexamethason
-published by <span class="citation">Himes et al. (<label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">2014<span class="marginnote">Himes, B E, X Jiang, P Wagner, R Hu, Q Wang, B Klanderman, R M Whitaker, et al. 2014. “RNA-Seq Transcriptome Profiling Identifies Crispld2 as a Glucocorticoid Responsive Gene That Modulates Cytokine Function in Airway Smooth Muscle Cells.” <em>PLoS One</em> 9 (6): e99625. <a href="https://doi.org/10.1371/journal.pone.0099625">https://doi.org/10.1371/journal.pone.0099625</a>.</span>)</span>. It contains the RNA expression data for
-64102 transcripts and 8 samples. These 8 samples correspond to treated
-and untreated condition in 4 different cell lines.</p>
-<p>Objects if the class <code>SummarizedExperiment</code> contain one or more assays
-(i.e. sets if quantitative expresson data), each represented by a
-matrix-like object (typically) of numeric mode. The rows represent
-features such as genes, transcripts, proteins or more generally
-genomic ranges and the columns represent samples. The figure below
-represents its anatomy in greater details.</p>
+<p>Let’s start by installing<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Before installing the package, we first check if they are available with <code>require</code>. If they are missing, the call to <code>require</code> will return <code>FALSE</code>, otherwise it returns <code>TRUE</code> and loads the packages. Given that we negate the return value of <code>require</code> using <code>!</code>, the packages will be installed only when missing.</span> the<em><a href="https://bioconductor.org/packages/3.9/SummarizedExperiment">SummarizedExperiment</a></em> package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.9/airway">airway</a></em> data package, that provides an RNA-Seq example data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"SummarizedExperiment"</span>))
+    BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"SummarizedExperiment"</span>)
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"airway"</span>))
+    BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"airway"</span>)</code></pre></div>
+<p>If you know you have the packages, it is more straightforward to directly load the packages.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"SummarizedExperiment"</span>)
+<span class="kw">library</span>(<span class="st">"airway"</span>)</code></pre></div>
+<p>The <code>airway</code> package provides a data for an RNA-Seq experiment on four human airway smooth muscle cell lines treated with dexamethason published by <span class="citation">Himes et al. (<label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">2014<span class="marginnote">Himes, B E, X Jiang, P Wagner, R Hu, Q Wang, B Klanderman, R M Whitaker, et al. 2014. “RNA-Seq Transcriptome Profiling Identifies Crispld2 as a Glucocorticoid Responsive Gene That Modulates Cytokine Function in Airway Smooth Muscle Cells.” <em>PLoS One</em> 9 (6): e99625. doi:<a href="https://doi.org/10.1371/journal.pone.0099625">10.1371/journal.pone.0099625</a>.</span>)</span>. It contains the RNA expression data for 64102 transcripts and 8 samples. These 8 samples correspond to treated and untreated condition in 4 different cell lines.</p>
+<p>Objects if the class <code>SummarizedExperiment</code> contain one or more assays (i.e. sets if quantitative expresson data), each represented by a matrix-like object (typically) of numeric mode. The rows represent features such as genes, transcripts, proteins or more generally genomic ranges and the columns represent samples. The figure below represents its anatomy in greater details.</p>
 <div class="figure">
 <span id="fig:sefig"></span>
 <p class="caption marginnote shownote">
@@ -429,15 +335,11 @@ Figure 3.4: Schematic representation of the anatomy if a <code>SummarizedExperim
 <img src="figs/SE.svg" alt="Schematic representation of the anatomy if a `SummarizedExperiment` object. (Figure taken from the `SummarizedExperiment` package vignette.)">
 </div>
 <ul>
-<li>The sample (columns) metadata can be access with the <code>colData()</code>
-function.</li>
-<li>The features (rows) metadata can be access with the <code>rowData()</code>
-column.</li>
-<li>If the features represent ranges along genomic coordinates, these
-can be accessed with <code>rowRanges()</code>
+<li>The sample (columns) metadata can be access with the <code>colData()</code> function.</li>
+<li>The features (rows) metadata can be access with the <code>rowData()</code> column.</li>
+<li>If the features represent ranges along genomic coordinates, these can be accessed with <code>rowRanges()</code>
 </li>
-<li>Additional metadata describing the overall experiment can be
-accessed with <code>metadata()</code>.</li>
+<li>Additional metadata describing the overall experiment can be accessed with <code>metadata()</code>.</li>
 <li>The quantiative data can be accessed with <code>assay()</code>.</li>
 <li>
 <code>assays()</code> returns a list of matrix-like assays.</li>
@@ -447,9 +349,7 @@ accessed with <code>metadata()</code>.</li>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>airway</code> data and display it in your R console. Make sure you
-understand all parts in the short text summary that is displayed. What
-class is <code>airway</code> of.</p>
+<p>Load the <code>airway</code> data and display it in your R console. Make sure you understand all parts in the short text summary that is displayed. What class is <code>airway</code> of.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -460,9 +360,7 @@ class is <code>airway</code> of.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Extract the quantitative assay data, the rows and columns metadata,
-the row ranges and the experiment metadata. What are the classes of
-these individual parts of the <code>SummarizedExperiment</code> object.</p>
+<p>Extract the quantitative assay data, the rows and columns metadata, the row ranges and the experiment metadata. What are the classes of these individual parts of the <code>SummarizedExperiment</code> object.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -473,8 +371,8 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 ► Solution<span id="sol-start-8" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-8', 'sol-start-8')"></span>
 </p>
 <div id="sol-body-8" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="sec-obj.html#cb68-1"></a><span class="kw">data</span>(airway)</span>
-<span id="cb68-2"><a href="sec-obj.html#cb68-2"></a>airway</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(airway)
+airway</code></pre></div>
 <pre><code>## class: RangedSummarizedExperiment 
 ## dim: 64102 8 
 ## metadata(1): ''
@@ -483,11 +381,11 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 ## rowData names(0):
 ## colnames(8): SRR1039508 SRR1039509 ... SRR1039520 SRR1039521
 ## colData names(9): SampleName cell ... Sample BioSample</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="sec-obj.html#cb70-1"></a><span class="kw">class</span>(airway)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(airway)</code></pre></div>
 <pre><code>## [1] "RangedSummarizedExperiment"
 ## attr(,"package")
 ## [1] "SummarizedExperiment"</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="sec-obj.html#cb72-1"></a><span class="kw">assay</span>(airway)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">assay</span>(airway)</code></pre></div>
 <pre><code>##                 SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516
 ## ENSG00000000003        679        448        873        408       1138
 ## ENSG00000000005          0          0          0          0          0
@@ -501,6 +399,56 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 ## ENSG00000001167        394        236        464        175        658
 ## ENSG00000001460        172        168        264        118        241
 ## ENSG00000001461       2112       1867       5137       2657       2735
+## ENSG00000001497        524        488        638        357        676
+## ENSG00000001561         71         51        211        156         23
+## ENSG00000001617        555        394        905        415        727
+## ENSG00000001626         10          2          9          2         10
+## ENSG00000001629       1660       1251       2259       1079       2462
+## ENSG00000001630         59         54         66         23         84
+## ENSG00000001631        729        692        943        475       1034
+## ENSG00000002016        201        161        256         99        268
+## ENSG00000002079          3          0          3          1          4
+## ENSG00000002330        206        174        184        111        194
+## ENSG00000002549       1459       1294       1317        998       1451
+## ENSG00000002586       7507       7203       9501       6214      10973
+## ENSG00000002587          2          0          1          0          0
+## ENSG00000002726          0          0          1          0          0
+## ENSG00000002745          4          6         22         10          2
+## ENSG00000002746        151        139        117         65         90
+## ENSG00000002822        411        303        446        195        445
+## ENSG00000002834       6314       6364       7831       5809       6677
+## ENSG00000002919        234        246        298        211        217
+## ENSG00000002933       1254       1508        636        431         25
+## ENSG00000003056       1189        947       1266        693       1288
+## ENSG00000003096        550        315        557        171        519
+## ENSG00000003137        124         57        256         63         30
+## ENSG00000003147          0          0          0          1          1
+## ENSG00000003249         81         71        207         80        109
+## ENSG00000003393        769        723        791        540       1115
+## ENSG00000003400         98         59        133         72         58
+## ENSG00000003402       1424       2617       1742       2364       2342
+## ENSG00000003436       4373       4183       5794       3230       7344
+## ENSG00000003509        287        280        357        191        386
+## ENSG00000003756       2368       1748       2694       1327       2647
+## ENSG00000003987         17         25         25         29         20
+## ENSG00000003989         47         56         12          3         51
+## ENSG00000004059       1090       1306       1140        817       1334
+## ENSG00000004139         86         83        103         51        115
+## ENSG00000004142       1496       1545       1607        964       1754
+## ENSG00000004399       4077       4260       3651       1649       5387
+## ENSG00000004455       1207       1111       1485        767       1497
+## ENSG00000004468          3          1          0          0          3
+## ENSG00000004478        502        461        551        281        612
+## ENSG00000004487       1410        989       1492        727       1708
+## ENSG00000004534       1202       1015       1855        919       1721
+## ENSG00000004660         95         55         59         35         87
+## ENSG00000004700        940       1096       1192        766        949
+## ENSG00000004766        492        413        546        337        611
+## ENSG00000004776       3473       3078       2775       1621       2084
+## ENSG00000004777        131        112        134         56         91
+## ENSG00000004779        329        335        494        258        417
+## ENSG00000004799         81        782        130       1106        235
+## ENSG00000004809          0          0          0          0          0
 ##                 SRR1039517 SRR1039520 SRR1039521
 ## ENSG00000000003       1047        770        572
 ## ENSG00000000005          0          0          0
@@ -514,10 +462,60 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 ## ENSG00000001167        584        360        269
 ## ENSG00000001460        210        155        177
 ## ENSG00000001461       2751       2467       2905
-##  [ reached getOption("max.print") -- omitted 64090 rows ]</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="sec-obj.html#cb74-1"></a><span class="kw">class</span>(<span class="kw">assay</span>(airway))</span></code></pre></div>
+## ENSG00000001497        806        493        475
+## ENSG00000001561         38        134        172
+## ENSG00000001617        697        618        599
+## ENSG00000001626          6          5          5
+## ENSG00000001629       2514       1888       1660
+## ENSG00000001630         87         31         59
+## ENSG00000001631       1163        731        744
+## ENSG00000002016        257        160        137
+## ENSG00000002079          0          0          1
+## ENSG00000002330        260        156        177
+## ENSG00000002549       1824        853       1031
+## ENSG00000002586      12863       6834       7225
+## ENSG00000002587          2          0          0
+## ENSG00000002726          0          0          0
+## ENSG00000002745          1          5          3
+## ENSG00000002746        102         86        119
+## ENSG00000002822        523        295        300
+## ENSG00000002834      11970       5766       7825
+## ENSG00000002919        376        184        265
+## ENSG00000002933         27         70        109
+## ENSG00000003056       1555        957        899
+## ENSG00000003096        284        485        224
+## ENSG00000003137         45        194         68
+## ENSG00000003147          2          2          0
+## ENSG00000003249        112        156        128
+## ENSG00000003393       1509        768        864
+## ENSG00000003400         49         96         67
+## ENSG00000003402       5198       1262       3761
+## ENSG00000003436       4981       3452       3342
+## ENSG00000003509        396        251        248
+## ENSG00000003756       2520       1996       2073
+## ENSG00000003987         51         12         27
+## ENSG00000003989        102         18         46
+## ENSG00000004059       1986       1028       1347
+## ENSG00000004139         99         82         77
+## ENSG00000004142       2301       1133       1256
+## ENSG00000004399       5992       2718       2809
+## ENSG00000004455       2274       1017        921
+## ENSG00000004468          1          2          1
+## ENSG00000004478        659        400        392
+## ENSG00000004487       1614       1263       1035
+## ENSG00000004534       1714       1171       1013
+## ENSG00000004660         79        154         67
+## ENSG00000004700       1452        812       1192
+## ENSG00000004766        677        435        424
+## ENSG00000004776       2254       3571       3153
+## ENSG00000004777         76        111         71
+## ENSG00000004779        572        294        325
+## ENSG00000004799        485        628       3187
+## ENSG00000004809          0          0          0
+##  [ reached getOption("max.print") -- omitted 64040 rows ]</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">assay</span>(airway))</code></pre></div>
 <pre><code>## [1] "matrix"</code></pre>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="sec-obj.html#cb76-1"></a><span class="kw">colData</span>(airway)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colData</span>(airway)</code></pre></div>
 <pre><code>## DataFrame with 8 rows and 9 columns
 ##            SampleName     cell      dex    albut        Run avgLength
 ##              &lt;factor&gt; &lt;factor&gt; &lt;factor&gt; &lt;factor&gt;   &lt;factor&gt; &lt;integer&gt;
@@ -539,19 +537,19 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 ## SRR1039517  SRX384354 SRS508576 SAMN02422673
 ## SRR1039520  SRX384357 SRS508579 SAMN02422683
 ## SRR1039521  SRX384358 SRS508580 SAMN02422677</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="sec-obj.html#cb78-1"></a><span class="kw">class</span>(<span class="kw">colData</span>(airway))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">colData</span>(airway))</code></pre></div>
 <pre><code>## [1] "DataFrame"
 ## attr(,"package")
 ## [1] "IRanges"</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="sec-obj.html#cb80-1"></a><span class="kw">rowData</span>(airway)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowData</span>(airway)</code></pre></div>
 <pre><code>## DataFrame with 64102 rows and 0 columns</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="sec-obj.html#cb82-1"></a><span class="kw">class</span>(<span class="kw">rowData</span>(airway))</span></code></pre></div>
-<pre><code>## [1] "DFrame"
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">rowData</span>(airway))</code></pre></div>
+<pre><code>## [1] "DataFrame"
 ## attr(,"package")
-## [1] "S4Vectors"</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="sec-obj.html#cb84-1"></a><span class="kw">rowRanges</span>(airway)</span></code></pre></div>
+## [1] "IRanges"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowRanges</span>(airway)</code></pre></div>
 <pre><code>## GRangesList object of length 64102:
-## $ENSG00000000003
+## $ENSG00000000003 
 ## GRanges object with 17 ranges and 2 metadata columns:
 ##        seqnames            ranges strand |   exon_id       exon_name
 ##           &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;     &lt;character&gt;
@@ -566,12 +564,12 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 ##   [15]        X 99891605-99891803      - |    667159 ENSE00001855382
 ##   [16]        X 99891790-99892101      - |    667160 ENSE00001863395
 ##   [17]        X 99894942-99894988      - |    667161 ENSE00001828996
-##   -------
-##   seqinfo: 722 sequences (1 circular) from an unspecified genome
 ## 
 ## ...
-## &lt;64101 more elements&gt;</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="sec-obj.html#cb86-1"></a><span class="kw">class</span>(<span class="kw">rowRanges</span>(airway))</span></code></pre></div>
+## &lt;64101 more elements&gt;
+## -------
+## seqinfo: 722 sequences (1 circular) from an unspecified genome</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="kw">rowRanges</span>(airway))</code></pre></div>
 <pre><code>## [1] "CompressedGRangesList"
 ## attr(,"package")
 ## [1] "GenomicRanges"</code></pre>
@@ -580,16 +578,13 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 </p>
 </div>
 </div>
-<p>The row and column metadata are stored as a special <code>data.frame</code>
-implementation<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>, that has been developed in the Bioconductor
-project. It behaves like like a classical <code>data.frame</code>.</p>
+<p>The row and column metadata are stored as a special <code>data.frame</code> implementation<label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> Like the <code>tibble</code>, that is an implememtation specific to the <code>tidyverse</code> packages.</span>, that has been developed in the Bioconductor project. It behaves like like a classical <code>data.frame</code>.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>What biological sample names in the <code>airway</code> dataset were treated with
-dexamethason? Which ones weren’t?</p>
+<p>What biological sample names in the <code>airway</code> dataset were treated with dexamethason? Which ones weren’t?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -600,21 +595,20 @@ dexamethason? Which ones weren’t?</p>
 ► Solution<span id="sol-start-9" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-9', 'sol-start-9')"></span>
 </p>
 <div id="sol-body-9" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="sec-obj.html#cb88-1"></a>dex_treated &lt;-<span class="st"> </span>airway<span class="op">$</span>dex <span class="op">==</span><span class="st"> "trt"</span></span>
-<span id="cb88-2"><a href="sec-obj.html#cb88-2"></a><span class="co">## shorthand for colData(airway)$dex == "trt"</span></span>
-<span id="cb88-3"><a href="sec-obj.html#cb88-3"></a><span class="co">## Treated samples</span></span>
-<span id="cb88-4"><a href="sec-obj.html#cb88-4"></a><span class="kw">colData</span>(airway)[dex_treated, <span class="st">"BioSample"</span>]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dex_treated &lt;-<span class="st"> </span>airway<span class="op">$</span>dex <span class="op">==</span><span class="st"> "trt"</span>
+## shorthand for colData(airway)$dex == "trt"
+## Treated samples
+<span class="kw">colData</span>(airway)[dex_treated, <span class="st">"BioSample"</span>]</code></pre></div>
 <pre><code>## [1] SAMN02422675 SAMN02422670 SAMN02422673 SAMN02422677
-## 8 Levels: SAMN02422669 SAMN02422670 SAMN02422673 ... SAMN02422683</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="sec-obj.html#cb90-1"></a><span class="co">## Control samples</span></span>
-<span id="cb90-2"><a href="sec-obj.html#cb90-2"></a><span class="kw">colData</span>(airway)[<span class="op">!</span>dex_treated, <span class="st">"BioSample"</span>]</span></code></pre></div>
+## 8 Levels: SAMN02422669 SAMN02422670 SAMN02422673 SAMN02422675 ... SAMN02422683</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Control samples
+<span class="kw">colData</span>(airway)[<span class="op">!</span>dex_treated, <span class="st">"BioSample"</span>]</code></pre></div>
 <pre><code>## [1] SAMN02422669 SAMN02422678 SAMN02422682 SAMN02422683
-## 8 Levels: SAMN02422669 SAMN02422670 SAMN02422673 ... SAMN02422683</code></pre>
-<p>It is also possible to use the <code>tidyverse</code> for this by first coercing
-the <code>DataFrame</code> to a <code>tibble</code>.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="sec-obj.html#cb92-1"></a><span class="kw">as_tibble</span>(<span class="kw">colData</span>(airway)) <span class="op">%&gt;%</span></span>
-<span id="cb92-2"><a href="sec-obj.html#cb92-2"></a><span class="st">    </span><span class="kw">filter</span>(dex <span class="op">==</span><span class="st"> "trt"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb92-3"><a href="sec-obj.html#cb92-3"></a><span class="st">    </span><span class="kw">select</span>(BioSample)</span></code></pre></div>
+## 8 Levels: SAMN02422669 SAMN02422670 SAMN02422673 SAMN02422675 ... SAMN02422683</code></pre>
+<p>It is also possible to use the <code>tidyverse</code> for this by first coercing the <code>DataFrame</code> to a <code>tibble</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(<span class="kw">colData</span>(airway)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(dex <span class="op">==</span><span class="st"> "trt"</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(BioSample)</code></pre></div>
 <pre><code>## # A tibble: 4 x 1
 ##   BioSample   
 ##   &lt;fct&gt;       
@@ -622,9 +616,9 @@ the <code>DataFrame</code> to a <code>tibble</code>.</p>
 ## 2 SAMN02422670
 ## 3 SAMN02422673
 ## 4 SAMN02422677</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="sec-obj.html#cb94-1"></a><span class="kw">as_tibble</span>(<span class="kw">colData</span>(airway)) <span class="op">%&gt;%</span></span>
-<span id="cb94-2"><a href="sec-obj.html#cb94-2"></a><span class="st">    </span><span class="kw">filter</span>(dex <span class="op">!=</span><span class="st"> "trt"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb94-3"><a href="sec-obj.html#cb94-3"></a><span class="st">    </span><span class="kw">select</span>(BioSample)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(<span class="kw">colData</span>(airway)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(dex <span class="op">!=</span><span class="st"> "trt"</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(BioSample)</code></pre></div>
 <pre><code>## # A tibble: 4 x 1
 ##   BioSample   
 ##   &lt;fct&gt;       
@@ -642,8 +636,7 @@ the <code>DataFrame</code> to a <code>tibble</code>.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>What are the dimensions of the assay data, and the row and column
-metadata? What can you way about these?</p>
+<p>What are the dimensions of the assay data, and the row and column metadata? What can you way about these?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -654,11 +647,11 @@ metadata? What can you way about these?</p>
 ► Solution<span id="sol-start-10" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-10', 'sol-start-10')"></span>
 </p>
 <div id="sol-body-10" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="sec-obj.html#cb96-1"></a><span class="kw">dim</span>(airway)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(airway)</code></pre></div>
 <pre><code>## [1] 64102     8</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="sec-obj.html#cb98-1"></a><span class="kw">dim</span>(<span class="kw">colData</span>(airway))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(<span class="kw">colData</span>(airway))</code></pre></div>
 <pre><code>## [1] 8 9</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="sec-obj.html#cb100-1"></a><span class="kw">dim</span>(<span class="kw">rowData</span>(airway))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(<span class="kw">rowData</span>(airway))</code></pre></div>
 <pre><code>## [1] 64102     0</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -669,14 +662,9 @@ metadata? What can you way about these?</p>
 <div id="subsetting-summarizedexperiment-objects" class="section level3">
 <h3>
 <span class="header-section-number">3.4.3</span> Subsetting <code>SummarizedExperiment</code> objects</h3>
-<p>As mentioned in the introduction, it is possible to redefine common
-functions to have a special behaviour with objects. This is the case
-for the <code>[</code> operator, that will automatically subset all parts of the
-object. Below, we create a new instance of class
-<code>SummarizedExperiment</code> that contains only the 5 first features for the
-3 first samples.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="sec-obj.html#cb102-1"></a>se &lt;-<span class="st"> </span>airway[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span>
-<span id="cb102-2"><a href="sec-obj.html#cb102-2"></a>se</span></code></pre></div>
+<p>As mentioned in the introduction, it is possible to redefine common functions to have a special behaviour with objects. This is the case for the <code>[</code> operator, that will automatically subset all parts of the object. Below, we create a new instance of class <code>SummarizedExperiment</code> that contains only the 5 first features for the 3 first samples.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">se &lt;-<span class="st"> </span>airway[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]
+se</code></pre></div>
 <pre><code>## class: RangedSummarizedExperiment 
 ## dim: 5 3 
 ## metadata(1): ''
@@ -691,23 +679,19 @@ object. Below, we create a new instance of class
 ► Question
 </p>
 <div class="question-body">
-<p>Verfiy that the assay data, the column and row metadata and the row
-ranges have been preserved.</p>
+<p>Verfiy that the assay data, the column and row metadata and the row ranges have been preserved.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
-<p>Subsetting can be performed with numberics (as shown above), but also
-with characters of logicals, just like with dataframes or matrices.</p>
+<p>Subsetting can be performed with numberics (as shown above), but also with characters of logicals, just like with dataframes or matrices.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Create a new object that contains the data for features (rows)
-<code>"ENSG00000166963"</code>, <code>"ENSG00000267970"</code> and <code>"ENSG00000254663"</code> and
-samples (columns) <code>"SRR1039517"</code> and <code>"SRR1039521"</code>.</p>
+<p>Create a new object that contains the data for features (rows) <code>"ENSG00000166963"</code>, <code>"ENSG00000267970"</code> and <code>"ENSG00000254663"</code> and samples (columns) <code>"SRR1039517"</code> and <code>"SRR1039521"</code>.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -718,8 +702,8 @@ samples (columns) <code>"SRR1039517"</code> and <code>"SRR1039521"</code>.</p>
 ► Solution<span id="sol-start-11" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-11', 'sol-start-11')"></span>
 </p>
 <div id="sol-body-11" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="sec-obj.html#cb104-1"></a>airway[<span class="kw">c</span>(<span class="st">"ENSG00000166963"</span>, <span class="st">"ENSG00000267970"</span>, <span class="st">"ENSG00000254663"</span>),</span>
-<span id="cb104-2"><a href="sec-obj.html#cb104-2"></a>       <span class="kw">c</span>(<span class="st">"SRR1039517"</span>, <span class="st">"SRR1039521"</span>)]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airway[<span class="kw">c</span>(<span class="st">"ENSG00000166963"</span>, <span class="st">"ENSG00000267970"</span>, <span class="st">"ENSG00000254663"</span>),
+       <span class="kw">c</span>(<span class="st">"SRR1039517"</span>, <span class="st">"SRR1039521"</span>)]</code></pre></div>
 <pre><code>## class: RangedSummarizedExperiment 
 ## dim: 3 2 
 ## metadata(1): ''
@@ -733,15 +717,9 @@ samples (columns) <code>"SRR1039517"</code> and <code>"SRR1039521"</code>.</p>
 </p>
 </div>
 </div>
-<p>The row ranges are defined as a list of genomic ranges (<code>GRanges</code>
-objects), one genomic range per row in the
-<code>SummarizedExperiment</code>. This <code>GRangesList</code> object behaves like a list,
-albeit a list that specifically contains <code>GRanges</code> objects.</p>
-<p>If we look at the first feature, corresponding to gene
-<code>ENSG00000000003</code>, we see that is is composed of 17 exons
-(<code>ENSE00001459322</code> to <code>ENSE00001828996</code>) and their detailed positions
-on chromosome X.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="sec-obj.html#cb106-1"></a><span class="kw">rowRanges</span>(airway)[[<span class="dv">1</span>]]</span></code></pre></div>
+<p>The row ranges are defined as a list of genomic ranges (<code>GRanges</code> objects), one genomic range per row in the <code>SummarizedExperiment</code>. This <code>GRangesList</code> object behaves like a list, albeit a list that specifically contains <code>GRanges</code> objects.</p>
+<p>If we look at the first feature, corresponding to gene <code>ENSG00000000003</code>, we see that is is composed of 17 exons (<code>ENSE00001459322</code> to <code>ENSE00001828996</code>) and their detailed positions on chromosome X.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowRanges</span>(airway)[[<span class="dv">1</span>]]</code></pre></div>
 <pre><code>## GRanges object with 17 ranges and 2 metadata columns:
 ##        seqnames            ranges strand |   exon_id       exon_name
 ##           &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;     &lt;character&gt;
@@ -758,24 +736,18 @@ on chromosome X.</p>
 ##   [17]        X 99894942-99894988      - |    667161 ENSE00001828996
 ##   -------
 ##   seqinfo: 722 sequences (1 circular) from an unspecified genome</code></pre>
-<p>The position of genes can also be used to subset a
-<code>SummarizedExperiment</code>. In the example below, we select all features
-that overlap with positions 100000 to 1100000 on chromosome 1. To do
-this we first create a new <code>GRanges</code> object that matches the region of
-interest:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="sec-obj.html#cb108-1"></a>roi &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="dt">seqnames=</span><span class="st">"1"</span>, <span class="dt">ranges=</span><span class="dv">100000</span><span class="op">:</span><span class="dv">1100000</span>)</span>
-<span id="cb108-2"><a href="sec-obj.html#cb108-2"></a>roi</span></code></pre></div>
+<p>The position of genes can also be used to subset a <code>SummarizedExperiment</code>. In the example below, we select all features that overlap with positions 100000 to 1100000 on chromosome 1. To do this we first create a new <code>GRanges</code> object that matches the region of interest:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">roi &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="dt">seqnames=</span><span class="st">"1"</span>, <span class="dt">ranges=</span><span class="dv">100000</span><span class="op">:</span><span class="dv">1100000</span>)
+roi</code></pre></div>
 <pre><code>## GRanges object with 1 range and 0 metadata columns:
 ##       seqnames         ranges strand
 ##          &lt;Rle&gt;      &lt;IRanges&gt;  &lt;Rle&gt;
 ##   [1]        1 100000-1100000      *
 ##   -------
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
-<p>We can now use <code>roi</code> to extract the feature of interest with the
-<code>subsetByOverlaps</code> function, which returns a new
-<code>SummarizedExperiment</code> object that contains 74 features.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="sec-obj.html#cb110-1"></a>se &lt;-<span class="st"> </span><span class="kw">subsetByOverlaps</span>(airway, roi)</span>
-<span id="cb110-2"><a href="sec-obj.html#cb110-2"></a>se</span></code></pre></div>
+<p>We can now use <code>roi</code> to extract the feature of interest with the <code>subsetByOverlaps</code> function, which returns a new <code>SummarizedExperiment</code> object that contains 74 features.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">se &lt;-<span class="st"> </span><span class="kw">subsetByOverlaps</span>(airway, roi)
+se</code></pre></div>
 <pre><code>## class: RangedSummarizedExperiment 
 ## dim: 74 8 
 ## metadata(1): ''
@@ -801,8 +773,8 @@ interest:</p>
 ► Solution<span id="sol-start-12" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-12', 'sol-start-12')"></span>
 </p>
 <div id="sol-body-12" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="sec-obj.html#cb112-1"></a>roi &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="dt">seqnames =</span> <span class="st">"X"</span>, <span class="dt">ranges =</span> <span class="fl">1e5</span><span class="op">:</span><span class="fl">1e6</span>)</span>
-<span id="cb112-2"><a href="sec-obj.html#cb112-2"></a><span class="kw">nrow</span>(<span class="kw">subsetByOverlaps</span>(airway, roi))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">roi &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="dt">seqnames =</span> <span class="st">"X"</span>, <span class="dt">ranges =</span> <span class="fl">1e5</span><span class="op">:</span><span class="fl">1e6</span>)
+<span class="kw">nrow</span>(<span class="kw">subsetByOverlaps</span>(airway, roi))</code></pre></div>
 <pre><code>## [1] 11</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -814,10 +786,7 @@ interest:</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Visit the Ensembl page and look up the Ensembl gene identifier
-(<code>ENSG00...</code>) of the BRCA1 gene. Verify if these match the information
-in the <code>airway</code> data. If not, why could this be? How many exons are
-there in the <code>airway</code> data for this gene?</p>
+<p>Visit the Ensembl page and look up the Ensembl gene identifier (<code>ENSG00...</code>) of the BRCA1 gene. Verify if these match the information in the <code>airway</code> data. If not, why could this be? How many exons are there in the <code>airway</code> data for this gene?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -828,10 +797,10 @@ there in the <code>airway</code> data for this gene?</p>
 ► Solution<span id="sol-start-13" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-13', 'sol-start-13')"></span>
 </p>
 <div id="sol-body-13" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="sec-obj.html#cb114-1"></a>gr &lt;-<span class="st"> </span><span class="kw">rowRanges</span>(airway[<span class="st">"ENSG00000012048"</span>, ])</span>
-<span id="cb114-2"><a href="sec-obj.html#cb114-2"></a>gr</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gr &lt;-<span class="st"> </span><span class="kw">rowRanges</span>(airway[<span class="st">"ENSG00000012048"</span>, ])
+gr</code></pre></div>
 <pre><code>## GRangesList object of length 1:
-## $ENSG00000012048
+## $ENSG00000012048 
 ## GRanges object with 99 ranges and 2 metadata columns:
 ##        seqnames            ranges strand |   exon_id       exon_name
 ##           &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;     &lt;character&gt;
@@ -846,9 +815,10 @@ there in the <code>airway</code> data for this gene?</p>
 ##   [97]       17 41277294-41277419      - |    550986 ENSE00001869098
 ##   [98]       17 41277294-41277467      - |    550987 ENSE00001954850
 ##   [99]       17 41277294-41277468      - |    550988 ENSE00001601762
-##   -------
-##   seqinfo: 722 sequences (1 circular) from an unspecified genome</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="sec-obj.html#cb116-1"></a><span class="kw">length</span>(gr[[<span class="dv">1</span>]])</span></code></pre></div>
+## 
+## -------
+## seqinfo: 722 sequences (1 circular) from an unspecified genome</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(gr[[<span class="dv">1</span>]])</code></pre></div>
 <pre><code>## [1] 99</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -860,34 +830,23 @@ there in the <code>airway</code> data for this gene?</p>
 <h3>
 <span class="header-section-number">3.4.4</span> Constructing a <code>SummarizedExperiment</code>
 </h3>
-<p>Complex object such as <code>SummarizedExperiment</code> are generally
-constructed by functions (called <strong>constructors</strong>) from files. It is
-possible to construct a <code>SummarizedExperiment</code> by hand. To do so, we
-first need to construct the different parts of the object.</p>
-<p>Let’s create an expression matrix for 200 genes and 6 samples by
-randomly sample values between 1 and 10000.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="sec-obj.html#cb118-1"></a>nrows &lt;-<span class="st"> </span><span class="dv">200</span></span>
-<span id="cb118-2"><a href="sec-obj.html#cb118-2"></a>ncols &lt;-<span class="st"> </span><span class="dv">6</span></span>
-<span id="cb118-3"><a href="sec-obj.html#cb118-3"></a>counts &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(nrows <span class="op">*</span><span class="st"> </span>ncols, <span class="dv">1</span>, <span class="fl">1e4</span>), nrows)</span></code></pre></div>
-<p>Below, we create a the <code>colData</code> part using the appropriate
-constructor for the class of data needed:</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="sec-obj.html#cb119-1"></a>cd &lt;-<span class="st"> </span><span class="kw">DataFrame</span>(<span class="dt">Treatment=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">"ChIP"</span>, <span class="st">"Input"</span>), <span class="dv">3</span>),</span>
-<span id="cb119-2"><a href="sec-obj.html#cb119-2"></a>                <span class="dt">row.names=</span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>])</span></code></pre></div>
-<p>Let’s also create some ranges. Here, we will have one range per
-features, as opposed to the <code>airway</code> data, that has multiple ranges
-(exons) per feature (gene). The ranges below to chromosomes 1 and 2
-(50 and 150 respectively), with ranges (constructure with the
-<code>IRanges</code> constructor) starting between 1e5 and 1e6 with width 100,
-and strand chosing randomly as the positive or negative strand.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="sec-obj.html#cb120-1"></a>rng &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>), <span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">150</span>)),</span>
-<span id="cb120-2"><a href="sec-obj.html#cb120-2"></a>               <span class="kw">IRanges</span>(<span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">200</span>, <span class="fl">1e5</span>, <span class="fl">1e6</span>)), <span class="dt">width =</span> <span class="dv">100</span>),</span>
-<span id="cb120-3"><a href="sec-obj.html#cb120-3"></a>               <span class="dt">strand =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">"+"</span>, <span class="st">"-"</span>), <span class="dv">200</span>, <span class="ot">TRUE</span>))</span></code></pre></div>
-<p>We can now put the different parts together using the
-<code>SummarizedExperiment</code> constructor:</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="sec-obj.html#cb121-1"></a>se &lt;-<span class="st"> </span><span class="kw">SummarizedExperiment</span>(<span class="dt">assays =</span> <span class="kw">list</span>(<span class="dt">counts =</span> counts),</span>
-<span id="cb121-2"><a href="sec-obj.html#cb121-2"></a>                           <span class="dt">colData =</span> cd,</span>
-<span id="cb121-3"><a href="sec-obj.html#cb121-3"></a>                           <span class="dt">rowRanges =</span> rng)</span>
-<span id="cb121-4"><a href="sec-obj.html#cb121-4"></a>se</span></code></pre></div>
+<p>Complex object such as <code>SummarizedExperiment</code> are generally constructed by functions (called <strong>constructors</strong>) from files. It is possible to construct a <code>SummarizedExperiment</code> by hand. To do so, we first need to construct the different parts of the object.</p>
+<p>Let’s create an expression matrix for 200 genes and 6 samples by randomly sample values between 1 and 10000.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nrows &lt;-<span class="st"> </span><span class="dv">200</span>
+ncols &lt;-<span class="st"> </span><span class="dv">6</span>
+counts &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(nrows <span class="op">*</span><span class="st"> </span>ncols, <span class="dv">1</span>, <span class="fl">1e4</span>), nrows)</code></pre></div>
+<p>Below, we create a the <code>colData</code> part using the appropriate constructor for the class of data needed:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cd &lt;-<span class="st"> </span><span class="kw">DataFrame</span>(<span class="dt">Treatment=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">"ChIP"</span>, <span class="st">"Input"</span>), <span class="dv">3</span>),
+                <span class="dt">row.names=</span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>])</code></pre></div>
+<p>Let’s also create some ranges. Here, we will have one range per features, as opposed to the <code>airway</code> data, that has multiple ranges (exons) per feature (gene). The ranges below to chromosomes 1 and 2 (50 and 150 respectively), with ranges (constructure with the <code>IRanges</code> constructor) starting between 1e5 and 1e6 with width 100, and strand chosing randomly as the positive or negative strand.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rng &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>), <span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">150</span>)),
+               <span class="kw">IRanges</span>(<span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">200</span>, <span class="fl">1e5</span>, <span class="fl">1e6</span>)), <span class="dt">width =</span> <span class="dv">100</span>),
+               <span class="dt">strand =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">"+"</span>, <span class="st">"-"</span>), <span class="dv">200</span>, <span class="ot">TRUE</span>))</code></pre></div>
+<p>We can now put the different parts together using the <code>SummarizedExperiment</code> constructor:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">se &lt;-<span class="st"> </span><span class="kw">SummarizedExperiment</span>(<span class="dt">assays =</span> <span class="kw">list</span>(<span class="dt">counts =</span> counts),
+                           <span class="dt">colData =</span> cd,
+                           <span class="dt">rowRanges =</span> rng)
+se</code></pre></div>
 <pre><code>## class: RangedSummarizedExperiment 
 ## dim: 200 6 
 ## metadata(0):
@@ -897,8 +856,8 @@ and strand chosing randomly as the positive or negative strand.</p>
 ## colnames(6): A B ... E F
 ## colData names(1): Treatment</code></pre>
 <p>We can also create a <code>rowData</code> object and add it to our <code>se</code> object:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="sec-obj.html#cb123-1"></a><span class="kw">rowData</span>(se) &lt;-<span class="st"> </span><span class="kw">DataFrame</span>(<span class="dt">some_value =</span> <span class="kw">sample</span>(<span class="dv">200</span>))</span>
-<span id="cb123-2"><a href="sec-obj.html#cb123-2"></a>se</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowData</span>(se) &lt;-<span class="st"> </span><span class="kw">DataFrame</span>(<span class="dt">some_value =</span> <span class="kw">sample</span>(<span class="dv">200</span>))
+se</code></pre></div>
 <pre><code>## class: RangedSummarizedExperiment 
 ## dim: 200 6 
 ## metadata(0):
@@ -917,9 +876,7 @@ and strand chosing randomly as the positive or negative strand.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Using the function <code>kem2.tsv</code> from the <code>rWSBIM1207</code> package, import
-the <em>count</em> and <em>annotation</em> data into R and use them to create an object
-of class <code>SummarizedExperiment</code>.</p>
+<p>Using the function <code>kem2.tsv</code> from the <code>rWSBIM1207</code> package, import the <em>count</em> and <em>annotation</em> data into R and use them to create an object of class <code>SummarizedExperiment</code>.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -934,7 +891,7 @@ of class <code>SummarizedExperiment</code>.</p>
 <a href="sec-biostrings.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-21
+2019-11-23
 </p>
 </div>
 </div>

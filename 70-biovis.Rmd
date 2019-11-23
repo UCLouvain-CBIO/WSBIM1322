@@ -9,56 +9,11 @@ that are widely used in biomedical data analysis, namely
   plots.
 - The `r BiocStyle::Biocpkg("Gviz")` to visualise genomic data.
 
+
 ## Heatmaps
 
 
-## Effect of distance and clustering algorithm
-
-It is important to highlight that the type of distance and the type of
-clustering algorithms will affect the result. Let's observe how using
-the euclidean or Pearson correlation distances between expression
-profiles can fundamentally change the results.
-
-```{r disttoyexample}
-## toy example: 3 genes, 5 samples from Olga Vitek
-gene1 <- c(1, 6, 2, 4, 7)
-gene2 <- gene1 + 4
-gene3 <- gene2/3 + c(0, 2, 0, 4, 0)
-e <- rbind(gene1, gene2, gene3)
-dimnames(e) <- list(paste0("gene", 1:3),
-					paste0("sample", 1:5))
-e
-matplot(t(e), type = "b", xlab = "Samples", ylab = "Expression")
-```
-
-```{r hclbiodist}
-library("bioDist")
-par(mfrow = c(1, 2))
-plot(hclust(euc(e)), main = "Euclidean distane")
-plot(hclust(cor.dist(e)), main = "Pearson correlational distance")
-```
-
-
-Many of the machine learning methods that are regularly used are
-sensitive to difference scales. This applies to unsupervised methods
-as well as supervised methods. Below, we show how centering and
-scaling the data (row-wise, hence the transposition) affects the
-euclidean distance but not the Pearson correlation distance.
-
-```{r hclscale, fig.with = 10, fig.height = 7}
-e2 <- t(scale(t(e)))
-## or manually
-## e2 <- (e - rowMeans(e)) / genefilter::rowSds(e)
-matplot(t(e2), type = "b", xlab = "Samples", ylab = "Expression")
-par(mfrow = c(2, 2))
-plot(hclust(euc(e)), main = "Euclidean distance")
-plot(hclust(euc(e2)), main = "Euclidean distance (scaled/centred)")
-plot(hclust(cor.dist(e)), main = "Pearson correlational distance")
-plot(hclust(cor.dist(e2)), main = "Pearson correlational distance (scaled/centred)")
-```
-## Heatmaps
-
-```{r heatmap_mulvey, cache = TRUE}
+```{r heatmapmulvey, cache = TRUE, fig.cap = "Heatmap of the (normalised) Mulvey et al. 2015 proteomic data."}
 data(mulvey2015norm)
 heatmap(MSnbase::exprs(mulvey2015norm))
 ```
@@ -71,23 +26,39 @@ subject to parameters and options.
 As we have seen above, the distance used for clustering can have a
 substantial effect on the results, which is conformed below.
 
-```{r heatmapcor, cache = TRUE}
+
+```{r heatmapcor, cache = TRUE, fig.cap = "Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances."}
 heatmap(MSnbase::exprs(mulvey2015norm), distfun = cor.dist)
 ```
+
 
 Another important argument, `scale` controls whether rows, columns or
 none are scaled. Let's re-use the toy data from the hierarchical
 clustering section below.
 
-```{r heatmapscale}
-heatmap(e, scale = "none", main = "No scaling")
-heatmap(e, scale = "row", main = "Scaling along rows")
-heatmap(e, scale = "column", main = "Scaling along columns")
+
+
+```{r heatmapscale1, fig.cap = "Effect of scaling on the heatmap output: no scaling."}
+library("rWSBIM1322")
+data(g3)
+heatmap(g3, scale = "none", main = "No scaling")
+```
+
+```{r heatmapscale2, fig.cap = "Effect of scaling on the heatmap output: scaling along the rows."}
+library("rWSBIM1322")
+data(g3)
+heatmap(g3, scale = "row", main = "Scaling along rows")
+```
+
+```{r heatmapscale3, fig.cap = "Effect of scaling on the heatmap output: scaling along the columns."}
+library("rWSBIM1322")
+data(g3)
+heatmap(g3, scale = "column", main = "Scaling along columns")
 ```
 
 Based on the caveats above, it is essential to present and interpret
-heatmaps with great care. It is of course possible to use any type of
-data, not only expression data, to build a heatmap.
+heatmaps with great care. 
+
 
 There exists several packages that allow to produce heatmaps with
 various levels of sophistication, such as `heatmap.2` from the `r
@@ -96,24 +67,28 @@ the `r Biocpkg("ComplexHeatmap")` packages (full documentation
 [here](https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html)),
 demonstrated below.
 
-```{r complexheatmap}
+
+```{r complexheatmap, fig.fullwidth = TRUE, message = FALSE, fig.cap = "An annotated heatmap produced with the `ComplexHeatmap` Bioconductor package."}
 library("ComplexHeatmap")
 x <- MSnbase::exprs(mulvey2015norm)
 hcl <- hclust(dist(x))
 cl <- cutree(hcl, k = 12)
-ha1 <- HeatmapAnnotation(time = factor(mulvey2015norm$time))
+ha1 <- HeatmapAnnotation(time = mulvey2015norm$time)
 ha2 <- HeatmapAnnotation(boxplot = anno_boxplot(x))
 ha3 <- rowAnnotation(cluster = factor(cl))
 Heatmap(x,
-		top_annotation = ha1,
-		bottom_annotation = ha2,
-		column_names_gp = gpar(fontsize = 8),
-		row_names_gp = gpar(fontsize = 3)) + ha3
+        top_annotation = ha1,
+        bottom_annotation = ha2,
+        column_names_gp = gpar(fontsize = 8),
+        row_names_gp = gpar(fontsize = 3)) +
+    ha3
 ```
+
 
 Finally, the `r Githubpkg("talgalili/heatmaply")`,
 `r Githubpkg("rstudio/d3heatmap")` and [`iheatmapr`](https://ropensci.github.io/iheatmapr/index.html)
 packages can be used to generate interactive heatmaps.
+
 
 ```{r heatmaply, eval = FALSE}
 library("heatmaply")
@@ -130,15 +105,9 @@ library("d3heatmap")
 d3heatmap(MSnbase::exprs(hlm))
 ```
 
-Reference:
-
-> Key M. *A tutorial in displaying mass spectrometry-based proteomic
-> data using heat maps*. BMC Bioinformatics. 2012;13 Suppl
-> 16:S10. doi:
-> [10.1186/1471-2105-13-S16-S10](https://doi.org/10.1186/1471-2105-13-S16-S10). Epub
-> 2012 Nov 5. Review. PMID: 23176119; PMCID: PMC3489527.
-
-
+See also *A tutorial in displaying mass spectrometry-based proteomic
+data using heat maps* [@Key:2012], that applies to any type of omics
+data (not only proteomics) for a useful reference.
 
 
 ## Visualising intersections between sets
@@ -240,4 +209,4 @@ upset(x)
 `r msmbstyle::solution_end()`
 
 
-## Data along genomic corrdinates
+## Data along genomic coordinates

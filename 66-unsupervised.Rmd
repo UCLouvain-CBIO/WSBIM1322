@@ -75,15 +75,21 @@ the sum of each the elements of vectors:
 
 $$ \sum{ \frac{ | x_{i} - y_{i} | }{ | x_{i} | + | y_{i} | } } $$
 
-<!-- TODO: Correlation based distance: -->
 
-These are some of the distances available in the `dist` function. See
-also section 5.3 from [@MSMB] for additional details.
+**Correlation based distance** uses the Pearson correlation (see the
+`cor` function and chapter \ref(sec:mlintro)) or its absolute value
+and transform it in into a distance metric:
+
+$$ d(A, B) = 1 - cor(A, B) $$
+
+These are some of the distances available in the `dist` function, or
+in the `bioDist` package. See also section 5.3 from [@MSMB] for
+additional details.
 
 `r msmbstyle::question_begin()`
 
 Generate the 5 data points along 2 dimensions as illustrated below and
-calculate all their euclidean pairwise distance using `dist`. Interprete the
+calculate all their Euclidean pairwise distance using `dist`. Interprete the
 output of the function. What class if it?
 
 ```{r, fig.cap = "A simulated dataset composed of 5 samples."}
@@ -127,7 +133,6 @@ which.min(d6) ## closest
 which.max(d6) ## furthers
 ```
 `r msmbstyle::solution_end()`
-
 
 ## k-means clustering
 
@@ -529,6 +534,68 @@ plot(hcl2, main = "scaled data")
 
 
 ## Additional exercises
+
+`r msmbstyle::question_begin()`
+- Load the small `g3` data set that provides expression profiles of
+  genes 1 to 3 in samples 1 to 5 and visualise these.
+  
+- Compute and compare the distances between the genes using the
+  Euclidean and correlation distances (these can be calculated, for
+  example, with the `euc` and `cor.dist` from the `bioDist`
+  package). Interpret these distances based on the visualisation
+  above.
+
+- Compare the effect of scaling on these distances. Visualise the
+  scaled and unscaled profiles to help interpret the distances.
+  
+`r msmbstyle::question_end()`
+
+```{r disttoyexample, include = FALSE, fig.cap = "Expression profiles of genes 1 to 3 in samples 1 to 5."}
+library("rWSBIM1322")
+data(g3)
+matplot(t(g3), type = "b", xlab = "Samples", ylab = "Gene expression")
+```
+
+```{r disttoy2, include = FALSE}
+library("bioDist")
+ds <- rbind(euc = euc(g3), 
+            cor = cor.dist(g3))
+colnames(ds) <- c("1-2", "1-3", "2-3")
+ds
+```
+
+```{r disttoy3, include = FALSE, fig.cap = "Expression profiles without (left) and with (right) scaling."}
+g3_scaled <- scale(g3) ## scale
+ds <- rbind(euc = euc(g3), 
+            euc_scaled = euc(g3_scaled),
+            cor = cor.dist(g3),
+            cor_scaled = cor.dist(g3_scaled))
+colnames(ds) <- c("1-2", "1-3", "2-3")
+ds
+par(mfrow = c(1, 2))
+matplot(t(g3), type = "b", xlab = "Samples", ylab = "Gene expression")
+matplot(t(g3_scaled), type = "b", xlab = "Samples", ylab = "Gene expression")
+
+```
+
+`r msmbstyle::question_begin()`
+
+Following up the exercise above, produce and interpret the four
+hierarchical clusterings, build using Euclidean and correlation
+distances (these can be calculated, for example, with the `euc` and
+`cor.dist` from the `bioDist` package).
+
+`r msmbstyle::question_end()`
+
+
+```{r hclscale, include = FALSE, fig.cap = ""}
+par(mfrow = c(2, 2))
+plot(hclust(euc(g3)), main = "Euclidean distance")
+plot(hclust(euc(g3_scaled)), main = "Euclidean distance (scaled/centred)")
+plot(hclust(cor.dist(g3)), main = "Pearson correlational distance")
+plot(hclust(cor.dist(g3_scaled)), main = "Pearson correlational distance (scaled/centred)")
+```
+
 
 `r msmbstyle::question_begin()`
 An important caveat of clustering is that a clustering algorithm such
