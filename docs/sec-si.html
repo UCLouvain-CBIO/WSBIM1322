@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
@@ -52,41 +52,68 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -135,130 +162,154 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>
 <span class="header-section-number">Chapter 13</span> Session information</h1>
 <p>The following packages have been used to generate this document.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
-<pre><code>## R version 3.6.1 Patched (2019-11-10 r77398)
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="sec-si.html#cb411-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
+<pre><code>## R version 3.6.1 Patched (2019-09-14 r77192)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 18.04.3 LTS
+## Running under: Manjaro Linux
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/libf77blas.so.3.10.3
-## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+## BLAS:   /usr/lib/libblas.so.3.8.0
+## LAPACK: /usr/lib/liblapack.so.3.8.0
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=fr_FR.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=fr_FR.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=fr_FR.UTF-8       LC_NAME=C                 
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=fr_FR.UTF-8 LC_IDENTIFICATION=C       
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
 ##  [1] grid      parallel  stats4    stats     graphics  grDevices utils    
 ##  [8] datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] UpSetR_1.4.0                          Vennerable_3.1.0.9000                
-##  [3] ComplexHeatmap_2.0.0                  pRoloc_1.24.1                        
-##  [5] MLInterfaces_1.64.1                   cluster_2.1.0                        
-##  [7] annotate_1.62.0                       XML_3.98-1.20                        
-##  [9] AnnotationDbi_1.46.1                  bioDist_1.56.0                       
-## [11] KernSmooth_2.23-16                    factoextra_1.0.5                     
-## [13] pRolocdata_1.22.0                     MSnbase_2.10.1                       
-## [15] ProtGenerics_1.16.0                   mzR_2.18.1                           
-## [17] Rcpp_1.0.3                            BSgenome.Dmelanogaster.UCSC.dm2_1.4.0
-## [19] BSgenome_1.52.0                       rtracklayer_1.44.4                   
-## [21] Biostrings_2.52.0                     XVector_0.24.0                       
-## [23] rWSBIM1207_0.1.9                      airway_1.4.0                         
-## [25] SummarizedExperiment_1.14.1           DelayedArray_0.10.0                  
-## [27] BiocParallel_1.18.1                   matrixStats_0.55.0                   
-## [29] Biobase_2.44.0                        GenomicRanges_1.36.1                 
-## [31] GenomeInfoDb_1.20.0                   IRanges_2.18.3                       
-## [33] S4Vectors_0.22.1                      BiocGenerics_0.30.0                  
-## [35] BiocStyle_2.12.0                      patchwork_0.0.1                      
-## [37] ggbeeswarm_0.6.0                      plotly_4.9.1                         
-## [39] Hmisc_4.3-0                           Formula_1.2-3                        
-## [41] survival_3.1-7                        lattice_0.20-38                      
-## [43] forcats_0.4.0                         stringr_1.4.0                        
-## [45] dplyr_0.8.3                           purrr_0.3.3                          
-## [47] readr_1.3.1                           tidyr_1.0.0                          
-## [49] tibble_2.1.3                          ggplot2_3.2.1                        
-## [51] tidyverse_1.2.1                       rWSBIM1322_0.1.12                    
+##  [1] UpSetR_1.4.0                         
+##  [2] Vennerable_3.1.0.9000                
+##  [3] ComplexHeatmap_2.2.0                 
+##  [4] pRoloc_1.26.0                        
+##  [5] MLInterfaces_1.66.0                  
+##  [6] cluster_2.1.0                        
+##  [7] annotate_1.64.0                      
+##  [8] XML_3.98-1.20                        
+##  [9] AnnotationDbi_1.48.0                 
+## [10] bioDist_1.58.0                       
+## [11] KernSmooth_2.23-15                   
+## [12] factoextra_1.0.5                     
+## [13] pRolocdata_1.24.0                    
+## [14] MSnbase_2.12.0                       
+## [15] ProtGenerics_1.18.0                  
+## [16] mzR_2.20.0                           
+## [17] Rcpp_1.0.3                           
+## [18] BSgenome.Dmelanogaster.UCSC.dm2_1.4.0
+## [19] BSgenome_1.54.0                      
+## [20] rtracklayer_1.46.0                   
+## [21] Biostrings_2.54.0                    
+## [22] XVector_0.26.0                       
+## [23] rWSBIM1207_0.1.9                     
+## [24] airway_1.6.0                         
+## [25] SummarizedExperiment_1.16.0          
+## [26] DelayedArray_0.12.0                  
+## [27] BiocParallel_1.20.0                  
+## [28] matrixStats_0.55.0                   
+## [29] Biobase_2.46.0                       
+## [30] GenomicRanges_1.38.0                 
+## [31] GenomeInfoDb_1.22.0                  
+## [32] IRanges_2.20.0                       
+## [33] S4Vectors_0.24.0                     
+## [34] BiocGenerics_0.32.0                  
+## [35] BiocStyle_2.14.0                     
+## [36] patchwork_0.0.1                      
+## [37] ggbeeswarm_0.6.0                     
+## [38] plotly_4.9.1                         
+## [39] Hmisc_4.3-0                          
+## [40] Formula_1.2-3                        
+## [41] survival_2.44-1.1                    
+## [42] lattice_0.20-38                      
+## [43] forcats_0.4.0                        
+## [44] stringr_1.4.0                        
+## [45] dplyr_0.8.3                          
+## [46] purrr_0.3.3                          
+## [47] readr_1.3.1                          
+## [48] tidyr_1.0.0                          
+## [49] tibble_2.1.3                         
+## [50] ggplot2_3.2.1                        
+## [51] tidyverse_1.2.1                      
+## [52] rWSBIM1322_0.1.13                    
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] ModelMetrics_1.2.2       prabclus_2.3-1           coda_0.19-3             
-##   [4] acepack_1.4.1            bit64_0.9-7              knitr_1.26              
-##   [7] data.table_1.12.6        rpart_4.1-15             hwriter_1.3.2           
-##  [10] RCurl_1.95-4.12          doParallel_1.0.15        generics_0.0.2          
-##  [13] preprocessCore_1.46.0    RSQLite_2.1.2            proxy_0.4-23            
-##  [16] bit_1.1-14               xml2_1.2.2               lubridate_1.7.4         
-##  [19] httpuv_1.5.2             assertthat_0.2.1         viridis_0.5.1           
-##  [22] gower_0.2.1              xfun_0.11                hms_0.5.2               
-##  [25] evaluate_0.14            promises_1.1.0           DEoptimR_1.0-8          
-##  [28] fansi_0.4.0              progress_1.2.2           dendextend_1.12.0       
-##  [31] readxl_1.3.1             igraph_1.2.4.1           DBI_1.0.0               
-##  [34] htmlwidgets_1.5.1        ellipsis_0.3.0           crosstalk_1.0.0         
-##  [37] rda_1.0.2-2.1            ggpubr_0.2.3             backports_1.1.5         
-##  [40] bookdown_0.15            biomaRt_2.40.5           vctrs_0.2.0             
-##  [43] caret_6.0-84             withr_2.1.2              sfsmisc_1.1-4           
-##  [46] msmbstyle_0.0.11         robustbase_0.93-5        checkmate_1.9.4         
-##  [49] GenomicAlignments_1.20.1 prettyunits_1.0.2        mclust_5.4.5            
-##  [52] segmented_1.0-0          lazyeval_0.2.2           crayon_1.3.4            
-##  [55] genefilter_1.66.0        recipes_0.1.7            pkgconfig_2.0.3         
-##  [58] labeling_0.3             nlme_3.1-142             vipor_0.4.5             
-##  [61] nnet_7.3-12              rlang_0.4.1              diptest_0.75-7          
-##  [64] lifecycle_0.1.0          pls_2.7-2                LaplacesDemon_16.1.1    
-##  [67] affyio_1.54.0            modelr_0.1.5             randomForest_4.6-14     
-##  [70] cellranger_1.1.0         graph_1.62.0             Matrix_1.2-17           
-##  [73] base64enc_0.1-3          beeswarm_0.2.3           GlobalOptions_0.1.1     
-##  [76] rjson_0.2.20             png_0.1-7                viridisLite_0.3.0       
-##  [79] bitops_1.0-6             blob_1.2.0               shape_1.4.4             
-##  [82] ggvis_0.4.5              ggsignif_0.6.0           lpSolve_5.6.13.3        
-##  [85] scales_1.0.0             memoise_1.1.0            magrittr_1.5            
-##  [88] plyr_1.8.4               hexbin_1.28.0            gdata_2.18.0            
-##  [91] zlibbioc_1.30.0          threejs_0.3.1            compiler_3.6.1          
-##  [94] RColorBrewer_1.1-2       clue_0.3-57              pcaMethods_1.76.0       
-##  [97] Rsamtools_2.0.3          cli_1.1.0                affy_1.62.0             
-## [100] htmlTable_1.13.2         MASS_7.3-51.4            tidyselect_0.2.5        
-## [103] vsn_3.52.0               stringi_1.4.3            highr_0.8               
-## [106] yaml_2.2.0               latticeExtra_0.6-28      MALDIquant_1.19.3       
-## [109] ggrepel_0.8.1            tools_3.6.1              circlize_0.4.8          
-## [112] rstudioapi_0.10          foreach_1.4.7            foreign_0.8-71          
-## [115] gridExtra_2.3            prodlim_2019.10.13       mzID_1.22.0             
-## [118] digest_0.6.22            BiocManager_1.30.9       lava_1.6.6              
-## [121] FNN_1.1.3                shiny_1.4.0              fpc_2.2-3               
-## [124] broom_0.5.2              later_1.0.0              ncdf4_1.17              
-## [127] httr_1.4.1               kernlab_0.9-29           colorspace_1.4-1        
-## [130] rvest_0.3.5              splines_3.6.1            RBGL_1.60.0             
-## [133] flexmix_2.3-15           xtable_1.8-4             jsonlite_1.6            
-## [136] mlbench_2.1-1            timeDate_3043.102        zeallot_0.1.0           
-## [139] ipred_0.9-9              modeltools_0.2-22        R6_2.4.1                
-## [142] pillar_1.4.2             htmltools_0.4.0          mime_0.7                
-## [145] glue_1.3.1               fastmap_1.0.1            class_7.3-15            
-## [148] codetools_0.2-16         mvtnorm_1.0-11           utf8_1.1.4              
-## [151] mixtools_1.1.0           gbm_2.1.5                gtools_3.8.1            
-## [154] limma_3.40.6             sampling_2.8             rmarkdown_1.17          
-## [157] munsell_0.5.0            GetoptLong_0.1.7         e1071_1.7-2             
-## [160] GenomeInfoDbData_1.2.1   iterators_1.0.12         impute_1.58.0           
-## [163] haven_2.2.0              reshape2_1.4.3           gtable_0.3.0</code></pre>
+##   [1] rappdirs_0.3.1           ModelMetrics_1.2.2      
+##   [3] prabclus_2.3-1           coda_0.19-3             
+##   [5] acepack_1.4.1            bit64_0.9-7             
+##   [7] knitr_1.25               data.table_1.12.6       
+##   [9] rpart_4.1-15             hwriter_1.3.2           
+##  [11] RCurl_1.95-4.12          doParallel_1.0.15       
+##  [13] generics_0.0.2           preprocessCore_1.48.0   
+##  [15] RSQLite_2.1.2            proxy_0.4-23            
+##  [17] bit_1.1-14               xml2_1.2.2              
+##  [19] lubridate_1.7.4          httpuv_1.5.2            
+##  [21] assertthat_0.2.1         viridis_0.5.1           
+##  [23] gower_0.2.1              xfun_0.10               
+##  [25] hms_0.5.2                evaluate_0.14           
+##  [27] promises_1.1.0           DEoptimR_1.0-8          
+##  [29] fansi_0.4.0              progress_1.2.2          
+##  [31] dbplyr_1.4.2             dendextend_1.12.0       
+##  [33] readxl_1.3.1             igraph_1.2.4.1          
+##  [35] DBI_1.0.0                htmlwidgets_1.5.1       
+##  [37] ellipsis_0.3.0           crosstalk_1.0.0         
+##  [39] rda_1.0.2-2.1            ggpubr_0.2.3            
+##  [41] backports_1.1.5          bookdown_0.14           
+##  [43] biomaRt_2.42.0           vctrs_0.2.0             
+##  [45] caret_6.0-84             withr_2.1.2             
+##  [47] sfsmisc_1.1-4            msmbstyle_0.0.11        
+##  [49] robustbase_0.93-5        checkmate_1.9.4         
+##  [51] GenomicAlignments_1.22.0 prettyunits_1.0.2       
+##  [53] mclust_5.4.5             segmented_1.0-0         
+##  [55] lazyeval_0.2.2           crayon_1.3.4            
+##  [57] genefilter_1.68.0        recipes_0.1.7           
+##  [59] pkgconfig_2.0.3          labeling_0.3            
+##  [61] nlme_3.1-140             vipor_0.4.5             
+##  [63] nnet_7.3-12              rlang_0.4.1             
+##  [65] diptest_0.75-7           lifecycle_0.1.0         
+##  [67] pls_2.7-2                LaplacesDemon_16.1.1    
+##  [69] affyio_1.56.0            BiocFileCache_1.10.2    
+##  [71] modelr_0.1.5             randomForest_4.6-14     
+##  [73] cellranger_1.1.0         graph_1.64.0            
+##  [75] Matrix_1.2-17            base64enc_0.1-3         
+##  [77] beeswarm_0.2.3           GlobalOptions_0.1.1     
+##  [79] rjson_0.2.20             png_0.1-7               
+##  [81] viridisLite_0.3.0        bitops_1.0-6            
+##  [83] blob_1.2.0               shape_1.4.4             
+##  [85] ggvis_0.4.5              ggsignif_0.6.0          
+##  [87] lpSolve_5.6.13.3         scales_1.0.0            
+##  [89] memoise_1.1.0            magrittr_1.5            
+##  [91] plyr_1.8.4               hexbin_1.28.0           
+##  [93] gdata_2.18.0             zlibbioc_1.32.0         
+##  [95] threejs_0.3.1            compiler_3.6.1          
+##  [97] RColorBrewer_1.1-2       clue_0.3-57             
+##  [99] pcaMethods_1.78.0        Rsamtools_2.2.1         
+##  [ reached getOption("max.print") -- omitted 71 entries ]</code></pre>
 <div id="sec:setup2" class="section level2">
 <h2>
 <span class="header-section-number">13.1</span> R package setup</h2>
-<p>To install all necessary packages to run all the code, please execute the following code:</p>
-<pre><code>pkgs &lt;- c("airway", "annotate", "AnnotationDbi", "base", "Biobase",
-          "BiocGenerics", "BiocParallel", "BiocStyle", "bioDist", "Biostrings",
-          "BSgenome.Dmelanogaster.UCSC.dm2", "BSgenome", "cluster",
-          "ComplexHeatmap", "datasets", "DelayedArray", "dplyr", "factoextra",
-          "forcats", "Formula", "GenomeInfoDb", "GenomicRanges", "ggbeeswarm",
-          "ggplot2", "graphics", "grDevices", "grid", "Hmisc", "IRanges",
-          "KernSmooth", "lattice", "matrixStats", "methods", "MLInterfaces",
-          "MSnbase", "mzR", "parallel", "patchwork", "plotly", "pRoloc",
-          "pRolocdata", "ProtGenerics", "purrr", "Rcpp", "readr", "rtracklayer",
-          "rWSBIM1207", "rWSBIM1322", "S4Vectors", "stats", "stats4", "stringr",
-          "SummarizedExperiment", "survival", "tibble", "tidyr", "tidyverse",
-          "UpSetR", "utils", "Vennerable", "XML", "XVector")</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"BiocManager"</span>))
-   <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)
-BiocManager<span class="op">::</span><span class="kw">install</span>(pkgs)</code></pre></div>
+<p>To install all necessary packages to run all the code, please execute
+the following code:</p>
+<pre><code>pkgs &lt;- c("airway", "annotate", "AnnotationDbi", "base",
+          "Biobase", "BiocGenerics", "BiocParallel", "BiocStyle", "bioDist",
+          "Biostrings", "BSgenome.Dmelanogaster.UCSC.dm2", "BSgenome",
+          "cluster", "ComplexHeatmap", "datasets", "DelayedArray", "dplyr",
+          "factoextra", "forcats", "Formula", "GenomeInfoDb",
+          "GenomicRanges", "ggbeeswarm", "ggplot2", "graphics", "grDevices",
+          "grid", "Hmisc", "IRanges", "KernSmooth", "lattice",
+          "matrixStats", "methods", "MLInterfaces", "MSnbase", "mzR",
+          "parallel", "patchwork", "plotly", "pRoloc", "pRolocdata",
+          "ProtGenerics", "purrr", "Rcpp", "readr", "rtracklayer",
+          "rWSBIM1207", "rWSBIM1322", "S4Vectors", "stats", "stats4",
+          "stringr", "SummarizedExperiment", "survival", "tibble", "tidyr",
+          "tidyverse", "UpSetR", "utils", "Vennerable", "XML", "XVector")</code></pre>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="sec-si.html#cb414-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"BiocManager"</span>))</span>
+<span id="cb414-2"><a href="sec-si.html#cb414-2"></a>   <span class="kw">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb414-3"><a href="sec-si.html#cb414-3"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(pkgs)</span></code></pre></div>
 
 </div>
 </div></body></html>
