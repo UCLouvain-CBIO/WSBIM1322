@@ -392,13 +392,14 @@ text(xr$x, xr$y, 1:5)
 ```
 
 The results of hierarchical clustering are typically visualised along
-a **dendrogram**, where the distance between the clusters is
+a **dendrogram**[^dendro], where the distance between the clusters is
 proportional to the branch lengths.
 
-Note that dendrograms, or trees in general, are used in evolutionary
-biology to visualise the evolutionary history of taxa. In this course,
-we use them to represent similarities (based on distances) and don't
-assess any evolutionary relations between features or samples.
+[^dendro]: Note that dendrograms, or trees in general, are used in
+    evolutionary biology to visualise the evolutionary history of
+    taxa. In this course, we use them to represent similarities (based
+    on distances) and don't assess any evolutionary relations between
+    features or samples.
 
 
 ```{r hcldendro, echo=FALSE, fig.cap = "Visualisation of the hierarchical clustering results on a dendrogram"}
