@@ -395,6 +395,11 @@ The results of hierarchical clustering are typically visualised along
 a **dendrogram**, where the distance between the clusters is
 proportional to the branch lengths.
 
+Note that dendrograms, or trees in general, are used in evolutionary
+biology to visualise the evolutionary history of taxa. In this course,
+we use them to represent similarities (based on distances) and don't
+assess any evolutionary relations between features or samples.
+
 
 ```{r hcldendro, echo=FALSE, fig.cap = "Visualisation of the hierarchical clustering results on a dendrogram"}
 plot(hcr <- hclust(dist(xr)))
@@ -538,7 +543,7 @@ plot(hcl2, main = "scaled data")
 `r msmbstyle::question_begin()`
 - Load the small `g3` data set that provides expression profiles of
   genes 1 to 3 in samples 1 to 5 and visualise these.
-  
+
 - Compute and compare the distances between the genes using the
   Euclidean and correlation distances (these can be calculated, for
   example, with the `euc` and `cor.dist` from the `bioDist`
@@ -547,7 +552,7 @@ plot(hcl2, main = "scaled data")
 
 - Compare the effect of scaling on these distances. Visualise the
   scaled and unscaled profiles to help interpret the distances.
-  
+
 `r msmbstyle::question_end()`
 
 ```{r disttoyexample, include = FALSE, fig.cap = "Expression profiles of genes 1 to 3 in samples 1 to 5."}
@@ -558,7 +563,7 @@ matplot(t(g3), type = "b", xlab = "Samples", ylab = "Gene expression")
 
 ```{r disttoy2, include = FALSE}
 library("bioDist")
-ds <- rbind(euc = euc(g3), 
+ds <- rbind(euc = euc(g3),
             cor = cor.dist(g3))
 colnames(ds) <- c("1-2", "1-3", "2-3")
 ds
@@ -566,7 +571,7 @@ ds
 
 ```{r disttoy3, include = FALSE, fig.cap = "Expression profiles without (left) and with (right) scaling."}
 g3_scaled <- scale(g3) ## scale
-ds <- rbind(euc = euc(g3), 
+ds <- rbind(euc = euc(g3),
             euc_scaled = euc(g3_scaled),
             cor = cor.dist(g3),
             cor_scaled = cor.dist(g3_scaled))
