@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-25" />
+<meta name="date" content="2019-11-26" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -446,7 +446,7 @@ Figure 8.9: Screeplot showing the variances for the PCs.
 </p>
 <div class="question-body">
 <p>Repeat the analysis above with the <code>xy0</code> data, that you can load
-from the <code>rWSBIM1207</code> data. First scale it, then repeat the PCA
+from the <code>rWSBIM1322</code> data. First scale it, then repeat the PCA
 analysis as shown above.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -727,18 +727,18 @@ display a summary of the results.</li>
 <div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="sec-dimred.html#cb325-1"></a>pca_mulvey2015 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">t</span>(<span class="kw">exprs</span>(mulvey2015)), <span class="dt">scale. =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb325-2"><a href="sec-dimred.html#cb325-2"></a><span class="kw">summary</span>(pca_mulvey2015)</span></code></pre></div>
 <pre><code>## Importance of components:
-##                            PC1     PC2     PC3     PC4     PC5     PC6
-## Standard deviation     34.2468 24.0808 16.8485 7.37212 6.79981 5.84729
-## Proportion of Variance  0.5019  0.2481  0.1215 0.02326 0.01978 0.01463
-## Cumulative Proportion   0.5019  0.7500  0.8715 0.89472 0.91450 0.92913
-##                            PC7     PC8    PC9    PC10    PC11    PC12
-## Standard deviation     5.50515 5.18188 4.7114 4.47518 3.99894 3.88066
-## Proportion of Variance 0.01297 0.01149 0.0095 0.00857 0.00684 0.00644
-## Cumulative Proportion  0.94210 0.95359 0.9631 0.97166 0.97850 0.98494
-##                           PC13    PC14    PC15    PC16   PC17      PC18
-## Standard deviation     3.52931 3.24782 3.04106 1.24069 1.1806 1.461e-14
-## Proportion of Variance 0.00533 0.00451 0.00396 0.00066 0.0006 0.000e+00
-## Cumulative Proportion  0.99027 0.99479 0.99874 0.99940 1.0000 1.000e+00</code></pre>
+##                            PC1     PC2     PC3     PC4     PC5     PC6     PC7
+## Standard deviation     34.2468 24.0808 16.8485 7.37212 6.79981 5.84729 5.50515
+## Proportion of Variance  0.5019  0.2481  0.1215 0.02326 0.01978 0.01463 0.01297
+## Cumulative Proportion   0.5019  0.7500  0.8715 0.89472 0.91450 0.92913 0.94210
+##                            PC8    PC9    PC10    PC11    PC12    PC13    PC14
+## Standard deviation     5.18188 4.7114 4.47518 3.99894 3.88066 3.52931 3.24782
+## Proportion of Variance 0.01149 0.0095 0.00857 0.00684 0.00644 0.00533 0.00451
+## Cumulative Proportion  0.95359 0.9631 0.97166 0.97850 0.98494 0.99027 0.99479
+##                           PC15    PC16   PC17      PC18
+## Standard deviation     3.04106 1.24069 1.1806 1.461e-14
+## Proportion of Variance 0.00396 0.00066 0.0006 0.000e+00
+## Cumulative Proportion  0.99874 0.99940 1.0000 1.000e+00</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -993,22 +993,18 @@ display a summary of the results.</li>
 <div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="sec-dimred.html#cb336-1"></a>pca_hl &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">exprs</span>(hyperLOPIT2015), <span class="dt">scale. =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb336-2"><a href="sec-dimred.html#cb336-2"></a><span class="kw">summary</span>(pca_hl)</span></code></pre></div>
 <pre><code>## Importance of components:
-##                          PC1    PC2     PC3     PC4     PC5     PC6
-## Standard deviation     3.111 2.1843 1.27979 1.10039 0.77542 0.69215
-## Proportion of Variance 0.484 0.2386 0.08189 0.06054 0.03006 0.02395
-## Cumulative Proportion  0.484 0.7226 0.80450 0.86504 0.89510 0.91906
-##                            PC7     PC8     PC9    PC10    PC11    PC12
-## Standard deviation     0.66758 0.48081 0.43346 0.40047 0.33093 0.32881
-## Proportion of Variance 0.02228 0.01156 0.00939 0.00802 0.00548 0.00541
-## Cumulative Proportion  0.94134 0.95290 0.96229 0.97031 0.97579 0.98119
-##                          PC13    PC14    PC15    PC16    PC17    PC18
-## Standard deviation     0.2864 0.27239 0.26359 0.23686 0.22918 0.20449
-## Proportion of Variance 0.0041 0.00371 0.00347 0.00281 0.00263 0.00209
-## Cumulative Proportion  0.9853 0.98900 0.99248 0.99528 0.99791 1.00000
-##                            PC19     PC20
-## Standard deviation     0.003022 0.002842
-## Proportion of Variance 0.000000 0.000000
-## Cumulative Proportion  1.000000 1.000000</code></pre>
+##                          PC1    PC2     PC3     PC4     PC5     PC6     PC7
+## Standard deviation     3.111 2.1843 1.27979 1.10039 0.77542 0.69215 0.66758
+## Proportion of Variance 0.484 0.2386 0.08189 0.06054 0.03006 0.02395 0.02228
+## Cumulative Proportion  0.484 0.7226 0.80450 0.86504 0.89510 0.91906 0.94134
+##                            PC8     PC9    PC10    PC11    PC12   PC13    PC14
+## Standard deviation     0.48081 0.43346 0.40047 0.33093 0.32881 0.2864 0.27239
+## Proportion of Variance 0.01156 0.00939 0.00802 0.00548 0.00541 0.0041 0.00371
+## Cumulative Proportion  0.95290 0.96229 0.97031 0.97579 0.98119 0.9853 0.98900
+##                           PC15    PC16    PC17    PC18     PC19     PC20
+## Standard deviation     0.26359 0.23686 0.22918 0.20449 0.003022 0.002842
+## Proportion of Variance 0.00347 0.00281 0.00263 0.00209 0.000000 0.000000
+## Cumulative Proportion  0.99248 0.99528 0.99791 1.00000 1.000000 1.000000</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1256,7 +1252,7 @@ Figure 8.23: Testing the effect of RNA sequencing kits 1 and 2.
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>tdata1</code> dataset from the <code>rWSBIM1207</code> package and run a PCA
+<p>Load the <code>tdata1</code> dataset from the <code>rWSBIM1322</code> package and run a PCA
 analysis on the samples. Interpret the results, knowing that these
 data are random.</p>
 <p class="question-end">
@@ -1281,7 +1277,7 @@ the RNA-seq data and perform a PCA analysis on the samples.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>metab1</code> data from the <code>rWSBIM1207</code> package (version &gt;=
+<p>Load the <code>metab1</code> data from the <code>rWSBIM1322</code> package (version &gt;=
 <code>0.1.10</code>) and perform a PCA analysis on the samples. These data
 represent mass spectrometry-based metabolomics data. Do the samples
 seem to be randomly placed? Do you notice any structure explained by
@@ -1300,7 +1296,7 @@ the labels?</p>
 <a href="sec-ul.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-25
+2019-11-26
 </p>
 </div>
 </div>

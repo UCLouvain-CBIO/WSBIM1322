@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-25" />
+<meta name="date" content="2019-11-26" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -605,11 +605,11 @@ dexamethason? Which ones weren’t?</p>
 <span id="cb88-3"><a href="sec-obj.html#cb88-3"></a><span class="co">## Treated samples</span></span>
 <span id="cb88-4"><a href="sec-obj.html#cb88-4"></a><span class="kw">colData</span>(airway)[dex_treated, <span class="st">"BioSample"</span>]</span></code></pre></div>
 <pre><code>## [1] SAMN02422675 SAMN02422670 SAMN02422673 SAMN02422677
-## 8 Levels: SAMN02422669 SAMN02422670 SAMN02422673 ... SAMN02422683</code></pre>
+## 8 Levels: SAMN02422669 SAMN02422670 SAMN02422673 SAMN02422675 ... SAMN02422683</code></pre>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="sec-obj.html#cb90-1"></a><span class="co">## Control samples</span></span>
 <span id="cb90-2"><a href="sec-obj.html#cb90-2"></a><span class="kw">colData</span>(airway)[<span class="op">!</span>dex_treated, <span class="st">"BioSample"</span>]</span></code></pre></div>
 <pre><code>## [1] SAMN02422669 SAMN02422678 SAMN02422682 SAMN02422683
-## 8 Levels: SAMN02422669 SAMN02422670 SAMN02422673 ... SAMN02422683</code></pre>
+## 8 Levels: SAMN02422669 SAMN02422670 SAMN02422673 SAMN02422675 ... SAMN02422683</code></pre>
 <p>It is also possible to use the <code>tidyverse</code> for this by first coercing
 the <code>DataFrame</code> to a <code>tibble</code>.</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="sec-obj.html#cb92-1"></a><span class="kw">as_tibble</span>(<span class="kw">colData</span>(airway)) <span class="op">%&gt;%</span></span>
@@ -934,7 +934,7 @@ of class <code>SummarizedExperiment</code>.</p>
 <a href="sec-biostrings.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-25
+2019-11-26
 </p>
 </div>
 </div>

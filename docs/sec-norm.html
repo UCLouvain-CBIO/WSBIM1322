@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-25" />
+<meta name="date" content="2019-11-26" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -605,10 +605,10 @@ of occurences of 1, 2, 3, … missing values.</p>
 <span id="cb222-2"><a href="sec-norm.html#cb222-2"></a><span class="kw">data</span>(naset)</span>
 <span id="cb222-3"><a href="sec-norm.html#cb222-3"></a>col_na &lt;-<span class="st"> </span><span class="kw">colSums</span>(<span class="kw">is.na</span>(<span class="kw">exprs</span>(naset)))</span>
 <span id="cb222-4"><a href="sec-norm.html#cb222-4"></a>col_na</span></code></pre></div>
-<pre><code>##  M1F1A  M1F4A  M1F7A M1F11A  M1F2B  M1F5B  M1F8B M1F11B  M2F1A  M2F4A 
-##     34     45     56     39     47     52     49     61     41     42 
-##  M2F7A M2F11A  M2F2B  M2F5B  M2F8B M2F11B 
-##     55     45     51     43     57     53</code></pre>
+<pre><code>##  M1F1A  M1F4A  M1F7A M1F11A  M1F2B  M1F5B  M1F8B M1F11B  M2F1A  M2F4A  M2F7A 
+##     34     45     56     39     47     52     49     61     41     42     55 
+## M2F11A  M2F2B  M2F5B  M2F8B M2F11B 
+##     45     51     43     57     53</code></pre>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="sec-norm.html#cb224-1"></a><span class="kw">barplot</span>(col_na)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="sec-norm.html#cb225-1"></a>row_na &lt;-<span class="st"> </span><span class="kw">rowSums</span>(<span class="kw">is.na</span>(<span class="kw">exprs</span>(naset)))</span>
@@ -653,7 +653,7 @@ implications for the normalisation step?</p>
 <a href="sec-mlintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-25
+2019-11-26
 </p>
 </div>
 </div>

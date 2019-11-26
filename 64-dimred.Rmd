@@ -326,7 +326,7 @@ plot(pca_xy)
 
 `r msmbstyle::question_begin()`
 Repeat the analysis above with the `xy0` data, that you can load
-from the `rWSBIM1207` data. First scale it, then repeat the PCA
+from the `rWSBIM1322` data. First scale it, then repeat the PCA
 analysis as shown above.
 `r msmbstyle::question_end()`
 
@@ -835,7 +835,7 @@ fviz_pca_ind(p, habillage = sub("\\.[0-9]+$", "", colnames(x)))
 `r msmbstyle::question_end()`
 
 `r msmbstyle::question_begin()`
-Load the `tdata1` dataset from the `rWSBIM1207` package and run a PCA
+Load the `tdata1` dataset from the `rWSBIM1322` package and run a PCA
 analysis on the samples. Interpret the results, knowing that these
 data are random.
 `r msmbstyle::question_end()`
@@ -847,7 +847,7 @@ the RNA-seq data and perform a PCA analysis on the samples.
 
 
 `r msmbstyle::question_begin()`
-Load the `metab1` data from the `rWSBIM1207` package (version >=
+Load the `metab1` data from the `rWSBIM1322` package (version >=
 `0.1.10`) and perform a PCA analysis on the samples. These data
 represent mass spectrometry-based metabolomics data. Do the samples
 seem to be randomly placed? Do you notice any structure explained by
