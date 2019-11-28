@@ -159,7 +159,7 @@ v@IntersectionSets[["110"]]
 And finally, the `Venn` object can directly be plotted (albeit with a
 suspicious set of colours) with
 
-```{r venn3, fig.cap = "A Venn diagram representing the size of all intersections of the three elements of out `feat_list` input.}
+```{r venn3, fig.cap = "A Venn diagram representing the size of all intersections of the three elements of out `feat_list` input."}
 plot(v)
 ```
 
