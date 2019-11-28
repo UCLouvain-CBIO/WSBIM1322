@@ -1,1 +1,63 @@
 # Supervised learning {#sec:sl}
+
+The goal of this last chapter about machine learning will be
+supervised learning, and in particular **classification**. In this
+chapter, you will learn
+
+- learn what classification is;
+- learn about labelled, unlabelled, training and testing data;
+- learn about and apply *k* nearest neighbour, a simple non-parametric
+  classifier;
+- see why and how to use cross-validation;
+- and learn about model complexity and generalisation.
+
+## Introduction
+
+Often, we faced with omics data, we have annotations for some of the
+samples (or features) we have acquired:
+
+- Among the 100s of patient tumours that were assayed using RNA
+  sequencing of microarrays, we know the grade of the tumour for about
+  half. We want to predict the grade of the other half using the gene
+  expression profiles.
+  
+- We have performed a spatial proteomics experiment such as in
+  Christoforou *et al.* [@Christoforou:2016] (see section
+  \@ref(sec:dimred02)) and know the sub-cellular localisation of some
+  proteins. We want to predict the sub-cellular localisation of the
+  other proteins using the protein profiles.
+  
+  
+In both of these examples, the quantitative data are the data that we
+want to use to predict properties about samples or features; these are
+called the **predictors**. The grade of the samples in the first
+example and the protein sub-cellular localisation in the second one
+are the **labels** that we have in some cases, and want to predcit
+otherwise. We can thus split our data in two parts, depending whether
+we have labels, or whether we want to predict them. The former are
+called **labelled**, and the latter **unlabelled**.
+
+
+```{r, echo = FALSE, fig.cap = "In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled.", fig.width = 12, fig.height = 5}
+par(mfrow = c(1, 2), mar = c(0, 1, 2, 0), oma = c(0, 0, 0, 0))
+rWSBIM1322:::sl_input_rows(main = "All data")
+text(rep(0.8, 8), (1:8) + 0.5, 1:8)
+
+rWSBIM1322:::blank_plot()
+title(main = "Labelled and unlabelled data")
+rWSBIM1322:::quant_data()
+rect(9.2, 8, 10.2, 9, col = "steelblue")
+rect(9.2, 7, 10.2, 8, col = "steelblue")
+rect(9.2, 6, 10.2, 7, col = "red")
+rect(9.2, 5, 10.2, 6, col = "red")
+rect(9.2, 4, 10.2, 5, col = "green")
+text(rep(0.8, 8), (1:8) + 0.5,
+     c(2, 4, 7, 5, 1, 6, 3, 8))
+```
+
+In the figure above, the labels represent categories that need to be
+inferred from the predictors. This class of supervised learning is
+called **classification**. When the annotations are continuous values,
+the situation is referred to as a **regression** problem.
+
+
