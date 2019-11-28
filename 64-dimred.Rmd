@@ -449,7 +449,7 @@ interpretation of two real-life proteomics datasets. Both of these
 datasets are available in the `pRolocdata` package.
 
 
-### Extra-embryonic endoderm differentiation in mouse embryonic stem cells
+### Extra-embryonic endoderm differentiation in mouse embryonic stem cells {#sec:dimred_mulvey}
 
 We are first going to focus on the data from Mulvey *et al.* (2015),
 where they present the *Dynamic proteomic profiling of extra-embryonic
@@ -579,7 +579,7 @@ plot3d(pca_mulvey2015$x[, 1],
 
 `r msmbstyle::solution_end()`
 
-### A map of the mouse pluripotent stem cell spatial proteome
+### A map of the mouse pluripotent stem cell spatial proteome  {#sec:dimred_hl}
 
 In this section, we are going to use PCA to explore spatial map of
 mouse pluripotent stem cell by Christoforou *et al.*
