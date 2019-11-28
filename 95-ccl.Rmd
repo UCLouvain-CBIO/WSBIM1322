@@ -1,7 +1,7 @@
 # Conclusions {#sec:ccl}
 
-In this course, we have seen consolidated our skills in data analysis
-and visualisation using R. In particular, this course has focused on
+In this course, we have consolidated our skills in data analysis and
+visualisation using R. In particular, this course has focused on
 interpretation and understanding of the outputs.
 
 We have also learned and applied new tools, in particular how to
@@ -10,7 +10,7 @@ learning tools to explore data and identify patterns of biological
 interest. In terms of statistical testing and machine learning, it can
 be useful to summarise the different classes of techniques we have
 touch on using the figures below. The grid on each of these figures
-represents a matrix with quantitative values with featues (genes,
+represents a matrix with quantitative values with features (genes,
 proteins, transcripts, ...)  along the rows and samples along the
 columns. Annotations of features or samples are presented as coloured
 boxes on the right or top if the matrices.
@@ -28,7 +28,7 @@ par(oma = c(0, 0, 0, 0), mar = c(0, 0, 2, 0))
 rWSBIM1322:::ht_summary()
 ```
 
-When performing clusterg (unsupervised machine learning), we only have our
+When performing clustering (unsupervised machine learning), we only have our
 quantitative data as input, and the clustering algorithm (whether
 k-means, hierarchical clustering among many others) suggests a set of
 groups to cluster the features (as shown below) or samples.
@@ -61,11 +61,13 @@ par(oma = c(0, 0, 0, 0), mar = c(0, 0, 2, 0))
 rWSBIM1322:::sl_summary()
 ```
 
-The next steps of the curiculum (course
+
+The next steps of the curriculum (course
 [WSBIM2122](https://uclouvain-cbio.github.io/WSBIM2122/]) will build
 upon the skills gained in this course to fully analyse complete
-datasets from omics technologies. The course will be project based:
-each experiment and associated technologies will be introduced, the
-analysis pipeline will be explained, and the students will then
+datasets from omics technologies, using state-of-the-art statistical
+and machine learning methods and software. The course will be project
+based: each experiment and associated technologies will be introduced,
+the analysis pipeline will be explained, and the students will then
 implement and present the data analysis and critical interpretation of
 the results.
