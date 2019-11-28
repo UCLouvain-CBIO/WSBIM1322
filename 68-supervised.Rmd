@@ -99,6 +99,8 @@ factoextra::fviz_pca_ind(pca2, col.ind = giris2$GRADE)
 ```
 `r msmbstyle::solution_end()`
 
+
+
 ## K-nearest neighbours classifier
 
 In this chapter, we'll use a simple, but useful classification
@@ -161,3 +163,110 @@ first **trains** a model and then uses the model to **predict** new
 outputs (class labels in this case). In kNN, these two steps are
 combined into a single function call to `knn`.
 
+
+`r msmbstyle::question_begin()`
+
+Separate the `giris2` data into two new datasets, one containing the
+labelled data that will be used to train the model and named
+`giris2_train`, and a second one containing the unlabelled data called
+`giris_test`.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+giris2_labelled <- giris2[!is.na(giris2$GRADE), ]
+giris2_unlabelled <- giris2[is.na(giris2$GRADE), ]
+```
+`r msmbstyle::solution_end()`
+
+The `knn` function takes, among others[^knnargs], the following arguments:
+
+[^knnargs]: we will see additional ones later.
+
+1. the labelled predictors, that will be used to *train* the model,
+2. the unlabelled preductors, on which the model will be applied (see
+   below why this is called *test*),
+3. the labels (the length of this vector must match the number of rows
+   of the labelled predictors).
+
+
+`r msmbstyle::question_begin()`
+
+- Apply the kNN classifier on the `giris2` prepared in the previous
+  exercise.
+
+- What is the class of the output? 
+
+- How many of the unlabelled data have been assigned to the different
+  grades?
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+library("class")
+knn_res <- knn(giris2_labelled[, -5],
+               giris2_unlabelled[, -5],
+               giris2_labelled[, 5])
+class(knn_res)
+table(knn_res)
+```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Visualise the results of the kNN classification on a PCA plot and
+interprete the results based on the firt PCA.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+giris2_res <- giris2
+giris2_res[is.na(giris2$GRADE), 5] <- knn_res
+pca_knn <- prcomp(giris2_res[, -5], scale = TRUE)
+p1 <- factoextra::fviz_pca_ind(pca2, col.ind = giris2$GRADE)
+p2 <- factoextra::fviz_pca_ind(pca_knn, col.ind = giris2_res$GRADE)
+library("patchwork")
+p1 / p2
+```
+`r msmbstyle::solution_end()`
+
+
+
+`r msmbstyle::question_begin()`
+- Can you identify some questionable results? Explore the results for
+  patient 167, that was assigned group B.
+
+- Do do so, calculated the distances between sample 167 and all other
+  labelled data.
+  
+- Compare the labels of its 15 closest labelled data points.
+
+`r msmbstyle::question_begin()`
+
+
+`r msmbstyle::solution_begin()`
+```{r, message = FALSE}
+## all pairwise distances
+dd <- as.matrix(dist(giris2[, -5]))
+## extract only those for sample 167
+giris2$dist_167 <- dd[167, ]
+
+## look at the 15 nearest neighbours 
+library("tidyverse")
+vote <- giris2 %>%
+    head(150) %>%
+    arrange(dist_167) %>%
+    head(15) %>%
+    mutate(vote = cumsum(count = ifelse(GRADE == "C", 1, -1))) %>%
+    mutate(grade = ifelse(vote <= 0, "B", "C"))
+vote
+
+vote %>%
+    ggplot(aes(x = 1:15, y = vote)) +
+    xlab("Number of nearest neighbours") + 
+    geom_point(aes(colour = grade), size = 3) + geom_line() +
+    geom_hline(yintercept = 0)
+```
+
+`r msmbstyle::solution_end()`

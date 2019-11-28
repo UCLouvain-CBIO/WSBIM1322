@@ -235,7 +235,175 @@ Figure 10.2: Schematic illustrating the k nearest neighbors algorithm.
 <img src="WSBIM1322_files/figure-html/knnex-1.png" alt="Schematic illustrating the k nearest neighbors algorithm." width="672">
 </div>
 <p>Typically in machine learning, there are two clear steps, where one first <strong>trains</strong> a model and then uses the model to <strong>predict</strong> new outputs (class labels in this case). In kNN, these two steps are combined into a single function call to <code>knn</code>.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Separate the <code>giris2</code> data into two new datasets, one containing the labelled data that will be used to train the model and named <code>giris2_train</code>, and a second one containing the unlabelled data called <code>giris_test</code>.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-67" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-67', 'sol-start-67')"></span>
+</p>
+<div id="sol-body-67" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">giris2_labelled &lt;-<span class="st"> </span>giris2[<span class="op">!</span><span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), ]
+giris2_unlabelled &lt;-<span class="st"> </span>giris2[<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), ]</code></pre></div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>The <code>knn</code> function takes, among others<label for="tufte-sn-14" class="margin-toggle sidenote-number">14</label><input type="checkbox" id="tufte-sn-14" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">14</span> we will see additional ones later.</span>, the following arguments:</p>
+<ol style="list-style-type: decimal">
+<li>the labelled predictors, that will be used to <em>train</em> the model,</li>
+<li>the unlabelled preductors, on which the model will be applied (see below why this is called <em>test</em>),</li>
+<li>the labels (the length of this vector must match the number of rows of the labelled predictors).</li>
+</ol>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Apply the kNN classifier on the <code>giris2</code> prepared in the previous exercise.</p></li>
+<li><p>What is the class of the output?</p></li>
+<li><p>How many of the unlabelled data have been assigned to the different grades?</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-68" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-68', 'sol-start-68')"></span>
+</p>
+<div id="sol-body-68" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"class"</span>)
+knn_res &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelled[, <span class="dv">-5</span>],
+               giris2_unlabelled[, <span class="dv">-5</span>],
+               giris2_labelled[, <span class="dv">5</span>])
+<span class="kw">class</span>(knn_res)</code></pre></div>
+<pre><code>## [1] "factor"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(knn_res)</code></pre></div>
+<pre><code>## knn_res
+##  A  B  C 
+## 31 38 31</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Visualise the results of the kNN classification on a PCA plot and interprete the results based on the firt PCA.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-69" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-69', 'sol-start-69')"></span>
+</p>
+<div id="sol-body-69" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">giris2_res &lt;-<span class="st"> </span>giris2
+giris2_res[<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), <span class="dv">5</span>] &lt;-<span class="st"> </span>knn_res
+pca_knn &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris2_res[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)
+p1 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca2, <span class="dt">col.ind =</span> giris2<span class="op">$</span>GRADE)
+p2 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca_knn, <span class="dt">col.ind =</span> giris2_res<span class="op">$</span>GRADE)
+<span class="kw">library</span>(<span class="st">"patchwork"</span>)
+p1 <span class="op">/</span><span class="st"> </span>p2</code></pre></div>
+<pre><code>## Warning: Removed 100 rows containing missing values (geom_point).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-80-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question" id="">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
 
+
+<ul>
+<li><p>Can you identify some questionable results? Explore the results for patient 167, that was assigned group B.</p></li>
+<li><p>Do do so, calculated the distances between sample 167 and all other labelled data.</p></li>
+<li><p>Compare the labels of its 15 closest labelled data points.</p></li>
+</ul>
+<div class="question" id="">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+
+
+
+
+
+
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-70" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-70', 'sol-start-70')"></span>
+</p>
+<div id="sol-body-70" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## all pairwise distances
+dd &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">dist</span>(giris2[, <span class="dv">-5</span>]))
+## extract only those for sample 167
+giris2<span class="op">$</span>dist_<span class="dv">167</span> &lt;-<span class="st"> </span>dd[<span class="dv">167</span>, ]
+
+## look at the 15 nearest neighbours 
+<span class="kw">library</span>(<span class="st">"tidyverse"</span>)
+vote &lt;-<span class="st"> </span>giris2 <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">head</span>(<span class="dv">150</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">arrange</span>(dist_<span class="dv">167</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">head</span>(<span class="dv">15</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">vote =</span> <span class="kw">cumsum</span>(<span class="dt">count =</span> <span class="kw">ifelse</span>(GRADE <span class="op">==</span><span class="st"> "C"</span>, <span class="dv">1</span>, <span class="dv">-1</span>))) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">grade =</span> <span class="kw">ifelse</span>(vote <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="st">"B"</span>, <span class="st">"C"</span>))
+vote</code></pre></div>
+<pre><code>##    BRCA1 BRCA2 TP53 A1CF GRADE  dist_167 vote grade
+## 1    6.8   2.8  4.8  1.4     B 0.7239656   -1     B
+## 2    6.7   3.0  5.0  1.7     B 0.7922045   -2     B
+## 3    6.9   3.1  4.9  1.5     B 0.8065525   -3     B
+## 4    6.7   2.5  5.8  1.8     C 0.8444024   -2     B
+## 5    7.2   3.0  5.8  1.6     C 0.8592955   -1     B
+## 6    6.9   3.1  5.4  2.1     C 0.8892644    0     B
+## 7    6.8   3.0  5.5  2.1     C 0.8956019    1     C
+## 8    6.4   2.7  5.3  1.9     C 0.9116501    2     C
+## 9    7.0   3.2  4.7  1.4     B 0.9623517    1     C
+## 10   6.9   3.1  5.1  2.3     C 0.9723507    2     C
+## 11   6.3   2.5  5.0  1.9     C 0.9726503    3     C
+## 12   6.5   3.0  5.2  2.0     C 0.9802555    4     C
+## 13   6.7   3.1  4.7  1.5     B 0.9829819    3     C
+## 14   6.3   2.5  4.9  1.5     B 0.9841642    2     C
+## 15   6.5   3.0  5.5  1.8     C 0.9930892    3     C</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vote <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">y =</span> vote)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">xlab</span>(<span class="st">"Number of nearest neighbours"</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> grade), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-81-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
 </div>
 </div></body></html>
 
