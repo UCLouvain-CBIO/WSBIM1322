@@ -118,6 +118,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
 <a id="active-page" href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a><ul class="toc-sections">
 <li class="toc"><a href="#introduction-5"> Introduction</a></li>
+<li class="toc"><a href="#k-nearest-neighbours-classifier"> K-nearest neighbours classifier</a></li>
 </ul>
 <a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
 <a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
@@ -138,7 +139,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>learn what classification is;</li>
 <li>learn about labelled, unlabelled, training and testing data;</li>
-<li>learn about and apply <em>k</em> nearest neighbour, a simple non-parametric classifier;</li>
+<li>learn about and apply k-nearest neighbour, a simple non-parametric classifier;</li>
 <li>see why and how to use cross-validation;</li>
 <li>and learn about model complexity and generalisation.</li>
 </ul>
@@ -158,7 +159,82 @@ Figure 10.1: In supervised learning, the data are split in labelled or unlabelle
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-75-1.png" alt="In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled." width="1152">
 </div>
-<p>In the figure above, the labels represent categories that need to be inferred from the predictors. This class of supervised learning is called <strong>classification</strong>. When the annotations are continuous values, the situation is referred to as a <strong>regression</strong> problem.</p>
+<p>In the figure above, the labels represent categories that need to be inferred from the predictors. This class of supervised learning is called <strong>classification</strong>. Classification are also split into <strong>binary classification</strong> when there are only two classes, or <strong>multi-label</strong> problem when, like above, there are more than two. The latter is a generalisation of the binary task. When the annotations are continuous values, the situation is referred to as a <strong>regression</strong> problem.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Load the <code>giris2</code> data from the <code>rWSBIM1322</code> package (requires version &gt;= 0.1.13). Identify the labelled and unlabelled data; how many are there respectively.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-65" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-65', 'sol-start-65')"></span>
+</p>
+<div id="sol-body-65" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)
+<span class="kw">data</span>(giris2)
+<span class="kw">summary</span>(giris2)</code></pre></div>
+<pre><code>##      BRCA1           BRCA2            TP53             A1CF         GRADE    
+##  Min.   :3.870   Min.   :1.888   Min.   :0.4919   Min.   :0.1000   A   : 50  
+##  1st Qu.:5.115   1st Qu.:2.700   1st Qu.:1.6242   1st Qu.:0.3044   B   : 50  
+##  Median :5.800   Median :3.000   Median :4.3276   Median :1.3327   C   : 50  
+##  Mean   :5.853   Mean   :3.058   Mean   :3.7796   Mean   :1.2111   NA's:100  
+##  3rd Qu.:6.400   3rd Qu.:3.400   3rd Qu.:5.1885   3rd Qu.:1.8000             
+##  Max.   :8.116   Max.   :4.400   Max.   :7.1766   Max.   :2.5685</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE))</code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##   150   100</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Visualise the <code>giris2</code> data on a PCA plot, highlighting the labels (or absence thereof). Using the visualisation, will the classifying of the unlabelled data will be difficult or easy? Motivate your aswer.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-66" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-66', 'sol-start-66')"></span>
+</p>
+<div id="sol-body-66" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca2 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris2[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)
+factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca2, <span class="dt">col.ind =</span> giris2<span class="op">$</span>GRADE)</code></pre></div>
+<pre><code>## Warning: Removed 100 rows containing missing values (geom_point).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-77-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="k-nearest-neighbours-classifier" class="section level2">
+<h2>
+<span class="header-section-number">10.2</span> K-nearest neighbours classifier</h2>
+<p>In this chapter, we’ll use a simple, but useful classification algorithm, k-nearest neighbours (kNN) to classify the <em>giris</em> patients. We will use the <code>knn</code> function from the <em><a href="https://CRAN.R-project.org/package=class">class</a></em> package.</p>
+<p>K-nearest neighbours works by directly measuring the (Euclidean) distance between observations and inferring the class of unlabelled data from the class of its nearest neighbours. In the figure below, the unlabelled instances <em>1</em> and <em>2</em> will be assigned classes <em>A</em> (blue) and <em>B</em> (red) as their closest neighbours are red and blue, respectively.</p>
+<div class="figure">
+<span id="fig:knnex"></span>
+<p class="caption marginnote shownote">
+Figure 10.2: Schematic illustrating the k nearest neighbors algorithm.
+</p>
+<img src="WSBIM1322_files/figure-html/knnex-1.png" alt="Schematic illustrating the k nearest neighbors algorithm." width="672">
+</div>
+<p>Typically in machine learning, there are two clear steps, where one first <strong>trains</strong> a model and then uses the model to <strong>predict</strong> new outputs (class labels in this case). In kNN, these two steps are combined into a single function call to <code>knn</code>.</p>
 
 </div>
 </div></body></html>

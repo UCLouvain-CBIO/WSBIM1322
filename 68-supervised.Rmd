@@ -6,7 +6,7 @@ chapter, you will learn
 
 - learn what classification is;
 - learn about labelled, unlabelled, training and testing data;
-- learn about and apply *k* nearest neighbour, a simple non-parametric
+- learn about and apply k-nearest neighbour, a simple non-parametric
   classifier;
 - see why and how to use cross-validation;
 - and learn about model complexity and generalisation.
@@ -57,7 +57,107 @@ text(rep(0.8, 8), (1:8) + 0.5,
 
 In the figure above, the labels represent categories that need to be
 inferred from the predictors. This class of supervised learning is
-called **classification**. When the annotations are continuous values,
-the situation is referred to as a **regression** problem.
+called **classification**. Classification are also split into **binary
+classification** when there are only two classes, or **multi-label**
+problem when, like above, there are more than two. The latter is a
+generalisation of the binary task. When the annotations are continuous
+values, the situation is referred to as a **regression** problem.
 
+`r msmbstyle::question_begin()`
+
+Load the `giris2` data from the `rWSBIM1322` package (requires version
+>= 0.1.13). Identify the labelled and unlabelled data; how many are
+there respectively.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+library("rWSBIM1322")
+data(giris2)
+summary(giris2)
+table(is.na(giris2$GRADE))
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Visualise the `giris2` data on a PCA plot, highlighting the labels (or
+absence thereof). Using the visualisation, will the classifying of the
+unlabelled data will be difficult or easy? Motivate your aswer.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r}
+pca2 <- prcomp(giris2[, -5], scale = TRUE)
+factoextra::fviz_pca_ind(pca2, col.ind = giris2$GRADE)
+```
+`r msmbstyle::solution_end()`
+
+## K-nearest neighbours classifier
+
+In this chapter, we'll use a simple, but useful classification
+algorithm, k-nearest neighbours (kNN) to classify the *giris*
+patients. We will use the `knn` function from the 
+`r CRANpkg("class")` package.
+
+K-nearest neighbours works by directly measuring the (Euclidean)
+distance between observations and inferring the class of unlabelled data
+from the class of its nearest neighbours. In the figure below, the
+unlabelled instances *1* and *2* will be assigned classes *A* (blue)
+and *B* (red) as their closest neighbours are red and blue,
+respectively.
+
+```{r knnex, echo=FALSE, fig.cap="Schematic illustrating the k nearest neighbors algorithm."}
+p1 <- c(0, 0)
+p2 <- c(0.7, 0.5)
+x1 <- rbind(c(0.2, 0.2),
+            c(-0.3, -0.8),
+            c(-0.2, 1.3))
+x2 <- rbind(c(1, 1),
+            c(0.5, 0.7))
+x3 <- c(1.5, -.9)
+x <- rbind(p1, p2, x1, x2, x3)
+col <- c("black", "black",
+         rep("steelblue", 3),
+         rep("red", 2),
+         "darkgreen")
+
+plot(x, pch = 19, col = col,
+     cex = 5, xlab = "", ylab = "",
+     xaxt = "n", yaxt = "n")
+grid()
+text(p1[1], p1[2], "1", col = "white", cex = 2)
+text(p2[1], p2[2], "2", col = "white", cex = 2)
+for (i in 1:3)
+    segments(p1[1], p1[2],
+             x1[i, 1], x1[i, 2],
+             lty = "dotted",
+             col = "steelblue")
+segments(p2[1], p2[2],
+         x1[1, 1], x1[1, 2],
+         lty = "dotted",
+         col = "steelblue")
+for (i in 1:2)
+    segments(p2[1], p2[2],
+             x2[i, 1], x2[i, 2],
+             lty = "dotted",
+             col = "red")
+legend("topright",
+       legend = LETTERS[1:3],
+       pch = 19,
+       col = c("steelblue", "red", "darkgreen"),
+       cex = 2,
+       bty = "n")
+```
+
+Typically in machine learning, there are two clear steps, where one
+first **trains** a model and then uses the model to **predict** new
+outputs (class labels in this case). In kNN, these two steps are
+combined into a single function call to `knn`.
 
