@@ -220,7 +220,7 @@ interprete the results based on the firt PCA.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-```{r, fig.cap = "Visualiation of the labelled and unlabelled data before (top) and after (bottom) classification.", fig.height = 10}
+```{r, fig.cap = "Visualiation of the labelled and unlabelled data before (top) and after (bottom) classification.", fig.height = 10, warning = FALSE}
 giris2_res <- giris2
 giris2_res[is.na(giris2$GRADE), 5] <- knn_res
 pca_knn <- prcomp(giris2_res[, -5], scale = TRUE)
@@ -364,7 +364,10 @@ giris2_test <- giris2_labelled[-i, ]
 
 `r msmbstyle::question_begin()`
 Run two kNN classifications, one with k = 1, then one with k = 11 and
-compare each to the true results. Interprete these results.
+compare each to the true results. A good way to assess the results is
+to generate a contingency matrix (using the `table` function) that
+tallies matches and mis-matches betweem the predictions and expected
+assignments. Interprete these results.
 `r msmbstyle::question_end()`
 
 
@@ -422,7 +425,7 @@ each fold. This leads to a total test set size that is identical to
 the size of the full dataset but is composed of out-of-sample
 predictions (i.e. a sample is never used for training and testing).
 
-```{r, echo = FALSE, fig.cap = "The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (orange) and the two other ones (white) are used to train the model.", out.width='100%', fig.align='center'}
+```{r, echo = FALSE, fig.cap = "The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model.", out.width='100%', fig.align='center'}
 knitr::include_graphics("./figs/xval.png")
 ```
 
@@ -476,13 +479,13 @@ mean(accs)
 `r msmbstyle::solution_end()`
 
 `r msmbstyle::question_begin()`
-Repeat the above for k=1, 3, 5, ... to 25 and plot the average
+Repeat the above for k=1, 3, 5, ... to 30 and plot the average
 accuracy as a function of k.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
 ```{r, fig.cap = "Average classification accuracy as a function of the parameter k."}
-accs <- tibble(k = seq(1, 25, 2)) %>%
+accs <- tibble(k = seq(1, 30, 2)) %>%
     rowwise() %>%
     mutate(acc = mean(sapply(folds, knn_accuracy, k))) %>%
     ungroup()
@@ -494,3 +497,50 @@ accs %>%
     geom_line()
 ```
 `r msmbstyle::solution_end()`
+
+As we can see from the last exercise, most values of k give a good
+classification accuracy, ranging from 96% to 98%, and it would be
+difficult to identify a single best value for k. Indeed, the three
+groups we are typing to assign new data to are relatively well
+separated and the little uncertainty that we observe is most likely
+due to some instances that lie at the boudary between classes B and C.
+
+There exist a variety of packages that automate model and parameter
+selection using cross-validation procedures as illustrated above, so
+that in practice, these tasks can be automated. This becomes
+particularly useful when more than one model parameter (called
+hyper-parameters) need to tuned, different classifiers need to be
+assessed, and/or several model performance metrics are to be computed.
+
+## Variance and biais tradeoff
+
+A recurrent goal in machine learning is to find a trade-off between
+variance and biais when fitting models. It is important to build a
+good model using the data at hand, i.e. that learns from the data, but
+not too much. If the model is too specific for the data that was used
+to build it (the model would be said to be **overfitting the data**)
+and would not be applicable to new data (the model would have high
+bias). On the other hand, a model that is too general, that wouldn't
+be applicable enough to the data, or type of data at hand[^varex], it
+would perform poorly, and hence lead to high variance.
+
+
+[^Varex]: In our example, this would equate to the expression of the
+    four genes of interest in a specific population of cancer
+    patients, for example.
+
+
+This variance and biais tradeoff can be illustrated in different
+ways. Figure below shows the prediction error as a function of the
+model complexity. In our example above, we have used accuracy, a
+metric that we want to optimise, while in the prediction error is a
+measure to me minimised. The model complexity represent the ability of
+the model (or model parameter) to learn/adapt to the training data. In
+our case, the complexity would be illustrated by $\frac{1}{k}$: when k=1, 
+
+the model becomes very complex as it adapts to every single
+neighbour. The other extreme, when k becomes large, the classification
+will tend to using an average of so many neighbours that doesn't
+reflect any specificity of our data.
+
+
