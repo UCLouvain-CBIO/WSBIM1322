@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-28" />
+<meta name="date" content="2019-11-29" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -119,6 +119,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a id="active-page" href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a><ul class="toc-sections">
 <li class="toc"><a href="#introduction-5"> Introduction</a></li>
 <li class="toc"><a href="#k-nearest-neighbours-classifier"> K-nearest neighbours classifier</a></li>
+<li class="toc"><a href="#model-selection-1"> Model selection</a></li>
+<li class="toc"><a href="#k-fold-cross-validation"> k-fold cross-validation</a></li>
 </ul>
 <a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
 <a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
@@ -330,29 +332,21 @@ p1 <span class="op">/</span><span class="st"> </span>p2</code></pre></div>
 </p>
 </div>
 </div>
-<div class="question" id="">
+<div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-
-
 <ul>
 <li><p>Can you identify some questionable results? Explore the results for patient 167, that was assigned group B.</p></li>
 <li><p>Do do so, calculated the distances between sample 167 and all other labelled data.</p></li>
 <li><p>Compare the labels of its 15 closest labelled data points.</p></li>
 </ul>
-<div class="question" id="">
-<p class="question-begin">
-► Question
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
 </p>
-<div class="question-body">
-
-
-
-
-
-
+</div>
+</div>
 <div class="solution">
 <p class="solution-begin">
 ► Solution<span id="sol-start-70" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-70', 'sol-start-70')"></span>
@@ -399,11 +393,319 @@ vote</code></pre></div>
 </p>
 </div>
 </div>
+<p>As we have seen, the number of nearest neighbours <em>k</em> has an important influence on the classification results. We can now refine our understanding of the <code>knn</code> function; it has the following arguments:</p>
+<ol style="list-style-type: decimal">
+<li>the labelled predictors, that will be used to <em>train</em> the model,</li>
+<li>the unlabelled preductors, on which the model will be applied (see below why this is called <em>test</em>),</li>
+<li>the labels (the length of this vector must match the number of rows of the labelled predictors),</li>
+<li>the number of neighbours to use,</li>
+<li>when set to <code>TRUE</code>, the <code>prob</code> argument also return the proportion of votes in favour of the assigned class.</li>
+</ol>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Repeat the kNN search comparing k=1 (as in our first attempt) and k=11 and compare the result.</p></li>
+<li><p>Which one is correct?</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-71" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-71', 'sol-start-71')"></span>
+</p>
+<div id="sol-body-71" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelled[, <span class="dv">-5</span>], giris2_unlabelled[, <span class="dv">-5</span>], giris2_labelled[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">1</span>)
+knn_<span class="dv">11</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelled[, <span class="dv">-5</span>], giris2_unlabelled[, <span class="dv">-5</span>], giris2_labelled[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">11</span>)
+<span class="kw">table</span>(knn_<span class="dv">1</span>, knn_<span class="dv">11</span>)</code></pre></div>
+<pre><code>##      knn_11
+## knn_1  A  B  C
+##     A 31  0  0
+##     B  0 34  4
+##     C  0  3 28</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="model-selection-1" class="section level2">
+<h2>
+<span class="header-section-number">10.3</span> Model selection</h2>
+<p>There is no way to decide which set of results above, using k=1, 2, … 11 or any other value for k is better. At least not while proceding as above. To be able to make an informed decision about the <strong>model parameter</strong> k, we need to to measure the <strong>performance</strong> of the kNN clasifier for different values of k. Do do so, we are going to create <strong>training</strong> and <strong>testing</strong> sets using the labelled data. Each of these will be composed by a certain proportion of the original labelled data.</p>
+<p>Below, we denote the training predictors <span class="math inline">\(X_{tr}\)</span> and labels <span class="math inline">\(Y_{tr}\)</span> and the testing predictors <span class="math inline">\(X_{te}\)</span> and labels <span class="math inline">\(Y_{te}\)</span>.</p>
+<div class="figure">
+<span id="fig:unnamed-chunk-83"></span>
+<p class="caption marginnote shownote">
+Figure 10.3: Training and testing sets.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-83-1.png" alt="Training and testing sets." width="672">
+</div>
+<p>We are now going to do the following procedure</p>
+<ol style="list-style-type: decimal">
+<li>hide the testing labels <span class="math inline">\(Y_{te}\)</span>,</li>
+<li>train a classifier model using <span class="math inline">\(X_{tr}\)</span> and <span class="math inline">\(Y_{tr}\)</span>,</li>
+<li>apply in on <span class="math inline">\(X_{te}\)</span> to obtain a new <span class="math inline">\(Y_{tr}^{predicted}\)</span>, and</li>
+<li>compare <span class="math inline">\(Y_{tr}\)</span> to <span class="math inline">\(Y_{tr}^{predicted}\)</span>.</li>
+</ol>
+<p>There are numerous different ways to measure the performace of a classifier using <span class="math inline">\(Y_{tr}\)</span> and <span class="math inline">\(Y_{tr}^{predicted}\)</span>. We are going to focus on the <strong>classification accuracy</strong>, counting the proportion of correct results.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Choose 100 random labelled data points to define the training data. Use the 50 others as test data.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-72" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-72', 'sol-start-72')"></span>
+</p>
+<div id="sol-body-72" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
+i &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">150</span>, <span class="dv">100</span>)
+giris2_train &lt;-<span class="st"> </span>giris2_labelled[i, ]
+giris2_test &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</span>i, ]</code></pre></div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Run two kNN classifications, one with k = 1, then one with k = 11 and compare each to the true results. Interprete these results.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-73" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-73', 'sol-start-73')"></span>
+</p>
+<div id="sol-body-73" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>], giris2_test[, <span class="dv">-5</span>], giris2_train[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">1</span>)
+test_<span class="dv">11</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>], giris2_test[, <span class="dv">-5</span>], giris2_train[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">11</span>)
+<span class="kw">table</span>(test_<span class="dv">1</span>, giris2_test[, <span class="dv">5</span>])</code></pre></div>
+<pre><code>##       
+## test_1  A  B  C
+##      A 16  0  0
+##      B  0 18  1
+##      C  0  1 14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(test_<span class="dv">11</span>, giris2_test[, <span class="dv">5</span>])</code></pre></div>
+<pre><code>##        
+## test_11  A  B  C
+##       A 16  0  0
+##       B  0 19  1
+##       C  0  0 14</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Calculate the classification accuracy of the two classifiers above.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-74" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-74', 'sol-start-74')"></span>
+</p>
+<div id="sol-body-74" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(test_<span class="dv">1</span> <span class="op">==</span><span class="st"> </span>giris2_test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_<span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 0.96</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(test_<span class="dv">11</span> <span class="op">==</span><span class="st"> </span>giris2_test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_<span class="dv">11</span>)</code></pre></div>
+<pre><code>## [1] 0.98</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>There are now two adjustments that we can do improve on the procedure above:</p>
+<ol style="list-style-type: decimal">
+<li><p>Test all odd value of k from 1 to 11 (or higher, if deemed useful), to have a better granularity of the model paramter we test.</p></li>
+<li><p>Testing more than on training/testing split using. Indeed, relying on a single split we rely on a random split, that could affect that results either overly optimistically, or negatively. We prefer to repeat the split <em>a certain number of time</em> and calculate an average performance over all splits.</p></li>
+</ol>
+</div>
+<div id="k-fold-cross-validation" class="section level2">
+<h2>
+<span class="header-section-number">10.4</span> k-fold cross-validation</h2>
+<p>There exist several principled ways to split data into training and testing partitions. Here, we are going to focus on k-fold cross-validation, where data of size <span class="math inline">\(n\)</span> a repeatedly split into a training set of size around <span class="math inline">\(\frac{n (k - 1)}{k}\)</span> and a testing set of size arond <span class="math inline">\(\frac{n}{k}\)</span>.</p>
+<p>In practice, the data are split into k partitions of size <span class="math inline">\(\frac{n}{k}\)</span>, and the training/testing procedure is repeated <span class="math inline">\(k\)</span> times using <span class="math inline">\(k - 1\)</span> partition as training data and 1 partition as testing data.</p>
+<p>The figure below illustrates the cross validation procedure, creating 3 folds. One would typically do a 10-fold cross validation (if the size of the data permits it). We split the data into 3 random and complementary folds, so that each data point appears exactly once in each fold. This leads to a total test set size that is identical to the size of the full dataset but is composed of out-of-sample predictions (i.e. a sample is never used for training and testing).</p>
+<div class="figure" style="text-align: center">
+<span id="fig:unnamed-chunk-87"></span>
+<p class="caption marginnote shownote">
+Figure 10.4: The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (orange) and the two other ones (white) are used to train the model.
+</p>
+<img src="figs/xval.png" alt="The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (orange) and the two other ones (white) are used to train the model." width="100%">
+</div>
+<p>After cross-validation, all models used within each fold are discarded, and a new model is built using the whole labelled dataset, with the best model parameter(s), i.e those that generalised over all folds. This makes cross-validation quite time consuming, as it takes x+1 (where x in the number of cross-validation folds) times as long as fitting a single model, but is essential.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Use the <code>createFolds</code> function from the <code>caret</code> package, passing it the labelled tags, to create 10 folds. Verify that each sample is present only once.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-75" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-75', 'sol-start-75')"></span>
+</p>
+<div id="sol-body-75" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">folds &lt;-<span class="st"> </span>caret<span class="op">::</span><span class="kw">createFolds</span>(giris2_labelled[[<span class="dv">5</span>]], <span class="dt">k =</span> <span class="dv">10</span>)
+folds</code></pre></div>
+<pre><code>## $Fold01
+##  [1]   2   9  11  15  40  51  54  62  76  95 103 107 115 140 143
+## 
+## $Fold02
+##  [1]   1  20  21  41  48  63  66  71  78  80 104 111 135 136 142
+## 
+## $Fold03
+##  [1]   3  31  34  39  46  74  89  90  94  96 105 117 120 131 139
+## 
+## $Fold04
+##  [1]  17  18  27  28  49  59  64  75  97  99 112 121 134 141 144
+## 
+## $Fold05
+##  [1]   8  29  35  37  42  53  69  79  81  82 108 110 119 123 125
+## 
+## $Fold06
+##  [1]  13  19  22  24  50  55  68  72  91 100 116 122 127 132 137
+## 
+## $Fold07
+##  [1]   6  10  33  38  43  52  56  65  73  87 101 114 124 126 130
+## 
+## $Fold08
+##  [1]   5  12  23  45  47  57  77  84  85  88 106 109 146 149 150
+## 
+## $Fold09
+##  [1]   4  14  16  26  44  58  61  92  93  98 102 118 129 138 147
+## 
+## $Fold10
+##  [1]   7  25  30  32  36  60  67  70  83  86 113 128 133 145 148</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all</span>(<span class="kw">sort</span>(<span class="kw">unlist</span>(folds)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">150</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Focusing now k=11 and using the folds above, calculate the classification accuracy in each case and compute the average accuracy for k=11.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-76" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-76', 'sol-start-76')"></span>
+</p>
+<div id="sol-body-76" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_accuracy &lt;-<span class="st"> </span><span class="cf">function</span>(fld, <span class="dt">k =</span> <span class="dv">11</span>) {
+    giris2_train &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</span>fld, ]
+    giris2_test &lt;-<span class="st"> </span>giris2_labelled[fld, ]
+    test_k &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>],
+                  giris2_test[, <span class="dv">-5</span>],
+                  giris2_train[, <span class="dv">5</span>],
+                  k)
+    <span class="kw">sum</span>(test_k <span class="op">==</span><span class="st"> </span>giris2_test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_k)
+}
 
+accs &lt;-<span class="st"> </span><span class="kw">sapply</span>(folds, knn_accuracy)
+accs</code></pre></div>
+<pre><code>##    Fold01    Fold02    Fold03    Fold04    Fold05    Fold06    Fold07    Fold08 
+## 0.9333333 0.9333333 0.9333333 1.0000000 1.0000000 1.0000000 1.0000000 0.9333333 
+##    Fold09    Fold10 
+## 1.0000000 1.0000000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(accs)</code></pre></div>
+<pre><code>## [1] 0.9733333</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
 </div>
 </div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Repeat the above for k=1, 3, 5, … to 25 and plot the average accuracy as a function of k.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
 </div>
 </div>
+<div class="solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-77" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-77', 'sol-start-77')"></span>
+</p>
+<div id="sol-body-77" class="solution-body" style="display: none;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accs &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">k =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">25</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">acc =</span> <span class="kw">mean</span>(<span class="kw">sapply</span>(folds, knn_accuracy, k))) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ungroup</span>()
+accs</code></pre></div>
+<pre><code>## # A tibble: 13 x 2
+##        k   acc
+##    &lt;dbl&gt; &lt;dbl&gt;
+##  1     1 0.953
+##  2     3 0.96 
+##  3     5 0.967
+##  4     7 0.98 
+##  5     9 0.96 
+##  6    11 0.98 
+##  7    13 0.98 
+##  8    15 0.973
+##  9    17 0.973
+## 10    19 0.98 
+## 11    21 0.98 
+## 12    23 0.98 
+## 13    25 0.96</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accs <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> acc)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>()</code></pre></div>
+<div class="figure">
+<span id="fig:unnamed-chunk-90"></span>
+<p class="caption marginnote shownote">
+Figure 10.5: Average classification accuracy as a function of the parameter k.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-90-1.png" alt="Average classification accuracy as a function of the parameter k." width="672">
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+
 </div>
 </div></body></html>
 
@@ -412,7 +714,7 @@ vote</code></pre></div>
 <a href="sec-biovis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-28
+2019-11-29
 </p>
 </div>
 </div>

@@ -242,7 +242,7 @@ p1 / p2
   
 - Compare the labels of its 15 closest labelled data points.
 
-`r msmbstyle::question_begin()`
+`r msmbstyle::question_end()`
 
 
 `r msmbstyle::solution_begin()`
@@ -269,4 +269,228 @@ vote %>%
     geom_hline(yintercept = 0)
 ```
 
+`r msmbstyle::solution_end()`
+
+As we have seen, the number of nearest neighbours *k* has an important
+influence on the classification results. We can now refine our
+understanding of the `knn` function; it has the following arguments:
+
+1. the labelled predictors, that will be used to *train* the model,
+2. the unlabelled preductors, on which the model will be applied (see
+   below why this is called *test*),
+3. the labels (the length of this vector must match the number of rows
+   of the labelled predictors),
+4. the number of neighbours to use,
+5. when set to `TRUE`, the `prob` argument also return the proportion
+   of votes in favour of the assigned class.
+
+`r msmbstyle::question_begin()`
+
+- Repeat the kNN search comparing k=1 (as in our first attempt) and
+  k=11 and compare the result.
+  
+- Which one is correct?
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r}
+knn_1 <- knn(giris2_labelled[, -5], giris2_unlabelled[, -5], giris2_labelled[, 5], k = 1)
+knn_11 <- knn(giris2_labelled[, -5], giris2_unlabelled[, -5], giris2_labelled[, 5], k = 11)
+table(knn_1, knn_11)
+```
+`r msmbstyle::solution_end()`
+
+## Model selection
+
+There is no way to decide which set of results above, using k=1, 2,
+... 11 or any other value for k is better. At least not while
+proceding as above. To be able to make an informed decision about the
+**model parameter** k, we need to to measure the **performance** of
+the kNN clasifier for different values of k. Do do so, we are going to
+create **training** and **testing** sets using the labelled data. Each
+of these will be composed by a certain proportion of the original
+labelled data.
+
+Below, we denote the training predictors $X_{tr}$ and labels $Y_{tr}$ and 
+the testing predictors $X_{te}$ and labels $Y_{te}$.
+
+```{r, echo = FALSE, fig.cap = "Training and testing sets."}
+par(mar = c(1, 1, 1, 1))
+rWSBIM1322:::blank_plot()
+rect(1, 1, 8, 4, col = "orange", border = NA)
+rect(8.2, 1, 9.2, 4, col = "orange", border = NA)
+rect(1, 4.2, 8, 9, col = "steelblue", border = NA)
+rect(8.2, 4.2, 9.2, 9, col = "steelblue", border = NA)
+rect(1, 1, 8, 9, lwd = 2)
+text(4.5, 9.5, "X", cex = 3)
+rect(8.2, 1, 9.2, 9, lwd = 2)
+text(8.7, 9.5, "Y", cex = 3)
+text(4.5, 7, expression(X[tr]), cex = 2)
+text(4.5, 2.5, expression(X[te]), cex = 2)
+text(8.7, 7, expression(Y[tr]), cex = 2)
+text(8.7, 2.5, expression(Y[te]), cex = 2)
+text(9.6, 6.5, expression(training), srt = 90, cex = 1.5)
+text(9.6, 2.5, expression(testing), srt = 90, cex = 1.5)
+```
+
+We are now going to do the following procedure
+
+1. hide the testing labels $Y_{te}$,
+2. train a classifier model using $X_{tr}$ and $Y_{tr}$,
+3. apply in on $X_{te}$ to obtain a new $Y_{tr}^{predicted}$, and 
+4. compare $Y_{tr}$ to $Y_{tr}^{predicted}$.
+
+There are numerous different ways to measure the performace of a
+classifier using $Y_{tr}$ and $Y_{tr}^{predicted}$. 
+We are going to focus on the **classification accuracy**, counting the
+proportion of correct results.
+
+
+`r msmbstyle::question_begin()`
+Choose 100 random labelled data points to define the training
+data. Use the 50 others as test data.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+set.seed(1)
+i <- sample(150, 100)
+giris2_train <- giris2_labelled[i, ]
+giris2_test <- giris2_labelled[-i, ]
+```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Run two kNN classifications, one with k = 1, then one with k = 11 and
+compare each to the true results. Interprete these results.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r}
+test_1 <- knn(giris2_train[, -5], giris2_test[, -5], giris2_train[, 5], k = 1)
+test_11 <- knn(giris2_train[, -5], giris2_test[, -5], giris2_train[, 5], k = 11)
+table(test_1, giris2_test[, 5])
+table(test_11, giris2_test[, 5])
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Calculate the classification accuracy of the two classifiers above.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r}
+sum(test_1 == giris2_test[, 5])/length(test_1)
+sum(test_11 == giris2_test[, 5])/length(test_11)
+```
+`r msmbstyle::solution_end()`
+
+
+There are now two adjustments that we can do improve on the procedure
+above:
+
+1. Test all odd value of k from 1 to 11 (or higher, if deemed useful),
+   to have a better granularity of the model paramter we test.
+
+2. Testing more than on training/testing split using. Indeed, relying
+   on a single split we rely on a random split, that could affect that
+   results either overly optimistically, or negatively. We prefer to
+   repeat the split *a certain number of time* and calculate an
+   average performance over all splits.
+
+## k-fold cross-validation
+
+There exist several principled ways to split data into training and
+testing partitions. Here, we are going to focus on k-fold
+cross-validation, where data of size $n$ a repeatedly split into a training 
+set of size around $\frac{n (k - 1)}{k}$ and a testing set of size arond $\frac{n}{k}$.
+
+In practice, the data are split into k partitions of size $\frac{n}{k}$, 
+and the training/testing procedure is repeated $k$ times using $k - 1$ partition 
+as training data and 1 partition as testing data.
+
+The figure below illustrates the cross validation procedure, creating
+3 folds. One would typically do a 10-fold cross validation (if the
+size of the data permits it). We split the data into 3 random and
+complementary folds, so that each data point appears exactly once in
+each fold. This leads to a total test set size that is identical to
+the size of the full dataset but is composed of out-of-sample
+predictions (i.e. a sample is never used for training and testing).
+
+```{r, echo = FALSE, fig.cap = "The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (orange) and the two other ones (white) are used to train the model.", out.width='100%', fig.align='center'}
+knitr::include_graphics("./figs/xval.png")
+```
+
+After cross-validation, all models used within each fold are
+discarded, and a new model is built using the whole labelled dataset,
+with the best model parameter(s), i.e those that generalised over all
+folds. This makes cross-validation quite time consuming, as it takes
+x+1 (where x in the number of cross-validation folds) times as long as
+fitting a single model, but is essential.
+
+
+`r msmbstyle::question_begin()`
+Use the `createFolds` function from the `caret` package, passing it
+the labelled tags, to create 10 folds. Verify that each sample is
+present only once.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+folds <- caret::createFolds(giris2_labelled[[5]], k = 10)
+folds
+all(sort(unlist(folds)) == 1:150)
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Focusing now k=11 and using the folds above, calculate the
+classification accuracy in each case and compute the average accuracy
+for k=11.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+knn_accuracy <- function(fld, k = 11) {
+    giris2_train <- giris2_labelled[-fld, ]
+    giris2_test <- giris2_labelled[fld, ]
+    test_k <- knn(giris2_train[, -5],
+                  giris2_test[, -5],
+                  giris2_train[, 5],
+                  k)
+    sum(test_k == giris2_test[, 5])/length(test_k)
+}
+
+accs <- sapply(folds, knn_accuracy)
+accs
+mean(accs)
+```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Repeat the above for k=1, 3, 5, ... to 25 and plot the average
+accuracy as a function of k.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r, fig.cap = "Average classification accuracy as a function of the parameter k."}
+accs <- tibble(k = seq(1, 25, 2)) %>%
+    rowwise() %>%
+    mutate(acc = mean(sapply(folds, knn_accuracy, k))) %>%
+    ungroup()
+accs
+
+accs %>%
+    ggplot(aes(x = k, y = acc)) +
+    geom_point() + 
+    geom_line()
+```
 `r msmbstyle::solution_end()`
