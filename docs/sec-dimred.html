@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
@@ -52,68 +52,41 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 
@@ -168,65 +141,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <html><body><div id="sec:dimred" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 8</span> Unsupervised learning: dimensionality reduction</h1>
-<p>In <strong>unsupervised learning</strong> (UML), no labels are provided, and the
-learning algorithm focuses solely on detecting structure in unlabelled
-input data. One generally differentiates between</p>
+<p>In <strong>unsupervised learning</strong> (UML), no labels are provided, and the learning algorithm focuses solely on detecting structure in unlabelled input data. One generally differentiates between</p>
 <ul>
 <li>
-<strong>Clustering</strong> (see chapter <a href="sec-ul.html#sec:ul">9</a>), where the goal is to
-find homogeneous subgroups within the data; the grouping is based on
-similiarities (or distance) between observations. The result of a
-clustering algorithm is to group the observations (features) into
-distinct (generally non-overlapping) groups. These groups are, even
-of imperfect (i.e. ignoring intermediate states) are often very
-useful in interpretation and assessment of the data.</li>
+<strong>Clustering</strong> (see chapter <a href="sec-ul.html#sec:ul">9</a>), where the goal is to find homogeneous subgroups within the data; the grouping is based on similiarities (or distance) between observations. The result of a clustering algorithm is to group the observations (features) into distinct (generally non-overlapping) groups. These groups are, even of imperfect (i.e. ignoring intermediate states) are often very useful in interpretation and assessment of the data.</li>
 </ul>
-<p>There is however one important caveat with clustering: clustering
-algorithms will always find clusters, even when none exists. It is
-thus essential to critically assess and validate (for example using
-existing domain knowledge) the results of any clustering algorithm.</p>
+<p>There is however one important caveat with clustering: clustering algorithms will always find clusters, even when none exists. It is thus essential to critically assess and validate (for example using existing domain knowledge) the results of any clustering algorithm.</p>
 <ul>
 <li>
-<strong>Dimensionality reduction</strong> (see chapter <a href="sec-dimred.html#sec:dimred">8</a>), where
-the goal is to summarise the data in a reduced number of
-dimensations, i.e. using a reduced number of (newly computer)
-variables. A typical example in omics is to summarise (and
-visualise) the relation between samples along two dimensions (which
-can easily be plotted) even if the data consists of tens of
-thousands of dimensions ( genes). Dimensionality reduction is often
-used to facilitate visualisation of the data, as well as a
-pre-processing method before supervised learning.</li>
+<strong>Dimensionality reduction</strong> (see chapter <a href="sec-dimred.html#sec:dimred">8</a>), where the goal is to summarise the data in a reduced number of dimensations, i.e. using a reduced number of (newly computer) variables. A typical example in omics is to summarise (and visualise) the relation between samples along two dimensions (which can easily be plotted) even if the data consists of tens of thousands of dimensions ( genes). Dimensionality reduction is often used to facilitate visualisation of the data, as well as a pre-processing method before supervised learning.</li>
 </ul>
 <p>UML presents specific challenges and benefits:</p>
 <ul>
 <li>Challenge: there is no single goal in UML</li>
-<li>Benefit: there is generally much more unlabelled data available than
-labelled data.</li>
+<li>Benefit: there is generally much more unlabelled data available than labelled data.</li>
 </ul>
 <p>This chapter has as objectives to</p>
 <ul>
 <li>introduce dimensionality reduction techniques;</li>
-<li>provide the students with an understanding of what principal
-compoment analysis achieves;</li>
+<li>provide the students with an understanding of what principal compoment analysis achieves;</li>
 <li>show how to perform a PCA analysis;</li>
 <li>provide real-life scenarios of PCA analyses on omics data.</li>
 </ul>
 <div id="introduction-3" class="section level2">
 <h2>
 <span class="header-section-number">8.1</span> Introduction</h2>
-<p>In this chapter, we are going to learn about dimensionality reduction,
-also called ordination. The goal of dimensionality reduction is to
-transform a high-dimensinal data into data of lesser dimensions while
-minimise the loss of information.</p>
-<p>Dimensionality reduction is used as a data transformation technique
-for input to other machine learning methods such as classifications,
-or as a very efficient visualisation technique, which is the use case
-we will focus on here. We are going to focus on a widerly used method
-called Principal Component Analysis (PCA).</p>
-<p>We are going to use the following dataset to illustrate some important
-concepts that are scale and central to PCA. The small dataset show
-below represents the measurement of genes <em>x</em> and <em>y</em> in 20
-samples. We will be using the scaled and centred version of this data.</p>
+<p>In this chapter, we are going to learn about dimensionality reduction, also called ordination. The goal of dimensionality reduction is to transform a high-dimensinal data into data of lesser dimensions while minimise the loss of information.</p>
+<p>Dimensionality reduction is used as a data transformation technique for input to other machine learning methods such as classifications, or as a very efficient visualisation technique, which is the use case we will focus on here. We are going to focus on a widerly used method called Principal Component Analysis (PCA).</p>
+<p>We are going to use the following dataset to illustrate some important concepts that are scale and central to PCA. The small dataset show below represents the measurement of genes <em>x</em> and <em>y</em> in 20 samples. We will be using the scaled and centred version of this data.</p>
 <div class="figure">
 <span id="fig:xyplot"></span>
 <p class="caption marginnote shownote">
@@ -238,11 +180,7 @@ Figure 8.1: Raw (left) and scale/centred (right) expression data for genes <em>x
 <div id="lower-dimensional-projections" class="section level2">
 <h2>
 <span class="header-section-number">8.2</span> Lower-dimensional projections</h2>
-<p>The goal of dimensionality reduction is to reduce the number of
-dimensions in a way that the new data remains useful. One way to
-reduce a 2-dimensional data is by projecting the data onto a
-lines. Below, we project our data on the x and y axes. These are
-called <strong>linear projections</strong>.</p>
+<p>The goal of dimensionality reduction is to reduce the number of dimensions in a way that the new data remains useful. One way to reduce a 2-dimensional data is by projecting the data onto a lines. Below, we project our data on the x and y axes. These are called <strong>linear projections</strong>.</p>
 <div class="figure">
 <span id="fig:linproj"></span>
 <p class="caption marginnote shownote">
@@ -250,18 +188,9 @@ Figure 8.2: Projection of the data on the x (left) and y (right) axes.
 </p>
 <img src="WSBIM1322_files/figure-html/linproj-1.png" alt="Projection of the data on the x (left) and y (right) axes." width="1056">
 </div>
-<p>In general, and in particular in the projections above, we loose
-information when reducing the number of dimensions (above, from 2
-(plane) to 1 (line)). In the first example above (left), we loose all
-the measurements of gene <em>y</em>. In the second example (right), we loose
-all the measurements of gene <em>x</em>.</p>
+<p>In general, and in particular in the projections above, we loose information when reducing the number of dimensions (above, from 2 (plane) to 1 (line)). In the first example above (left), we loose all the measurements of gene <em>y</em>. In the second example (right), we loose all the measurements of gene <em>x</em>.</p>
 <p>The goal of dimensionality reduction is to limit this loss.</p>
-<p>We know already about <strong>linear regression</strong>. Below, we use the <code>lm</code>
-function to regress <em>y</em> onto <em>x</em> (left) and <em>x</em> onto <em>y</em>
-(right). These regression lines give us an approximate linear
-relationship between the expression of genes <em>x</em> and <em>y</em>. The
-relationship differs depending on which gene we choose to be the
-predictor adn the response.</p>
+<p>We know already about <strong>linear regression</strong>. Below, we use the <code>lm</code> function to regress <em>y</em> onto <em>x</em> (left) and <em>x</em> onto <em>y</em> (right). These regression lines give us an approximate linear relationship between the expression of genes <em>x</em> and <em>y</em>. The relationship differs depending on which gene we choose to be the predictor adn the response.</p>
 <div class="figure">
 <span id="fig:linreg"></span>
 <p class="caption marginnote shownote">
@@ -269,9 +198,7 @@ Figure 8.3: Regression of y onto x (left) minimisises the sums of squares of ver
 </p>
 <img src="WSBIM1322_files/figure-html/linreg-1.png" alt="Regression of y onto x (left) minimisises the sums of squares of vertical residuals (red). Regression of x onto y (right) minimisises the sums of squares of horizontal residuals (orange)." width="1056">
 </div>
-<p>We now want a line that minimises distances in both directions, as
-shown below. This line, called <strong>principal compoment</strong>, is also the
-ones that maximises the variance of the projections along itself.</p>
+<p>We now want a line that minimises distances in both directions, as shown below. This line, called <strong>principal compoment</strong>, is also the ones that maximises the variance of the projections along itself.</p>
 <div class="figure">
 <span id="fig:pxaex"></span>
 <p class="caption marginnote shownote">
@@ -279,8 +206,7 @@ Figure 8.4: The first prinicpal component minimises the sum of squares of the or
 </p>
 <img src="WSBIM1322_files/figure-html/pxaex-1.png" alt="The first prinicpal component minimises the sum of squares of the orthogonal projections." width="1104">
 </div>
-<p>The second principal component is then chosen to be orthogonal to the
-first one. In our case above, there is only one possibility.</p>
+<p>The second principal component is then chosen to be orthogonal to the first one. In our case above, there is only one possibility.</p>
 <div class="figure">
 <span id="fig:pxaex2"></span>
 <p class="caption marginnote shownote">
@@ -288,14 +214,8 @@ Figure 8.5: The second prinicpal component is orthogonal to the second one.
 </p>
 <img src="WSBIM1322_files/figure-html/pxaex2-1.png" alt="The second prinicpal component is orthogonal to the second one." width="1056">
 </div>
-<p>In the example above the variance, the variance along the PCs are
-1.77 and 0.23. The first one explains
-88.6% or that variance, and the second one merely
-11.4%. This is also reflected in the different
-scales along the x and y axis.</p>
-<p>To account for these differences in variation along the different PCs,
-it is better to represent a PCA plot as a rectangle, using an aspect
-ratio that is illustrative of the respective variances.</p>
+<p>In the example above the variance, the variance along the PCs are 1.77 and 0.23. The first one explains 88.6% or that variance, and the second one merely 11.4%. This is also reflected in the different scales along the x and y axis.</p>
+<p>To account for these differences in variation along the different PCs, it is better to represent a PCA plot as a rectangle, using an aspect ratio that is illustrative of the respective variances.</p>
 <div class="figure">
 <span id="fig:pxaex3"></span>
 <p class="caption marginnote shownote">
@@ -307,29 +227,19 @@ Figure 8.6: Final principal component analysis of the data.
 <div id="the-new-linear-combinations" class="section level2">
 <h2>
 <span class="header-section-number">8.3</span> The new linear combinations</h2>
-<p>Principal components are linear combinations of the variables that
-were originally measured, they provide a new coordinate system. The
-PC in the previous example is a linear combination of <em>gene_x</em> and
-<em>gene_y</em>, more specifically</p>
+<p>Principal components are linear combinations of the variables that were originally measured, they provide a new coordinate system. The PC in the previous example is a linear combination of <em>gene_x</em> and <em>gene_y</em>, more specifically</p>
 <p><span class="math display">\[ PC = c_{1} ~ gene_{x} + c_{2} ~ gene_{y} \]</span></p>
 <p>It has coefficients <span class="math inline">\((c_1, c_2)\)</span>, also called loading.</p>
-<p>PCA in general will find linear combinations of the original
-variables. These new linear combinations will maximise the variance
-of the data.</p>
+<p>PCA in general will find linear combinations of the original variables. These new linear combinations will maximise the variance of the data.</p>
 </div>
 <div id="summary-and-application" class="section level2">
 <h2>
 <span class="header-section-number">8.4</span> Summary and application</h2>
-<p>Principal Component Analysis (PCA) is a technique that transforms the
-original n-dimensional data into a new space.</p>
+<p>Principal Component Analysis (PCA) is a technique that transforms the original n-dimensional data into a new space.</p>
 <ul>
-<li><p>These new dimensions are linear combinations of the original data,
-i.e. they are composed of proportions of the original variables.</p></li>
-<li><p>Along these new dimensions, called principal components, the data
-expresses most of its variability along the first PC, then second,
-…</p></li>
-<li><p>Principal components are orthogonal to each other,
-i.e. non-correlated.</p></li>
+<li><p>These new dimensions are linear combinations of the original data, i.e. they are composed of proportions of the original variables.</p></li>
+<li><p>Along these new dimensions, called principal components, the data expresses most of its variability along the first PC, then second, …</p></li>
+<li><p>Principal components are orthogonal to each other, i.e. non-correlated.</p></li>
 </ul>
 <div class="figure fullwidth">
 <span id="fig:pcaex"></span>
@@ -337,22 +247,18 @@ i.e. non-correlated.</p></li>
 Figure 8.7: Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).
 </p>
 </div>
-<p>In R, we can use the <code>prcomp</code> function. A summary of the <code>prcomp</code>
-output shows that along PC1 along, we are able to retain close to 92%
-of the total variability in the data.</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="sec-dimred.html#cb290-1"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb290-2"><a href="sec-dimred.html#cb290-2"></a><span class="kw">data</span>(xy)</span>
-<span id="cb290-3"><a href="sec-dimred.html#cb290-3"></a>pca_xy &lt;-<span class="st"> </span><span class="kw">prcomp</span>(xy)</span>
-<span id="cb290-4"><a href="sec-dimred.html#cb290-4"></a><span class="kw">summary</span>(pca_xy)</span></code></pre></div>
+<p>In R, we can use the <code>prcomp</code> function. A summary of the <code>prcomp</code> output shows that along PC1 along, we are able to retain close to 92% of the total variability in the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)
+<span class="kw">data</span>(xy)
+pca_xy &lt;-<span class="st"> </span><span class="kw">prcomp</span>(xy)
+<span class="kw">summary</span>(pca_xy)</code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2
 ## Standard deviation     1.3308 0.4784
 ## Proportion of Variance 0.8856 0.1144
 ## Cumulative Proportion  0.8856 1.0000</code></pre>
-<p>This <code>pca_xy</code> variable is an object of class <code>prcomp</code>. To learn what
-it contains, we can look at its structure with <code>str</code> and read the
-<code>?prcomp</code> manual page.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="sec-dimred.html#cb292-1"></a><span class="kw">str</span>(pca_xy)</span></code></pre></div>
+<p>This <code>pca_xy</code> variable is an object of class <code>prcomp</code>. To learn what it contains, we can look at its structure with <code>str</code> and read the <code>?prcomp</code> manual page.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(pca_xy)</code></pre></div>
 <pre><code>## List of 5
 ##  $ sdev    : num [1:2] 1.331 0.478
 ##  $ rotation: num [1:2, 1:2] 0.707 0.707 -0.707 0.707
@@ -370,23 +276,19 @@ it contains, we can look at its structure with <code>str</code> and read the
 <p>We are going to focus on two elements:</p>
 <ul>
 <li>
-<strong>sdev</strong> contains the standard deviations along the respective PCs
-(as also displayed in the summary). From these, we can compute the
-variances, the percentages of variance explained by the individual
-PCs, and the cumulative variances.</li>
+<strong>sdev</strong> contains the standard deviations along the respective PCs (as also displayed in the summary). From these, we can compute the variances, the percentages of variance explained by the individual PCs, and the cumulative variances.</li>
 </ul>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="sec-dimred.html#cb294-1"></a>(var &lt;-<span class="st"> </span>pca_xy<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(var &lt;-<span class="st"> </span>pca_xy<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## [1] 1.7711407 0.2288593</code></pre>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="sec-dimred.html#cb296-1"></a>(pve &lt;-<span class="st"> </span>var<span class="op">/</span><span class="kw">sum</span>(var))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(pve &lt;-<span class="st"> </span>var<span class="op">/</span><span class="kw">sum</span>(var))</code></pre></div>
 <pre><code>## [1] 0.8855704 0.1144296</code></pre>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="sec-dimred.html#cb298-1"></a><span class="kw">cumsum</span>(pve)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(pve)</code></pre></div>
 <pre><code>## [1] 0.8855704 1.0000000</code></pre>
 <ul>
 <li>
-<strong>x</strong> contains the coordinates of the data along the PCs. These are
-the values we could use to produce the PCA plot as above by hand.</li>
+<strong>x</strong> contains the coordinates of the data along the PCs. These are the values we could use to produce the PCA plot as above by hand.</li>
 </ul>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="sec-dimred.html#cb300-1"></a>pca_xy<span class="op">$</span>x</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_xy<span class="op">$</span>x</code></pre></div>
 <pre><code>##               PC1         PC2
 ##  [1,] -2.72848772  0.17019003
 ##  [2,] -2.40018291  0.11371158
@@ -408,17 +310,14 @@ the values we could use to produce the PCA plot as above by hand.</li>
 ## [18,]  1.28218805 -0.32631519
 ## [19,]  1.46938699 -0.32768480
 ## [20,]  0.72379344 -1.24506826</code></pre>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="sec-dimred.html#cb302-1"></a><span class="kw">plot</span>(pca_xy<span class="op">$</span>x)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca_xy<span class="op">$</span>x)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/pcaplot-1.png" width="672"></p>
 </div>
 <div id="visualisation" class="section level2">
 <h2>
 <span class="header-section-number">8.5</span> Visualisation</h2>
-<p>A <strong>biplot</strong> features all original points re-mapped (rotated) along the
-first two PCs as well as the original features as vectors along the
-same PCs. Feature vectors that are in the same direction in PC space
-are also correlated in the original data space.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="sec-dimred.html#cb303-1"></a><span class="kw">biplot</span>(pca_xy)</span></code></pre></div>
+<p>A <strong>biplot</strong> features all original points re-mapped (rotated) along the first two PCs as well as the original features as vectors along the same PCs. Feature vectors that are in the same direction in PC space are also correlated in the original data space.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca_xy)</code></pre></div>
 <div class="figure">
 <span id="fig:biplot"></span>
 <p class="caption marginnote shownote">
@@ -426,13 +325,8 @@ Figure 8.8: A biplot shows both the variables (arrows) and observations of the P
 </p>
 <img src="WSBIM1322_files/figure-html/biplot-1.png" alt="A biplot shows both the variables (arrows) and observations of the PCA analysis." width="672">
 </div>
-<p>One important piece of information when using PCA is the proportion of
-variance explained along the PCs (see above), in particular when
-dealing with high dimensional data, as PC1 and PC2 (that are generally
-used for visualisation), might only account for an insufficient
-proportion of variance to be relevant on their own. This can be
-visualised on a <strong>screeplot</strong>, that can be produced with</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="sec-dimred.html#cb304-1"></a><span class="kw">plot</span>(pca_xy)</span></code></pre></div>
+<p>One important piece of information when using PCA is the proportion of variance explained along the PCs (see above), in particular when dealing with high dimensional data, as PC1 and PC2 (that are generally used for visualisation), might only account for an insufficient proportion of variance to be relevant on their own. This can be visualised on a <strong>screeplot</strong>, that can be produced with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca_xy)</code></pre></div>
 <div class="figure">
 <span id="fig:screeplot"></span>
 <p class="caption marginnote shownote">
@@ -445,9 +339,7 @@ Figure 8.9: Screeplot showing the variances for the PCs.
 ► Question
 </p>
 <div class="question-body">
-<p>Repeat the analysis above with the <code>xy0</code> data, that you can load
-from the <code>rWSBIM1322</code> data. First scale it, then repeat the PCA
-analysis as shown above.</p>
+<p>Repeat the analysis above with the <code>xy0</code> data, that you can load from the <code>rWSBIM1322</code> data. First scale it, then repeat the PCA analysis as shown above.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -458,17 +350,17 @@ analysis as shown above.</p>
 ► Solution<span id="sol-start-41" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-41', 'sol-start-41')"></span>
 </p>
 <div id="sol-body-41" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="sec-dimred.html#cb305-1"></a>xy &lt;-<span class="st"> </span><span class="kw">scale</span>(xy0)</span>
-<span id="cb305-2"><a href="sec-dimred.html#cb305-2"></a>pca1 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(xy)</span>
-<span id="cb305-3"><a href="sec-dimred.html#cb305-3"></a><span class="kw">summary</span>(pca1)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xy &lt;-<span class="st"> </span><span class="kw">scale</span>(xy0)
+pca1 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(xy)
+<span class="kw">summary</span>(pca1)</code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2
 ## Standard deviation     1.3308 0.4784
 ## Proportion of Variance 0.8856 0.1144
 ## Cumulative Proportion  0.8856 1.0000</code></pre>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="sec-dimred.html#cb307-1"></a><span class="kw">screeplot</span>(pca1)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screeplot</span>(pca1)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/pcaex1-1.png" width="672"></p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="sec-dimred.html#cb308-1"></a><span class="kw">biplot</span>(pca1)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca1)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/pcaex1-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -480,9 +372,7 @@ analysis as shown above.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>cptac_prot</code> data, scale the data (see below for why scaling
-is important), then perform the PCA analysis and interpret it. Also
-produce a PCA for PCs 2 and 3.</p>
+<p>Load the <code>cptac_prot</code> data, scale the data (see below for why scaling is important), then perform the PCA analysis and interpret it. Also produce a PCA for PCs 2 and 3.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -493,23 +383,23 @@ produce a PCA for PCs 2 and 3.</p>
 ► Solution<span id="sol-start-42" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-42', 'sol-start-42')"></span>
 </p>
 <div id="sol-body-42" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="sec-dimred.html#cb309-1"></a><span class="kw">library</span>(<span class="st">"MSnbase"</span>)</span>
-<span id="cb309-2"><a href="sec-dimred.html#cb309-2"></a><span class="kw">data</span>(cptac_prot)</span>
-<span id="cb309-3"><a href="sec-dimred.html#cb309-3"></a>x &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="kw">exprs</span>(cptac_prot))</span>
-<span id="cb309-4"><a href="sec-dimred.html#cb309-4"></a>pca2 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x)</span>
-<span id="cb309-5"><a href="sec-dimred.html#cb309-5"></a><span class="kw">summary</span>(pca2)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"MSnbase"</span>)
+<span class="kw">data</span>(cptac_prot)
+x &lt;-<span class="st"> </span><span class="kw">scale</span>(<span class="kw">exprs</span>(cptac_prot))
+pca2 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x)
+<span class="kw">summary</span>(pca2)</code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4     PC5     PC6
 ## Standard deviation     2.3718 0.4106 0.30777 0.22335 0.20650 0.13692
 ## Proportion of Variance 0.9376 0.0281 0.01579 0.00831 0.00711 0.00312
 ## Cumulative Proportion  0.9376 0.9657 0.98145 0.98977 0.99688 1.00000</code></pre>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="sec-dimred.html#cb311-1"></a><span class="kw">screeplot</span>(pca2)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screeplot</span>(pca2)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/pcaex2-1.png" width="672"></p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="sec-dimred.html#cb312-1"></a><span class="kw">biplot</span>(pca2)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca2)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/pcaex2-2.png" width="672"></p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="sec-dimred.html#cb313-1"></a><span class="kw">plot</span>(pca2<span class="op">$</span>x[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca2<span class="op">$</span>x[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>])</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/pcaex2-3.png" width="672"></p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="sec-dimred.html#cb314-1"></a><span class="kw">biplot</span>(pca2, <span class="dt">choices =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca2, <span class="dt">choices =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/pcaex2-4.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -521,9 +411,7 @@ produce a PCA for PCs 2 and 3.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>In the exercise above, the PCA was performed on the features
-(proteins). Transpose the data and produce a PCA of the
-samples. Interprete the figures.</p>
+<p>In the exercise above, the PCA was performed on the features (proteins). Transpose the data and produce a PCA of the samples. Interprete the figures.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -534,17 +422,17 @@ samples. Interprete the figures.</p>
 ► Solution<span id="sol-start-43" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-43', 'sol-start-43')"></span>
 </p>
 <div id="sol-body-43" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="sec-dimred.html#cb315-1"></a>x_t &lt;-<span class="st"> </span><span class="kw">t</span>(x)</span>
-<span id="cb315-2"><a href="sec-dimred.html#cb315-2"></a>pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)</span>
-<span id="cb315-3"><a href="sec-dimred.html#cb315-3"></a><span class="kw">summary</span>(pca3)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x_t &lt;-<span class="st"> </span><span class="kw">t</span>(x)
+pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
+<span class="kw">summary</span>(pca3)</code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3    PC4     PC5       PC6
-## Standard deviation     1.9522 1.4632 1.0618 0.9817 0.65186 6.586e-16
+## Standard deviation     1.9522 1.4632 1.0618 0.9817 0.65186 6.826e-16
 ## Proportion of Variance 0.4501 0.2528 0.1331 0.1138 0.05018 0.000e+00
 ## Cumulative Proportion  0.4501 0.7029 0.8360 0.9498 1.00000 1.000e+00</code></pre>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="sec-dimred.html#cb317-1"></a><span class="kw">screeplot</span>(pca3)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screeplot</span>(pca3)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-48-1.png" width="672"></p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="sec-dimred.html#cb318-1"></a><span class="kw">biplot</span>(pca3)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">biplot</span>(pca3)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-48-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -555,18 +443,13 @@ samples. Interprete the figures.</p>
 <div id="pre-processing-and-missing-values-with-pca" class="section level2">
 <h2>
 <span class="header-section-number">8.6</span> Pre-processing and missing values with PCA</h2>
-<p>We haven’t looked at other <code>prcomp</code> parameters, other that the first
-one, <code>x</code>. There are two other ones that are or importance, in
-particular in the light of the section on pre-processing above, which
-are <code>center</code> and <code>scale.</code>. The former is set to <code>TRUE</code> by default,
-while the second one is set the <code>FALSE</code>.</p>
+<p>We haven’t looked at other <code>prcomp</code> parameters, other that the first one, <code>x</code>. There are two other ones that are or importance, in particular in the light of the section on pre-processing above, which are <code>center</code> and <code>scale.</code>. The former is set to <code>TRUE</code> by default, while the second one is set the <code>FALSE</code>.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Perform a PCA analysis on the <code>mtcars</code> dataset with and without
-scaling. Compare and interpret the results.</p>
+<p>Perform a PCA analysis on the <code>mtcars</code> dataset with and without scaling. Compare and interpret the results.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -577,36 +460,18 @@ scaling. Compare and interpret the results.</p>
 ► Solution<span id="sol-start-44" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-44', 'sol-start-44')"></span>
 </p>
 <div id="sol-body-44" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="sec-dimred.html#cb319-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb319-2"><a href="sec-dimred.html#cb319-2"></a><span class="kw">biplot</span>(<span class="kw">prcomp</span>(mtcars, <span class="dt">scale =</span> <span class="ot">FALSE</span>), <span class="dt">main =</span> <span class="st">"No scaling"</span>)  <span class="co">## 1</span></span>
-<span id="cb319-3"><a href="sec-dimred.html#cb319-3"></a><span class="kw">biplot</span>(<span class="kw">prcomp</span>(mtcars, <span class="dt">scale =</span> <span class="ot">TRUE</span>), <span class="dt">main =</span> <span class="st">"With scaling"</span>) <span class="co">## 2</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+<span class="kw">biplot</span>(<span class="kw">prcomp</span>(mtcars, <span class="dt">scale =</span> <span class="ot">FALSE</span>), <span class="dt">main =</span> <span class="st">"No scaling"</span>)  ## 1
+<span class="kw">biplot</span>(<span class="kw">prcomp</span>(mtcars, <span class="dt">scale =</span> <span class="ot">TRUE</span>), <span class="dt">main =</span> <span class="st">"With scaling"</span>) ## 2</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/scalepcasol-1.png" width="672"></p>
-<p>Without scaling, <code>disp</code> and <code>hp</code> are the features with the highest
-loadings along PC1 and 2 (all others are negligible), which are also
-those with the highest units of measurement. Scaling removes this
-effect.</p>
+<p>Without scaling, <code>disp</code> and <code>hp</code> are the features with the highest loadings along PC1 and 2 (all others are negligible), which are also those with the highest units of measurement. Scaling removes this effect.</p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
-<p>Real datasets often come with <em>missing values</em>. In R, these should be
-encoded using <code>NA</code>. Unfortunately, PCA cannot deal with missing
-values, and observations containing <code>NA</code> values will be dropped
-automatically. This is a viable solution only when the proportion of
-missing values is low. Otherwise, it is possible to impute missing
-values (which often requires great care) or use an implementation of
-PCA such as <em>non-linear iterative partial least squares</em> (NIPALS),
-that support missing values.</p>
-<p>Finally, we should be careful when using categorical data in any of
-the unsupervised methods. Categories are generally represented as
-factors, which are encoded as integer levels, and might give the
-impression that a distance between levels is a relevant measure (which
-it is not, unless the factors are ordered). In such situations,
-categorical data can be dropped, or it is possible to encode
-categories as binary <em>dummy variables</em>. For example, if we have 3
-categories, say <code>A</code>, <code>B</code> and <code>C</code>, we would create two dummy variables
-to encode the categories as:</p>
+<p>Real datasets often come with <em>missing values</em>. In R, these should be encoded using <code>NA</code>. Unfortunately, PCA cannot deal with missing values, and observations containing <code>NA</code> values will be dropped automatically. This is a viable solution only when the proportion of missing values is low. Otherwise, it is possible to impute missing values (which often requires great care) or use an implementation of PCA such as <em>non-linear iterative partial least squares</em> (NIPALS), that support missing values.</p>
+<p>Finally, we should be careful when using categorical data in any of the unsupervised methods. Categories are generally represented as factors, which are encoded as integer levels, and might give the impression that a distance between levels is a relevant measure (which it is not, unless the factors are ordered). In such situations, categorical data can be dropped, or it is possible to encode categories as binary <em>dummy variables</em>. For example, if we have 3 categories, say <code>A</code>, <code>B</code> and <code>C</code>, we would create two dummy variables to encode the categories as:</p>
 <pre><code>##   x y
 ## A 1 0
 ## B 0 1
@@ -616,51 +481,20 @@ to encode the categories as:</p>
 <div id="the-full-pca-workflow" class="section level2">
 <h2>
 <span class="header-section-number">8.7</span> The full PCA workflow</h2>
-<p>In this section, we will describe the detailed PCA analysis and
-interpretation of two real-life proteomics datasets. Both of these
-datasets are available in the <code>pRolocdata</code> package.</p>
+<p>In this section, we will describe the detailed PCA analysis and interpretation of two real-life proteomics datasets. Both of these datasets are available in the <code>pRolocdata</code> package.</p>
 <div id="sec:dimred01" class="section level3">
 <h3>
 <span class="header-section-number">8.7.1</span> Extra-embryonic endoderm differentiation in mouse embryonic stem cells</h3>
-<p>We are first going to focus on the data from Mulvey <em>et al.</em> (2015),
-where they present the <em>Dynamic proteomic profiling of extra-embryonic
-endoderm differentiation in mouse embryonic stem cells</em> <span class="citation">(Mulvey et al. <label for="tufte-mn-23" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-23" class="margin-toggle">2015<span class="marginnote">Mulvey, C M, C Schröter, L Gatto, D Dikicioglu, I Baris Fidaner, A Christoforou, M J Deery, et al. 2015. “Dynamic Proteomic Profiling of Extra-Embryonic Endoderm Differentiation in Mouse Embryonic Stem Cells.” <em>Stem Cells</em>, June. <a href="https://doi.org/10.1002/stem.2067">https://doi.org/10.1002/stem.2067</a>.</span>)</span>.</p>
+<p>We are first going to focus on the data from Mulvey <em>et al.</em> (2015), where they present the <em>Dynamic proteomic profiling of extra-embryonic endoderm differentiation in mouse embryonic stem cells</em> <span class="citation">(Mulvey et al. <label for="tufte-mn-23" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-23" class="margin-toggle">2015<span class="marginnote">Mulvey, C M, C Schröter, L Gatto, D Dikicioglu, I Baris Fidaner, A Christoforou, M J Deery, et al. 2015. “Dynamic Proteomic Profiling of Extra-Embryonic Endoderm Differentiation in Mouse Embryonic Stem Cells.” <em>Stem Cells</em>, June. doi:<a href="https://doi.org/10.1002/stem.2067">10.1002/stem.2067</a>.</span>)</span>.</p>
 <blockquote>
-<p>During mammalian preimplantation development, the cells of the
-blastocyst’s inner cell mass differentiate into the epiblast and
-primitive endoderm lineages, which give rise to the fetus and
-extra-embryonic tissues, respectively. Extra-embryonic endoderm
-(XEN) differentiation can be modeled in vitro by induced
-expression of GATA transcription factors in mouse embryonic stem
-cells. Here, we use this GATA-inducible system to quantitatively
-monitor the dynamics of global proteomic changes during the early
-stages of this differentiation event and also investigate the
-fully differentiated phenotype, as represented by embryo-derived
-XEN cells. Using mass spectrometry-based quantitative proteomic
-profiling with multivariate data analysis tools, we reproducibly
-quantified 2,336 proteins across three biological replicates and
-have identified clusters of proteins characterized by distinct,
-dynamic temporal abundance profiles. We first used this approach
-to highlight novel marker candidates of the pluripotent state and
-XEN differentiation. Through functional annotation enrichment
-analysis, we have shown that the downregulation of
-chromatin-modifying enzymes, the reorganization of membrane
-trafficking machinery, and the breakdown of cell-cell adhesion are
-successive steps of the extra-embryonic differentiation process.
-Thus, applying a range of sophisticated clustering approaches to a
-time-resolved proteomic dataset has allowed the elucidation of
-complex biological processes which characterize stem cell
-differentiation and could establish a general paradigm for the
-investigation of these processes.</p>
+<p>During mammalian preimplantation development, the cells of the blastocyst’s inner cell mass differentiate into the epiblast and primitive endoderm lineages, which give rise to the fetus and extra-embryonic tissues, respectively. Extra-embryonic endoderm (XEN) differentiation can be modeled in vitro by induced expression of GATA transcription factors in mouse embryonic stem cells. Here, we use this GATA-inducible system to quantitatively monitor the dynamics of global proteomic changes during the early stages of this differentiation event and also investigate the fully differentiated phenotype, as represented by embryo-derived XEN cells. Using mass spectrometry-based quantitative proteomic profiling with multivariate data analysis tools, we reproducibly quantified 2,336 proteins across three biological replicates and have identified clusters of proteins characterized by distinct, dynamic temporal abundance profiles. We first used this approach to highlight novel marker candidates of the pluripotent state and XEN differentiation. Through functional annotation enrichment analysis, we have shown that the downregulation of chromatin-modifying enzymes, the reorganization of membrane trafficking machinery, and the breakdown of cell-cell adhesion are successive steps of the extra-embryonic differentiation process. Thus, applying a range of sophisticated clustering approaches to a time-resolved proteomic dataset has allowed the elucidation of complex biological processes which characterize stem cell differentiation and could establish a general paradigm for the investigation of these processes.</p>
 </blockquote>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>mulvey2015</code> data from the <code>pRolocdata</code> package. Check its
-class and familiarise yourself with its experimental design stored in
-the <em>phenoData</em> slot that can be accessed with the <code>pData</code> function.</p>
+<p>Load the <code>mulvey2015</code> data from the <code>pRolocdata</code> package. Check its class and familiarise yourself with its experimental design stored in the <em>phenoData</em> slot that can be accessed with the <code>pData</code> function.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -671,12 +505,12 @@ the <em>phenoData</em> slot that can be accessed with the <code>pData</code> fun
 ► Solution<span id="sol-start-45" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-45', 'sol-start-45')"></span>
 </p>
 <div id="sol-body-45" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="sec-dimred.html#cb321-1"></a><span class="kw">library</span>(pRolocdata)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pRolocdata)</code></pre></div>
 <pre><code>## 
-## This is pRolocdata version 1.24.0.
+## This is pRolocdata version 1.22.0.
 ## Use 'pRolocdata()' to list available data sets.</code></pre>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="sec-dimred.html#cb323-1"></a><span class="kw">data</span>(mulvey2015)</span>
-<span id="cb323-2"><a href="sec-dimred.html#cb323-2"></a><span class="kw">pData</span>(mulvey2015)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mulvey2015)
+<span class="kw">pData</span>(mulvey2015)</code></pre></div>
 <pre><code>##           rep times cond
 ## rep1_0hr    1     1    1
 ## rep1_16hr   1     2    1
@@ -701,18 +535,14 @@ the <em>phenoData</em> slot that can be accessed with the <code>pData</code> fun
 </p>
 </div>
 </div>
-<p>Here, we will want to do a PCA analysis on the samples. We want to remap the
-18 samples from a 2337-dimensional space into 2, or
-possibly 3 dimensions. This will require to transpose the data matrix
-before passing it to the <code>prcomp</code> function.</p>
+<p>Here, we will want to do a PCA analysis on the samples. We want to remap the 18 samples from a 2337-dimensional space into 2, or possibly 3 dimensions. This will require to transpose the data matrix before passing it to the <code>prcomp</code> function.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
 <ul>
-<li>Run a PCA analysis on the samples of the <code>mulvey2015</code> data and
-display a summary of the results.</li>
+<li>Run a PCA analysis on the samples of the <code>mulvey2015</code> data and display a summary of the results.</li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -724,8 +554,8 @@ display a summary of the results.</li>
 ► Solution<span id="sol-start-46" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-46', 'sol-start-46')"></span>
 </p>
 <div id="sol-body-46" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="sec-dimred.html#cb325-1"></a>pca_mulvey2015 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">t</span>(<span class="kw">exprs</span>(mulvey2015)), <span class="dt">scale. =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb325-2"><a href="sec-dimred.html#cb325-2"></a><span class="kw">summary</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_mulvey2015 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">t</span>(<span class="kw">exprs</span>(mulvey2015)), <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
+<span class="kw">summary</span>(pca_mulvey2015)</code></pre></div>
 <pre><code>## Importance of components:
 ##                            PC1     PC2     PC3     PC4     PC5     PC6     PC7
 ## Standard deviation     34.2468 24.0808 16.8485 7.37212 6.79981 5.84729 5.50515
@@ -736,7 +566,7 @@ display a summary of the results.</li>
 ## Proportion of Variance 0.01149 0.0095 0.00857 0.00684 0.00644 0.00533 0.00451
 ## Cumulative Proportion  0.95359 0.9631 0.97166 0.97850 0.98494 0.99027 0.99479
 ##                           PC15    PC16   PC17      PC18
-## Standard deviation     3.04106 1.24069 1.1806 1.461e-14
+## Standard deviation     3.04106 1.24069 1.1806 1.636e-14
 ## Proportion of Variance 0.00396 0.00066 0.0006 0.000e+00
 ## Cumulative Proportion  0.99874 0.99940 1.0000 1.000e+00</code></pre>
 <p class="solution-end">
@@ -750,10 +580,8 @@ display a summary of the results.</li>
 </p>
 <div class="question-body">
 <ul>
-<li><p>Assuming we are happy with a reduced space explaining 90% of the
-variance of the data, how many PCs do we need?</p></li>
-<li><p>Visualise the variance captured by the 18 PCs. To do so, you can use
-the <code>fviz_screeplot</code> function from the <code>factoextra</code> package.</p></li>
+<li><p>Assuming we are happy with a reduced space explaining 90% of the variance of the data, how many PCs do we need?</p></li>
+<li><p>Visualise the variance captured by the 18 PCs. To do so, you can use the <code>fviz_screeplot</code> function from the <code>factoextra</code> package.</p></li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -765,8 +593,8 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 ► Solution<span id="sol-start-47" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-47', 'sol-start-47')"></span>
 </p>
 <div id="sol-body-47" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="sec-dimred.html#cb327-1"></a><span class="kw">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb327-2"><a href="sec-dimred.html#cb327-2"></a><span class="kw">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"factoextra"</span>)
+<span class="kw">fviz_screeplot</span>(pca_mulvey2015)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-51"></span>
 <p class="caption marginnote shownote">
@@ -785,13 +613,8 @@ Figure 8.10: Scree plot for the <code>mulvey2015</code> data showing the percent
 </p>
 <div class="question-body">
 <ul>
-<li><p>Visualise your PCA analysis on a biplot. You can use the <code>fviz_pca</code>
-function from the <code>factoextra</code> package, or the <code>fviz_pca_ind</code>
-function to focus on the individuals (the rows of the orgininal
-input).</p></li>
-<li><p>Use the <code>habillage</code> argument of the <code>fviz_pca_ind</code> function to
-highlight the time experimental variable. Interpret the figures in
-the light of the experimental design.</p></li>
+<li><p>Visualise your PCA analysis on a biplot. You can use the <code>fviz_pca</code> function from the <code>factoextra</code> package, or the <code>fviz_pca_ind</code> function to focus on the individuals (the rows of the orgininal input).</p></li>
+<li><p>Use the <code>habillage</code> argument of the <code>fviz_pca_ind</code> function to highlight the time experimental variable. Interpret the figures in the light of the experimental design.</p></li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -803,7 +626,7 @@ the light of the experimental design.</p></li>
 ► Solution<span id="sol-start-48" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-48', 'sol-start-48')"></span>
 </p>
 <div id="sol-body-48" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="sec-dimred.html#cb328-1"></a><span class="kw">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca</span>(pca_mulvey2015)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-521"></span>
 <p class="caption marginnote shownote">
@@ -811,7 +634,7 @@ Figure 8.11: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-52-1.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="sec-dimred.html#cb329-1"></a><span class="kw">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_ind</span>(pca_mulvey2015)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-522"></span>
 <p class="caption marginnote shownote">
@@ -819,7 +642,7 @@ Figure 8.12: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-52-2.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="sec-dimred.html#cb330-1"></a><span class="kw">fviz_pca_ind</span>(pca_mulvey2015, <span class="dt">habillage =</span> <span class="kw">pData</span>(mulvey2015)<span class="op">$</span>time)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_ind</span>(pca_mulvey2015, <span class="dt">habillage =</span> <span class="kw">pData</span>(mulvey2015)<span class="op">$</span>time)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-523"></span>
 <p class="caption marginnote shownote">
@@ -837,9 +660,7 @@ Figure 8.13: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 ► Question
 </p>
 <div class="question-body">
-<p>To visualise the data in 3 dimension, you can use the <code>plot3d</code>
-function from the <code>rgl</code> package, that provides means to rotate the
-cube along the three first PCs.</p>
+<p>To visualise the data in 3 dimension, you can use the <code>plot3d</code> function from the <code>rgl</code> package, that provides means to rotate the cube along the three first PCs.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -850,12 +671,12 @@ cube along the three first PCs.</p>
 ► Solution<span id="sol-start-49" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-49', 'sol-start-49')"></span>
 </p>
 <div id="sol-body-49" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="sec-dimred.html#cb331-1"></a><span class="kw">library</span>(<span class="st">"rgl"</span>)</span>
-<span id="cb331-2"><a href="sec-dimred.html#cb331-2"></a><span class="kw">plot3d</span>(pca_mulvey2015<span class="op">$</span>x[, <span class="dv">1</span>],</span>
-<span id="cb331-3"><a href="sec-dimred.html#cb331-3"></a>       pca_mulvey2015<span class="op">$</span>x[, <span class="dv">2</span>],</span>
-<span id="cb331-4"><a href="sec-dimred.html#cb331-4"></a>       pca_mulvey2015<span class="op">$</span>x[, <span class="dv">3</span>],</span>
-<span id="cb331-5"><a href="sec-dimred.html#cb331-5"></a>       <span class="dt">col =</span> mulvey2015<span class="op">$</span>time,</span>
-<span id="cb331-6"><a href="sec-dimred.html#cb331-6"></a>       <span class="dt">size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rgl"</span>)
+<span class="kw">plot3d</span>(pca_mulvey2015<span class="op">$</span>x[, <span class="dv">1</span>],
+       pca_mulvey2015<span class="op">$</span>x[, <span class="dv">2</span>],
+       pca_mulvey2015<span class="op">$</span>x[, <span class="dv">3</span>],
+       <span class="dt">col =</span> mulvey2015<span class="op">$</span>time,
+       <span class="dt">size =</span> <span class="dv">10</span>)</code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -865,39 +686,16 @@ cube along the three first PCs.</p>
 <div id="sec:dimred02" class="section level3">
 <h3>
 <span class="header-section-number">8.7.2</span> A map of the mouse pluripotent stem cell spatial proteome</h3>
-<p>In this section, we are going to use PCA to explore spatial map of
-mouse pluripotent stem cell by Christoforou <em>et al.</em>
-<span class="citation">(Christoforou et al. <label for="tufte-mn-24" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-24" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>.</p>
+<p>In this section, we are going to use PCA to explore spatial map of mouse pluripotent stem cell by Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-24" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-24" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. doi:<a href="https://doi.org/10.1038/ncomms9992">10.1038/ncomms9992</a>.</span>)</span>.</p>
 <blockquote>
-<p>Knowledge of the subcellular distribution of proteins is vital for
-understanding cellular mechanisms. Capturing the subcellular
-proteome in a single experiment has proven challenging, with studies
-focusing on specific compartments or assigning proteins to
-subcellular niches with low resolution and/or accuracy. Here we
-introduce hyperLOPIT, a method that couples extensive fractionation,
-quantitative high-resolution accurate mass spectrometry with
-multivariate data analysis. We apply hyperLOPIT to a pluripotent
-stem cell population whose subcellular proteome has not been
-extensively studied. We provide localization data on over 5,000
-proteins with unprecedented spatial resolution to reveal the
-organization of organelles, sub-organellar compartments, protein
-complexes, functional networks and steady-state dynamics of proteins
-and unexpected subcellular locations. The method paves the way for
-characterizing the impact of post-transcriptional and
-post-translational modification on protein location and studies
-involving proteome-level locational changes on cellular
-perturbation. An interactive open-source resource is presented that
-enables exploration of these data.</p>
+<p>Knowledge of the subcellular distribution of proteins is vital for understanding cellular mechanisms. Capturing the subcellular proteome in a single experiment has proven challenging, with studies focusing on specific compartments or assigning proteins to subcellular niches with low resolution and/or accuracy. Here we introduce hyperLOPIT, a method that couples extensive fractionation, quantitative high-resolution accurate mass spectrometry with multivariate data analysis. We apply hyperLOPIT to a pluripotent stem cell population whose subcellular proteome has not been extensively studied. We provide localization data on over 5,000 proteins with unprecedented spatial resolution to reveal the organization of organelles, sub-organellar compartments, protein complexes, functional networks and steady-state dynamics of proteins and unexpected subcellular locations. The method paves the way for characterizing the impact of post-transcriptional and post-translational modification on protein location and studies involving proteome-level locational changes on cellular perturbation. An interactive open-source resource is presented that enables exploration of these data.</p>
 </blockquote>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>hyperLOPIT2015</code> data from the <code>pRolocdata</code> package. Check
-its class and familiarise yourself with its experimetnal design and
-its feature annotation stored in the <em>featureData</em> slot that can be
-accessed with the <code>fData</code> function.</p>
+<p>Load the <code>hyperLOPIT2015</code> data from the <code>pRolocdata</code> package. Check its class and familiarise yourself with its experimetnal design and its feature annotation stored in the <em>featureData</em> slot that can be accessed with the <code>fData</code> function.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -908,9 +706,9 @@ accessed with the <code>fData</code> function.</p>
 ► Solution<span id="sol-start-50" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-50', 'sol-start-50')"></span>
 </p>
 <div id="sol-body-50" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="sec-dimred.html#cb332-1"></a><span class="kw">library</span>(pRolocdata)</span>
-<span id="cb332-2"><a href="sec-dimred.html#cb332-2"></a><span class="kw">data</span>(hyperLOPIT2015)</span>
-<span id="cb332-3"><a href="sec-dimred.html#cb332-3"></a><span class="kw">pData</span>(hyperLOPIT2015)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pRolocdata)
+<span class="kw">data</span>(hyperLOPIT2015)
+<span class="kw">pData</span>(hyperLOPIT2015)</code></pre></div>
 <pre><code>##            Replicate TMT.Reagent Acquisiton.Method Gradient.Fraction
 ## X126.rep1          1        X126               MS3           Cytosol
 ## X127N.rep1         1       X127N               MS3   1 to 6 (pooled)
@@ -953,7 +751,7 @@ accessed with the <code>fData</code> function.</p>
 ## X130N.rep2              24.7
 ## X130C.rep2                NA
 ## X131.rep2               31.9</code></pre>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="sec-dimred.html#cb334-1"></a><span class="kw">head</span>(<span class="kw">fData</span>(hyperLOPIT2015)[, <span class="kw">c</span>(<span class="st">"entry.name"</span>, <span class="st">"markers"</span>)])</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">fData</span>(hyperLOPIT2015)[, <span class="kw">c</span>(<span class="st">"entry.name"</span>, <span class="st">"markers"</span>)])</code></pre></div>
 <pre><code>##           entry.name            markers
 ## Q9JHU4   DYHC1_MOUSE            unknown
 ## Q9QXS1-3  PLEC_MOUSE            unknown
@@ -966,19 +764,14 @@ accessed with the <code>fData</code> function.</p>
 </p>
 </div>
 </div>
-<p>Here, we will want to do a PCA analysis on the features. We want to
-remap the 5032 proteins from a
-20-dimensional space into 2, or
-possibly 3 dimensions. Here, we can use the data as it when
-passing it to the <code>prcomp</code> function.</p>
+<p>Here, we will want to do a PCA analysis on the features. We want to remap the 5032 proteins from a 20-dimensional space into 2, or possibly 3 dimensions. Here, we can use the data as it when passing it to the <code>prcomp</code> function.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
 <ul>
-<li>Run a PCA analysis on the features of the <code>hyperLOPIT2015</code> data and
-display a summary of the results.</li>
+<li>Run a PCA analysis on the features of the <code>hyperLOPIT2015</code> data and display a summary of the results.</li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -990,8 +783,8 @@ display a summary of the results.</li>
 ► Solution<span id="sol-start-51" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-51', 'sol-start-51')"></span>
 </p>
 <div id="sol-body-51" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="sec-dimred.html#cb336-1"></a>pca_hl &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">exprs</span>(hyperLOPIT2015), <span class="dt">scale. =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb336-2"><a href="sec-dimred.html#cb336-2"></a><span class="kw">summary</span>(pca_hl)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_hl &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">exprs</span>(hyperLOPIT2015), <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
+<span class="kw">summary</span>(pca_hl)</code></pre></div>
 <pre><code>## Importance of components:
 ##                          PC1    PC2     PC3     PC4     PC5     PC6     PC7
 ## Standard deviation     3.111 2.1843 1.27979 1.10039 0.77542 0.69215 0.66758
@@ -1016,10 +809,8 @@ display a summary of the results.</li>
 </p>
 <div class="question-body">
 <ul>
-<li><p>Assuming we are happy with a reduced space explaining 75% of the
-variance of the data, how many PCs do we need?</p></li>
-<li><p>Visualise the variance captured by the 18 PCs. To do so, you can use
-the <code>fviz_screeplot</code> function from the <code>factoextra</code> package.</p></li>
+<li><p>Assuming we are happy with a reduced space explaining 75% of the variance of the data, how many PCs do we need?</p></li>
+<li><p>Visualise the variance captured by the 18 PCs. To do so, you can use the <code>fviz_screeplot</code> function from the <code>factoextra</code> package.</p></li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1031,8 +822,8 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 ► Solution<span id="sol-start-52" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-52', 'sol-start-52')"></span>
 </p>
 <div id="sol-body-52" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="sec-dimred.html#cb338-1"></a><span class="kw">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb338-2"><a href="sec-dimred.html#cb338-2"></a><span class="kw">fviz_screeplot</span>(pca_hl)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"factoextra"</span>)
+<span class="kw">fviz_screeplot</span>(pca_hl)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-56"></span>
 <p class="caption marginnote shownote">
@@ -1051,21 +842,10 @@ Figure 8.14: Scree plot for the <code>hyperLOPIT2015</code> data showing the per
 </p>
 <div class="question-body">
 <ul>
-<li><p>Visualise your PCA analysis on a biplot. You can use the <code>fviz_pca</code>
-function from the <code>factoextra</code> package, or the <code>fviz_pca_var</code>
-function to focus on the variables (the columns of the orgininal
-input).</p></li>
-<li><p>Interpret the variables on the biplot. Which ones are correlated? Is
-this to be expected in the light of the experimental design.</p></li>
-<li><p>Use the <code>fviz_pca_ind</code> function to focus on the individuals (the
-rows of the orgininal input). Use the <code>habillage</code> argument of the
-<code>fviz_pca_ind</code> function to highlight sub-cellular locations of the
-proteins (use the <code>"markers"</code> feature variable) and set the <code>geom</code>
-argument to <code>"point"</code> to drop the feature names from the plot (which
-correspond to <code>geom = "text"</code>). Interpret the figures in the light of
-the spatial proteomics experiment.</p></li>
-<li><p>Repeat the figure above setting the <code>"final.assignment"</code> variable to
-annotate the plot. Compare and interpret the two plots.</p></li>
+<li><p>Visualise your PCA analysis on a biplot. You can use the <code>fviz_pca</code> function from the <code>factoextra</code> package, or the <code>fviz_pca_var</code> function to focus on the variables (the columns of the orgininal input).</p></li>
+<li><p>Interpret the variables on the biplot. Which ones are correlated? Is this to be expected in the light of the experimental design.</p></li>
+<li><p>Use the <code>fviz_pca_ind</code> function to focus on the individuals (the rows of the orgininal input). Use the <code>habillage</code> argument of the <code>fviz_pca_ind</code> function to highlight sub-cellular locations of the proteins (use the <code>"markers"</code> feature variable) and set the <code>geom</code> argument to <code>"point"</code> to drop the feature names from the plot (which correspond to <code>geom = "text"</code>). Interpret the figures in the light of the spatial proteomics experiment.</p></li>
+<li><p>Repeat the figure above setting the <code>"final.assignment"</code> variable to annotate the plot. Compare and interpret the two plots.</p></li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1077,7 +857,7 @@ annotate the plot. Compare and interpret the two plots.</p></li>
 ► Solution<span id="sol-start-53" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-53', 'sol-start-53')"></span>
 </p>
 <div id="sol-body-53" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="sec-dimred.html#cb339-1"></a><span class="kw">fviz_pca</span>(pca_hl)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca</span>(pca_hl)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-571"></span>
 <p class="caption marginnote shownote">
@@ -1085,7 +865,7 @@ Figure 8.15: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> da
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-57-1.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="sec-dimred.html#cb340-1"></a><span class="kw">fviz_pca_var</span>(pca_hl)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_var</span>(pca_hl)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-572"></span>
 <p class="caption marginnote shownote">
@@ -1093,15 +873,15 @@ Figure 8.16: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> da
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-57-2.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="sec-dimred.html#cb341-1"></a><span class="co">## Manual colour palette (from the pRoloc package)</span></span>
-<span id="cb341-2"><a href="sec-dimred.html#cb341-2"></a></span>
-<span id="cb341-3"><a href="sec-dimred.html#cb341-3"></a>cls &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,</span>
-<span id="cb341-4"><a href="sec-dimred.html#cb341-4"></a>         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,</span>
-<span id="cb341-5"><a href="sec-dimred.html#cb341-5"></a>         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</span>
-<span id="cb341-6"><a href="sec-dimred.html#cb341-6"></a></span>
-<span id="cb341-7"><a href="sec-dimred.html#cb341-7"></a><span class="kw">fviz_pca_ind</span>(pca_hl, <span class="dt">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb341-8"><a href="sec-dimred.html#cb341-8"></a>             <span class="dt">habillage =</span> <span class="kw">fData</span>(hyperLOPIT2015)<span class="op">$</span>markers,</span>
-<span id="cb341-9"><a href="sec-dimred.html#cb341-9"></a>             <span class="dt">palette =</span> cls)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Manual colour palette (from the pRoloc package)
+
+cls &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,
+         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,
+         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)
+
+<span class="kw">fviz_pca_ind</span>(pca_hl, <span class="dt">geom =</span> <span class="st">"point"</span>,
+             <span class="dt">habillage =</span> <span class="kw">fData</span>(hyperLOPIT2015)<span class="op">$</span>markers,
+             <span class="dt">palette =</span> cls)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-581"></span>
 <p class="caption marginnote shownote">
@@ -1109,9 +889,9 @@ Figure 8.17: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> 
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-58-1.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
 </div>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="sec-dimred.html#cb342-1"></a><span class="kw">fviz_pca_ind</span>(pca_hl, <span class="dt">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb342-2"><a href="sec-dimred.html#cb342-2"></a>             <span class="dt">habillage =</span> <span class="kw">fData</span>(hyperLOPIT2015)<span class="op">$</span>final.assignment,</span>
-<span id="cb342-3"><a href="sec-dimred.html#cb342-3"></a>             <span class="dt">palette =</span> cls)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_pca_ind</span>(pca_hl, <span class="dt">geom =</span> <span class="st">"point"</span>,
+             <span class="dt">habillage =</span> <span class="kw">fData</span>(hyperLOPIT2015)<span class="op">$</span>final.assignment,
+             <span class="dt">palette =</span> cls)</code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-582"></span>
 <p class="caption marginnote shownote">
@@ -1134,14 +914,8 @@ Figure 8.18: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> 
 ► Question
 </p>
 <div class="question-body">
-<p>Professor Simpson and her team wanted to test the effect of drug A and
-drug B on fibroblast. They measured gene expression using RNA-Seq in
-three conditions: a control without any drug, cells in presence of
-drug A, and cells in presence of drug B. Each of these were measured
-in triplicates in a single batch by the same operator.</p>
-<p>The figure below shows the PCA plot of the 9 samples, coloured by
-condition. Interpreted the figure in the light of the experimentally
-design and suggest how to best analyse these data.</p>
+<p>Professor Simpson and her team wanted to test the effect of drug A and drug B on fibroblast. They measured gene expression using RNA-Seq in three conditions: a control without any drug, cells in presence of drug A, and cells in presence of drug B. Each of these were measured in triplicates in a single batch by the same operator.</p>
+<p>The figure below shows the PCA plot of the 9 samples, coloured by condition. Interpreted the figure in the light of the experimentally design and suggest how to best analyse these data.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-59"></span>
 <p class="caption marginnote shownote">
@@ -1159,9 +933,7 @@ Figure 8.19: PCA analysis illustrating the global effect of drug A and B.
 ► Question
 </p>
 <div class="question-body">
-<p>Consider the same experimental design as above, but with the PCA plot
-below. Interpret the figure in the light of the experimental design
-and suggest how to best analyse these data.</p>
+<p>Consider the same experimental design as above, but with the PCA plot below. Interpret the figure in the light of the experimental design and suggest how to best analyse these data.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-60"></span>
 <p class="caption marginnote shownote">
@@ -1179,14 +951,8 @@ Figure 8.20: PCA analysis illustrating the global effect of drug A and B.
 ► Question
 </p>
 <div class="question-body">
-<p>Researchers of the famous FLVIT (Fosse-La-Ville Institute of
-Technology) wanted to test the effect of a newly identified
-anti-cancer drug C121 on KEK293 cells. They measured proteins
-expression using quantitative mass spectrometry in these two
-conditions and 4 replicates. Each of these were measured in
-triplicates in a single batch.</p>
-<p>Interpret the PCA plot in the light of the experimental design. Do you
-think the analysis is likely to provide significant results?</p>
+<p>Researchers of the famous FLVIT (Fosse-La-Ville Institute of Technology) wanted to test the effect of a newly identified anti-cancer drug C121 on KEK293 cells. They measured proteins expression using quantitative mass spectrometry in these two conditions and 4 replicates. Each of these were measured in triplicates in a single batch.</p>
+<p>Interpret the PCA plot in the light of the experimental design. Do you think the analysis is likely to provide significant results?</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-61"></span>
 <p class="caption marginnote shownote">
@@ -1204,12 +970,8 @@ Figure 8.21: Quantitative proteomics experiment measuring the effect of drug C12
 ► Question
 </p>
 <div class="question-body">
-<p>In the following experimental design, clinicians have used
-quantitative PCR to measure the expression of 96 micro RNAs in the
-blood of three patients and three healthy donor, with the goal of
-identifying novel biomarkers.</p>
-<p>In the light of the experimental design, interpret the PCA plot. What
-are the chances to find good biomarkers?</p>
+<p>In the following experimental design, clinicians have used quantitative PCR to measure the expression of 96 micro RNAs in the blood of three patients and three healthy donor, with the goal of identifying novel biomarkers.</p>
+<p>In the light of the experimental design, interpret the PCA plot. What are the chances to find good biomarkers?</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-62"></span>
 <p class="caption marginnote shownote">
@@ -1227,14 +989,8 @@ Figure 8.22: Quantitative proteomics experiment measuring the effect of drug C12
 ► Question
 </p>
 <div class="question-body">
-<p>The team of Professor Von der Brille have quantified the gene
-expression of Jurkat cells using two RNA-Seq protocols. 25 samples
-were tested with kit 1 by operator A and B (12 and 13 samples
-respectively), and 27 samples were processed with kit 2 by operators A
-and C (20 and 7 samples respectively).</p>
-<p>In the light of the experimental design, interpret the PCA plot. What
-would you suggest to do before testing whether using kit 1 and 2 have
-an impact on the data?</p>
+<p>The team of Professor Von der Brille have quantified the gene expression of Jurkat cells using two RNA-Seq protocols. 25 samples were tested with kit 1 by operator A and B (12 and 13 samples respectively), and 27 samples were processed with kit 2 by operators A and C (20 and 7 samples respectively).</p>
+<p>In the light of the experimental design, interpret the PCA plot. What would you suggest to do before testing whether using kit 1 and 2 have an impact on the data?</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-63"></span>
 <p class="caption marginnote shownote">
@@ -1252,9 +1008,7 @@ Figure 8.23: Testing the effect of RNA sequencing kits 1 and 2.
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>tdata1</code> dataset from the <code>rWSBIM1322</code> package and run a PCA
-analysis on the samples. Interpret the results, knowing that these
-data are random.</p>
+<p>Load the <code>tdata1</code> dataset from the <code>rWSBIM1322</code> package and run a PCA analysis on the samples. Interpret the results, knowing that these data are random.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1265,8 +1019,7 @@ data are random.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Using the function <code>kem2.tsv</code> from the <code>rWSBIM1207</code> package, import
-the RNA-seq data and perform a PCA analysis on the samples.</p>
+<p>Using the function <code>kem2.tsv</code> from the <code>rWSBIM1207</code> package, import the RNA-seq data and perform a PCA analysis on the samples.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1277,11 +1030,7 @@ the RNA-seq data and perform a PCA analysis on the samples.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>metab1</code> data from the <code>rWSBIM1322</code> package (version &gt;=
-<code>0.1.10</code>) and perform a PCA analysis on the samples. These data
-represent mass spectrometry-based metabolomics data. Do the samples
-seem to be randomly placed? Do you notice any structure explained by
-the labels?</p>
+<p>Load the <code>metab1</code> data from the <code>rWSBIM1322</code> package (version &gt;= <code>0.1.10</code>) and perform a PCA analysis on the samples. These data represent mass spectrometry-based metabolomics data. Do the samples seem to be randomly placed? Do you notice any structure explained by the labels?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>

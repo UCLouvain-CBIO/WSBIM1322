@@ -32,7 +32,7 @@ In both of these examples, the quantitative data are the data that we
 want to use to predict properties about samples or features; these are
 called the **predictors**. The grade of the samples in the first
 example and the protein sub-cellular localisation in the second one
-are the **labels** that we have in some cases, and want to predcit
+are the **labels** that we have in some cases, and want to predict
 otherwise. We can thus split our data in two parts, depending whether
 we have labels, or whether we want to predict them. The former are
 called **labelled**, and the latter **unlabelled**.
@@ -87,7 +87,7 @@ table(is.na(giris2$GRADE))
 
 Visualise the `giris2` data on a PCA plot, highlighting the labels (or
 absence thereof). Using the visualisation, will the classifying of the
-unlabelled data will be difficult or easy? Motivate your aswer.
+unlabelled data will be difficult or easy? Motivate your answer.
 
 `r msmbstyle::question_end()`
 
@@ -115,7 +115,7 @@ unlabelled instances *1* and *2* will be assigned classes *A* (blue)
 and *B* (red) as their closest neighbours are red and blue,
 respectively.
 
-```{r knnex, echo=FALSE, fig.cap="Schematic illustrating the k nearest neighbors algorithm."}
+```{r knnex, echo=FALSE, fig.cap="Schematic illustrating the k nearest neighbours algorithm."}
 p1 <- c(0, 0)
 p2 <- c(0.7, 0.5)
 x1 <- rbind(c(0.2, 0.2),
@@ -185,7 +185,7 @@ The `knn` function takes, among others[^knnargs], the following arguments:
 [^knnargs]: we will see additional ones later.
 
 1. the labelled predictors, that will be used to *train* the model,
-2. the unlabelled preductors, on which the model will be applied (see
+2. the unlabelled predictors, on which the model will be applied (see
    below why this is called *test*),
 3. the labels (the length of this vector must match the number of rows
    of the labelled predictors).
@@ -216,11 +216,11 @@ table(knn_res)
 
 `r msmbstyle::question_begin()`
 Visualise the results of the kNN classification on a PCA plot and
-interprete the results based on the firt PCA.
+interpret the results based on the first PCA.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-```{r, fig.cap = "Visualiation of the labelled and unlabelled data before (top) and after (bottom) classification.", fig.height = 10, warning = FALSE}
+```{r, fig.cap = "Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification.", fig.height = 10, warning = FALSE}
 giris2_res <- giris2
 giris2_res[is.na(giris2$GRADE), 5] <- knn_res
 pca_knn <- prcomp(giris2_res[, -5], scale = TRUE)
@@ -276,7 +276,7 @@ influence on the classification results. We can now refine our
 understanding of the `knn` function; it has the following arguments:
 
 1. the labelled predictors, that will be used to *train* the model,
-2. the unlabelled preductors, on which the model will be applied (see
+2. the unlabelled predictors, on which the model will be applied (see
    below why this is called *test*),
 3. the labels (the length of this vector must match the number of rows
    of the labelled predictors),
@@ -306,9 +306,9 @@ table(knn_1, knn_11)
 
 There is no way to decide which set of results above, using k=1, 2,
 ... 11 or any other value for k is better. At least not while
-proceding as above. To be able to make an informed decision about the
+proceeding as above. To be able to make an informed decision about the
 **model parameter** k, we need to to measure the **performance** of
-the kNN clasifier for different values of k. Do do so, we are going to
+the kNN classifier for different values of k. Do do so, we are going to
 create **training** and **testing** sets using the labelled data. Each
 of these will be composed by a certain proportion of the original
 labelled data.
@@ -342,7 +342,7 @@ We are now going to do the following procedure
 3. apply in on $X_{te}$ to obtain a new $Y_{tr}^{predicted}$, and
 4. compare $Y_{tr}$ to $Y_{tr}^{predicted}$.
 
-There are numerous different ways to measure the performace of a
+There are numerous different ways to measure the performance of a
 classifier using $Y_{tr}$ and $Y_{tr}^{predicted}$.
 We are going to focus on the **classification accuracy**, counting the
 proportion of correct results.
@@ -366,8 +366,8 @@ giris2_test <- giris2_labelled[-i, ]
 Run two kNN classifications, one with k = 1, then one with k = 11 and
 compare each to the true results. A good way to assess the results is
 to generate a contingency matrix (using the `table` function) that
-tallies matches and mis-matches betweem the predictions and expected
-assignments. Interprete these results.
+tallies matches and mis-matches between the predictions and expected
+assignments. Interpret these results.
 `r msmbstyle::question_end()`
 
 
@@ -398,7 +398,7 @@ There are now two adjustments that we can do improve on the procedure
 above:
 
 1. Test all odd value of k from 1 to 11 (or higher, if deemed useful),
-   to have a better granularity of the model paramter we test.
+   to have a better granularity of the model parameter we test.
 
 2. Testing more than on training/testing split using. Indeed, relying
    on a single split we rely on a random split, that could affect that
@@ -411,7 +411,7 @@ above:
 There exist several principled ways to split data into training and
 testing partitions. Here, we are going to focus on k-fold
 cross-validation, where data of size $n$ a repeatedly split into a training
-set of size around $\frac{n (k - 1)}{k}$ and a testing set of size arond $\frac{n}{k}$.
+set of size around $\frac{n (k - 1)}{k}$ and a testing set of size around $\frac{n}{k}$.
 
 In practice, the data are split into k partitions of size $\frac{n}{k}$,
 and the training/testing procedure is repeated $k$ times using $k - 1$ partition
@@ -503,22 +503,23 @@ classification accuracy, ranging from 96% to 98%, and it would be
 difficult to identify a single best value for k. Indeed, the three
 groups we are typing to assign new data to are relatively well
 separated and the little uncertainty that we observe is most likely
-due to some instances that lie at the boudary between classes B and C.
+due to some instances that lie at the boundary between classes B and C.
 
-There exist a variety of packages that automate model and parameter
-selection using cross-validation procedures as illustrated above, so
-that in practice, these tasks can be automated. This becomes
-particularly useful when more than one model parameter (called
-hyper-parameters) need to tuned, different classifiers need to be
-assessed, and/or several model performance metrics are to be computed.
+There exist a variety of packages (for example `caret`, `tidymodels`
+or `mlr`) that automate model and parameter selection using
+cross-validation procedures as illustrated above, so that in practice,
+these tasks can be automated. This becomes particularly useful when
+more than one model parameter (called hyper-parameters) need to tuned,
+different classifiers need to be assessed, and/or several model
+performance metrics are to be computed.
 
-## Variance and biais tradeoff
+## Variance and bias trade-off
 
 A recurrent goal in machine learning is to find a trade-off between
-variance and biais when fitting models. It is important to build a
+variance and bias when fitting models. It is important to build a
 good model using the data at hand, i.e. that learns from the data, but
 not too much. If the model is too specific for the data that was used
-to build it (the model would be said to be **overfitting the data**)
+to build it (the model would be said to be **over fitting the data**)
 and would not be applicable to new data (the model would have high
 bias). On the other hand, a model that is too general, that wouldn't
 be applicable enough to the data, or type of data at hand[^varex], it
@@ -530,7 +531,7 @@ would perform poorly, and hence lead to high variance.
     patients, for example.
 
 
-This variance and biais tradeoff can be illustrated in different
+This variance and bias trade-off can be illustrated in different
 ways. The figure below shows the prediction error as a function of the
 model complexity. In our example above, we have used accuracy, a
 metric that we want to optimise, while in the prediction error is a
@@ -540,8 +541,6 @@ measure to me minimised.
 ```{r, echo = FALSE, fig.cap = "Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of $k$ while the test error reaches a minimum around $k = 10$ before increasing again. Reproduced with permission from [@ISLR].", out.width='100%', fig.align='center'}
 knitr::include_graphics("./figs/ISL-2_17.png")
 ```
-
-
 
 The model complexity represent the ability of
 the model (or model parameter) to learn/adapt to the training data. In
@@ -555,30 +554,66 @@ reflect any specificity of our data.
 knitr::include_graphics("./figs/ISL-2_16.png")
 ```
 
-This last figure, reproduced from [@MSMB],
+This last figure, reproduced from [@MSMB], frames the variance-bias
+trade-off as one between accuracy and precision. An over-fit model with
+high bias and low variance is one that is precise but not accurate:
+it could work extremely well on the training data but miss on new
+data, thus lacking in generalisation power. Conversely, an under-fit
+model could be accurate but with low precision: on average, it works
+will, but is unable to provide a precise answer. Ideally, we want
+models that achieve good precision while still being applicable and
+accurate with new data.
 
-```{r, echo = FALSE, fig.cap = "Precision and accuracy when shooting."}
-par(mar = c(0, 1, 0, 1))
+
+```{r, echo = FALSE, fig.cap = "Precision and accuracy when shooting.", fig.width = 10, fig.height = 10}
+par(mar = c(0, 0, 0, 0))
 plot(1:15, 1:15,
      type = "n", xaxt = "n", yaxt = "n", xlab = "",
-     ylab = "", bty = "n")
-plotrix::draw.circle(4, 7, 3, col = "steelblue")
-plotrix::draw.circle(4, 7, 2, col = "red")
-plotrix::draw.circle(4, 7, 1, col = "yellow")
+     ylab = "")
+## 
+plotrix::draw.circle(4, 11.5, 3, col = "steelblue")
+plotrix::draw.circle(4, 11.5, 2, col = "red")
+plotrix::draw.circle(4, 11.5, 1, col = "yellow")
 set.seed(12)
-x <- rnorm(20, 4, 1.2)
-y <- rnorm(20, 7, 1.2)
+x <- rnorm(20, 4.5, 1.2)
+y <- rnorm(20, 11.5, 1.2)
 points(x, y)
 points(mean(x), mean(y), pch = 19)
-plotrix::draw.circle(12, 7, 3, col = "steelblue")
-plotrix::draw.circle(12, 7, 2, col = "red")
-plotrix::draw.circle(12, 7, 1, col = "yellow")
+text(4, 15, "Accurate but not precise", cex = 1.3)
+## 
+plotrix::draw.circle(12, 11.5, 3, col = "steelblue")
+plotrix::draw.circle(12, 11.5, 2, col = "red")
+plotrix::draw.circle(12, 11.5, 1, col = "yellow")
 set.seed(12)
-x <- rnorm(20, 13, 0.4)
-y <- rnorm(20, 8, 0.4)
+x <- rnorm(20, 12.75, 0.3)
+y <- rnorm(20, 12.75, 0.3)
 points(x, y)
 points(mean(x), mean(y), pch = 19)
+text(12, 15, "Precise but not accurate", cex = 1.3)
+## 
+plotrix::draw.circle(4, 4, 3, col = "steelblue")
+plotrix::draw.circle(4, 4, 2, col = "red")
+plotrix::draw.circle(4, 4, 1, col = "yellow")
+set.seed(12)
+x <- rnorm(20, 4, 0.3)
+y <- rnorm(20, 4, 0.3)
+points(x, y)
+points(mean(x), mean(y), pch = 19)
+text(4, 7.5, "Accurate and precise", cex = 1.3)
+## 
+plotrix::draw.circle(12, 4, 3, col = "steelblue")
+plotrix::draw.circle(12, 4, 2, col = "red")
+plotrix::draw.circle(12, 4, 1, col = "yellow")
+set.seed(123)
+x <- rnorm(20, 13, 1.2)
+y <- rnorm(20, 5, 1.2)
+points(x, y)
+points(mean(x), mean(y), pch = 19)
+text(12, 7.5, "Neither precise nor accurate", cex = 1.3)
+## 
+abline(v = 8)
+abline(h = 8)
 ```
 
-
 ## Additional exercises
+
