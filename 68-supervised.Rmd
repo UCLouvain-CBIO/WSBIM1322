@@ -220,7 +220,7 @@ interprete the results based on the firt PCA.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-```{r}
+```{r, fig.cap = "Visualiation of the labelled and unlabelled data before (top) and after (bottom) classification.", fig.height = 10}
 giris2_res <- giris2
 giris2_res[is.na(giris2$GRADE), 5] <- knn_res
 pca_knn <- prcomp(giris2_res[, -5], scale = TRUE)
