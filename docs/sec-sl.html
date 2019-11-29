@@ -121,6 +121,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="toc"><a href="#k-nearest-neighbours-classifier"> K-nearest neighbours classifier</a></li>
 <li class="toc"><a href="#model-selection-1"> Model selection</a></li>
 <li class="toc"><a href="#k-fold-cross-validation"> k-fold cross-validation</a></li>
+<li class="toc"><a href="#variance-and-biais-tradeoff"> Variance and biais tradeoff</a></li>
 </ul>
 <a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
 <a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
@@ -324,8 +325,6 @@ p1 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class
 p2 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca_knn, <span class="dt">col.ind =</span> giris2_res<span class="op">$</span>GRADE)
 <span class="kw">library</span>(<span class="st">"patchwork"</span>)
 p1 <span class="op">/</span><span class="st"> </span>p2</code></pre></div>
-<pre><code>## Warning: Removed 100 rows containing missing values (geom_point).</code></pre>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <div class="figure">
 <span id="fig:unnamed-chunk-80"></span>
 <p class="caption marginnote shownote">
@@ -490,7 +489,7 @@ giris2_test &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</sp
 ► Question
 </p>
 <div class="question-body">
-<p>Run two kNN classifications, one with k = 1, then one with k = 11 and compare each to the true results. Interprete these results.</p>
+<p>Run two kNN classifications, one with k = 1, then one with k = 11 and compare each to the true results. A good way to assess the results is to generate a contingency matrix (using the <code>table</code> function) that tallies matches and mis-matches betweem the predictions and expected assignments. Interprete these results.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -560,9 +559,9 @@ test_<span class="dv">11</span> &lt;-<span class="st"> </span><span class="kw">k
 <div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-87"></span>
 <p class="caption marginnote shownote">
-Figure 10.5: The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (orange) and the two other ones (white) are used to train the model.
+Figure 10.5: The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model.
 </p>
-<img src="figs/xval.png" alt="The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (orange) and the two other ones (white) are used to train the model." width="100%">
+<img src="figs/xval.png" alt="The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model." width="100%">
 </div>
 <p>After cross-validation, all models used within each fold are discarded, and a new model is built using the whole labelled dataset, with the best model parameter(s), i.e those that generalised over all folds. This makes cross-validation quite time consuming, as it takes x+1 (where x in the number of cross-validation folds) times as long as fitting a single model, but is essential.</p>
 <div class="question">
@@ -663,7 +662,7 @@ accs</code></pre></div>
 ► Question
 </p>
 <div class="question-body">
-<p>Repeat the above for k=1, 3, 5, … to 25 and plot the average accuracy as a function of k.</p>
+<p>Repeat the above for k=1, 3, 5, … to 30 and plot the average accuracy as a function of k.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -674,12 +673,12 @@ accs</code></pre></div>
 ► Solution<span id="sol-start-77" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-77', 'sol-start-77')"></span>
 </p>
 <div id="sol-body-77" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accs &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">k =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">25</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accs &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">k =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">acc =</span> <span class="kw">mean</span>(<span class="kw">sapply</span>(folds, knn_accuracy, k))) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ungroup</span>()
 accs</code></pre></div>
-<pre><code>## # A tibble: 13 x 2
+<pre><code>## # A tibble: 15 x 2
 ##        k   acc
 ##    &lt;dbl&gt; &lt;dbl&gt;
 ##  1     1 0.953
@@ -694,7 +693,9 @@ accs</code></pre></div>
 ## 10    19 0.98 
 ## 11    21 0.98 
 ## 12    23 0.98 
-## 13    25 0.96</code></pre>
+## 13    25 0.96 
+## 14    27 0.967
+## 15    29 0.953</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accs <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> acc)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
@@ -711,6 +712,15 @@ Figure 10.6: Average classification accuracy as a function of the parameter k.
 </p>
 </div>
 </div>
+<p>As we can see from the last exercise, most values of k give a good classification accuracy, ranging from 96% to 98%, and it would be difficult to identify a single best value for k. Indeed, the three groups we are typing to assign new data to are relatively well separated and the little uncertainty that we observe is most likely due to some instances that lie at the boudary between classes B and C.</p>
+<p>There exist a variety of packages that automate model and parameter selection using cross-validation procedures as illustrated above, so that in practice, these tasks can be automated. This becomes particularly useful when more than one model parameter (called hyper-parameters) need to tuned, different classifiers need to be assessed, and/or several model performance metrics are to be computed.</p>
+</div>
+<div id="variance-and-biais-tradeoff" class="section level2">
+<h2>
+<span class="header-section-number">10.5</span> Variance and biais tradeoff</h2>
+<p>A recurrent goal in machine learning is to find a trade-off between variance and biais when fitting models. It is important to build a good model using the data at hand, i.e. that learns from the data, but not too much. If the model is too specific for the data that was used to build it (the model would be said to be <strong>overfitting the data</strong>) and would not be applicable to new data (the model would have high bias). On the other hand, a model that is too general, that wouldn’t be applicable enough to the data, or type of data at hand[^varex], it would perform poorly, and hence lead to high variance.</p>
+<p>This variance and biais tradeoff can be illustrated in different ways. Figure below shows the prediction error as a function of the model complexity. In our example above, we have used accuracy, a metric that we want to optimise, while in the prediction error is a measure to me minimised. The model complexity represent the ability of the model (or model parameter) to learn/adapt to the training data. In our case, the complexity would be illustrated by <span class="math inline">\(\frac{1}{k}\)</span>: when k=1,</p>
+<p>the model becomes very complex as it adapts to every single neighbour. The other extreme, when k becomes large, the classification will tend to using an average of so many neighbours that doesn’t reflect any specificity of our data.</p>
 
 </div>
 </div></body></html>
