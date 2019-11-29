@@ -20,14 +20,14 @@ samples (or features) we have acquired:
   sequencing of microarrays, we know the grade of the tumour for about
   half. We want to predict the grade of the other half using the gene
   expression profiles.
-  
+
 - We have performed a spatial proteomics experiment such as in
   Christoforou *et al.* [@Christoforou:2016] (see section
   \@ref(sec:dimred02)) and know the sub-cellular localisation of some
   proteins. We want to predict the sub-cellular localisation of the
   other proteins using the protein profiles.
-  
-  
+
+
 In both of these examples, the quantitative data are the data that we
 want to use to predict properties about samples or features; these are
 called the **predictors**. The grade of the samples in the first
@@ -105,7 +105,7 @@ factoextra::fviz_pca_ind(pca2, col.ind = giris2$GRADE)
 
 In this chapter, we'll use a simple, but useful classification
 algorithm, k-nearest neighbours (kNN) to classify the *giris*
-patients. We will use the `knn` function from the 
+patients. We will use the `knn` function from the
 `r CRANpkg("class")` package.
 
 K-nearest neighbours works by directly measuring the (Euclidean)
@@ -196,7 +196,7 @@ The `knn` function takes, among others[^knnargs], the following arguments:
 - Apply the kNN classifier on the `giris2` prepared in the previous
   exercise.
 
-- What is the class of the output? 
+- What is the class of the output?
 
 - How many of the unlabelled data have been assigned to the different
   grades?
@@ -239,7 +239,7 @@ p1 / p2
 
 - Do do so, calculated the distances between sample 167 and all other
   labelled data.
-  
+
 - Compare the labels of its 15 closest labelled data points.
 
 `r msmbstyle::question_end()`
@@ -252,7 +252,7 @@ dd <- as.matrix(dist(giris2[, -5]))
 ## extract only those for sample 167
 giris2$dist_167 <- dd[167, ]
 
-## look at the 15 nearest neighbours 
+## look at the 15 nearest neighbours
 library("tidyverse")
 vote <- giris2 %>%
     head(150) %>%
@@ -264,7 +264,7 @@ vote
 
 vote %>%
     ggplot(aes(x = 1:15, y = vote)) +
-    xlab("Number of nearest neighbours") + 
+    xlab("Number of nearest neighbours") +
     geom_point(aes(colour = grade), size = 3) + geom_line() +
     geom_hline(yintercept = 0)
 ```
@@ -288,7 +288,7 @@ understanding of the `knn` function; it has the following arguments:
 
 - Repeat the kNN search comparing k=1 (as in our first attempt) and
   k=11 and compare the result.
-  
+
 - Which one is correct?
 
 `r msmbstyle::question_end()`
@@ -313,7 +313,7 @@ create **training** and **testing** sets using the labelled data. Each
 of these will be composed by a certain proportion of the original
 labelled data.
 
-Below, we denote the training predictors $X_{tr}$ and labels $Y_{tr}$ and 
+Below, we denote the training predictors $X_{tr}$ and labels $Y_{tr}$ and
 the testing predictors $X_{te}$ and labels $Y_{te}$.
 
 ```{r, echo = FALSE, fig.cap = "Training and testing sets."}
@@ -339,11 +339,11 @@ We are now going to do the following procedure
 
 1. hide the testing labels $Y_{te}$,
 2. train a classifier model using $X_{tr}$ and $Y_{tr}$,
-3. apply in on $X_{te}$ to obtain a new $Y_{tr}^{predicted}$, and 
+3. apply in on $X_{te}$ to obtain a new $Y_{tr}^{predicted}$, and
 4. compare $Y_{tr}$ to $Y_{tr}^{predicted}$.
 
 There are numerous different ways to measure the performace of a
-classifier using $Y_{tr}$ and $Y_{tr}^{predicted}$. 
+classifier using $Y_{tr}$ and $Y_{tr}^{predicted}$.
 We are going to focus on the **classification accuracy**, counting the
 proportion of correct results.
 
@@ -410,11 +410,11 @@ above:
 
 There exist several principled ways to split data into training and
 testing partitions. Here, we are going to focus on k-fold
-cross-validation, where data of size $n$ a repeatedly split into a training 
+cross-validation, where data of size $n$ a repeatedly split into a training
 set of size around $\frac{n (k - 1)}{k}$ and a testing set of size arond $\frac{n}{k}$.
 
-In practice, the data are split into k partitions of size $\frac{n}{k}$, 
-and the training/testing procedure is repeated $k$ times using $k - 1$ partition 
+In practice, the data are split into k partitions of size $\frac{n}{k}$,
+and the training/testing procedure is repeated $k$ times using $k - 1$ partition
 as training data and 1 partition as testing data.
 
 The figure below illustrates the cross validation procedure, creating
@@ -493,7 +493,7 @@ accs
 
 accs %>%
     ggplot(aes(x = k, y = acc)) +
-    geom_point() + 
+    geom_point() +
     geom_line()
 ```
 `r msmbstyle::solution_end()`
@@ -531,16 +531,54 @@ would perform poorly, and hence lead to high variance.
 
 
 This variance and biais tradeoff can be illustrated in different
-ways. Figure below shows the prediction error as a function of the
+ways. The figure below shows the prediction error as a function of the
 model complexity. In our example above, we have used accuracy, a
 metric that we want to optimise, while in the prediction error is a
-measure to me minimised. The model complexity represent the ability of
-the model (or model parameter) to learn/adapt to the training data. In
-our case, the complexity would be illustrated by $\frac{1}{k}$: when k=1, 
+measure to me minimised.
 
+
+```{r, echo = FALSE, fig.cap = "Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of $k$ while the test error reaches a minimum around $k = 10$ before increasing again. Reproduced with permission from [@ISLR].", out.width='100%', fig.align='center'}
+knitr::include_graphics("./figs/ISL-2_17.png")
+```
+
+
+
+The model complexity represent the ability of
+the model (or model parameter) to learn/adapt to the training data. In
+our case, the complexity would be illustrated by$\frac{1}{k}$: when k=1,
 the model becomes very complex as it adapts to every single
 neighbour. The other extreme, when k becomes large, the classification
 will tend to using an average of so many neighbours that doesn't
 reflect any specificity of our data.
 
+```{r, echo = FALSE, fig.cap = "The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from  [@ISLR].", out.width='100%', fig.align='center'}
+knitr::include_graphics("./figs/ISL-2_16.png")
+```
 
+This last figure, reproduced from [@MSMB],
+
+```{r, echo = FALSE, fig.cap = "Precision and accuracy when shooting."}
+par(mar = c(0, 1, 0, 1))
+plot(1:15, 1:15,
+     type = "n", xaxt = "n", yaxt = "n", xlab = "",
+     ylab = "", bty = "n")
+plotrix::draw.circle(4, 7, 3, col = "steelblue")
+plotrix::draw.circle(4, 7, 2, col = "red")
+plotrix::draw.circle(4, 7, 1, col = "yellow")
+set.seed(12)
+x <- rnorm(20, 4, 1.2)
+y <- rnorm(20, 7, 1.2)
+points(x, y)
+points(mean(x), mean(y), pch = 19)
+plotrix::draw.circle(12, 7, 3, col = "steelblue")
+plotrix::draw.circle(12, 7, 2, col = "red")
+plotrix::draw.circle(12, 7, 1, col = "yellow")
+set.seed(12)
+x <- rnorm(20, 13, 0.4)
+y <- rnorm(20, 8, 0.4)
+points(x, y)
+points(mean(x), mean(y), pch = 19)
+```
+
+
+## Additional exercises
