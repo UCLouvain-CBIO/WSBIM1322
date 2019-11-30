@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-29" />
+<meta name="date" content="2019-11-30" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -748,6 +748,71 @@ Figure 10.9: Precision and accuracy when shooting.
 <div id="additional-exercises-8" class="section level2">
 <h2>
 <span class="header-section-number">10.6</span> Additional exercises</h2>
+<p>Load the <code>hyperLOPIT2015</code> data from the <code>pRolocdata</code> package. See section <a href="sec-dimred.html#sec:dimred02">8.7.2</a>) for details. The features variable column <code>markers</code> defines the proteins for which the sub-cellular localisation is known - these are the labelled data. Those that are marked <code>unknown</code> are of unknown location - these are the unlabelled data.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Perform a kNN classification setting k=5.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>To assess the results of this classification, visualise the data on two PCA plots, one before and one after classification.</p>
+<p>You can use the following colour palette that uses grey for the unlabelled data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cls &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,
+         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,
+         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</code></pre></div>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Asses the choice of k=5 used above.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Compare you results with those that were obtained using <em>support vector machine</em>, a popular classifier that was used in Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-32" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-32" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. doi:<a href="https://doi.org/10.1038/ncomms9992">10.1038/ncomms9992</a>.</span>)</span>, and available in the <code>svm.classification</code> feature variable.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>A classification algorithm will assign a class to any unlabelled instance, even if it doesn’t match any of the prodided classes. This is often the case in omics datasets such as the spatial proteomics example above, where not all the sub-cellular niches are annotated or known. We thus know that some of these assignments will be wrong from a biological point of view.</p>
+<p>Re-run the kNN classifer above, setting <code>prob = TRUE</code> to get the proportion of votes in favour of the assigned class. These are stored as an attribute named <em>prob</em>; eead the <code>knn</code> manual page to learn how to extract these from the <code>knn</code> output variable.</p>
+<ul>
+<li><p>Based on these vote proportions, which results to you consider the most reliable?</p></li>
+<li><p>Re-generate a PCA plot keeping the classification results for the most reliable assignments one, and setting the unreliable ones to <code>unknown</code>.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 
 </div>
 </div></body></html>
@@ -757,7 +822,7 @@ Figure 10.9: Precision and accuracy when shooting.
 <a href="sec-biovis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-29
+2019-11-30
 </p>
 </div>
 </div>

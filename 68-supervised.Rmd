@@ -617,3 +617,65 @@ abline(h = 8)
 
 ## Additional exercises
 
+
+Load the `hyperLOPIT2015` data from the `pRolocdata` package. See
+section \@ref(sec:dimred02)) for details. The features variable column
+`markers` defines the proteins for which the sub-cellular localisation
+is known - these are the labelled data. Those that are marked
+`unknown` are of unknown location - these are the unlabelled data.
+
+`r msmbstyle::question_begin()`
+Perform a kNN classification setting k=5. 
+`r msmbstyle::question_end()`
+
+`r msmbstyle::question_begin()`
+To assess the results of this classification, visualise the data on
+two PCA plots, one before and one after classification.
+
+You can use the following colour palette that uses grey for the
+unlabelled data.
+
+```r
+cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
+         "#333333", "#00CED1", "#A65628", "#F781BF", "#984EA3",
+         "#9ACD32", "#B0C4DE", "#00008A", "#8B795E", "#E0E0E060")
+```
+`r msmbstyle::question_end()`
+
+`r msmbstyle::question_begin()`
+Asses the choice of k=5 used above.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Compare you results with those that were obtained using *support
+vector machine*, a popular classifier that was used in Christoforou
+*et al.* [@Christoforou:2016], and available in the
+`svm.classification` feature variable.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+A classification algorithm will assign a class to any unlabelled
+instance, even if it doesn't match any of the prodided classes. This
+is often the case in omics datasets such as the spatial proteomics
+example above, where not all the sub-cellular niches are annotated or
+known. We thus know that some of these assignments will be wrong from
+a biological point of view.
+
+Re-run the kNN classifer above, setting `prob = TRUE` to get the 
+proportion of votes in favour of the assigned class. These are stored
+as an attribute named *prob*; eead the `knn` manual page to learn how
+to extract these from the `knn` output variable. 
+
+- Based on these vote proportions, which results to you consider the
+  most reliable?
+
+- Re-generate a PCA plot keeping the classification results for the
+  most reliable assignments one, and setting the unreliable ones to
+  `unknown`.
+
+`r msmbstyle::question_end()`
