@@ -365,7 +365,7 @@ giris2_test <- giris2_labelled[-i, ]
 `r msmbstyle::question_begin()`
 Run two kNN classifications, one with k = 1, then one with k = 11 and
 compare each to the true results. A good way to assess the results is
-to generate a contingency matrix (using the `table` function) that
+to generate a contingency table (using the `table` function) that
 tallies matches and mis-matches between the predictions and expected
 assignments. Interpret these results.
 `r msmbstyle::question_end()`
@@ -625,8 +625,27 @@ is known - these are the labelled data. Those that are marked
 `unknown` are of unknown location - these are the unlabelled data.
 
 `r msmbstyle::question_begin()`
-Perform a kNN classification setting k=5. 
+
+Perform a kNN classification setting k=5. How many unlabelled data
+were assigned to any of the 14 classes?
+
 `r msmbstyle::question_end()`
+
+```{r echo = FALSE, include = FALSE}
+suppressPackageStartupMessages(library("pRolocdata"))
+data(hyperLOPIT2015)
+library("class")
+
+markers <- fData(hyperLOPIT2015)$markers != "unknown"
+unknown <- fData(hyperLOPIT2015)$markers == "unknown"
+
+knn5 <- knn(exprs(hyperLOPIT2015)[markers, ],
+            exprs(hyperLOPIT2015)[unknown, ],
+            fData(hyperLOPIT2015)$markers[markers],
+            k = 5)
+
+table(knn5)
+```
 
 `r msmbstyle::question_begin()`
 To assess the results of this classification, visualise the data on
@@ -642,6 +661,26 @@ cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
 ```
 `r msmbstyle::question_end()`
 
+```{r, echo = FALSE, include = TRUE}
+pca <- prcomp(exprs(hyperLOPIT2015), scale. = TRUE)
+library("factoextra")
+
+cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
+         "#333333", "#00CED1", "#A65628", "#F781BF", "#984EA3",
+         "#9ACD32", "#B0C4DE", "#00008A", "#8B795E", "#E0E0E060")
+
+all <- fData(hyperLOPIT2015)$markers
+all[unknown] <- as.character(knn5)
+
+fviz_pca_ind(pca, geom = "point",
+             habillage = fData(hyperLOPIT2015)$markers,
+             palette = cls)
+
+fviz_pca_ind(pca, geom = "point",
+             habillage = all,
+             palette = cls)
+```
+
 `r msmbstyle::question_begin()`
 Asses the choice of k=5 used above.
 `r msmbstyle::question_end()`
@@ -649,13 +688,17 @@ Asses the choice of k=5 used above.
 
 `r msmbstyle::question_begin()`
 
-Compare you results with those that were obtained using *support
-vector machine*, a popular classifier that was used in Christoforou
-*et al.* [@Christoforou:2016], and available in the
-`svm.classification` feature variable.
+Using a contingency table, compare you results with those that were
+obtained using *support vector machine*, a popular classifier that was
+used in Christoforou *et al.* [@Christoforou:2016], and available in
+the `svm.classification` feature variable.
 
 `r msmbstyle::question_end()`
 
+```{r, echo = FALSE, incldue = FALSE}
+table(fData(hyperLOPIT2015)$svm.classification[unknown],
+      all[unknown])
+```
 
 `r msmbstyle::question_begin()`
 
