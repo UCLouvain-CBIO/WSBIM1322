@@ -63,7 +63,7 @@ rWSBIM1322:::sl_summary()
 
 
 The next steps of the curriculum (course
-[WSBIM2122](https://uclouvain-cbio.github.io/WSBIM2122/]) will build
+[WSBIM2122](https://uclouvain-cbio.github.io/WSBIM2122/])) will build
 upon the skills gained in this course to fully analyse complete
 datasets from omics technologies, using state-of-the-art statistical
 and machine learning methods and software. The course will be project
