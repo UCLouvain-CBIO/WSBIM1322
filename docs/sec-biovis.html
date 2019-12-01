@@ -288,13 +288,8 @@ Figure 11.7: A Venn diagram representing the size of all intersections of the th
 </div>
 <p>Venn diagrams are however limited to two to three, possibly four sets. The <em><a href="https://CRAN.R-project.org/package=UpSetR">UpSetR</a></em> package is a great solution when more sets need to be compared. The <em><a href="https://CRAN.R-project.org/package=UpSetR">UpSetR</a></em> visualises intersections of sets as a matrix in which the rows represent the sets and the columns represent their intersection sizes. For each set that is part of a given intersection, a black filled circle is placed in the corresponding matrix cell. If a set is not part of the intersection, a light grey circle is shown. A vertical black line connects the topmost black circle with the bottom most black circle in each column to emphasise the column-based relationships. The size of the intersections is shown as a bar chart placed on top of the matrix so that each column lines up with exactly one bar. A second bar chart showing the size of the each set is shown to the left of the matrix.</p>
 <p>We will first make use of the <code>fromList</code> function to convert our list to a <code>UpSetR</code> compatible input and then generate the figure:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"UpSetR"</span>)</code></pre></div>
-<pre><code>## 
-## Attaching package: 'UpSetR'</code></pre>
-<pre><code>## The following object is masked from 'package:lattice':
-## 
-##     histogram</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">upset_in &lt;-<span class="st"> </span><span class="kw">fromList</span>(feat_list)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"UpSetR"</span>)
+upset_in &lt;-<span class="st"> </span><span class="kw">fromList</span>(feat_list)
 <span class="kw">upset</span>(upset_in)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset1-1.png" width="672"></p>
 <p>The following <a href="https://twitter.com/ngehlenborg/status/986354574989709312">tweet</a> by the author of the package illustrates how Venn and upset diagrams relate to each other.</p>

@@ -181,7 +181,7 @@ to the left of the matrix.
 We will first make use of the `fromList` function to convert our list
 to a `UpSetR` compatible input and then generate the figure:
 
-```{r upset1}
+```{r upset1, message = FALSE}
 library("UpSetR")
 upset_in <- fromList(feat_list)
 upset(upset_in)
