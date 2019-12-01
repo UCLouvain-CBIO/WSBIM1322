@@ -94,8 +94,8 @@ unlabelled data will be difficult or easy? Motivate your answer.
 
 `r msmbstyle::solution_begin()`
 ```{r}
-pca2 <- prcomp(giris2[, -5], scale = TRUE)
-factoextra::fviz_pca_ind(pca2, col.ind = giris2$GRADE)
+pca <- prcomp(giris2[, -5], scale = TRUE)
+factoextra::fviz_pca_ind(pca, col.ind = giris2$GRADE)
 ```
 `r msmbstyle::solution_end()`
 
@@ -223,14 +223,12 @@ interpret the results based on the first PCA.
 ```{r, fig.cap = "Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification.", fig.height = 10, warning = FALSE}
 giris2_res <- giris2
 giris2_res[is.na(giris2$GRADE), 5] <- knn_res
-pca_knn <- prcomp(giris2_res[, -5], scale = TRUE)
-p1 <- factoextra::fviz_pca_ind(pca2, col.ind = giris2$GRADE)
-p2 <- factoextra::fviz_pca_ind(pca_knn, col.ind = giris2_res$GRADE)
+p1 <- factoextra::fviz_pca_ind(pca, col.ind = giris2$GRADE)
+p2 <- factoextra::fviz_pca_ind(pca, col.ind = giris2_res$GRADE)
 library("patchwork")
 p1 / p2
 ```
 `r msmbstyle::solution_end()`
-
 
 
 `r msmbstyle::question_begin()`
@@ -375,8 +373,8 @@ assignments. Interpret these results.
 ```{r}
 test_1 <- knn(giris2_train[, -5], giris2_test[, -5], giris2_train[, 5], k = 1)
 test_11 <- knn(giris2_train[, -5], giris2_test[, -5], giris2_train[, 5], k = 11)
-table(test_1, giris2_test[, 5])
-table(test_11, giris2_test[, 5])
+table(giris2_test[, 5], test_1)
+table(giris2_test[, 5], test_11)
 ```
 `r msmbstyle::solution_end()`
 
@@ -461,15 +459,17 @@ for k=11.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
+
 ```{r}
 knn_accuracy <- function(fld, k = 11) {
-    giris2_train <- giris2_labelled[-fld, ]
-    giris2_test <- giris2_labelled[fld, ]
-    test_k <- knn(giris2_train[, -5],
-                  giris2_test[, -5],
-                  giris2_train[, 5],
+    ## Uses global variables!
+    train <- giris2_labelled[-fld, ]
+    test <- giris2_labelled[fld, ]
+    test_k <- knn(train[, -5],
+                  test[, -5],
+                  train[, 5],
                   k)
-    sum(test_k == giris2_test[, 5])/length(test_k)
+    sum(test_k == test[, 5])/length(test_k)
 }
 
 accs <- sapply(folds, knn_accuracy)
@@ -524,7 +524,6 @@ and would not be applicable to new data (the model would have high
 bias). On the other hand, a model that is too general, that wouldn't
 be applicable enough to the data, or type of data at hand[^varex], it
 would perform poorly, and hence lead to high variance.
-
 
 [^Varex]: In our example, this would equate to the expression of the
     four genes of interest in a specific population of cancer
@@ -626,8 +625,8 @@ is known - these are the labelled data. Those that are marked
 
 `r msmbstyle::question_begin()`
 
-Perform a kNN classification setting k=5. How many unlabelled data
-were assigned to any of the 14 classes?
+Perform a kNN classification using 5 nearest neighbours. How many
+unlabelled data were assigned to any of the 14 classes?
 
 `r msmbstyle::question_end()`
 
@@ -661,7 +660,7 @@ cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
 ```
 `r msmbstyle::question_end()`
 
-```{r, echo = FALSE, include = TRUE}
+```{r, echo = FALSE, include = FALSE}
 pca <- prcomp(exprs(hyperLOPIT2015), scale. = TRUE)
 library("factoextra")
 
@@ -669,15 +668,15 @@ cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
          "#333333", "#00CED1", "#A65628", "#F781BF", "#984EA3",
          "#9ACD32", "#B0C4DE", "#00008A", "#8B795E", "#E0E0E060")
 
-all <- fData(hyperLOPIT2015)$markers
-all[unknown] <- as.character(knn5)
+all_labels <- fData(hyperLOPIT2015)$markers
+all_labels[unknown] <- as.character(knn5)
 
 fviz_pca_ind(pca, geom = "point",
              habillage = fData(hyperLOPIT2015)$markers,
              palette = cls)
 
 fviz_pca_ind(pca, geom = "point",
-             habillage = all,
+             habillage = all_labels,
              palette = cls)
 ```
 
@@ -685,6 +684,32 @@ fviz_pca_ind(pca, geom = "point",
 Asses the choice of k=5 used above.
 `r msmbstyle::question_end()`
 
+
+```{r, echo = FALSE, include = FALSE}
+hyper_preds <- exprs(hyperLOPIT2015)[markers, ]
+hyper_labels <- fData(hyperLOPIT2015)[markers, "markers"]
+folds <- caret::createFolds(hyper_labels, k = 10)
+
+knn_accuracy <- function(fld, k = 5) {
+    ## Uses global variables!
+    train <- hyper_preds[-fld, ]
+    test <- hyper_preds[fld, ]
+    test_k <- knn(train, test,
+                  hyper_labels[-fld],
+                  k)
+    sum(test_k == hyper_labels[fld])/length(test_k)
+}
+
+accs <- tibble(k = seq(1, 30, 2)) %>%
+    rowwise() %>%
+    mutate(acc = mean(sapply(folds, knn_accuracy, k))) %>%
+    ungroup()
+accs
+accs %>%
+    ggplot(aes(x = k, y = acc)) +
+    geom_point() +
+    geom_line()
+```
 
 `r msmbstyle::question_begin()`
 
@@ -695,9 +720,9 @@ the `svm.classification` feature variable.
 
 `r msmbstyle::question_end()`
 
-```{r, echo = FALSE, incldue = FALSE}
+```{r, echo = FALSE, include = FALSE}
 table(fData(hyperLOPIT2015)$svm.classification[unknown],
-      all[unknown])
+      all_labels[unknown])
 ```
 
 `r msmbstyle::question_begin()`
@@ -719,6 +744,33 @@ to extract these from the `knn` output variable.
 
 - Re-generate a PCA plot keeping the classification results for the
   most reliable assignments one, and setting the unreliable ones to
-  `unknown`.
+  `unknown`. Interpret this figure.
 
 `r msmbstyle::question_end()`
+
+```{r, echo = FALSE, include = FALSE}
+knn5 <- knn(exprs(hyperLOPIT2015)[markers, ],
+            exprs(hyperLOPIT2015)[unknown, ],
+            fData(hyperLOPIT2015)$markers[markers],
+            k = 5,
+            prob = TRUE)
+
+knn_probs <- attr(knn5, "prob")
+table(knn_probs)
+## those that have at least 4/5
+table(knn_probs >= 4/5)
+## those that have 5/5
+table(knn_probs == 1)
+knn_res <- as.character(knn5)
+knn_res[knn_probs != 1] <- "unknown"
+table(knn_res)
+```
+
+```{r echo = FALSE, include = FALSE}
+all_labels <- fData(hyperLOPIT2015)$markers
+all_labels[all_labels == "unknown"] <- knn_res
+
+fviz_pca_ind(pca, geom = "point",
+             habillage = all_labels,
+             palette = cls)
+```

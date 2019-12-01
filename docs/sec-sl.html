@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-11-30" />
+<meta name="date" content="2019-12-01" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -215,8 +215,8 @@ Figure 10.1: In supervised learning, the data are split in labelled or unlabelle
 ► Solution<span id="sol-start-66" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-66', 'sol-start-66')"></span>
 </p>
 <div id="sol-body-66" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca2 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris2[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)
-factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca2, <span class="dt">col.ind =</span> giris2<span class="op">$</span>GRADE)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris2[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)
+factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">col.ind =</span> giris2<span class="op">$</span>GRADE)</code></pre></div>
 <pre><code>## Warning: Removed 100 rows containing missing values (geom_point).</code></pre>
 <pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-77-1.png" width="672"></p>
@@ -321,9 +321,8 @@ knn_res &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelle
 <div id="sol-body-69" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">giris2_res &lt;-<span class="st"> </span>giris2
 giris2_res[<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), <span class="dv">5</span>] &lt;-<span class="st"> </span>knn_res
-pca_knn &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris2_res[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)
-p1 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca2, <span class="dt">col.ind =</span> giris2<span class="op">$</span>GRADE)
-p2 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca_knn, <span class="dt">col.ind =</span> giris2_res<span class="op">$</span>GRADE)
+p1 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">col.ind =</span> giris2<span class="op">$</span>GRADE)
+p2 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">col.ind =</span> giris2_res<span class="op">$</span>GRADE)
 <span class="kw">library</span>(<span class="st">"patchwork"</span>)
 p1 <span class="op">/</span><span class="st"> </span>p2</code></pre></div>
 <div class="figure">
@@ -490,7 +489,7 @@ giris2_test &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</sp
 ► Question
 </p>
 <div class="question-body">
-<p>Run two kNN classifications, one with k = 1, then one with k = 11 and compare each to the true results. A good way to assess the results is to generate a contingency matrix (using the <code>table</code> function) that tallies matches and mis-matches between the predictions and expected assignments. Interpret these results.</p>
+<p>Run two kNN classifications, one with k = 1, then one with k = 11 and compare each to the true results. A good way to assess the results is to generate a contingency table (using the <code>table</code> function) that tallies matches and mis-matches between the predictions and expected assignments. Interpret these results.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -503,18 +502,18 @@ giris2_test &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</sp
 <div id="sol-body-73" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>], giris2_test[, <span class="dv">-5</span>], giris2_train[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">1</span>)
 test_<span class="dv">11</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>], giris2_test[, <span class="dv">-5</span>], giris2_train[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">11</span>)
-<span class="kw">table</span>(test_<span class="dv">1</span>, giris2_test[, <span class="dv">5</span>])</code></pre></div>
-<pre><code>##       
-## test_1  A  B  C
-##      A 16  0  0
-##      B  0 18  1
-##      C  0  1 14</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(test_<span class="dv">11</span>, giris2_test[, <span class="dv">5</span>])</code></pre></div>
-<pre><code>##        
-## test_11  A  B  C
-##       A 16  0  0
-##       B  0 19  1
-##       C  0  0 14</code></pre>
+<span class="kw">table</span>(giris2_test[, <span class="dv">5</span>], test_<span class="dv">1</span>)</code></pre></div>
+<pre><code>##    test_1
+##      A  B  C
+##   A 16  0  0
+##   B  0 18  1
+##   C  0  1 14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(giris2_test[, <span class="dv">5</span>], test_<span class="dv">11</span>)</code></pre></div>
+<pre><code>##    test_11
+##      A  B  C
+##   A 16  0  0
+##   B  0 19  0
+##   C  0  1 14</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -636,13 +635,14 @@ folds</code></pre></div>
 </p>
 <div id="sol-body-76" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_accuracy &lt;-<span class="st"> </span><span class="cf">function</span>(fld, <span class="dt">k =</span> <span class="dv">11</span>) {
-    giris2_train &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</span>fld, ]
-    giris2_test &lt;-<span class="st"> </span>giris2_labelled[fld, ]
-    test_k &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>],
-                  giris2_test[, <span class="dv">-5</span>],
-                  giris2_train[, <span class="dv">5</span>],
+    ## Uses global variables!
+    train &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</span>fld, ]
+    test &lt;-<span class="st"> </span>giris2_labelled[fld, ]
+    test_k &lt;-<span class="st"> </span><span class="kw">knn</span>(train[, <span class="dv">-5</span>],
+                  test[, <span class="dv">-5</span>],
+                  train[, <span class="dv">5</span>],
                   k)
-    <span class="kw">sum</span>(test_k <span class="op">==</span><span class="st"> </span>giris2_test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_k)
+    <span class="kw">sum</span>(test_k <span class="op">==</span><span class="st"> </span>test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_k)
 }
 
 accs &lt;-<span class="st"> </span><span class="kw">sapply</span>(folds, knn_accuracy)
@@ -754,7 +754,7 @@ Figure 10.9: Precision and accuracy when shooting.
 ► Question
 </p>
 <div class="question-body">
-<p>Perform a kNN classification setting k=5.</p>
+<p>Perform a kNN classification using 5 nearest neighbours. How many unlabelled data were assigned to any of the 14 classes?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -791,7 +791,7 @@ Figure 10.9: Precision and accuracy when shooting.
 ► Question
 </p>
 <div class="question-body">
-<p>Compare you results with those that were obtained using <em>support vector machine</em>, a popular classifier that was used in Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-32" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-32" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. doi:<a href="https://doi.org/10.1038/ncomms9992">10.1038/ncomms9992</a>.</span>)</span>, and available in the <code>svm.classification</code> feature variable.</p>
+<p>Using a contingency table, compare you results with those that were obtained using <em>support vector machine</em>, a popular classifier that was used in Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-32" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-32" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. doi:<a href="https://doi.org/10.1038/ncomms9992">10.1038/ncomms9992</a>.</span>)</span>, and available in the <code>svm.classification</code> feature variable.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -806,7 +806,7 @@ Figure 10.9: Precision and accuracy when shooting.
 <p>Re-run the kNN classifer above, setting <code>prob = TRUE</code> to get the proportion of votes in favour of the assigned class. These are stored as an attribute named <em>prob</em>; eead the <code>knn</code> manual page to learn how to extract these from the <code>knn</code> output variable.</p>
 <ul>
 <li><p>Based on these vote proportions, which results to you consider the most reliable?</p></li>
-<li><p>Re-generate a PCA plot keeping the classification results for the most reliable assignments one, and setting the unreliable ones to <code>unknown</code>.</p></li>
+<li><p>Re-generate a PCA plot keeping the classification results for the most reliable assignments one, and setting the unreliable ones to <code>unknown</code>. Interpret this figure.</p></li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -822,7 +822,7 @@ Figure 10.9: Precision and accuracy when shooting.
 <a href="sec-biovis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-11-30
+2019-12-01
 </p>
 </div>
 </div>
