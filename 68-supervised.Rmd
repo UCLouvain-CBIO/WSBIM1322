@@ -529,7 +529,7 @@ bias). On the other hand, a model that is too general, that wouldn't
 be applicable enough to the data, or type of data at hand[^varex], it
 would perform poorly, and hence lead to high variance.
 
-[^Varex]: In our example, this would equate to the expression of the
+[^varex]: In our example, this would equate to the expression of the
     four genes of interest in a specific population of cancer
     patients, for example.
 
