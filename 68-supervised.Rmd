@@ -172,8 +172,8 @@ combined into a single function call to `knn`.
 
 Separate the `giris2` data into two new datasets, one containing the
 labelled data that will be used to train the model and named
-`giris2_train`, and a second one containing the unlabelled data called
-`giris_test`.
+`giris2_labelled`, and a second one containing the unlabelled data called
+`giris_unlabelled`.
 
 `r msmbstyle::question_end()`
 
