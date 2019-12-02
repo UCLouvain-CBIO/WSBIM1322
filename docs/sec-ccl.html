@@ -15,14 +15,14 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-12-01" />
+<meta name="date" content="2019-12-02" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
@@ -52,41 +52,68 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -132,9 +159,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <html><body><div id="sec:ccl" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 12</span> Conclusions</h1>
-<p>In this course, we have consolidated our skills in data analysis and visualisation using R. In particular, this course has focused on interpretation and understanding of the outputs.</p>
-<p>We have also learned and applied new tools, in particular how to manipulate sequence data using <code>Biostrings</code> and how to use statistical learning tools to explore data and identify patterns of biological interest. In terms of statistical testing and machine learning, it can be useful to summarise the different classes of techniques we have touch on using the figures below. The grid on each of these figures represents a matrix with quantitative values with features (genes, proteins, transcripts, …) along the rows and samples along the columns. Annotations of features or samples are presented as coloured boxes on the right or top if the matrices.</p>
-<p>In hypothesis test, we start with quantitative data and an experimental design, i.e. sample annotation that group samples in biologically relevant groups. The output of hypothesis testing is a set of metrics for each features (a p-value, an adjusted p-value, a fold-change, …) that informs whether that feature shows any difference between the biological groups of interest.</p>
+<p>In this course, we have consolidated our skills in data analysis and
+visualisation using R. In particular, this course has focused on
+interpretation and understanding of the outputs.</p>
+<p>We have also learned and applied new tools, in particular how to
+manipulate sequence data using <code>Biostrings</code> and how to use statistical
+learning tools to explore data and identify patterns of biological
+interest. In terms of statistical testing and machine learning, it can
+be useful to summarise the different classes of techniques we have
+touch on using the figures below. The grid on each of these figures
+represents a matrix with quantitative values with features (genes,
+proteins, transcripts, …) along the rows and samples along the
+columns. Annotations of features or samples are presented as coloured
+boxes on the right or top if the matrices.</p>
+<p>In hypothesis test, we start with quantitative data and an
+experimental design, i.e. sample annotation that group samples in
+biologically relevant groups. The output of hypothesis testing is a
+set of metrics for each features (a p-value, an adjusted p-value, a
+fold-change, …) that informs whether that feature shows any
+difference between the biological groups of interest.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-100"></span>
 <p class="caption marginnote shownote">
@@ -142,7 +185,10 @@ Figure 12.1: Hypothesis testing.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-100-1.png" alt="Hypothesis testing." width="672">
 </div>
-<p>When performing clustering (unsupervised machine learning), we only have our quantitative data as input, and the clustering algorithm (whether k-means, hierarchical clustering among many others) suggests a set of groups to cluster the features (as shown below) or samples.</p>
+<p>When performing clustering (unsupervised machine learning), we only have our
+quantitative data as input, and the clustering algorithm (whether
+k-means, hierarchical clustering among many others) suggests a set of
+groups to cluster the features (as shown below) or samples.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-101"></span>
 <p class="caption marginnote shownote">
@@ -150,7 +196,11 @@ Figure 12.2: Clustering of features.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-101-1.png" alt="Clustering of features." width="672">
 </div>
-<p>When performing dimensionality reduction with, for example PCA, one starts with a <em>n</em> by <em>m</em> data set as input to reduce the number of dimensions in either direction. On the figure below, the number of features <em>n</em> was reduced to 2 to, typically, visualise the sample along a scatter plot.</p>
+<p>When performing dimensionality reduction with, for example PCA, one
+starts with a <em>n</em> by <em>m</em> data set as input to reduce the number of
+dimensions in either direction. On the figure below, the number of
+features <em>n</em> was reduced to 2 to, typically, visualise the sample
+along a scatter plot.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-102"></span>
 <p class="caption marginnote shownote">
@@ -158,7 +208,11 @@ Figure 12.3: Dimensionality reduction.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-102-1.png" alt="Dimensionality reduction." width="672">
 </div>
-<p>In classification (supervised machine learning), we need labelled data, i.e. a set of sample (top on the figures below) or features (bottom on the figure below). The classifier uses the data to learn to assign labels and applies that learnt model it infer the most likely label of the unlabelled data.</p>
+<p>In classification (supervised machine learning), we need labelled
+data, i.e. a set of sample (top on the figures below) or features
+(bottom on the figure below). The classifier uses the data to learn to
+assign labels and applies that learnt model it infer the most likely
+label of the unlabelled data.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-103"></span>
 <p class="caption marginnote shownote">
@@ -166,7 +220,15 @@ Figure 12.4: Classification of samples (top) or features (bottom).
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-103-1.png" alt="Classification of samples (top) or features (bottom)." width="672">
 </div>
-<p>The next steps of the curriculum (course <a href="https://uclouvain-cbio.github.io/WSBIM2122/%5D">WSBIM2122</a>) will build upon the skills gained in this course to fully analyse complete datasets from omics technologies, using state-of-the-art statistical and machine learning methods and software. The course will be project based: each experiment and associated technologies will be introduced, the analysis pipeline will be explained, and the students will then implement and present the data analysis and critical interpretation of the results.</p>
+<p>The next steps of the curriculum (course
+<a href="https://uclouvain-cbio.github.io/WSBIM2122/%5D">WSBIM2122</a>) will build
+upon the skills gained in this course to fully analyse complete
+datasets from omics technologies, using state-of-the-art statistical
+and machine learning methods and software. The course will be project
+based: each experiment and associated technologies will be introduced,
+the analysis pipeline will be explained, and the students will then
+implement and present the data analysis and critical interpretation of
+the results.</p>
 
 </div></body></html>
 
@@ -175,7 +237,7 @@ Figure 12.4: Classification of samples (top) or features (bottom).
 <a href="sec-si.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-12-01
+2019-12-02
 </p>
 </div>
 </div>

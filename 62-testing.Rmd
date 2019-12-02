@@ -464,9 +464,9 @@ below demonstrate the risk of dependence between samples.
 Finally, it is important to highlight that all the methods and
 concepts described above will only be relevant if the problem is
 properly stated. Hence the importance of clearly laying out the
-experimental design and stating the biological question of interest
-before running experiment. Indeed, quoting the mathematician Richard
-Hamming:
+**experimental design** and stating the **biological question** of
+interest before running experiment. Indeed, quoting the mathematician
+Richard Hamming:
 
 > It is better to solve the right problem the wrong way than to solve
 > the wrong problem the right way.
