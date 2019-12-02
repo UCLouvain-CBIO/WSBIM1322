@@ -246,7 +246,7 @@ samples.
 
 - Why are there still some features (around 5%) that show a
   significant p-value at an alpha of 0.05?
-  
+
 `r msmbstyle::question_end()`
 
 
@@ -456,7 +456,25 @@ called the Welch t-test exist.
 
 An important assumption when performing a t-test is the **independence
 assumption** among the observations in a sample. A additional exercise
-below demonstrate the risk of dependence between samples. 
+below demonstrate the risk of dependence between samples.
+
+
+
+
+Finally, it is important to highlight that all the methods and
+concepts described above will only be relevant if the problem is
+properly stated. Hence the importance of clearly laying out the
+experimental design and stating the biological question of interest
+before running experiment. Indeed, quoting the mathematician Richard
+Hamming:
+
+> It is better to solve the right problem the wrong way than to solve
+> the wrong problem the right way.
+
+To this effect, a [type III
+error](https://en.wikipedia.org/wiki/Type_III_error) has been defined
+that occurs when researchers provide the right answer to the wrong
+question.
 
 
 <!-- ## Linear regression -->
