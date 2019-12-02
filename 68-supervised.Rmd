@@ -93,10 +93,14 @@ unlabelled data will be difficult or easy? Motivate your answer.
 
 
 `r msmbstyle::solution_begin()`
+
 ```{r}
 pca <- prcomp(giris2[, -5], scale = TRUE)
-factoextra::fviz_pca_ind(pca, col.ind = giris2$GRADE)
+cls <- as.character(giris2$GRADE)
+cls[is.na(cls)] <- "unknown"
+factoextra::fviz_pca_ind(pca, col.ind = cls)
 ```
+
 `r msmbstyle::solution_end()`
 
 
@@ -220,10 +224,10 @@ interpret the results based on the first PCA.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-```{r, fig.cap = "Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification.", fig.height = 10, warning = FALSE}
+```{r, fig.cap = "Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification.", fig.height = 10}
 giris2_res <- giris2
 giris2_res[is.na(giris2$GRADE), 5] <- knn_res
-p1 <- factoextra::fviz_pca_ind(pca, col.ind = giris2$GRADE)
+p1 <- factoextra::fviz_pca_ind(pca, col.ind = cls)
 p2 <- factoextra::fviz_pca_ind(pca, col.ind = giris2_res$GRADE)
 library("patchwork")
 p1 / p2
@@ -569,7 +573,7 @@ par(mar = c(0, 0, 0, 0))
 plot(1:15, 1:15,
      type = "n", xaxt = "n", yaxt = "n", xlab = "",
      ylab = "")
-## 
+##
 plotrix::draw.circle(4, 11.5, 3, col = "steelblue")
 plotrix::draw.circle(4, 11.5, 2, col = "red")
 plotrix::draw.circle(4, 11.5, 1, col = "yellow")
@@ -579,7 +583,7 @@ y <- rnorm(20, 11.5, 1.2)
 points(x, y)
 points(mean(x), mean(y), pch = 19)
 text(4, 15, "Accurate but not precise", cex = 1.3)
-## 
+##
 plotrix::draw.circle(12, 11.5, 3, col = "steelblue")
 plotrix::draw.circle(12, 11.5, 2, col = "red")
 plotrix::draw.circle(12, 11.5, 1, col = "yellow")
@@ -589,7 +593,7 @@ y <- rnorm(20, 12.75, 0.3)
 points(x, y)
 points(mean(x), mean(y), pch = 19)
 text(12, 15, "Precise but not accurate", cex = 1.3)
-## 
+##
 plotrix::draw.circle(4, 4, 3, col = "steelblue")
 plotrix::draw.circle(4, 4, 2, col = "red")
 plotrix::draw.circle(4, 4, 1, col = "yellow")
@@ -599,7 +603,7 @@ y <- rnorm(20, 4, 0.3)
 points(x, y)
 points(mean(x), mean(y), pch = 19)
 text(4, 7.5, "Accurate and precise", cex = 1.3)
-## 
+##
 plotrix::draw.circle(12, 4, 3, col = "steelblue")
 plotrix::draw.circle(12, 4, 2, col = "red")
 plotrix::draw.circle(12, 4, 1, col = "yellow")
@@ -609,7 +613,7 @@ y <- rnorm(20, 5, 1.2)
 points(x, y)
 points(mean(x), mean(y), pch = 19)
 text(12, 7.5, "Neither precise nor accurate", cex = 1.3)
-## 
+##
 abline(v = 8)
 abline(h = 8)
 ```
@@ -734,10 +738,10 @@ example above, where not all the sub-cellular niches are annotated or
 known. We thus know that some of these assignments will be wrong from
 a biological point of view.
 
-Re-run the kNN classifer above, setting `prob = TRUE` to get the 
+Re-run the kNN classifer above, setting `prob = TRUE` to get the
 proportion of votes in favour of the assigned class. These are stored
 as an attribute named *prob*; eead the `knn` manual page to learn how
-to extract these from the `knn` output variable. 
+to extract these from the `knn` output variable.
 
 - Based on these vote proportions, which results to you consider the
   most reliable?
