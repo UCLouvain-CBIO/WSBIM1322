@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2019-12-02" />
+<meta name="date" content="2019-12-15" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -167,6 +167,54 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>
 <span class="header-section-number">5.2</span> Data transformation</h2>
 <p>The very first step in preparing a dataset is to visualise the distribution of the values. Below we see the density plots for 6 proteomics samples and about 4000 peptides from the CPTAC study that compares the reproducibility of quantiative mass spectrometry using human proteins spiked into a yeast proteome background.</p>
+<pre><code>## Warning: multiple methods tables found for 'analyzer'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'tolerance'</code></pre>
+<pre><code>## Warning: replacing previous import 'ProtGenerics::tolerance' by 'mzR::tolerance'
+## when loading 'MSnbase'</code></pre>
+<pre><code>## Warning: replacing previous import 'ProtGenerics::analyzer' by 'mzR::analyzer'
+## when loading 'MSnbase'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'msInfo'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'expemail'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'exptitle'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'ionSource'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'ionSourceDetails'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'analyser'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'analyzer'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'analyserDetails'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'analyzerDetails'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'detectorType'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'instrumentModel'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'instrumentManufacturer'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'instrumentCustomisations'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'processingData'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'smooth'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'ionCount'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'centroided'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'centroided&lt;-'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'smoothed'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'smoothed&lt;-'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'precursorMz'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'precursorIntensity'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'precursorCharge'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'precScanNum'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'acquisitionNum'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'scanIndex'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'msLevel'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'collisionEnergy'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'polarity'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterNA'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterMsLevel'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterMz'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterPolarity'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterRt'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterAcquisitionNum'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterEmptySpectra'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterPrecursorScan'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'productMz'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'isolationWindowLowerMz'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'isolationWindowUpperMz'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterPrecursorMz'</code></pre>
+<pre><code>## Warning: multiple methods tables found for 'filterIsolationWindow'</code></pre>
 <div class="figure">
 <span id="fig:logtans"></span>
 <p class="caption marginnote shownote">
@@ -515,7 +563,7 @@ col_na</code></pre></div>
 <a href="sec-mlintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2019-12-02
+2019-12-15
 </p>
 </div>
 </div>
