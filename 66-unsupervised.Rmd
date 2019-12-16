@@ -671,7 +671,7 @@ p1 + p2 + p3
 `r msmbstyle::question_begin()`
 
 - Load the `mulvey2015` data from the `pRolocdata` package. The goal
-  of this exercise is to identify proteins that haev a specific
+  of this exercise is to identify proteins that have a specific
   expression pattern over the cell development time. Do do so,
   permform a k-means clustering setting k = 12.
 
