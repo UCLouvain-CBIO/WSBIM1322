@@ -57,7 +57,7 @@ heatmap(g3, scale = "column", main = "Scaling along columns")
 ```
 
 Based on the caveats above, it is essential to present and interpret
-heatmaps with great care. 
+heatmaps with great care.
 
 
 There exists several packages that allow to produce heatmaps with
@@ -84,6 +84,10 @@ Heatmap(x,
     ha3
 ```
 
+Other powerful packages to generate and customise heatmaps are
+[superheat](https://rlbarter.github.io/superheat/) and
+[pheatmap](https://github.com/raivokolde/pheatmap).
+
 
 Finally, the `r Githubpkg("talgalili/heatmaply")`,
 `r Githubpkg("rstudio/d3heatmap")` and [`iheatmapr`](https://ropensci.github.io/iheatmapr/index.html)
@@ -97,7 +101,7 @@ heatmaply(MSnbase::exprs(hlm)[1:100, ])
 
 ```{r heatmaply2, eval = FALSE}
 heatmaply(MSnbase::exprs(hlm)[1:100, ],
-		  RowSideColors = as.factor(fData(hlm)$markers[1:100]))
+          RowSideColors = as.factor(fData(hlm)$markers[1:100]))
 ```
 
 ```{r d3hm, eval = FALSE}
@@ -115,7 +119,7 @@ data (not only proteomics) for a useful reference.
 Computing and visualising intersections is a common task in data
 analysis. Venn and Euler diagrams are popular representation when
 comparing sets and their intersection. Two useful R packages to
-generate such plots are 
+generate such plots are
 `r CRANpkg("venneuler")` and `r Githubpkg("js229/Vennerable")`.
 
 We will use the `mulvey2015` feature names to generate a test data:
@@ -164,8 +168,8 @@ plot(v)
 ```
 
 Venn diagrams are however limited to two to three, possibly four
-sets. The `r CRANpkg("UpSetR")` package is a great solution when 
-more sets need to be compared. 
+sets. The `r CRANpkg("UpSetR")` package is a great solution when
+more sets need to be compared.
 The `r CRANpkg("UpSetR")` visualises intersections of sets as a matrix
 in which the rows represent the sets and the columns represent their
 intersection sizes. For each set that is part of a given intersection,
