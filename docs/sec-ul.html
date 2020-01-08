@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 9 Unsupervised learning: clustering | Bioinformatics" />
+<meta property="og:title" content="9 Unsupervised learning: clustering | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 9 Unsupervised learning: clustering | Bioinformatics</title>
+<title>9 Unsupervised learning: clustering | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -142,14 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
 <a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
-<a id="active-page" href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a><ul class="toc-sections">
-<li class="toc"><a href="#introduction-4"> Introduction</a></li>
-<li class="toc"><a href="#how-to-measure-similarities"> How to measure similarities?</a></li>
-<li class="toc"><a href="#k-means-clustering"> k-means clustering</a></li>
-<li class="toc"><a href="#hierarchical-clustering"> Hierarchical clustering</a></li>
-<li class="toc"><a href="#pre-processing"> Pre-processing</a></li>
-<li class="toc"><a href="#additional-exercises-7"> Additional exercises</a></li>
-</ul>
+<a id="active-page" href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
 <a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
 <a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
 <a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
@@ -164,10 +159,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:ul" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 9</span> Unsupervised learning: clustering</h1>
+<h1 number="9">
+<span class="header-section-number">9</span> Unsupervised learning: clustering</h1>
 <div id="introduction-4" class="section level2">
-<h2>
+<h2 number="9.1">
 <span class="header-section-number">9.1</span> Introduction</h2>
 <p>After learing about dimensionality reduction and PCA, in this chapter
 we will focus on <strong>clustering</strong>. The goal of clustering algorithms is
@@ -190,11 +185,11 @@ on the outputs.</li>
 </ul>
 <p>Clustering is a widely used techniques in many areas of omics data
 analysis. The <em>How does gene expression clustering work?</em>
-<span class="citation">(D’haeseleer <label for="tufte-mn-25" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-25" class="margin-toggle">2005<span class="marginnote">D’haeseleer, P. 2005. “How Does Gene Expression Clustering Work?” <em>Nat Biotechnol</em> 23 (12): 1499–1501. <a href="https://doi.org/10.1038/nbt1205-1499">https://doi.org/10.1038/nbt1205-1499</a>.</span>)</span> is a useful reading to put the following chapter
+<span class="citation">(D’haeseleer <a href="sec-si.html#ref-Dhaeseleer:2005" role="doc-biblioref">2005</a>)</span> is a useful reading to put the following chapter
 into context.</p>
 </div>
 <div id="how-to-measure-similarities" class="section level2">
-<h2>
+<h2 number="9.2">
 <span class="header-section-number">9.2</span> How to measure similarities?</h2>
 <p>Clustering algorithms reply on a measurement of similarity between
 between features to group them into clusters. An important step is
@@ -230,7 +225,7 @@ the sum of each the elements of vectors:</p>
 and transform it in into a distance metric:</p>
 <p><span class="math display">\[ d(A, B) = 1 - cor(A, B) \]</span></p>
 <p>These are some of the distances available in the <code>dist</code> function, or
-in the <code>bioDist</code> package. See also section 5.3 from <span class="citation">(Holmes and Huber <label for="tufte-mn-26" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-26" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for
+in the <code>bioDist</code> package. See also section 5.3 from <span class="citation">(Holmes and Huber <a href="sec-si.html#ref-MSMB" role="doc-biblioref">2019</a>)</span> for
 additional details.</p>
 <div class="question">
 <p class="question-begin">
@@ -248,7 +243,7 @@ output of the function. What class if it?</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-65"></span>
 <p class="caption marginnote shownote">
-Figure 9.1: A simulated dataset composed of 5 samples.
+Figure 72: A simulated dataset composed of 5 samples.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-65-1.png" alt="A simulated dataset composed of 5 samples." width="672">
 </div>
@@ -300,7 +295,7 @@ to the <em>average sample</em>?</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-67"></span>
 <p class="caption marginnote shownote">
-Figure 9.2: Visualisation of the average sample, in red.
+Figure 73: Visualisation of the average sample, in red.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-67-1.png" alt="Visualisation of the average sample, in red." width="672">
 </div>
@@ -326,7 +321,7 @@ Figure 9.2: Visualisation of the average sample, in red.
 </div>
 </div>
 <div id="k-means-clustering" class="section level2">
-<h2>
+<h2 number="9.3">
 <span class="header-section-number">9.3</span> k-means clustering</h2>
 <p>The k-means clustering algorithm<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> aims at partitioning <em>n</em>
 observations into a fixed number of <em>k</em> clusters. This algorithm will
@@ -351,7 +346,7 @@ or C.</p>
 <div class="figure">
 <span id="fig:girisplot"></span>
 <p class="caption marginnote shownote">
-Figure 9.3: The <em>giris</em> dataset describes 150 patients by the expression of 4 genes. Each patient was assigned a grade A, B or C.
+Figure 74: The <em>giris</em> dataset describes 150 patients by the expression of 4 genes. Each patient was assigned a grade A, B or C.
 </p>
 <img src="WSBIM1322_files/figure-html/girisplot-1.png" alt="The *giris* dataset describes 150 patients by the expression of 4 genes. Each patient was assigned a grade A, B or C." width="672">
 </div>
@@ -442,7 +437,7 @@ two plots.</p>
 <div class="figure fullwidth">
 <span id="fig:solkmcl3"></span>
 <img src="WSBIM1322_files/figure-html/solkmcl3-1.png" alt="PCA analysis of the `giris` data, highlighting the original groups (left) and the clustering results (right)." width="960"><p class="caption marginnote shownote">
-Figure 9.4: PCA analysis of the <code>giris</code> data, highlighting the original groups (left) and the clustering results (right).
+Figure 75: PCA analysis of the <code>giris</code> data, highlighting the original groups (left) and the clustering results (right).
 </p>
 </div>
 <p class="solution-end">
@@ -478,15 +473,15 @@ matches/mismatches.</p>
 </p>
 </div>
 </div>
-<div id="how-does-k-means-work" class="section level3 unnumbered">
-<h3>How does k-means work</h3>
+<div id="how-does-k-means-work" class="section level3">
+<h3 class="unnumbered" number="">How does k-means work</h3>
 <p>The algorithm starts from a matrix of <em>n</em> features in <em>p</em> observations
 and proceeds as follows:</p>
 <p><strong>Initialisation</strong>: randomly assign the <em>p</em> obervations to <em>k</em> clusters.</p>
 <div class="figure">
 <span id="fig:kmworksinit"></span>
 <p class="caption marginnote shownote">
-Figure 9.5: k-means random intialisation
+Figure 76: k-means random intialisation
 </p>
 <img src="WSBIM1322_files/figure-html/kmworksinit-1.png" alt="k-means random intialisation" width="864">
 </div>
@@ -502,7 +497,7 @@ iterations, or once the centres move less than a certain distance.</p>
 <div class="figure fullwidth">
 <span id="fig:kmworksiter"></span>
 <img src="WSBIM1322_files/figure-html/kmworksiter-1.png" alt="k-means iteration: calculate centers (left) and assign new cluster membership (right)" width="960"><p class="caption marginnote shownote">
-Figure 9.6: k-means iteration: calculate centers (left) and assign new cluster membership (right)
+Figure 77: k-means iteration: calculate centers (left) and assign new cluster membership (right)
 </p>
 </div>
 <p><strong>Termination</strong>: Repeat the iteration steps until no point changes its
@@ -510,20 +505,20 @@ cluster membership.</p>
 <div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-70"></span>
 <p class="caption marginnote shownote">
-Figure 9.7: k-means convergence (credit Wikipedia).
+Figure 78: k-means convergence (credit Wikipedia).
 </p>
 <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif" alt="k-means convergence (credit Wikipedia)." width="100%">
 </div>
 </div>
 <div id="model-selection" class="section level3">
-<h3>
+<h3 number="9.3.1">
 <span class="header-section-number">9.3.1</span> Model selection</h3>
 <p>Due to the random initialisation, one can obtain different clustering
 results.</p>
 <div class="figure fullwidth">
 <span id="fig:unnamed-chunk-71"></span>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-71-1.png" alt="Different k-means results on the same `girsi` data" width="960"><p class="caption marginnote shownote">
-Figure 9.8: Different k-means results on the same <code>girsi</code> data
+Figure 79: Different k-means results on the same <code>girsi</code> data
 </p>
 </div>
 <p>When k-means is run multiple times (as set by <code>nstart</code>), the best
@@ -540,7 +535,7 @@ centre of cluster</li>
 a global minimum.</p>
 </div>
 <div id="how-to-determine-the-number-of-clusters" class="section level3">
-<h3>
+<h3 number="9.3.2">
 <span class="header-section-number">9.3.2</span> How to determine the number of clusters</h3>
 <ol style="list-style-type: decimal">
 <li>Run k-means with <code>k=1</code>, <code>k=2</code>, …, <code>k=n</code>
@@ -551,7 +546,7 @@ a global minimum.</p>
 <div class="figure">
 <span id="fig:kmelbow"></span>
 <p class="caption marginnote shownote">
-Figure 9.9: Total within sum of squared distances for different values is <em>k</em>.
+Figure 80: Total within sum of squared distances for different values is <em>k</em>.
 </p>
 <img src="WSBIM1322_files/figure-html/kmelbow-1.png" alt="Total within sum of squared distances for different values is *k*." width="672">
 </div>
@@ -587,10 +582,10 @@ Figure 9.9: Total within sum of squared distances for different values is <em>k<
 </div>
 </div>
 <div id="hierarchical-clustering" class="section level2">
-<h2>
+<h2 number="9.4">
 <span class="header-section-number">9.4</span> Hierarchical clustering</h2>
 <div id="how-does-hierarchical-clustering-work" class="section level3">
-<h3>
+<h3 number="9.4.1">
 <span class="header-section-number">9.4.1</span> How does hierarchical clustering work</h3>
 <p><strong>Initialisation</strong>: Starts by assigning each of the n points its own cluster</p>
 <p><strong>Iteration</strong></p>
@@ -604,7 +599,7 @@ single cluster</li>
 <div class="figure">
 <span id="fig:hcldata"></span>
 <p class="caption marginnote shownote">
-Figure 9.10: Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right).
+Figure 81: Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right).
 </p>
 <img src="WSBIM1322_files/figure-html/hcldata-1.png" alt="Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right)." width="1152">
 </div>
@@ -614,7 +609,7 @@ proportional to the branch lengths.</p>
 <div class="figure">
 <span id="fig:hcldendro"></span>
 <p class="caption marginnote shownote">
-Figure 9.11: Visualisation of the hierarchical clustering results on a dendrogram
+Figure 82: Visualisation of the hierarchical clustering results on a dendrogram
 </p>
 <img src="WSBIM1322_files/figure-html/hcldendro-1.png" alt="Visualisation of the hierarchical clustering results on a dendrogram" width="672">
 </div>
@@ -671,7 +666,7 @@ method) will use the smallest distance between observations. The
 method takes an analysis of variance approach, and aims at minimising
 the variance within clusters.</p>
 <p>See <a href="https://www.huber.embl.de/msmb/Chap-Clustering.html#hierarchical-clustering">section 5.6</a>
-of <em>Modern Statistics of Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-27" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-27" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for further details.</p>
+of <em>Modern Statistics of Modern Biology</em> <span class="citation">(Holmes and Huber <a href="sec-si.html#ref-MSMB" role="doc-biblioref">2019</a>)</span> for further details.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -701,7 +696,7 @@ of <em>Modern Statistics of Modern Biology</em> <span class="citation">(Holmes a
 <div class="figure fullwidth">
 <span id="fig:linkcomp"></span>
 <img src="WSBIM1322_files/figure-html/linkcomp-1.png" alt="Effect of using different linkage methods." width="768"><p class="caption marginnote shownote">
-Figure 9.12: Effect of using different linkage methods.
+Figure 83: Effect of using different linkage methods.
 </p>
 </div>
 <p class="solution-end">
@@ -711,7 +706,7 @@ Figure 9.12: Effect of using different linkage methods.
 </div>
 </div>
 <div id="defining-clusters" class="section level3">
-<h3>
+<h3 number="9.4.2">
 <span class="header-section-number">9.4.2</span> Defining clusters</h3>
 <p>After producing the hierarchical clustering result, we need to <em>cut
 the tree (dendrogram)</em> at a specific height to defined the
@@ -720,7 +715,7 @@ cut it at a distance around 1.5, with would produce 2 clusters.</p>
 <div class="figure">
 <span id="fig:cuthcl"></span>
 <p class="caption marginnote shownote">
-Figure 9.13: Cutting the dendrogram at height 1.5.
+Figure 84: Cutting the dendrogram at height 1.5.
 </p>
 <img src="WSBIM1322_files/figure-html/cuthcl-1.png" alt="Cutting the dendrogram at height 1.5." width="672">
 </div>
@@ -776,14 +771,14 @@ the same results.</p></li>
 </div>
 </div>
 <div id="pre-processing" class="section level2">
-<h2>
+<h2 number="9.5">
 <span class="header-section-number">9.5</span> Pre-processing</h2>
 <p>Many of the machine learning methods that are regularly used are
 sensitive to difference scales. This applies to unsupervised methods
 as well as supervised methods.</p>
 <p>A typical way to pre-process the data prior to learning is to scale
-the data (see chapter <a href="sec-norm.html#sec:norm">5</a>), or apply principal component
-analysis (see chapter <a href="sec-dimred.html#sec:dimred">8</a>).</p>
+the data (see chapter <a href="sec-norm.html#sec:norm"><strong>??</strong></a>), or apply principal component
+analysis (see chapter <a href="sec-dimred.html#sec:dimred"><strong>??</strong></a>).</p>
 <p>In R, scaling is done with the <code>scale</code> function.</p>
 <div class="question">
 <p class="question-begin">
@@ -819,7 +814,7 @@ original and scaled data.</p>
 </div>
 </div>
 <div id="additional-exercises-7" class="section level2">
-<h2>
+<h2 number="9.6">
 <span class="header-section-number">9.6</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
@@ -938,7 +933,7 @@ average marker profiles, such as shown below.</p></li>
 <a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>

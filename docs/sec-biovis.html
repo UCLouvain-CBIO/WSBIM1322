@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 11 Visualising biomolecular data | Bioinformatics" />
+<meta property="og:title" content="11 Visualising biomolecular data | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 11 Visualising biomolecular data | Bioinformatics</title>
+<title>11 Visualising biomolecular data | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -144,10 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
 <a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
 <a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
-<a id="active-page" href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a><ul class="toc-sections">
-<li class="toc"><a href="#heatmaps"> Heatmaps</a></li>
-<li class="toc"><a href="#visualising-intersections-between-sets"> Visualising intersections between sets</a></li>
-</ul>
+<a id="active-page" href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
 <a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
 <a href="sec-si.html"><span class="toc-section-number">13</span> Session information</a>
 </div>
@@ -160,27 +159,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:biovis" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 11</span> Visualising biomolecular data</h1>
+<h1 number="11">
+<span class="header-section-number">11</span> Visualising biomolecular data</h1>
 <p>The goal of this chapter is to learn some additional visualisation
 that are widely used in biomedical data analysis, namely</p>
 <ul>
 <li>
 <strong>Heatmaps</strong>, including an application of the hierarchical
-clustering that was seen in chapter <a href="sec-ul.html#sec:ul">9</a>.</li>
+clustering that was seen in chapter <a href="sec-ul.html#sec:ul"><strong>??</strong></a>.</li>
 <li>Visualisation of intersections, in particular <strong>Venn</strong> and <strong>UpSet</strong>
 plots.</li>
 <li>The <em><a href="https://bioconductor.org/packages/3.10/Gviz">Gviz</a></em> to visualise genomic data.</li>
 </ul>
 <div id="heatmaps" class="section level2">
-<h2>
+<h2 number="11.1">
 <span class="header-section-number">11.1</span> Heatmaps</h2>
 <div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="sec-biovis.html#cb419-1"></a><span class="kw">data</span>(mulvey2015norm)</span>
 <span id="cb419-2"><a href="sec-biovis.html#cb419-2"></a><span class="kw">heatmap</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(mulvey2015norm))</span></code></pre></div>
 <div class="figure">
 <span id="fig:heatmapmulvey"></span>
 <p class="caption marginnote shownote">
-Figure 11.1: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data.
+Figure 94: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapmulvey-1.png" alt="Heatmap of the (normalised) Mulvey et al. 2015 proteomic data." width="672">
 </div>
@@ -194,7 +193,7 @@ substantial effect on the results, which is conformed below.</p>
 <div class="figure">
 <span id="fig:heatmapcor"></span>
 <p class="caption marginnote shownote">
-Figure 11.2: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances.
+Figure 95: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapcor-1.png" alt="Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances." width="672">
 </div>
@@ -207,7 +206,7 @@ clustering section below.</p>
 <div class="figure">
 <span id="fig:heatmapscale1"></span>
 <p class="caption marginnote shownote">
-Figure 11.3: Effect of scaling on the heatmap output: no scaling.
+Figure 96: Effect of scaling on the heatmap output: no scaling.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapscale1-1.png" alt="Effect of scaling on the heatmap output: no scaling." width="672">
 </div>
@@ -217,7 +216,7 @@ Figure 11.3: Effect of scaling on the heatmap output: no scaling.
 <div class="figure">
 <span id="fig:heatmapscale2"></span>
 <p class="caption marginnote shownote">
-Figure 11.4: Effect of scaling on the heatmap output: scaling along the rows.
+Figure 97: Effect of scaling on the heatmap output: scaling along the rows.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapscale2-1.png" alt="Effect of scaling on the heatmap output: scaling along the rows." width="672">
 </div>
@@ -227,7 +226,7 @@ Figure 11.4: Effect of scaling on the heatmap output: scaling along the rows.
 <div class="figure">
 <span id="fig:heatmapscale3"></span>
 <p class="caption marginnote shownote">
-Figure 11.5: Effect of scaling on the heatmap output: scaling along the columns.
+Figure 98: Effect of scaling on the heatmap output: scaling along the columns.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapscale3-1.png" alt="Effect of scaling on the heatmap output: scaling along the columns." width="672">
 </div>
@@ -254,7 +253,7 @@ demonstrated below.</p>
 <div class="figure fullwidth">
 <span id="fig:complexheatmap"></span>
 <img src="WSBIM1322_files/figure-html/complexheatmap-1.png" alt="An annotated heatmap produced with the `ComplexHeatmap` Bioconductor package." width="672"><p class="caption marginnote shownote">
-Figure 11.6: An annotated heatmap produced with the <code>ComplexHeatmap</code> Bioconductor package.
+Figure 99: An annotated heatmap produced with the <code>ComplexHeatmap</code> Bioconductor package.
 </p>
 </div>
 <p>Other powerful packages to generate and customise heatmaps are
@@ -270,11 +269,11 @@ packages can be used to generate interactive heatmaps.</p>
 <div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="sec-biovis.html#cb427-1"></a><span class="kw">library</span>(<span class="st">"d3heatmap"</span>)</span>
 <span id="cb427-2"><a href="sec-biovis.html#cb427-2"></a><span class="kw">d3heatmap</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(hlm))</span></code></pre></div>
 <p>See also <em>A tutorial in displaying mass spectrometry-based proteomic
-data using heat maps</em> <span class="citation">(Key <label for="tufte-mn-33" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-33" class="margin-toggle">2012<span class="marginnote">Key, M. 2012. “A Tutorial in Displaying Mass Spectrometry-Based Proteomic Data Using Heat Maps.” <em>BMC Bioinformatics</em> 13 Suppl 16: S10. <a href="https://doi.org/10.1186/1471-2105-13-S16-S10">https://doi.org/10.1186/1471-2105-13-S16-S10</a>.</span>)</span>, that applies to any type of omics
+data using heat maps</em> <span class="citation">(Key <a href="sec-si.html#ref-Key:2012" role="doc-biblioref">2012</a>)</span>, that applies to any type of omics
 data (not only proteomics) for a useful reference.</p>
 </div>
 <div id="visualising-intersections-between-sets" class="section level2">
-<h2>
+<h2 number="11.2">
 <span class="header-section-number">11.2</span> Visualising intersections between sets</h2>
 <p>Computing and visualising intersections is a common task in data
 analysis. Venn and Euler diagrams are popular representation when
@@ -341,7 +340,7 @@ suspicious set of colours) with</p>
 <div class="figure">
 <span id="fig:venn3"></span>
 <p class="caption marginnote shownote">
-Figure 11.7: A Venn diagram representing the size of all intersections of the three elements of out <code>feat_list</code> input.
+Figure 100: A Venn diagram representing the size of all intersections of the three elements of out <code>feat_list</code> input.
 </p>
 <img src="WSBIM1322_files/figure-html/venn3-1.png" alt="A Venn diagram representing the size of all intersections of the three elements of out `feat_list` input." width="672">
 </div>
@@ -443,7 +442,7 @@ number of intersectios (default is 40) become useful.</p>
 <a href="sec-ccl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>

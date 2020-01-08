@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 5 Data normalisation: centring, scaling, quantile normalisation | Bioinformatics" />
+<meta property="og:title" content="5 Data normalisation: centring, scaling, quantile normalisation | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 5 Data normalisation: centring, scaling, quantile normalisation | Bioinformatics</title>
+<title>5 Data normalisation: centring, scaling, quantile normalisation | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -138,13 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
 <a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
 <a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
-<a id="active-page" href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a><ul class="toc-sections">
-<li class="toc"><a href="#introduction-2"> Introduction</a></li>
-<li class="toc"><a href="#data-transformation"> Data transformation</a></li>
-<li class="toc"><a href="#normalisation"> Normalisation</a></li>
-<li class="toc"><a href="#missing-data"> Missing data</a></li>
-<li class="toc"><a href="#additional-exercises-4"> Additional exercises</a></li>
-</ul>
+<a id="active-page" href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
 <a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
@@ -163,8 +159,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:norm" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 5</span> Data normalisation: centring, scaling, quantile normalisation</h1>
+<h1 number="5">
+<span class="header-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</h1>
 <p><strong>Learning objectives</strong></p>
 <ul>
 <li>What is data normalisation and why do we need it?</li>
@@ -173,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>How to assess if normalisation worked.</li>
 </ul>
 <div id="introduction-2" class="section level2">
-<h2>
+<h2 number="5.1">
 <span class="header-section-number">5.1</span> Introduction</h2>
 <p>In a typical high throughput experiment, we assay thousands of
 features (gene transcripts, proteins, metabolites, …) is a certain
@@ -218,7 +214,7 @@ without removing biological variability (that will differantiate the
 samples biologically).</p>
 </div>
 <div id="data-transformation" class="section level2">
-<h2>
+<h2 number="5.2">
 <span class="header-section-number">5.2</span> Data transformation</h2>
 <p>The very first step in preparing a dataset is to visualise the
 distribution of the values. Below we see the density plots for 6
@@ -229,7 +225,7 @@ human proteins spiked into a yeast proteome background.</p>
 <div class="figure">
 <span id="fig:logtans"></span>
 <p class="caption marginnote shownote">
-Figure 5.1: Raw quantiation values from the proteomics CPTAC data.
+Figure 28: Raw quantiation values from the proteomics CPTAC data.
 </p>
 <img src="WSBIM1322_files/figure-html/logtans-1.png" alt="Raw quantiation values from the proteomics CPTAC data." width="672">
 </div>
@@ -255,7 +251,7 @@ not always<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>) to l
 <div class="figure">
 <span id="fig:logtrans2"></span>
 <p class="caption marginnote shownote">
-Figure 5.2: CPTAC data after log transformation
+Figure 29: CPTAC data after log transformation
 </p>
 <img src="WSBIM1322_files/figure-html/logtrans2-1.png" alt="CPTAC data after log transformation" width="672">
 </div>
@@ -302,13 +298,13 @@ symmetrically centred around 0.</p>
 <div class="figure">
 <span id="fig:lfc"></span>
 <p class="caption marginnote shownote">
-Figure 5.3: Non-symetric fold-changes (left) and symetric log fold-changes (right) distributions..
+Figure 30: Non-symetric fold-changes (left) and symetric log fold-changes (right) distributions..
 </p>
 <img src="WSBIM1322_files/figure-html/lfc-1.png" alt="Non-symetric fold-changes (left) and symetric log fold-changes (right) distributions.." width="672">
 </div>
 </div>
 <div id="normalisation" class="section level2">
-<h2>
+<h2 number="5.3">
 <span class="header-section-number">5.3</span> Normalisation</h2>
 <p>In addition to possible transformation of the data, it is necessary to
 further process the data to remove as much as technical variability as
@@ -319,7 +315,7 @@ change among biological conditions. In other words, normalisation
 expects only a minority of biological features to be differentially
 expressed in the conditions of interest.</p>
 <div id="centring-and-scaling" class="section level3">
-<h3>
+<h3 number="5.3.1">
 <span class="header-section-number">5.3.1</span> Centring and scaling</h3>
 <div class="question">
 <p class="question-begin">
@@ -367,7 +363,7 @@ simulation, set the random number generation seed to 123.</p></li>
 <div class="figure">
 <span id="fig:sln1"></span>
 <p class="caption marginnote shownote">
-Figure 5.4: Simulated data for 4 samples and 1000 genes.
+Figure 31: Simulated data for 4 samples and 1000 genes.
 </p>
 <img src="WSBIM1322_files/figure-html/sln1-1.png" alt="Simulated data for 4 samples and 1000 genes." width="672">
 </div>
@@ -455,7 +451,7 @@ operations using <code>scale</code>.</p>
 </div>
 </div>
 <div id="quantile-normalisation" class="section level3">
-<h3>
+<h3 number="5.3.2">
 <span class="header-section-number">5.3.2</span> Quantile normalisation</h3>
 <p>Quantile normalisation is a method that will make different data
 distributions identical. The method works shown below using a small
@@ -557,7 +553,7 @@ experiment.</p>
 </div>
 </div>
 <div id="missing-data" class="section level2">
-<h2>
+<h2 number="5.4">
 <span class="header-section-number">5.4</span> Missing data</h2>
 <p>In some omics experiments, a substantial faction of the data can be
 missing. Missing values are encoded as <code>NA</code> in R, and should be
@@ -628,7 +624,7 @@ of occurences of 1, 2, 3, … missing values.</p>
 the next ones, once we will test, cluster or classify our data.</p>
 </div>
 <div id="additional-exercises-4" class="section level2">
-<h2>
+<h2 number="5.5">
 <span class="header-section-number">5.5</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
@@ -654,7 +650,7 @@ implications for the normalisation step?</p>
 <a href="sec-mlintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 8 Unsupervised learning: dimensionality reduction | Bioinformatics" />
+<meta property="og:title" content="8 Unsupervised learning: dimensionality reduction | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 8 Unsupervised learning: dimensionality reduction | Bioinformatics</title>
+<title>8 Unsupervised learning: dimensionality reduction | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -141,16 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a id="active-page" href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a><ul class="toc-sections">
-<li class="toc"><a href="#introduction-3"> Introduction</a></li>
-<li class="toc"><a href="#lower-dimensional-projections"> Lower-dimensional projections</a></li>
-<li class="toc"><a href="#the-new-linear-combinations"> The new linear combinations</a></li>
-<li class="toc"><a href="#summary-and-application"> Summary and application</a></li>
-<li class="toc"><a href="#visualisation"> Visualisation</a></li>
-<li class="toc"><a href="#pre-processing-and-missing-values-with-pca"> Pre-processing and missing values with PCA</a></li>
-<li class="toc"><a href="#the-full-pca-workflow"> The full PCA workflow</a></li>
-<li class="toc"><a href="#additional-exercises-6"> Additional exercises</a></li>
-</ul>
+<a id="active-page" href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
 <a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
 <a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
 <a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
@@ -166,14 +159,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:dimred" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 8</span> Unsupervised learning: dimensionality reduction</h1>
+<h1 number="8">
+<span class="header-section-number">8</span> Unsupervised learning: dimensionality reduction</h1>
 <p>In <strong>unsupervised learning</strong> (UML), no labels are provided, and the
 learning algorithm focuses solely on detecting structure in unlabelled
 input data. One generally differentiates between</p>
 <ul>
 <li>
-<strong>Clustering</strong> (see chapter <a href="sec-ul.html#sec:ul">9</a>), where the goal is to
+<strong>Clustering</strong> (see chapter <a href="sec-ul.html#sec:ul"><strong>??</strong></a>), where the goal is to
 find homogeneous subgroups within the data; the grouping is based on
 similiarities (or distance) between observations. The result of a
 clustering algorithm is to group the observations (features) into
@@ -187,7 +180,7 @@ thus essential to critically assess and validate (for example using
 existing domain knowledge) the results of any clustering algorithm.</p>
 <ul>
 <li>
-<strong>Dimensionality reduction</strong> (see chapter <a href="sec-dimred.html#sec:dimred">8</a>), where
+<strong>Dimensionality reduction</strong> (see chapter <a href="sec-dimred.html#sec:dimred"><strong>??</strong></a>), where
 the goal is to summarise the data in a reduced number of
 dimensations, i.e. using a reduced number of (newly computer)
 variables. A typical example in omics is to summarise (and
@@ -212,7 +205,7 @@ compoment analysis achieves;</li>
 <li>provide real-life scenarios of PCA analyses on omics data.</li>
 </ul>
 <div id="introduction-3" class="section level2">
-<h2>
+<h2 number="8.1">
 <span class="header-section-number">8.1</span> Introduction</h2>
 <p>In this chapter, we are going to learn about dimensionality reduction,
 also called ordination. The goal of dimensionality reduction is to
@@ -230,13 +223,13 @@ samples. We will be using the scaled and centred version of this data.</p>
 <div class="figure">
 <span id="fig:xyplot"></span>
 <p class="caption marginnote shownote">
-Figure 8.1: Raw (left) and scale/centred (right) expression data for genes <em>x</em> and <em>y</em> in 20 samples
+Figure 49: Raw (left) and scale/centred (right) expression data for genes <em>x</em> and <em>y</em> in 20 samples
 </p>
 <img src="WSBIM1322_files/figure-html/xyplot-1.png" alt="Raw (left) and scale/centred (right) expression data for genes *x* and *y* in 20 samples" width="1056">
 </div>
 </div>
 <div id="lower-dimensional-projections" class="section level2">
-<h2>
+<h2 number="8.2">
 <span class="header-section-number">8.2</span> Lower-dimensional projections</h2>
 <p>The goal of dimensionality reduction is to reduce the number of
 dimensions in a way that the new data remains useful. One way to
@@ -246,7 +239,7 @@ called <strong>linear projections</strong>.</p>
 <div class="figure">
 <span id="fig:linproj"></span>
 <p class="caption marginnote shownote">
-Figure 8.2: Projection of the data on the x (left) and y (right) axes.
+Figure 50: Projection of the data on the x (left) and y (right) axes.
 </p>
 <img src="WSBIM1322_files/figure-html/linproj-1.png" alt="Projection of the data on the x (left) and y (right) axes." width="1056">
 </div>
@@ -265,7 +258,7 @@ predictor adn the response.</p>
 <div class="figure">
 <span id="fig:linreg"></span>
 <p class="caption marginnote shownote">
-Figure 8.3: Regression of y onto x (left) minimisises the sums of squares of vertical residuals (red). Regression of x onto y (right) minimisises the sums of squares of horizontal residuals (orange).
+Figure 51: Regression of y onto x (left) minimisises the sums of squares of vertical residuals (red). Regression of x onto y (right) minimisises the sums of squares of horizontal residuals (orange).
 </p>
 <img src="WSBIM1322_files/figure-html/linreg-1.png" alt="Regression of y onto x (left) minimisises the sums of squares of vertical residuals (red). Regression of x onto y (right) minimisises the sums of squares of horizontal residuals (orange)." width="1056">
 </div>
@@ -275,7 +268,7 @@ ones that maximises the variance of the projections along itself.</p>
 <div class="figure">
 <span id="fig:pxaex"></span>
 <p class="caption marginnote shownote">
-Figure 8.4: The first prinicpal component minimises the sum of squares of the orthogonal projections.
+Figure 52: The first prinicpal component minimises the sum of squares of the orthogonal projections.
 </p>
 <img src="WSBIM1322_files/figure-html/pxaex-1.png" alt="The first prinicpal component minimises the sum of squares of the orthogonal projections." width="1104">
 </div>
@@ -284,7 +277,7 @@ first one. In our case above, there is only one possibility.</p>
 <div class="figure">
 <span id="fig:pxaex2"></span>
 <p class="caption marginnote shownote">
-Figure 8.5: The second prinicpal component is orthogonal to the second one.
+Figure 53: The second prinicpal component is orthogonal to the second one.
 </p>
 <img src="WSBIM1322_files/figure-html/pxaex2-1.png" alt="The second prinicpal component is orthogonal to the second one." width="1056">
 </div>
@@ -299,13 +292,13 @@ ratio that is illustrative of the respective variances.</p>
 <div class="figure">
 <span id="fig:pxaex3"></span>
 <p class="caption marginnote shownote">
-Figure 8.6: Final principal component analysis of the data.
+Figure 54: Final principal component analysis of the data.
 </p>
 <img src="WSBIM1322_files/figure-html/pxaex3-1.png" alt="Final principal component analysis of the data." width="960">
 </div>
 </div>
 <div id="the-new-linear-combinations" class="section level2">
-<h2>
+<h2 number="8.3">
 <span class="header-section-number">8.3</span> The new linear combinations</h2>
 <p>Principal components are linear combinations of the variables that
 were originally measured, they provide a new coordinate system. The
@@ -318,7 +311,7 @@ variables. These new linear combinations will maximise the variance
 of the data.</p>
 </div>
 <div id="summary-and-application" class="section level2">
-<h2>
+<h2 number="8.4">
 <span class="header-section-number">8.4</span> Summary and application</h2>
 <p>Principal Component Analysis (PCA) is a technique that transforms the
 original n-dimensional data into a new space.</p>
@@ -334,7 +327,7 @@ i.e. non-correlated.</p></li>
 <div class="figure fullwidth">
 <span id="fig:pcaex"></span>
 <img src="WSBIM1322_files/figure-html/pcaex-1.png" alt="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right)." width="1152"><p class="caption marginnote shownote">
-Figure 8.7: Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).
+Figure 55: Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).
 </p>
 </div>
 <p>In R, we can use the <code>prcomp</code> function. A summary of the <code>prcomp</code>
@@ -412,7 +405,7 @@ the values we could use to produce the PCA plot as above by hand.</li>
 <p><img src="WSBIM1322_files/figure-html/pcaplot-1.png" width="672"></p>
 </div>
 <div id="visualisation" class="section level2">
-<h2>
+<h2 number="8.5">
 <span class="header-section-number">8.5</span> Visualisation</h2>
 <p>A <strong>biplot</strong> features all original points re-mapped (rotated) along the
 first two PCs as well as the original features as vectors along the
@@ -422,7 +415,7 @@ are also correlated in the original data space.</p>
 <div class="figure">
 <span id="fig:biplot"></span>
 <p class="caption marginnote shownote">
-Figure 8.8: A biplot shows both the variables (arrows) and observations of the PCA analysis.
+Figure 56: A biplot shows both the variables (arrows) and observations of the PCA analysis.
 </p>
 <img src="WSBIM1322_files/figure-html/biplot-1.png" alt="A biplot shows both the variables (arrows) and observations of the PCA analysis." width="672">
 </div>
@@ -436,7 +429,7 @@ visualised on a <strong>screeplot</strong>, that can be produced with</p>
 <div class="figure">
 <span id="fig:screeplot"></span>
 <p class="caption marginnote shownote">
-Figure 8.9: Screeplot showing the variances for the PCs.
+Figure 57: Screeplot showing the variances for the PCs.
 </p>
 <img src="WSBIM1322_files/figure-html/screeplot-1.png" alt="Screeplot showing the variances for the PCs." width="672">
 </div>
@@ -553,7 +546,7 @@ samples. Interprete the figures.</p>
 </div>
 </div>
 <div id="pre-processing-and-missing-values-with-pca" class="section level2">
-<h2>
+<h2 number="8.6">
 <span class="header-section-number">8.6</span> Pre-processing and missing values with PCA</h2>
 <p>We haven’t looked at other <code>prcomp</code> parameters, other that the first
 one, <code>x</code>. There are two other ones that are or importance, in
@@ -614,17 +607,17 @@ to encode the categories as:</p>
 <p>so that the distance between each category are approximately equal to 1.</p>
 </div>
 <div id="the-full-pca-workflow" class="section level2">
-<h2>
+<h2 number="8.7">
 <span class="header-section-number">8.7</span> The full PCA workflow</h2>
 <p>In this section, we will describe the detailed PCA analysis and
 interpretation of two real-life proteomics datasets. Both of these
 datasets are available in the <code>pRolocdata</code> package.</p>
 <div id="sec:dimred01" class="section level3">
-<h3>
+<h3 number="8.7.1">
 <span class="header-section-number">8.7.1</span> Extra-embryonic endoderm differentiation in mouse embryonic stem cells</h3>
 <p>We are first going to focus on the data from Mulvey <em>et al.</em> (2015),
 where they present the <em>Dynamic proteomic profiling of extra-embryonic
-endoderm differentiation in mouse embryonic stem cells</em> <span class="citation">(Mulvey et al. <label for="tufte-mn-23" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-23" class="margin-toggle">2015<span class="marginnote">Mulvey, C M, C Schröter, L Gatto, D Dikicioglu, I Baris Fidaner, A Christoforou, M J Deery, et al. 2015. “Dynamic Proteomic Profiling of Extra-Embryonic Endoderm Differentiation in Mouse Embryonic Stem Cells.” <em>Stem Cells</em>, June. <a href="https://doi.org/10.1002/stem.2067">https://doi.org/10.1002/stem.2067</a>.</span>)</span>.</p>
+endoderm differentiation in mouse embryonic stem cells</em> <span class="citation">(Mulvey et al. <a href="sec-si.html#ref-Mulvey:2015" role="doc-biblioref">2015</a>)</span>.</p>
 <blockquote>
 <p>During mammalian preimplantation development, the cells of the
 blastocyst’s inner cell mass differentiate into the epiblast and
@@ -770,7 +763,7 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 <div class="figure">
 <span id="fig:unnamed-chunk-51"></span>
 <p class="caption marginnote shownote">
-Figure 8.10: Scree plot for the <code>mulvey2015</code> data showing the percentage of explained variance onlong the principal components.
+Figure 58: Scree plot for the <code>mulvey2015</code> data showing the percentage of explained variance onlong the principal components.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-51-1.png" alt="Scree plot for the `mulvey2015` data showing the percentage of explained variance onlong the principal components." width="672">
 </div>
@@ -807,7 +800,7 @@ the light of the experimental design.</p></li>
 <div class="figure">
 <span id="fig:unnamed-chunk-521"></span>
 <p class="caption marginnote shownote">
-Figure 8.11: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
+Figure 59: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-52-1.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
@@ -815,7 +808,7 @@ Figure 8.11: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 <div class="figure">
 <span id="fig:unnamed-chunk-522"></span>
 <p class="caption marginnote shownote">
-Figure 8.12: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
+Figure 60: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-52-2.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
@@ -823,7 +816,7 @@ Figure 8.12: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 <div class="figure">
 <span id="fig:unnamed-chunk-523"></span>
 <p class="caption marginnote shownote">
-Figure 8.13: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
+Figure 61: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-52-3.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
@@ -863,11 +856,11 @@ cube along the three first PCs.</p>
 </div>
 </div>
 <div id="sec:dimred02" class="section level3">
-<h3>
+<h3 number="8.7.2">
 <span class="header-section-number">8.7.2</span> A map of the mouse pluripotent stem cell spatial proteome</h3>
 <p>In this section, we are going to use PCA to explore spatial map of
 mouse pluripotent stem cell by Christoforou <em>et al.</em>
-<span class="citation">(Christoforou et al. <label for="tufte-mn-24" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-24" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>.</p>
+<span class="citation">(Christoforou et al. <a href="sec-si.html#ref-Christoforou:2016" role="doc-biblioref">2016</a>)</span>.</p>
 <blockquote>
 <p>Knowledge of the subcellular distribution of proteins is vital for
 understanding cellular mechanisms. Capturing the subcellular
@@ -1036,7 +1029,7 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 <div class="figure">
 <span id="fig:unnamed-chunk-56"></span>
 <p class="caption marginnote shownote">
-Figure 8.14: Scree plot for the <code>hyperLOPIT2015</code> data showing the percentage of explained variance onlong the principal components.
+Figure 62: Scree plot for the <code>hyperLOPIT2015</code> data showing the percentage of explained variance onlong the principal components.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-56-1.png" alt="Scree plot for the `hyperLOPIT2015` data showing the percentage of explained variance onlong the principal components." width="672">
 </div>
@@ -1081,7 +1074,7 @@ annotate the plot. Compare and interpret the two plots.</p></li>
 <div class="figure">
 <span id="fig:unnamed-chunk-571"></span>
 <p class="caption marginnote shownote">
-Figure 8.15: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
+Figure 63: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-57-1.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
@@ -1089,7 +1082,7 @@ Figure 8.15: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> da
 <div class="figure">
 <span id="fig:unnamed-chunk-572"></span>
 <p class="caption marginnote shownote">
-Figure 8.16: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
+Figure 64: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-57-2.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
@@ -1105,7 +1098,7 @@ Figure 8.16: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> da
 <div class="figure">
 <span id="fig:unnamed-chunk-581"></span>
 <p class="caption marginnote shownote">
-Figure 8.17: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
+Figure 65: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-58-1.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
 </div>
@@ -1115,7 +1108,7 @@ Figure 8.17: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> 
 <div class="figure">
 <span id="fig:unnamed-chunk-582"></span>
 <p class="caption marginnote shownote">
-Figure 8.18: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
+Figure 66: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-58-2.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
 </div>
@@ -1127,7 +1120,7 @@ Figure 8.18: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> 
 </div>
 </div>
 <div id="additional-exercises-6" class="section level2">
-<h2>
+<h2 number="8.8">
 <span class="header-section-number">8.8</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
@@ -1145,7 +1138,7 @@ design and suggest how to best analyse these data.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-59"></span>
 <p class="caption marginnote shownote">
-Figure 8.19: PCA analysis illustrating the global effect of drug A and B.
+Figure 67: PCA analysis illustrating the global effect of drug A and B.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-59-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
 </div>
@@ -1165,7 +1158,7 @@ and suggest how to best analyse these data.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-60"></span>
 <p class="caption marginnote shownote">
-Figure 8.20: PCA analysis illustrating the global effect of drug A and B.
+Figure 68: PCA analysis illustrating the global effect of drug A and B.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-60-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
 </div>
@@ -1190,7 +1183,7 @@ think the analysis is likely to provide significant results?</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-61"></span>
 <p class="caption marginnote shownote">
-Figure 8.21: Quantitative proteomics experiment measuring the effect of drug C121.
+Figure 69: Quantitative proteomics experiment measuring the effect of drug C121.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-61-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
 </div>
@@ -1213,7 +1206,7 @@ are the chances to find good biomarkers?</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-62"></span>
 <p class="caption marginnote shownote">
-Figure 8.22: Quantitative proteomics experiment measuring the effect of drug C121.
+Figure 70: Quantitative proteomics experiment measuring the effect of drug C121.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-62-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
 </div>
@@ -1238,7 +1231,7 @@ an impact on the data?</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-63"></span>
 <p class="caption marginnote shownote">
-Figure 8.23: Testing the effect of RNA sequencing kits 1 and 2.
+Figure 71: Testing the effect of RNA sequencing kits 1 and 2.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-63-1.png" alt="Testing the effect of RNA sequencing kits 1 and 2." width="672">
 </div>
@@ -1296,7 +1289,7 @@ the labels?</p>
 <a href="sec-ul.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 1 R refresher | Bioinformatics" />
+<meta property="og:title" content="1 R refresher | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 1 R refresher | Bioinformatics</title>
+<title>1 R refresher | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -134,14 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
 <a href="index.html">Preamble</a>
-<a id="active-page" href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a><ul class="toc-sections">
-<li class="toc"><a href="#administration"> Administration</a></li>
-<li class="toc"><a href="#basic-data-structures-and-operations"> Basic data structures and operations</a></li>
-<li class="toc"><a href="#tidyvers"> Tidyvers</a></li>
-<li class="toc"><a href="#saving-and-exporting"> Saving and exporting</a></li>
-<li class="toc"><a href="#programming"> Programming</a></li>
-<li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
-</ul>
+<a id="active-page" href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
 <a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
 <a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
 <a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
@@ -164,12 +159,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:refresher" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 1</span> R refresher</h1>
+<h1 number="1">
+<span class="header-section-number">1</span> R refresher</h1>
 <p>The objectives of this chapter is to review some R syntax, functions
 and data structures that will be needed for the following chapters.</p>
 <div id="administration" class="section level2">
-<h2>
+<h2 number="1.1">
 <span class="header-section-number">1.1</span> Administration</h2>
 <ul>
 <li>Setting up an <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up">RStudio project</a>
@@ -191,7 +186,7 @@ workspace</a>
 </ul>
 </div>
 <div id="basic-data-structures-and-operations" class="section level2">
-<h2>
+<h2 number="1.2">
 <span class="header-section-number">1.2</span> Basic data structures and operations</h2>
 <ul>
 <li>
@@ -242,7 +237,7 @@ generating and subsetting vectors.</li>
 </table>
 </div>
 <div id="tidyvers" class="section level2">
-<h2>
+<h2 number="1.3">
 <span class="header-section-number">1.3</span> Tidyvers</h2>
 <ul>
 <li>The <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html">dplyr</a> package</li>
@@ -253,7 +248,7 @@ functions</a>)</li>
 </ul>
 </div>
 <div id="saving-and-exporting" class="section level2">
-<h2>
+<h2 number="1.4">
 <span class="header-section-number">1.4</span> Saving and exporting</h2>
 <ul>
 <li>
@@ -274,7 +269,7 @@ figures</a>
 </ul>
 </div>
 <div id="programming" class="section level2">
-<h2>
+<h2 number="1.5">
 <span class="header-section-number">1.5</span> Programming</h2>
 <ul>
 <li><a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-prog.html#writing-new-functions">Writing
@@ -289,7 +284,7 @@ functions</a></li>
 </ul>
 </div>
 <div id="additional-exercises" class="section level2">
-<h2>
+<h2 number="1.6">
 <span class="header-section-number">1.6</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
@@ -321,7 +316,7 @@ functions. For the latter, see <code>rowwise()</code></p>
 <a href="sec-vis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>

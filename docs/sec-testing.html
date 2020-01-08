@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 7 Hypothesis testing | Bioinformatics" />
+<meta property="og:title" content="7 Hypothesis testing | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 7 Hypothesis testing | Bioinformatics</title>
+<title>7 Hypothesis testing | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -140,15 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
 <a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
-<a id="active-page" href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a><ul class="toc-sections">
-<li class="toc"><a href="#refresher"> Refresher</a></li>
-<li class="toc"><a href="#a-biological-example"> A biological example</a></li>
-<li class="toc"><a href="#a-more-realistic-biological-example"> A more realistic biological example</a></li>
-<li class="toc"><a href="#adjustment-for-multiple-testing"> Adjustment for multiple testing</a></li>
-<li class="toc"><a href="#result-visualisation"> Result visualisation</a></li>
-<li class="toc"><a href="#a-word-of-caution"> A word of caution</a></li>
-<li class="toc"><a href="#additional-exercises-5"> Additional exercises</a></li>
-</ul>
+<a id="active-page" href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
 <a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
 <a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
 <a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
@@ -165,16 +159,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:testing" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 7</span> Hypothesis testing</h1>
+<h1 number="7">
+<span class="header-section-number">7</span> Hypothesis testing</h1>
 <p>The goal of this chapter is to demonstrate some of the fundamentals of
 hypothesis testing as used in bioinformatics. For prerequisites within
 the Biomedical sciences masters degree at the UCLouvain, see
 <em>WFARM1247</em> (Traitement statistique des données).</p>
 <p>Parts of this chapter are based on chapter 6 from <em>Modern Statistical
-for Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-19" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-19" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>.</p>
+for Modern Biology</em> <span class="citation">(Holmes and Huber <a href="sec-si.html#ref-MSMB" role="doc-biblioref">2019</a>)</span>.</p>
 <div id="refresher" class="section level2">
-<h2>
+<h2 number="7.1">
 <span class="header-section-number">7.1</span> Refresher</h2>
 <p>We have flipped a coing 100 times and have obtained the following results.</p>
 <pre><code>## flips
@@ -189,14 +183,14 @@ the number of head observed.</p>
 <div class="figure">
 <span id="fig:tosshist"></span>
 <p class="caption marginnote shownote">
-Figure 7.1: Binomial density of for an unbiased coin to get 0 to 100 heads. The full area of the histogram sums to 1.
+Figure 41: Binomial density of for an unbiased coin to get 0 to 100 heads. The full area of the histogram sums to 1.
 </p>
 <img src="WSBIM1322_files/figure-html/tosshist-1.png" alt="Binomial density of for an unbiased coin to get 0 to 100 heads. The full area of the histogram sums to 1." width="672">
 </div>
 <p>Above, we see that the most likely outcome would be 50 heads with a
 probability of 0.0795892. No head and 100 heads have respectively
-7.888609110^{-31} and
-7.888609110^{-31} probability.</p>
+7.8886091^{-31} and
+7.8886091^{-31} probability.</p>
 <p>We set</p>
 <ul>
 <li>
@@ -212,7 +206,7 @@ outside of the 95% most probably values.</p>
 <div class="figure">
 <span id="fig:tosshist2"></span>
 <p class="caption marginnote shownote">
-Figure 7.2: Binomial density of for an unbiased coin to get 0 to 100 heads. The areas in red sum to 0.05.
+Figure 42: Binomial density of for an unbiased coin to get 0 to 100 heads. The areas in red sum to 0.05.
 </p>
 <img src="WSBIM1322_files/figure-html/tosshist2-1.png" alt="Binomial density of for an unbiased coin to get 0 to 100 heads. The areas in red sum to 0.05." width="672">
 </div>
@@ -257,7 +251,7 @@ such a extreme or more extreme value under <span class="math inline">\(H_0\)</sp
 <p>See below for a step by step guide to this example.</p>
 </div>
 <div id="a-biological-example" class="section level2">
-<h2>
+<h2 number="7.2">
 <span class="header-section-number">7.2</span> A biological example</h2>
 <p>A typical biological example consists in measuring a gene of interest
 in two populations of interest (say control and group), represented by
@@ -267,7 +261,7 @@ intensities of triplicates in each population.</p>
 <div class="figure">
 <span id="fig:exdists"></span>
 <p class="caption marginnote shownote">
-Figure 7.3: Expression of a gene in two populations with randomly chosen triplicates.
+Figure 43: Expression of a gene in two populations with randomly chosen triplicates.
 </p>
 <img src="WSBIM1322_files/figure-html/exdists-1.png" alt="Expression of a gene in two populations with randomly chosen triplicates." width="672">
 </div>
@@ -347,7 +341,7 @@ t-test, such as the one provided in the <em><a href="https://bioconductor.org/pa
 and also widely applied to RNA-Seq count data.</p>
 </div>
 <div id="a-more-realistic-biological-example" class="section level2">
-<h2>
+<h2 number="7.3">
 <span class="header-section-number">7.3</span> A more realistic biological example</h2>
 <p>Let’s now use the <code>tdata1</code> dataset from the <code>rWSBIM1322</code> package that
 provide gene expression data for 100 genes and 6 samples, three in
@@ -482,7 +476,7 @@ whether eating jelly beans causes acne.</p>
 <div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-31"></span>
 <p class="caption marginnote shownote">
-Figure 7.4: Do jelly beans cause acne? Scientists investigate. From <a href="https://xkcd.com/882/">xkcd</a>.
+Figure 44: Do jelly beans cause acne? Scientists investigate. From <a href="https://xkcd.com/882/">xkcd</a>.
 </p>
 <img src="figs/jellybeans.png" alt="Do jelly beans cause acne? Scientists investigate. From [xkcd](https://xkcd.com/882/)." width="700">
 </div>
@@ -504,7 +498,7 @@ distribution between 0 and 1. Both are very similar; they are flat.</p>
 <div class="figure">
 <span id="fig:pvalhist"></span>
 <p class="caption marginnote shownote">
-Figure 7.5: Distribution of p-values for the <code>tdata1</code> dataset (left) and 100 (p-)values uniformely distributed between 0 and 1 (right).
+Figure 45: Distribution of p-values for the <code>tdata1</code> dataset (left) and 100 (p-)values uniformely distributed between 0 and 1 (right).
 </p>
 <img src="WSBIM1322_files/figure-html/pvalhist-1.png" alt="Distribution of p-values for the `tdata1` dataset (left) and 100 (p-)values uniformely distributed between 0 and 1 (right)." width="672">
 </div>
@@ -514,7 +508,7 @@ explained</a>.</p>
 <div class="figure" style="text-align: center">
 <span id="fig:pvalhists2"></span>
 <p class="caption marginnote shownote">
-Figure 7.6: Expected trends of p-values for different scenarios (<a href="http://varianceexplained.org/statistics/interpreting-pvalue-histogram/">source</a>).
+Figure 46: Expected trends of p-values for different scenarios (<a href="http://varianceexplained.org/statistics/interpreting-pvalue-histogram/">source</a>).
 </p>
 <img src="figs/plot_melted-1.png" alt="Expected trends of p-values for different scenarios ([source](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/))." width="100%">
 </div>
@@ -526,7 +520,7 @@ present (uniform). All other scenarios warrent further inspection, as
 they might point to issue with the data of the tests.</p>
 </div>
 <div id="adjustment-for-multiple-testing" class="section level2">
-<h2>
+<h2 number="7.4">
 <span class="header-section-number">7.4</span> Adjustment for multiple testing</h2>
 <p>There are two classes of multiple testing adjumstment methods:</p>
 <ul>
@@ -545,7 +539,7 @@ are null and then adjust the p-values accordingly.</p>
 <div class="figure" style="text-align: center">
 <span id="fig:fdrhist"></span>
 <p class="caption marginnote shownote">
-Figure 7.7: Principle behind the false discovery rate p-value adjustment (<a href="http://varianceexplained.org/statistics/interpreting-pvalue-histogram/">source</a>).
+Figure 47: Principle behind the false discovery rate p-value adjustment (<a href="http://varianceexplained.org/statistics/interpreting-pvalue-histogram/">source</a>).
 </p>
 <img src="figs/fdr.png" alt="Principle behind the false discovery rate p-value adjustment ([source](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/))." width="100%">
 </div>
@@ -581,7 +575,7 @@ confirm that none of the features are differentially expressed.</p>
 </div>
 </div>
 <div id="result-visualisation" class="section level2">
-<h2>
+<h2 number="7.5">
 <span class="header-section-number">7.5</span> Result visualisation</h2>
 <div class="question">
 <p class="question-begin">
@@ -662,7 +656,7 @@ absolute value) fold-changes.</p>
 <div class="figure">
 <span id="fig:volc"></span>
 <p class="caption marginnote shownote">
-Figure 7.8: A volcano plot.
+Figure 48: A volcano plot.
 </p>
 <img src="WSBIM1322_files/figure-html/volc-1.png" alt="A volcano plot." width="672">
 </div>
@@ -695,7 +689,7 @@ computed above.</p>
 </div>
 <p><a href="https://www.huber.embl.de/msmb/Chap-Testing.html">Chapter 6 on
 <em>testing</em></a> of
-<em>Modern Statistical for Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-20" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-20" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>, and in particlar
+<em>Modern Statistical for Modern Biology</em> <span class="citation">(Holmes and Huber <a href="sec-si.html#ref-MSMB" role="doc-biblioref">2019</a>)</span>, and in particlar
 section 6.5, provides additional details about the t-test.</p>
 <p>The t-test comes in multiple flavors, all of which can be chosen
 through parameters of the <code>t.test</code> function. What we did above is
@@ -738,7 +732,7 @@ question.</p>
 <!-- - Bootstrapping to generate null distributions -->
 </div>
 <div id="a-word-of-caution" class="section level2">
-<h2>
+<h2 number="7.6">
 <span class="header-section-number">7.6</span> A word of caution</h2>
 <p>Summary of statistical inference:</p>
 <ol style="list-style-type: decimal">
@@ -749,22 +743,22 @@ question.</p>
 <li><p>Make a decision: reject <span class="math inline">\(H_0\)</span> if the computed probability is deemed too small.</p></li>
 </ol>
 <p>What not to do:</p>
-<div id="p-hacking" class="section level3 unnumbered">
-<h3>p-hacking</h3>
+<div id="p-hacking" class="section level3">
+<h3 class="unnumbered" number="">p-hacking</h3>
 <p>Instead of setting up one statistical hypothesis before data
 collection and then testing it, collect data at large, then try lots
 of different tests until one give a statistically significant result
-<span class="citation">(Head et al. <label for="tufte-mn-21" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-21" class="margin-toggle">2015<span class="marginnote">Head, M. L., L. Holman, R. Lanfear, A. T. Kahn, and M. D. Jennions. 2015. “The extent and consequences of p-hacking in science.” <em>PLoS Biol</em> 13: e1002106. <a href="https://doi.org/10.1371/journal.pbio.1002106">https://doi.org/10.1371/journal.pbio.1002106</a>.</span>)</span>.</p>
+<span class="citation">(Head et al. <a href="sec-si.html#ref-Head:2015" role="doc-biblioref">2015</a>)</span>.</p>
 </div>
-<div id="p-harking" class="section level3 unnumbered">
-<h3>p-harking</h3>
+<div id="p-harking" class="section level3">
+<h3 class="unnumbered" number="">p-harking</h3>
 <p>HARKing (Hypothesizing After the Results are Known) is the fraudulous
 practice of presenting a post hoc hypothesis, i.e., one based on prior
-result, as a priori hypotheses <span class="citation">(Kerr <label for="tufte-mn-22" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-22" class="margin-toggle">1998<span class="marginnote">Kerr, N. L. 1998. “HARKing: hypothesizing after the results are known.” <em>Pers Soc Psychol Rev</em> 2: 196–217. <a href="https://doi.org/10.1207/s15327957pspr0203_4">https://doi.org/10.1207/s15327957pspr0203_4</a>.</span>)</span>.</p>
+result, as a priori hypotheses <span class="citation">(Kerr <a href="sec-si.html#ref-Kerr:1998" role="doc-biblioref">1998</a>)</span>.</p>
 </div>
 </div>
 <div id="additional-exercises-5" class="section level2">
-<h2>
+<h2 number="7.7">
 <span class="header-section-number">7.7</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
@@ -892,8 +886,8 @@ values and repeat the t-test (now 6 against 6) above. Interpret the</p></li>
 </p>
 </div>
 </div>
-<div id="the-coin-example-step-by-step" class="section level3 unnumbered">
-<h3>The coin example, step by step</h3>
+<div id="the-coin-example-step-by-step" class="section level3">
+<h3 class="unnumbered" number="">The coin example, step by step</h3>
 <p>The following code chunk simulates 100 coin toss from a biased coin.</p>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="sec-testing.html#cb277-1"></a><span class="kw">set.seed</span>(<span class="dv">2</span>)</span>
 <span id="cb277-2"><a href="sec-testing.html#cb277-2"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
@@ -1057,7 +1051,7 @@ conclusion now?</li>
 <a href="sec-dimred.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>

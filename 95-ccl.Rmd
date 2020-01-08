@@ -71,3 +71,242 @@ based: each experiment and associated technologies will be introduced,
 the analysis pipeline will be explained, and the students will then
 implement and present the data analysis and critical interpretation of
 the results.
+
+## Additional exercise
+
+This final exercise integrates several techniques seen throughout this
+course.
+
+`r msmbstyle::question_begin()`
+The the RNA-Seq data and sample annotation in the files returned by
+the `rWSBIM1207::kem2.tsv()` function. How many genes have been
+assayed? Describe the experimental design at hand.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+e <- as.matrix(read.delim(rWSBIM1207::kem2.tsv()[1],
+                          row.names = 1))
+dim(e)
+```
+
+```{r}
+## Below, we harmonise the samples names to have dots in the
+## experimental design dataframe (pd: phenotypic data) and expression
+## matix.
+pd <- readr::read_tsv(rWSBIM1207::kem2.tsv()[2]) %>%
+    mutate(sample_id = sub("-", ".", sample_id)) %>%
+    mutate(group = paste(cell_type, treatment, sep = "."))
+pd
+```
+
+Cell types A and B have been assay in a stimulted and non-stimulated
+(none) conditions. There are 4 replicates in each of the 4 groups.
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Log-2 transform the expression data and visualise the distributions of
+the expression values in each samples.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r, fig.cap = "Expression values in cell types A and B without (black and gree) and with stimulation (red and blue).", warning = FALSE}
+e <- log2(e + 1)
+boxplot(e, col = as.factor(pd$group))
+```
+`r msmbstyle::solution_end()`
+
+Continue without preforming any normalisation.
+
+`r msmbstyle::question_begin()`
+Removes genes that aren't expressed in any samples, i.e. those that
+have a sum of expression equal to 0 accross all samples. How many
+genes unexpressed genes are there?
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r}
+table(rowSums(e) > 0)
+e <- e[rowSums(e) > 0, ]
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Visualise and interpret the experiment desing (cell type and
+treatment) using a principal component analyis.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r, fig.cap = "PCA of *kem2* samples."}
+library("factoextra")
+pca_samples  <- prcomp(t(e), scale = TRUE, center = TRUE)
+fviz_pca_ind(pca_samples, habillage = pd$group)
+```
+
+The PCA shows that samples group by treatment along the second PC
+(22.3% of variance explained) and that close to 50% of the variance is
+explained by variability along all samples.
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Use a t test to identify the genes that are differentially expressed
+between the stimulated and non-stimulated samples of cell type A.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+We start by selecting the relevant samples and create a new expression
+matrix matching cell type A. Visualise the results on a volcano plot.
+```{r}
+cell_type_a <- pd %>% filter(cell_type == "A")
+cell_type_a
+
+e_a <- e[, cell_type_a[[1]]]
+e_a[1:10, 1:4]
+```
+
+Below, we perform a t test on each of the `r nrow(e_a)` genes.
+
+```{r, fig.cap = "Histogram of p-values, showing an enrichment of small values."}
+my_t_test <- function(x)
+    t.test(x[1:4], x[5:8])$p.value
+
+res <- data.frame(row.names = rownames(e))
+res$pv <- apply(e_a, 1, my_t_test)
+hist(res$pv)
+```
+
+```{r}
+res$adjp <- p.adjust(res$pv, method = "BH")
+
+my_lfc <- function(x)
+    mean(x[1:4]) - mean(x[5:8])
+res$lfc <- apply(e_a, 1, my_lfc)
+
+res %>%
+    arrange(adjp) %>%
+    head()
+```
+
+
+```{r, fig.cap = "Volcano plot illustrating how stimulation down-regulates the expression of numerous genes."}
+with(res, plot(lfc, -log10(adjp)))
+abline(v = c(-1, 1))
+abline(h = -log10(0.001))
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Considering that a gene is called differentially expressed if it has
+an absolute log2 fold-change > 1 and an adjusted p-value < 0.001, how
+many differentially genes are there?
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r}
+res %>%
+    filter(adjp < 0.001, abs(lfc) > 1) %>%
+    nrow
+```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Visualise the expression of these differentially expressed genes in
+all sampes using a heatmap and interpret the figure.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r, fig.cap = "Heatmap of the 73 differentially expressed genes."}
+k_de <- res %>%
+    rownames_to_column() %>%
+    filter(adjp < 0.001, abs(lfc) > 1) %>%
+    dplyr::select(rowname) %>%
+    unlist()
+
+heatmap(e[k_de, ])
+```
+
+```{r, message = FALSE, fig.cap = "Annotated heatmap of the 73 differentially expressed genes."}
+library("ComplexHeatmap")
+col_annot <- HeatmapAnnotation(cell_type = pd$cell_type, treatment = pd$treatment)
+Heatmap(e[k_de, ], top_annotation = col_annot)
+```
+
+We see that most genes that are differentially expressed in cell type
+A are show a consistent pattern in cell type B, except for the botton
+5 genes, that show a low expression accross both conditions.
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Select the 3 genes with the smallest p-values and visualise their
+expression in all samples (cell types A and B, both stimulated and
+un-stimulated) using boxplots.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r, fig.cap = "Expression of the three most differentially expressed genes."}
+k_3 <- res %>%
+    rownames_to_column() %>%
+    arrange(adjp) %>%
+    head(3) %>%
+    dplyr::select(rowname) %>%
+    unlist()
+
+e[k_3, ] %>%
+    as.data.frame() %>%
+    rownames_to_column() %>%
+    gather(value = expression, key = sample_id, -rowname) %>%
+    full_join(pd) %>%
+    ggplot(aes(x = treatment, y = expression)) +
+    geom_boxplot(outlier.size = -1) +
+    geom_jitter() +
+    facet_grid(rowname ~ cell_type)
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+Perform a k-means clustering of all genes and samples using k = 5 and
+visualise these clusters on a PCA plot. Interprete the figure.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r, fig.cap = "PCA of the *kem2* genes displaying the 5 arbitrary clusters."}
+set.seed(1)
+res$cl <- kmeans(e, centers = 5, nstart = 10)$cl
+pca <- prcomp(e, scale = TRUE, center = TRUE)
+fviz_pca_ind(pca, habillage = res$cl, geom = "point")
+```
+
+The clusters represent the diversity of gene expression along
+PC1. Cluster 3, on the left of the figure, seems to be the most
+variable and different, while to others represent a more continuous
+gradient along of gene expression variation.
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+Repeat the volcano plot above, colouring the genes based on their
+respective clusters. Refine your interpretation of the gene-level PCA
+above.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r, fig.cap = "Volcano plot displaying the five clusters"}
+with(res, plot(lfc, -log10(adjp), col = res$cl))
+legend("bottomleft", legend = 1:5, pch = 1, col = 1:5)
+```
+
+We see that the most diverse cluster corresponds roughly to the genes
+that show significant down regulation upon stimulation.
+
+`r msmbstyle::solution_end()`

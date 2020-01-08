@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 4 Manipulating sequences with Biostrings | Bioinformatics" />
+<meta property="og:title" content="4 Manipulating sequences with Biostrings | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 4 Manipulating sequences with Biostrings | Bioinformatics</title>
+<title>4 Manipulating sequences with Biostrings | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -137,15 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
 <a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
 <a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
-<a id="active-page" href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a><ul class="toc-sections">
-<li class="toc"><a href="#working-with-sequences---a-first-start"> Working with sequences - a first start</a></li>
-<li class="toc"><a href="#working-with-sequences---using-biostrings"> Working with sequences - using <code>Biostrings</code></a></li>
-<li class="toc"><a href="#reading-dna-sequence-data-from-a-file"> Reading DNA sequence data from a file</a></li>
-<li class="toc"><a href="#tidy-bioconductor"> Tidy Bioconductor</a></li>
-<li class="toc"><a href="#subsetting-sequences"> Subsetting sequences</a></li>
-<li class="toc"><a href="#working-with-genomes"> Working with genomes</a></li>
-<li class="toc"><a href="#additional-exercises-3"> Additional exercises</a></li>
-</ul>
+<a id="active-page" href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
 <a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
@@ -165,8 +159,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:biostrings" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 4</span> Manipulating sequences with Biostrings</h1>
+<h1 number="4">
+<span class="header-section-number">4</span> Manipulating sequences with Biostrings</h1>
 <p><strong>Learning objectives</strong></p>
 <p>In this chapter, we will learn about a new object, that is
 specialised for the manipulation of biological sequences.</p>
@@ -181,7 +175,7 @@ Morgan during the <a href="https://uclouvain-cbio.github.io/BSS2019/">Bioinforma
 2019</a> at Louvain-la-Neuve,
 Belgium.</p>
 <div id="working-with-sequences---a-first-start" class="section level2">
-<h2>
+<h2 number="4.1">
 <span class="header-section-number">4.1</span> Working with sequences - a first start</h2>
 <p>It is easy to use standard R character vectors to define DNA
 sequences. Below, we create a vector with three short sequences.</p>
@@ -207,7 +201,7 @@ of the variable name is not enforced by R</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="sec-biostrings.html#cb136-1"></a>not_a_dna_sequence &lt;-<span class="st"> "I love R"</span></span></code></pre></div>
 </div>
 <div id="working-with-sequences---using-biostrings" class="section level2">
-<h2>
+<h2 number="4.2">
 <span class="header-section-number">4.2</span> Working with sequences - using <code>Biostrings</code>
 </h2>
 <p>The Bioconductor <em><a href="https://bioconductor.org/packages/3.10/Biostrings">Biostrings</a></em>
@@ -219,7 +213,7 @@ package:</p>
 available online the <a href="https://www.bioconductor.org/packages/release/bioc/html/Biostrings.html">package
 package</a>.</p>
 <div id="dnastringset" class="section level3">
-<h3>
+<h3 number="4.2.1">
 <span class="header-section-number">4.2.1</span> <code>DNAStringSet()</code>
 </h3>
 <p>The <code>DNAStringSet</code> class that <em>knows</em> about DNA sequences. We can
@@ -374,7 +368,7 @@ alphabet:" on the help page <code>?DNAString</code>.</p>
 </div>
 </div>
 <div id="learning-more-about-a-class" class="section level3">
-<h3>
+<h3 number="4.2.2">
 <span class="header-section-number">4.2.2</span> Learning more about a class</h3>
 <p>The function <code>DNAStringSet()</code> returns an <em>object</em> that has a
 particular class</p>
@@ -432,7 +426,7 @@ possible content.</p>
 </div>
 </div>
 <div id="reading-dna-sequence-data-from-a-file" class="section level2">
-<h2>
+<h2 number="4.3">
 <span class="header-section-number">4.3</span> Reading DNA sequence data from a file</h2>
 <p>It is unlikely that we would enter 1000’s of DNA sequences ‘by
 hand’. Instead, we might read the data from a standard file
@@ -615,7 +609,7 @@ graphics <code>hist()</code> and <code>plot(density())</code>, and using <code>g
 </div>
 </div>
 <div id="tidy-bioconductor" class="section level2">
-<h2>
+<h2 number="4.4">
 <span class="header-section-number">4.4</span> Tidy Bioconductor</h2>
 <p>Although <em>Bioconductor</em> emphasizes formal objects like <code>DNAStringSet</code>
 rather than <code>tibble</code>-like data frames, some of the ways one interacts with tidy data can be
@@ -645,7 +639,7 @@ down-stream manipulation</p>
 ## # … with 26,444 more rows</code></pre>
 </div>
 <div id="subsetting-sequences" class="section level2">
-<h2>
+<h2 number="4.5">
 <span class="header-section-number">4.5</span> Subsetting sequences</h2>
 <p>As <code>[</code> is used to subset a <code>DNAStringSet</code>, it can’t be used to take
 substrings of a sequence. This can be done with the <code>subseq</code> sequence.</p>
@@ -723,7 +717,7 @@ respectively nucleotides 1 to 1, 1 to 2, 1 to 3, …, 1 to 10.</p>
 </div>
 </div>
 <div id="working-with-genomes" class="section level2">
-<h2>
+<h2 number="4.6">
 <span class="header-section-number">4.6</span> Working with genomes</h2>
 <p><code>BSgenome</code> packages inside Bioconductor contain whole genome sequences
 as distributed by ENSEMBL, NCBI and others. In this next example we
@@ -778,7 +772,7 @@ and T nucleotides in chromosome 2L.</p>
 </div>
 </div>
 <div id="additional-exercises-3" class="section level2">
-<h2>
+<h2 number="4.7">
 <span class="header-section-number">4.7</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
@@ -799,7 +793,7 @@ the mean GC content and highlight the regions that have a GC content &gt;
 <div class="figure">
 <span id="fig:unnamed-chunk-19"></span>
 <p class="caption marginnote shownote">
-Figure 4.1: GC content for chomosome 2L (10 - 11 Mb)
+Figure 27: GC content for chomosome 2L (10 - 11 Mb)
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-19-1.png" alt="GC content for chomosome 2L (10 - 11 Mb)" width="672">
 </div>
@@ -889,7 +883,7 @@ proteins.</p>
 <a href="sec-norm.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>

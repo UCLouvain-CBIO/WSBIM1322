@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 10 Supervised learning | Bioinformatics" />
+<meta property="og:title" content="10 Supervised learning | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 10 Supervised learning | Bioinformatics</title>
+<title>10 Supervised learning | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -143,14 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
 <a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
 <a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
-<a id="active-page" href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a><ul class="toc-sections">
-<li class="toc"><a href="#introduction-5"> Introduction</a></li>
-<li class="toc"><a href="#k-nearest-neighbours-classifier"> K-nearest neighbours classifier</a></li>
-<li class="toc"><a href="#model-selection-1"> Model selection</a></li>
-<li class="toc"><a href="#k-fold-cross-validation"> k-fold cross-validation</a></li>
-<li class="toc"><a href="#variance-and-bias-trade-off"> Variance and bias trade-off</a></li>
-<li class="toc"><a href="#additional-exercises-8"> Additional exercises</a></li>
-</ul>
+<a id="active-page" href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
 <a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
 <a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
 <a href="sec-si.html"><span class="toc-section-number">13</span> Session information</a>
@@ -164,8 +159,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:sl" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 10</span> Supervised learning</h1>
+<h1 number="10">
+<span class="header-section-number">10</span> Supervised learning</h1>
 <p>The goal of this last chapter about machine learning will be
 supervised learning, and in particular <strong>classification</strong>. In this
 chapter, you will learn</p>
@@ -178,7 +173,7 @@ classifier;</li>
 <li>and learn about model complexity and generalisation.</li>
 </ul>
 <div id="introduction-5" class="section level2">
-<h2>
+<h2 number="10.1">
 <span class="header-section-number">10.1</span> Introduction</h2>
 <p>Often, we faced with omics data, we have annotations for some of the
 samples (or features) we have acquired:</p>
@@ -188,8 +183,8 @@ sequencing of microarrays, we know the grade of the tumour for about
 half. We want to predict the grade of the other half using the gene
 expression profiles.</p></li>
 <li><p>We have performed a spatial proteomics experiment such as in
-Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-28" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-28" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span> (see section
-<a href="sec-dimred.html#sec:dimred02">8.7.2</a>) and know the sub-cellular localisation of some
+Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <a href="sec-si.html#ref-Christoforou:2016" role="doc-biblioref">2016</a>)</span> (see section
+<a href="sec-dimred.html#sec:dimred02"><strong>??</strong></a>) and know the sub-cellular localisation of some
 proteins. We want to predict the sub-cellular localisation of the
 other proteins using the protein profiles.</p></li>
 </ul>
@@ -204,7 +199,7 @@ called <strong>labelled</strong>, and the latter <strong>unlabelled</strong>.</p
 <div class="figure">
 <span id="fig:unnamed-chunk-75"></span>
 <p class="caption marginnote shownote">
-Figure 10.1: In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled.
+Figure 85: In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-75-1.png" alt="In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled." width="1152">
 </div>
@@ -282,7 +277,7 @@ unlabelled data will be difficult or easy? Motivate your answer.</p>
 </div>
 </div>
 <div id="k-nearest-neighbours-classifier" class="section level2">
-<h2>
+<h2 number="10.2">
 <span class="header-section-number">10.2</span> K-nearest neighbours classifier</h2>
 <p>In this chapter, we’ll use a simple, but useful classification
 algorithm, k-nearest neighbours (kNN) to classify the <em>giris</em>
@@ -297,7 +292,7 @@ respectively.</p>
 <div class="figure">
 <span id="fig:knnex"></span>
 <p class="caption marginnote shownote">
-Figure 10.2: Schematic illustrating the k nearest neighbours algorithm.
+Figure 86: Schematic illustrating the k nearest neighbours algorithm.
 </p>
 <img src="WSBIM1322_files/figure-html/knnex-1.png" alt="Schematic illustrating the k nearest neighbours algorithm." width="672">
 </div>
@@ -402,7 +397,7 @@ interpret the results based on the first PCA.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-80"></span>
 <p class="caption marginnote shownote">
-Figure 10.3: Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification.
+Figure 87: Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-80-1.png" alt="Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification." width="672">
 </div>
@@ -520,7 +515,7 @@ k=11 and compare the result.</p></li>
 </div>
 </div>
 <div id="model-selection-1" class="section level2">
-<h2>
+<h2 number="10.3">
 <span class="header-section-number">10.3</span> Model selection</h2>
 <p>There is no way to decide which set of results above, using k=1, 2,
 … 11 or any other value for k is better. At least not while
@@ -535,7 +530,7 @@ the testing predictors <span class="math inline">\(X_{te}\)</span> and labels <s
 <div class="figure">
 <span id="fig:unnamed-chunk-83"></span>
 <p class="caption marginnote shownote">
-Figure 10.4: Training and testing sets.
+Figure 88: Training and testing sets.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-83-1.png" alt="Training and testing sets." width="672">
 </div>
@@ -653,7 +648,7 @@ average performance over all splits.</p></li>
 </ol>
 </div>
 <div id="k-fold-cross-validation" class="section level2">
-<h2>
+<h2 number="10.4">
 <span class="header-section-number">10.4</span> k-fold cross-validation</h2>
 <p>There exist several principled ways to split data into training and
 testing partitions. Here, we are going to focus on k-fold
@@ -672,7 +667,7 @@ predictions (i.e. a sample is never used for training and testing).</p>
 <div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-87"></span>
 <p class="caption marginnote shownote">
-Figure 10.5: The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model.
+Figure 89: The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model.
 </p>
 <img src="figs/xval.png" alt="The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model." width="100%">
 </div>
@@ -827,7 +822,7 @@ accuracy as a function of k.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-90"></span>
 <p class="caption marginnote shownote">
-Figure 10.6: Average classification accuracy as a function of the parameter k.
+Figure 90: Average classification accuracy as a function of the parameter k.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-90-1.png" alt="Average classification accuracy as a function of the parameter k." width="672">
 </div>
@@ -851,7 +846,7 @@ different classifiers need to be assessed, and/or several model
 performance metrics are to be computed.</p>
 </div>
 <div id="variance-and-bias-trade-off" class="section level2">
-<h2>
+<h2 number="10.5">
 <span class="header-section-number">10.5</span> Variance and bias trade-off</h2>
 <p>A recurrent goal in machine learning is to find a trade-off between
 variance and bias when fitting models. It is important to build a
@@ -870,7 +865,7 @@ measure to me minimised.</p>
 <div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-91"></span>
 <p class="caption marginnote shownote">
-Figure 10.7: Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of <span class="math inline">\(k\)</span> while the test error reaches a minimum around <span class="math inline">\(k = 10\)</span> before increasing again. Reproduced with permission from <span class="citation">(James et al. <label for="tufte-mn-29" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-29" class="margin-toggle">2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in R</em>. Springer Publishing Company, Incorporated.</span>)</span>.
+Figure 91: Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of <span class="math inline">\(k\)</span> while the test error reaches a minimum around <span class="math inline">\(k = 10\)</span> before increasing again. Reproduced with permission from <span class="citation">(James et al. <a href="sec-si.html#ref-ISLR" role="doc-biblioref">2014</a>)</span>.
 </p>
 <img src="figs/ISL-2_17.png" alt="Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of $k$ while the test error reaches a minimum around $k = 10$ before increasing again. Reproduced with permission from [@ISLR]." width="100%">
 </div>
@@ -884,11 +879,11 @@ reflect any specificity of our data.</p>
 <div class="figure" style="text-align: center">
 <span id="fig:unnamed-chunk-92"></span>
 <p class="caption marginnote shownote">
-Figure 10.8: The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from <span class="citation">(James et al. <label for="tufte-mn-30" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-30" class="margin-toggle">2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in R</em>. Springer Publishing Company, Incorporated.</span>)</span>.
+Figure 92: The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from <span class="citation">(James et al. <a href="sec-si.html#ref-ISLR" role="doc-biblioref">2014</a>)</span>.
 </p>
 <img src="figs/ISL-2_16.png" alt="The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from  [@ISLR]." width="100%">
 </div>
-<p>This last figure, reproduced from <span class="citation">(Holmes and Huber <label for="tufte-mn-31" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-31" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>, frames the variance-bias
+<p>This last figure, reproduced from <span class="citation">(Holmes and Huber <a href="sec-si.html#ref-MSMB" role="doc-biblioref">2019</a>)</span>, frames the variance-bias
 trade-off as one between accuracy and precision. An over-fit model with
 high bias and low variance is one that is precise but not accurate:
 it could work extremely well on the training data but miss on new
@@ -900,16 +895,16 @@ accurate with new data.</p>
 <div class="figure">
 <span id="fig:unnamed-chunk-93"></span>
 <p class="caption marginnote shownote">
-Figure 10.9: Precision and accuracy when shooting.
+Figure 93: Precision and accuracy when shooting.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-93-1.png" alt="Precision and accuracy when shooting." width="960">
 </div>
 </div>
 <div id="additional-exercises-8" class="section level2">
-<h2>
+<h2 number="10.6">
 <span class="header-section-number">10.6</span> Additional exercises</h2>
 <p>Load the <code>hyperLOPIT2015</code> data from the <code>pRolocdata</code> package. See
-section <a href="sec-dimred.html#sec:dimred02">8.7.2</a>) for details. The features variable column
+section <a href="sec-dimred.html#sec:dimred02"><strong>??</strong></a>) for details. The features variable column
 <code>markers</code> defines the proteins for which the sub-cellular localisation
 is known - these are the labelled data. Those that are marked
 <code>unknown</code> are of unknown location - these are the unlabelled data.</p>
@@ -960,7 +955,7 @@ unlabelled data.</p>
 <div class="question-body">
 <p>Using a contingency table, compare you results with those that were
 obtained using <em>support vector machine</em>, a popular classifier that was
-used in Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-32" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-32" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>, and available in
+used in Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <a href="sec-si.html#ref-Christoforou:2016" role="doc-biblioref">2016</a>)</span>, and available in
 the <code>svm.classification</code> feature variable.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1003,7 +998,7 @@ most reliable assignments one, and setting the unreliable ones to
 <a href="sec-biovis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>

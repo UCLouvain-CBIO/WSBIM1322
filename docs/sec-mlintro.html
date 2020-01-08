@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 6 Introduction to statistical machine learning | Bioinformatics" />
+<meta property="og:title" content="6 Introduction to statistical machine learning | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 6 Introduction to statistical machine learning | Bioinformatics</title>
+<title>6 Introduction to statistical machine learning | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -139,12 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
 <a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
 <a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
-<a id="active-page" href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a><ul class="toc-sections">
-<li class="toc"><a href="#hypothesis-testing"> Hypothesis testing</a></li>
-<li class="toc"><a href="#handling-more-data"> Handling more data</a></li>
-<li class="toc"><a href="#the-curse-of-dimensionality"> The curse of dimensionality</a></li>
-<li class="toc"><a href="#machine-learning"> Machine learning</a></li>
-</ul>
+<a id="active-page" href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
 <a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
 <a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
@@ -162,11 +159,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:mlintro" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 6</span> Introduction to statistical machine learning</h1>
+<h1 number="6">
+<span class="header-section-number">6</span> Introduction to statistical machine learning</h1>
 <p>The next chapters will focus on concepts from statistical (hypothesis
-testing in chapter <a href="sec-testing.html#sec:testing">7</a>) and general machine learning
-(chapters <a href="sec-ul.html#sec:ul">9</a>, <a href="sec-dimred.html#sec:dimred">8</a> and <a href="sec-sl.html#sec:sl">10</a>). Before
+testing in chapter <a href="sec-testing.html#sec:testing"><strong>??</strong></a>) and general machine learning
+(chapters <a href="sec-ul.html#sec:ul"><strong>??</strong></a>, <a href="sec-dimred.html#sec:dimred"><strong>??</strong></a> and <a href="sec-sl.html#sec:sl"><strong>??</strong></a>). Before
 diving into the technical details, it is useful to learn (or remind
 ourselves) why these techniques are so incredibly important when
 analysing (i.e. looking to understand) high throughput biomedical
@@ -181,7 +178,7 @@ data is needed before generating it;</li>
 <li>to ultimately extracting meaningful results from a dataset.</li>
 </ul>
 <div id="hypothesis-testing" class="section level2">
-<h2>
+<h2 number="6.1">
 <span class="header-section-number">6.1</span> Hypothesis testing</h2>
 <p>Let’s start with the following experiment. Researchers are interested
 in the expression of three genes,
@@ -193,7 +190,7 @@ expression of these genes is measured four times.</p>
 <div class="figure fullwidth">
 <span id="fig:unnamed-chunk-26"></span>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-26-1.png" alt="Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5." width="672"><p class="caption marginnote shownote">
-Figure 6.1: Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5.
+Figure 32: Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5.
 </p>
 </div>
 <div class="question">
@@ -319,22 +316,22 @@ what the experiment measures using a table.</p>
 </p>
 </div>
 </div>
-<p>Statistical hypothesis testing (chapter <a href="sec-testing.html#sec:testing">7</a>) will help
+<p>Statistical hypothesis testing (chapter <a href="sec-testing.html#sec:testing"><strong>??</strong></a>) will help
 us formalise when to call genes differentially expressed.</p>
 </div>
 <div id="handling-more-data" class="section level2">
-<h2>
+<h2 number="6.2">
 <span class="header-section-number">6.2</span> Handling more data</h2>
 <p>There are many more types of patterns that we wold be interested in
 identifying in omics data. Let’s reconsider the linear regression
-model from section <a href="sec-obj.html#sec:lm">3.3</a>. Below is a figure from
-<span class="citation">Majumder, Hofmann, and Cook (<label for="tufte-mn-17" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-17" class="margin-toggle">2013<span class="marginnote">Majumder, Mahbubul, Heike Hofmann, and Dianne Cook. 2013. “Validation of Visual Statistical Inference, Applied to Linear Models.” <em>Journal of the American Statistical Association</em> 108 (503): 942–56. <a href="https://doi.org/10.1080/01621459.2013.808157">https://doi.org/10.1080/01621459.2013.808157</a>.</span>)</span>. Among the 20 scatter plots below, one represents the
+model from section <a href="sec-obj.html#sec:lm"><strong>??</strong></a>. Below is a figure from
+<span class="citation">Majumder, Hofmann, and Cook (<a href="sec-si.html#ref-Majumder2013" role="doc-biblioref">2013</a>)</span>. Among the 20 scatter plots below, one represents the
 actual data, and 19 are simulations that are based on the real
 data.</p>
 <div class="figure">
 <span id="fig:regsim"></span>
 <p class="caption marginnote shownote">
-Figure 6.2: One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect (<span class="math inline">\(H_{0}\)</span> is true).
+Figure 33: One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect (<span class="math inline">\(H_{0}\)</span> is true).
 </p>
 <img src="figs/uasa_a_808157_o_f0004g.jpg" alt="One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true).">
 </div>
@@ -386,7 +383,7 @@ have a correlation coefficient close to 0.</p>
 <div class="figure fullwidth">
 <span id="fig:corfig"></span>
 <img src="WSBIM1322_files/figure-html/corfig-1.png" alt="Example of correlation, anti-correlation and lack thereof." width="960"><p class="caption marginnote shownote">
-Figure 6.3: Example of correlation, anti-correlation and lack thereof.
+Figure 34: Example of correlation, anti-correlation and lack thereof.
 </p>
 </div>
 <div class="question">
@@ -443,14 +440,14 @@ the <code>cor</code> function.</p>
 <p>Let’s expand the code above and calculate the correlation coefficient
 between hundreds of random vectors and choose the best one (in abolute
 terms) among those. Let’s repeat this procedure 1000 times to obtain
-1000 best correlations (based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. “Challenges of Big Data analysis.” <em>National Science Review</em> 1 (2): 293–314. <a href="https://doi.org/10.1093/nsr/nwt032">https://doi.org/10.1093/nsr/nwt032</a>.</span>)</span>). The figure below shows
+1000 best correlations (based on <span class="citation">Fan, Han, and Liu (<a href="sec-si.html#ref-Fan:2014" role="doc-biblioref">2014</a>)</span>). The figure below shows
 the distribution of these 1000 best correlations when comparing 800 or
 6400 vectors. We see that with more (random) data, we increase that
 the risk of obtaining spurious correlations.</p>
 <div class="figure">
 <span id="fig:spurcor"></span>
 <p class="caption marginnote shownote">
-Figure 6.4: Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions.
+Figure 35: Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions.
 </p>
 <img src="figs/spurcor.png" alt="Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions." width="672">
 </div>
@@ -505,7 +502,7 @@ of genes<span class="math inline">\(x\)</span> and <span class="math inline">\(y
 <div class="figure">
 <span id="fig:dist0"></span>
 <p class="caption marginnote shownote">
-Figure 6.5: A simulated dataset composed of 5 samples.
+Figure 36: A simulated dataset composed of 5 samples.
 </p>
 <img src="WSBIM1322_files/figure-html/dist0-1.png" alt="A simulated dataset composed of 5 samples." width="672">
 </div>
@@ -546,7 +543,7 @@ below.</p>
 <div class="figure">
 <span id="fig:avgsample"></span>
 <p class="caption marginnote shownote">
-Figure 6.6: The average sample is shown as a red point among the 5 samples simulated above.
+Figure 37: The average sample is shown as a red point among the 5 samples simulated above.
 </p>
 <img src="WSBIM1322_files/figure-html/avgsample-1.png" alt="The average sample is shown as a red point among the 5 samples simulated above." width="672">
 </div>
@@ -589,7 +586,7 @@ real data points.</li>
 number of dimensions becomes very high.</p>
 </div>
 <div id="the-curse-of-dimensionality" class="section level2">
-<h2>
+<h2 number="6.3">
 <span class="header-section-number">6.3</span> The curse of dimensionality</h2>
 <p>There is one very well documented feature of high dimension data,
 known as the curse of dimensionality. When the numbers of dimensions
@@ -619,7 +616,7 @@ dimensions, almost 90% of the points are outliers.</p>
 <p><img src="WSBIM1322_files/figure-html/curse-1.png" width="672"></p>
 </div>
 <div id="machine-learning" class="section level2">
-<h2>
+<h2 number="6.4">
 <span class="header-section-number">6.4</span> Machine learning</h2>
 <p>The dataset below is composed of 100 data points (samples). For each
 data point, we have measured values x and y (two genes). We have a
@@ -627,7 +624,7 @@ dataset of 100 points in 2 dimensions.</p>
 <div class="figure">
 <span id="fig:unlabex"></span>
 <p class="caption marginnote shownote">
-Figure 6.7: A dataset of 100 unlabelled points measured along two dimensions.
+Figure 38: A dataset of 100 unlabelled points measured along two dimensions.
 </p>
 <img src="WSBIM1322_files/figure-html/unlabex-1.png" alt="A dataset of 100 unlabelled points measured along two dimensions." width="672">
 </div>
@@ -652,7 +649,7 @@ points below to the red class and the black class.</p>
 <div class="figure">
 <span id="fig:labex"></span>
 <p class="caption marginnote shownote">
-Figure 6.8: A dataset of 100 labelled points measured along two dimensions.
+Figure 39: A dataset of 100 labelled points measured along two dimensions.
 </p>
 <img src="WSBIM1322_files/figure-html/labex-1.png" alt="A dataset of 100 labelled points measured along two dimensions." width="672">
 </div>
@@ -661,7 +658,7 @@ and 3 below.</p>
 <div class="figure">
 <span id="fig:labex2"></span>
 <p class="caption marginnote shownote">
-Figure 6.9: A dataset of 100 labelled and three new, unlalled, points.
+Figure 40: A dataset of 100 labelled and three new, unlalled, points.
 </p>
 <img src="WSBIM1322_files/figure-html/labex2-1.png" alt="A dataset of 100 labelled and three new, unlalled, points." width="672">
 </div>
@@ -681,13 +678,13 @@ machine learning. The first example is a case of <strong>unsupervised
 learning</strong>. In unsupervised learning we aim at find patterns in a
 dataset without the help of any additional information or
 labels. Typical applications of unsupervised learning is clustering
-(as in our first example and chapter <a href="sec-ul.html#sec:ul">9</a>) or dimensionality
-reduction (chapter <a href="sec-dimred.html#sec:dimred">8</a>)</p>
+(as in our first example and chapter <a href="sec-ul.html#sec:ul"><strong>??</strong></a>) or dimensionality
+reduction (chapter <a href="sec-dimred.html#sec:dimred"><strong>??</strong></a>)</p>
 <p>In our second example, we were given labels for each observation. This
 is an example of <strong>supervised learning</strong>, that aims at learning inputs
 and mapping them to certain target outputs with the help of known
 labels. Example of supervised learning are classification as in the
-example above (see chapter <a href="sec-sl.html#sec:sl">10</a>) and regression, where the
+example above (see chapter <a href="sec-sl.html#sec:sl"><strong>??</strong></a>) and regression, where the
 target isn’t a category, but a value.</p>
 <p>There are additional types of machine learning, such as
 semi-supervised learning (combining the two approaches above),
@@ -708,7 +705,7 @@ but these are beyond the scope of this course.</p>
 <a href="sec-testing.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>

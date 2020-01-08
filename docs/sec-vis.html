@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 2 Data visualisation | Bioinformatics" />
+<meta property="og:title" content="2 Data visualisation | Bioinformatics" />
 <meta property="og:type" content="book" />
 
 
@@ -15,19 +15,21 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-06" />
+<meta name="date" content="2020-01-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
-<title>Chapter 2 Data visualisation | Bioinformatics</title>
+<title>2 Data visualisation | Bioinformatics</title>
 
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -135,17 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="dropdown-content">
 <a href="index.html">Preamble</a>
 <a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
-<a id="active-page" href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a><ul class="toc-sections">
-<li class="toc"><a href="#introduction"> Introduction</a></li>
-<li class="toc"><a href="#base-plotting"> Base plotting</a></li>
-<li class="toc"><a href="#the-ggplot2-package"> The <code>ggplot2</code> package</a></li>
-<li class="toc"><a href="#visualising-1d-data"> Visualising 1D data</a></li>
-<li class="toc"><a href="#number-of-modes"> Number of modes</a></li>
-<li class="toc"><a href="#visualising-2d-data"> Visualising 2D data</a></li>
-<li class="toc"><a href="#visualising-data-along-more-dimensions"> Visualising data along more dimensions</a></li>
-<li class="toc"><a href="#interactive-visualisation"> Interactive visualisation</a></li>
-<li class="toc"><a href="#additional-exercises-1"> Additional exercises</a></li>
-</ul>
+<a id="active-page" href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
 <a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
 <a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
 <a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
@@ -167,13 +159,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><div id="sec:vis" class="section level1">
-<h1>
-<span class="header-section-number">Chapter 2</span> Data visualisation</h1>
+<h1 number="2">
+<span class="header-section-number">2</span> Data visualisation</h1>
 <p>This chapter is based on Chapter 3 <a href="https://www-huber.embl.de/msmb/Chap-Graphics.html"><em>High Quality Graphics in
 R</em></a> of the <em>Modern
-Statistics for Modern Biology</em> book <span class="citation">(Holmes and Huber <label for="tufte-mn-11" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-11" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>.</p>
+Statistics for Modern Biology</em> book <span class="citation">(Holmes and Huber <a href="sec-si.html#ref-MSMB" role="doc-biblioref">2019</a>)</span>.</p>
 <div id="introduction" class="section level2">
-<h2>
+<h2 number="2.1">
 <span class="header-section-number">2.1</span> Introduction</h2>
 <p>The <strong>goal</strong> of data visualisation is to</p>
 <ul>
@@ -376,7 +368,7 @@ correlation:</p>
 </table>
 <p>But…</p>
 <p>While the <em>residuals</em> of the linear regression (see chapter
-<a href="sec-obj.html#sec:obj">3</a>) clearly indicate fundamental differences in these
+<a href="sec-obj.html#sec:obj"><strong>??</strong></a>) clearly indicate fundamental differences in these
 data, the most simple and straightforward approach is <em>visualisation</em>
 to highlight the fundamental differences in the datasets.</p>
 <p><img src="WSBIM1322_files/figure-html/anscombefig-1.png" width="672"></p>
@@ -397,16 +389,16 @@ useful figure has been chosen as a means of communication.</p>
 transformation and the format of the data: as seen in
 <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html">WSBIM1207</a>,
 its scale (see below) and normalisation of the data (see chapter
-<a href="sec-norm.html#sec:norm">5</a>).</p>
+<a href="sec-norm.html#sec:norm"><strong>??</strong></a>).</p>
 <p>A last feature of data that is intimately associated with its
 manipulation and visualisation is its <strong>structure</strong>: long and wide
 dataframes (as introduced in
 <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html">WSBIM1207</a>
-or dedicated objects (see chapter <a href="sec-obj.html#sec:obj">3</a>). Some visualisations
+or dedicated objects (see chapter <a href="sec-obj.html#sec:obj"><strong>??</strong></a>). Some visualisations
 will be much easier when the data is formatted in a certain way.</p>
 </div>
 <div id="base-plotting" class="section level2">
-<h2>
+<h2 number="2.2">
 <span class="header-section-number">2.2</span> Base plotting</h2>
 <p>The default graphics system that comes with R, often called base R
 graphics is simple and fast. It is based on the painter’s model or
@@ -428,7 +420,7 @@ immunosorbent assay (ELISA) assay for all observations.</p>
 <div class="figure">
 <span id="fig:dnase"></span>
 <p class="caption marginnote shownote">
-Figure 2.1: The default base <code>plot</code> function on the <code>DNase</code> data.
+Figure 1: The default base <code>plot</code> function on the <code>DNase</code> data.
 </p>
 <img src="WSBIM1322_files/figure-html/dnase-1.png" alt="The default base `plot` function on the `DNase` data." width="672">
 </div>
@@ -444,7 +436,7 @@ by setting specific arguments to the <code>plot</code> function.</p>
 <div class="figure">
 <span id="fig:dnase2"></span>
 <p class="caption marginnote shownote">
-Figure 2.2: Customising a base figure using function arguments and overlaying new graphical features.
+Figure 2: Customising a base figure using function arguments and overlaying new graphical features.
 </p>
 <img src="WSBIM1322_files/figure-html/dnase2-1.png" alt="Customising a base figure using function arguments and overlaying new graphical features." width="672">
 </div>
@@ -522,7 +514,7 @@ code.</p>
 <p>Finally, defaults, and colours in particular, are poorly chosen.</p>
 </div>
 <div id="the-ggplot2-package" class="section level2">
-<h2>
+<h2 number="2.3">
 <span class="header-section-number">2.3</span> The <code>ggplot2</code> package</h2>
 <p><strong><code>ggplot2</code></strong> is a plotting package that makes it simple to create
 complex plots from data in a data frame. It provides a more
@@ -547,7 +539,7 @@ be used for different types of plots:</p>
 <div class="figure">
 <span id="fig:gg0"></span>
 <p class="caption marginnote shownote">
-Figure 2.3: We have only specified the data, and there’s nothing to display yet.
+Figure 3: We have only specified the data, and there’s nothing to display yet.
 </p>
 <img src="WSBIM1322_files/figure-html/gg0-1.png" alt="We have only specified the data, and there's nothing to display yet." width="672">
 </div>
@@ -562,7 +554,7 @@ size, shape, colour, etc.</li>
 <div class="figure">
 <span id="fig:gg1"></span>
 <p class="caption marginnote shownote">
-Figure 2.4: <code>ggplot2</code> can now generate the axes, ticks and ranges based on the data.
+Figure 4: <code>ggplot2</code> can now generate the axes, ticks and ranges based on the data.
 </p>
 <img src="WSBIM1322_files/figure-html/gg1-1.png" alt="`ggplot2` can now generate the axes, ticks and ranges based on the data." width="672">
 </div>
@@ -578,7 +570,7 @@ operator. Because we have two continuous variables, let’s use
 <div class="figure">
 <span id="fig:gg2"></span>
 <p class="caption marginnote shownote">
-Figure 2.5: Final figures with rendering of the data as a scatter plot.
+Figure 5: Final figures with rendering of the data as a scatter plot.
 </p>
 <img src="WSBIM1322_files/figure-html/gg2-1.png" alt="Final figures with rendering of the data as a scatter plot." width="672">
 </div>
@@ -604,7 +596,7 @@ console or explicitly printing it (like any other variable).</p>
 <div class="figure">
 <span id="fig:ggobj"></span>
 <p class="caption marginnote shownote">
-Figure 2.6: Saving and printing an object.
+Figure 6: Saving and printing an object.
 </p>
 <img src="WSBIM1322_files/figure-html/ggobj-1.png" alt="Saving and printing an object." width="672">
 </div>
@@ -619,7 +611,7 @@ plot.</p></li>
 <div class="figure">
 <span id="fig:gg3"></span>
 <p class="caption marginnote shownote">
-Figure 2.7: Adding another <code>geom_point</code> with its own (local) aesthetics.
+Figure 7: Adding another <code>geom_point</code> with its own (local) aesthetics.
 </p>
 <img src="WSBIM1322_files/figure-html/gg3-1.png" alt="Adding another `geom_point` with its own (local) aesthetics. " width="672">
 </div>
@@ -644,7 +636,7 @@ runs above?</p>
 <div class="figure">
 <span id="fig:ggex"></span>
 <p class="caption marginnote shownote">
-Figure 2.8: Setting the Run to a category by coercing it to a character, rather than a numeric.
+Figure 8: Setting the Run to a category by coercing it to a character, rather than a numeric.
 </p>
 <img src="WSBIM1322_files/figure-html/ggex-1.png" alt="Setting the Run to a category by coercing it to a character, rather than a numeric." width="672">
 </div>
@@ -660,7 +652,7 @@ originally available from the
 <a href="http://bioconductor.org/packages/release/data/experiment/html/Hiiragi2013.html"><code>Hiiragi2013</code></a>
 package and describes the cell-to-cell expression variability followed
 by signal reinforcement progressively segregates early mouse lineages
-<span class="citation">(Ohnishi et al. <label for="tufte-mn-12" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-12" class="margin-toggle">2014<span class="marginnote">Ohnishi, Y, W Huber, A Tsumura, M Kang, P Xenopoulos, K Kurimoto, A K Oleś, et al. 2014. “Cell-to-Cell Expression Variability Followed by Signal Reinforcement Progressively Segregates Early Mouse Lineages.” <em>Nat Cell Biol</em> 16 (1): 27–37. <a href="https://doi.org/10.1038/ncb2881">https://doi.org/10.1038/ncb2881</a>.</span>)</span>.</p>
+<span class="citation">(Ohnishi et al. <a href="sec-si.html#ref-Ohnishi:2014" role="doc-biblioref">2014</a>)</span>.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sec-vis.html#cb20-1"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
 <span id="cb20-2"><a href="sec-vis.html#cb20-2"></a><span class="kw">data</span>(hiiragi2013df1)</span>
 <span id="cb20-3"><a href="sec-vis.html#cb20-3"></a><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at)) <span class="op">+</span></span>
@@ -669,7 +661,7 @@ by signal reinforcement progressively segregates early mouse lineages
 <div class="figure">
 <span id="fig:gg4"></span>
 <p class="caption marginnote shownote">
-Figure 2.9: Modelling the relation between the expression of X1426642_at and X1418765_at.
+Figure 9: Modelling the relation between the expression of X1426642_at and X1418765_at.
 </p>
 <img src="WSBIM1322_files/figure-html/gg4-1.png" alt="Modelling the relation between the expression of X1426642_at and X1418765_at." width="672">
 </div>
@@ -680,13 +672,13 @@ Figure 2.9: Modelling the relation between the expression of X1426642_at and X14
 <div class="figure">
 <span id="fig:gg5"></span>
 <p class="caption marginnote shownote">
-Figure 2.10: Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples.
+Figure 10: Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples.
 </p>
 <img src="WSBIM1322_files/figure-html/gg5-1.png" alt="Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples." width="672">
 </div>
 </div>
 <div id="visualising-1d-data" class="section level2">
-<h2>
+<h2 number="2.4">
 <span class="header-section-number">2.4</span> Visualising 1D data</h2>
 <p>Let’s start by exploring some 1 dimensional visualisation. This is
 very relevant for omics data such as transcriptomics or quantitative
@@ -711,7 +703,7 @@ Gata6 and Sox2.</p>
 ## 5 Fgf4   8.924228
 ## 6 Fgf4  11.325952</code></pre>
 <div id="histogram" class="section level3">
-<h3>
+<h3 number="2.4.1">
 <span class="header-section-number">2.4.1</span> Histogram</h3>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="sec-vis.html#cb25-1"></a>genes <span class="op">%&gt;%</span></span>
 <span id="cb25-2"><a href="sec-vis.html#cb25-2"></a><span class="st">    </span><span class="kw">filter</span>(gene <span class="op">==</span><span class="st"> "Gata4"</span>) <span class="op">%&gt;%</span></span>
@@ -720,13 +712,13 @@ Gata6 and Sox2.</p>
 <div class="figure">
 <span id="fig:hist"></span>
 <p class="caption marginnote shownote">
-Figure 2.11: Distribution of the Gata4 expression
+Figure 11: Distribution of the Gata4 expression
 </p>
 <img src="WSBIM1322_files/figure-html/hist-1.png" alt="Distribution of the Gata4 expression" width="672">
 </div>
 </div>
 <div id="box-plots" class="section level3">
-<h3>
+<h3 number="2.4.2">
 <span class="header-section-number">2.4.2</span> Box plots</h3>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="sec-vis.html#cb27-1"></a>p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> gene, <span class="dt">y =</span> expression, <span class="dt">fill =</span> gene))</span>
 <span id="cb27-2"><a href="sec-vis.html#cb27-2"></a>bxplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</span>
@@ -734,7 +726,7 @@ Figure 2.11: Distribution of the Gata4 expression
 <div class="figure">
 <span id="fig:boxplot"></span>
 <p class="caption marginnote shownote">
-Figure 2.12: A boxplot of expression values.
+Figure 12: A boxplot of expression values.
 </p>
 <img src="WSBIM1322_files/figure-html/boxplot-1.png" alt="A boxplot of expression values." width="672">
 </div>
@@ -760,7 +752,7 @@ Figure 2.12: A boxplot of expression values.
 <div class="figure">
 <span id="fig:violin"></span>
 <p class="caption marginnote shownote">
-Figure 2.13: A violin plot of expression values.
+Figure 13: A violin plot of expression values.
 </p>
 <img src="WSBIM1322_files/figure-html/violin-1.png" alt="A violin plot of expression values." width="672">
 </div>
@@ -771,7 +763,7 @@ Figure 2.13: A violin plot of expression values.
 </div>
 </div>
 <div id="dot-plots-and-beeswarm-plots" class="section level3">
-<h3>
+<h3 number="2.4.3">
 <span class="header-section-number">2.4.3</span> Dot plots and beeswarm plots</h3>
 <p>When the data aren’t too large, it is also possibly to visualise all
 points to get a sense of their distribution.</p>
@@ -796,13 +788,13 @@ by a small amount sufficient to avoid overlap.</p>
 <div class="figure">
 <span id="fig:showdots"></span>
 <p class="caption marginnote shownote">
-Figure 2.14: Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot.
+Figure 14: Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot.
 </p>
 <img src="WSBIM1322_files/figure-html/showdots-1.png" alt="Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot." width="672">
 </div>
 </div>
 <div id="density-and-ecdf-plots" class="section level3">
-<h3>
+<h3 number="2.4.4">
 <span class="header-section-number">2.4.4</span> Density and ecdf plots</h3>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sec-vis.html#cb33-1"></a>densplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">color =</span> gene)) <span class="op">+</span></span>
 <span id="cb33-2"><a href="sec-vis.html#cb33-2"></a><span class="st">    </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
@@ -814,13 +806,13 @@ Figure 2.14: Showing all expression values using jittering (left), a dotplot (ce
 <div class="figure">
 <span id="fig:unnamed-chunk-4"></span>
 <p class="caption marginnote shownote">
-Figure 2.15: Density and cumulative density functions of expression values.
+Figure 15: Density and cumulative density functions of expression values.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-4-1.png" alt="Density and cumulative density functions of expression values." width="672">
 </div>
 </div>
 <div id="summary" class="section level3">
-<h3>
+<h3 number="2.4.5">
 <span class="header-section-number">2.4.5</span> Summary</h3>
 <ul>
 <li><p><strong>Boxplot</strong> makes sense for unimodal distributions (see below).</p></li>
@@ -837,7 +829,7 @@ quantiles and shifts in location in comparative plots.</p></li>
 </div>
 </div>
 <div id="number-of-modes" class="section level2">
-<h2>
+<h2 number="2.5">
 <span class="header-section-number">2.5</span> Number of modes</h2>
 <p>The number of modes of a distribution depends on scale transformation
 of the data.</p>
@@ -852,18 +844,18 @@ of the data.</p>
 <span id="cb36-9"><a href="sec-vis.html#cb36-9"></a>p2 &lt;-<span class="st">  </span><span class="kw">ggplot</span>(sim, <span class="kw">aes</span>(<span class="kw">log</span>(x))) <span class="op">+</span></span>
 <span id="cb36-10"><a href="sec-vis.html#cb36-10"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>)</span>
 <span id="cb36-11"><a href="sec-vis.html#cb36-11"></a>p1 <span class="op">+</span><span class="st"> </span>p2</span></code></pre></div>
-<pre><code>## Warning: Removed 8131 rows containing non-finite values (stat_bin).</code></pre>
+<pre><code>## Warning: Removed 8109 rows containing non-finite values (stat_bin).</code></pre>
 <div class="figure">
 <span id="fig:sim"></span>
 <p class="caption marginnote shownote">
-Figure 2.16: Histograms of the same data without (left) and with (right) log-transformation.
+Figure 16: Histograms of the same data without (left) and with (right) log-transformation.
 </p>
 <img src="WSBIM1322_files/figure-html/sim-1.png" alt="Histograms of the same data without (left) and with (right) log-transformation." width="672">
 </div>
 <p>This also applies to density plots.</p>
 </div>
 <div id="visualising-2d-data" class="section level2">
-<h2>
+<h2 number="2.6">
 <span class="header-section-number">2.6</span> Visualising 2D data</h2>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sec-vis.html#cb38-1"></a><span class="kw">data</span>(hiiragi2013df2)</span>
 <span id="cb38-2"><a href="sec-vis.html#cb38-2"></a><span class="kw">head</span>(hiiragi2013df2)</span></code></pre></div>
@@ -881,7 +873,7 @@ Figure 2.16: Histograms of the same data without (left) and with (right) log-tra
 <div class="figure">
 <span id="fig:sc1"></span>
 <p class="caption marginnote shownote">
-Figure 2.17: Scatter plot comparing the expression of a wild-type vs. FGF4 KO.
+Figure 17: Scatter plot comparing the expression of a wild-type vs. FGF4 KO.
 </p>
 <img src="WSBIM1322_files/figure-html/sc1-1.png" alt="Scatter plot comparing the expression of a wild-type vs. FGF4 KO." width="672">
 </div>
@@ -908,7 +900,7 @@ default).</p>
 <div class="figure">
 <span id="fig:scp2"></span>
 <p class="caption marginnote shownote">
-Figure 2.18: Transparency can help distinguish regions of different densities.
+Figure 18: Transparency can help distinguish regions of different densities.
 </p>
 <img src="WSBIM1322_files/figure-html/scp2-1.png" alt="Transparency can help distinguish regions of different densities." width="672">
 </div>
@@ -921,7 +913,7 @@ Figure 2.18: Transparency can help distinguish regions of different densities.
 <div class="figure">
 <span id="fig:scp3"></span>
 <p class="caption marginnote shownote">
-Figure 2.19: Focusing on contours rather that individual values.
+Figure 19: Focusing on contours rather that individual values.
 </p>
 <img src="WSBIM1322_files/figure-html/scp3-1.png" alt="Focusing on contours rather that individual values." width="672">
 </div>
@@ -929,13 +921,13 @@ Figure 2.19: Focusing on contours rather that individual values.
 <div class="figure">
 <span id="fig:scp5"></span>
 <p class="caption marginnote shownote">
-Figure 2.20: Local density summaries.
+Figure 20: Local density summaries.
 </p>
 <img src="WSBIM1322_files/figure-html/scp5-1.png" alt="Local density summaries." width="672">
 </div>
 </div>
 <div id="visualising-data-along-more-dimensions" class="section level2">
-<h2>
+<h2 number="2.7">
 <span class="header-section-number">2.7</span> Visualising data along more dimensions</h2>
 <p>When visualising data along additional dimension, we can parameterise
 the points by setting their shape, colour, size and transparency, that
@@ -954,7 +946,7 @@ expressions</p>
 <div class="figure">
 <span id="fig:facet1"></span>
 <p class="caption marginnote shownote">
-Figure 2.21: Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages.
+Figure 21: Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages.
 </p>
 <img src="WSBIM1322_files/figure-html/facet1-1.png" alt="Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages." width="672">
 </div>
@@ -965,7 +957,7 @@ Figure 2.21: Different sub-plots for different lineages using colours (left) of 
 <div class="figure">
 <span id="fig:facet2"></span>
 <p class="caption marginnote shownote">
-Figure 2.22: Different sub-plots for different lineages and embryonic stages.
+Figure 22: Different sub-plots for different lineages and embryonic stages.
 </p>
 <img src="WSBIM1322_files/figure-html/facet2-1.png" alt="Different sub-plots for different lineages and embryonic stages." width="672">
 </div>
@@ -998,7 +990,7 @@ Gata6 and Sox2 genes in the <code>genes</code> data using histograms.</p>
 </div>
 </div>
 <div id="interactive-visualisation" class="section level2">
-<h2>
+<h2 number="2.8">
 <span class="header-section-number">2.8</span> Interactive visualisation</h2>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="sec-vis.html#cb48-1"></a>scp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hiiragi2013df2[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ],</span>
 <span id="cb48-2"><a href="sec-vis.html#cb48-2"></a>              <span class="kw">aes</span>(<span class="dt">x=</span> <span class="st">`</span><span class="dt">59 E4.5 (PE)</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">92 E4.5 (FGF4-KO)</span><span class="st">`</span>))</span>
@@ -1011,7 +1003,7 @@ to the <code>plotly::ggplotly</code> function to generate an interactive figure.
 <p>See <a href="https://plot.ly/r" class="uri">https://plot.ly/r</a> for examples of interactive graphics online.</p>
 </div>
 <div id="additional-exercises-1" class="section level2">
-<h2>
+<h2 number="2.9">
 <span class="header-section-number">2.9</span> Additional exercises</h2>
 <div class="question">
 <p class="question-begin">
@@ -1094,7 +1086,7 @@ otherwise. Below are some example outputs.</p>
 <a href="sec-obj.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-06
+2020-01-08
 </p>
 </div>
 </div>
