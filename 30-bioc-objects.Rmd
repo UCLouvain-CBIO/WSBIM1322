@@ -319,11 +319,11 @@ the `DataFrame` to a `tibble`.
 ```{r seex2b}
 as_tibble(colData(airway)) %>%
     filter(dex == "trt") %>%
-    select(BioSample)
+    dplyr::select(BioSample)
 
 as_tibble(colData(airway)) %>%
     filter(dex != "trt") %>%
-    select(BioSample)
+    dplyr::select(BioSample)
 ```
 `r msmbstyle::solution_end()`
 

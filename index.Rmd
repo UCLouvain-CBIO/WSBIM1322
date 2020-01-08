@@ -45,11 +45,8 @@ bioinformatics skills aren't well integrated in life science
 curricula, limiting students in their career prospects and research
 horizon [@WilsonSayres:2018]. It is important for young researchers to
 acquire quantitative, computational and data skills to address the
-challenges that lie ahead[^motiv1].
-
-[^motiv1]: See also the [motivations behind the introductory
-course](https://uclouvain-cbio.github.io/WSBIM1207/#motivation), which
-still hold
+challenges that lie
+[ahead](https://uclouvain-cbio.github.io/WSBIM1207/#motivation).
 
 
 This course will focus on the application of data analysis methods and

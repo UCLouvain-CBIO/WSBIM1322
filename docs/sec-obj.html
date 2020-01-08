@@ -198,11 +198,11 @@ sequencing (HTS) data contains high-throughput sequencing
 data. Replace high-throughput sequencing data by DNA sequences (see
 chapter <a href="sec-biostrings.html#sec:biostrings"><strong>??</strong></a>), proteomics, … and it will still
 hold.</p></li>
-<li><p>Using object enables <strong>consistency</strong><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>: whoever prepares the
+<li><p>Using object enables <strong>consistency</strong><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>: whoever prepares the
 HTS data, it will always have the same structure.</p></li>
 </ul>
 <ul>
-<li>If all information is stored in a single object<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>, it is
+<li>If all information is stored in a single object<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>, it is
 easier to save it, to share it with others, and to use it as an
 input to a function.</li>
 </ul>
@@ -395,7 +395,7 @@ summarised below.</p>
 <div id="the-summarizedexperiment-class" class="section level3">
 <h3 number="3.4.2">
 <span class="header-section-number">3.4.2</span> The <code>SummarizedExperiment</code> class</h3>
-<p>Let’s start by installing<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> the<em><a href="https://bioconductor.org/packages/3.10/SummarizedExperiment">SummarizedExperiment</a></em>
+<p>Let’s start by installing<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> the<em><a href="https://bioconductor.org/packages/3.10/SummarizedExperiment">SummarizedExperiment</a></em>
 package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.10/airway">airway</a></em>
 data package, that provides an RNA-Seq example data.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="sec-obj.html#cb66-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"SummarizedExperiment"</span>))</span>
@@ -577,7 +577,7 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 </div>
 </div>
 <p>The row and column metadata are stored as a special <code>data.frame</code>
-implementation<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>, that has been developed in the Bioconductor
+implementation<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, that has been developed in the Bioconductor
 project. It behaves like like a classical <code>data.frame</code>.</p>
 <div class="question">
 <p class="question-begin">
@@ -610,7 +610,7 @@ dexamethason? Which ones weren’t?</p>
 the <code>DataFrame</code> to a <code>tibble</code>.</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="sec-obj.html#cb92-1"></a><span class="kw">as_tibble</span>(<span class="kw">colData</span>(airway)) <span class="op">%&gt;%</span></span>
 <span id="cb92-2"><a href="sec-obj.html#cb92-2"></a><span class="st">    </span><span class="kw">filter</span>(dex <span class="op">==</span><span class="st"> "trt"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb92-3"><a href="sec-obj.html#cb92-3"></a><span class="st">    </span><span class="kw">select</span>(BioSample)</span></code></pre></div>
+<span id="cb92-3"><a href="sec-obj.html#cb92-3"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(BioSample)</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 1
 ##   BioSample   
 ##   &lt;fct&gt;       
@@ -620,7 +620,7 @@ the <code>DataFrame</code> to a <code>tibble</code>.</p>
 ## 4 SAMN02422677</code></pre>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="sec-obj.html#cb94-1"></a><span class="kw">as_tibble</span>(<span class="kw">colData</span>(airway)) <span class="op">%&gt;%</span></span>
 <span id="cb94-2"><a href="sec-obj.html#cb94-2"></a><span class="st">    </span><span class="kw">filter</span>(dex <span class="op">!=</span><span class="st"> "trt"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb94-3"><a href="sec-obj.html#cb94-3"></a><span class="st">    </span><span class="kw">select</span>(BioSample)</span></code></pre></div>
+<span id="cb94-3"><a href="sec-obj.html#cb94-3"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(BioSample)</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 1
 ##   BioSample   
 ##   &lt;fct&gt;       

@@ -521,9 +521,9 @@ complex plots from data in a data frame. It provides a more
 programmatic interface for specifying what variables to plot, how they
 are displayed, and general visual properties. The theoretical
 foundation that supports the <code>ggplot2</code> is the <em>Grammar of
-Graphics</em><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. Instead of producing the figure, the user defines and
+Graphics</em><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Instead of producing the figure, the user defines and
 assembles the visual components into an object that is the
-displayed. There is a book about ggplot2<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> that provides a good
+displayed. There is a book about ggplot2<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> that provides a good
 overview, but it is outdated. The ggplot2 web page
 (<a href="https://ggplot2.tidyverse.org" class="uri">https://ggplot2.tidyverse.org</a>) provides ample documentation.</p>
 <p>To build a ggplot, we will use the following basic template that can
@@ -844,7 +844,7 @@ of the data.</p>
 <span id="cb36-9"><a href="sec-vis.html#cb36-9"></a>p2 &lt;-<span class="st">  </span><span class="kw">ggplot</span>(sim, <span class="kw">aes</span>(<span class="kw">log</span>(x))) <span class="op">+</span></span>
 <span id="cb36-10"><a href="sec-vis.html#cb36-10"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>)</span>
 <span id="cb36-11"><a href="sec-vis.html#cb36-11"></a>p1 <span class="op">+</span><span class="st"> </span>p2</span></code></pre></div>
-<pre><code>## Warning: Removed 8109 rows containing non-finite values (stat_bin).</code></pre>
+<pre><code>## Warning: Removed 7908 rows containing non-finite values (stat_bin).</code></pre>
 <div class="figure">
 <span id="fig:sim"></span>
 <p class="caption marginnote shownote">

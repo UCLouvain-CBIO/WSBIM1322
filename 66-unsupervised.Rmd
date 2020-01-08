@@ -261,7 +261,7 @@ centres <- x %>%
     group_by(init) %>%
     summarise(PC1 = mean(PC1),
               PC2 = mean(PC2)) %>%
-    select(PC1, PC2, init)
+    dplyr::select(PC1, PC2, init)
 
 p2 <- p1 +
     labs(title = "Initialisation with centres") +

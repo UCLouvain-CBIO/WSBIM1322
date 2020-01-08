@@ -87,7 +87,7 @@ actual data, and 19 are simulations that are based on the real
 data.
 
 ```{r regsim, echo = FALSE, fig.cap = "One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true)."}
-knitr::include_graphics("./figs/uasa_a_808157_o_f0004g.jpg")
+knitr::include_graphics("./figs/uasa_a_808157_o_f0004g.png")
 ```
 
 `r msmbstyle::question_begin()`
@@ -377,4 +377,3 @@ self-supervised learning (supervised without any labels, i.e. where
 they need to be identified automatically), reinforcement learning
 (automatic tuning of the learning when new information is received),
 but these are beyond the scope of this course.
-
