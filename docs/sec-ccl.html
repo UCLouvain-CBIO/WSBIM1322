@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-08" />
+<meta name="date" content="2020-01-09" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -184,54 +184,8 @@ Figure 12.4: Classification of samples (top) or features (bottom).
 </p>
 </div>
 </div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-79" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-79', 'sol-start-79')"></span>
-</p>
-<div id="sol-body-79" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">read.delim</span>(rWSBIM1207<span class="op">::</span><span class="kw">kem2.tsv</span>()[<span class="dv">1</span>],
-                          <span class="dt">row.names =</span> <span class="dv">1</span>))
-<span class="kw">dim</span>(e)</code></pre></div>
-<pre><code>## [1] 4774   16</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Below, we harmonise the samples names to have dots in the
-## experimental design dataframe (pd: phenotypic data) and expression
-## matix.
-pd &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_tsv</span>(rWSBIM1207<span class="op">::</span><span class="kw">kem2.tsv</span>()[<span class="dv">2</span>]) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">sample_id =</span> <span class="kw">sub</span>(<span class="st">"-"</span>, <span class="st">"."</span>, sample_id)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">group =</span> <span class="kw">paste</span>(cell_type, treatment, <span class="dt">sep =</span> <span class="st">"."</span>))</code></pre></div>
-<pre><code>## Parsed with column specification:
-## cols(
-##   sample_id = col_character(),
-##   jurkat = col_character(),
-##   cell_type = col_character(),
-##   treatment = col_character()
-## )</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pd</code></pre></div>
-<pre><code>## # A tibble: 16 x 5
-##    sample_id jurkat cell_type treatment  group       
-##    &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;       
-##  1 KEM182.01 yes    A         none       A.none      
-##  2 KEM182.02 yes    A         none       A.none      
-##  3 KEM182.03 yes    A         none       A.none      
-##  4 KEM182.04 yes    A         none       A.none      
-##  5 KEM182.05 yes    B         none       B.none      
-##  6 KEM182.06 yes    B         none       B.none      
-##  7 KEM182.07 yes    B         none       B.none      
-##  8 KEM182.08 yes    B         none       B.none      
-##  9 KEM182.09 yes    A         stimulated A.stimulated
-## 10 KEM182.10 yes    A         stimulated A.stimulated
-## 11 KEM182.11 yes    A         stimulated A.stimulated
-## 12 KEM182.12 yes    A         stimulated A.stimulated
-## 13 KEM182.13 yes    B         stimulated B.stimulated
-## 14 KEM182.14 yes    B         stimulated B.stimulated
-## 15 KEM182.15 yes    B         stimulated B.stimulated
-## 16 KEM182.16 yes    B         stimulated B.stimulated</code></pre>
-<p>Cell types A and B have been assay in a stimulted and non-stimulated (none) conditions. There are 4 replicates in each of the 4 groups.</p>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
+<!-- Cell types A and B have been assay in a stimulted and non-stimulated -->
+<!-- (none) conditions. There are 4 replicates in each of the 4 groups. -->
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -239,25 +193,6 @@ pd &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw"
 <div class="question-body">
 <p>Log-2 transform the expression data and visualise the distributions of the expression values in each samples.</p>
 <p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-80" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-80', 'sol-start-80')"></span>
-</p>
-<div id="sol-body-80" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e &lt;-<span class="st"> </span><span class="kw">log2</span>(e <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
-<span class="kw">boxplot</span>(e, <span class="dt">col =</span> <span class="kw">as.factor</span>(pd<span class="op">$</span>group))</code></pre></div>
-<div class="figure">
-<span id="fig:unnamed-chunk-106"></span>
-<p class="caption marginnote shownote">
-Figure 12.5: Expression values in cell types A and B without (black and gree) and with stimulation (red and blue).
-</p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-106-1.png" alt="Expression values in cell types A and B without (black and gree) and with stimulation (red and blue)." width="672">
-</div>
-<p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
@@ -274,21 +209,6 @@ Figure 12.5: Expression values in cell types A and B without (black and gree) an
 </p>
 </div>
 </div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-81" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-81', 'sol-start-81')"></span>
-</p>
-<div id="sol-body-81" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="kw">rowSums</span>(e) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</code></pre></div>
-<pre><code>## 
-## TRUE 
-## 4774</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e &lt;-<span class="st"> </span>e[<span class="kw">rowSums</span>(e) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, ]</code></pre></div>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -300,115 +220,23 @@ Figure 12.5: Expression values in cell types A and B without (black and gree) an
 </p>
 </div>
 </div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-82" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-82', 'sol-start-82')"></span>
-</p>
-<div id="sol-body-82" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"factoextra"</span>)
-pca_samples  &lt;-<span class="st"> </span><span class="kw">prcomp</span>(<span class="kw">t</span>(e), <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">center =</span> <span class="ot">TRUE</span>)
-<span class="kw">fviz_pca_ind</span>(pca_samples, <span class="dt">habillage =</span> pd<span class="op">$</span>group)</code></pre></div>
-<div class="figure">
-<span id="fig:unnamed-chunk-108"></span>
-<p class="caption marginnote shownote">
-Figure 12.6: PCA of <em>kem2</em> samples.
-</p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-108-1.png" alt="PCA of *kem2* samples." width="672">
-</div>
-<p>The PCA shows that samples group by treatment along the second PC (22.3% of variance explained) and that close to 50% of the variance is explained by variability along all samples.</p>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
+<!-- The PCA shows that samples group by treatment along the second PC -->
+<!-- (22.3% of variance explained) and that close to 50% of the variance is -->
+<!-- explained by variability along all samples. -->
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Use a t test to identify the genes that are differentially expressed between the stimulated and non-stimulated samples of cell type A.</p>
+<p>Use a t test to identify the genes that are differentially expressed between the stimulated and non-stimulated samples of cell type A. Visualise the results on a volcano plot.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-83" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-83', 'sol-start-83')"></span>
-</p>
-<div id="sol-body-83" class="solution-body" style="display: none;">
-<p>We start by selecting the relevant samples and create a new expression matrix matching cell type A. Visualise the results on a volcano plot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cell_type_a &lt;-<span class="st"> </span>pd <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(cell_type <span class="op">==</span><span class="st"> "A"</span>)
-cell_type_a</code></pre></div>
-<pre><code>## # A tibble: 8 x 5
-##   sample_id jurkat cell_type treatment  group       
-##   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;       
-## 1 KEM182.01 yes    A         none       A.none      
-## 2 KEM182.02 yes    A         none       A.none      
-## 3 KEM182.03 yes    A         none       A.none      
-## 4 KEM182.04 yes    A         none       A.none      
-## 5 KEM182.09 yes    A         stimulated A.stimulated
-## 6 KEM182.10 yes    A         stimulated A.stimulated
-## 7 KEM182.11 yes    A         stimulated A.stimulated
-## 8 KEM182.12 yes    A         stimulated A.stimulated</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e_a &lt;-<span class="st"> </span>e[, cell_type_a[[<span class="dv">1</span>]]]
-e_a[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</code></pre></div>
-<pre><code>##                 KEM182.01 KEM182.02 KEM182.03 KEM182.04
-## ENSG00000000419  9.491853  8.997179  9.306062  9.262095
-## ENSG00000001084  9.888743  9.519636  9.717676  9.729621
-## ENSG00000001167 11.285980 10.980140 11.114393 11.249706
-## ENSG00000001461  9.214319  8.353147  8.781360  9.172428
-## ENSG00000001497 10.343186  9.885696 10.048487 10.284246
-## ENSG00000001629  9.927778  9.372865  9.554589  9.573647
-## ENSG00000002549  9.805744  9.527477  9.734710  9.636625
-## ENSG00000002586 11.982281 11.448116 11.897845 11.936638
-## ENSG00000002834 11.558899 10.872675 11.136350 11.396605
-## ENSG00000003056 10.803324 10.482808 10.663558 10.736402</code></pre>
-<p>Below, we perform a t test on each of the 4774 genes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_t_test &lt;-<span class="st"> </span><span class="cf">function</span>(x)
-    <span class="kw">t.test</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], x[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>])<span class="op">$</span>p.value
-
-res &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">row.names =</span> <span class="kw">rownames</span>(e))
-res<span class="op">$</span>pv &lt;-<span class="st"> </span><span class="kw">apply</span>(e_a, <span class="dv">1</span>, my_t_test)
-<span class="kw">hist</span>(res<span class="op">$</span>pv)</code></pre></div>
-<div class="figure">
-<span id="fig:unnamed-chunk-110"></span>
-<p class="caption marginnote shownote">
-Figure 12.7: Histogram of p-values, showing an enrichment of small values.
-</p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-110-1.png" alt="Histogram of p-values, showing an enrichment of small values." width="672">
-</div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res<span class="op">$</span>adjp &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(res<span class="op">$</span>pv, <span class="dt">method =</span> <span class="st">"BH"</span>)
-
-my_lfc &lt;-<span class="st"> </span><span class="cf">function</span>(x)
-    <span class="kw">mean</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>])
-res<span class="op">$</span>lfc &lt;-<span class="st"> </span><span class="kw">apply</span>(e_a, <span class="dv">1</span>, my_lfc)
-
-res <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">arrange</span>(adjp) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">head</span>()</code></pre></div>
-<pre><code>##             pv         adjp        lfc
-## 1 6.937532e-09 2.734553e-05  -6.698396
-## 2 1.146323e-08 2.734553e-05  -9.952726
-## 3 4.751844e-08 5.636475e-05  -9.303326
-## 4 8.104771e-08 5.636475e-05 -12.465510
-## 5 6.717552e-08 5.636475e-05  -5.497636
-## 6 4.567204e-08 5.636475e-05  -7.130614</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(res, <span class="kw">plot</span>(lfc, <span class="op">-</span><span class="kw">log10</span>(adjp)))
-<span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="op">-</span><span class="kw">log10</span>(<span class="fl">0.001</span>))</code></pre></div>
-<div class="figure">
-<span id="fig:unnamed-chunk-112"></span>
-<p class="caption marginnote shownote">
-Figure 12.8: Volcano plot illustrating how stimulation down-regulates the expression of numerous genes.
-</p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-112-1.png" alt="Volcano plot illustrating how stimulation down-regulates the expression of numerous genes." width="672">
-</div>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
+<!-- We start by selecting the relevant samples and create a new expression -->
+<!-- matrix matching cell type A.  -->
+<!-- Below, we perform a t test on each of the 4774 genes. -->
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -416,20 +244,6 @@ Figure 12.8: Volcano plot illustrating how stimulation down-regulates the expres
 <div class="question-body">
 <p>Considering that a gene is called differentially expressed if it has an absolute log2 fold-change &gt; 1 and an adjusted p-value &lt; 0.001, how many differentially genes are there?</p>
 <p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-84" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-84', 'sol-start-84')"></span>
-</p>
-<div id="sol-body-84" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">filter</span>(adjp <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.001</span>, <span class="kw">abs</span>(lfc) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span>nrow</code></pre></div>
-<pre><code>## [1] 133</code></pre>
-<p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
@@ -445,41 +259,9 @@ Figure 12.8: Volcano plot illustrating how stimulation down-regulates the expres
 </p>
 </div>
 </div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-85" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-85', 'sol-start-85')"></span>
-</p>
-<div id="sol-body-85" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k_de &lt;-<span class="st"> </span>res <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">rownames_to_column</span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">filter</span>(adjp <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.001</span>, <span class="kw">abs</span>(lfc) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(rowname) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">unlist</span>()
-
-<span class="kw">heatmap</span>(e[k_de, ])</code></pre></div>
-<div class="figure">
-<span id="fig:unnamed-chunk-114"></span>
-<p class="caption marginnote shownote">
-Figure 12.9: Heatmap of the 73 differentially expressed genes.
-</p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-114-1.png" alt="Heatmap of the 73 differentially expressed genes." width="672">
-</div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"ComplexHeatmap"</span>)
-col_annot &lt;-<span class="st"> </span><span class="kw">HeatmapAnnotation</span>(<span class="dt">cell_type =</span> pd<span class="op">$</span>cell_type, <span class="dt">treatment =</span> pd<span class="op">$</span>treatment)
-<span class="kw">Heatmap</span>(e[k_de, ], <span class="dt">top_annotation =</span> col_annot)</code></pre></div>
-<div class="figure">
-<span id="fig:unnamed-chunk-115"></span>
-<p class="caption marginnote shownote">
-Figure 12.10: Annotated heatmap of the 73 differentially expressed genes.
-</p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-115-1.png" alt="Annotated heatmap of the 73 differentially expressed genes." width="672">
-</div>
-<p>We see that most genes that are differentially expressed in cell type A are show a consistent pattern in cell type B, except for the botton 5 genes, that show a low expression accross both conditions.</p>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
+<!-- We see that most genes that are differentially expressed in cell type -->
+<!-- A are show a consistent pattern in cell type B, except for the botton -->
+<!-- 5 genes, that show a low expression accross both conditions. -->
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -487,40 +269,6 @@ Figure 12.10: Annotated heatmap of the 73 differentially expressed genes.
 <div class="question-body">
 <p>Select the 3 genes with the smallest p-values and visualise their expression in all samples (cell types A and B, both stimulated and un-stimulated) using boxplots.</p>
 <p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-86" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-86', 'sol-start-86')"></span>
-</p>
-<div id="sol-body-86" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k_<span class="dv">3</span> &lt;-<span class="st"> </span>res <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">rownames_to_column</span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">arrange</span>(adjp) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">head</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(rowname) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">unlist</span>()
-
-e[k_<span class="dv">3</span>, ] <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">rownames_to_column</span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">gather</span>(<span class="dt">value =</span> expression, <span class="dt">key =</span> sample_id, <span class="op">-</span>rowname) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">full_join</span>(pd) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> treatment, <span class="dt">y =</span> expression)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.size =</span> <span class="dv">-1</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">facet_grid</span>(rowname <span class="op">~</span><span class="st"> </span>cell_type)</code></pre></div>
-<pre><code>## Joining, by = "sample_id"</code></pre>
-<div class="figure">
-<span id="fig:unnamed-chunk-116"></span>
-<p class="caption marginnote shownote">
-Figure 12.11: Expression of the three most differentially expressed genes.
-</p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-116-1.png" alt="Expression of the three most differentially expressed genes." width="672">
-</div>
-<p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
@@ -536,28 +284,10 @@ Figure 12.11: Expression of the three most differentially expressed genes.
 </p>
 </div>
 </div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-87" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-87', 'sol-start-87')"></span>
-</p>
-<div id="sol-body-87" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
-res<span class="op">$</span>cl &lt;-<span class="st"> </span><span class="kw">kmeans</span>(e, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)<span class="op">$</span>cl
-pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(e, <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">center =</span> <span class="ot">TRUE</span>)
-<span class="kw">fviz_pca_ind</span>(pca, <span class="dt">habillage =</span> res<span class="op">$</span>cl, <span class="dt">geom =</span> <span class="st">"point"</span>)</code></pre></div>
-<div class="figure">
-<span id="fig:unnamed-chunk-117"></span>
-<p class="caption marginnote shownote">
-Figure 12.12: PCA of the <em>kem2</em> genes displaying the 5 arbitrary clusters.
-</p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-117-1.png" alt="PCA of the *kem2* genes displaying the 5 arbitrary clusters." width="672">
-</div>
-<p>The clusters represent the diversity of gene expression along PC1. Cluster 3, on the left of the figure, seems to be the most variable and different, while to others represent a more continuous gradient along of gene expression variation.</p>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
+<!-- The clusters represent the diversity of gene expression along -->
+<!-- PC1. Cluster 3, on the left of the figure, seems to be the most -->
+<!-- variable and different, while to others represent a more continuous -->
+<!-- gradient along of gene expression variation. -->
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -569,26 +299,8 @@ Figure 12.12: PCA of the <em>kem2</em> genes displaying the 5 arbitrary clusters
 </p>
 </div>
 </div>
-<div class="solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-88" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-88', 'sol-start-88')"></span>
-</p>
-<div id="sol-body-88" class="solution-body" style="display: none;">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(res, <span class="kw">plot</span>(lfc, <span class="op">-</span><span class="kw">log10</span>(adjp), <span class="dt">col =</span> res<span class="op">$</span>cl))
-<span class="kw">legend</span>(<span class="st">"bottomleft"</span>, <span class="dt">legend =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">pch =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
-<div class="figure">
-<span id="fig:unnamed-chunk-118"></span>
-<p class="caption marginnote shownote">
-Figure 12.13: Volcano plot displaying the five clusters
-</p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-118-1.png" alt="Volcano plot displaying the five clusters" width="672">
-</div>
-<p>We see that the most diverse cluster corresponds roughly to the genes that show significant down regulation upon stimulation.</p>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
+<!-- We see that the most diverse cluster corresponds roughly to the genes -->
+<!-- that show significant down regulation upon stimulation. -->
 
 </div>
 </div></body></html>
@@ -598,7 +310,7 @@ Figure 12.13: Volcano plot displaying the five clusters
 <a href="sec-si.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-08
+2020-01-09
 </p>
 </div>
 </div>
