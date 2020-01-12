@@ -15,7 +15,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-01-09" />
+<meta name="date" content="2020-01-12" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -184,6 +184,17 @@ Figure 12.4: Classification of samples (top) or features (bottom).
 </p>
 </div>
 </div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Print and describe the experimental design.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 <!-- Cell types A and B have been assay in a stimulted and non-stimulated -->
 <!-- (none) conditions. There are 4 replicates in each of the 4 groups. -->
 <div class="question">
@@ -191,19 +202,7 @@ Figure 12.4: Classification of samples (top) or features (bottom).
 ► Question
 </p>
 <div class="question-body">
-<p>Log-2 transform the expression data and visualise the distributions of the expression values in each samples.</p>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<p>Continue without preforming any normalisation.</p>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<p>Removes genes that aren’t expressed in any samples, i.e. those that have a sum of expression equal to 0 accross all samples. How many genes unexpressed genes are there?</p>
+<p>Before performing log-transformation of the data, check if there are any 0-expression values. Indeed, these would be converted to <code>-Inf</code> after log-transformation. Are there any 0-values in the data. If so, how many are there.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -214,7 +213,30 @@ Figure 12.4: Classification of samples (top) or features (bottom).
 ► Question
 </p>
 <div class="question-body">
-<p>Visualise and interpret the experiment desing (cell type and treatment) using a principal component analyis.</p>
+<p>Add 1 to all expression values, then log-2 transform the expression data. Visualise the distributions of the expression values in each samples before and after transformation.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Continue with log-transformed data, without preforming any normalisation.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Compute, for each gene, the number of 0-expression values and visualise these as a table showing the number of genes with 0, 1, 2, … zero values.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Visualise and interpret the experiment design (cell type and treatment) using a principal component analyis.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -310,7 +332,7 @@ Figure 12.4: Classification of samples (top) or features (bottom).
 <a href="sec-si.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-01-09
+2020-01-12
 </p>
 </div>
 </div>

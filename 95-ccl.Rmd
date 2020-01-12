@@ -90,6 +90,10 @@ e <- as.matrix(read.delim(rWSBIM1207::kem2.tsv()[1],
 dim(e)
 ```
 
+`r msmbstyle::question_begin()`
+Print and describe the experimental design.
+`r msmbstyle::question_end()`
+
 ```{r, include = FALSE}
 ## Below, we harmonise the samples names to have dots in the
 ## experimental design dataframe (pd: phenotypic data) and expression
@@ -105,22 +109,37 @@ pd
 
 
 `r msmbstyle::question_begin()`
-Log-2 transform the expression data and visualise the distributions of
-the expression values in each samples.
+Before performing log-transformation of the data, check if there are
+any 0-expression values. Indeed, these would be converted to `-Inf`
+after log-transformation. Are there any 0-values in the data. If so,
+how many are there.
+`r msmbstyle::question_end()`
+
+
+```{r, include = FALSE}
+table(e == 0)
+```
+
+`r msmbstyle::question_begin()`
+Add 1 to all expression values, then log-2 transform the expression
+data. Visualise the distributions of the expression values in each
+samples before and after transformation.
 `r msmbstyle::question_end()`
 
 
 ```{r, fig.cap = "Expression values in cell types A and B without (black and gree) and with stimulation (red and blue).", warning = FALSE, include = FALSE}
+boxplot(e, col = as.factor(pd$group), main = "Raw values")
 e <- log2(e + 1)
-boxplot(e, col = as.factor(pd$group))
+boxplot(e, col = as.factor(pd$group), main = "Log-transformed")
 ```
 
 Continue with log-transformed data, without preforming any normalisation.
 
 `r msmbstyle::question_begin()`
-Copmute, for each gene, the number of 0-expression values and
+
+Compute, for each gene, the number of 0-expression values and
 visualise these as a table showing the number of genes with 0, 1, 2,
-... 0
+... zero values.
 
 `r msmbstyle::question_end()`
 
@@ -129,7 +148,7 @@ table(row_zero <- apply(e, 1, function(x) sum(x == 0)))
 ```
 
 `r msmbstyle::question_begin()`
-Visualise and interpret the experiment desing (cell type and
+Visualise and interpret the experiment design (cell type and
 treatment) using a principal component analyis.
 `r msmbstyle::question_end()`
 
