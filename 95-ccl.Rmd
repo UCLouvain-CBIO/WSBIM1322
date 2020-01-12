@@ -115,19 +115,18 @@ e <- log2(e + 1)
 boxplot(e, col = as.factor(pd$group))
 ```
 
-Continue without preforming any normalisation.
+Continue with log-transformed data, without preforming any normalisation.
 
 `r msmbstyle::question_begin()`
-Removes genes that aren't expressed in any samples, i.e. those that
-have a sum of expression equal to 0 accross all samples. How many
-genes unexpressed genes are there?
+Copmute, for each gene, the number of 0-expression values and
+visualise these as a table showing the number of genes with 0, 1, 2,
+... 0
+
 `r msmbstyle::question_end()`
 
 ```{r, include = FALSE}
-table(rowSums(e) > 0)
-e <- e[rowSums(e) > 0, ]
+table(row_zero <- apply(e, 1, function(x) sum(x == 0)))
 ```
-
 
 `r msmbstyle::question_begin()`
 Visualise and interpret the experiment desing (cell type and
@@ -188,7 +187,6 @@ with(res, plot(lfc, -log10(adjp)))
 abline(v = c(-1, 1))
 abline(h = -log10(0.001))
 ```
-
 
 `r msmbstyle::question_begin()`
 Considering that a gene is called differentially expressed if it has
