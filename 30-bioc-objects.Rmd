@@ -107,7 +107,6 @@ Object of class person:
 - Role: teaching assistant
 
 Object of class person:
-- Name: Object of class person:
 - Name: Alejandra
 - Surname: Sanchez-Cortez
 - Noma: 123456
