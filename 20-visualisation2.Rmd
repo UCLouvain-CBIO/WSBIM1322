@@ -378,6 +378,10 @@ vlnplot
 ```
 `r msmbstyle::solution_end()`
 
+See this post, [The Boxplot and its
+pitfalls](https://www.data-to-viz.com/caveat/boxplot.html) for more
+detail about boxplots and how to improve them using jitter, violin
+plots, and information about the sample size.
 
 ### Dot plots and beeswarm plots
 
