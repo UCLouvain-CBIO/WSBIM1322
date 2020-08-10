@@ -22,6 +22,9 @@ output: html_document
   répondre aux questions de leurs collègues. **N'oubliez pas de vous
   inscrire!**
 
+- Quand vous poser vos questions sur moodle, il vous est demandé de
+  **décrire ce que vous avez déjà essayé/testé**. 
+
 - Les notes de cours sont en anglais, mais le cours se donnera en
   français.
 
