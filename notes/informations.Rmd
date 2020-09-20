@@ -36,22 +36,16 @@ output: html_document
   proposés comme travail à domicile.
 
 - La **présence des étudiants à l'ensemble des cours (volumes 1 et 2)
-  est obligatoire**. Ceci est aussi valable pour les bisseurs. Il est
-  essentiel de prendre contact avec le titulaire du cours au plus vite
-  si vous n'êtes pas en mesure de suivre le cours. Les présences
-  seront comptabilisées. **N'oubliez pas de signer à chaque
-  cours!**
+  est obligatoire**. Ceci est aussi valable pour les bisseurs, sauf
+  dérogation explicite. Les présences seront
+  comptabilisées. **N'oubliez pas de signer à chaque cours!**
 
 - En case de trois absences non justifiées, l'étudiant(e) pourra se
   voir refuser la participation **aux examens** de fin de cours.
 
-- Il y aura des interrogations cotées en début de certaines
-  sessions. Ces cotes compteront pour 25% de la note finale. Le
-  meilleur moyen de vous y préparer et de faire et comprendre les
-  exercices en cours et à domicile.
-
 - Le nombre et durée des pauses dépendra du [vote des
   étudiant(e)s](https://moodleucl.uclouvain.be/mod/choice/view.php?id=764607).
+
 
 Ce qui est attendu de vous:
 
@@ -77,29 +71,45 @@ final. La conclusion étant que de travail régulier, qui se traduit par
 des bons résultats durant les interrogations, est un bon prédicateur du
 succès à l'examen.
 
-
 ```{r scores, echo = FALSE}
 knitr::include_graphics("./2019-06-corr-exam-interro.png")
 ```
 
 ## Horaire
 
-|    | Jour              | Horaire       | Matière |
-|----|-------------------|---------------|---------|
-| 1  | Lundi  23/09/2020 | 08h30 - 12h30 |         |
-| 2  | Lundi  30/09/2020 | 08h30 - 12h30 |         |
-| 3  | Lundi  07/10/2020 | 08h30 - 12h30 |         |
-| 4  | Lundi  21/10/2020 | 08h30 - 12h30 |         |
-| 5  | Lundi  28/10/2020 | 08h30 - 12h30 |         |
-| 6  | Lundi  04/11/2020 | 08h30 - 12h30 |         |
-| 7  | Lundi  18/11/2020 | 08h30 - 12h30 |         |
-| 8  | Lundi  25/11/2020 | 08h30 - 12h30 |         |
-| 9  | Lundi  02/12/2020 | 08h30 - 12h30 |         |
-| 10 | Lundi  16/12/2020 | 08h30 - 12h30 |         |
+|    | Jour              | Horaire       |
+|----|-------------------|---------------|
+| 1  | Lundi  21/09/2020 | 08h30 - 12h30 |
+| 2  | Lundi  28/09/2020 | 08h30 - 12h30 |
+| 3  | Lundi  05/10/2020 | 08h30 - 12h30 |
+| 4  | Lundi  12/10/2020 | 08h30 - 12h30 |
+| 5  | Lundi  19/10/2020 | 08h30 - 12h30 |
+| 6  | Lundi  04/11/2020 | 08h30 - 12h30 |
+| 7  | Lundi  02/11/2020 | 08h30 - 12h30 |
+| 8  | Lundi  16/11/2020 | 08h30 - 12h30 |
+| 9  | Lundi  23/11/2020 | 08h30 - 12h30 |
+| 10 | Lundi  30/11/2020 | 08h30 - 12h30 |
 
 
 NB: la matière reprise ci-dessus est à titre indicatif uniquement, et
 sera adaptée en fonction de l'avancée en cours.
+
+## Modes d'évalutations
+
+- **Évaluation continue**: les étudiant(e)s seront interrogé(e)s tout
+  au long du cours. Ceux et celles obtenant une moyenne supérieure ou
+  égale à 12 pourront être dispensé(e)s de l'examen final.
+
+- L'**examen** se fera sur ordinateur ; les étudiants prépareront un
+  rapport reproductible en Rmd sous RStudio, répondant à des exercices
+  et préparant des analyses de petites tailles tels que présentés et
+  pratiqués durant le cours. Les cotes des interrogations n'entreront
+  plus en compte en cas de présentation de l'examen.
+
+<!-- Il y aura des interrogations cotées en début de certaines -->
+<!-- sessions. Ces cotes compteront pour 25% de la note finale. Le -->
+<!-- meilleur moyen de vous y préparer et de faire et comprendre les -->
+<!-- exercices en cours et à domicile. -->
 
 ## Examen
 
@@ -132,23 +142,19 @@ sera adaptée en fonction de l'avancée en cours.
   jury puis sanction disciplinaire possible par le vice-recteur aux
   affaires étudiantes).
 
-<!-- - L'examen consistera en la préparation, sur ordinateur, de [rapport -->
-<!--   reproductible en -->
-<!--   Rmarkdown](https://uclouvain-cbio.github.io/WSBIM1207/sec-rr.html), -->
-<!--   que vous nous rendrez en fin d'examen. Nous le compilerons nous -->
-<!--   mêmes en format pdf, et c'est ce fichier que nous corrigerons. Les -->
-<!--   questions vous seront communiquées via le page moodle du cours et -->
-<!--   votre rapport sera remis par cette même page moodle. -->
+- L'examen consistera en la préparation, sur ordinateur, de [rapport
+  reproductible en
+  Rmarkdown](https://uclouvain-cbio.github.io/WSBIM1207/sec-rr.html).
 
-<!-- - Le nombre de pages de rapport sera limité. Assurez-vous de ne pas le -->
-<!--   dépasser. -->
+- Le nombre de pages de rapport sera limité. Assurez-vous de ne pas le
+  dépasser.
 
-- L'examen sera à livre ouvert - vous aurez accès à la dernière mise à
-  jour en ligne des notes de cours. Vous pourrez également amener vos
-  notes manuscrites si vous le désirez. Vous aurez aussi accès à vos
-  répertoires personnels avec le projet et les scripts préparés en
-  cours d'année (y compris le projet du professeur). Tout autre
-  support est interdit, sauf autorisation exlicite du professeur.
+- L'examen sera à **livre ouvert** - vous aurez accès à la dernière
+  mise à jour en ligne des notes de cours. Vous pourrez également
+  amener vos notes manuscrites si vous le désirez. Vous aurez aussi
+  accès à vos répertoires personnels avec le projet et les scripts
+  préparés en cours d'année (y compris le projet du professeur). Tout
+  autre support est interdit, sauf autorisation exlicite.
 
 - Vous devrez utiliser l'ordinateur de la salle pour l'examen. Des
   ordinateurs portables personnels ainsi que des tablettes ou
@@ -161,6 +167,7 @@ sera adaptée en fonction de l'avancée en cours.
 
 Vous aurez un document reprenant des informations détaillées sur
 l'examen et sont déroulement en temps voulu.
+
 
 ----
 
