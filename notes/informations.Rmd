@@ -1,5 +1,5 @@
 ---
-title: "Informations WSBIM1322 2019 - 2020"
+title: "Informations WSBIM1322 2020 - 2021"
 output: html_document
 ---
 
@@ -7,7 +7,7 @@ output: html_document
 
 - [Descriptif du cours](https://uclouvain.be/cours-2019-wsbim1322.html)
 - Titulaire: Prof Laurent Gatto
-- Assistants: Dr. Axelle Loriot
+- Assistants: Dr. Axelle Loriot, Jean Fain, Valentine Robaux
 - Notes de cours: http://bit.ly/WSBIM1322
 - Informations aux étudiants (ce document): http://bit.ly/WSBIM1322info
 

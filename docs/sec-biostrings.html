@@ -14,20 +14,19 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-08-25" />
+<meta name="date" content="2020-09-20" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
 <title>Chapter 4 Manipulating sequences with Biostrings | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -48,73 +47,45 @@ if(f.classList.contains('fa-plus-square')) {
 
 }
 </script>
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 
@@ -165,68 +136,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec:biostrings" class="section level1" number="4">
+<html><body><div id="sec:biostrings" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 4</span> Manipulating sequences with Biostrings</h1>
 <p><strong>Learning objectives</strong></p>
-<p>In this chapter, we will learn about a new object, that is
-specialised for the manipulation of biological sequences.</p>
+<p>In this chapter, we will learn about a new object, that is specialised for the manipulation of biological sequences.</p>
 <ul>
 <li>Learn about the fasta format format for biological sequences.</li>
 <li>Learn about the <code>*StingSet</code> classes.</li>
 <li>Working with whole genomes.</li>
 <li>Find patterns in sequence data.</li>
 </ul>
-<p>This chapter is based on the course material presented by Martin
-Morgan during the <a href="https://uclouvain-cbio.github.io/BSS2019/">Bioinformatics Summer School
-2019</a> at Louvain-la-Neuve,
-Belgium.</p>
-<div id="working-with-sequences---a-first-start" class="section level2" number="4.1">
+<p>This chapter is based on the course material presented by Martin Morgan during the <a href="https://uclouvain-cbio.github.io/BSS2019/">Bioinformatics Summer School 2019</a> at Louvain-la-Neuve, Belgium.</p>
+<div id="working-with-sequences---a-first-start" class="section level2">
 <h2>
 <span class="header-section-number">4.1</span> Working with sequences - a first start</h2>
-<p>It is easy to use standard R character vectors to define DNA
-sequences. Below, we create a vector with three short sequences.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="sec-biostrings.html#cb127-1" aria-hidden="true"></a>sequences &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"AAATCGA"</span>, <span class="st">"ATACAACAT"</span>, <span class="st">"TTGCCA"</span>)</span>
-<span id="cb127-2"><a href="sec-biostrings.html#cb127-2" aria-hidden="true"></a>sequences</span></code></pre></div>
+<p>It is easy to use standard R character vectors to define DNA sequences. Below, we create a vector with three short sequences.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sequences &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"AAATCGA"</span>, <span class="st">"ATACAACAT"</span>, <span class="st">"TTGCCA"</span>)
+sequences</code></pre></div>
 <pre><code>## [1] "AAATCGA"   "ATACAACAT" "TTGCCA"</code></pre>
-<p>We can ask about properties of these sequences and perform some
-operations using base R function:</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="sec-biostrings.html#cb129-1" aria-hidden="true"></a><span class="kw">length</span>(sequences)</span></code></pre></div>
+<p>We can ask about properties of these sequences and perform some operations using base R function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(sequences)</code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="sec-biostrings.html#cb131-1" aria-hidden="true"></a><span class="kw">nchar</span>(sequences)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nchar</span>(sequences)</code></pre></div>
 <pre><code>## [1] 7 9 6</code></pre>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="sec-biostrings.html#cb133-1" aria-hidden="true"></a>sequences[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sequences[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</code></pre></div>
 <pre><code>## [1] "AAATCGA" "TTGCCA"</code></pre>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="sec-biostrings.html#cb135-1" aria-hidden="true"></a><span class="kw">sample</span>(sequences)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(sequences)</code></pre></div>
 <pre><code>## [1] "TTGCCA"    "AAATCGA"   "ATACAACAT"</code></pre>
-<p>However, once is we want to perform biologically relevant operations,
-base R fails us; it has no notion of operations relevant to DNA
-sequences, e.g.,</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="sec-biostrings.html#cb137-1" aria-hidden="true"></a><span class="kw">reverseComplement</span>(sequences)</span></code></pre></div>
-<p>Likewise, we can name a variable anything, the semantic meaning
-of the variable name is not enforced by R</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="sec-biostrings.html#cb138-1" aria-hidden="true"></a>not_a_dna_sequence &lt;-<span class="st"> "I love R"</span></span></code></pre></div>
+<p>However, once is we want to perform biologically relevant operations, base R fails us; it has no notion of operations relevant to DNA sequences, e.g.,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverseComplement</span>(sequences)</code></pre></div>
+<p>Likewise, we can name a variable anything, the semantic meaning of the variable name is not enforced by R</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">not_a_dna_sequence &lt;-<span class="st"> "I love R"</span></code></pre></div>
 </div>
-<div id="working-with-sequences---using-biostrings" class="section level2" number="4.2">
+<div id="working-with-sequences---using-biostrings" class="section level2">
 <h2>
 <span class="header-section-number">4.2</span> Working with sequences - using <code>Biostrings</code>
 </h2>
-<p>The Bioconductor <em><a href="https://bioconductor.org/packages/3.11/Biostrings">Biostrings</a></em>
-package can do all that base R can do, in addition to knowing about
-the semantics of the sequences is handles. Let’s start by loading the
-package:</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="sec-biostrings.html#cb139-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"Biostrings"</span>)</span></code></pre></div>
-<p>For more information about the <code>Biostrings</code> package, see the vignettes
-available online the <a href="https://www.bioconductor.org/packages/release/bioc/html/Biostrings.html">package
-package</a>.</p>
-<div id="dnastringset" class="section level3" number="4.2.1">
+<p>The Bioconductor <em><a href="https://bioconductor.org/packages/3.11/Biostrings">Biostrings</a></em> package can do all that base R can do, in addition to knowing about the semantics of the sequences is handles. Let's start by loading the package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"Biostrings"</span>)</code></pre></div>
+<p>For more information about the <code>Biostrings</code> package, see the vignettes available online the <a href="https://www.bioconductor.org/packages/release/bioc/html/Biostrings.html">package package</a>.</p>
+<div id="dnastringset" class="section level3">
 <h3>
 <span class="header-section-number">4.2.1</span> <code>DNAStringSet()</code>
 </h3>
-<p>The <code>DNAStringSet</code> class that <em>knows</em> about DNA sequences. We can
-easily create a <code>DNAStringSet</code> from our character vector with</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="sec-biostrings.html#cb140-1" aria-hidden="true"></a>dna &lt;-<span class="st"> </span><span class="kw">DNAStringSet</span>(sequences)</span>
-<span id="cb140-2"><a href="sec-biostrings.html#cb140-2" aria-hidden="true"></a>dna</span></code></pre></div>
+<p>The <code>DNAStringSet</code> class that <em>knows</em> about DNA sequences. We can easily create a <code>DNAStringSet</code> from our character vector with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dna &lt;-<span class="st"> </span><span class="kw">DNAStringSet</span>(sequences)
+dna</code></pre></div>
 <pre><code>## DNAStringSet object of length 3:
 ##     width seq
 ## [1]     7 AAATCGA
@@ -237,9 +193,7 @@ easily create a <code>DNAStringSet</code> from our character vector with</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Does the object <code>dna</code> support the operations illustrated above for a
-character vector, especially <code>length()</code>, <code>nchar()</code>, <code>[</code>, and
-<code>sample()</code>?</p>
+<p>Does the object <code>dna</code> support the operations illustrated above for a character vector, especially <code>length()</code>, <code>nchar()</code>, <code>[</code>, and <code>sample()</code>?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -250,16 +204,16 @@ character vector, especially <code>length()</code>, <code>nchar()</code>, <code>
 ► Solution<span id="sol-start-14" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-14', 'sol-start-14')"></span>
 </p>
 <div id="sol-body-14" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="sec-biostrings.html#cb142-1" aria-hidden="true"></a><span class="kw">length</span>(dna)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(dna)</code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="sec-biostrings.html#cb144-1" aria-hidden="true"></a><span class="kw">nchar</span>(dna)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nchar</span>(dna)</code></pre></div>
 <pre><code>## [1] 7 9 6</code></pre>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="sec-biostrings.html#cb146-1" aria-hidden="true"></a>dna[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dna[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</code></pre></div>
 <pre><code>## DNAStringSet object of length 2:
 ##     width seq
 ## [1]     7 AAATCGA
 ## [2]     6 TTGCCA</code></pre>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="sec-biostrings.html#cb148-1" aria-hidden="true"></a><span class="kw">sample</span>(dna)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(dna)</code></pre></div>
 <pre><code>## DNAStringSet object of length 3:
 ##     width seq
 ## [1]     9 ATACAACAT
@@ -275,8 +229,7 @@ character vector, especially <code>length()</code>, <code>nchar()</code>, <code>
 ► Question
 </p>
 <div class="question-body">
-<p>Prove to yourself that at least some other useful, DNA-specific,
-functions exist, e.g., <code>reverse()</code> and <code>reverseComplement()</code>.</p>
+<p>Prove to yourself that at least some other useful, DNA-specific, functions exist, e.g., <code>reverse()</code> and <code>reverseComplement()</code>.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -287,13 +240,13 @@ functions exist, e.g., <code>reverse()</code> and <code>reverseComplement()</cod
 ► Solution<span id="sol-start-15" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-15', 'sol-start-15')"></span>
 </p>
 <div id="sol-body-15" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="sec-biostrings.html#cb150-1" aria-hidden="true"></a><span class="kw">reverse</span>(dna)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverse</span>(dna)</code></pre></div>
 <pre><code>## DNAStringSet object of length 3:
 ##     width seq
 ## [1]     7 AGCTAAA
 ## [2]     9 TACAACATA
 ## [3]     6 ACCGTT</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="sec-biostrings.html#cb152-1" aria-hidden="true"></a><span class="kw">reverseComplement</span>(dna)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">reverseComplement</span>(dna)</code></pre></div>
 <pre><code>## DNAStringSet object of length 3:
 ##     width seq
 ## [1]     7 TCGATTT
@@ -309,10 +262,7 @@ functions exist, e.g., <code>reverse()</code> and <code>reverseComplement()</cod
 ► Question
 </p>
 <div class="question-body">
-<p>What happens when you try to create a <code>DNAStringSet()</code> from an object
-such as <code>not_a_dna_sequence</code>, defined above, that does not contain a
-DNA sequence? Warning: the message is quite cryptic, can you provide a
-‘human’ translation?</p>
+<p>What happens when you try to create a <code>DNAStringSet()</code> from an object such as <code>not_a_dna_sequence</code>, defined above, that does not contain a DNA sequence? Warning: the message is quite cryptic, can you provide a 'human' translation?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -323,7 +273,7 @@ DNA sequence? Warning: the message is quite cryptic, can you provide a
 ► Solution<span id="sol-start-16" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-16', 'sol-start-16')"></span>
 </p>
 <div id="sol-body-16" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="sec-biostrings.html#cb154-1" aria-hidden="true"></a><span class="kw">try</span>(<span class="kw">DNAStringSet</span>(not_a_dna_sequence))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">try</span>(<span class="kw">DNAStringSet</span>(not_a_dna_sequence))</code></pre></div>
 <pre><code>## Error in .Call2("new_XString_from_CHARACTER", class(x0), string, start,  : 
 ##   key 73 (char 'I') not in lookup table</code></pre>
 <p class="solution-end">
@@ -336,9 +286,7 @@ DNA sequence? Warning: the message is quite cryptic, can you provide a
 ► Question
 </p>
 <div class="question-body">
-<p>Why does <code>DNAStringSet("ACGTMRW")</code> not create an error, since <code>MRW</code>
-are not standard nucleotides? For hints, see the section ’The DNA
-alphabet:" on the help page <code>?DNAString</code>.</p>
+<p>Why does <code>DNAStringSet("ACGTMRW")</code> not create an error, since <code>MRW</code> are not standard nucleotides? For hints, see the section 'The DNA alphabet:" on the help page <code>?DNAString</code>.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -360,10 +308,10 @@ alphabet:" on the help page <code>?DNAString</code>.</p>
 ► Solution<span id="sol-start-17" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-17', 'sol-start-17')"></span>
 </p>
 <div id="sol-body-17" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="sec-biostrings.html#cb156-1" aria-hidden="true"></a><span class="kw">DNAString</span>(<span class="st">"AGACCATG"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">DNAString</span>(<span class="st">"AGACCATG"</span>)</code></pre></div>
 <pre><code>## 8-letter DNAString object
 ## seq: AGACCATG</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="sec-biostrings.html#cb158-1" aria-hidden="true"></a><span class="kw">DNAStringSet</span>(<span class="kw">c</span>(<span class="st">"AGACCATG"</span>, <span class="st">"AAAAAATTTA"</span>))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">DNAStringSet</span>(<span class="kw">c</span>(<span class="st">"AGACCATG"</span>, <span class="st">"AAAAAATTTA"</span>))</code></pre></div>
 <pre><code>## DNAStringSet object of length 2:
 ##     width seq
 ## [1]     8 AGACCATG
@@ -374,57 +322,45 @@ alphabet:" on the help page <code>?DNAString</code>.</p>
 </div>
 </div>
 </div>
-<div id="learning-more-about-a-class" class="section level3" number="4.2.2">
+<div id="learning-more-about-a-class" class="section level3">
 <h3>
 <span class="header-section-number">4.2.2</span> Learning more about a class</h3>
-<p>The function <code>DNAStringSet()</code> returns an <em>object</em> that has a
-particular class</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="sec-biostrings.html#cb160-1" aria-hidden="true"></a><span class="kw">class</span>(dna)</span></code></pre></div>
+<p>The function <code>DNAStringSet()</code> returns an <em>object</em> that has a particular class</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(dna)</code></pre></div>
 <pre><code>## [1] "DNAStringSet"
 ## attr(,"package")
 ## [1] "Biostrings"</code></pre>
-<p>Associated with the class are a series of <em>methods</em> (i.e. functions
-that have a behaviour that is tuned for that class) that operate on
-the class.</p>
+<p>Associated with the class are a series of <em>methods</em> (i.e. functions that have a behaviour that is tuned for that class) that operate on the class.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Discover many (unfortunately, not all) methods acting on
-an object of class <code>DNAStringSet</code> using <code>methods(class = "DNAStringSet")</code>. Verify that <code>reverseComplement</code> is among those
-methods.</p>
+<p>Discover many (unfortunately, not all) methods acting on an object of class <code>DNAStringSet</code> using <code>methods(class = "DNAStringSet")</code>. Verify that <code>reverseComplement</code> is among those methods.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
-<p>Help pages describing a particular method can be found using <code>?</code>, with
-the search query quoted and with tab-completion providing hints on
-what the appropriate help topic is.</p>
+<p>Help pages describing a particular method can be found using <code>?</code>, with the search query quoted and with tab-completion providing hints on what the appropriate help topic is.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Find the help page for the <code>reverseComplement</code> method operating on a
-<code>DNAStringSet</code> object, using <code>?reverseComplement</code>.</p>
+<p>Find the help page for the <code>reverseComplement</code> method operating on a <code>DNAStringSet</code> object, using <code>?reverseComplement</code>.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
-<p>Help pages provide a description of the technical details required for
-creating classes and using methods. Vignettes provide a more narrative
-description of overall package use.</p>
+<p>Help pages provide a description of the technical details required for creating classes and using methods. Vignettes provide a more narrative description of overall package use.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Use <code>browseVignettes(package = "Biostrings")</code> to see vignettes
-available for this package; explore a few vignettes to get a sense of
-possible content.</p>
+<p>Use <code>browseVignettes(package = "Biostrings")</code> to see vignettes available for this package; explore a few vignettes to get a sense of possible content.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -432,28 +368,18 @@ possible content.</p>
 </div>
 </div>
 </div>
-<div id="reading-dna-sequence-data-from-a-file" class="section level2" number="4.3">
+<div id="reading-dna-sequence-data-from-a-file" class="section level2">
 <h2>
 <span class="header-section-number">4.3</span> Reading DNA sequence data from a file</h2>
-<p>It is unlikely that we would enter 1000’s of DNA sequences ‘by
-hand’. Instead, we might read the data from a standard file
-format. For DNA sequences the standard file format is often a ‘FASTA’
-file, sometimes abbreviated with an extension <code>.fa</code> and often
-compressed with an additional extension <code>.fa.gz</code>. An example of a
-FASTA file containing DNA sequences of the 2000bp upstream nucleotides
-of all genes annotated in the <em>Drosophila melanogaster</em> <code>dm3</code> genome
-build, is distributed with the <code>Biostrings</code> package. Here’s the path
-to the FASTA file.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="sec-biostrings.html#cb162-1" aria-hidden="true"></a>fa_file &lt;-</span>
-<span id="cb162-2"><a href="sec-biostrings.html#cb162-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">system.file</span>(<span class="dt">package=</span><span class="st">"Biostrings"</span>, <span class="st">"extdata"</span>, <span class="st">"dm3_upstream2000.fa.gz"</span>)</span></code></pre></div>
+<p>It is unlikely that we would enter 1000's of DNA sequences 'by hand'. Instead, we might read the data from a standard file format. For DNA sequences the standard file format is often a 'FASTA' file, sometimes abbreviated with an extension <code>.fa</code> and often compressed with an additional extension <code>.fa.gz</code>. An example of a FASTA file containing DNA sequences of the 2000bp upstream nucleotides of all genes annotated in the <em>Drosophila melanogaster</em> <code>dm3</code> genome build, is distributed with the <code>Biostrings</code> package. Here's the path to the FASTA file.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa_file &lt;-
+<span class="st">    </span><span class="kw">system.file</span>(<span class="dt">package=</span><span class="st">"Biostrings"</span>, <span class="st">"extdata"</span>, <span class="st">"dm3_upstream2000.fa.gz"</span>)</code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Take a peak at the structure of a FASTA file by looking at the first
-five lines. You can use the <code>readLines</code> function, setting the <code>n</code>
-parameter to read only a limited number of files (see <code>readLines</code>).</p>
+<p>Take a peak at the structure of a FASTA file by looking at the first five lines. You can use the <code>readLines</code> function, setting the <code>n</code> parameter to read only a limited number of files (see <code>readLines</code>).</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -464,7 +390,7 @@ parameter to read only a limited number of files (see <code>readLines</code>).</
 ► Solution<span id="sol-start-18" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-18', 'sol-start-18')"></span>
 </p>
 <div id="sol-body-18" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="sec-biostrings.html#cb163-1" aria-hidden="true"></a><span class="kw">readLines</span>(fa_file, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(fa_file, <span class="dv">5</span>)</code></pre></div>
 <pre><code>## [1] "&gt;NM_078863_up_2000_chr2L_16764737_f chr2L:16764737-16766736"
 ## [2] "gttggtggcccaccagtgccaaaatacacaagaagaagaaacagcatctt"         
 ## [3] "gacactaaaatgcaaaaattgctttgcgtcaatgactcaaaacgaaaatg"         
@@ -475,22 +401,16 @@ parameter to read only a limited number of files (see <code>readLines</code>).</
 </p>
 </div>
 </div>
-<p>In this case, the first line is an identifier, containing information
-about the gene <code>NM_078863</code> as well as the genomic coordinates of the
-sequence <code>chr2L:16764737-16766736</code>. The next lines are the DNA
-sequence. After a certain number of lines, a new record starts.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="sec-biostrings.html#cb165-1" aria-hidden="true"></a><span class="kw">tail</span>(<span class="kw">readLines</span>(fa_file, <span class="dv">44</span>), <span class="dv">5</span>)</span></code></pre></div>
+<p>In this case, the first line is an identifier, containing information about the gene <code>NM_078863</code> as well as the genomic coordinates of the sequence <code>chr2L:16764737-16766736</code>. The next lines are the DNA sequence. After a certain number of lines, a new record starts.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(<span class="kw">readLines</span>(fa_file, <span class="dv">44</span>), <span class="dv">5</span>)</code></pre></div>
 <pre><code>## [1] "cacgcacaccgatcgtcgaatcgaaaagctttcggggtcttacgggatcc"         
 ## [2] "atgggtatcaagttgccccgtataaaaggcaagtttaccggttgcacggt"         
 ## [3] "&gt;NM_001201794_up_2000_chr2L_8382455_f chr2L:8382455-8384454"
 ## [4] "ttatttatgtaggcgcccgttcccgcagccaaagcactcagaattccggg"         
 ## [5] "cgtgtagcgcaacgaccatctacaaggcaatattttgatcgcttgttagg"</code></pre>
-<p>We could fairly <em>easily</em> write our own parser for this format, but
-this would be error-prone and unnecessary. Instread, we want to use
-the <code>readDNAStringSet</code> function from the <code>Biostrings</code> package for
-that.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="sec-biostrings.html#cb167-1" aria-hidden="true"></a>dna &lt;-<span class="st"> </span><span class="kw">readDNAStringSet</span>(fa_file)</span>
-<span id="cb167-2"><a href="sec-biostrings.html#cb167-2" aria-hidden="true"></a>dna</span></code></pre></div>
+<p>We could fairly <em>easily</em> write our own parser for this format, but this would be error-prone and unnecessary. Instread, we want to use the <code>readDNAStringSet</code> function from the <code>Biostrings</code> package for that.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dna &lt;-<span class="st"> </span><span class="kw">readDNAStringSet</span>(fa_file)
+dna</code></pre></div>
 <pre><code>## DNAStringSet object of length 26454:
 ##         width seq                                           names               
 ##     [1]  2000 GTTGGTGGCCCACCAGTGCCA...CAAGTTTACCGGTTGCACGGT NM_078863_up_2000...
@@ -509,8 +429,7 @@ that.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Query the object for basic properties, e.g., it’s <code>length()</code> and that
-number of character in each sequence (try <code>table(nchar(dna))</code>).</p>
+<p>Query the object for basic properties, e.g., it's <code>length()</code> and that number of character in each sequence (try <code>table(nchar(dna))</code>).</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -521,9 +440,7 @@ number of character in each sequence (try <code>table(nchar(dna))</code>).</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Use <code>letterFrequency()</code> to determine GC content of each of the DNA
-sequences in <code>dna</code>. The <code>letters</code> argument should be <code>"GC"</code>; <code>as.prob = TRUE</code> returns values between 0 and 1. The data is returned as a
-matrix with 1 column.</p>
+<p>Use <code>letterFrequency()</code> to determine GC content of each of the DNA sequences in <code>dna</code>. The <code>letters</code> argument should be <code>"GC"</code>; <code>as.prob = TRUE</code> returns values between 0 and 1. The data is returned as a matrix with 1 column.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -534,8 +451,8 @@ matrix with 1 column.</p>
 ► Solution<span id="sol-start-19" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-19', 'sol-start-19')"></span>
 </p>
 <div id="sol-body-19" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="sec-biostrings.html#cb169-1" aria-hidden="true"></a>gc_content &lt;-<span class="st"> </span><span class="kw">letterFrequency</span>(dna, <span class="dt">letters =</span> <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb169-2"><a href="sec-biostrings.html#cb169-2" aria-hidden="true"></a><span class="kw">head</span>(gc_content)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gc_content &lt;-<span class="st"> </span><span class="kw">letterFrequency</span>(dna, <span class="dt">letters =</span> <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(gc_content)</code></pre></div>
 <pre><code>##         G|C
 ## [1,] 0.3785
 ## [2,] 0.4300
@@ -553,8 +470,7 @@ matrix with 1 column.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>What are the mean and standard deviation of the GC contents in the 26454 genes?
-What genes(s) has/have the highes GC content?</p>
+<p>What are the mean and standard deviation of the GC contents in the 26454 genes? What genes(s) has/have the highes GC content?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -565,13 +481,13 @@ What genes(s) has/have the highes GC content?</p>
 ► Solution<span id="sol-start-20" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-20', 'sol-start-20')"></span>
 </p>
 <div id="sol-body-20" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="sec-biostrings.html#cb171-1" aria-hidden="true"></a><span class="kw">mean</span>(gc_content)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(gc_content)</code></pre></div>
 <pre><code>## [1] 0.4228301</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="sec-biostrings.html#cb173-1" aria-hidden="true"></a><span class="kw">sd</span>(gc_content)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(gc_content)</code></pre></div>
 <pre><code>## [1] 0.04935743</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="sec-biostrings.html#cb175-1" aria-hidden="true"></a><span class="kw">range</span>(gc_content)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range</span>(gc_content)</code></pre></div>
 <pre><code>## [1] 0.0800 0.6145</code></pre>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="sec-biostrings.html#cb177-1" aria-hidden="true"></a>dna[<span class="kw">which</span>(gc_content <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(gc_content))]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dna[<span class="kw">which</span>(gc_content <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(gc_content))]</code></pre></div>
 <pre><code>## DNAStringSet object of length 1:
 ##     width seq                                               names               
 ## [1]  2000 CGCTACTACGGCGCCAGTTCGGC...GCGCTTGCTAAAGCACTCTGGTC NM_133087_up_2000...</code></pre>
@@ -585,8 +501,7 @@ What genes(s) has/have the highes GC content?</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Plot the distribution of GC frequencies in the <code>dna</code> object using base
-graphics <code>hist()</code> and <code>plot(density())</code>, and using <code>ggplot()</code>.</p>
+<p>Plot the distribution of GC frequencies in the <code>dna</code> object using base graphics <code>hist()</code> and <code>plot(density())</code>, and using <code>ggplot()</code>.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -597,17 +512,17 @@ graphics <code>hist()</code> and <code>plot(density())</code>, and using <code>g
 ► Solution<span id="sol-start-21" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-21', 'sol-start-21')"></span>
 </p>
 <div id="sol-body-21" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-biostrings.html#cb179-1" aria-hidden="true"></a><span class="kw">hist</span>(gc_content)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(gc_content)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/letterfreqex3a-1.png" width="672"></p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="sec-biostrings.html#cb180-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">density</span>(gc_content))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(gc_content))</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/letterfreqex3a-2.png" width="672"></p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="sec-biostrings.html#cb181-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb181-2"><a href="sec-biostrings.html#cb181-2" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(gc_content) <span class="op">%&gt;%</span></span>
-<span id="cb181-3"><a href="sec-biostrings.html#cb181-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">G|C</span><span class="st">`</span>))</span>
-<span id="cb181-4"><a href="sec-biostrings.html#cb181-4" aria-hidden="true"></a>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"tidyverse"</span>)
+p &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(gc_content) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">G|C</span><span class="st">`</span>))
+p <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="WSBIM1322_files/figure-html/letterfreqex3b-1.png" width="672"></p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="sec-biostrings.html#cb183-1" aria-hidden="true"></a>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/letterfreqex3b-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -615,21 +530,17 @@ graphics <code>hist()</code> and <code>plot(density())</code>, and using <code>g
 </div>
 </div>
 </div>
-<div id="tidy-bioconductor" class="section level2" number="4.4">
+<div id="tidy-bioconductor" class="section level2">
 <h2>
 <span class="header-section-number">4.4</span> Tidy Bioconductor</h2>
-<p>Although <em>Bioconductor</em> emphasizes formal objects like <code>DNAStringSet</code>
-rather than <code>tibble</code>-like data frames, some of the ways one interacts with tidy data can be
-applied to Bioconductor objects. For instance, the GC content example
-might be written in ‘traditional’ form as</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="sec-biostrings.html#cb184-1" aria-hidden="true"></a>gc &lt;-<span class="st"> </span><span class="kw">letterFrequency</span>(dna, <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<p>but could be written using pipes and to reesult in a tibble for easier
-down-stream manipulation</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="sec-biostrings.html#cb185-1" aria-hidden="true"></a>gc &lt;-</span>
-<span id="cb185-2"><a href="sec-biostrings.html#cb185-2" aria-hidden="true"></a><span class="st">    </span>dna <span class="op">%&gt;%</span></span>
-<span id="cb185-3"><a href="sec-biostrings.html#cb185-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">letterFrequency</span>(<span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
-<span id="cb185-4"><a href="sec-biostrings.html#cb185-4" aria-hidden="true"></a><span class="st">    </span>tibble<span class="op">::</span><span class="kw">as_tibble</span>()</span>
-<span id="cb185-5"><a href="sec-biostrings.html#cb185-5" aria-hidden="true"></a>gc</span></code></pre></div>
+<p>Although <em>Bioconductor</em> emphasizes formal objects like <code>DNAStringSet</code> rather than <code>tibble</code>-like data frames, some of the ways one interacts with tidy data can be applied to Bioconductor objects. For instance, the GC content example might be written in 'traditional' form as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gc &lt;-<span class="st"> </span><span class="kw">letterFrequency</span>(dna, <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>but could be written using pipes and to reesult in a tibble for easier down-stream manipulation</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gc &lt;-
+<span class="st">    </span>dna <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">letterFrequency</span>(<span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span>tibble<span class="op">::</span><span class="kw">as_tibble</span>()
+gc</code></pre></div>
 <pre><code>## # A tibble: 26,454 x 1
 ##    `G|C`
 ##    &lt;dbl&gt;
@@ -645,12 +556,11 @@ down-stream manipulation</p>
 ## 10 0.43 
 ## # … with 26,444 more rows</code></pre>
 </div>
-<div id="subsetting-sequences" class="section level2" number="4.5">
+<div id="subsetting-sequences" class="section level2">
 <h2>
 <span class="header-section-number">4.5</span> Subsetting sequences</h2>
-<p>As <code>[</code> is used to subset a <code>DNAStringSet</code>, it can’t be used to take
-substrings of a sequence. This can be done with the <code>subseq</code> sequence.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="sec-biostrings.html#cb187-1" aria-hidden="true"></a><span class="kw">subseq</span>(dna, <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> <span class="dv">100</span>)</span></code></pre></div>
+<p>As <code>[</code> is used to subset a <code>DNAStringSet</code>, it can't be used to take substrings of a sequence. This can be done with the <code>subseq</code> sequence.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subseq</span>(dna, <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> <span class="dv">100</span>)</code></pre></div>
 <pre><code>## DNAStringSet object of length 26454:
 ##         width seq                                           names               
 ##     [1]   100 GTTGGTGGCCCACCAGTGCCA...CAATGACTCAAAACGAAAATG NM_078863_up_2000...
@@ -664,7 +574,7 @@ substrings of a sequence. This can be done with the <code>subseq</code> sequence
 ## [26452]   100 GATATACGAAGGACGACCTGC...ATGACAGTCTTCTGGTGCTGG NM_001110997_up_2...
 ## [26453]   100 GATATACGAAGGACGACCTGC...ATGACAGTCTTCTGGTGCTGG NM_001276245_up_2...
 ## [26454]   100 CGTATGTATTAGTTAACTCTG...TTACTGTAGTTAGGAAGATTA NM_001015497_up_2...</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="sec-biostrings.html#cb189-1" aria-hidden="true"></a><span class="kw">subseq</span>(dna, <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">width =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subseq</span>(dna, <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">width =</span> <span class="dv">100</span>)</code></pre></div>
 <pre><code>## DNAStringSet object of length 26454:
 ##         width seq                                           names               
 ##     [1]   100 GTTGGTGGCCCACCAGTGCCA...CAATGACTCAAAACGAAAATG NM_078863_up_2000...
@@ -678,10 +588,10 @@ substrings of a sequence. This can be done with the <code>subseq</code> sequence
 ## [26452]   100 GATATACGAAGGACGACCTGC...ATGACAGTCTTCTGGTGCTGG NM_001110997_up_2...
 ## [26453]   100 GATATACGAAGGACGACCTGC...ATGACAGTCTTCTGGTGCTGG NM_001276245_up_2...
 ## [26454]   100 CGTATGTATTAGTTAACTCTG...TTACTGTAGTTAGGAAGATTA NM_001015497_up_2...</code></pre>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sec-biostrings.html#cb191-1" aria-hidden="true"></a><span class="kw">subseq</span>(dna[[<span class="dv">1</span>]], <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subseq</span>(dna[[<span class="dv">1</span>]], <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>## 10-letter DNAString object
 ## seq: GTTGGTGGCC</code></pre>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="sec-biostrings.html#cb193-1" aria-hidden="true"></a><span class="kw">subseq</span>(dna[[<span class="dv">1</span>]], <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">width =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subseq</span>(dna[[<span class="dv">1</span>]], <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">width =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>## 10-letter DNAString object
 ## seq: GTTGGTGGCC</code></pre>
 <div class="question">
@@ -689,10 +599,7 @@ substrings of a sequence. This can be done with the <code>subseq</code> sequence
 ► Question
 </p>
 <div class="question-body">
-<p>The start, end and with arguments can be vector of length &gt; 1
-themselves so as to generate sequences of different lengths. Create a
-new object that contains subsets of the first sequence of <code>dna</code> with,
-respectively nucleotides 1 to 1, 1 to 2, 1 to 3, …, 1 to 10.</p>
+<p>The start, end and with arguments can be vector of length &gt; 1 themselves so as to generate sequences of different lengths. Create a new object that contains subsets of the first sequence of <code>dna</code> with, respectively nucleotides 1 to 1, 1 to 2, 1 to 3, ..., 1 to 10.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -703,8 +610,8 @@ respectively nucleotides 1 to 1, 1 to 2, 1 to 3, …, 1 to 10.</p>
 ► Solution<span id="sol-start-22" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-22', 'sol-start-22')"></span>
 </p>
 <div id="sol-body-22" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="sec-biostrings.html#cb195-1" aria-hidden="true"></a>dna[<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>)] <span class="op">%&gt;%</span><span class="st">               </span><span class="co"># DNAStringSet with first sequence 10 times</span></span>
-<span id="cb195-2"><a href="sec-biostrings.html#cb195-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">subseq</span>(<span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) <span class="co"># subsequences of 1, 2, ... 10 nucleotides</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dna[<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>)] <span class="op">%&gt;%</span><span class="st">               </span><span class="co"># DNAStringSet with first sequence 10 times</span>
+<span class="st">    </span><span class="kw">subseq</span>(<span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) <span class="co"># subsequences of 1, 2, ... 10 nucleotides</span></code></pre></div>
 <pre><code>## DNAStringSet object of length 10:
 ##      width seq                                              names               
 ##  [1]     1 G                                                NM_078863_up_2000...
@@ -723,30 +630,27 @@ respectively nucleotides 1 to 1, 1 to 2, 1 to 3, …, 1 to 10.</p>
 </div>
 </div>
 </div>
-<div id="working-with-genomes" class="section level2" number="4.6">
+<div id="working-with-genomes" class="section level2">
 <h2>
 <span class="header-section-number">4.6</span> Working with genomes</h2>
-<p><code>BSgenome</code> packages inside Bioconductor contain whole genome sequences
-as distributed by ENSEMBL, NCBI and others. In this next example we
-will load the whole genome sequence for Drosophila melanogaster from
-UCSC’s dm2 build, and calculate the GC content across chromosome 2L.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="sec-biostrings.html#cb197-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"Biostrings"</span>)</span>
-<span id="cb197-2"><a href="sec-biostrings.html#cb197-2" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"BSgenome.Dmelanogaster.UCSC.dm2"</span>)</span>
-<span id="cb197-3"><a href="sec-biostrings.html#cb197-3" aria-hidden="true"></a></span>
-<span id="cb197-4"><a href="sec-biostrings.html#cb197-4" aria-hidden="true"></a>chr2L_range &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="st">"chr2L"</span>, <span class="kw">IRanges</span>(<span class="dv">1</span>, <span class="kw">seqlengths</span>(Dmelanogaster)[<span class="st">"chr2L"</span>]))</span>
-<span id="cb197-5"><a href="sec-biostrings.html#cb197-5" aria-hidden="true"></a>chr2L_range</span></code></pre></div>
+<p><code>BSgenome</code> packages inside Bioconductor contain whole genome sequences as distributed by ENSEMBL, NCBI and others. In this next example we will load the whole genome sequence for Drosophila melanogaster from UCSC's dm2 build, and calculate the GC content across chromosome 2L.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"Biostrings"</span>)
+<span class="kw">library</span>(<span class="st">"BSgenome.Dmelanogaster.UCSC.dm2"</span>)
+
+chr2L_range &lt;-<span class="st"> </span><span class="kw">GRanges</span>(<span class="st">"chr2L"</span>, <span class="kw">IRanges</span>(<span class="dv">1</span>, <span class="kw">seqlengths</span>(Dmelanogaster)[<span class="st">"chr2L"</span>]))
+chr2L_range</code></pre></div>
 <pre><code>## GRanges object with 1 range and 0 metadata columns:
 ##       seqnames     ranges strand
 ##          &lt;Rle&gt;  &lt;IRanges&gt;  &lt;Rle&gt;
 ##   [1]    chr2L 1-22407834      *
 ##   -------
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="sec-biostrings.html#cb199-1" aria-hidden="true"></a>chr2L_dna &lt;-<span class="st"> </span><span class="kw">getSeq</span>(Dmelanogaster, chr2L_range)</span>
-<span id="cb199-2"><a href="sec-biostrings.html#cb199-2" aria-hidden="true"></a>chr2L_dna</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chr2L_dna &lt;-<span class="st"> </span><span class="kw">getSeq</span>(Dmelanogaster, chr2L_range)
+chr2L_dna</code></pre></div>
 <pre><code>## DNAStringSet object of length 1:
 ##        width seq
 ## [1] 22407834 CGACAATGCACGACAGAGGAAGCAGAACAGAT...AAAGTTTCGAGTTAGTTGAAGGTGAGGGTGCT</code></pre>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="sec-biostrings.html#cb201-1" aria-hidden="true"></a><span class="kw">letterFrequency</span>(chr2L_dna, <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr2L_dna, <span class="st">"GC"</span>, <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>##            G|C
 ## [1,] 0.4190165</code></pre>
 <div class="question">
@@ -754,8 +658,7 @@ UCSC’s dm2 build, and calculate the GC content across chromosome 2L.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Using <code>letterFrequency</code>, calculate the number and frequency of A, G, C
-and T nucleotides in chromosome 2L.</p>
+<p>Using <code>letterFrequency</code>, calculate the number and frequency of A, G, C and T nucleotides in chromosome 2L.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -766,10 +669,10 @@ and T nucleotides in chromosome 2L.</p>
 ► Solution<span id="sol-start-23" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-23', 'sol-start-23')"></span>
 </p>
 <div id="sol-body-23" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="sec-biostrings.html#cb203-1" aria-hidden="true"></a><span class="kw">letterFrequency</span>(chr2L_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr2L_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>))</code></pre></div>
 <pre><code>##            A       G       C       T
 ## [1,] 6512712 4697776 4691476 6505770</code></pre>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="sec-biostrings.html#cb205-1" aria-hidden="true"></a><span class="kw">letterFrequency</span>(chr2L_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>), <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">letterFrequency</span>(chr2L_dna, <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>), <span class="dt">as.prob =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>##              A         G         C         T
 ## [1,] 0.2906444 0.2096488 0.2093677 0.2903346</code></pre>
 <p class="solution-end">
@@ -778,7 +681,7 @@ and T nucleotides in chromosome 2L.</p>
 </div>
 </div>
 </div>
-<div id="additional-exercises" class="section level2" number="4.7">
+<div id="additional-exercises" class="section level2">
 <h2>
 <span class="header-section-number">4.7</span> Additional exercises</h2>
 <div class="question">
@@ -786,12 +689,7 @@ and T nucleotides in chromosome 2L.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Focusing on the region from base 10 million to 11 million along
-chromosome 2L, calculate the GC content across a sliding window of
-5000 nucleotides (you can use the <code>letterFrequencyInSlidingView</code>
-functionn) and visualise it (see an example below). On that plot, show
-the mean GC content and highlight the regions that have a GC content &gt;
-0.5 and &lt; 0.35.</p>
+<p>Focusing on the region from base 10 million to 11 million along chromosome 2L, calculate the GC content across a sliding window of 5000 nucleotides (you can use the <code>letterFrequencyInSlidingView</code> functionn) and visualise it (see an example below). On that plot, show the mean GC content and highlight the regions that have a GC content &gt; 0.5 and &lt; 0.35.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -809,13 +707,7 @@ Figure 4.1: GC content for chomosome 2L (10 - 11 Mb)
 ► Question
 </p>
 <div class="question-body">
-<p>Visit the UniProt web page at
-<a href="https://www.uniprot.org/">https://www.uniprot.org/</a> and download the
-manually reviewed complete human proteome (containing about 20500
-proteins). Do to so, choose <em>Proteomes</em> on the main page, then search
-for <em>Homo sapiens</em>, select it among the list of hits, choose the
-reviewed Swiss-Prot release, and download all entries in compressed
-fasta format.</p>
+<p>Visit the UniProt web page at <a href="https://www.uniprot.org/" class="uri">https://www.uniprot.org/</a> and download the manually reviewed complete human proteome (containing about 20500 proteins). Do to so, choose <em>Proteomes</em> on the main page, then search for <em>Homo sapiens</em>, select it among the list of hits, choose the reviewed Swiss-Prot release, and download all entries in compressed fasta format.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -826,10 +718,7 @@ fasta format.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the file into R. Beware though that these are protein sequences,
-composed of amino acids. Read the <code>?readDNAStringSet</code> manual page to
-find a more appropriate function. How many sequences are there? What’s
-the average. max and min length of the proteins?</p>
+<p>Load the file into R. Beware though that these are protein sequences, composed of amino acids. Read the <code>?readDNAStringSet</code> manual page to find a more appropriate function. How many sequences are there? What's the average. max and min length of the proteins?</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -840,11 +729,7 @@ the average. max and min length of the proteins?</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>up_selected</code> data from the <code>rWSBIM1322</code> data (version 0.1.1
-or later) and use it to create a subset of the object created
-above. To to so, you will need to match the matching protein
-identifiers from that vector and the names of the <code>AAStringSet</code>
-above.</p>
+<p>Load the <code>up_selected</code> data from the <code>rWSBIM1322</code> data (version 0.1.1 or later) and use it to create a subset of the object created above. To to so, you will need to match the matching protein identifiers from that vector and the names of the <code>AAStringSet</code> above.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -855,14 +740,8 @@ above.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Among the proteins of interest (that where also found in the original
-data), how many match the following patterns: <code>DDVF</code>, <code>DEVF</code> <code>EDVF</code> or
-<code>EEVF</code>? Do you consider this to be a high number?</p>
-<p>The identification of patterns in sequences (not specifically
-biological sequences) is called pattern matching, which defines a
-whole syntax to define patterns. In particular, it is possible to
-define <em>letter D or E</em> as <code>[DE]</code>. To find the pattern of interest, use
-the <code>str_detect</code> function from the <code>stringr</code> package.</p>
+<p>Among the proteins of interest (that where also found in the original data), how many match the following patterns: <code>DDVF</code>, <code>DEVF</code> <code>EDVF</code> or <code>EEVF</code>? Do you consider this to be a high number?</p>
+<p>The identification of patterns in sequences (not specifically biological sequences) is called pattern matching, which defines a whole syntax to define patterns. In particular, it is possible to define <em>letter D or E</em> as <code>[DE]</code>. To find the pattern of interest, use the <code>str_detect</code> function from the <code>stringr</code> package.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -873,9 +752,7 @@ the <code>str_detect</code> function from the <code>stringr</code> package.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>To assess if there is an overrepresentation of that pattern in the
-sequences of interest, repeat the calculation on all the other
-proteins.</p>
+<p>To assess if there is an overrepresentation of that pattern in the sequences of interest, repeat the calculation on all the other proteins.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -890,7 +767,7 @@ proteins.</p>
 <a href="sec-norm.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-08-25
+2020-09-20
 </p>
 </div>
 </div>
