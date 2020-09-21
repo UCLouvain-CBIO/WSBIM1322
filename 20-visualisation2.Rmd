@@ -26,10 +26,10 @@ Our **learning objectives** are
   `ggplot2`;
 - Understand the concepts behind the gramar of graphics and `ggplot2`;
 - Learn how to visualiste data along 1, 2 or more dimensions;
-- Learn about `plotly`, one package for ploducing interactive
+- Learn about `plotly`, one package for producing interactive
   visualisations.
 
-The different between this chapter, and the [*Data
+The difference between this chapter, and the [*Data
 Visualisation*](ttps://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html)
 of the introductory WSBIM1207 course is that here we focus on
 understanding and communicating data through visualisation, rather
@@ -273,7 +273,7 @@ Let's immediately customise this visualisation to
 
 - highlight how to re-use the `gg` object without repeating the
   plotting code and
-  
+
 - how we can add additional (identical or different) *geoms* to a
   plot.
 
@@ -657,5 +657,3 @@ ggplot_probe_sets("X1426642_at", "X1420085_at", data = hiiragi2013df1)
 try(plot_probe_sets("X1416967_at", "123_at"))
 ```
 `r msmbstyle::question_end()`
-
-
