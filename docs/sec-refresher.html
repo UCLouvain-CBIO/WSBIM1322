@@ -14,20 +14,19 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-09-21" />
+<meta name="date" content="2020-09-27" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
 <title>Chapter 1 R refresher | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -52,27 +51,26 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +79,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -163,12 +161,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec:refresher" class="section level1" number="1">
+<html><body><div id="sec:refresher" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 1</span> R refresher</h1>
 <p>The objectives of this chapter is to review some R syntax, functions
 and data structures that will be needed for the following chapters.</p>
-<div id="administration" class="section level2" number="1.1">
+<div id="administration" class="section level2">
 <h2>
 <span class="header-section-number">1.1</span> Administration</h2>
 <ul>
@@ -179,7 +177,7 @@ and data structures that will be needed for the following chapters.</p>
 packages from CRAN and
 <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec:bioconductor">Bioconductor</a>.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="sec-refresher.html#cb5-1" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"UCLouvain-CBIO/rWSBIM1322"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"UCLouvain-CBIO/rWSBIM1322"</span>)</a></code></pre></div>
 <ul>
 <li>
 <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up">Avoid saving and loading your
@@ -190,7 +188,7 @@ workspace</a>
 <li>Starting a markdown document.</li>
 </ul>
 </div>
-<div id="basic-data-structures-and-operations" class="section level2" number="1.2">
+<div id="basic-data-structures-and-operations" class="section level2">
 <h2>
 <span class="header-section-number">1.2</span> Basic data structures and operations</h2>
 <ul>
@@ -241,18 +239,18 @@ generating and subsetting vectors.</li>
 </tbody>
 </table>
 </div>
-<div id="tidyvers" class="section level2" number="1.3">
+<div id="tidyvers" class="section level2">
 <h2>
 <span class="header-section-number">1.3</span> Tidyvers</h2>
 <ul>
 <li>The <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html">dplyr</a> package</li>
 <li><a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#pipes">Piping</a></li>
-<li>Wide and long data (converting with <code>gather</code> and <code>spread</code> - see also
-the <a href="https://tidyr.tidyverse.org/dev/articles/pivot.html">new <code>pivot_longer</code> and <code>pivot_wider</code>
+<li>Wide and long data (converting with <code>gather</code> and <code>spread</code> or the
+<a href="https://tidyr.tidyverse.org/dev/articles/pivot.html">new <code>pivot_longer</code> and <code>pivot_wider</code>
 functions</a>)</li>
 </ul>
 </div>
-<div id="saving-and-exporting" class="section level2" number="1.4">
+<div id="saving-and-exporting" class="section level2">
 <h2>
 <span class="header-section-number">1.4</span> Saving and exporting</h2>
 <ul>
@@ -273,7 +271,7 @@ figures</a>
 </li>
 </ul>
 </div>
-<div id="programming" class="section level2" number="1.5">
+<div id="programming" class="section level2">
 <h2>
 <span class="header-section-number">1.5</span> Programming</h2>
 <ul>
@@ -288,7 +286,7 @@ functions</a></li>
 <code>for</code> loops and <code>apply</code> functions</li>
 </ul>
 </div>
-<div id="additional-exercises" class="section level2" number="1.6">
+<div id="additional-exercises" class="section level2">
 <h2>
 <span class="header-section-number">1.6</span> Additional exercises</h2>
 <div class="question">
@@ -321,7 +319,7 @@ functions. For the latter, see <code>rowwise()</code></p>
 <a href="sec-vis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-09-21
+2020-09-27
 </p>
 </div>
 </div>

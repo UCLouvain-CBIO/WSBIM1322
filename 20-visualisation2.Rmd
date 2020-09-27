@@ -340,10 +340,11 @@ dfx <- hiiragi2013df1[, selected_genes]
 colnames(dfx) <- names(selected_genes)
 ```
 
-```{r gather}
+```{r pivot_longer}
 library("dplyr")
 library("tidyr")
-genes <- gather(dfx, key = "gene", value = "expression")
+genes <- pivot_longer(dfx, names_to = "gene", values_to = "expression",
+                      everything())
 head(genes)
 ```
 

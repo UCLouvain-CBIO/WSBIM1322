@@ -47,8 +47,8 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 
 - The [dplyr](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html) package
 - [Piping](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#pipes)
-- Wide and long data (converting with `gather` and `spread` - see also
-  the [new `pivot_longer` and `pivot_wider`
+- Wide and long data (converting with `gather` and `spread` or the
+  [new `pivot_longer` and `pivot_wider`
   functions](https://tidyr.tidyverse.org/dev/articles/pivot.html))
 
 ## Saving and exporting

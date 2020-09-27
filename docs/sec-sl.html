@@ -14,20 +14,19 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-09-21" />
+<meta name="date" content="2020-09-27" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
 <title>Chapter 10 Supervised learning | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -52,27 +51,26 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +79,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -163,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec:sl" class="section level1" number="10">
+<html><body><div id="sec:sl" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 10</span> Supervised learning</h1>
 <p>The goal of this last chapter about machine learning will be
@@ -177,7 +175,7 @@ classifier;</li>
 <li>see why and how to use cross-validation;</li>
 <li>and learn about model complexity and generalisation.</li>
 </ul>
-<div id="introduction" class="section level2" number="10.1">
+<div id="introduction" class="section level2">
 <h2>
 <span class="header-section-number">10.1</span> Introduction</h2>
 <p>Often, we faced with omics data, we have annotations for some of the
@@ -188,7 +186,7 @@ sequencing of microarrays, we know the grade of the tumour for about
 half. We want to predict the grade of the other half using the gene
 expression profiles.</p></li>
 <li><p>We have performed a spatial proteomics experiment such as in
-Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-28" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-28" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span> (see section
+Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-28" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-28" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992" class="uri">https://doi.org/10.1038/ncomms9992</a>.</span>)</span> (see section
 <a href="sec-dimred.html#sec:dimred02">8.7.2</a>) and know the sub-cellular localisation of some
 proteins. We want to predict the sub-cellular localisation of the
 other proteins using the protein profiles.</p></li>
@@ -233,9 +231,9 @@ there respectively.</p>
 ► Solution<span id="sol-start-65" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-65', 'sol-start-65')"></span>
 </p>
 <div id="sol-body-65" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="sec-sl.html#cb386-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb386-2"><a href="sec-sl.html#cb386-2" aria-hidden="true"></a><span class="kw">data</span>(giris2)</span>
-<span id="cb386-3"><a href="sec-sl.html#cb386-3" aria-hidden="true"></a><span class="kw">summary</span>(giris2)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</a>
+<a class="sourceLine" id="cb386-2" data-line-number="2"><span class="kw">data</span>(giris2)</a>
+<a class="sourceLine" id="cb386-3" data-line-number="3"><span class="kw">summary</span>(giris2)</a></code></pre></div>
 <pre><code>##      BRCA1           BRCA2            TP53             A1CF         GRADE    
 ##  Min.   :3.870   Min.   :1.888   Min.   :0.4919   Min.   :0.1000   A   : 50  
 ##  1st Qu.:5.115   1st Qu.:2.700   1st Qu.:1.6242   1st Qu.:0.3044   B   : 50  
@@ -243,7 +241,7 @@ there respectively.</p>
 ##  Mean   :5.853   Mean   :3.058   Mean   :3.7796   Mean   :1.2111   NA's:100  
 ##  3rd Qu.:6.400   3rd Qu.:3.400   3rd Qu.:5.1885   3rd Qu.:1.8000             
 ##  Max.   :8.116   Max.   :4.400   Max.   :7.1766   Max.   :2.5685</code></pre>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="sec-sl.html#cb388-1" aria-hidden="true"></a><span class="kw">table</span>(<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE))</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" data-line-number="1"><span class="kw">table</span>(<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE))</a></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##   150   100</code></pre>
@@ -270,10 +268,10 @@ unlabelled data will be difficult or easy? Motivate your answer.</p>
 ► Solution<span id="sol-start-66" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-66', 'sol-start-66')"></span>
 </p>
 <div id="sol-body-66" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="sec-sl.html#cb390-1" aria-hidden="true"></a>pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris2[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb390-2"><a href="sec-sl.html#cb390-2" aria-hidden="true"></a>cls &lt;-<span class="st"> </span><span class="kw">as.character</span>(giris2<span class="op">$</span>GRADE)</span>
-<span id="cb390-3"><a href="sec-sl.html#cb390-3" aria-hidden="true"></a>cls[<span class="kw">is.na</span>(cls)] &lt;-<span class="st"> "unknown"</span></span>
-<span id="cb390-4"><a href="sec-sl.html#cb390-4" aria-hidden="true"></a>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">col.ind =</span> cls)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" data-line-number="1">pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris2[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb390-2" data-line-number="2">cls &lt;-<span class="st"> </span><span class="kw">as.character</span>(giris2<span class="op">$</span>GRADE)</a>
+<a class="sourceLine" id="cb390-3" data-line-number="3">cls[<span class="kw">is.na</span>(cls)] &lt;-<span class="st"> "unknown"</span></a>
+<a class="sourceLine" id="cb390-4" data-line-number="4">factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">col.ind =</span> cls)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-77-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -281,7 +279,7 @@ unlabelled data will be difficult or easy? Motivate your answer.</p>
 </div>
 </div>
 </div>
-<div id="k-nearest-neighbours-classifier" class="section level2" number="10.2">
+<div id="k-nearest-neighbours-classifier" class="section level2">
 <h2>
 <span class="header-section-number">10.2</span> K-nearest neighbours classifier</h2>
 <p>In this chapter, we’ll use a simple, but useful classification
@@ -324,8 +322,8 @@ labelled data that will be used to train the model and named
 ► Solution<span id="sol-start-67" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-67', 'sol-start-67')"></span>
 </p>
 <div id="sol-body-67" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="sec-sl.html#cb391-1" aria-hidden="true"></a>giris2_labelled &lt;-<span class="st"> </span>giris2[<span class="op">!</span><span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), ]</span>
-<span id="cb391-2"><a href="sec-sl.html#cb391-2" aria-hidden="true"></a>giris2_unlabelled &lt;-<span class="st"> </span>giris2[<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), ]</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" data-line-number="1">giris2_labelled &lt;-<span class="st"> </span>giris2[<span class="op">!</span><span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), ]</a>
+<a class="sourceLine" id="cb391-2" data-line-number="2">giris2_unlabelled &lt;-<span class="st"> </span>giris2[<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), ]</a></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -361,13 +359,13 @@ grades?</p></li>
 ► Solution<span id="sol-start-68" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-68', 'sol-start-68')"></span>
 </p>
 <div id="sol-body-68" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="sec-sl.html#cb392-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"class"</span>)</span>
-<span id="cb392-2"><a href="sec-sl.html#cb392-2" aria-hidden="true"></a>knn_res &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelled[, <span class="dv">-5</span>],</span>
-<span id="cb392-3"><a href="sec-sl.html#cb392-3" aria-hidden="true"></a>               giris2_unlabelled[, <span class="dv">-5</span>],</span>
-<span id="cb392-4"><a href="sec-sl.html#cb392-4" aria-hidden="true"></a>               giris2_labelled[, <span class="dv">5</span>])</span>
-<span id="cb392-5"><a href="sec-sl.html#cb392-5" aria-hidden="true"></a><span class="kw">class</span>(knn_res)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"class"</span>)</a>
+<a class="sourceLine" id="cb392-2" data-line-number="2">knn_res &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelled[, <span class="dv">-5</span>],</a>
+<a class="sourceLine" id="cb392-3" data-line-number="3">               giris2_unlabelled[, <span class="dv">-5</span>],</a>
+<a class="sourceLine" id="cb392-4" data-line-number="4">               giris2_labelled[, <span class="dv">5</span>])</a>
+<a class="sourceLine" id="cb392-5" data-line-number="5"><span class="kw">class</span>(knn_res)</a></code></pre></div>
 <pre><code>## [1] "factor"</code></pre>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="sec-sl.html#cb394-1" aria-hidden="true"></a><span class="kw">table</span>(knn_res)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" data-line-number="1"><span class="kw">table</span>(knn_res)</a></code></pre></div>
 <pre><code>## knn_res
 ##  A  B  C 
 ## 31 38 31</code></pre>
@@ -393,12 +391,12 @@ interpret the results based on the first PCA.</p>
 ► Solution<span id="sol-start-69" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-69', 'sol-start-69')"></span>
 </p>
 <div id="sol-body-69" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="sec-sl.html#cb396-1" aria-hidden="true"></a>giris2_res &lt;-<span class="st"> </span>giris2</span>
-<span id="cb396-2"><a href="sec-sl.html#cb396-2" aria-hidden="true"></a>giris2_res[<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), <span class="dv">5</span>] &lt;-<span class="st"> </span>knn_res</span>
-<span id="cb396-3"><a href="sec-sl.html#cb396-3" aria-hidden="true"></a>p1 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">col.ind =</span> cls)</span>
-<span id="cb396-4"><a href="sec-sl.html#cb396-4" aria-hidden="true"></a>p2 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">col.ind =</span> giris2_res<span class="op">$</span>GRADE)</span>
-<span id="cb396-5"><a href="sec-sl.html#cb396-5" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"patchwork"</span>)</span>
-<span id="cb396-6"><a href="sec-sl.html#cb396-6" aria-hidden="true"></a>p1 <span class="op">/</span><span class="st"> </span>p2</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" data-line-number="1">giris2_res &lt;-<span class="st"> </span>giris2</a>
+<a class="sourceLine" id="cb396-2" data-line-number="2">giris2_res[<span class="kw">is.na</span>(giris2<span class="op">$</span>GRADE), <span class="dv">5</span>] &lt;-<span class="st"> </span>knn_res</a>
+<a class="sourceLine" id="cb396-3" data-line-number="3">p1 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">col.ind =</span> cls)</a>
+<a class="sourceLine" id="cb396-4" data-line-number="4">p2 &lt;-<span class="st"> </span>factoextra<span class="op">::</span><span class="kw">fviz_pca_ind</span>(pca, <span class="dt">col.ind =</span> giris2_res<span class="op">$</span>GRADE)</a>
+<a class="sourceLine" id="cb396-5" data-line-number="5"><span class="kw">library</span>(<span class="st">"patchwork"</span>)</a>
+<a class="sourceLine" id="cb396-6" data-line-number="6">p1 <span class="op">/</span><span class="st"> </span>p2</a></code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-80"></span>
 <p class="caption marginnote shownote">
@@ -433,20 +431,20 @@ labelled data.</p></li>
 ► Solution<span id="sol-start-70" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-70', 'sol-start-70')"></span>
 </p>
 <div id="sol-body-70" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="sec-sl.html#cb397-1" aria-hidden="true"></a><span class="co">## all pairwise distances</span></span>
-<span id="cb397-2"><a href="sec-sl.html#cb397-2" aria-hidden="true"></a>dd &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">dist</span>(giris2[, <span class="dv">-5</span>]))</span>
-<span id="cb397-3"><a href="sec-sl.html#cb397-3" aria-hidden="true"></a><span class="co">## extract only those for sample 167</span></span>
-<span id="cb397-4"><a href="sec-sl.html#cb397-4" aria-hidden="true"></a>giris2<span class="op">$</span>dist_<span class="dv">167</span> &lt;-<span class="st"> </span>dd[<span class="dv">167</span>, ]</span>
-<span id="cb397-5"><a href="sec-sl.html#cb397-5" aria-hidden="true"></a></span>
-<span id="cb397-6"><a href="sec-sl.html#cb397-6" aria-hidden="true"></a><span class="co">## look at the 15 nearest neighbours</span></span>
-<span id="cb397-7"><a href="sec-sl.html#cb397-7" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb397-8"><a href="sec-sl.html#cb397-8" aria-hidden="true"></a>vote &lt;-<span class="st"> </span>giris2 <span class="op">%&gt;%</span></span>
-<span id="cb397-9"><a href="sec-sl.html#cb397-9" aria-hidden="true"></a><span class="st">    </span><span class="kw">head</span>(<span class="dv">150</span>) <span class="op">%&gt;%</span></span>
-<span id="cb397-10"><a href="sec-sl.html#cb397-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">arrange</span>(dist_<span class="dv">167</span>) <span class="op">%&gt;%</span></span>
-<span id="cb397-11"><a href="sec-sl.html#cb397-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">head</span>(<span class="dv">15</span>) <span class="op">%&gt;%</span></span>
-<span id="cb397-12"><a href="sec-sl.html#cb397-12" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">vote =</span> <span class="kw">cumsum</span>(<span class="dt">count =</span> <span class="kw">ifelse</span>(GRADE <span class="op">==</span><span class="st"> "C"</span>, <span class="dv">1</span>, <span class="dv">-1</span>))) <span class="op">%&gt;%</span></span>
-<span id="cb397-13"><a href="sec-sl.html#cb397-13" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">grade =</span> <span class="kw">ifelse</span>(vote <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="st">"B"</span>, <span class="st">"C"</span>))</span>
-<span id="cb397-14"><a href="sec-sl.html#cb397-14" aria-hidden="true"></a>vote</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" data-line-number="1"><span class="co">## all pairwise distances</span></a>
+<a class="sourceLine" id="cb397-2" data-line-number="2">dd &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(<span class="kw">dist</span>(giris2[, <span class="dv">-5</span>]))</a>
+<a class="sourceLine" id="cb397-3" data-line-number="3"><span class="co">## extract only those for sample 167</span></a>
+<a class="sourceLine" id="cb397-4" data-line-number="4">giris2<span class="op">$</span>dist_<span class="dv">167</span> &lt;-<span class="st"> </span>dd[<span class="dv">167</span>, ]</a>
+<a class="sourceLine" id="cb397-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb397-6" data-line-number="6"><span class="co">## look at the 15 nearest neighbours</span></a>
+<a class="sourceLine" id="cb397-7" data-line-number="7"><span class="kw">library</span>(<span class="st">"tidyverse"</span>)</a>
+<a class="sourceLine" id="cb397-8" data-line-number="8">vote &lt;-<span class="st"> </span>giris2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb397-9" data-line-number="9"><span class="st">    </span><span class="kw">head</span>(<span class="dv">150</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb397-10" data-line-number="10"><span class="st">    </span><span class="kw">arrange</span>(dist_<span class="dv">167</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb397-11" data-line-number="11"><span class="st">    </span><span class="kw">head</span>(<span class="dv">15</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb397-12" data-line-number="12"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">vote =</span> <span class="kw">cumsum</span>(<span class="dt">count =</span> <span class="kw">ifelse</span>(GRADE <span class="op">==</span><span class="st"> "C"</span>, <span class="dv">1</span>, <span class="dv">-1</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb397-13" data-line-number="13"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">grade =</span> <span class="kw">ifelse</span>(vote <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="st">"B"</span>, <span class="st">"C"</span>))</a>
+<a class="sourceLine" id="cb397-14" data-line-number="14">vote</a></code></pre></div>
 <pre><code>##    BRCA1 BRCA2 TP53 A1CF GRADE  dist_167 vote grade
 ## 1    6.8   2.8  4.8  1.4     B 0.7239656   -1     B
 ## 2    6.7   3.0  5.0  1.7     B 0.7922045   -2     B
@@ -460,12 +458,14 @@ labelled data.</p></li>
 ## 10   6.9   3.1  5.1  2.3     C 0.9723507    2     C
 ## 11   6.3   2.5  5.0  1.9     C 0.9726503    3     C
 ## 12   6.5   3.0  5.2  2.0     C 0.9802555    4     C
-##  [ reached 'max' / getOption("max.print") -- omitted 3 rows ]</code></pre>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="sec-sl.html#cb399-1" aria-hidden="true"></a>vote <span class="op">%&gt;%</span></span>
-<span id="cb399-2"><a href="sec-sl.html#cb399-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">y =</span> vote)) <span class="op">+</span></span>
-<span id="cb399-3"><a href="sec-sl.html#cb399-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">"Number of nearest neighbours"</span>) <span class="op">+</span></span>
-<span id="cb399-4"><a href="sec-sl.html#cb399-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> grade), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
-<span id="cb399-5"><a href="sec-sl.html#cb399-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)</span></code></pre></div>
+## 13   6.7   3.1  4.7  1.5     B 0.9829819    3     C
+## 14   6.3   2.5  4.9  1.5     B 0.9841642    2     C
+## 15   6.5   3.0  5.5  1.8     C 0.9930892    3     C</code></pre>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" data-line-number="1">vote <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb399-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">y =</span> vote)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb399-3" data-line-number="3"><span class="st">    </span><span class="kw">xlab</span>(<span class="st">"Number of nearest neighbours"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb399-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> grade), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb399-5" data-line-number="5"><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-81-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -505,9 +505,9 @@ k=11 and compare the result.</p></li>
 ► Solution<span id="sol-start-71" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-71', 'sol-start-71')"></span>
 </p>
 <div id="sol-body-71" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="sec-sl.html#cb400-1" aria-hidden="true"></a>knn_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelled[, <span class="dv">-5</span>], giris2_unlabelled[, <span class="dv">-5</span>], giris2_labelled[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">1</span>)</span>
-<span id="cb400-2"><a href="sec-sl.html#cb400-2" aria-hidden="true"></a>knn_<span class="dv">11</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelled[, <span class="dv">-5</span>], giris2_unlabelled[, <span class="dv">-5</span>], giris2_labelled[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">11</span>)</span>
-<span id="cb400-3"><a href="sec-sl.html#cb400-3" aria-hidden="true"></a><span class="kw">table</span>(knn_<span class="dv">1</span>, knn_<span class="dv">11</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" data-line-number="1">knn_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelled[, <span class="dv">-5</span>], giris2_unlabelled[, <span class="dv">-5</span>], giris2_labelled[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb400-2" data-line-number="2">knn_<span class="dv">11</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_labelled[, <span class="dv">-5</span>], giris2_unlabelled[, <span class="dv">-5</span>], giris2_labelled[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb400-3" data-line-number="3"><span class="kw">table</span>(knn_<span class="dv">1</span>, knn_<span class="dv">11</span>)</a></code></pre></div>
 <pre><code>##      knn_11
 ## knn_1  A  B  C
 ##     A 31  0  0
@@ -519,7 +519,7 @@ k=11 and compare the result.</p></li>
 </div>
 </div>
 </div>
-<div id="model-selection" class="section level2" number="10.3">
+<div id="model-selection" class="section level2">
 <h2>
 <span class="header-section-number">10.3</span> Model selection</h2>
 <p>There is no way to decide which set of results above, using k=1, 2,
@@ -567,10 +567,10 @@ data. Use the 50 others as test data.</p>
 ► Solution<span id="sol-start-72" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-72', 'sol-start-72')"></span>
 </p>
 <div id="sol-body-72" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="sec-sl.html#cb402-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb402-2"><a href="sec-sl.html#cb402-2" aria-hidden="true"></a>i &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">150</span>, <span class="dv">100</span>)</span>
-<span id="cb402-3"><a href="sec-sl.html#cb402-3" aria-hidden="true"></a>giris2_train &lt;-<span class="st"> </span>giris2_labelled[i, ]</span>
-<span id="cb402-4"><a href="sec-sl.html#cb402-4" aria-hidden="true"></a>giris2_test &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</span>i, ]</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb402-2" data-line-number="2">i &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">150</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb402-3" data-line-number="3">giris2_train &lt;-<span class="st"> </span>giris2_labelled[i, ]</a>
+<a class="sourceLine" id="cb402-4" data-line-number="4">giris2_test &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</span>i, ]</a></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -596,15 +596,15 @@ assignments. Interpret these results.</p>
 ► Solution<span id="sol-start-73" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-73', 'sol-start-73')"></span>
 </p>
 <div id="sol-body-73" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="sec-sl.html#cb403-1" aria-hidden="true"></a>test_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>], giris2_test[, <span class="dv">-5</span>], giris2_train[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">1</span>)</span>
-<span id="cb403-2"><a href="sec-sl.html#cb403-2" aria-hidden="true"></a>test_<span class="dv">11</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>], giris2_test[, <span class="dv">-5</span>], giris2_train[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">11</span>)</span>
-<span id="cb403-3"><a href="sec-sl.html#cb403-3" aria-hidden="true"></a><span class="kw">table</span>(giris2_test[, <span class="dv">5</span>], test_<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb403-1" data-line-number="1">test_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>], giris2_test[, <span class="dv">-5</span>], giris2_train[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb403-2" data-line-number="2">test_<span class="dv">11</span> &lt;-<span class="st"> </span><span class="kw">knn</span>(giris2_train[, <span class="dv">-5</span>], giris2_test[, <span class="dv">-5</span>], giris2_train[, <span class="dv">5</span>], <span class="dt">k =</span> <span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb403-3" data-line-number="3"><span class="kw">table</span>(giris2_test[, <span class="dv">5</span>], test_<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>##    test_1
 ##      A  B  C
 ##   A 16  0  0
 ##   B  0 18  1
 ##   C  0  1 14</code></pre>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="sec-sl.html#cb405-1" aria-hidden="true"></a><span class="kw">table</span>(giris2_test[, <span class="dv">5</span>], test_<span class="dv">11</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" data-line-number="1"><span class="kw">table</span>(giris2_test[, <span class="dv">5</span>], test_<span class="dv">11</span>)</a></code></pre></div>
 <pre><code>##    test_11
 ##      A  B  C
 ##   A 16  0  0
@@ -631,9 +631,9 @@ assignments. Interpret these results.</p>
 ► Solution<span id="sol-start-74" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-74', 'sol-start-74')"></span>
 </p>
 <div id="sol-body-74" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="sec-sl.html#cb407-1" aria-hidden="true"></a><span class="kw">sum</span>(test_<span class="dv">1</span> <span class="op">==</span><span class="st"> </span>giris2_test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb407-1" data-line-number="1"><span class="kw">sum</span>(test_<span class="dv">1</span> <span class="op">==</span><span class="st"> </span>giris2_test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 0.96</code></pre>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="sec-sl.html#cb409-1" aria-hidden="true"></a><span class="kw">sum</span>(test_<span class="dv">11</span> <span class="op">==</span><span class="st"> </span>giris2_test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_<span class="dv">11</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb409-1" data-line-number="1"><span class="kw">sum</span>(test_<span class="dv">11</span> <span class="op">==</span><span class="st"> </span>giris2_test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_<span class="dv">11</span>)</a></code></pre></div>
 <pre><code>## [1] 0.98</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -652,7 +652,7 @@ repeat the split <em>a certain number of time</em> and calculate an
 average performance over all splits.</p></li>
 </ol>
 </div>
-<div id="k-fold-cross-validation" class="section level2" number="10.4">
+<div id="k-fold-cross-validation" class="section level2">
 <h2>
 <span class="header-section-number">10.4</span> k-fold cross-validation</h2>
 <p>There exist several principled ways to split data into training and
@@ -700,8 +700,8 @@ present only once.</p>
 ► Solution<span id="sol-start-75" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-75', 'sol-start-75')"></span>
 </p>
 <div id="sol-body-75" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="sec-sl.html#cb411-1" aria-hidden="true"></a>folds &lt;-<span class="st"> </span>caret<span class="op">::</span><span class="kw">createFolds</span>(giris2_labelled[[<span class="dv">5</span>]], <span class="dt">k =</span> <span class="dv">10</span>)</span>
-<span id="cb411-2"><a href="sec-sl.html#cb411-2" aria-hidden="true"></a>folds</span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb411-1" data-line-number="1">folds &lt;-<span class="st"> </span>caret<span class="op">::</span><span class="kw">createFolds</span>(giris2_labelled[[<span class="dv">5</span>]], <span class="dt">k =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb411-2" data-line-number="2">folds</a></code></pre></div>
 <pre><code>## $Fold01
 ##  [1]   2   9  11  15  40  51  54  62  76  95 103 107 115 140 143
 ## 
@@ -731,7 +731,7 @@ present only once.</p>
 ## 
 ## $Fold10
 ##  [1]   7  25  30  32  36  60  67  70  83  86 113 128 133 145 148</code></pre>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="sec-sl.html#cb413-1" aria-hidden="true"></a><span class="kw">all</span>(<span class="kw">sort</span>(<span class="kw">unlist</span>(folds)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">150</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb413-1" data-line-number="1"><span class="kw">all</span>(<span class="kw">sort</span>(<span class="kw">unlist</span>(folds)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">150</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -756,24 +756,24 @@ for k=11.</p>
 ► Solution<span id="sol-start-76" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-76', 'sol-start-76')"></span>
 </p>
 <div id="sol-body-76" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="sec-sl.html#cb415-1" aria-hidden="true"></a>knn_accuracy &lt;-<span class="st"> </span><span class="cf">function</span>(fld, <span class="dt">k =</span> <span class="dv">11</span>) {</span>
-<span id="cb415-2"><a href="sec-sl.html#cb415-2" aria-hidden="true"></a>    <span class="co">## Uses global variables!</span></span>
-<span id="cb415-3"><a href="sec-sl.html#cb415-3" aria-hidden="true"></a>    train &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</span>fld, ]</span>
-<span id="cb415-4"><a href="sec-sl.html#cb415-4" aria-hidden="true"></a>    test &lt;-<span class="st"> </span>giris2_labelled[fld, ]</span>
-<span id="cb415-5"><a href="sec-sl.html#cb415-5" aria-hidden="true"></a>    test_k &lt;-<span class="st"> </span><span class="kw">knn</span>(train[, <span class="dv">-5</span>],</span>
-<span id="cb415-6"><a href="sec-sl.html#cb415-6" aria-hidden="true"></a>                  test[, <span class="dv">-5</span>],</span>
-<span id="cb415-7"><a href="sec-sl.html#cb415-7" aria-hidden="true"></a>                  train[, <span class="dv">5</span>],</span>
-<span id="cb415-8"><a href="sec-sl.html#cb415-8" aria-hidden="true"></a>                  k)</span>
-<span id="cb415-9"><a href="sec-sl.html#cb415-9" aria-hidden="true"></a>    <span class="kw">sum</span>(test_k <span class="op">==</span><span class="st"> </span>test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_k)</span>
-<span id="cb415-10"><a href="sec-sl.html#cb415-10" aria-hidden="true"></a>}</span>
-<span id="cb415-11"><a href="sec-sl.html#cb415-11" aria-hidden="true"></a></span>
-<span id="cb415-12"><a href="sec-sl.html#cb415-12" aria-hidden="true"></a>accs &lt;-<span class="st"> </span><span class="kw">sapply</span>(folds, knn_accuracy)</span>
-<span id="cb415-13"><a href="sec-sl.html#cb415-13" aria-hidden="true"></a>accs</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb415-1" data-line-number="1">knn_accuracy &lt;-<span class="st"> </span><span class="cf">function</span>(fld, <span class="dt">k =</span> <span class="dv">11</span>) {</a>
+<a class="sourceLine" id="cb415-2" data-line-number="2">    <span class="co">## Uses global variables!</span></a>
+<a class="sourceLine" id="cb415-3" data-line-number="3">    train &lt;-<span class="st"> </span>giris2_labelled[<span class="op">-</span>fld, ]</a>
+<a class="sourceLine" id="cb415-4" data-line-number="4">    test &lt;-<span class="st"> </span>giris2_labelled[fld, ]</a>
+<a class="sourceLine" id="cb415-5" data-line-number="5">    test_k &lt;-<span class="st"> </span><span class="kw">knn</span>(train[, <span class="dv">-5</span>],</a>
+<a class="sourceLine" id="cb415-6" data-line-number="6">                  test[, <span class="dv">-5</span>],</a>
+<a class="sourceLine" id="cb415-7" data-line-number="7">                  train[, <span class="dv">5</span>],</a>
+<a class="sourceLine" id="cb415-8" data-line-number="8">                  k)</a>
+<a class="sourceLine" id="cb415-9" data-line-number="9">    <span class="kw">sum</span>(test_k <span class="op">==</span><span class="st"> </span>test[, <span class="dv">5</span>])<span class="op">/</span><span class="kw">length</span>(test_k)</a>
+<a class="sourceLine" id="cb415-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb415-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb415-12" data-line-number="12">accs &lt;-<span class="st"> </span><span class="kw">sapply</span>(folds, knn_accuracy)</a>
+<a class="sourceLine" id="cb415-13" data-line-number="13">accs</a></code></pre></div>
 <pre><code>##    Fold01    Fold02    Fold03    Fold04    Fold05    Fold06    Fold07    Fold08 
 ## 0.9333333 0.9333333 0.9333333 1.0000000 1.0000000 1.0000000 1.0000000 0.9333333 
 ##    Fold09    Fold10 
 ## 1.0000000 1.0000000</code></pre>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="sec-sl.html#cb417-1" aria-hidden="true"></a><span class="kw">mean</span>(accs)</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb417-1" data-line-number="1"><span class="kw">mean</span>(accs)</a></code></pre></div>
 <pre><code>## [1] 0.9733333</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -797,11 +797,11 @@ accuracy as a function of k.</p>
 ► Solution<span id="sol-start-77" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-77', 'sol-start-77')"></span>
 </p>
 <div id="sol-body-77" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="sec-sl.html#cb419-1" aria-hidden="true"></a>accs &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">k =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb419-2"><a href="sec-sl.html#cb419-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></span>
-<span id="cb419-3"><a href="sec-sl.html#cb419-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">acc =</span> <span class="kw">mean</span>(<span class="kw">sapply</span>(folds, knn_accuracy, k))) <span class="op">%&gt;%</span></span>
-<span id="cb419-4"><a href="sec-sl.html#cb419-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">ungroup</span>()</span>
-<span id="cb419-5"><a href="sec-sl.html#cb419-5" aria-hidden="true"></a>accs</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" data-line-number="1">accs &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">k =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb419-2" data-line-number="2"><span class="st">    </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb419-3" data-line-number="3"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">acc =</span> <span class="kw">mean</span>(<span class="kw">sapply</span>(folds, knn_accuracy, k))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb419-4" data-line-number="4"><span class="st">    </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb419-5" data-line-number="5">accs</a></code></pre></div>
 <pre><code>## # A tibble: 15 x 2
 ##        k   acc
 ##    &lt;dbl&gt; &lt;dbl&gt;
@@ -820,10 +820,10 @@ accuracy as a function of k.</p>
 ## 13    25 0.96 
 ## 14    27 0.967
 ## 15    29 0.953</code></pre>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="sec-sl.html#cb421-1" aria-hidden="true"></a>accs <span class="op">%&gt;%</span></span>
-<span id="cb421-2"><a href="sec-sl.html#cb421-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> acc)) <span class="op">+</span></span>
-<span id="cb421-3"><a href="sec-sl.html#cb421-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb421-4"><a href="sec-sl.html#cb421-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb421-1" data-line-number="1">accs <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb421-2" data-line-number="2"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> acc)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb421-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb421-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-90"></span>
 <p class="caption marginnote shownote">
@@ -850,7 +850,7 @@ more than one model parameter (called hyper-parameters) need to tuned,
 different classifiers need to be assessed, and/or several model
 performance metrics are to be computed.</p>
 </div>
-<div id="variance-and-bias-trade-off" class="section level2" number="10.5">
+<div id="variance-and-bias-trade-off" class="section level2">
 <h2>
 <span class="header-section-number">10.5</span> Variance and bias trade-off</h2>
 <p>A recurrent goal in machine learning is to find a trade-off between
@@ -907,7 +907,7 @@ Figure 10.9: Precision and accuracy when shooting.
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-93-1.png" alt="Precision and accuracy when shooting." width="960">
 </div>
 </div>
-<div id="additional-exercises" class="section level2" number="10.6">
+<div id="additional-exercises" class="section level2">
 <h2>
 <span class="header-section-number">10.6</span> Additional exercises</h2>
 <p>Load the <code>hyperLOPIT2015</code> data from the <code>pRolocdata</code> package. See
@@ -936,9 +936,9 @@ unlabelled data were assigned to any of the 14 classes?</p>
 two PCA plots, one before and one after classification.</p>
 <p>You can use the following colour palette that uses grey for the
 unlabelled data.</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="sec-sl.html#cb422-1" aria-hidden="true"></a>cls &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,</span>
-<span id="cb422-2"><a href="sec-sl.html#cb422-2" aria-hidden="true"></a>         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,</span>
-<span id="cb422-3"><a href="sec-sl.html#cb422-3" aria-hidden="true"></a>         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb422-1" data-line-number="1">cls &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,</a>
+<a class="sourceLine" id="cb422-2" data-line-number="2">         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,</a>
+<a class="sourceLine" id="cb422-3" data-line-number="3">         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</a></code></pre></div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -962,7 +962,7 @@ unlabelled data.</p>
 <div class="question-body">
 <p>Using a contingency table, compare you results with those that were
 obtained using <em>support vector machine</em>, a popular classifier that was
-used in Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-32" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-32" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>, and available in
+used in Christoforou <em>et al.</em> <span class="citation">(Christoforou et al. <label for="tufte-mn-32" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-32" class="margin-toggle">2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. “A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.” <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992" class="uri">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>, and available in
 the <code>svm.classification</code> feature variable.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1005,7 +1005,7 @@ most reliable assignments one, and setting the unreliable ones to
 <a href="sec-biovis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-09-21
+2020-09-27
 </p>
 </div>
 </div>

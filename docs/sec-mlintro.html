@@ -14,20 +14,19 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-09-21" />
+<meta name="date" content="2020-09-27" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
 <title>Chapter 6 Introduction to statistical machine learning | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -52,27 +51,26 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +79,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -161,7 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec:mlintro" class="section level1" number="6">
+<html><body><div id="sec:mlintro" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 6</span> Introduction to statistical machine learning</h1>
 <p>The next chapters will focus on concepts from statistical (hypothesis
@@ -180,7 +178,7 @@ available analysis techniques;</li>
 data is needed before generating it;</li>
 <li>to ultimately extracting meaningful results from a dataset.</li>
 </ul>
-<div id="hypothesis-testing" class="section level2" number="6.1">
+<div id="hypothesis-testing" class="section level2">
 <h2>
 <span class="header-section-number">6.1</span> Hypothesis testing</h2>
 <p>Let’s start with the following experiment. Researchers are interested
@@ -231,7 +229,7 @@ what the experiment measures using a table.</p>
 ► Solution<span id="sol-start-30" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-30', 'sol-start-30')"></span>
 </p>
 <div id="sol-body-30" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="sec-mlintro.html#cb230-1" aria-hidden="true"></a>knitr<span class="op">::</span><span class="kw">kable</span>(expd)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">kable</span>(expd)</a></code></pre></div>
 <table>
 <thead><tr class="header">
 <th align="left">sample</th>
@@ -322,13 +320,13 @@ what the experiment measures using a table.</p>
 <p>Statistical hypothesis testing (chapter <a href="sec-testing.html#sec:testing">7</a>) will help
 us formalise when to call genes differentially expressed.</p>
 </div>
-<div id="handling-more-data" class="section level2" number="6.2">
+<div id="handling-more-data" class="section level2">
 <h2>
 <span class="header-section-number">6.2</span> Handling more data</h2>
 <p>There are many more types of patterns that we wold be interested in
 identifying in omics data. Let’s reconsider the linear regression
 model from section <a href="sec-obj.html#sec:lm">3.3</a>. Below is a figure from
-<span class="citation">Majumder, Hofmann, and Cook (<label for="tufte-mn-17" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-17" class="margin-toggle">2013<span class="marginnote">Majumder, Mahbubul, Heike Hofmann, and Dianne Cook. 2013. “Validation of Visual Statistical Inference, Applied to Linear Models.” <em>Journal of the American Statistical Association</em> 108 (503): 942–56. <a href="https://doi.org/10.1080/01621459.2013.808157">https://doi.org/10.1080/01621459.2013.808157</a>.</span>)</span>. Among the 20 scatter plots below, one represents the
+<span class="citation">Majumder, Hofmann, and Cook (<label for="tufte-mn-17" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-17" class="margin-toggle">2013<span class="marginnote">Majumder, Mahbubul, Heike Hofmann, and Dianne Cook. 2013. “Validation of Visual Statistical Inference, Applied to Linear Models.” <em>Journal of the American Statistical Association</em> 108 (503). Taylor &amp; Francis: 942–56. <a href="https://doi.org/10.1080/01621459.2013.808157" class="uri">https://doi.org/10.1080/01621459.2013.808157</a>.</span>)</span>. Among the 20 scatter plots below, one represents the
 actual data, and 19 are simulations that are based on the real
 data.</p>
 <div class="figure">
@@ -409,14 +407,14 @@ the <code>cor</code> function.</p>
 ► Solution<span id="sol-start-31" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-31', 'sol-start-31')"></span>
 </p>
 <div id="sol-body-31" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="sec-mlintro.html#cb232-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
-<span id="cb232-2"><a href="sec-mlintro.html#cb232-2" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</span>
-<span id="cb232-3"><a href="sec-mlintro.html#cb232-3" aria-hidden="true"></a></span>
-<span id="cb232-4"><a href="sec-mlintro.html#cb232-4" aria-hidden="true"></a><span class="co">## fit linear model</span></span>
-<span id="cb232-5"><a href="sec-mlintro.html#cb232-5" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
-<span id="cb232-6"><a href="sec-mlintro.html#cb232-6" aria-hidden="true"></a></span>
-<span id="cb232-7"><a href="sec-mlintro.html#cb232-7" aria-hidden="true"></a><span class="co">## slope</span></span>
-<span id="cb232-8"><a href="sec-mlintro.html#cb232-8" aria-hidden="true"></a>fit</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb232-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb232-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb232-4" data-line-number="4"><span class="co">## fit linear model</span></a>
+<a class="sourceLine" id="cb232-5" data-line-number="5">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb232-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb232-7" data-line-number="7"><span class="co">## slope</span></a>
+<a class="sourceLine" id="cb232-8" data-line-number="8">fit</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x)
@@ -424,17 +422,17 @@ the <code>cor</code> function.</p>
 ## Coefficients:
 ## (Intercept)            x  
 ##     0.03864      0.09221</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="sec-mlintro.html#cb234-1" aria-hidden="true"></a><span class="co">## correlation</span></span>
-<span id="cb234-2"><a href="sec-mlintro.html#cb234-2" aria-hidden="true"></a><span class="kw">cor</span>(x, y)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="co">## correlation</span></a>
+<a class="sourceLine" id="cb234-2" data-line-number="2"><span class="kw">cor</span>(x, y)</a></code></pre></div>
 <pre><code>## [1] 0.08567754</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="sec-mlintro.html#cb236-1" aria-hidden="true"></a><span class="co">## with base graphics</span></span>
-<span id="cb236-2"><a href="sec-mlintro.html#cb236-2" aria-hidden="true"></a><span class="kw">plot</span>(x, y)</span>
-<span id="cb236-3"><a href="sec-mlintro.html#cb236-3" aria-hidden="true"></a><span class="kw">abline</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1"><span class="co">## with base graphics</span></a>
+<a class="sourceLine" id="cb236-2" data-line-number="2"><span class="kw">plot</span>(x, y)</a>
+<a class="sourceLine" id="cb236-3" data-line-number="3"><span class="kw">abline</span>(fit)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/corex1-1.png" width="672"></p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="sec-mlintro.html#cb237-1" aria-hidden="true"></a><span class="co">## or with ggplot2</span></span>
-<span id="cb237-2"><a href="sec-mlintro.html#cb237-2" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(x, y),</span>
-<span id="cb237-3"><a href="sec-mlintro.html#cb237-3" aria-hidden="true"></a>       <span class="kw">aes</span>(x, y)) <span class="op">+</span></span>
-<span id="cb237-4"><a href="sec-mlintro.html#cb237-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"lm"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1"><span class="co">## or with ggplot2</span></a>
+<a class="sourceLine" id="cb237-2" data-line-number="2"><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(x, y),</a>
+<a class="sourceLine" id="cb237-3" data-line-number="3">       <span class="kw">aes</span>(x, y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb237-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"lm"</span>)</a></code></pre></div>
 <pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
 <p><img src="WSBIM1322_files/figure-html/corex1-2.png" width="672"></p>
 <p class="solution-end">
@@ -445,7 +443,7 @@ the <code>cor</code> function.</p>
 <p>Let’s expand the code above and calculate the correlation coefficient
 between hundreds of random vectors and choose the best one (in abolute
 terms) among those. Let’s repeat this procedure 1000 times to obtain
-1000 best correlations (based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. “Challenges of Big Data analysis.” <em>National Science Review</em> 1 (2): 293–314. <a href="https://doi.org/10.1093/nsr/nwt032">https://doi.org/10.1093/nsr/nwt032</a>.</span>)</span>). The figure below shows
+1000 best correlations (based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. “Challenges of Big Data analysis.” <em>National Science Review</em> 1 (2): 293–314. <a href="https://doi.org/10.1093/nsr/nwt032" class="uri">https://doi.org/10.1093/nsr/nwt032</a>.</span>)</span>). The figure below shows
 the distribution of these 1000 best correlations when comparing 800 or
 6400 vectors. We see that with more (random) data, we increase that
 the risk of obtaining spurious correlations.</p>
@@ -476,17 +474,17 @@ data?</p>
 ► Solution<span id="sol-start-32" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-32', 'sol-start-32')"></span>
 </p>
 <div id="sol-body-32" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="sec-mlintro.html#cb239-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb239-2"><a href="sec-mlintro.html#cb239-2" aria-hidden="true"></a>rs &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">cor</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>)))</span>
-<span id="cb239-3"><a href="sec-mlintro.html#cb239-3" aria-hidden="true"></a><span class="kw">summary</span>(rs)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb239-2" data-line-number="2">rs &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">cor</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="kw">rnorm</span>(<span class="dv">10</span>)))</a>
+<a class="sourceLine" id="cb239-3" data-line-number="3"><span class="kw">summary</span>(rs)</a></code></pre></div>
 <pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
 ## -0.8194367 -0.2280550 -0.0009475  0.0055000  0.2118503  0.7977295</code></pre>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="sec-mlintro.html#cb241-1" aria-hidden="true"></a><span class="co">## Assuming a totally arbitrary value of 0.75, we would get</span></span>
-<span id="cb241-2"><a href="sec-mlintro.html#cb241-2" aria-hidden="true"></a>rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1"><span class="co">## Assuming a totally arbitrary value of 0.75, we would get</span></a>
+<a class="sourceLine" id="cb241-2" data-line-number="2">rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>]</a></code></pre></div>
 <pre><code>## [1]  0.7941876  0.7977295 -0.8194367</code></pre>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="sec-mlintro.html#cb243-1" aria-hidden="true"></a><span class="kw">hist</span>(rs)</span>
-<span id="cb243-2"><a href="sec-mlintro.html#cb243-2" aria-hidden="true"></a><span class="kw">rug</span>(rs)</span>
-<span id="cb243-3"><a href="sec-mlintro.html#cb243-3" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>], <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="kw">hist</span>(rs)</a>
+<a class="sourceLine" id="cb243-2" data-line-number="2"><span class="kw">rug</span>(rs)</a>
+<a class="sourceLine" id="cb243-3" data-line-number="3"><span class="kw">abline</span>(<span class="dt">v =</span> rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">.75</span>], <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">lty =</span> <span class="st">"dotted"</span>)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/corex2-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -499,11 +497,11 @@ measuring distances between all the samples, or each sample to a
 virtual <em>average sample</em>. Let’s try this ourselves for a dataset of 5
 sample that have each been characterised by measuring the expression
 of genes<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="sec-mlintro.html#cb244-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">111</span>)</span>
-<span id="cb244-2"><a href="sec-mlintro.html#cb244-2" aria-hidden="true"></a>samples &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb244-3"><a href="sec-mlintro.html#cb244-3" aria-hidden="true"></a>                      <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb244-4"><a href="sec-mlintro.html#cb244-4" aria-hidden="true"></a><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</span>
-<span id="cb244-5"><a href="sec-mlintro.html#cb244-5" aria-hidden="true"></a><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">111</span>)</a>
+<a class="sourceLine" id="cb244-2" data-line-number="2">samples &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb244-3" data-line-number="3">                      <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb244-4" data-line-number="4"><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb244-5" data-line-number="5"><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <div class="figure">
 <span id="fig:dist0"></span>
 <p class="caption marginnote shownote">
@@ -515,7 +513,7 @@ Figure 6.5: A simulated dataset composed of 5 samples.
 calculating all pairwise <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean
 distances</a> with the
 <code>dist</code>.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="sec-mlintro.html#cb245-1" aria-hidden="true"></a><span class="kw">dist</span>(samples)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1"><span class="kw">dist</span>(samples)</a></code></pre></div>
 <pre><code>##           1         2         3         4
 ## 2 1.7327389                              
 ## 3 1.2738181 0.4876129                    
@@ -568,18 +566,18 @@ real data points.</li>
 ► Solution<span id="sol-start-33" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-33', 'sol-start-33')"></span>
 </p>
 <div id="sol-body-33" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="sec-mlintro.html#cb247-1" aria-hidden="true"></a>avg_sample &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samples)</span>
-<span id="cb247-2"><a href="sec-mlintro.html#cb247-2" aria-hidden="true"></a><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</span>
-<span id="cb247-3"><a href="sec-mlintro.html#cb247-3" aria-hidden="true"></a><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
-<span id="cb247-4"><a href="sec-mlintro.html#cb247-4" aria-hidden="true"></a><span class="kw">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1">avg_sample &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samples)</a>
+<a class="sourceLine" id="cb247-2" data-line-number="2"><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb247-3" data-line-number="3"><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb247-4" data-line-number="4"><span class="kw">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/dist2-1.png" width="672"></p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="sec-mlintro.html#cb248-1" aria-hidden="true"></a>dists &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">rbind</span>(samples, avg_sample))</span>
-<span id="cb248-2"><a href="sec-mlintro.html#cb248-2" aria-hidden="true"></a><span class="co">## convert the object of `dist` to a matrix that we can subset easily</span></span>
-<span id="cb248-3"><a href="sec-mlintro.html#cb248-3" aria-hidden="true"></a>dists &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(dists)</span>
-<span id="cb248-4"><a href="sec-mlintro.html#cb248-4" aria-hidden="true"></a>dists[<span class="dv">6</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1">dists &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">rbind</span>(samples, avg_sample))</a>
+<a class="sourceLine" id="cb248-2" data-line-number="2"><span class="co">## convert the object of `dist` to a matrix that we can subset easily</span></a>
+<a class="sourceLine" id="cb248-3" data-line-number="3">dists &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(dists)</a>
+<a class="sourceLine" id="cb248-4" data-line-number="4">dists[<span class="dv">6</span>, ]</a></code></pre></div>
 <pre><code>##         1         2         3         4         5         6 
 ## 1.2133510 0.7753119 0.3627020 1.7363209 0.4858024 0.0000000</code></pre>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-mlintro.html#cb250-1" aria-hidden="true"></a><span class="kw">which.max</span>(dists[<span class="dv">6</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1"><span class="kw">which.max</span>(dists[<span class="dv">6</span>, ])</a></code></pre></div>
 <pre><code>## 4 
 ## 4</code></pre>
 <p class="solution-end">
@@ -590,7 +588,7 @@ real data points.</li>
 <p>The concept out outlier is very intuitive, but becomes murky when the
 number of dimensions becomes very high.</p>
 </div>
-<div id="the-curse-of-dimensionality" class="section level2" number="6.3">
+<div id="the-curse-of-dimensionality" class="section level2">
 <h2>
 <span class="header-section-number">6.3</span> The curse of dimensionality</h2>
 <p>There is one very well documented feature of high dimension data,
@@ -608,19 +606,19 @@ uniformely distributed points that are outliers. In 50 dimension,
 there are already 60% of the points that are outliers; in 100
 dimensions, almost 90% of the points are outliers.</p>
 </blockquote>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="sec-mlintro.html#cb252-1" aria-hidden="true"></a>d &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">200</span></span>
-<span id="cb252-2"><a href="sec-mlintro.html#cb252-2" aria-hidden="true"></a>N &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb252-3"><a href="sec-mlintro.html#cb252-3" aria-hidden="true"></a>dat &lt;-<span class="st"> </span><span class="kw">lapply</span>(d, <span class="cf">function</span>(i) <span class="kw">replicate</span>(i, <span class="kw">runif</span>(N)))</span>
-<span id="cb252-4"><a href="sec-mlintro.html#cb252-4" aria-hidden="true"></a>nout &lt;-<span class="st"> </span><span class="cf">function</span>(m) <span class="kw">mean</span>(<span class="kw">apply</span>(m, <span class="dv">1</span>, <span class="cf">function</span>(i) <span class="kw">any</span>(i <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.01</span> <span class="op">|</span><span class="st"> </span>i <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.99</span>)))</span>
-<span id="cb252-5"><a href="sec-mlintro.html#cb252-5" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(dat, nout)</span>
-<span id="cb252-6"><a href="sec-mlintro.html#cb252-6" aria-hidden="true"></a><span class="kw">plot</span>(res, <span class="dt">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb252-7"><a href="sec-mlintro.html#cb252-7" aria-hidden="true"></a>     <span class="dt">xlab =</span> <span class="st">"Number of dimensions"</span>,</span>
-<span id="cb252-8"><a href="sec-mlintro.html#cb252-8" aria-hidden="true"></a>     <span class="dt">ylab =</span> <span class="st">"Proportion of 1% outliers"</span>,</span>
-<span id="cb252-9"><a href="sec-mlintro.html#cb252-9" aria-hidden="true"></a>     <span class="dt">main =</span> <span class="st">"Curse of Dimensionality"</span>)</span>
-<span id="cb252-10"><a href="sec-mlintro.html#cb252-10" aria-hidden="true"></a><span class="kw">grid</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb252-2" data-line-number="2">N &lt;-<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb252-3" data-line-number="3">dat &lt;-<span class="st"> </span><span class="kw">lapply</span>(d, <span class="cf">function</span>(i) <span class="kw">replicate</span>(i, <span class="kw">runif</span>(N)))</a>
+<a class="sourceLine" id="cb252-4" data-line-number="4">nout &lt;-<span class="st"> </span><span class="cf">function</span>(m) <span class="kw">mean</span>(<span class="kw">apply</span>(m, <span class="dv">1</span>, <span class="cf">function</span>(i) <span class="kw">any</span>(i <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.01</span> <span class="op">|</span><span class="st"> </span>i <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.99</span>)))</a>
+<a class="sourceLine" id="cb252-5" data-line-number="5">res &lt;-<span class="st"> </span><span class="kw">sapply</span>(dat, nout)</a>
+<a class="sourceLine" id="cb252-6" data-line-number="6"><span class="kw">plot</span>(res, <span class="dt">type =</span> <span class="st">"l"</span>,</a>
+<a class="sourceLine" id="cb252-7" data-line-number="7">     <span class="dt">xlab =</span> <span class="st">"Number of dimensions"</span>,</a>
+<a class="sourceLine" id="cb252-8" data-line-number="8">     <span class="dt">ylab =</span> <span class="st">"Proportion of 1% outliers"</span>,</a>
+<a class="sourceLine" id="cb252-9" data-line-number="9">     <span class="dt">main =</span> <span class="st">"Curse of Dimensionality"</span>)</a>
+<a class="sourceLine" id="cb252-10" data-line-number="10"><span class="kw">grid</span>()</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/curse-1.png" width="672"></p>
 </div>
-<div id="machine-learning" class="section level2" number="6.4">
+<div id="machine-learning" class="section level2">
 <h2>
 <span class="header-section-number">6.4</span> Machine learning</h2>
 <p>The dataset below is composed of 100 data points (samples). For each
@@ -710,7 +708,7 @@ but these are beyond the scope of this course.</p>
 <a href="sec-testing.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-09-21
+2020-09-27
 </p>
 </div>
 </div>

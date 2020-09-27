@@ -14,20 +14,19 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-09-21" />
+<meta name="date" content="2020-09-27" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
 <title>Chapter 2 Data visualisation | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -52,27 +51,26 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +79,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -166,18 +164,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec:vis" class="section level1" number="2">
+<html><body><div id="sec:vis" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 2</span> Data visualisation</h1>
 <p>This chapter is based on Chapter 3 <a href="https://www-huber.embl.de/msmb/Chap-Graphics.html"><em>High Quality Graphics in
 R</em></a> of the <em>Modern
 Statistics for Modern Biology</em> book <span class="citation">(Holmes and Huber <label for="tufte-mn-11" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-11" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>.</p>
-<div id="introduction" class="section level2" number="2.1">
+<div id="introduction" class="section level2">
 <h2>
 <span class="header-section-number">2.1</span> Introduction</h2>
 <p>The <strong>goal</strong> of data visualisation is to</p>
 <ul>
-<li>interactively explore and understand data, i.e. <em>exploratory data
+<li>interactively explore and understand data, i.e. <em>exploratory data
 analysis</em>;</li>
 <li>to present and <em>communicate results</em>, whether as a preliminary
 analysis or final results.</li>
@@ -405,7 +403,7 @@ dataframes (as introduced in
 or dedicated objects (see chapter <a href="sec-obj.html#sec:obj">3</a>). Some visualisations
 will be much easier when the data is formatted in a certain way.</p>
 </div>
-<div id="base-plotting" class="section level2" number="2.2">
+<div id="base-plotting" class="section level2">
 <h2>
 <span class="header-section-number">2.2</span> Base plotting</h2>
 <p>The default graphics system that comes with R, often called base R
@@ -415,7 +413,7 @@ other.</p>
 <p>Below, we display the relation between the optical density of the
 deoxyribonuclease (DNase) protein as measure by an enzyme-linked
 immunosorbent assay (ELISA) assay for all observations.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sec-vis.html#cb6-1" aria-hidden="true"></a><span class="kw">head</span>(DNase)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">head</span>(DNase)</a></code></pre></div>
 <pre><code>##   Run       conc density
 ## 1   1 0.04882812   0.017
 ## 2   1 0.04882812   0.018
@@ -423,7 +421,7 @@ immunosorbent assay (ELISA) assay for all observations.</p>
 ## 4   1 0.19531250   0.124
 ## 5   1 0.39062500   0.206
 ## 6   1 0.39062500   0.215</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="sec-vis.html#cb8-1" aria-hidden="true"></a><span class="kw">plot</span>(DNase<span class="op">$</span>con, DNase<span class="op">$</span>density)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">plot</span>(DNase<span class="op">$</span>con, DNase<span class="op">$</span>density)</a></code></pre></div>
 <div class="figure">
 <span id="fig:dnase"></span>
 <p class="caption marginnote shownote">
@@ -434,12 +432,12 @@ Figure 2.1: The default base <code>plot</code> function on the <code>DNase</code
 <p>We can add some features on the plot, such vertical dotted lines for
 all observed observations and customise the look and feel of the plot
 by setting specific arguments to the <code>plot</code> function.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="sec-vis.html#cb9-1" aria-hidden="true"></a><span class="kw">plot</span>(DNase<span class="op">$</span>con, DNase<span class="op">$</span>density,</span>
-<span id="cb9-2"><a href="sec-vis.html#cb9-2" aria-hidden="true"></a>     <span class="dt">xlab =</span> <span class="st">"DNase concentration (ng/ml)"</span>,</span>
-<span id="cb9-3"><a href="sec-vis.html#cb9-3" aria-hidden="true"></a>     <span class="dt">ylab =</span> <span class="st">"Optical density"</span>,</span>
-<span id="cb9-4"><a href="sec-vis.html#cb9-4" aria-hidden="true"></a>     <span class="dt">pch =</span> <span class="dv">1</span>,</span>
-<span id="cb9-5"><a href="sec-vis.html#cb9-5" aria-hidden="true"></a>     <span class="dt">col =</span> <span class="st">"steelblue"</span>)</span>
-<span id="cb9-6"><a href="sec-vis.html#cb9-6" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">unique</span>(DNase<span class="op">$</span>conc), <span class="dt">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">plot</span>(DNase<span class="op">$</span>con, DNase<span class="op">$</span>density,</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">     <span class="dt">xlab =</span> <span class="st">"DNase concentration (ng/ml)"</span>,</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">     <span class="dt">ylab =</span> <span class="st">"Optical density"</span>,</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">     <span class="dt">pch =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">     <span class="dt">col =</span> <span class="st">"steelblue"</span>)</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">unique</span>(DNase<span class="op">$</span>conc), <span class="dt">lty =</span> <span class="st">"dotted"</span>)</a></code></pre></div>
 <div class="figure">
 <span id="fig:dnase2"></span>
 <p class="caption marginnote shownote">
@@ -467,7 +465,7 @@ using base graphics?</p>
 ► Solution<span id="sol-start-1" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-1', 'sol-start-1')"></span>
 </p>
 <div id="sol-body-1" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sec-vis.html#cb10-1" aria-hidden="true"></a><span class="kw">plot</span>(DNase<span class="op">$</span>con, DNase<span class="op">$</span>density, <span class="dt">col =</span> DNase<span class="op">$</span>Run)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">plot</span>(DNase<span class="op">$</span>con, DNase<span class="op">$</span>density, <span class="dt">col =</span> DNase<span class="op">$</span>Run)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/colbyrun-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -492,9 +490,9 @@ split by run.</p>
 ► Solution<span id="sol-start-2" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-2', 'sol-start-2')"></span>
 </p>
 <div id="sol-body-2" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="sec-vis.html#cb11-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb11-2"><a href="sec-vis.html#cb11-2" aria-hidden="true"></a><span class="kw">hist</span>(DNase<span class="op">$</span>density)</span>
-<span id="cb11-3"><a href="sec-vis.html#cb11-3" aria-hidden="true"></a><span class="kw">boxplot</span>(density <span class="op">~</span><span class="st"> </span>Run, DNase)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">hist</span>(DNase<span class="op">$</span>density)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">boxplot</span>(density <span class="op">~</span><span class="st"> </span>Run, DNase)</a></code></pre></div>
 <div class="figure">
 <p class="caption marginnote shownote">
 (#fig:hist_boxplot)The base <code>hist</code> and <code>boxplot</code> functions, the latter using the formula interface.
@@ -520,7 +518,7 @@ heterogeneous in terms of interface, leading to a lot of customisation
 code.</p>
 <p>Finally, defaults, and colours in particular, are poorly chosen.</p>
 </div>
-<div id="the-ggplot2-package" class="section level2" number="2.3">
+<div id="the-ggplot2-package" class="section level2">
 <h2>
 <span class="header-section-number">2.3</span> The <code>ggplot2</code> package</h2>
 <p><strong><code>ggplot2</code></strong> is a plotting package that makes it simple to create
@@ -539,12 +537,12 @@ overview, but it is outdated. The ggplot2 web page
 be used for different types of plots:</p>
 <pre><code>ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) +  &lt;GEOM_FUNCTION&gt;()</code></pre>
 <p>We need first to load the <code>ggplot2</code> package:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sec-vis.html#cb13-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"ggplot2"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"ggplot2"</span>)</a></code></pre></div>
 <ul>
 <li>use the <code>ggplot()</code> function and bind the plot to a specific data frame using the
 <code>data</code> argument</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sec-vis.html#cb14-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> DNase)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> DNase)</a></code></pre></div>
 <div class="figure">
 <span id="fig:gg0"></span>
 <p class="caption marginnote shownote">
@@ -558,8 +556,8 @@ selecting the variables to be plotted and specifying how to present
 them in the graph, e.g. as x/y positions or characteristics such as
 size, shape, colour, etc.</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="sec-vis.html#cb15-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> DNase,</span>
-<span id="cb15-2"><a href="sec-vis.html#cb15-2" aria-hidden="true"></a>       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> conc, <span class="dt">y =</span> density))</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> DNase,</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> conc, <span class="dt">y =</span> density))</a></code></pre></div>
 <div class="figure">
 <span id="fig:gg1"></span>
 <p class="caption marginnote shownote">
@@ -573,9 +571,9 @@ Figure 2.4: <code>ggplot2</code> can now generate the axes, ticks and ranges bas
 operator. Because we have two continuous variables, let’s use
 <code>geom_point()</code> first:</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sec-vis.html#cb16-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> DNase,</span>
-<span id="cb16-2"><a href="sec-vis.html#cb16-2" aria-hidden="true"></a>       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> conc, <span class="dt">y =</span> density)) <span class="op">+</span></span>
-<span id="cb16-3"><a href="sec-vis.html#cb16-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> DNase,</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> conc, <span class="dt">y =</span> density)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <div class="figure">
 <span id="fig:gg2"></span>
 <p class="caption marginnote shownote">
@@ -598,10 +596,10 @@ vs. concentration plot. Which one do you prefer, and why?</p>
 <p>It is possible to store the output of the <code>ggplot</code> function into a
 variable that can be visualised by either typing its name in the
 console or explicitly printing it (like any other variable).</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="sec-vis.html#cb17-1" aria-hidden="true"></a>gg &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> DNase,</span>
-<span id="cb17-2"><a href="sec-vis.html#cb17-2" aria-hidden="true"></a>             <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> conc, <span class="dt">y =</span> density)) <span class="op">+</span></span>
-<span id="cb17-3"><a href="sec-vis.html#cb17-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>()</span>
-<span id="cb17-4"><a href="sec-vis.html#cb17-4" aria-hidden="true"></a><span class="kw">print</span>(gg)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">gg &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> DNase,</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">             <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> conc, <span class="dt">y =</span> density)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">print</span>(gg)</a></code></pre></div>
 <div class="figure">
 <span id="fig:ggobj"></span>
 <p class="caption marginnote shownote">
@@ -616,7 +614,7 @@ plotting code and</p></li>
 <li><p>how we can add additional (identical or different) <em>geoms</em> to a
 plot.</p></li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sec-vis.html#cb18-1" aria-hidden="true"></a>gg <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> Run))</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">gg <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> Run))</a></code></pre></div>
 <div class="figure">
 <span id="fig:gg3"></span>
 <p class="caption marginnote shownote">
@@ -641,7 +639,7 @@ runs above?</p>
 ► Solution<span id="sol-start-3" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-3', 'sol-start-3')"></span>
 </p>
 <div id="sol-body-3" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="sec-vis.html#cb19-1" aria-hidden="true"></a>gg <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw">as.character</span>(Run)))</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">gg <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw">as.character</span>(Run)))</a></code></pre></div>
 <div class="figure">
 <span id="fig:ggex"></span>
 <p class="caption marginnote shownote">
@@ -661,12 +659,12 @@ originally available from the
 <a href="http://bioconductor.org/packages/release/data/experiment/html/Hiiragi2013.html"><code>Hiiragi2013</code></a>
 package and describes the cell-to-cell expression variability followed
 by signal reinforcement progressively segregates early mouse lineages
-<span class="citation">(Ohnishi et al. <label for="tufte-mn-12" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-12" class="margin-toggle">2014<span class="marginnote">Ohnishi, Y, W Huber, A Tsumura, M Kang, P Xenopoulos, K Kurimoto, A K Oleś, et al. 2014. “Cell-to-Cell Expression Variability Followed by Signal Reinforcement Progressively Segregates Early Mouse Lineages.” <em>Nat Cell Biol</em> 16 (1): 27–37. <a href="https://doi.org/10.1038/ncb2881">https://doi.org/10.1038/ncb2881</a>.</span>)</span>.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sec-vis.html#cb20-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb20-2"><a href="sec-vis.html#cb20-2" aria-hidden="true"></a><span class="kw">data</span>(hiiragi2013df1)</span>
-<span id="cb20-3"><a href="sec-vis.html#cb20-3" aria-hidden="true"></a><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at)) <span class="op">+</span></span>
-<span id="cb20-4"><a href="sec-vis.html#cb20-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb20-5"><a href="sec-vis.html#cb20-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"loess"</span>)</span></code></pre></div>
+<span class="citation">(Ohnishi et al. <label for="tufte-mn-12" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-12" class="margin-toggle">2014<span class="marginnote">Ohnishi, Y, W Huber, A Tsumura, M Kang, P Xenopoulos, K Kurimoto, A K Oleś, et al. 2014. “Cell-to-Cell Expression Variability Followed by Signal Reinforcement Progressively Segregates Early Mouse Lineages.” <em>Nat Cell Biol</em> 16 (1): 27–37. <a href="https://doi.org/10.1038/ncb2881" class="uri">https://doi.org/10.1038/ncb2881</a>.</span>)</span>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">data</span>(hiiragi2013df1)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"loess"</span>)</a></code></pre></div>
 <pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
 <div class="figure">
 <span id="fig:gg4"></span>
@@ -676,9 +674,9 @@ Figure 2.9: Modelling the relation between the expression of X1426642_at and X14
 <img src="WSBIM1322_files/figure-html/gg4-1.png" alt="Modelling the relation between the expression of X1426642_at and X1418765_at." width="672">
 </div>
 <p>And, adding colours representing the different samples</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-vis.html#cb22-1" aria-hidden="true"></a><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at))  <span class="op">+</span></span>
-<span id="cb22-2"><a href="sec-vis.html#cb22-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> sampleColour), <span class="dt">shape =</span> <span class="dv">19</span>) <span class="op">+</span></span>
-<span id="cb22-3"><a href="sec-vis.html#cb22-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"loess"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at))  <span class="op">+</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> sampleColour), <span class="dt">shape =</span> <span class="dv">19</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">"loess"</span>)</a></code></pre></div>
 <pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
 <div class="figure">
 <span id="fig:gg5"></span>
@@ -688,7 +686,7 @@ Figure 2.10: Modelling the relation between the expression of X1426642_at and X1
 <img src="WSBIM1322_files/figure-html/gg5-1.png" alt="Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples." width="672">
 </div>
 </div>
-<div id="visualising-1d-data" class="section level2" number="2.4">
+<div id="visualising-1d-data" class="section level2">
 <h2>
 <span class="header-section-number">2.4</span> Visualising 1D data</h2>
 <p>Let’s start by exploring some 1 dimensional visualisation. This is
@@ -698,27 +696,30 @@ samples.</p>
 <p>First, we convert a microarray gene expression data to a data.frame,
 fit for some <code>ggplot2</code> visualisation, focusing on genes Fgf4, Gata4,
 Gata6 and Sox2.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sec-vis.html#cb24-1" aria-hidden="true"></a>selected_genes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Fgf4 =</span> <span class="st">"X1420085_at"</span>, <span class="dt">Gata4 =</span> <span class="st">"X1418863_at"</span>,</span>
-<span id="cb24-2"><a href="sec-vis.html#cb24-2" aria-hidden="true"></a>                    <span class="dt">Gata6 =</span> <span class="st">"X1425463_at"</span>,  <span class="dt">Sox2 =</span> <span class="st">"X1416967_at"</span>)</span>
-<span id="cb24-3"><a href="sec-vis.html#cb24-3" aria-hidden="true"></a>dfx &lt;-<span class="st"> </span>hiiragi2013df1[, selected_genes]</span>
-<span id="cb24-4"><a href="sec-vis.html#cb24-4" aria-hidden="true"></a><span class="kw">colnames</span>(dfx) &lt;-<span class="st"> </span><span class="kw">names</span>(selected_genes)</span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="sec-vis.html#cb25-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"dplyr"</span>)</span>
-<span id="cb25-2"><a href="sec-vis.html#cb25-2" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"tidyr"</span>)</span>
-<span id="cb25-3"><a href="sec-vis.html#cb25-3" aria-hidden="true"></a>genes &lt;-<span class="st"> </span><span class="kw">gather</span>(dfx, <span class="dt">key =</span> <span class="st">"gene"</span>, <span class="dt">value =</span> <span class="st">"expression"</span>)</span>
-<span id="cb25-4"><a href="sec-vis.html#cb25-4" aria-hidden="true"></a><span class="kw">head</span>(genes)</span></code></pre></div>
-<pre><code>##   gene expression
-## 1 Fgf4   3.027715
-## 2 Fgf4   9.293016
-## 3 Fgf4   2.940142
-## 4 Fgf4   9.715243
-## 5 Fgf4   8.924228
-## 6 Fgf4  11.325952</code></pre>
-<div id="histogram" class="section level3" number="2.4.1">
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">selected_genes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Fgf4 =</span> <span class="st">"X1420085_at"</span>, <span class="dt">Gata4 =</span> <span class="st">"X1418863_at"</span>,</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">                    <span class="dt">Gata6 =</span> <span class="st">"X1425463_at"</span>,  <span class="dt">Sox2 =</span> <span class="st">"X1416967_at"</span>)</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">dfx &lt;-<span class="st"> </span>hiiragi2013df1[, selected_genes]</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="kw">colnames</span>(dfx) &lt;-<span class="st"> </span><span class="kw">names</span>(selected_genes)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"dplyr"</span>)</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">library</span>(<span class="st">"tidyr"</span>)</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">genes &lt;-<span class="st"> </span><span class="kw">pivot_longer</span>(dfx, <span class="dt">names_to =</span> <span class="st">"gene"</span>, <span class="dt">values_to =</span> <span class="st">"expression"</span>,</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">                      <span class="kw">everything</span>())</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="kw">head</span>(genes)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   gene  expression
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 Fgf4        3.03
+## 2 Gata4       4.84
+## 3 Gata6       5.50
+## 4 Sox2        1.73
+## 5 Fgf4        9.29
+## 6 Gata4       5.53</code></pre>
+<div id="histogram" class="section level3">
 <h3>
 <span class="header-section-number">2.4.1</span> Histogram</h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="sec-vis.html#cb27-1" aria-hidden="true"></a>genes <span class="op">%&gt;%</span></span>
-<span id="cb27-2"><a href="sec-vis.html#cb27-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(gene <span class="op">==</span><span class="st"> "Gata4"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb27-3"><a href="sec-vis.html#cb27-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">genes <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="st">    </span><span class="kw">filter</span>(gene <span class="op">==</span><span class="st"> "Gata4"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <div class="figure">
 <span id="fig:hist"></span>
@@ -728,12 +729,12 @@ Figure 2.11: Distribution of the Gata4 expression
 <img src="WSBIM1322_files/figure-html/hist-1.png" alt="Distribution of the Gata4 expression" width="672">
 </div>
 </div>
-<div id="box-plots" class="section level3" number="2.4.2">
+<div id="box-plots" class="section level3">
 <h3>
 <span class="header-section-number">2.4.2</span> Box plots</h3>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="sec-vis.html#cb29-1" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> gene, <span class="dt">y =</span> expression, <span class="dt">fill =</span> gene))</span>
-<span id="cb29-2"><a href="sec-vis.html#cb29-2" aria-hidden="true"></a>bxplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</span>
-<span id="cb29-3"><a href="sec-vis.html#cb29-3" aria-hidden="true"></a>bxplot</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> gene, <span class="dt">y =</span> expression, <span class="dt">fill =</span> gene))</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">bxplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">bxplot</a></code></pre></div>
 <div class="figure">
 <span id="fig:boxplot"></span>
 <p class="caption marginnote shownote">
@@ -758,8 +759,8 @@ Figure 2.12: A boxplot of expression values.
 ► Solution<span id="sol-start-4" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-4', 'sol-start-4')"></span>
 </p>
 <div id="sol-body-4" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sec-vis.html#cb30-1" aria-hidden="true"></a>vlnplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>()</span>
-<span id="cb30-2"><a href="sec-vis.html#cb30-2" aria-hidden="true"></a>vlnplot</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">vlnplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>()</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">vlnplot</a></code></pre></div>
 <div class="figure">
 <span id="fig:violin"></span>
 <p class="caption marginnote shownote">
@@ -777,29 +778,29 @@ pitfalls</a> for more
 detail about boxplots and how to improve them using jitter, violin
 plots, and information about the sample size.</p>
 </div>
-<div id="dot-plots-and-beeswarm-plots" class="section level3" number="2.4.3">
+<div id="dot-plots-and-beeswarm-plots" class="section level3">
 <h3>
 <span class="header-section-number">2.4.3</span> Dot plots and beeswarm plots</h3>
 <p>When the data aren’t too large, it is also possibly to visualise all
 points to get a sense of their distribution.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="sec-vis.html#cb31-1" aria-hidden="true"></a>jtrplot &lt;-<span class="st"> </span>p <span class="op">+</span></span>
-<span id="cb31-2"><a href="sec-vis.html#cb31-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_jitter</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> gene)) <span class="op">+</span></span>
-<span id="cb31-3"><a href="sec-vis.html#cb31-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">jtrplot &lt;-<span class="st"> </span>p <span class="op">+</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_jitter</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> gene)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</a></code></pre></div>
 <p>In a dotplot, the position of the points along the y axis is
 discretised into bins (set as 1/6 below) and the points are then
 stacked next to each other.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sec-vis.html#cb32-1" aria-hidden="true"></a>dotplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_dotplot</span>(<span class="dt">binaxis =</span> <span class="st">"y"</span>, <span class="dt">binwidth =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>,</span>
-<span id="cb32-2"><a href="sec-vis.html#cb32-2" aria-hidden="true"></a>                            <span class="dt">stackdir =</span> <span class="st">"center"</span>, <span class="dt">stackratio =</span> <span class="fl">0.75</span>,</span>
-<span id="cb32-3"><a href="sec-vis.html#cb32-3" aria-hidden="true"></a>                            <span class="kw">aes</span>(<span class="dt">color =</span> gene)) <span class="op">+</span></span>
-<span id="cb32-4"><a href="sec-vis.html#cb32-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">dotplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_dotplot</span>(<span class="dt">binaxis =</span> <span class="st">"y"</span>, <span class="dt">binwidth =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">                            <span class="dt">stackdir =</span> <span class="st">"center"</span>, <span class="dt">stackratio =</span> <span class="fl">0.75</span>,</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">                            <span class="kw">aes</span>(<span class="dt">color =</span> gene)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</a></code></pre></div>
 <p>The beeswarm algorithms tries to avoid overlapping points: if a point
 were to overlap an existing point, it is shifted along the <span class="math inline">\(x\)</span>-axis
 by a small amount sufficient to avoid overlap.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sec-vis.html#cb33-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"ggbeeswarm"</span>)</span>
-<span id="cb33-2"><a href="sec-vis.html#cb33-2" aria-hidden="true"></a>beeplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_beeswarm</span>(<span class="kw">aes</span>(<span class="dt">color =</span> gene)) <span class="op">+</span></span>
-<span id="cb33-3"><a href="sec-vis.html#cb33-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sec-vis.html#cb34-1" aria-hidden="true"></a><span class="kw">library</span>(patchwork)</span>
-<span id="cb34-2"><a href="sec-vis.html#cb34-2" aria-hidden="true"></a>jtrplot <span class="op">+</span><span class="st"> </span>dotplot <span class="op">+</span><span class="st"> </span>beeplot</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"ggbeeswarm"</span>)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">beeplot &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_beeswarm</span>(<span class="kw">aes</span>(<span class="dt">color =</span> gene)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">library</span>(patchwork)</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">jtrplot <span class="op">+</span><span class="st"> </span>dotplot <span class="op">+</span><span class="st"> </span>beeplot</a></code></pre></div>
 <div class="figure">
 <span id="fig:showdots"></span>
 <p class="caption marginnote shownote">
@@ -808,16 +809,16 @@ Figure 2.14: Showing all expression values using jittering (left), a dotplot (ce
 <img src="WSBIM1322_files/figure-html/showdots-1.png" alt="Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot." width="672">
 </div>
 </div>
-<div id="density-and-ecdf-plots" class="section level3" number="2.4.4">
+<div id="density-and-ecdf-plots" class="section level3">
 <h3>
 <span class="header-section-number">2.4.4</span> Density and ecdf plots</h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sec-vis.html#cb35-1" aria-hidden="true"></a>densplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">color =</span> gene)) <span class="op">+</span></span>
-<span id="cb35-2"><a href="sec-vis.html#cb35-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
-<span id="cb35-3"><a href="sec-vis.html#cb35-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sec-vis.html#cb36-1" aria-hidden="true"></a>ecdfplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">color =</span> gene)) <span class="op">+</span></span>
-<span id="cb36-2"><a href="sec-vis.html#cb36-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_ecdf</span>() <span class="op">+</span></span>
-<span id="cb36-3"><a href="sec-vis.html#cb36-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sec-vis.html#cb37-1" aria-hidden="true"></a>densplot <span class="op">+</span><span class="st"> </span>ecdfplot</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">densplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">color =</span> gene)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_density</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">ecdfplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">color =</span> gene)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">    </span><span class="kw">stat_ecdf</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">densplot <span class="op">+</span><span class="st"> </span>ecdfplot</a></code></pre></div>
 <div class="figure">
 <span id="fig:unnamed-chunk-4"></span>
 <p class="caption marginnote shownote">
@@ -826,7 +827,7 @@ Figure 2.15: Density and cumulative density functions of expression values.
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-4-1.png" alt="Density and cumulative density functions of expression values." width="672">
 </div>
 </div>
-<div id="summary" class="section level3" number="2.4.5">
+<div id="summary" class="section level3">
 <h3>
 <span class="header-section-number">2.4.5</span> Summary</h3>
 <ul>
@@ -843,23 +844,23 @@ quantiles and shifts in location in comparative plots.</p></li>
 </ul>
 </div>
 </div>
-<div id="number-of-modes" class="section level2" number="2.5">
+<div id="number-of-modes" class="section level2">
 <h2>
 <span class="header-section-number">2.5</span> Number of modes</h2>
 <p>The number of modes of a distribution depends on scale transformation
 of the data.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sec-vis.html#cb38-1" aria-hidden="true"></a>sim &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">exp</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="fl">1e5</span>,</span>
-<span id="cb38-2"><a href="sec-vis.html#cb38-2" aria-hidden="true"></a>                                <span class="dt">mean =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>),</span>
-<span id="cb38-3"><a href="sec-vis.html#cb38-3" aria-hidden="true"></a>                                              <span class="dt">size =</span> <span class="fl">1e5</span>,</span>
-<span id="cb38-4"><a href="sec-vis.html#cb38-4" aria-hidden="true"></a>                                              <span class="dt">replace =</span> <span class="ot">TRUE</span>))))</span>
-<span id="cb38-5"><a href="sec-vis.html#cb38-5" aria-hidden="true"></a></span>
-<span id="cb38-6"><a href="sec-vis.html#cb38-6" aria-hidden="true"></a>p1 &lt;-<span class="st">  </span><span class="kw">ggplot</span>(sim, <span class="kw">aes</span>(x)) <span class="op">+</span></span>
-<span id="cb38-7"><a href="sec-vis.html#cb38-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>, <span class="dt">boundary =</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb38-8"><a href="sec-vis.html#cb38-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">400</span>)</span>
-<span id="cb38-9"><a href="sec-vis.html#cb38-9" aria-hidden="true"></a>p2 &lt;-<span class="st">  </span><span class="kw">ggplot</span>(sim, <span class="kw">aes</span>(<span class="kw">log</span>(x))) <span class="op">+</span></span>
-<span id="cb38-10"><a href="sec-vis.html#cb38-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>)</span>
-<span id="cb38-11"><a href="sec-vis.html#cb38-11" aria-hidden="true"></a>p1 <span class="op">+</span><span class="st"> </span>p2</span></code></pre></div>
-<pre><code>## Warning: Removed 7944 rows containing non-finite values (stat_bin).</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">sim &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">exp</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="fl">1e5</span>,</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">                                <span class="dt">mean =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">                                              <span class="dt">size =</span> <span class="fl">1e5</span>,</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">                                              <span class="dt">replace =</span> <span class="ot">TRUE</span>))))</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">p1 &lt;-<span class="st">  </span><span class="kw">ggplot</span>(sim, <span class="kw">aes</span>(x)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-7" data-line-number="7"><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>, <span class="dt">boundary =</span> <span class="dv">0</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-8" data-line-number="8"><span class="st">    </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">400</span>)</a>
+<a class="sourceLine" id="cb38-9" data-line-number="9">p2 &lt;-<span class="st">  </span><span class="kw">ggplot</span>(sim, <span class="kw">aes</span>(<span class="kw">log</span>(x))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-10" data-line-number="10"><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>)</a>
+<a class="sourceLine" id="cb38-11" data-line-number="11">p1 <span class="op">+</span><span class="st"> </span>p2</a></code></pre></div>
+<pre><code>## Warning: Removed 8168 rows containing non-finite values (stat_bin).</code></pre>
 <div class="figure">
 <span id="fig:sim"></span>
 <p class="caption marginnote shownote">
@@ -869,11 +870,11 @@ Figure 2.16: Histograms of the same data without (left) and with (right) log-tra
 </div>
 <p>This also applies to density plots.</p>
 </div>
-<div id="visualising-2d-data" class="section level2" number="2.6">
+<div id="visualising-2d-data" class="section level2">
 <h2>
 <span class="header-section-number">2.6</span> Visualising 2D data</h2>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="sec-vis.html#cb40-1" aria-hidden="true"></a><span class="kw">data</span>(hiiragi2013df2)</span>
-<span id="cb40-2"><a href="sec-vis.html#cb40-2" aria-hidden="true"></a><span class="kw">head</span>(hiiragi2013df2)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">data</span>(hiiragi2013df2)</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">head</span>(hiiragi2013df2)</a></code></pre></div>
 <pre><code>##              59 E4.5 (PE) 92 E4.5 (FGF4-KO)
 ## 1415670_at       9.503289          8.359740
 ## 1415671_at      11.458339         11.175453
@@ -881,10 +882,10 @@ Figure 2.16: Histograms of the same data without (left) and with (right) log-tra
 ## 1415673_at       6.765473          4.957310
 ## 1415674_a_at     9.974538          8.592410
 ## 1415675_at       9.294144          6.257513</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sec-vis.html#cb42-1" aria-hidden="true"></a>scp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hiiragi2013df2,</span>
-<span id="cb42-2"><a href="sec-vis.html#cb42-2" aria-hidden="true"></a>              <span class="kw">aes</span>(<span class="dt">x=</span> <span class="st">`</span><span class="dt">59 E4.5 (PE)</span><span class="st">`</span>,</span>
-<span id="cb42-3"><a href="sec-vis.html#cb42-3" aria-hidden="true"></a>                  <span class="dt">y =</span> <span class="st">`</span><span class="dt">92 E4.5 (FGF4-KO)</span><span class="st">`</span>))</span>
-<span id="cb42-4"><a href="sec-vis.html#cb42-4" aria-hidden="true"></a>scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">scp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hiiragi2013df2,</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">              <span class="kw">aes</span>(<span class="dt">x=</span> <span class="st">`</span><span class="dt">59 E4.5 (PE)</span><span class="st">`</span>,</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">                  <span class="dt">y =</span> <span class="st">`</span><span class="dt">92 E4.5 (FGF4-KO)</span><span class="st">`</span>))</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <div class="figure">
 <span id="fig:sc1"></span>
 <p class="caption marginnote shownote">
@@ -911,7 +912,7 @@ default).</p>
 ► Solution<span id="sol-start-5" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-5', 'sol-start-5')"></span>
 </p>
 <div id="sol-body-5" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sec-vis.html#cb43-1" aria-hidden="true"></a>scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>)</a></code></pre></div>
 <div class="figure">
 <span id="fig:scp2"></span>
 <p class="caption marginnote shownote">
@@ -924,7 +925,7 @@ Figure 2.18: Transparency can help distinguish regions of different densities.
 </p>
 </div>
 </div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sec-vis.html#cb44-1" aria-hidden="true"></a>scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_density2d</span>(<span class="dt">h =</span> <span class="fl">0.5</span>, <span class="dt">bins =</span> <span class="dv">60</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_density2d</span>(<span class="dt">h =</span> <span class="fl">0.5</span>, <span class="dt">bins =</span> <span class="dv">60</span>)</a></code></pre></div>
 <div class="figure">
 <span id="fig:scp3"></span>
 <p class="caption marginnote shownote">
@@ -932,7 +933,7 @@ Figure 2.19: Focusing on contours rather that individual values.
 </p>
 <img src="WSBIM1322_files/figure-html/scp3-1.png" alt="Focusing on contours rather that individual values." width="672">
 </div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="sec-vis.html#cb45-1" aria-hidden="true"></a>scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_hex</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_hex</span>()</a></code></pre></div>
 <div class="figure">
 <span id="fig:scp5"></span>
 <p class="caption marginnote shownote">
@@ -941,7 +942,7 @@ Figure 2.20: Local density summaries.
 <img src="WSBIM1322_files/figure-html/scp5-1.png" alt="Local density summaries." width="672">
 </div>
 </div>
-<div id="visualising-data-along-more-dimensions" class="section level2" number="2.7">
+<div id="visualising-data-along-more-dimensions" class="section level2">
 <h2>
 <span class="header-section-number">2.7</span> Visualising data along more dimensions</h2>
 <p>When visualising data along additional dimension, we can parameterise
@@ -952,12 +953,12 @@ can be set with point aesthetics such as <code>fill</code>, <code>color</code> (
 facetting, i.e. producing sub-plots for different subsets of the
 data. Below, we first re-annotate the data using some regular
 expressions</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="sec-vis.html#cb46-1" aria-hidden="true"></a>p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at, <span class="dt">colour =</span> lineage)) <span class="op">+</span></span>
-<span id="cb46-2"><a href="sec-vis.html#cb46-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span>
-<span id="cb46-3"><a href="sec-vis.html#cb46-3" aria-hidden="true"></a>p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at)) <span class="op">+</span></span>
-<span id="cb46-4"><a href="sec-vis.html#cb46-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb46-5"><a href="sec-vis.html#cb46-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_grid</span>( . <span class="op">~</span><span class="st"> </span>lineage )</span>
-<span id="cb46-6"><a href="sec-vis.html#cb46-6" aria-hidden="true"></a>p1 <span class="op">+</span><span class="st"> </span>p2</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at, <span class="dt">colour =</span> lineage)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hiiragi2013df1, <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb46-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="st">    </span><span class="kw">facet_grid</span>( . <span class="op">~</span><span class="st"> </span>lineage )</a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">p1 <span class="op">+</span><span class="st"> </span>p2</a></code></pre></div>
 <div class="figure">
 <span id="fig:facet1"></span>
 <p class="caption marginnote shownote">
@@ -965,10 +966,10 @@ Figure 2.21: Different sub-plots for different lineages using colours (left) of 
 </p>
 <img src="WSBIM1322_files/figure-html/facet1-1.png" alt="Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages." width="672">
 </div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="sec-vis.html#cb47-1" aria-hidden="true"></a><span class="kw">ggplot</span>(hiiragi2013df1,</span>
-<span id="cb47-2"><a href="sec-vis.html#cb47-2" aria-hidden="true"></a>       <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at)) <span class="op">+</span></span>
-<span id="cb47-3"><a href="sec-vis.html#cb47-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb47-4"><a href="sec-vis.html#cb47-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_grid</span>( Embryonic.day <span class="op">~</span><span class="st"> </span>lineage )</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">ggplot</span>(hiiragi2013df1,</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">       <span class="kw">aes</span>(<span class="dt">x =</span> X1426642_at, <span class="dt">y =</span> X1418765_at)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="st">    </span><span class="kw">facet_grid</span>( Embryonic.day <span class="op">~</span><span class="st"> </span>lineage )</a></code></pre></div>
 <div class="figure">
 <span id="fig:facet2"></span>
 <p class="caption marginnote shownote">
@@ -993,9 +994,9 @@ Gata6 and Sox2 genes in the <code>genes</code> data using histograms.</p>
 ► Solution<span id="sol-start-6" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-6', 'sol-start-6')"></span>
 </p>
 <div id="sol-body-6" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="sec-vis.html#cb48-1" aria-hidden="true"></a><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> expression)) <span class="op">+</span></span>
-<span id="cb48-2"><a href="sec-vis.html#cb48-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>() <span class="op">+</span></span>
-<span id="cb48-3"><a href="sec-vis.html#cb48-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>gene)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">ggplot</span>(genes, <span class="kw">aes</span>(<span class="dt">x =</span> expression)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_histogram</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>gene)</a></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="WSBIM1322_files/figure-html/hist2-1.png" width="672"></p>
 <p class="solution-end">
@@ -1004,20 +1005,20 @@ Gata6 and Sox2 genes in the <code>genes</code> data using histograms.</p>
 </div>
 </div>
 </div>
-<div id="interactive-visualisation" class="section level2" number="2.8">
+<div id="interactive-visualisation" class="section level2">
 <h2>
 <span class="header-section-number">2.8</span> Interactive visualisation</h2>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sec-vis.html#cb50-1" aria-hidden="true"></a>scp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hiiragi2013df2[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ],</span>
-<span id="cb50-2"><a href="sec-vis.html#cb50-2" aria-hidden="true"></a>              <span class="kw">aes</span>(<span class="dt">x=</span> <span class="st">`</span><span class="dt">59 E4.5 (PE)</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">92 E4.5 (FGF4-KO)</span><span class="st">`</span>))</span>
-<span id="cb50-3"><a href="sec-vis.html#cb50-3" aria-hidden="true"></a></span>
-<span id="cb50-4"><a href="sec-vis.html#cb50-4" aria-hidden="true"></a>scp2 &lt;-<span class="st"> </span>scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">scp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hiiragi2013df2[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ],</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">              <span class="kw">aes</span>(<span class="dt">x=</span> <span class="st">`</span><span class="dt">59 E4.5 (PE)</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">92 E4.5 (FGF4-KO)</span><span class="st">`</span>))</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">scp2 &lt;-<span class="st"> </span>scp <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p>Once we have stored ggplot object in a variable, we can simply pass it
 to the <code>plotly::ggplotly</code> function to generate an interactive figure.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sec-vis.html#cb51-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"plotly"</span>)</span>
-<span id="cb51-2"><a href="sec-vis.html#cb51-2" aria-hidden="true"></a><span class="kw">ggplotly</span>(scp2)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"plotly"</span>)</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="kw">ggplotly</span>(scp2)</a></code></pre></div>
 <p>See <a href="https://plot.ly/r" class="uri">https://plot.ly/r</a> for examples of interactive graphics online.</p>
 </div>
-<div id="additional-exercises" class="section level2" number="2.9">
+<div id="additional-exercises" class="section level2">
 <h2>
 <span class="header-section-number">2.9</span> Additional exercises</h2>
 <div class="question">
@@ -1080,11 +1081,11 @@ and the <code>hiiragi2013df1</code> data (from the <code>rWSBIM1322</code> packa
 and produces a scatterplot. Your function should test if the provided
 probe sets are valid before producing the plot and inform
 otherwise. Below are some example outputs.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="sec-vis.html#cb52-1" aria-hidden="true"></a><span class="kw">plot_probe_sets</span>(<span class="st">"X1426642_at"</span>, <span class="st">"X1420085_at"</span>, <span class="dt">data =</span> hiiragi2013df1)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">plot_probe_sets</span>(<span class="st">"X1426642_at"</span>, <span class="st">"X1420085_at"</span>, <span class="dt">data =</span> hiiragi2013df1)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/visfun-1.png" width="768"></p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="sec-vis.html#cb53-1" aria-hidden="true"></a><span class="kw">ggplot_probe_sets</span>(<span class="st">"X1426642_at"</span>, <span class="st">"X1420085_at"</span>, <span class="dt">data =</span> hiiragi2013df1)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">ggplot_probe_sets</span>(<span class="st">"X1426642_at"</span>, <span class="st">"X1420085_at"</span>, <span class="dt">data =</span> hiiragi2013df1)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/visfun-2.png" width="768"></p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="sec-vis.html#cb54-1" aria-hidden="true"></a><span class="kw">try</span>(<span class="kw">plot_probe_sets</span>(<span class="st">"X1416967_at"</span>, <span class="st">"123_at"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">try</span>(<span class="kw">plot_probe_sets</span>(<span class="st">"X1416967_at"</span>, <span class="st">"123_at"</span>))</a></code></pre></div>
 <pre><code>## Error in plot_probe_sets("X1416967_at", "123_at") : 
 ##   y %in% colnames(hiiragi2013df1)[1:6] is not TRUE</code></pre>
 <p class="question-end">
@@ -1101,7 +1102,7 @@ otherwise. Below are some example outputs.</p>
 <a href="sec-obj.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-09-21
+2020-09-27
 </p>
 </div>
 </div>

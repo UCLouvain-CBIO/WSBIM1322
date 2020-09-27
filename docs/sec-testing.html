@@ -14,20 +14,19 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-09-21" />
+<meta name="date" content="2020-09-27" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
 <title>Chapter 7 Hypothesis testing | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -52,27 +51,26 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -81,9 +79,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -164,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec:testing" class="section level1" number="7">
+<html><body><div id="sec:testing" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 7</span> Hypothesis testing</h1>
 <p>The goal of this chapter is to demonstrate some of the fundamentals of
@@ -173,7 +171,7 @@ the Biomedical sciences masters degree at the UCLouvain, see
 <em>WFARM1247</em> (Traitement statistique des données).</p>
 <p>Parts of this chapter are based on chapter 6 from <em>Modern Statistical
 for Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-19" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-19" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>.</p>
-<div id="refresher" class="section level2" number="7.1">
+<div id="refresher" class="section level2">
 <h2>
 <span class="header-section-number">7.1</span> Refresher</h2>
 <p>We have flipped a coing 100 times and have obtained the following results.</p>
@@ -195,8 +193,8 @@ Figure 7.1: Binomial density of for an unbiased coin to get 0 to 100 heads. The 
 </div>
 <p>Above, we see that the most likely outcome would be 50 heads with a
 probability of 0.0795892. No head and 100 heads have respectively
-7.8886091^{-31} and
-7.8886091^{-31} probability.</p>
+7.888609110^{-31} and
+7.888609110^{-31} probability.</p>
 <p>We set</p>
 <ul>
 <li>
@@ -218,7 +216,7 @@ Figure 7.2: Binomial density of for an unbiased coin to get 0 to 100 heads. The 
 </div>
 <p>We can also compute the p-value, the tells us how likely we are to see
 such a extreme or more extreme value under <span class="math inline">\(H_0\)</span>.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="sec-testing.html#cb254-1" aria-hidden="true"></a><span class="kw">binom.test</span>(<span class="dt">x =</span> <span class="dv">62</span>, <span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1"><span class="kw">binom.test</span>(<span class="dt">x =</span> <span class="dv">62</span>, <span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">p =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>## 
 ## 	Exact binomial test
 ## 
@@ -256,7 +254,7 @@ such a extreme or more extreme value under <span class="math inline">\(H_0\)</sp
 </table>
 <p>See below for a step by step guide to this example.</p>
 </div>
-<div id="a-biological-example" class="section level2" number="7.2">
+<div id="a-biological-example" class="section level2">
 <h2>
 <span class="header-section-number">7.2</span> A biological example</h2>
 <p>A typical biological example consists in measuring a gene of interest
@@ -330,7 +328,7 @@ t = \frac{ \bar X_{1} - \bar X_{2} }
 </ul>
 <p>Note that the t-test is robust to deviations<label for="tufte-sn-9" class="margin-toggle sidenote-number">9</label><input type="checkbox" id="tufte-sn-9" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">9</span> All models are wrong. Some are useful.</span>.</p>
 <p>In R, we do this with</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="sec-testing.html#cb256-1" aria-hidden="true"></a><span class="kw">t.test</span>(s1, s2)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1"><span class="kw">t.test</span>(s1, s2)</a></code></pre></div>
 <pre><code>## 
 ## 	Welch Two Sample t-test
 ## 
@@ -346,15 +344,15 @@ t = \frac{ \bar X_{1} - \bar X_{2} }
 t-test, such as the one provided in the <em><a href="https://bioconductor.org/packages/3.11/limma">limma</a></em> package
 and also widely applied to RNA-Seq count data.</p>
 </div>
-<div id="a-more-realistic-biological-example" class="section level2" number="7.3">
+<div id="a-more-realistic-biological-example" class="section level2">
 <h2>
 <span class="header-section-number">7.3</span> A more realistic biological example</h2>
 <p>Let’s now use the <code>tdata1</code> dataset from the <code>rWSBIM1322</code> package that
 provide gene expression data for 100 genes and 6 samples, three in
 group A and 3 in group B.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="sec-testing.html#cb258-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb258-2"><a href="sec-testing.html#cb258-2" aria-hidden="true"></a><span class="kw">data</span>(tdata1)</span>
-<span id="cb258-3"><a href="sec-testing.html#cb258-3" aria-hidden="true"></a><span class="kw">head</span>(tdata1)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</a>
+<a class="sourceLine" id="cb258-2" data-line-number="2"><span class="kw">data</span>(tdata1)</a>
+<a class="sourceLine" id="cb258-3" data-line-number="3"><span class="kw">head</span>(tdata1)</a></code></pre></div>
 <pre><code>##                 A1         A2         A3         B1         B2        B3
 ## feature1  429.6721   433.3133  1806.2773  3534.6396  4541.2757 1139.8326
 ## feature2 1320.8827  1085.5660 10643.9541   239.7528 14177.4412  678.5271
@@ -379,10 +377,10 @@ log-transform it.</p>
 ► Solution<span id="sol-start-34" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-34', 'sol-start-34')"></span>
 </p>
 <div id="sol-body-34" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="sec-testing.html#cb260-1" aria-hidden="true"></a>log_tdata1 &lt;-<span class="st"> </span><span class="kw">log2</span>(tdata1)</span>
-<span id="cb260-2"><a href="sec-testing.html#cb260-2" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb260-3"><a href="sec-testing.html#cb260-3" aria-hidden="true"></a>limma<span class="op">::</span><span class="kw">plotDensities</span>(tdata1)</span>
-<span id="cb260-4"><a href="sec-testing.html#cb260-4" aria-hidden="true"></a>limma<span class="op">::</span><span class="kw">plotDensities</span>(log_tdata1)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" data-line-number="1">log_tdata1 &lt;-<span class="st"> </span><span class="kw">log2</span>(tdata1)</a>
+<a class="sourceLine" id="cb260-2" data-line-number="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb260-3" data-line-number="3">limma<span class="op">::</span><span class="kw">plotDensities</span>(tdata1)</a>
+<a class="sourceLine" id="cb260-4" data-line-number="4">limma<span class="op">::</span><span class="kw">plotDensities</span>(log_tdata1)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/tex1-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -392,8 +390,8 @@ log-transform it.</p>
 <p>We are now going to apply a t-test to feature 73, comparing the
 expression intensities in groups A and B. In R, this can be done with
 the <code>t.test</code> function:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="sec-testing.html#cb261-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span>log_tdata1[<span class="dv">73</span>, ]</span>
-<span id="cb261-2"><a href="sec-testing.html#cb261-2" aria-hidden="true"></a><span class="kw">t.test</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1">x &lt;-<span class="st"> </span>log_tdata1[<span class="dv">73</span>, ]</a>
+<a class="sourceLine" id="cb261-2" data-line-number="2"><span class="kw">t.test</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>])</a></code></pre></div>
 <pre><code>## 
 ## 	Welch Two Sample t-test
 ## 
@@ -443,15 +441,15 @@ What features are of possible biological interest?</p></li>
 ► Solution<span id="sol-start-35" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-35', 'sol-start-35')"></span>
 </p>
 <div id="sol-body-35" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="sec-testing.html#cb263-1" aria-hidden="true"></a>my_t_test &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb263-2"><a href="sec-testing.html#cb263-2" aria-hidden="true"></a>    <span class="kw">t.test</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>])<span class="op">$</span>p.value</span>
-<span id="cb263-3"><a href="sec-testing.html#cb263-3" aria-hidden="true"></a>}</span>
-<span id="cb263-4"><a href="sec-testing.html#cb263-4" aria-hidden="true"></a>pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(log_tdata1, <span class="dv">1</span>, my_t_test)</span>
-<span id="cb263-5"><a href="sec-testing.html#cb263-5" aria-hidden="true"></a><span class="kw">table</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" data-line-number="1">my_t_test &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb263-2" data-line-number="2">    <span class="kw">t.test</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>])<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb263-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb263-4" data-line-number="4">pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(log_tdata1, <span class="dv">1</span>, my_t_test)</a>
+<a class="sourceLine" id="cb263-5" data-line-number="5"><span class="kw">table</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</a></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##    98     2</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="sec-testing.html#cb265-1" aria-hidden="true"></a><span class="kw">head</span>(<span class="kw">sort</span>(pvals))</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">sort</span>(pvals))</a></code></pre></div>
 <pre><code>##  feature19  feature61  feature20  feature84   feature1   feature7 
 ## 0.02967230 0.03595002 0.08576252 0.08958506 0.10645476 0.10832969</code></pre>
 <p class="solution-end">
@@ -498,9 +496,9 @@ many time.</p>
 is to visualise the distribution of computed p-values. Below, we see
 the histogram of the <code>tdata1</code> data and 100 values drawn from a uniform
 distribution between 0 and 1. Both are very similar; they are flat.</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="sec-testing.html#cb267-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb267-2"><a href="sec-testing.html#cb267-2" aria-hidden="true"></a><span class="kw">hist</span>(pvals)</span>
-<span id="cb267-3"><a href="sec-testing.html#cb267-3" aria-hidden="true"></a><span class="kw">hist</span>(<span class="kw">runif</span>(<span class="dv">100</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb267-2" data-line-number="2"><span class="kw">hist</span>(pvals)</a>
+<a class="sourceLine" id="cb267-3" data-line-number="3"><span class="kw">hist</span>(<span class="kw">runif</span>(<span class="dv">100</span>))</a></code></pre></div>
 <div class="figure">
 <span id="fig:pvalhist"></span>
 <p class="caption marginnote shownote">
@@ -525,7 +523,7 @@ p-values that at random, or when no statistically significant are
 present (uniform). All other scenarios warrent further inspection, as
 they might point to issue with the data of the tests.</p>
 </div>
-<div id="adjustment-for-multiple-testing" class="section level2" number="7.4">
+<div id="adjustment-for-multiple-testing" class="section level2">
 <h2>
 <span class="header-section-number">7.4</span> Adjustment for multiple testing</h2>
 <p>There are two classes of multiple testing adjumstment methods:</p>
@@ -553,7 +551,7 @@ Figure 7.7: Principle behind the false discovery rate p-value adjustment (<a hre
 adjust the p-values for multiple testing. Below we apply the
 Benjamini-Hochberg FDR procedure using the <code>p.adjust</code> function and
 confirm that none of the features are differentially expressed.</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="sec-testing.html#cb268-1" aria-hidden="true"></a>adj_pvals &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">"BH"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1">adj_pvals &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">"BH"</span>)</a></code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -570,9 +568,9 @@ confirm that none of the features are differentially expressed.</p>
 ► Solution<span id="sol-start-36" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-36', 'sol-start-36')"></span>
 </p>
 <div id="sol-body-36" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="sec-testing.html#cb269-1" aria-hidden="true"></a><span class="kw">any</span>(adj_pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="kw">any</span>(adj_pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="sec-testing.html#cb271-1" aria-hidden="true"></a><span class="kw">min</span>(adj_pvals)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="kw">min</span>(adj_pvals)</a></code></pre></div>
 <pre><code>## [1] 0.899736</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -580,7 +578,7 @@ confirm that none of the features are differentially expressed.</p>
 </div>
 </div>
 </div>
-<div id="result-visualisation" class="section level2" number="7.5">
+<div id="result-visualisation" class="section level2">
 <h2>
 <span class="header-section-number">7.5</span> Result visualisation</h2>
 <div class="question">
@@ -601,21 +599,21 @@ expressed genes in group A vs B.</p>
 ► Solution<span id="sol-start-37" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-37', 'sol-start-37')"></span>
 </p>
 <div id="sol-body-37" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="sec-testing.html#cb273-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb273-2"><a href="sec-testing.html#cb273-2" aria-hidden="true"></a><span class="kw">data</span>(tdata4)</span>
-<span id="cb273-3"><a href="sec-testing.html#cb273-3" aria-hidden="true"></a></span>
-<span id="cb273-4"><a href="sec-testing.html#cb273-4" aria-hidden="true"></a>my_t_test &lt;-<span class="st"> </span><span class="cf">function</span>(x)</span>
-<span id="cb273-5"><a href="sec-testing.html#cb273-5" aria-hidden="true"></a>    <span class="kw">t.test</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>])<span class="op">$</span>p.value</span>
-<span id="cb273-6"><a href="sec-testing.html#cb273-6" aria-hidden="true"></a></span>
-<span id="cb273-7"><a href="sec-testing.html#cb273-7" aria-hidden="true"></a>pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(tdata4, <span class="dv">1</span>, my_t_test)</span>
-<span id="cb273-8"><a href="sec-testing.html#cb273-8" aria-hidden="true"></a><span class="kw">hist</span>(pvals)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</a>
+<a class="sourceLine" id="cb273-2" data-line-number="2"><span class="kw">data</span>(tdata4)</a>
+<a class="sourceLine" id="cb273-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb273-4" data-line-number="4">my_t_test &lt;-<span class="st"> </span><span class="cf">function</span>(x)</a>
+<a class="sourceLine" id="cb273-5" data-line-number="5">    <span class="kw">t.test</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>])<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb273-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb273-7" data-line-number="7">pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(tdata4, <span class="dv">1</span>, my_t_test)</a>
+<a class="sourceLine" id="cb273-8" data-line-number="8"><span class="kw">hist</span>(pvals)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/tdata4ex1-1.png" width="672"></p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="sec-testing.html#cb274-1" aria-hidden="true"></a><span class="kw">table</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" data-line-number="1"><span class="kw">table</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</a></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##    91     9</code></pre>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="sec-testing.html#cb276-1" aria-hidden="true"></a>adjp &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">"BH"</span>)</span>
-<span id="cb276-2"><a href="sec-testing.html#cb276-2" aria-hidden="true"></a><span class="kw">head</span>(<span class="kw">sort</span>(adjp))</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1">adjp &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">"BH"</span>)</a>
+<a class="sourceLine" id="cb276-2" data-line-number="2"><span class="kw">head</span>(<span class="kw">sort</span>(adjp))</a></code></pre></div>
 <pre><code>##  feature87  feature34  feature39  feature68  feature43  feature51 
 ## 0.02927868 0.09032688 0.09032688 0.09032688 0.21467090 0.25799641</code></pre>
 <p class="solution-end">
@@ -642,10 +640,10 @@ of the log2 fold-changes.</p>
 ► Solution<span id="sol-start-38" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-38', 'sol-start-38')"></span>
 </p>
 <div id="sol-body-38" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="sec-testing.html#cb278-1" aria-hidden="true"></a>my_lfc &lt;-<span class="st"> </span><span class="cf">function</span>(x)</span>
-<span id="cb278-2"><a href="sec-testing.html#cb278-2" aria-hidden="true"></a>    <span class="kw">mean</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>])</span>
-<span id="cb278-3"><a href="sec-testing.html#cb278-3" aria-hidden="true"></a>lfc &lt;-<span class="st"> </span><span class="kw">apply</span>(tdata4, <span class="dv">1</span>, my_lfc)</span>
-<span id="cb278-4"><a href="sec-testing.html#cb278-4" aria-hidden="true"></a><span class="kw">hist</span>(lfc)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1">my_lfc &lt;-<span class="st"> </span><span class="cf">function</span>(x)</a>
+<a class="sourceLine" id="cb278-2" data-line-number="2">    <span class="kw">mean</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>])</a>
+<a class="sourceLine" id="cb278-3" data-line-number="3">lfc &lt;-<span class="st"> </span><span class="kw">apply</span>(tdata4, <span class="dv">1</span>, my_lfc)</a>
+<a class="sourceLine" id="cb278-4" data-line-number="4"><span class="kw">hist</span>(lfc)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/tdata4ex2-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -683,10 +681,10 @@ computed above.</p>
 ► Solution<span id="sol-start-39" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-39', 'sol-start-39')"></span>
 </p>
 <div id="sol-body-39" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="sec-testing.html#cb279-1" aria-hidden="true"></a><span class="kw">plot</span>(lfc, <span class="op">-</span><span class="kw">log10</span>(adjp))</span>
-<span id="cb279-2"><a href="sec-testing.html#cb279-2" aria-hidden="true"></a><span class="kw">grid</span>()</span>
-<span id="cb279-3"><a href="sec-testing.html#cb279-3" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="op">-</span><span class="kw">log10</span>(<span class="fl">0.05</span>))</span>
-<span id="cb279-4"><a href="sec-testing.html#cb279-4" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" data-line-number="1"><span class="kw">plot</span>(lfc, <span class="op">-</span><span class="kw">log10</span>(adjp))</a>
+<a class="sourceLine" id="cb279-2" data-line-number="2"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb279-3" data-line-number="3"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="op">-</span><span class="kw">log10</span>(<span class="fl">0.05</span>))</a>
+<a class="sourceLine" id="cb279-4" data-line-number="4"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/volcex-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -737,7 +735,7 @@ question.</p>
 <!-- ## Empirical approximations  -->
 <!-- - Bootstrapping to generate null distributions -->
 </div>
-<div id="a-word-of-caution" class="section level2" number="7.6">
+<div id="a-word-of-caution" class="section level2">
 <h2>
 <span class="header-section-number">7.6</span> A word of caution</h2>
 <p>Summary of statistical inference:</p>
@@ -754,16 +752,16 @@ question.</p>
 <p>Instead of setting up one statistical hypothesis before data
 collection and then testing it, collect data at large, then try lots
 of different tests until one give a statistically significant result
-<span class="citation">(Head et al. <label for="tufte-mn-21" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-21" class="margin-toggle">2015<span class="marginnote">Head, M. L., L. Holman, R. Lanfear, A. T. Kahn, and M. D. Jennions. 2015. “The extent and consequences of p-hacking in science.” <em>PLoS Biol</em> 13: e1002106. <a href="https://doi.org/10.1371/journal.pbio.1002106">https://doi.org/10.1371/journal.pbio.1002106</a>.</span>)</span>.</p>
+<span class="citation">(Head et al. <label for="tufte-mn-21" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-21" class="margin-toggle">2015<span class="marginnote">Head, M. L., L. Holman, R. Lanfear, A. T. Kahn, and M. D. Jennions. 2015. “The extent and consequences of p-hacking in science.” <em>PLoS Biol</em> 13: e1002106. <a href="https://doi.org/10.1371/journal.pbio.1002106" class="uri">https://doi.org/10.1371/journal.pbio.1002106</a>.</span>)</span>.</p>
 </div>
 <div id="p-harking" class="section level3 unnumbered">
 <h3>p-harking</h3>
 <p>HARKing (Hypothesizing After the Results are Known) is the fraudulous
 practice of presenting a post hoc hypothesis, i.e., one based on prior
-result, as a priori hypotheses <span class="citation">(Kerr <label for="tufte-mn-22" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-22" class="margin-toggle">1998<span class="marginnote">Kerr, N. L. 1998. “HARKing: hypothesizing after the results are known.” <em>Pers Soc Psychol Rev</em> 2: 196–217. <a href="https://doi.org/10.1207/s15327957pspr0203_4">https://doi.org/10.1207/s15327957pspr0203_4</a>.</span>)</span>.</p>
+result, as a priori hypotheses <span class="citation">(Kerr <label for="tufte-mn-22" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-22" class="margin-toggle">1998<span class="marginnote">Kerr, N. L. 1998. “HARKing: hypothesizing after the results are known.” <em>Pers Soc Psychol Rev</em> 2: 196–217. <a href="https://doi.org/10.1207/s15327957pspr0203_4" class="uri">https://doi.org/10.1207/s15327957pspr0203_4</a>.</span>)</span>.</p>
 </div>
 </div>
-<div id="additional-exercises" class="section level2" number="7.7">
+<div id="additional-exercises" class="section level2">
 <h2>
 <span class="header-section-number">7.7</span> Additional exercises</h2>
 <div class="question">
@@ -896,25 +894,25 @@ new results.</p></li>
 <div id="the-coin-example-step-by-step" class="section level3 unnumbered">
 <h3>The coin example, step by step</h3>
 <p>The following code chunk simulates 100 coin toss from a biased coin.</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="sec-testing.html#cb280-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb280-2"><a href="sec-testing.html#cb280-2" aria-hidden="true"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb280-3"><a href="sec-testing.html#cb280-3" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="fl">0.59</span></span>
-<span id="cb280-4"><a href="sec-testing.html#cb280-4" aria-hidden="true"></a>flips &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">"H"</span>, <span class="st">"T"</span>), <span class="dt">size =</span> n,</span>
-<span id="cb280-5"><a href="sec-testing.html#cb280-5" aria-hidden="true"></a>                <span class="dt">replace =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb280-6"><a href="sec-testing.html#cb280-6" aria-hidden="true"></a>                <span class="dt">prob =</span> <span class="kw">c</span>(p, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p))</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb280-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb280-3" data-line-number="3">p &lt;-<span class="st"> </span><span class="fl">0.59</span></a>
+<a class="sourceLine" id="cb280-4" data-line-number="4">flips &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">"H"</span>, <span class="st">"T"</span>), <span class="dt">size =</span> n,</a>
+<a class="sourceLine" id="cb280-5" data-line-number="5">                <span class="dt">replace =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb280-6" data-line-number="6">                <span class="dt">prob =</span> <span class="kw">c</span>(p, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p))</a></code></pre></div>
 <p>If the coin were unbiased we expect roughly 50 heads. Let us see how
 many heads and tails there are.</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="sec-testing.html#cb281-1" aria-hidden="true"></a><span class="kw">table</span>(flips)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1"><span class="kw">table</span>(flips)</a></code></pre></div>
 <pre><code>## flips
 ##  H  T 
 ## 62 38</code></pre>
 <p>We calculate the binomial statistic for a number of flips between 0
 and 100. This is the binomial density for an unbiased coin.</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="sec-testing.html#cb283-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"dplyr"</span>)</span>
-<span id="cb283-2"><a href="sec-testing.html#cb283-2" aria-hidden="true"></a>num_heads &lt;-<span class="st"> </span><span class="kw">sum</span>(flips <span class="op">==</span><span class="st"> "H"</span>)</span>
-<span id="cb283-3"><a href="sec-testing.html#cb283-3" aria-hidden="true"></a>binomial_dens &lt;-</span>
-<span id="cb283-4"><a href="sec-testing.html#cb283-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">tibble</span>(<span class="dt">k =</span> <span class="dv">0</span><span class="op">:</span>n) <span class="op">%&gt;%</span></span>
-<span id="cb283-5"><a href="sec-testing.html#cb283-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">p =</span> <span class="kw">dbinom</span>(k, <span class="dt">size =</span> n, <span class="dt">prob =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"dplyr"</span>)</a>
+<a class="sourceLine" id="cb283-2" data-line-number="2">num_heads &lt;-<span class="st"> </span><span class="kw">sum</span>(flips <span class="op">==</span><span class="st"> "H"</span>)</a>
+<a class="sourceLine" id="cb283-3" data-line-number="3">binomial_dens &lt;-</a>
+<a class="sourceLine" id="cb283-4" data-line-number="4"><span class="st">    </span><span class="kw">tibble</span>(<span class="dt">k =</span> <span class="dv">0</span><span class="op">:</span>n) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb283-5" data-line-number="5"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">p =</span> <span class="kw">dbinom</span>(k, <span class="dt">size =</span> n, <span class="dt">prob =</span> <span class="fl">0.5</span>))</a></code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -933,10 +931,10 @@ to <span class="math inline">\(1\)</span>.</p></li>
 </div>
 <p>The following code chunk plots the binomial statistic and the number
 of heads observed is marked in blue.</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="sec-testing.html#cb284-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb284-2"><a href="sec-testing.html#cb284-2" aria-hidden="true"></a><span class="kw">ggplot</span>(binomial_dens, <span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> p)) <span class="op">+</span></span>
-<span id="cb284-3"><a href="sec-testing.html#cb284-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">"identity"</span>) <span class="op">+</span></span>
-<span id="cb284-4"><a href="sec-testing.html#cb284-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"ggplot2"</span>)</a>
+<a class="sourceLine" id="cb284-2" data-line-number="2"><span class="kw">ggplot</span>(binomial_dens, <span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb284-3" data-line-number="3"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">"identity"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb284-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-41-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
@@ -954,7 +952,7 @@ what do you notice about how the distribution is centered?</li>
 </div>
 <p>Now, we set the size of the reject threshold, this is a choice and
 corresponds to how many false discoveries we are happy to allow.</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="sec-testing.html#cb285-1" aria-hidden="true"></a>alpha &lt;-<span class="st"> </span><span class="fl">0.05</span></span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1">alpha &lt;-<span class="st"> </span><span class="fl">0.05</span></a></code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -978,14 +976,14 @@ observe?</p></li>
 ► Solution<span id="sol-start-40" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-40', 'sol-start-40')"></span>
 </p>
 <div id="sol-body-40" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="sec-testing.html#cb286-1" aria-hidden="true"></a>binomial_dens <span class="op">%&gt;%</span></span>
-<span id="cb286-2"><a href="sec-testing.html#cb286-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(p <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(p))</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" data-line-number="1">binomial_dens <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb286-2" data-line-number="2"><span class="st">    </span><span class="kw">filter</span>(p <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(p))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##       k      p
 ##   &lt;int&gt;  &lt;dbl&gt;
 ## 1    50 0.0796</code></pre>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="sec-testing.html#cb288-1" aria-hidden="true"></a>binomial_dens <span class="op">%&gt;%</span></span>
-<span id="cb288-2"><a href="sec-testing.html#cb288-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(p <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(p))</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" data-line-number="1">binomial_dens <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb288-2" data-line-number="2"><span class="st">    </span><span class="kw">filter</span>(p <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(p))</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##       k        p
 ##   &lt;int&gt;    &lt;dbl&gt;
@@ -1004,21 +1002,21 @@ observe?</p></li>
 <ul>
 <li>What does the following code chunk do?</li>
 </ul>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="sec-testing.html#cb290-1" aria-hidden="true"></a>binomial_dens &lt;-</span>
-<span id="cb290-2"><a href="sec-testing.html#cb290-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">arrange</span>(binomial_dens, p) <span class="op">%&gt;%</span></span>
-<span id="cb290-3"><a href="sec-testing.html#cb290-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">reject =</span> (<span class="kw">cumsum</span>(p) <span class="op">&lt;=</span><span class="st"> </span>alpha))</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1">binomial_dens &lt;-</a>
+<a class="sourceLine" id="cb290-2" data-line-number="2"><span class="st">    </span><span class="kw">arrange</span>(binomial_dens, p) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb290-3" data-line-number="3"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">reject =</span> (<span class="kw">cumsum</span>(p) <span class="op">&lt;=</span><span class="st"> </span>alpha))</a></code></pre></div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
 <p>Let us plot the reject region in red</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="sec-testing.html#cb291-1" aria-hidden="true"></a><span class="kw">ggplot</span>(binomial_dens) <span class="op">+</span></span>
-<span id="cb291-2"><a href="sec-testing.html#cb291-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> p, <span class="dt">fill =</span> reject), <span class="dt">stat =</span> <span class="st">"identity"</span>) <span class="op">+</span></span>
-<span id="cb291-3"><a href="sec-testing.html#cb291-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_fill_manual</span>(</span>
-<span id="cb291-4"><a href="sec-testing.html#cb291-4" aria-hidden="true"></a>        <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">TRUE</span><span class="st">`</span> =<span class="st"> "red"</span>, <span class="st">`</span><span class="dt">FALSE</span><span class="st">`</span> =<span class="st"> "#5a5a5a"</span>)) <span class="op">+</span></span>
-<span id="cb291-5"><a href="sec-testing.html#cb291-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads, <span class="dt">col =</span> <span class="st">"blue"</span>) <span class="op">+</span></span>
-<span id="cb291-6"><a href="sec-testing.html#cb291-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1"><span class="kw">ggplot</span>(binomial_dens) <span class="op">+</span></a>
+<a class="sourceLine" id="cb291-2" data-line-number="2"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> k, <span class="dt">y =</span> p, <span class="dt">fill =</span> reject), <span class="dt">stat =</span> <span class="st">"identity"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb291-3" data-line-number="3"><span class="st">    </span><span class="kw">scale_fill_manual</span>(</a>
+<a class="sourceLine" id="cb291-4" data-line-number="4">        <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">TRUE</span><span class="st">`</span> =<span class="st"> "red"</span>, <span class="st">`</span><span class="dt">FALSE</span><span class="st">`</span> =<span class="st"> "#5a5a5a"</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb291-5" data-line-number="5"><span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> num_heads, <span class="dt">col =</span> <span class="st">"blue"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb291-6" data-line-number="6"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"none"</span>)</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-45-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
@@ -1036,7 +1034,7 @@ conclusion now?</li>
 </div>
 </div>
 <p>The above test already has an easy to use funciton in R:</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="sec-testing.html#cb292-1" aria-hidden="true"></a><span class="kw">binom.test</span>(<span class="dt">x =</span> num_heads, <span class="dt">n =</span> n, <span class="dt">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1"><span class="kw">binom.test</span>(<span class="dt">x =</span> num_heads, <span class="dt">n =</span> n, <span class="dt">p =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>## 
 ## 	Exact binomial test
 ## 
@@ -1058,7 +1056,7 @@ conclusion now?</li>
 <a href="sec-dimred.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-09-21
+2020-09-27
 </p>
 </div>
 </div>
