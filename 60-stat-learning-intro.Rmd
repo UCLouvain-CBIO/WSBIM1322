@@ -40,7 +40,10 @@ set.seed(1)
 ge$A1CF <- rnorm(12, 6, 2)
 ge$BRCA1 <- c(abs(rnorm(4, 2, 1)), rnorm(4, 8, 2), rnorm(4, 13, 2))
 ge$TP53 <-  c(rnorm(4, 10, 5), rnorm(4, 10, 3), rnorm(4, 10, 2))
-ge <- tidyr::gather(ge, key = gene, value = expression, A1CF, BRCA1, TP53)
+ge <- tidyr::pivot_longer(ge,
+                          names_to = "gene",
+                          values_to = "expression",
+                          c(A1CF, BRCA1, TP53))
 
 ggplot(ge, aes(x = concentration, y = expression,
                colour = concentration, label = replicate)) +

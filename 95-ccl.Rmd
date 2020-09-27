@@ -266,7 +266,9 @@ k_3 <- res %>%
 e[k_3, ] %>%
     as.data.frame() %>%
     rownames_to_column() %>%
-    gather(value = expression, key = sample_id, -rowname) %>%
+    pivot_longer(names_to = "sample_id",
+                 values_to = "expression",
+                 -rowname) %>%
     full_join(pd) %>%
     ggplot(aes(x = treatment, y = expression)) +
     geom_boxplot(outlier.size = -1) +

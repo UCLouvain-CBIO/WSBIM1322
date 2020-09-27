@@ -60,10 +60,12 @@ human proteins spiked into a yeast proteome background.
 
 ```{r logtans, echo = FALSE, message = FALSE, fig.cap = "Raw quantiation values from the proteomics CPTAC data."}
 library("rWSBIM1322")
+library("tidyverse")
 library("MSnbase")
 data(cptac)
 as_tibble(exprs(cptac)) %>%
-    gather(key = sample, value = expression) %>%
+    pivot_longer(names_to = "sample", values_to = "expression",
+                 everything()) %>%
     ggplot(aes(x = expression, colour = sample)) +
     geom_density()
 ```
@@ -89,7 +91,8 @@ not always[^negbinom]) to log-transform the data, as shown below.
 
 ```{r logtrans2, echo = FALSE, fig.cap = "CPTAC data after log transformation"}
 as_tibble(exprs(cptac)) %>%
-    gather(key = sample, value = expression) %>%
+    pivot_longer(names_to = "sample", values_to = "expression",
+                 everything()) %>% 
     ggplot(aes(x = log2(expression), colour = sample)) +
     geom_density()
 ```
@@ -107,12 +110,14 @@ data(cptac)
 
 library("tidyverse")
 as_tibble(exprs(cptac)) %>%
-    gather(key = sample, value = expression) %>%
+    pivot_longer(names_to = "sample", values_to = "expression",
+                 everything()) %>%
     ggplot(aes(x = expression, colour = sample)) +
     geom_density()
 
 as_tibble(exprs(cptac)) %>%
-    gather(key = sample, value = expression) %>%
+    pivot_longer(names_to = "sample", values_to = "expression",
+                 everything()) %>%
     ggplot(aes(x = log2(expression), colour = sample)) +
     geom_density()
 ```
@@ -289,12 +294,14 @@ cptac <- log(cptac, base = 2)
 cptac_quant <- normalise(cptac, method = "quantiles")
 
 as_tibble(exprs(cptac)) %>%
-    gather(key = sample, value = expression) %>%
+    pivot_longer(names_to = "sample", values_to = "expression",
+                 everything()) %>% 
     ggplot(aes(x = expression, colour = sample)) +
     geom_density()
 
 as_tibble(exprs(cptac_quant)) %>%
-    gather(key = sample, value = expression) %>%
+    pivot_longer(names_to = "sample", values_to = "expression",
+                 everything()) %>%     
     ggplot(aes(x = expression, colour = sample)) +
     geom_density()
 ```

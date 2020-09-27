@@ -689,7 +689,8 @@ fData(mulvey2015)$cl <- factor(cl$cluster)
 
 ms2df(mulvey2015, fcol = "cl") %>%
     rownames_to_column(var = "protein") %>%
-    gather(key = sample, value = expression, -cl, -protein) %>%
+    pivot_longer(names_to = "sample",
+                 values_to = "expression", c(-cl, -protein)) %>%
     mutate(time = sub("hr", "", sub("^.+_", "", sample))) %>%
     mutate(rep = sub("_.+$", "", sub("rep", "", sample))) %>%
     mutate(sample = paste(time, rep, sep = "_")) %>%

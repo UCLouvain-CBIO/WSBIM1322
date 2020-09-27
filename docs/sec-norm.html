@@ -285,14 +285,16 @@ later) and reproduce the figures above. See <code>?cptac</code> for details .</p
 <a class="sourceLine" id="cb208-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb208-5" data-line-number="5"><span class="kw">library</span>(<span class="st">"tidyverse"</span>)</a>
 <a class="sourceLine" id="cb208-6" data-line-number="6"><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb208-7" data-line-number="7"><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb208-8" data-line-number="8"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb208-9" data-line-number="9"><span class="st">    </span><span class="kw">geom_density</span>()</a>
-<a class="sourceLine" id="cb208-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb208-11" data-line-number="11"><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb208-12" data-line-number="12"><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb208-13" data-line-number="13"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">log2</span>(expression), <span class="dt">colour =</span> sample)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb208-14" data-line-number="14"><span class="st">    </span><span class="kw">geom_density</span>()</a></code></pre></div>
+<a class="sourceLine" id="cb208-7" data-line-number="7"><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">names_to =</span> <span class="st">"sample"</span>, <span class="dt">values_to =</span> <span class="st">"expression"</span>,</a>
+<a class="sourceLine" id="cb208-8" data-line-number="8">                 <span class="kw">everything</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb208-9" data-line-number="9"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-10" data-line-number="10"><span class="st">    </span><span class="kw">geom_density</span>()</a>
+<a class="sourceLine" id="cb208-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb208-12" data-line-number="12"><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb208-13" data-line-number="13"><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">names_to =</span> <span class="st">"sample"</span>, <span class="dt">values_to =</span> <span class="st">"expression"</span>,</a>
+<a class="sourceLine" id="cb208-14" data-line-number="14">                 <span class="kw">everything</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb208-15" data-line-number="15"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">log2</span>(expression), <span class="dt">colour =</span> sample)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb208-16" data-line-number="16"><span class="st">    </span><span class="kw">geom_density</span>()</a></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -530,14 +532,16 @@ the data, you can use the <code>normalise</code> function, defining <code>method
 <a class="sourceLine" id="cb222-3" data-line-number="3">cptac_quant &lt;-<span class="st"> </span><span class="kw">normalise</span>(cptac, <span class="dt">method =</span> <span class="st">"quantiles"</span>)</a>
 <a class="sourceLine" id="cb222-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb222-5" data-line-number="5"><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb222-6" data-line-number="6"><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb222-7" data-line-number="7"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb222-8" data-line-number="8"><span class="st">    </span><span class="kw">geom_density</span>()</a></code></pre></div>
+<a class="sourceLine" id="cb222-6" data-line-number="6"><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">names_to =</span> <span class="st">"sample"</span>, <span class="dt">values_to =</span> <span class="st">"expression"</span>,</a>
+<a class="sourceLine" id="cb222-7" data-line-number="7">                 <span class="kw">everything</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb222-8" data-line-number="8"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb222-9" data-line-number="9"><span class="st">    </span><span class="kw">geom_density</span>()</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/quantnormex-1.png" width="672"></p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="kw">as_tibble</span>(<span class="kw">exprs</span>(cptac_quant)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb223-2" data-line-number="2"><span class="st">    </span><span class="kw">gather</span>(<span class="dt">key =</span> sample, <span class="dt">value =</span> expression) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb223-3" data-line-number="3"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb223-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_density</span>()</a></code></pre></div>
+<a class="sourceLine" id="cb223-2" data-line-number="2"><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">names_to =</span> <span class="st">"sample"</span>, <span class="dt">values_to =</span> <span class="st">"expression"</span>,</a>
+<a class="sourceLine" id="cb223-3" data-line-number="3">                 <span class="kw">everything</span>()) <span class="op">%&gt;%</span><span class="st">     </span></a>
+<a class="sourceLine" id="cb223-4" data-line-number="4"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> expression, <span class="dt">colour =</span> sample)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb223-5" data-line-number="5"><span class="st">    </span><span class="kw">geom_density</span>()</a></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/quantnormex-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>

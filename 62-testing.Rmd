@@ -587,14 +587,18 @@ data(tdata2)
 tdata2$patient <- 1:15
 
 library("tidyverse")
-gather(tdata2, key = time, value = biomarker, -patient) %>%
-    ggplot(aes(x = factor(time, levels = c("before", "after")), y = biomarker)) +
+pivot_longer(tdata2,
+             names_to = "time",
+             values_to = "biomarker",
+             c(before, after)) %>%
+    ggplot(aes(x = factor(time, levels = c("before", "after")),
+               y = biomarker)) +
     geom_boxplot() +
     geom_point(aes(colour = factor(patient)), size = 3) +
     geom_segment(data = tdata2,
                  aes(x = 1, xend = 2,
-                     y = before, yend = after),
-                     colour = "black")
+                     y = before, yend = after,
+                     colour = factor(patient)))
 
 t.test(tdata2$before, tdata2$after, paired = TRUE)
 ```
