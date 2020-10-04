@@ -433,11 +433,12 @@ summary(width(up))
 
 
 `r msmbstyle::question_begin()`
+
 Load the `up_selected` data from the `rWSBIM1322` data (version 0.1.1
 or later) and use it to create a subset of the object created
-above. To to so, you will need to match the matching protein
-identifiers from that vector and the names of the `AAStringSet`
-above.
+above. To to so, you will need to match the protein identifiers from
+that vector and the names of the `AAStringSet` above.
+
 `r msmbstyle::question_end()`
 
 ```{r pattern2, message = FALSE, include = FALSE}
