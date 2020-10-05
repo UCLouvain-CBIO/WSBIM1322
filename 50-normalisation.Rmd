@@ -6,11 +6,12 @@
 - What are centring and scaling?
 - What is quantile normalisation?
 - How to assess if normalisation worked.
+- Lean about handling of missing values.
 
 ## Introduction
 
 In a typical high throughput experiment, we assay thousands of
-features (gene transcripts, proteins, metabolites, ...) is a certain
+features (gene transcripts, proteins, metabolites, ...) in a certain
 number of biologically diverse samples (from about 6 to hundreds or
 thousands).
 
@@ -92,7 +93,7 @@ not always[^negbinom]) to log-transform the data, as shown below.
 ```{r logtrans2, echo = FALSE, fig.cap = "CPTAC data after log transformation"}
 as_tibble(exprs(cptac)) %>%
     pivot_longer(names_to = "sample", values_to = "expression",
-                 everything()) %>% 
+                 everything()) %>%
     ggplot(aes(x = log2(expression), colour = sample)) +
     geom_density()
 ```
@@ -295,13 +296,13 @@ cptac_quant <- normalise(cptac, method = "quantiles")
 
 as_tibble(exprs(cptac)) %>%
     pivot_longer(names_to = "sample", values_to = "expression",
-                 everything()) %>% 
+                 everything()) %>%
     ggplot(aes(x = expression, colour = sample)) +
     geom_density()
 
 as_tibble(exprs(cptac_quant)) %>%
     pivot_longer(names_to = "sample", values_to = "expression",
-                 everything()) %>%     
+                 everything()) %>%
     ggplot(aes(x = expression, colour = sample)) +
     geom_density()
 ```
