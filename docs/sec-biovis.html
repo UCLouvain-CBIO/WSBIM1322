@@ -14,20 +14,19 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-10-05" />
+<meta name="date" content="2020-10-11" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
 <title>Chapter 11 Visualising biomolecular data | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -52,68 +51,41 @@ if(f.classList.contains('fa-plus-square')) {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 
@@ -159,50 +131,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec:biovis" class="section level1" number="11">
+<html><body><div id="sec:biovis" class="section level1">
 <h1>
 <span class="header-section-number">Chapter 11</span> Visualising biomolecular data</h1>
-<p>The goal of this chapter is to learn some additional visualisation
-that are widely used in biomedical data analysis, namely</p>
+<p>The goal of this chapter is to learn some additional visualisation that are widely used in biomedical data analysis, namely</p>
 <ul>
 <li>
-<strong>Heatmaps</strong>, including an application of the hierarchical
-clustering that was seen in chapter <a href="sec-ul.html#sec:ul">9</a>.</li>
-<li>Visualisation of intersections, in particular <strong>Venn</strong> and <strong>UpSet</strong>
-plots.</li>
+<strong>Heatmaps</strong>, including an application of the hierarchical clustering that was seen in chapter <a href="sec-ul.html#sec:ul">9</a>.</li>
+<li>Visualisation of intersections, in particular <strong>Venn</strong> and <strong>UpSet</strong> plots.</li>
 </ul>
-<!-- - The *[Gviz](https://bioconductor.org/packages/3.11/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2" number="11.1">
+<!-- - The *[Gviz](https://bioconductor.org/packages/3.11/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2">
 <h2>
 <span class="header-section-number">11.1</span> Heatmaps</h2>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="sec-biovis.html#cb423-1" aria-hidden="true"></a><span class="kw">data</span>(mulvey2015norm)</span>
-<span id="cb423-2"><a href="sec-biovis.html#cb423-2" aria-hidden="true"></a><span class="kw">heatmap</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(mulvey2015norm))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mulvey2015norm)
+<span class="kw">heatmap</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(mulvey2015norm))</code></pre></div>
 <div class="figure">
 <span id="fig:heatmapmulvey"></span>
 <p class="caption marginnote shownote">
-Figure 11.1: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data.
+Figure 11.1: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapmulvey-1.png" alt="Heatmap of the (normalised) Mulvey et al. 2015 proteomic data." width="672">
 </div>
-<p>A heatmap is composed of two hierarchical clusters (one along the
-rows, one along the columns, leading to their re-ordering based on
-their similarity) and a intensity matrix. Each of these components is
-subject to parameters and options.</p>
-<p>As we have seen above, the distance used for clustering can have a
-substantial effect on the results, which is conformed below.</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="sec-biovis.html#cb424-1" aria-hidden="true"></a><span class="kw">heatmap</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(mulvey2015norm), <span class="dt">distfun =</span> cor.dist)</span></code></pre></div>
+<p>A heatmap is composed of two hierarchical clusters (one along the rows, one along the columns, leading to their re-ordering based on their similarity) and a intensity matrix. Each of these components is subject to parameters and options.</p>
+<p>As we have seen above, the distance used for clustering can have a substantial effect on the results, which is conformed below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(mulvey2015norm), <span class="dt">distfun =</span> cor.dist)</code></pre></div>
 <div class="figure">
 <span id="fig:heatmapcor"></span>
 <p class="caption marginnote shownote">
-Figure 11.2: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances.
+Figure 11.2: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapcor-1.png" alt="Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances." width="672">
 </div>
-<p>Another important argument, <code>scale</code> controls whether rows, columns or
-none are scaled. Let’s re-use the toy data from the hierarchical
-clustering section below.</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="sec-biovis.html#cb425-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb425-2"><a href="sec-biovis.html#cb425-2" aria-hidden="true"></a><span class="kw">data</span>(g3)</span>
-<span id="cb425-3"><a href="sec-biovis.html#cb425-3" aria-hidden="true"></a><span class="kw">heatmap</span>(g3, <span class="dt">scale =</span> <span class="st">"none"</span>, <span class="dt">main =</span> <span class="st">"No scaling"</span>)</span></code></pre></div>
+<p>Another important argument, <code>scale</code> controls whether rows, columns or none are scaled. Let's re-use the toy data from the hierarchical clustering section below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)
+<span class="kw">data</span>(g3)
+<span class="kw">heatmap</span>(g3, <span class="dt">scale =</span> <span class="st">"none"</span>, <span class="dt">main =</span> <span class="st">"No scaling"</span>)</code></pre></div>
 <div class="figure">
 <span id="fig:heatmapscale1"></span>
 <p class="caption marginnote shownote">
@@ -210,9 +173,9 @@ Figure 11.3: Effect of scaling on the heatmap output: no scaling.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapscale1-1.png" alt="Effect of scaling on the heatmap output: no scaling." width="672">
 </div>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="sec-biovis.html#cb426-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb426-2"><a href="sec-biovis.html#cb426-2" aria-hidden="true"></a><span class="kw">data</span>(g3)</span>
-<span id="cb426-3"><a href="sec-biovis.html#cb426-3" aria-hidden="true"></a><span class="kw">heatmap</span>(g3, <span class="dt">scale =</span> <span class="st">"row"</span>, <span class="dt">main =</span> <span class="st">"Scaling along rows"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)
+<span class="kw">data</span>(g3)
+<span class="kw">heatmap</span>(g3, <span class="dt">scale =</span> <span class="st">"row"</span>, <span class="dt">main =</span> <span class="st">"Scaling along rows"</span>)</code></pre></div>
 <div class="figure">
 <span id="fig:heatmapscale2"></span>
 <p class="caption marginnote shownote">
@@ -220,9 +183,9 @@ Figure 11.4: Effect of scaling on the heatmap output: scaling along the rows.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapscale2-1.png" alt="Effect of scaling on the heatmap output: scaling along the rows." width="672">
 </div>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="sec-biovis.html#cb427-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb427-2"><a href="sec-biovis.html#cb427-2" aria-hidden="true"></a><span class="kw">data</span>(g3)</span>
-<span id="cb427-3"><a href="sec-biovis.html#cb427-3" aria-hidden="true"></a><span class="kw">heatmap</span>(g3, <span class="dt">scale =</span> <span class="st">"column"</span>, <span class="dt">main =</span> <span class="st">"Scaling along columns"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)
+<span class="kw">data</span>(g3)
+<span class="kw">heatmap</span>(g3, <span class="dt">scale =</span> <span class="st">"column"</span>, <span class="dt">main =</span> <span class="st">"Scaling along columns"</span>)</code></pre></div>
 <div class="figure">
 <span id="fig:heatmapscale3"></span>
 <p class="caption marginnote shownote">
@@ -230,92 +193,70 @@ Figure 11.5: Effect of scaling on the heatmap output: scaling along the columns.
 </p>
 <img src="WSBIM1322_files/figure-html/heatmapscale3-1.png" alt="Effect of scaling on the heatmap output: scaling along the columns." width="672">
 </div>
-<p>Based on the caveats above, it is essential to present and interpret
-heatmaps with great care.</p>
-<p>There exists several packages that allow to produce heatmaps with
-various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.11/Heatplus">Heatplus</a></em> package, or
-the <em><a href="https://bioconductor.org/packages/3.11/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation
-<a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html">here</a>),
-demonstrated below.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="sec-biovis.html#cb428-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"ComplexHeatmap"</span>)</span>
-<span id="cb428-2"><a href="sec-biovis.html#cb428-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span>MSnbase<span class="op">::</span><span class="kw">exprs</span>(mulvey2015norm)</span>
-<span id="cb428-3"><a href="sec-biovis.html#cb428-3" aria-hidden="true"></a>hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(x))</span>
-<span id="cb428-4"><a href="sec-biovis.html#cb428-4" aria-hidden="true"></a>cl &lt;-<span class="st"> </span><span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">12</span>)</span>
-<span id="cb428-5"><a href="sec-biovis.html#cb428-5" aria-hidden="true"></a>ha1 &lt;-<span class="st"> </span><span class="kw">HeatmapAnnotation</span>(<span class="dt">time =</span> mulvey2015norm<span class="op">$</span>time)</span>
-<span id="cb428-6"><a href="sec-biovis.html#cb428-6" aria-hidden="true"></a>ha2 &lt;-<span class="st"> </span><span class="kw">HeatmapAnnotation</span>(<span class="dt">boxplot =</span> <span class="kw">anno_boxplot</span>(x))</span>
-<span id="cb428-7"><a href="sec-biovis.html#cb428-7" aria-hidden="true"></a>ha3 &lt;-<span class="st"> </span><span class="kw">rowAnnotation</span>(<span class="dt">cluster =</span> <span class="kw">factor</span>(cl))</span>
-<span id="cb428-8"><a href="sec-biovis.html#cb428-8" aria-hidden="true"></a><span class="kw">Heatmap</span>(x,</span>
-<span id="cb428-9"><a href="sec-biovis.html#cb428-9" aria-hidden="true"></a>        <span class="dt">top_annotation =</span> ha1,</span>
-<span id="cb428-10"><a href="sec-biovis.html#cb428-10" aria-hidden="true"></a>        <span class="dt">bottom_annotation =</span> ha2,</span>
-<span id="cb428-11"><a href="sec-biovis.html#cb428-11" aria-hidden="true"></a>        <span class="dt">column_names_gp =</span> <span class="kw">gpar</span>(<span class="dt">fontsize =</span> <span class="dv">8</span>),</span>
-<span id="cb428-12"><a href="sec-biovis.html#cb428-12" aria-hidden="true"></a>        <span class="dt">row_names_gp =</span> <span class="kw">gpar</span>(<span class="dt">fontsize =</span> <span class="dv">3</span>)) <span class="op">+</span></span>
-<span id="cb428-13"><a href="sec-biovis.html#cb428-13" aria-hidden="true"></a><span class="st">    </span>ha3</span></code></pre></div>
+<p>Based on the caveats above, it is essential to present and interpret heatmaps with great care.</p>
+<p>There exists several packages that allow to produce heatmaps with various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.11/Heatplus">Heatplus</a></em> package, or the <em><a href="https://bioconductor.org/packages/3.11/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html">here</a>), demonstrated below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"ComplexHeatmap"</span>)
+x &lt;-<span class="st"> </span>MSnbase<span class="op">::</span><span class="kw">exprs</span>(mulvey2015norm)
+hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(x))
+cl &lt;-<span class="st"> </span><span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">12</span>)
+ha1 &lt;-<span class="st"> </span><span class="kw">HeatmapAnnotation</span>(<span class="dt">time =</span> mulvey2015norm<span class="op">$</span>time)
+ha2 &lt;-<span class="st"> </span><span class="kw">HeatmapAnnotation</span>(<span class="dt">boxplot =</span> <span class="kw">anno_boxplot</span>(x))
+ha3 &lt;-<span class="st"> </span><span class="kw">rowAnnotation</span>(<span class="dt">cluster =</span> <span class="kw">factor</span>(cl))
+<span class="kw">Heatmap</span>(x,
+        <span class="dt">top_annotation =</span> ha1,
+        <span class="dt">bottom_annotation =</span> ha2,
+        <span class="dt">column_names_gp =</span> <span class="kw">gpar</span>(<span class="dt">fontsize =</span> <span class="dv">8</span>),
+        <span class="dt">row_names_gp =</span> <span class="kw">gpar</span>(<span class="dt">fontsize =</span> <span class="dv">3</span>)) <span class="op">+</span>
+<span class="st">    </span>ha3</code></pre></div>
 <div class="figure fullwidth">
 <span id="fig:complexheatmap"></span>
 <img src="WSBIM1322_files/figure-html/complexheatmap-1.png" alt="An annotated heatmap produced with the `ComplexHeatmap` Bioconductor package." width="672"><p class="caption marginnote shownote">
 Figure 11.6: An annotated heatmap produced with the <code>ComplexHeatmap</code> Bioconductor package.
 </p>
 </div>
-<p>Other powerful packages to generate and customise heatmaps are
-<a href="https://rlbarter.github.io/superheat/">superheat</a> and
-<a href="https://github.com/raivokolde/pheatmap">pheatmap</a>.</p>
-<p>Finally, the <em><a href="https://github.com/talgalili/heatmaply">heatmaply</a></em>,
-<em><a href="https://github.com/rstudio/d3heatmap">d3heatmap</a></em> and <a href="https://ropensci.github.io/iheatmapr/index.html"><code>iheatmapr</code></a>
-packages can be used to generate interactive heatmaps.</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="sec-biovis.html#cb429-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"heatmaply"</span>)</span>
-<span id="cb429-2"><a href="sec-biovis.html#cb429-2" aria-hidden="true"></a><span class="kw">heatmaply</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(hlm)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ])</span></code></pre></div>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="sec-biovis.html#cb430-1" aria-hidden="true"></a><span class="kw">heatmaply</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(hlm)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ],</span>
-<span id="cb430-2"><a href="sec-biovis.html#cb430-2" aria-hidden="true"></a>          <span class="dt">RowSideColors =</span> <span class="kw">as.factor</span>(<span class="kw">fData</span>(hlm)<span class="op">$</span>markers[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>]))</span></code></pre></div>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="sec-biovis.html#cb431-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"d3heatmap"</span>)</span>
-<span id="cb431-2"><a href="sec-biovis.html#cb431-2" aria-hidden="true"></a><span class="kw">d3heatmap</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(hlm))</span></code></pre></div>
-<p>See also <em>A tutorial in displaying mass spectrometry-based proteomic
-data using heat maps</em> <span class="citation">(Key <label for="tufte-mn-33" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-33" class="margin-toggle">2012<span class="marginnote">Key, M. 2012. “A Tutorial in Displaying Mass Spectrometry-Based Proteomic Data Using Heat Maps.” <em>BMC Bioinformatics</em> 13 Suppl 16: S10. <a href="https://doi.org/10.1186/1471-2105-13-S16-S10">https://doi.org/10.1186/1471-2105-13-S16-S10</a>.</span>)</span>, that applies to any type of omics
-data (not only proteomics) for a useful reference.</p>
+<p>Other powerful packages to generate and customise heatmaps are <a href="https://rlbarter.github.io/superheat/">superheat</a> and <a href="https://github.com/raivokolde/pheatmap">pheatmap</a>.</p>
+<p>Finally, the <em><a href="https://github.com/talgalili/heatmaply">heatmaply</a></em>, <em><a href="https://github.com/rstudio/d3heatmap">d3heatmap</a></em> and <a href="https://ropensci.github.io/iheatmapr/index.html"><code>iheatmapr</code></a> packages can be used to generate interactive heatmaps.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"heatmaply"</span>)
+<span class="kw">heatmaply</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(hlm)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmaply</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(hlm)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ],
+          <span class="dt">RowSideColors =</span> <span class="kw">as.factor</span>(<span class="kw">fData</span>(hlm)<span class="op">$</span>markers[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>]))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"d3heatmap"</span>)
+<span class="kw">d3heatmap</span>(MSnbase<span class="op">::</span><span class="kw">exprs</span>(hlm))</code></pre></div>
+<p>See also <em>A tutorial in displaying mass spectrometry-based proteomic data using heat maps</em> <span class="citation">(Key <label for="tufte-mn-33" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-33" class="margin-toggle">2012<span class="marginnote">Key, M. 2012. “A Tutorial in Displaying Mass Spectrometry-Based Proteomic Data Using Heat Maps.” <em>BMC Bioinformatics</em> 13 Suppl 16: S10. doi:<a href="https://doi.org/10.1186/1471-2105-13-S16-S10">10.1186/1471-2105-13-S16-S10</a>.</span>)</span>, that applies to any type of omics data (not only proteomics) for a useful reference.</p>
 </div>
-<div id="visualising-intersections-between-sets" class="section level2" number="11.2">
+<div id="visualising-intersections-between-sets" class="section level2">
 <h2>
 <span class="header-section-number">11.2</span> Visualising intersections between sets</h2>
-<p>Computing and visualising intersections is a common task in data
-analysis. Venn and Euler diagrams are popular representation when
-comparing sets and their intersection. Two useful R packages to
-generate such plots are
-<em><a href="https://CRAN.R-project.org/package=venneuler">venneuler</a></em> and <em><a href="https://github.com/js229/Vennerable">Vennerable</a></em>.</p>
+<p>Computing and visualising intersections is a common task in data analysis. Venn and Euler diagrams are popular representation when comparing sets and their intersection. Two useful R packages to generate such plots are <em><a href="https://CRAN.R-project.org/package=venneuler">venneuler</a></em> and <em><a href="https://github.com/js229/Vennerable">Vennerable</a></em>.</p>
 <p>We will use the <code>mulvey2015</code> feature names to generate a test data:</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="sec-biovis.html#cb432-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb432-2"><a href="sec-biovis.html#cb432-2" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"pRolocdata"</span>)</span>
-<span id="cb432-3"><a href="sec-biovis.html#cb432-3" aria-hidden="true"></a><span class="kw">data</span>(mulvey2015)</span>
-<span id="cb432-4"><a href="sec-biovis.html#cb432-4" aria-hidden="true"></a>feat_list &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">3</span>,</span>
-<span id="cb432-5"><a href="sec-biovis.html#cb432-5" aria-hidden="true"></a>                       <span class="kw">sample</span>(<span class="kw">featureNames</span>(mulvey2015), <span class="dv">555</span>),</span>
-<span id="cb432-6"><a href="sec-biovis.html#cb432-6" aria-hidden="true"></a>                       <span class="dt">simplify =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb432-7"><a href="sec-biovis.html#cb432-7" aria-hidden="true"></a><span class="kw">names</span>(feat_list) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span></code></pre></div>
-<p>The <code>Venn</code> function from the <code>Vennerable</code> package takes a list as
-input, and computes all possible intersections between these elements
-of the list. In the output below</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
+<span class="kw">library</span>(<span class="st">"pRolocdata"</span>)
+<span class="kw">data</span>(mulvey2015)
+feat_list &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">3</span>,
+                       <span class="kw">sample</span>(<span class="kw">featureNames</span>(mulvey2015), <span class="dv">555</span>),
+                       <span class="dt">simplify =</span> <span class="ot">FALSE</span>)
+<span class="kw">names</span>(feat_list) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
+<p>The <code>Venn</code> function from the <code>Vennerable</code> package takes a list as input, and computes all possible intersections between these elements of the list. In the output below</p>
 <ul>
 <li>
-<code>000</code> refers to the empty set that are present in none of the
-element of the list;</li>
+<code>000</code> refers to the empty set that are present in none of the element of the list;</li>
 <li>
-<code>001</code> is the set of items that are unique to the third element
-(named <code>C</code>) of our list;</li>
-<li>…</li>
+<code>001</code> is the set of items that are unique to the third element (named <code>C</code>) of our list;</li>
+<li>...</li>
 <li>
-<code>011</code> is the set of items that is shared by the second (<code>B</code>) and
-third (<code>C</code>) element (and absent from the first one) of our list;</li>
+<code>011</code> is the set of items that is shared by the second (<code>B</code>) and third (<code>C</code>) element (and absent from the first one) of our list;</li>
 <li>
-<code>111</code> is the set of items that are shared between all elements of
-our list.</li>
+<code>111</code> is the set of items that are shared between all elements of our list.</li>
 </ul>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="sec-biovis.html#cb433-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"Vennerable"</span>)</span>
-<span id="cb433-2"><a href="sec-biovis.html#cb433-2" aria-hidden="true"></a>(v &lt;-<span class="st"> </span><span class="kw">Venn</span>(feat_list))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"Vennerable"</span>)
+(v &lt;-<span class="st"> </span><span class="kw">Venn</span>(feat_list))</code></pre></div>
 <pre><code>## A Venn object on 3 sets named
 ## A,B,C 
 ## 000 100 010 110 001 101 011 111 
 ##   0 336 317 105 340  82 101  32</code></pre>
-<p>Each of these intersections can be accessed using through the
-<code>IntersectionSets</code> slot.</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="sec-biovis.html#cb435-1" aria-hidden="true"></a><span class="co">## access the identifiers</span></span>
-<span id="cb435-2"><a href="sec-biovis.html#cb435-2" aria-hidden="true"></a>v<span class="op">@</span>IntersectionSets[[<span class="st">"110"</span>]]</span></code></pre></div>
+<p>Each of these intersections can be accessed using through the <code>IntersectionSets</code> slot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## access the identifiers
+v<span class="op">@</span>IntersectionSets[[<span class="st">"110"</span>]]</code></pre></div>
 <pre><code>##   [1] "Q8BXZ1"   "Q571H0"   "Q9D1C9"   "P43274"   "Q0VG62"   "Q8CE90-4"
 ##   [7] "Q99LI8"   "P30416"   "Q8C7X2-2" "Q9JI13-2" "Q8BJF9"   "Q6P5E4"  
 ##  [13] "P51881"   "Q8BGT7"   "Q8K2F0"   "P25206"   "Q921E6-3" "Q8BWR8"  
@@ -332,11 +273,10 @@ our list.</li>
 ##  [79] "Q64373-2" "Q61464-4" "Q7TQK4"   "P61982"   "P51150"   "P84091"  
 ##  [85] "Q80XI4"   "Q8CFV9"   "Q8BTZ4-2" "Q8R326-2" "Q811J3"   "Q9D753"  
 ##  [91] "P51410"   "Q9D1H7"   "Q9CXK8"   "Q99LB6-2" "P62862"   "Q9WVB0"  
-##  [97] "P62267"   "O88322"   "Q923E4"   "O54984"  
-##  [ reached getOption("max.print") -- omitted 5 entries ]</code></pre>
-<p>And finally, the <code>Venn</code> object can directly be plotted (albeit with a
-suspicious set of colours) with</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="sec-biovis.html#cb437-1" aria-hidden="true"></a><span class="kw">plot</span>(v)</span></code></pre></div>
+##  [97] "P62267"   "O88322"   "Q923E4"   "O54984"   "O35343"   "Q8VDF2-2"
+## [103] "Q6A009"   "Q3UIA2-4" "Q9CYR6"</code></pre>
+<p>And finally, the <code>Venn</code> object can directly be plotted (albeit with a suspicious set of colours) with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(v)</code></pre></div>
 <div class="figure">
 <span id="fig:venn3"></span>
 <p class="caption marginnote shownote">
@@ -344,49 +284,32 @@ Figure 11.7: A Venn diagram representing the size of all intersections of the th
 </p>
 <img src="WSBIM1322_files/figure-html/venn3-1.png" alt="A Venn diagram representing the size of all intersections of the three elements of out `feat_list` input." width="672">
 </div>
-<p>Venn diagrams are however limited to two to three, possibly four
-sets. The <em><a href="https://CRAN.R-project.org/package=UpSetR">UpSetR</a></em> package is a great solution when
-more sets need to be compared.
-The <em><a href="https://CRAN.R-project.org/package=UpSetR">UpSetR</a></em> visualises intersections of sets as a matrix
-in which the rows represent the sets and the columns represent their
-intersection sizes. For each set that is part of a given intersection,
-a black filled circle is placed in the corresponding matrix cell. If a
-set is not part of the intersection, a light grey circle is shown. A
-vertical black line connects the topmost black circle with the
-bottom most black circle in each column to emphasise the column-based
-relationships. The size of the intersections is shown as a bar chart
-placed on top of the matrix so that each column lines up with exactly
-one bar. A second bar chart showing the size of the each set is shown
-to the left of the matrix.</p>
-<p>We will first make use of the <code>fromList</code> function to convert our list
-to a <code>UpSetR</code> compatible input and then generate the figure:</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="sec-biovis.html#cb438-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"UpSetR"</span>)</span>
-<span id="cb438-2"><a href="sec-biovis.html#cb438-2" aria-hidden="true"></a>upset_in &lt;-<span class="st"> </span><span class="kw">fromList</span>(feat_list)</span>
-<span id="cb438-3"><a href="sec-biovis.html#cb438-3" aria-hidden="true"></a><span class="kw">upset</span>(upset_in)</span></code></pre></div>
+<p>Venn diagrams are however limited to two to three, possibly four sets. The <em><a href="https://CRAN.R-project.org/package=UpSetR">UpSetR</a></em> package is a great solution when more sets need to be compared. The <em><a href="https://CRAN.R-project.org/package=UpSetR">UpSetR</a></em> visualises intersections of sets as a matrix in which the rows represent the sets and the columns represent their intersection sizes. For each set that is part of a given intersection, a black filled circle is placed in the corresponding matrix cell. If a set is not part of the intersection, a light grey circle is shown. A vertical black line connects the topmost black circle with the bottom most black circle in each column to emphasise the column-based relationships. The size of the intersections is shown as a bar chart placed on top of the matrix so that each column lines up with exactly one bar. A second bar chart showing the size of the each set is shown to the left of the matrix.</p>
+<p>We will first make use of the <code>fromList</code> function to convert our list to a <code>UpSetR</code> compatible input and then generate the figure:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"UpSetR"</span>)
+upset_in &lt;-<span class="st"> </span><span class="kw">fromList</span>(feat_list)
+<span class="kw">upset</span>(upset_in)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset1-1.png" width="672"></p>
-<p>The following
-<a href="https://twitter.com/ngehlenborg/status/986354574989709312">tweet</a> by
-the author of the package illustrates how Venn and upset diagrams
-relate to each other.</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="sec-biovis.html#cb439-1" aria-hidden="true"></a><span class="kw">upset</span>(upset_in, <span class="dt">order.by =</span> <span class="st">"freq"</span>)</span></code></pre></div>
+<p>The following <a href="https://twitter.com/ngehlenborg/status/986354574989709312">tweet</a> by the author of the package illustrates how Venn and upset diagrams relate to each other.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upset</span>(upset_in, <span class="dt">order.by =</span> <span class="st">"freq"</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-1.png" width="672"></p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="sec-biovis.html#cb440-1" aria-hidden="true"></a><span class="kw">upset</span>(upset_in, <span class="dt">order.by =</span> <span class="st">"degree"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upset</span>(upset_in, <span class="dt">order.by =</span> <span class="st">"degree"</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-2.png" width="672"></p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="sec-biovis.html#cb441-1" aria-hidden="true"></a><span class="kw">upset</span>(upset_in, <span class="dt">order.by =</span> <span class="kw">c</span>(<span class="st">"freq"</span>, <span class="st">"degree"</span>))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upset</span>(upset_in, <span class="dt">order.by =</span> <span class="kw">c</span>(<span class="st">"freq"</span>, <span class="st">"degree"</span>))</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-3.png" width="672"></p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="sec-biovis.html#cb442-1" aria-hidden="true"></a><span class="kw">upset</span>(upset_in, <span class="dt">order.by =</span> <span class="kw">c</span>(<span class="st">"degree"</span>, <span class="st">"freq"</span>))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upset</span>(upset_in, <span class="dt">order.by =</span> <span class="kw">c</span>(<span class="st">"degree"</span>, <span class="st">"freq"</span>))</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-4.png" width="672"></p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="sec-biovis.html#cb443-1" aria-hidden="true"></a><span class="kw">upset</span>(upset_in, <span class="dt">sets =</span> <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upset</span>(upset_in, <span class="dt">sets =</span> <span class="kw">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>))</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-5.png" width="672"></p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="sec-biovis.html#cb444-1" aria-hidden="true"></a><span class="kw">upset</span>(upset_in, <span class="dt">sets =</span> <span class="kw">c</span>(<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"A"</span>), <span class="dt">keep.order =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upset</span>(upset_in, <span class="dt">sets =</span> <span class="kw">c</span>(<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"A"</span>), <span class="dt">keep.order =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-6.png" width="672"></p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="sec-biovis.html#cb445-1" aria-hidden="true"></a><span class="kw">upset</span>(upset_in, <span class="dt">group.by =</span> <span class="st">"sets"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upset</span>(upset_in, <span class="dt">group.by =</span> <span class="st">"sets"</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-7.png" width="672"></p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="sec-biovis.html#cb446-1" aria-hidden="true"></a><span class="co">## Add set D with a single intersection</span></span>
-<span id="cb446-2"><a href="sec-biovis.html#cb446-2" aria-hidden="true"></a>upset_in_<span class="dv">4</span> &lt;-<span class="st"> </span>upset_in</span>
-<span id="cb446-3"><a href="sec-biovis.html#cb446-3" aria-hidden="true"></a>upset_in_<span class="dv">4</span><span class="op">$</span>D &lt;-<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb446-4"><a href="sec-biovis.html#cb446-4" aria-hidden="true"></a>upset_in_<span class="dv">4</span>[<span class="dv">1</span>, <span class="st">"D"</span>] &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb446-5"><a href="sec-biovis.html#cb446-5" aria-hidden="true"></a><span class="kw">head</span>(upset_in_<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Add set D with a single intersection
+upset_in_<span class="dv">4</span> &lt;-<span class="st"> </span>upset_in
+upset_in_<span class="dv">4</span><span class="op">$</span>D &lt;-<span class="st"> </span><span class="dv">0</span>
+upset_in_<span class="dv">4</span>[<span class="dv">1</span>, <span class="st">"D"</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
+<span class="kw">head</span>(upset_in_<span class="dv">4</span>)</code></pre></div>
 <pre><code>##   A B C D
 ## 1 1 0 1 1
 ## 2 1 0 0 0
@@ -394,23 +317,18 @@ relate to each other.</p>
 ## 4 1 1 0 0
 ## 5 1 0 0 0
 ## 6 1 1 0 0</code></pre>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="sec-biovis.html#cb448-1" aria-hidden="true"></a><span class="kw">upset</span>(upset_in_<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upset</span>(upset_in_<span class="dv">4</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-8.png" width="672"></p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="sec-biovis.html#cb449-1" aria-hidden="true"></a><span class="kw">upset</span>(upset_in_<span class="dv">4</span>, <span class="dt">empty.intersections =</span> <span class="st">"on"</span>)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/upset2-9.png" width="672">
-Visualising intersections with <code>UpSetR</code> shines with more that 4 sets,
-as Venn diagrams become practically useless.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upset</span>(upset_in_<span class="dv">4</span>, <span class="dt">empty.intersections =</span> <span class="st">"on"</span>)</code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-9.png" width="672"> Visualising intersections with <code>UpSetR</code> shines with more that 4 sets, as Venn diagrams become practically useless.</p>
 <p>There is also am UpSetR online app: <a href="https://gehlenborglab.shinyapps.io/upsetr/" class="uri">https://gehlenborglab.shinyapps.io/upsetr/</a></p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
-<p>Generate a bigger dataset containing 10 sets. Try to generate Venn and
-upset diagrams as shown above.</p>
-<p>When the number of sets become larger, the options above, as well as
-<code>nsets</code>, the number of sets (default is 5) and <code>nintersects</code>, the
-number of intersectios (default is 40) become useful.</p>
+<p>Generate a bigger dataset containing 10 sets. Try to generate Venn and upset diagrams as shown above.</p>
+<p>When the number of sets become larger, the options above, as well as <code>nsets</code>, the number of sets (default is 5) and <code>nintersects</code>, the number of intersectios (default is 40) become useful.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -421,11 +339,11 @@ number of intersectios (default is 40) become useful.</p>
 ► Solution<span id="sol-start-78" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-78', 'sol-start-78')"></span>
 </p>
 <div id="sol-body-78" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="sec-biovis.html#cb450-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb450-2"><a href="sec-biovis.html#cb450-2" aria-hidden="true"></a>feat_list_<span class="dv">10</span> &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10</span>, <span class="kw">sample</span>(<span class="kw">featureNames</span>(mulvey2015), <span class="dv">555</span>), <span class="dt">simplify =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb450-3"><a href="sec-biovis.html#cb450-3" aria-hidden="true"></a><span class="kw">names</span>(feat_list_<span class="dv">10</span>) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
-<span id="cb450-4"><a href="sec-biovis.html#cb450-4" aria-hidden="true"></a>feat_list_<span class="dv">10</span> &lt;-<span class="st"> </span><span class="kw">fromList</span>(feat_list_<span class="dv">10</span>)</span>
-<span id="cb450-5"><a href="sec-biovis.html#cb450-5" aria-hidden="true"></a><span class="kw">upset</span>(feat_list_<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
+feat_list_<span class="dv">10</span> &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10</span>, <span class="kw">sample</span>(<span class="kw">featureNames</span>(mulvey2015), <span class="dv">555</span>), <span class="dt">simplify =</span> <span class="ot">FALSE</span>)
+<span class="kw">names</span>(feat_list_<span class="dv">10</span>) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
+feat_list_<span class="dv">10</span> &lt;-<span class="st"> </span><span class="kw">fromList</span>(feat_list_<span class="dv">10</span>)
+<span class="kw">upset</span>(feat_list_<span class="dv">10</span>)</code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upsetchallenge-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -442,7 +360,7 @@ number of intersectios (default is 40) become useful.</p>
 <a href="sec-ccl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-10-05
+2020-10-11
 </p>
 </div>
 </div>
