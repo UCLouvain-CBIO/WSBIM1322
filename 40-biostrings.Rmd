@@ -453,6 +453,12 @@ up2 <- up[names(up) %in% up_selected]
 up2
 ```
 
+```{r pattern2b, message = FALSE, include = FALSE}
+library(BSgenome)
+up <- readAAStringSet("./data/uniprot-proteome_UP000005640_reviewed.fasta.gz")
+up2b <- getSeq(up, up_selected)
+```
+
 `r msmbstyle::question_begin()`
 Among the proteins of interest (that where also found in the original
 data), how many match the following patterns: `DDVF`, `DEVF` `EDVF` or
