@@ -30,7 +30,7 @@ in the expression of three genes,
 absence and presence of a certain drug in a model cell line. The
 expression of these genes is measured four times.
 
-```{r, echo = FALSE, fig.fullwidth = TRUE, fig.cap = "Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5."}
+```{r, echo = FALSE, fig.cap = "Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5.", fig.width = 8}
 expd <- ge <- data.frame(sample = paste0("S", 1:12),
                          group = rep(c("CTRL", "DRUG", "DRUG"), each = 4),
                          concentration = factor(rep(c(0, 1, 5), each = 4)),
@@ -122,7 +122,7 @@ A correlation coefficient ranges between -1 (for anti-correlated
 vectors) to 1 (for perfectly correlated vectors). Non-correlated data
 have a correlation coefficient close to 0.
 
-```{r corfig, fig.cap = "Example of correlation, anti-correlation and lack thereof.", echo = FALSE, fig.fullwidth = TRUE, message = FALSE}
+```{r corfig, fig.cap = "Example of correlation, anti-correlation and lack thereof.", echo = FALSE, message = FALSE, fig.width = 8}
 x <- rnorm(60)
 y1  <- x + rnorm(60, 0, 0.3)
 y2 <- -y1
