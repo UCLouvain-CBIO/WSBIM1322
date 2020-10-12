@@ -89,7 +89,7 @@ model from section \@ref(sec:lm). Below is a figure from
 actual data, and 19 are simulations that are based on the real
 data.
 
-```{r regsim, echo = FALSE, fig.cap = "One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true)."}
+```{r regsim, echo = FALSE, fig.cap = "One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true).", fig.fullwidth = TRUE}
 knitr::include_graphics("./figs/uasa_a_808157_o_f0004g.png")
 ```
 
@@ -148,7 +148,8 @@ the `cor` function.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-```{r corex1}
+
+```{r corex1, message = FALSE}
 x <- rnorm(60)
 y <- rnorm(60)
 
@@ -176,9 +177,9 @@ Let's expand the code above and calculate the correlation coefficient
 between hundreds of random vectors and choose the best one (in abolute
 terms) among those. Let's repeat this procedure 1000 times to obtain
 1000 best correlations (based on @Fan:2014). The figure below shows
-the distribution of these 1000 best correlations when comparing 800 or
-6400 vectors. We see that with more (random) data, we increase that
-the risk of obtaining spurious correlations.
+the distribution of these 1000 best correlations when comparing
+vectors of length 800 or 6400. We see that with more (random) data, we
+increase that the risk of obtaining spurious correlations.
 
 
 ```{r spurcor, cache = TRUE, fig.cap = "Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions.", echo=FALSE}
