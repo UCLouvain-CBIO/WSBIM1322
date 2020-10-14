@@ -25,13 +25,13 @@ We have flipped a coing 100 times and have obtained the following results.
 table(flips)
 ```
 
-If the coin were unbiased we expect roughly 50 heads. Can we make any
+If the coin was unbiased we expect roughly 50 heads. Can we make any
 claims regarding the biaised or unbiaised nature of that coin?
 
 A coin toss can be modeled by a binomial distribution. The histogram
 below shows the binomial statistic for 0 to 100 heads; it represents
-the binomial density of for an unbiased coin. The vertical line shows
-the number of head observed.
+the binomial density of an unbiased coin. The vertical line shows the
+number of head observed.
 
 
 ```{r tosshist, echo = FALSE, fig.cap = "Binomial density of for an unbiased coin to get 0 to 100 heads. The full area of the histogram sums to 1."}
@@ -46,18 +46,19 @@ ggplot(binomial_dens, aes(x = k, y = p)) +
 ```
 
 Above, we see that the most likely outcome would be 50 heads with a
-probability of `r max(binomial_dens$p)`. No head and 100 heads have respectively
-`r binomial_dens$p[binomial_dens$k == 0]` and
-`r binomial_dens$p[binomial_dens$k == 100]` probability.
+probability of `r max(binomial_dens$p)`. No head and 100 heads have a
+probability of $`r binomial_dens$p[binomial_dens$k == 0]`$.
+
 
 We set
 
 - $H_0$: the coin is fair
 - $H_1$: the coin is baised
 
-If `r num_heads` isn't deemed too *extreme*, then we won't reject $H_0$ and
-conclude that the coin in faire. If `r num_heads`, then we reject $H_0$ and
-accept $H_1$, and conclude that the coin is baised.
+If `r num_heads` isn't deemed too *extreme*, then we won't reject
+$H_0$ and conclude that the coin in faire. If `r num_heads` is deemed
+too extreme, then we reject $H_0$ and accept $H_1$, and conclude that
+the coin is baised.
 
 To define *extreme*, we set $\alpha = 0.05$ and rejet $H_0$ if our result is
 outside of the 95% most probably values.
@@ -143,7 +144,8 @@ t = \frac{ \bar X_{1} - \bar X_{2} }
 $$
 
 
-where $\bar X_i$, $s_{i}^{2}$ and $N_i$ are the mean, variance and size of samples 1 and 2.
+where $\bar X_i$, $s_{i}^{2}$ and $N_i$ are the mean, variance and
+size of samples 1 and 2.
 
 
 A t-test has the following assumptions:
@@ -163,9 +165,21 @@ In R, we do this with
 t.test(s1, s2)
 ```
 
-Note that in practice, we would apply moderated versions of the
-t-test, such as the one provided in the `r Biocpkg("limma")` package
-and also widely applied to RNA-Seq count data.
+
+`r msmbstyle::question_begin()`
+
+Note that this result, this p-value, is specific to our sample, the
+measured triplicates, that are assumed to be representative of the
+population. Can you imagine other sets of triplicates that are
+compatible with the population distributions above, but that could
+lead to non-significant results?
+
+`r msmbstyle::question_end()`
+
+
+In practice, we would apply moderated versions of the tests, such as
+the one provided in the `r Biocpkg("limma")` package and also widely
+applied to RNA-Seq count data.
 
 
 
@@ -187,17 +201,19 @@ log-transform it.
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
+
 ```{r tex1}
 log_tdata1 <- log2(tdata1)
 par(mfrow = c(1, 2))
 limma::plotDensities(tdata1)
 limma::plotDensities(log_tdata1)
 ```
+
 `r msmbstyle::solution_end()`
 
-We are now going to apply a t-test to feature 73, comparing the
-expression intensities in groups A and B. In R, this can be done with
-the `t.test` function:
+We are now going to apply a t-test to feature (row) 73, comparing the
+expression intensities in groups A and B. As we have seen, this can be
+done with the `t.test` function:
 
 
 ```{r}
@@ -297,6 +313,8 @@ p-values that at random, or when no statistically significant are
 present (uniform). All other scenarios warrent further inspection, as
 they might point to issue with the data of the tests.
 
+When many tests are preformed, the p-values need to be *adjusted*, to
+take into account that many tests have been performed.
 
 ## Adjustment for multiple testing
 
@@ -314,8 +332,8 @@ There are two classes of multiple testing adjumstment methods:
 
 
 The figure below illustrates the principle behind the FDR
-adjustment. The procedure estimate the proportion of hypthesis that
-are null and then adjust the p-values accordingly.
+adjustment. The procedure estimate the proportion of hypothesis that
+are null and then adjust the p-values accordingly. 
 
 ```{r fdrhist, results='markup', fig.cap="Principle behind the false discovery rate p-value adjustment ([source](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/)).", echo=FALSE, purl=FALSE, fig.align='center', out.width='100%', fig.align='center'}
 knitr::include_graphics("./figs/fdr.png")
@@ -763,6 +781,7 @@ alpha <- 0.05
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
+
 ```{r}
 binomial_dens %>%
     filter(p == max(p))
@@ -770,6 +789,7 @@ binomial_dens %>%
 binomial_dens %>%
     filter(p == min(p))
 ```
+
 `r msmbstyle::solution_end()`
 
 

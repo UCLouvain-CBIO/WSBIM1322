@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-10-11" />
+<meta name="date" content="2020-10-14" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -148,8 +148,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## flips
 ##  H  T 
 ## 62 38</code></pre>
-<p>If the coin were unbiased we expect roughly 50 heads. Can we make any claims regarding the biaised or unbiaised nature of that coin?</p>
-<p>A coin toss can be modeled by a binomial distribution. The histogram below shows the binomial statistic for 0 to 100 heads; it represents the binomial density of for an unbiased coin. The vertical line shows the number of head observed.</p>
+<p>If the coin was unbiased we expect roughly 50 heads. Can we make any claims regarding the biaised or unbiaised nature of that coin?</p>
+<p>A coin toss can be modeled by a binomial distribution. The histogram below shows the binomial statistic for 0 to 100 heads; it represents the binomial density of an unbiased coin. The vertical line shows the number of head observed.</p>
 <div class="figure">
 <span id="fig:tosshist"></span>
 <p class="caption marginnote shownote">
@@ -157,7 +157,7 @@ Figure 7.1: Binomial density of for an unbiased coin to get 0 to 100 heads. The 
 </p>
 <img src="WSBIM1322_files/figure-html/tosshist-1.png" alt="Binomial density of for an unbiased coin to get 0 to 100 heads. The full area of the histogram sums to 1." width="672">
 </div>
-<p>Above, we see that the most likely outcome would be 50 heads with a probability of 0.0795892. No head and 100 heads have respectively 7.888609110^{-31} and 7.888609110^{-31} probability.</p>
+<p>Above, we see that the most likely outcome would be 50 heads with a probability of 0.0795892. No head and 100 heads have a probability of <span class="math inline">\(7.8886091\times 10^{-31}\)</span>.</p>
 <p>We set</p>
 <ul>
 <li>
@@ -165,7 +165,7 @@ Figure 7.1: Binomial density of for an unbiased coin to get 0 to 100 heads. The 
 <li>
 <span class="math inline">\(H_1\)</span>: the coin is baised</li>
 </ul>
-<p>If 62 isn't deemed too <em>extreme</em>, then we won't reject <span class="math inline">\(H_0\)</span> and conclude that the coin in faire. If 62, then we reject <span class="math inline">\(H_0\)</span> and accept <span class="math inline">\(H_1\)</span>, and conclude that the coin is baised.</p>
+<p>If 62 isn't deemed too <em>extreme</em>, then we won't reject <span class="math inline">\(H_0\)</span> and conclude that the coin in faire. If 62 is deemed too extreme, then we reject <span class="math inline">\(H_0\)</span> and accept <span class="math inline">\(H_1\)</span>, and conclude that the coin is baised.</p>
 <p>To define <em>extreme</em>, we set <span class="math inline">\(\alpha = 0.05\)</span> and rejet <span class="math inline">\(H_0\)</span> if our result is outside of the 95% most probably values.</p>
 <div class="figure">
 <span id="fig:tosshist2"></span>
@@ -292,7 +292,18 @@ t = \frac{ \bar X_{1} - \bar X_{2} }
 ## sample estimates:
 ## mean of x mean of y 
 ##  6.307222 11.957431</code></pre>
-<p>Note that in practice, we would apply moderated versions of the t-test, such as the one provided in the <em><a href="https://bioconductor.org/packages/3.11/limma">limma</a></em> package and also widely applied to RNA-Seq count data.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Note that this result, this p-value, is specific to our sample, the measured triplicates, that are assumed to be representative of the population. Can you imagine other sets of triplicates that are compatible with the population distributions above, but that could lead to non-significant results?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>In practice, we would apply moderated versions of the tests, such as the one provided in the <em><a href="https://bioconductor.org/packages/3.11/limma">limma</a></em> package and also widely applied to RNA-Seq count data.</p>
 </div>
 <div id="a-more-realistic-biological-example" class="section level2">
 <h2>
@@ -334,7 +345,7 @@ limma<span class="op">::</span><span class="kw">plotDensities</span>(log_tdata1)
 </p>
 </div>
 </div>
-<p>We are now going to apply a t-test to feature 73, comparing the expression intensities in groups A and B. In R, this can be done with the <code>t.test</code> function:</p>
+<p>We are now going to apply a t-test to feature (row) 73, comparing the expression intensities in groups A and B. As we have seen, this can be done with the <code>t.test</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>log_tdata1[<span class="dv">73</span>, ]
 <span class="kw">t.test</span>(x[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>])</code></pre></div>
 <pre><code>## 
@@ -444,6 +455,7 @@ Figure 7.6: Expected trends of p-values for different scenarios (<a href="http:/
 <img src="figs/plot_melted-1.png" alt="Expected trends of p-values for different scenarios ([source](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/))." width="100%">
 </div>
 <p>In an experiment with enough truly differentially expression features, on expects to observe a substantial increase of small p-values (anti-conservative). In other words, we expect to see more small p-values that at random, or when no statistically significant are present (uniform). All other scenarios warrent further inspection, as they might point to issue with the data of the tests.</p>
+<p>When many tests are preformed, the p-values need to be <em>adjusted</em>, to take into account that many tests have been performed.</p>
 </div>
 <div id="adjustment-for-multiple-testing" class="section level2">
 <h2>
@@ -453,7 +465,7 @@ Figure 7.6: Expected trends of p-values for different scenarios (<a href="http:/
 <li><p><strong>Family-wise error rate</strong> (FWER) that gives the probability of one or more false positives. The <strong>Bonferroni correction</strong> for <em>m</em> tests multiplies each p-value by <em>m</em>. One then checks if any results still remains below significance threshold.</p></li>
 <li><p><strong>False discovery rate</strong> (FDR) that computes the expected fraction of false positives among all discoveries. It allows us to choose <em>n</em> results with a given FDR. Widely used examples are Benjamini-Hochberg or q-values.</p></li>
 </ul>
-<p>The figure below illustrates the principle behind the FDR adjustment. The procedure estimate the proportion of hypthesis that are null and then adjust the p-values accordingly.</p>
+<p>The figure below illustrates the principle behind the FDR adjustment. The procedure estimate the proportion of hypothesis that are null and then adjust the p-values accordingly.</p>
 <div class="figure" style="text-align: center">
 <span id="fig:fdrhist"></span>
 <p class="caption marginnote shownote">
@@ -883,7 +895,7 @@ binomial_dens &lt;-
 <a href="sec-dimred.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-10-11
+2020-10-14
 </p>
 </div>
 </div>
