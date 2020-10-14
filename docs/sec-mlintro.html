@@ -114,6 +114,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a id="active-page" href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a><ul class="toc-sections">
 <li class="toc"><a href="#hypothesis-testing"> Hypothesis testing</a></li>
 <li class="toc"><a href="#handling-more-data"> Handling more data</a></li>
+<li class="toc"><a href="#whats-an-outlier"> What's an outlier</a></li>
 <li class="toc"><a href="#the-curse-of-dimensionality"> The curse of dimensionality</a></li>
 <li class="toc"><a href="#machine-learning"> Machine learning</a></li>
 </ul>
@@ -147,11 +148,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>
 <span class="header-section-number">6.1</span> Hypothesis testing</h2>
 <p>Let's start with the following experiment. Researchers are interested in the expression of three genes, <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=A1CF">A1CF</a>, <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=BRCA1">BRCA1</a> and <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=TP53">TP53</a> in the absence and presence of a certain drug in a model cell line. The expression of these genes is measured four times.</p>
-<div class="figure fullwidth">
+<div class="figure">
 <span id="fig:unnamed-chunk-26"></span>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-26-1.png" alt="Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5." width="672"><p class="caption marginnote shownote">
+<p class="caption marginnote shownote">
 Figure 6.1: Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5.
 </p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-26-1.png" alt="Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5." width="768">
 </div>
 <div class="question">
 <p class="question-begin">
@@ -319,12 +321,12 @@ Figure 6.2: One of these plots is the plot of the actual data, and the remaining
 <p><span class="math display">\[r_{xy} = \frac{\sum_{i = 1}^{n}(x_{i} - \bar x)(y_{i} - \bar y)}{\sqrt{\sum_{i = 1}^{n}(x_{i} - \bar x)^{2}} \sqrt{\sum_{i = 1}^{n}(y_{i} - \bar y)^{2}}}\]</span></p>
 <p>where <span class="math inline">\(n\)</span> is the length of the vector, <span class="math inline">\(x_{i}\)</span> and <span class="math inline">\(y_{i}\)</span> are the <span class="math inline">\(i_{th}\)</span> elements of the <span class="math inline">\(x\)</span> and y$ vectors, <span class="math inline">\(\bar x\)</span> and <span class="math inline">\(\bar y\)</span> are the respective means.</p>
 <p>A correlation coefficient ranges between -1 (for anti-correlated vectors) to 1 (for perfectly correlated vectors). Non-correlated data have a correlation coefficient close to 0.</p>
-<pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
-<div class="figure fullwidth">
+<div class="figure">
 <span id="fig:corfig"></span>
-<img src="WSBIM1322_files/figure-html/corfig-1.png" alt="Example of correlation, anti-correlation and lack thereof." width="960"><p class="caption marginnote shownote">
+<p class="caption marginnote shownote">
 Figure 6.3: Example of correlation, anti-correlation and lack thereof.
 </p>
+<img src="WSBIM1322_files/figure-html/corfig-1.png" alt="Example of correlation, anti-correlation and lack thereof." width="768">
 </div>
 <div class="question">
 <p class="question-begin">
@@ -415,6 +417,10 @@ rs[<span class="kw">abs</span>(rs) <span class="op">&gt;</span><span class="st">
 </p>
 </div>
 </div>
+</div>
+<div id="whats-an-outlier" class="section level2">
+<h2>
+<span class="header-section-number">6.3</span> What's an outlier</h2>
 <p>We are often interested in identifying outliers, i.e. points that are different from the others. One way to define <em>different</em> is by measuring distances between all the samples, or each sample to a virtual <em>average sample</em>. Let's try this ourselves for a dataset of 5 sample that have each been characterised by measuring the expression of genes<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">111</span>)
 samples &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),
@@ -501,7 +507,7 @@ dists[<span class="dv">6</span>, ]</code></pre></div>
 </div>
 <div id="the-curse-of-dimensionality" class="section level2">
 <h2>
-<span class="header-section-number">6.3</span> The curse of dimensionality</h2>
+<span class="header-section-number">6.4</span> The curse of dimensionality</h2>
 <p>There is one very well documented feature of high dimension data, known as the curse of dimensionality. When the numbers of dimensions increase, data become increasingly sparse, the definition of distance or density becomes difficult to define and more and more points become outliers.</p>
 <p>Below, we demonstrate how the number of outliers increases with the number of dimenstion (<a href="https://lgatto.github.io/curse-dimensionality/">source</a>):</p>
 <blockquote>
@@ -521,7 +527,7 @@ res &lt;-<span class="st"> </span><span class="kw">sapply</span>(dat, nout)
 </div>
 <div id="machine-learning" class="section level2">
 <h2>
-<span class="header-section-number">6.4</span> Machine learning</h2>
+<span class="header-section-number">6.5</span> Machine learning</h2>
 <p>The dataset below is composed of 100 data points (samples). For each data point, we have measured values x and y (two genes). We have a dataset of 100 points in 2 dimensions.</p>
 <div class="figure">
 <span id="fig:unlabex"></span>
