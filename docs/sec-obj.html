@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-10-14" />
+<meta name="date" content="2020-11-23" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -47,6 +47,8 @@ if(f.classList.contains('fa-plus-square')) {
 
 }
 </script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -109,11 +111,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
 <a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
 <a id="active-page" href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a><ul class="toc-sections">
-<li class="toc"><a href="#introduction"> Introduction</a></li>
+<li class="toc"><a href="#introduction-1"> Introduction</a></li>
 <li class="toc"><a href="#why-objects"> Why objects?</a></li>
 <li class="toc"><a href="#sec:lm"> Examples in base R</a></li>
 <li class="toc"><a href="#examples-from-the-bioconductor-project"> Examples from the Bioconductor project</a></li>
-<li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
+<li class="toc"><a href="#additional-exercises-2"> Additional exercises</a></li>
 </ul>
 <a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
 <a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
@@ -145,7 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Learn about import Bioconductor objects widely used in omics data analysis.</li>
 <li>Become familiar with how objects are implemented.</li>
 </ul>
-<div id="introduction" class="section level2">
+<div id="introduction-1" class="section level2">
 <h2>
 <span class="header-section-number">3.1</span> Introduction</h2>
 <p>The term <em>object</em> stems from the widely used objet-oriented programming (OOP) paradigm. OOP is however outside of scope of this course (see part III of <span class="citation">Wickham (<label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">2014<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced R</em>. Chapman &amp; Hall/Crc the R Series. Taylor &amp; Francis.</span>)</span>, which is also <a href="https://adv-r.hadley.nz/">freely available online</a>). In the <em>R refresher</em> chapter <a href="sec-refresher.html#sec:refresher">1</a>, we have seen the base types of R, which we have efficiently used in many situations. Sometimes, however, these aren't enough.</p>
@@ -296,26 +298,26 @@ Figure 3.3: Plotting an instance of class <code>lm</code> produces a set of diag
 <h3>
 <span class="header-section-number">3.4.1</span> Common Bioconductor classes</h3>
 <ul>
-<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.11/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, ...)</li>
-<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.11/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
-<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.11/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
+<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.12/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, ...)</li>
+<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.12/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
+<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.12/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
 </li>
-<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.11/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.11/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
+<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.12/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.12/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
 </li>
-<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.11/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
+<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.12/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
 </li>
-<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.11/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
+<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.12/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
 </li>
-<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.11/MSnbase">MSnbase</a></em><code>::MSnExp()</code>
+<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.12/MSnbase">MSnbase</a></em><code>::MSnExp()</code>
 </li>
-<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.11/MSnbase">MSnbase</a></em><code>::MSnSet()</code>
+<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.12/MSnbase">MSnbase</a></em><code>::MSnSet()</code>
 </li>
 </ul>
 </div>
 <div id="the-summarizedexperiment-class" class="section level3">
 <h3>
 <span class="header-section-number">3.4.2</span> The <code>SummarizedExperiment</code> class</h3>
-<p>Let's start by installing<label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> Before installing the package, we first check if they are available with <code>require</code>. If they are missing, the call to <code>require</code> will return <code>FALSE</code>, otherwise it returns <code>TRUE</code> and loads the packages. Given that we negate the return value of <code>require</code> using <code>!</code>, the packages will be installed only when missing.</span> the<em><a href="https://bioconductor.org/packages/3.11/SummarizedExperiment">SummarizedExperiment</a></em> package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.11/airway">airway</a></em> data package, that provides an RNA-Seq example data.</p>
+<p>Let's start by installing<label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> Before installing the package, we first check if they are available with <code>require</code>. If they are missing, the call to <code>require</code> will return <code>FALSE</code>, otherwise it returns <code>TRUE</code> and loads the packages. Given that we negate the return value of <code>require</code> using <code>!</code>, the packages will be installed only when missing.</span> the<em><a href="https://bioconductor.org/packages/3.12/SummarizedExperiment">SummarizedExperiment</a></em> package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.12/airway">airway</a></em> data package, that provides an RNA-Seq example data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"SummarizedExperiment"</span>))
     BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"SummarizedExperiment"</span>)
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"airway"</span>))
@@ -865,7 +867,7 @@ se</code></pre></div>
 ## colData names(1): Treatment</code></pre>
 </div>
 </div>
-<div id="additional-exercises" class="section level2">
+<div id="additional-exercises-2" class="section level2">
 <h2>
 <span class="header-section-number">3.5</span> Additional exercises</h2>
 <div class="question">
@@ -888,7 +890,7 @@ se</code></pre></div>
 <a href="sec-biostrings.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-10-14
+2020-11-23
 </p>
 </div>
 </div>

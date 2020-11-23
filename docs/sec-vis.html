@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-10-14" />
+<meta name="date" content="2020-11-23" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -47,6 +47,8 @@ if(f.classList.contains('fa-plus-square')) {
 
 }
 </script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -116,7 +118,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="toc"><a href="#visualising-2d-data"> Visualising 2D data</a></li>
 <li class="toc"><a href="#visualising-data-along-more-dimensions"> Visualising data along more dimensions</a></li>
 <li class="toc"><a href="#interactive-visualisation"> Interactive visualisation</a></li>
-<li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
+<li class="toc"><a href="#additional-exercises-1"> Additional exercises</a></li>
 </ul>
 <a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
 <a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
@@ -724,7 +726,7 @@ p1 &lt;-<span class="st">  </span><span class="kw">ggplot</span>(sim, <span clas
 p2 &lt;-<span class="st">  </span><span class="kw">ggplot</span>(sim, <span class="kw">aes</span>(<span class="kw">log</span>(x))) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>)
 p1 <span class="op">+</span><span class="st"> </span>p2</code></pre></div>
-<pre><code>## Warning: Removed 8091 rows containing non-finite values (stat_bin).</code></pre>
+<pre><code>## Warning: Removed 8086 rows containing non-finite values (stat_bin).</code></pre>
 <div class="figure">
 <span id="fig:sim"></span>
 <p class="caption marginnote shownote">
@@ -871,7 +873,7 @@ scp2 &lt;-<span class="st"> </span>scp <span class="op">+</span><span class="st"
 <span class="kw">ggplotly</span>(scp2)</code></pre></div>
 <p>See <a href="https://plot.ly/r" class="uri">https://plot.ly/r</a> for examples of interactive graphics online.</p>
 </div>
-<div id="additional-exercises" class="section level2">
+<div id="additional-exercises-1" class="section level2">
 <h2>
 <span class="header-section-number">2.9</span> Additional exercises</h2>
 <div class="question">
@@ -941,7 +943,7 @@ scp2 &lt;-<span class="st"> </span>scp <span class="op">+</span><span class="st"
 <a href="sec-obj.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-10-14
+2020-11-23
 </p>
 </div>
 </div>

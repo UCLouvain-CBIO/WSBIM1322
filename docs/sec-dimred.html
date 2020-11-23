@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-10-14" />
+<meta name="date" content="2020-11-23" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -47,6 +47,8 @@ if(f.classList.contains('fa-plus-square')) {
 
 }
 </script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -114,14 +116,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
 <a id="active-page" href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a><ul class="toc-sections">
-<li class="toc"><a href="#introduction"> Introduction</a></li>
+<li class="toc"><a href="#introduction-3"> Introduction</a></li>
 <li class="toc"><a href="#lower-dimensional-projections"> Lower-dimensional projections</a></li>
 <li class="toc"><a href="#the-new-linear-combinations"> The new linear combinations</a></li>
 <li class="toc"><a href="#summary-and-application"> Summary and application</a></li>
 <li class="toc"><a href="#visualisation"> Visualisation</a></li>
 <li class="toc"><a href="#pre-processing-and-missing-values-with-pca"> Pre-processing and missing values with PCA</a></li>
 <li class="toc"><a href="#the-full-pca-workflow"> The full PCA workflow</a></li>
-<li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
+<li class="toc"><a href="#additional-exercises-6"> Additional exercises</a></li>
 </ul>
 <a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
 <a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
@@ -162,7 +164,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>show how to perform a PCA analysis;</li>
 <li>provide real-life scenarios of PCA analyses on omics data.</li>
 </ul>
-<div id="introduction" class="section level2">
+<div id="introduction-3" class="section level2">
 <h2>
 <span class="header-section-number">8.1</span> Introduction</h2>
 <p>In this chapter, we are going to learn about dimensionality reduction, also called ordination. The goal of dimensionality reduction is to transform a high-dimensinal data into data of lesser dimensions while minimise the loss of information.</p>
@@ -506,7 +508,7 @@ pca3 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(x_t)
 <div id="sol-body-45" class="solution-body" style="display: none;">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pRolocdata)</code></pre></div>
 <pre><code>## 
-## This is pRolocdata version 1.26.0.
+## This is pRolocdata version 1.28.0.
 ## Use 'pRolocdata()' to list available data sets.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mulvey2015)
 <span class="kw">pData</span>(mulvey2015)</code></pre></div>
@@ -905,7 +907,7 @@ Figure 8.18: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> 
 </div>
 </div>
 </div>
-<div id="additional-exercises" class="section level2">
+<div id="additional-exercises-6" class="section level2">
 <h2>
 <span class="header-section-number">8.8</span> Additional exercises</h2>
 <div class="question">
@@ -1044,7 +1046,7 @@ Figure 8.23: Testing the effect of RNA sequencing kits 1 and 2.
 <a href="sec-ul.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-10-14
+2020-11-23
 </p>
 </div>
 </div>

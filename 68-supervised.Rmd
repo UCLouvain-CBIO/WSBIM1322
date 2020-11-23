@@ -563,7 +563,7 @@ high bias and low variance is one that is precise but not accurate:
 it could work extremely well on the training data but miss on new
 data, thus lacking in generalisation power. Conversely, an under-fit
 model could be accurate but with low precision: on average, it works
-will, but is unable to provide a precise answer. Ideally, we want
+well, but is unable to provide a precise answer. Ideally, we want
 models that achieve good precision while still being applicable and
 accurate with new data.
 

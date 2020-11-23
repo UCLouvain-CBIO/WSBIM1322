@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-10-14" />
+<meta name="date" content="2020-11-23" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -47,6 +47,8 @@ if(f.classList.contains('fa-plus-square')) {
 
 }
 </script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -161,7 +163,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="about-this-course-material" class="section level2 unnumbered">
 <h2>About this course material</h2>
-<p>This material is written in R markdown <span class="citation">(Allaire et al. <label for="tufte-mn-6" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle">2020<span class="marginnote">Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2020. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://github.com/rstudio/rmarkdown" class="uri">https://github.com/rstudio/rmarkdown</a>.</span>)</span> and compiled as a book using <code>knitr</code> <span class="citation">(Xie <label for="tufte-mn-7" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-7" class="margin-toggle">2020b<span class="marginnote">Xie, Yihui. 2020b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>.</span>)</span> <code>bookdown</code> <span class="citation">(Xie <label for="tufte-mn-8" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-8" class="margin-toggle">2020a<span class="marginnote">Xie, Yihui. 2020a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</span>)</span>. The source code is publicly available in a Github repository <a href="https://github.com/uclouvain-cbio/WSBIM1322" class="uri">https://github.com/uclouvain-cbio/WSBIM1322</a> and the compiled material can be read at <a href="http://bit.ly/WSBIM1322" class="uri">http://bit.ly/WSBIM1322</a>.</p>
+<p>This material is written in R markdown <span class="citation">(Allaire et al. <label for="tufte-mn-6" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle">2020<span class="marginnote">Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2020. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://github.com/rstudio/rmarkdown" class="uri">https://github.com/rstudio/rmarkdown</a>.</span>)</span> and compiled as a book using <code>knitr</code> <span class="citation">(Xie <label for="tufte-mn-7" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-7" class="margin-toggle">2020b)<span class="marginnote">Xie, Yihui. 2020b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>.</span></span> <code>bookdown</code> <span class="citation">(Xie <label for="tufte-mn-8" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-8" class="margin-toggle">2020b)<span class="marginnote">Xie, Yihui. 2020b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>.</span></span>. The source code is publicly available in a Github repository <a href="https://github.com/uclouvain-cbio/WSBIM1322" class="uri">https://github.com/uclouvain-cbio/WSBIM1322</a> and the compiled material can be read at <a href="http://bit.ly/WSBIM1322" class="uri">http://bit.ly/WSBIM1322</a>.</p>
 <p>Contributions to this material are welcome. The best way to contribute or contact the maintainers is by means of pull requests and <a href="https://github.com/uclouvain-cbio/WSBIM1322/issues">issues</a>. Please familiarise yourself with the <a href="https://github.com/UCLouvain-CBIO/WSBIM1322/blob/master/CONDUCT.md">code of conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 <div id="citation" class="section level2 unnumbered">
@@ -183,7 +185,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"UCLouvain-CBIO/rWSBIM1322"</span>)</code></pre></div>
 <p>and then loaded with</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</code></pre></div>
-<p>To build this book, you'll need <code>bookdown</code> <span class="citation">(Xie <label for="tufte-mn-9" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-9" class="margin-toggle">2020a<span class="marginnote">Xie, Yihui. 2020a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</span>)</span> and a fork<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> <a href="https://github.com/lgatto/msmbstyle" class="uri">https://github.com/lgatto/msmbstyle</a></span> of <a href="https://github.com/grimbough/msmbstyle/"><code>msmbstyle</code> style</a> <span class="citation">(Smith <label for="tufte-mn-10" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-10" class="margin-toggle">2020<span class="marginnote">Smith, Mike. 2020. <em>Msmbstyle: MSMB Styles for R Markdown Documents</em>.</span>)</span>.</p>
+<p>To build this book, you'll need <code>bookdown</code> <span class="citation">(Xie <label for="tufte-mn-9" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-9" class="margin-toggle">2020a)<span class="marginnote">Xie, Yihui. 2020a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</span></span> and a fork<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> <a href="https://github.com/lgatto/msmbstyle" class="uri">https://github.com/lgatto/msmbstyle</a></span> of <a href="https://github.com/grimbough/msmbstyle/"><code>msmbstyle</code> style</a> <span class="citation">(Smith <label for="tufte-mn-10" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-10" class="margin-toggle">2020<span class="marginnote">Smith, Mike. 2020. <em>Msmbstyle: MSMB Styles for R Markdown Documents</em>.</span>)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"bookdown"</span>)
 devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"lgatto/msmbstyle"</span>)</code></pre></div>
 <p>In the course's work directory, simply type</p>
@@ -196,7 +198,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <a href="sec-refresher.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-10-14
+2020-11-23
 </p>
 </div>
 </div>

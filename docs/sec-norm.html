@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-10-14" />
+<meta name="date" content="2020-11-23" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -47,6 +47,8 @@ if(f.classList.contains('fa-plus-square')) {
 
 }
 </script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -111,11 +113,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
 <a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
 <a id="active-page" href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a><ul class="toc-sections">
-<li class="toc"><a href="#introduction"> Introduction</a></li>
+<li class="toc"><a href="#introduction-2"> Introduction</a></li>
 <li class="toc"><a href="#data-transformation"> Data transformation</a></li>
 <li class="toc"><a href="#normalisation"> Normalisation</a></li>
 <li class="toc"><a href="#missing-data"> Missing data</a></li>
-<li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
+<li class="toc"><a href="#additional-exercises-4"> Additional exercises</a></li>
 </ul>
 <a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
 <a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
@@ -145,7 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>How to assess if normalisation worked.</li>
 <li>Lean about handling of missing values.</li>
 </ul>
-<div id="introduction" class="section level2">
+<div id="introduction-2" class="section level2">
 <h2>
 <span class="header-section-number">5.1</span> Introduction</h2>
 <p>In a typical high throughput experiment, we assay thousands of features (gene transcripts, proteins, metabolites, ...) in a certain number of biologically diverse samples (from about 6 to hundreds or thousands).</p>
@@ -167,6 +169,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>
 <span class="header-section-number">5.2</span> Data transformation</h2>
 <p>The very first step in preparing a dataset is to visualise the distribution of the values. Below we see the density plots for 6 proteomics samples and about 4000 peptides from the CPTAC study that compares the reproducibility of quantiative mass spectrometry using human proteins spiked into a yeast proteome background.</p>
+<pre><code>## Warning: multiple methods tables found for 'calculateFragments'</code></pre>
 <div class="figure">
 <span id="fig:logtans"></span>
 <p class="caption marginnote shownote">
@@ -495,7 +498,7 @@ col_na</code></pre></div>
 </div>
 <p>All the concepts and methods seen in this chapter will be paramount in the next ones, once we will test, cluster or classify our data.</p>
 </div>
-<div id="additional-exercises" class="section level2">
+<div id="additional-exercises-4" class="section level2">
 <h2>
 <span class="header-section-number">5.5</span> Additional exercises</h2>
 <div class="question">
@@ -519,7 +522,7 @@ col_na</code></pre></div>
 <a href="sec-mlintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-10-14
+2020-11-23
 </p>
 </div>
 </div>

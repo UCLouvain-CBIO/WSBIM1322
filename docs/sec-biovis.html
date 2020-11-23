@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2020-10-14" />
+<meta name="date" content="2020-11-23" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -47,6 +47,8 @@ if(f.classList.contains('fa-plus-square')) {
 
 }
 </script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -140,7 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <strong>Heatmaps</strong>, including an application of the hierarchical clustering that was seen in chapter <a href="sec-ul.html#sec:ul">9</a>.</li>
 <li>Visualisation of intersections, in particular <strong>Venn</strong> and <strong>UpSet</strong> plots.</li>
 </ul>
-<!-- - The *[Gviz](https://bioconductor.org/packages/3.11/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2">
+<!-- - The *[Gviz](https://bioconductor.org/packages/3.12/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2">
 <h2>
 <span class="header-section-number">11.1</span> Heatmaps</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mulvey2015norm)
@@ -194,7 +196,7 @@ Figure 11.5: Effect of scaling on the heatmap output: scaling along the columns.
 <img src="WSBIM1322_files/figure-html/heatmapscale3-1.png" alt="Effect of scaling on the heatmap output: scaling along the columns." width="672">
 </div>
 <p>Based on the caveats above, it is essential to present and interpret heatmaps with great care.</p>
-<p>There exists several packages that allow to produce heatmaps with various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.11/Heatplus">Heatplus</a></em> package, or the <em><a href="https://bioconductor.org/packages/3.11/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html">here</a>), demonstrated below.</p>
+<p>There exists several packages that allow to produce heatmaps with various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.12/Heatplus">Heatplus</a></em> package, or the <em><a href="https://bioconductor.org/packages/3.12/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html">here</a>), demonstrated below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"ComplexHeatmap"</span>)
 x &lt;-<span class="st"> </span>MSnbase<span class="op">::</span><span class="kw">exprs</span>(mulvey2015norm)
 hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(x))
@@ -360,7 +362,7 @@ feat_list_<span class="dv">10</span> &lt;-<span class="st"> </span><span class="
 <a href="sec-ccl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2020-10-14
+2020-11-23
 </p>
 </div>
 </div>
