@@ -1,10 +1,10 @@
-# Unsupervised learning: dimensionality reduction {#sec:dimred}
+# Unsupervised learning: dimensionality reduction {#sec-dimred}
 
 In **unsupervised learning** (UML), no labels are provided, and the
 learning algorithm focuses solely on detecting structure in unlabelled
 input data. One generally differentiates between
 
-- **Clustering** (see chapter \@ref(sec:ul)), where the goal is to
+- **Clustering** (see chapter \@ref(sec-ul)), where the goal is to
   find homogeneous subgroups within the data; the grouping is based on
   similiarities (or distance) between observations. The result of a
   clustering algorithm is to group the observations (features) into
@@ -17,7 +17,7 @@ algorithms will always find clusters, even when none exists. It is
 thus essential to critically assess and validate (for example using
 existing domain knowledge) the results of any clustering algorithm.
 
-- **Dimensionality reduction** (see chapter \@ref(sec:dimred)), where
+- **Dimensionality reduction** (see chapter \@ref(sec-dimred)), where
   the goal is to summarise the data in a reduced number of
   dimensations, i.e. using a reduced number of (newly computer)
   variables. A typical example in omics is to summarise (and
@@ -449,7 +449,7 @@ interpretation of two real-life proteomics datasets. Both of these
 datasets are available in the `pRolocdata` package.
 
 
-### Extra-embryonic endoderm differentiation in mouse embryonic stem cells {#sec:dimred01}
+### Extra-embryonic endoderm differentiation in mouse embryonic stem cells {#sec-dimred01}
 
 We are first going to focus on the data from Mulvey *et al.* (2015),
 where they present the *Dynamic proteomic profiling of extra-embryonic
@@ -579,7 +579,7 @@ plot3d(pca_mulvey2015$x[, 1],
 
 `r msmbstyle::solution_end()`
 
-### A map of the mouse pluripotent stem cell spatial proteome  {#sec:dimred02}
+### A map of the mouse pluripotent stem cell spatial proteome  {#sec-dimred02}
 
 In this section, we are going to use PCA to explore spatial map of
 mouse pluripotent stem cell by Christoforou *et al.*

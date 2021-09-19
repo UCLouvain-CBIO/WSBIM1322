@@ -1,6 +1,5 @@
 @import 'https://fonts.googleapis.com/css?family=Istok+Web|Oxygen|Source+Sans+Pro';
-@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
-
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css';
 body {
   font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
   background-color: #fefefe;
@@ -91,6 +90,24 @@ h2 {
   font-weight: bold;
 }
 
+.tooltip>.internal-link-btn {
+  display: none;
+  float: none;
+  vertical-align: middle;
+  padding: 0;
+  margin-left: 10px;
+  border: none;
+  background: none;
+  color: #1881c2;
+}
+h2:hover>.tooltip>.internal-link-btn { display: inline }
+h3:hover>.tooltip>.internal-link-btn { display: inline }
+
+.internal-link>a:link {
+  text-decoration: none;
+  background-size: 0;
+}
+
 h3 {
   color: var(--main-bg-color);
   font-size: 1.5rem;
@@ -102,6 +119,15 @@ h4 {
 
 li p {
   margin-bottom: 0;
+}
+
+video {
+  width: 100%;
+}
+
+.shaka-video-container {
+  width: 55%;
+  max-width: 100%;
 }
 
 
@@ -263,36 +289,45 @@ li.toc a {
 
 div.sourceCode {
     width: 56%;
+    /*padding-left: 1%;*/
 }
 
+<<<<<<< HEAD
 /*
 changes to bookdown HTML render this
 obsolete for now
+=======
+>>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
 pre.sourceCode {
     width: auto;
-    padding: 2px;
-    padding-left: 10px;
-    background-color: #F7F7F7;
-    margin-bottom: 3px;
-    margin-top: 3px;
 }
 
 pre {
+<<<<<<< HEAD
   width: 56%;
 }
 */
 
 pre {
     width: auto;
+=======
+    width: 56%;
+>>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
     padding-top: 2px;
     padding-bottom: 2px;
-    padding-left: 1%;
-    padding-right: 1%;
+    /*padding-left: 1%;
+    padding-right: 1%;*/
     background-color: #F7F7F7;
+<<<<<<< HEAD
     margin-bottom: 10px;
     margin-top: 3px;
     margin-top: 4px;
     overflow-x: scroll;
+=======
+    margin-bottom: 4px;
+    margin-top: 4px;
+    overflow-x: auto;
+>>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
 }
 
 .build-date {
@@ -303,45 +338,159 @@ pre {
   margin-top: 0;
 }
 
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 70px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -35px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.tooltip-eqn {
+  position: relative;
+  z-index: 100;
+}
+
+.tooltip-eqn .tooltiptext {
+  visibility: hidden;
+  width: 70px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  margin-left: -35px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-eqn .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip-eqn:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip-eqn>.internal-link-eqn {
+  display: none;
+  float: none;
+  vertical-align: middle;
+  padding: 0;
+  margin-left: 10px;
+  margin-top: -10px;
+  border: none;
+  background: none;
+  color: black;
+  position: absolute;
+}
+.eqn-mouseover:hover>.tooltip-eqn>.internal-link-eqn { display: inline }
+
+.eqn-mouseover {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 760px) {
     body {
-	padding-left: 0;
-	margin-left: 2%;
-	margin-right: 2%;
-	width: auto;
+<<<<<<< HEAD
+        padding-left: 0;
+        margin-left: 2%;
+        margin-right: 2%;
+        width: auto;
     }
     p {
-	width: auto;
-	font-size: 1.2em;
+        width: auto;
+        font-size: 1.2em;
+=======
+        padding-left: 0;
+        margin-left: 2%;
+        width: auto;
+    }
+    p {
+        width: auto;
+        font-size: 1.2rem;
+>>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
     }
     .marginnote, .sidenote {
-	left: 0;
+        left: 0;
     }
+<<<<<<< HEAD
     .sourceCode {
-	display: inline-block;
-	width: 90%;
+        display: inline-block;
+        width: 90%;
+=======
+    div.sourceCode {
+        display: inline-block;
+        width: 100%;
+    }
+    pre {
+      width: 100%;
+>>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
     }
     .title, .author, .dropdown {
-	text-align: center;
+        text-align: center;
     }
     .dropdown {
-	width: 100%;
+        width: 100%;
     }
     .dropdown-content {
-	position: inherit;
-	width: 100%;
+        position: inherit;
+        width: 100%;
     }
     li .dropbtn {
-	padding-top: 0;
+        padding-top: 0;
     }
     h1, h2, h3 {
-	width: 100%;
+        width: 100%;
     }
     h3 {
-	display: inline-block;
+        display: inline-block;
     }
     #TOC {
-	max-width: 100%;
+        max-width: 100%;
     }
 
 }

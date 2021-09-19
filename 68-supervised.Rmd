@@ -1,4 +1,4 @@
-# Supervised learning {#sec:sl}
+# Supervised learning {#sec-sl}
 
 The goal of this last chapter about machine learning will be
 supervised learning, and in particular **classification**. In this
@@ -23,7 +23,7 @@ samples (or features) we have acquired:
 
 - We have performed a spatial proteomics experiment such as in
   Christoforou *et al.* [@Christoforou:2016] (see section
-  \@ref(sec:dimred02)) and know the sub-cellular localisation of some
+  \@ref(sec-dimred02)) and know the sub-cellular localisation of some
   proteins. We want to predict the sub-cellular localisation of the
   other proteins using the protein profiles.
 
@@ -622,7 +622,7 @@ abline(h = 8)
 
 
 Load the `hyperLOPIT2015` data from the `pRolocdata` package. See
-section \@ref(sec:dimred02)) for details. The features variable column
+section \@ref(sec-dimred02)) for details. The features variable column
 `markers` defines the proteins for which the sub-cellular localisation
 is known - these are the labelled data. Those that are marked
 `unknown` are of unknown location - these are the unlabelled data.

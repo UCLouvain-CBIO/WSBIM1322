@@ -132,7 +132,7 @@ interact with R and write scripts and reports. Both R and RStudio are
 easy to install and works on all major operating systems.
 
 Once R and RStudio are installed, a set of packages will need to be
-installed. See section \@ref(sec:setup2) for details.
+installed. See section \@ref(sec-setup2) for details.
 
 The `rWSBIM1322` package provides some pre-formatted data used in this
 course. It can be installed with

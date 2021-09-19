@@ -1,4 +1,4 @@
-# Conclusions {#sec:ccl}
+# Conclusions {#sec-ccl}
 
 In this course, we have consolidated our skills in data analysis and
 visualisation using R. In particular, this course has focused on
@@ -311,4 +311,3 @@ legend("bottomleft", legend = 1:5, pch = 1, col = 1:5)
 
 <!-- We see that the most diverse cluster corresponds roughly to the genes -->
 <!-- that show significant down regulation upon stimulation. -->
-

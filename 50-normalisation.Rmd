@@ -1,4 +1,4 @@
-# Data normalisation: centring, scaling, quantile normalisation {#sec:norm}
+# Data normalisation: centring, scaling, quantile normalisation {#sec-norm}
 
 **Learning objectives**
 
@@ -62,9 +62,10 @@ human proteins spiked into a yeast proteome background.
 ```{r logtans, echo = FALSE, message = FALSE, fig.cap = "Raw quantiation values from the proteomics CPTAC data."}
 library("rWSBIM1322")
 library("tidyverse")
-library("MSnbase")
-data(cptac)
-as_tibble(exprs(cptac)) %>%
+library("SummarizedExperiment")
+
+data(cptac_se)
+as_tibble(assay(cptac_se)) %>%
     pivot_longer(names_to = "sample", values_to = "expression",
                  everything()) %>%
     ggplot(aes(x = expression, colour = sample)) +
@@ -75,7 +76,7 @@ We see that the vast majority of the data are at very low values with
 some very high values:
 
 ```{r, echo = FALSE}
-summary(exprs(cptac))
+summary(assay(cptac_se))
 ```
 
 Such data are difficult to visualise and to analyse, because their
@@ -91,7 +92,7 @@ not always[^negbinom]) to log-transform the data, as shown below.
     variability of such experimental data.
 
 ```{r logtrans2, echo = FALSE, fig.cap = "CPTAC data after log transformation"}
-as_tibble(exprs(cptac)) %>%
+as_tibble(assay(cptac_se)) %>%
     pivot_longer(names_to = "sample", values_to = "expression",
                  everything()) %>%
     ggplot(aes(x = log2(expression), colour = sample)) +
@@ -99,24 +100,26 @@ as_tibble(exprs(cptac)) %>%
 ```
 
 `r msmbstyle::question_begin()`
+
 Load the CPTAC data from the `rWSBIM1322` package (version 0.1.3 or
 later) and reproduce the figures above. See `?cptac` for details .
+
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
 ```{r, eval = FALSE}
 library("rWSBIM1322")
-library("MSnbase")
-data(cptac)
+library("SummarizedExperiment")
+data(cptac_se)
 
 library("tidyverse")
-as_tibble(exprs(cptac)) %>%
+as_tibble(assay(cptac_se)) %>%
     pivot_longer(names_to = "sample", values_to = "expression",
                  everything()) %>%
     ggplot(aes(x = expression, colour = sample)) +
     geom_density()
 
-as_tibble(exprs(cptac)) %>%
+as_tibble(assay(cptac_se)) %>%
     pivot_longer(names_to = "sample", values_to = "expression",
                  everything()) %>%
     ggplot(aes(x = log2(expression), colour = sample)) +
@@ -283,24 +286,30 @@ round(x_norm, 2)
 ```
 
 `r msmbstyle::question_begin()`
-Using the `cptac` data (`MSnSet` object), normalise it using quantile
-normalisation and visualise the data before and after. To normalise
-the data, you can use the `normalise` function, defining `method = "quantiles"`.
+
+Using the `cptac_se` data (`SummarizedExperiment` object),
+log-transform and normalise it using quantile normalisation, then
+visualise the data before and after. To log-transform and normalise
+the data, you can use the `logTransform()` and `normalize(method =
+"quantiles")` functions from the `QFeatures` package.
+
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
-```{r quantnormex}
-data(cptac)
-cptac <- log(cptac, base = 2)
-cptac_quant <- normalise(cptac, method = "quantiles")
 
-as_tibble(exprs(cptac)) %>%
+```{r quantnormex, message = FALSE}
+library(QFeatures)
+data(cptac_se)
+cptac <- logTransform(cptac_se, base = 2)
+cptac_quant <- normalize(cptac, method = "quantiles")
+
+as_tibble(assay(cptac)) %>%
     pivot_longer(names_to = "sample", values_to = "expression",
                  everything()) %>%
     ggplot(aes(x = expression, colour = sample)) +
     geom_density()
 
-as_tibble(exprs(cptac_quant)) %>%
+as_tibble(assay(cptac_quant)) %>%
     pivot_longer(names_to = "sample", values_to = "expression",
                  everything()) %>%
     ggplot(aes(x = expression, colour = sample)) +
@@ -352,9 +361,9 @@ There are two approaches to deal with missing values:
    while others can only be applied to data missing not at random.
 
 `r msmbstyle::question_begin()`
-Load the `naset` object available in the `MSnbase` package. You can
-either use the data as an `MSnSet` (as it currently is), or convert it
-to an `SummarizedExperiment` with `as(naset, "SummarizedExperiment")`.
+
+Load the `se_na2` `SummarizedExperiment` object available in the
+`QFeatures` package.
 
 Calculate the number of missing values along the rows and sample, then
 visualise these data and represent them as tables showing the number
@@ -365,13 +374,14 @@ of occurences of 1, 2, 3, ... missing values.
 
 `r msmbstyle::solution_begin()`
 ```{r}
-library("MSnbase")
-data(naset)
-col_na <- colSums(is.na(exprs(naset)))
+library("QFeatures")
+data(se_na2)
+
+col_na <- colSums(is.na(assay(se_na2)))
 col_na
 barplot(col_na)
 
-row_na <- rowSums(is.na(exprs(naset)))
+row_na <- rowSums(is.na(assay(se_na2)))
 table(row_na)
 hist(row_na)
 ```

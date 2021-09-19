@@ -1,4 +1,4 @@
-# High-level data structures  {#sec:obj}
+# High-level data structures  {#sec-obj}
 
 **Learning objectives**
 
@@ -16,11 +16,11 @@ The term *object* stems from the widely used objet-oriented
 programming (OOP) paradigm. OOP is however outside of scope of this
 course (see part III of @advancedR, which is also [freely available
 online](https://adv-r.hadley.nz/)). In the *R refresher* chapter
-\@ref(sec:refresher), we have seen the base types of R, which we have
+\@ref(sec-refresher), we have seen the base types of R, which we have
 efficiently used in many situations. Sometimes, however, these aren't
 enough.
 
-We have also use object, for example in chapter \@ref(sec:vis), when
+We have also use object, for example in chapter \@ref(sec-vis), when
 generating ggplot visualisation. We have seen that it is possible to
 store the output of `ggplot2` in a variable, that contain all the data
 and information necessary to produce the figure.
@@ -28,13 +28,13 @@ and information necessary to produce the figure.
 ## Why objects?
 
 - Combine many parts of a complext data, for example store data (and
-  possibly different forms thereof (see chapter \@ref(sec:norm)) and
+  possibly different forms thereof (see chapter \@ref(sec-norm)) and
   metadata together.
 
 - Objects are **self describing**: an object to store high-throughput
   sequencing (HTS) data contains high-throughput sequencing
   data. Replace high-throughput sequencing data by DNA sequences (see
-  chapter \@ref(sec:biostrings)), proteomics, ... and it will still
+  chapter \@ref(sec-biostrings)), proteomics, ... and it will still
   hold.
 
 - Using object enables **consistency**[^flex]: whoever prepares the
@@ -117,7 +117,7 @@ Object of class person:
 
 We will focus on objects and their usage here.
 
-## Examples in base R {#sec:lm}
+## Examples in base R {#sec-lm}
 
 Let's start by generating a testing dataset composed of two correlated
 variables, `x` and `y`:
@@ -183,7 +183,7 @@ library("BiocStyle")
 ```
 
 We have already briefly seen the [Bioconductor
-project](https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec:bioconductor). It
+project](https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec-bioconductor). It
 initiated by Robert Gentleman (@Gentleman:2004;@Huber:2015), one of
 the two creators of the R language, and centrally offers dedicated R
 packages for bioinformatics.
@@ -205,8 +205,8 @@ summarised below.
 - Gene sets – `r Biocpkg("GSEABase")``::GeneSet()` `r Biocpkg("GSEABase")``::GeneSetCollection()`
 - Multi-omics data – `r Biocpkg("MultiAssayExperiment")``::MultiAssayExperiment()`
 - Single cell data – `r Biocpkg("SingleCellExperiment")``::SingleCellExperiment()`
-- Mass spectrometry data – `r Biocpkg("MSnbase")``::MSnExp()`
-- Quantitative proteomics data – `r Biocpkg("MSnbase")``::MSnSet()`
+- Mass spectrometry data – `r Biocpkg("Spectra")``::Spectra()`
+- Quantitative proteomics data – `r Biocpkg("QFeatures")``::QFeatures()`
 
 ### The `SummarizedExperiment` class
 

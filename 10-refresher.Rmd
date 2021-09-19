@@ -1,4 +1,4 @@
-# R refresher {#sec:refresher}
+# R refresher {#sec-refresher}
 
 The objectives of this chapter is to review some R syntax, functions
 and data structures that will be needed for the following chapters.
@@ -8,7 +8,7 @@ and data structures that will be needed for the following chapters.
 - Setting up an [RStudio project](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up)
 - [Install](https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#r-packages)
   packages from CRAN and
-  [Bioconductor](https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec:bioconductor).
+  [Bioconductor](https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec-bioconductor).
 
 ```{r, eval = FALSE}
 BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
@@ -47,14 +47,12 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 
 - The [dplyr](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html) package
 - [Piping](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#pipes)
-- Wide and long data (converting with `gather` and `spread` or the
-  [new `pivot_longer` and `pivot_wider`
-  functions](https://tidyr.tidyverse.org/dev/articles/pivot.html))
+- Wide and long data, and their conversion with the `pivot_longer` and
+  `pivot_wider` functions.
 
 ## Saving and exporting
 
-- `save()` and `load()` binary data.
-- `saveRDS` and `readRDS` binary data.
+- `saveRDS()` and `readRDS()` binary data.
 - [Exporting
   data](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#exporting-data-1)
   with `write.csv` and `read.csv` (or `write_csv` and `read_csv`) and
@@ -62,7 +60,7 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 - [Saving
   figures](https://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html#exporting-plots)
   (`ggsave` and file devices such as `png()`, `pdf()`, ...).
-- Provenance: `sessionInfo()`
+- Package versions: `sessionInfo()`
 
 ## Programming
 
@@ -74,8 +72,6 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
   `for` loops and `apply` functions
 
 ## Additional exercises
-
-
 
 `r msmbstyle::question_begin()`
 Read the `interro2.rds` from the `rWSBIM1207` package (version 0.1.9

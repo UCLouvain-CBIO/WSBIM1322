@@ -1,4 +1,4 @@
-# Manipulating sequences with Biostrings {#sec:biostrings}
+# Manipulating sequences with Biostrings {#sec-biostrings}
 
 **Learning objectives**
 

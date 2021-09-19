@@ -1,12 +1,12 @@
-# Introduction to statistical machine learning {#sec:mlintro}
+# Introduction to statistical machine learning {#sec-mlintro}
 
 ```{r env_ml, echo = FALSE, message = FALSE}
 library("ggplot2")
 ```
 
 The next chapters will focus on concepts from statistical (hypothesis
-testing in chapter \@ref(sec:testing)) and general machine learning
-(chapters \@ref(sec:ul), \@ref(sec:dimred) and \@ref(sec:sl)). Before
+testing in chapter \@ref(sec-testing)) and general machine learning
+(chapters \@ref(sec-ul), \@ref(sec-dimred) and \@ref(sec-sl)). Before
 diving into the technical details, it is useful to learn (or remind
 ourselves) why these techniques are so incredibly important when
 analysing (i.e. looking to understand) high throughput biomedical
@@ -77,14 +77,14 @@ knitr::kable(expd)
 `r msmbstyle::solution_end()`
 
 
-Statistical hypothesis testing (chapter \@ref(sec:testing)) will help
+Statistical hypothesis testing (chapter \@ref(sec-testing)) will help
 us formalise when to call genes differentially expressed.
 
 ## Handling more data
 
 There are many more types of patterns that we wold be interested in
 identifying in omics data. Let's reconsider the linear regression
-model from section \@ref(sec:lm). Below is a figure from
+model from section \@ref(sec-lm). Below is a figure from
 @Majumder2013. Among the 20 scatter plots below, one represents the
 actual data, and 19 are simulations that are based on the real
 data.
@@ -366,15 +366,15 @@ machine learning. The first example is a case of **unsupervised
 learning**. In unsupervised learning we aim at find patterns in a
 dataset without the help of any additional information or
 labels. Typical applications of unsupervised learning is clustering
-(as in our first example and chapter \@ref(sec:ul)) or dimensionality
-reduction (chapter \@ref(sec:dimred))
+(as in our first example and chapter \@ref(sec-ul)) or dimensionality
+reduction (chapter \@ref(sec-dimred))
 
 
 In our second example, we were given labels for each observation. This
 is an example of **supervised learning**, that aims at learning inputs
 and mapping them to certain target outputs with the help of known
 labels. Example of supervised learning are classification as in the
-example above (see chapter \@ref(sec:sl)) and regression, where the
+example above (see chapter \@ref(sec-sl)) and regression, where the
 target isn't a category, but a value.
 
 There are additional types of machine learning, such as

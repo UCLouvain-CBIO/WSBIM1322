@@ -1,10 +1,10 @@
-# Visualising biomolecular data {#sec:biovis}
+# Visualising biomolecular data {#sec-biovis}
 
 The goal of this chapter is to learn some additional visualisation
 that are widely used in biomedical data analysis, namely
 
 - **Heatmaps**, including an application of the hierarchical
-  clustering that was seen in chapter \@ref(sec:ul).
+  clustering that was seen in chapter \@ref(sec-ul).
 - Visualisation of intersections, in particular **Venn** and **UpSet**
   plots.
 

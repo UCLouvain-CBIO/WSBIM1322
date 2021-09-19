@@ -1,4 +1,4 @@
-# Unsupervised learning: clustering {#sec:ul}
+# Unsupervised learning: clustering {#sec-ul}
 
 ## Introduction
 
@@ -77,7 +77,7 @@ $$ \sum{ \frac{ | x_{i} - y_{i} | }{ | x_{i} | + | y_{i} | } } $$
 
 
 **Correlation based distance** uses the Pearson correlation (see the
-`cor` function and chapter \ref(sec:mlintro)) or its absolute value
+`cor` function and chapter \ref(sec-mlintro)) or its absolute value
 and transform it in into a distance metric:
 
 $$ d(A, B) = 1 - cor(A, B) $$
@@ -510,8 +510,8 @@ sensitive to difference scales. This applies to unsupervised methods
 as well as supervised methods.
 
 A typical way to pre-process the data prior to learning is to scale
-the data (see chapter \@ref(sec:norm)), or apply principal component
-analysis (see chapter \@ref(sec:dimred)).
+the data (see chapter \@ref(sec-norm)), or apply principal component
+analysis (see chapter \@ref(sec-dimred)).
 
 In R, scaling is done with the `scale` function.
 

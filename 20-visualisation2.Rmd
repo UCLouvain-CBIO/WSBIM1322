@@ -1,4 +1,4 @@
-# Data visualisation {#sec:vis}
+# Data visualisation {#sec-vis}
 
 This chapter is based on Chapter 3 [*High Quality Graphics in
 R*](https://www-huber.embl.de/msmb/Chap-Graphics.html) of the *Modern
@@ -70,7 +70,7 @@ knitr::kable(tab)
 But...
 
 While the *residuals* of the linear regression (see chapter
-\@ref(sec:obj)) clearly indicate fundamental differences in these
+\@ref(sec-obj)) clearly indicate fundamental differences in these
 data, the most simple and straightforward approach is *visualisation*
 to highlight the fundamental differences in the datasets.
 
@@ -107,13 +107,13 @@ An important aspect of data visualisation is data **manipulation**,
 transformation and the format of the data: as seen in
 [WSBIM1207](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html),
 its scale (see below) and normalisation of the data (see chapter
-\@ref(sec:norm)).
+\@ref(sec-norm)).
 
 A last feature of data that is intimately associated with its
 manipulation and visualisation is its **structure**: long and wide
 dataframes (as introduced in
 [WSBIM1207](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html)
-or dedicated objects (see chapter \@ref(sec:obj)). Some visualisations
+or dedicated objects (see chapter \@ref(sec-obj)). Some visualisations
 will be much easier when the data is formatted in a certain way.
 
 ## Base plotting
@@ -329,22 +329,24 @@ samples.
 
 
 First, we convert a microarray gene expression data to a data.frame,
-fit for some `ggplot2` visualisation, focusing on genes Fgf4, Gata4,
-Gata6 and Sox2.
+fit for some `ggplot2` visualisation, focusing on genes Fgf4 (probeset
+`X1420085_at`), Gata4 (`X1418863_at`), Gata6 (`X1425463_at`) and Sox2
+(`X1416967_at`).
 
 
-```{r selprobes}
-selected_genes <- c(Fgf4 = "X1420085_at", Gata4 = "X1418863_at",
-                    Gata6 = "X1425463_at",  Sox2 = "X1416967_at")
-dfx <- hiiragi2013df1[, selected_genes]
-colnames(dfx) <- names(selected_genes)
-```
+```{r pivot_longer, message = FALSE}
+library("tidyverse")
+genes  <- rename(hiiragi2013df1,
+                 Fgf4 = X1420085_at,
+                 Gata4 = X1418863_at,
+                 Gata6 = X1425463_at,
+                 Sox2 = X1416967_at) %>%
+    select(Fgf4, Gata4,
+           Gata6, Sox2) %>%
+    pivot_longer(names_to = "gene",
+                 values_to = "expression",
+                 everything())
 
-```{r pivot_longer}
-library("dplyr")
-library("tidyr")
-genes <- pivot_longer(dfx, names_to = "gene", values_to = "expression",
-                      everything())
 head(genes)
 ```
 
