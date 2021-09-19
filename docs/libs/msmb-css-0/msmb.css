@@ -292,42 +292,17 @@ div.sourceCode {
     /*padding-left: 1%;*/
 }
 
-<<<<<<< HEAD
-/*
-changes to bookdown HTML render this
-obsolete for now
-=======
->>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
-pre.sourceCode {
-    width: auto;
-}
-
-pre {
-<<<<<<< HEAD
-  width: 56%;
-}
-*/
-
 pre {
     width: auto;
-=======
-    width: 56%;
->>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
     padding-top: 2px;
     padding-bottom: 2px;
     /*padding-left: 1%;
     padding-right: 1%;*/
     background-color: #F7F7F7;
-<<<<<<< HEAD
     margin-bottom: 10px;
     margin-top: 3px;
     margin-top: 4px;
     overflow-x: scroll;
-=======
-    margin-bottom: 4px;
-    margin-top: 4px;
-    overflow-x: auto;
->>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
 }
 
 .build-date {
@@ -435,7 +410,6 @@ pre {
 
 @media (max-width: 760px) {
     body {
-<<<<<<< HEAD
         padding-left: 0;
         margin-left: 2%;
         margin-right: 2%;
@@ -444,31 +418,13 @@ pre {
     p {
         width: auto;
         font-size: 1.2em;
-=======
-        padding-left: 0;
-        margin-left: 2%;
-        width: auto;
-    }
-    p {
-        width: auto;
-        font-size: 1.2rem;
->>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
     }
     .marginnote, .sidenote {
         left: 0;
     }
-<<<<<<< HEAD
     .sourceCode {
         display: inline-block;
         width: 90%;
-=======
-    div.sourceCode {
-        display: inline-block;
-        width: 100%;
-    }
-    pre {
-      width: 100%;
->>>>>>> 1e790b0d671328315b5484018a6490a173f9ca93
     }
     .title, .author, .dropdown {
         text-align: center;
