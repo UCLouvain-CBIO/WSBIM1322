@@ -43,7 +43,7 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 | **list**   | 1 (length)           | n                    |
 
 
-## Tidyvers
+## Tidyverse
 
 - The [dplyr](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html) package
 - [Piping](https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#pipes)

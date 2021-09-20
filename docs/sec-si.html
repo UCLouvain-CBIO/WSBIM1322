@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-09-19" />
+<meta name="date" content="2021-09-20" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -27,7 +27,7 @@ MathJax.Hub.Config({
 
 <title>Chapter 13 Session information | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -74,6 +74,7 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -207,19 +208,19 @@ div.csl-indent {
 <div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="sec-si.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 20.04.3 LTS
+## Running under: Manjaro Linux
 ## 
 ## Matrix products: default
-## BLAS:   /usr/lib/x86_64-linux-gnu/libf77blas.so.3.10.3
-## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+## BLAS:   /usr/lib/libblas.so.3.10.0
+## LAPACK: /usr/lib/liblapack.so.3.10.0
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=en_GB.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=en_GB.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=en_GB.UTF-8       LC_NAME=C                 
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=en_GB.UTF-8 LC_IDENTIFICATION=C       
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
 ## [1] grid      stats4    stats     graphics  grDevices utils     datasets 
@@ -230,13 +231,13 @@ div.csl-indent {
 ##  [3] ComplexHeatmap_2.9.4                  class_7.3-19                         
 ##  [5] pRoloc_1.33.0                         BiocParallel_1.27.7                  
 ##  [7] MLInterfaces_1.73.0                   cluster_2.1.2                        
-##  [9] annotate_1.71.0                       XML_3.99-0.7                         
+##  [9] annotate_1.71.0                       XML_3.99-0.8                         
 ## [11] AnnotationDbi_1.55.1                  bioDist_1.65.0                       
 ## [13] KernSmooth_2.23-20                    factoextra_1.0.7                     
 ## [15] pRolocdata_1.31.0                     MSnbase_2.19.2                       
-## [17] ProtGenerics_1.25.1                   mzR_2.27.1                           
-## [19] Rcpp_1.0.7                            QFeatures_1.3.6                      
-## [21] MultiAssayExperiment_1.19.11          BSgenome.Dmelanogaster.UCSC.dm2_1.4.0
+## [17] ProtGenerics_1.25.2                   mzR_2.27.1                           
+## [19] Rcpp_1.0.7                            QFeatures_1.3.7                      
+## [21] MultiAssayExperiment_1.19.12          BSgenome.Dmelanogaster.UCSC.dm2_1.4.0
 ## [23] BSgenome_1.61.0                       rtracklayer_1.53.1                   
 ## [25] Biostrings_2.61.2                     XVector_0.33.0                       
 ## [27] rWSBIM1207_0.1.14                     airway_1.13.0                        
@@ -257,14 +258,14 @@ div.csl-indent {
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] rappdirs_0.3.3           ModelMetrics_1.2.2.2     coda_0.19-4             
-##   [4] bit64_4.0.5              knitr_1.34               DelayedArray_0.19.2     
+##   [4] bit64_4.0.5              knitr_1.34               DelayedArray_0.19.3     
 ##   [7] data.table_1.14.0        rpart_4.1-15             KEGGREST_1.33.0         
-##  [10] RCurl_1.98-1.4           AnnotationFilter_1.17.1  doParallel_1.0.16       
+##  [10] RCurl_1.98-1.5           AnnotationFilter_1.17.1  doParallel_1.0.16       
 ##  [13] generics_0.1.0           preprocessCore_1.55.2    RSQLite_2.2.8           
 ##  [16] future_1.22.1            proxy_0.4-26             bit_4.0.4               
 ##  [19] tzdb_0.1.2               xml2_1.3.2               lubridate_1.7.10        
 ##  [22] assertthat_0.2.1         isoband_0.2.5            viridis_0.6.1           
-##  [25] gower_0.2.2              xfun_0.25                hms_1.1.0               
+##  [25] gower_0.2.2              xfun_0.26                hms_1.1.0               
 ##  [28] jquerylib_0.1.4          evaluate_0.14            fansi_0.5.0             
 ##  [31] restfulr_0.0.13          progress_1.2.2           dendextend_1.15.1       
 ##  [34] dbplyr_2.1.1             readxl_1.3.1             igraph_1.2.6            
@@ -272,7 +273,7 @@ div.csl-indent {
 ##  [40] ggpubr_0.4.0             backports_1.2.1          bookdown_0.24           
 ##  [43] biomaRt_2.49.4           vctrs_0.3.8              Cairo_1.5-12.2          
 ##  [46] abind_1.4-5              caret_6.0-88             cachem_1.0.6            
-##  [49] withr_2.4.2              msmbstyle_0.0.19         vroom_1.5.4             
+##  [49] withr_2.4.2              msmbstyle_0.0.19         vroom_1.5.5             
 ##  [52] checkmate_2.0.0          GenomicAlignments_1.29.0 prettyunits_1.1.1       
 ##  [55] mclust_5.4.7             segmented_1.3-4          lazyeval_0.2.2          
 ##  [58] crayon_1.4.1             recipes_0.1.16           pkgconfig_2.0.3         
@@ -321,7 +322,7 @@ the following code:</p>
 <a href="sec-ccl.html"><button class="btn btn-default">Previous</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-09-19
+2021-09-20
  using 
 R version 4.1.0 (2021-05-18)
 </p>

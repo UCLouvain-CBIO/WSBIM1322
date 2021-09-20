@@ -105,7 +105,7 @@ fig:unnamed-chunk-103
 sec-refresher
 administration
 basic-data-structures-and-operations
-tidyvers
+tidyverse
 saving-and-exporting
 programming
 additional-exercises
