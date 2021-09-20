@@ -129,7 +129,7 @@ immunosorbent assay (ELISA) assay for all observations.
 
 ```{r dnase, fig.cap = "The default base `plot` function on the `DNase` data."}
 head(DNase)
-plot(DNase$con, DNase$density)
+plot(DNase$conc, DNase$density)
 ```
 
 We can add some features on the plot, such vertical dotted lines for
@@ -137,7 +137,7 @@ all observed observations and customise the look and feel of the plot
 by setting specific arguments to the `plot` function.
 
 ```{r dnase2, fig.cap = "Customising a base figure using function arguments and overlaying new graphical features."}
-plot(DNase$con, DNase$density,
+plot(DNase$conc, DNase$density,
      xlab = "DNase concentration (ng/ml)",
      ylab = "Optical density",
      pch = 1,
@@ -156,7 +156,7 @@ using base graphics?
 
 `r msmbstyle::solution_begin()`
 ```{r colbyrun}
-plot(DNase$con, DNase$density, col = DNase$Run)
+plot(DNase$conc, DNase$density, col = DNase$Run)
 ```
 `r msmbstyle::solution_end()`
 

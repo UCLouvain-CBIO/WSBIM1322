@@ -468,7 +468,7 @@ immunosorbent assay (ELISA) assay for all observations.</p>
 ## 4   1 0.19531250   0.124
 ## 5   1 0.39062500   0.206
 ## 6   1 0.39062500   0.215</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="sec-vis.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>con, DNase<span class="sc">$</span>density)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="sec-vis.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>conc, DNase<span class="sc">$</span>density)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:dnase"></span>
 <p class="caption marginnote shownote">
@@ -479,7 +479,7 @@ Figure 2.1: The default base <code>plot</code> function on the <code>DNase</code
 <p>We can add some features on the plot, such vertical dotted lines for
 all observed observations and customise the look and feel of the plot
 by setting specific arguments to the <code>plot</code> function.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="sec-vis.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>con, DNase<span class="sc">$</span>density,</span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="sec-vis.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>conc, DNase<span class="sc">$</span>density,</span>
 <span id="cb9-2"><a href="sec-vis.html#cb9-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"DNase concentration (ng/ml)"</span>,</span>
 <span id="cb9-3"><a href="sec-vis.html#cb9-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Optical density"</span>,</span>
 <span id="cb9-4"><a href="sec-vis.html#cb9-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">1</span>,</span>
@@ -512,7 +512,7 @@ using base graphics?</p>
 ► Solution<span id="sol-start-1" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-1', 'sol-start-1')"></span>
 </p>
 <div id="sol-body-1" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sec-vis.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>con, DNase<span class="sc">$</span>density, <span class="at">col =</span> DNase<span class="sc">$</span>Run)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sec-vis.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>conc, DNase<span class="sc">$</span>density, <span class="at">col =</span> DNase<span class="sc">$</span>Run)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/colbyrun-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -920,7 +920,7 @@ of the data.</p>
 <span id="cb37-9"><a href="sec-vis.html#cb37-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(sim, <span class="fu">aes</span>(<span class="fu">log</span>(x))) <span class="sc">+</span></span>
 <span id="cb37-10"><a href="sec-vis.html#cb37-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span>
 <span id="cb37-11"><a href="sec-vis.html#cb37-11" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code></pre></div>
-<pre><code>## Warning: Removed 8068 rows containing non-finite values (stat_bin).</code></pre>
+<pre><code>## Warning: Removed 7891 rows containing non-finite values (stat_bin).</code></pre>
 <div class="figure">
 <span style="display:block;" id="fig:sim"></span>
 <p class="caption marginnote shownote">
