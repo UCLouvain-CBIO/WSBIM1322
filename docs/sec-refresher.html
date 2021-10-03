@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-09-20" />
+<meta name="date" content="2021-10-03" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -352,7 +352,13 @@ tests.</li>
 <li>Calculate this average score for the 10 students.</li>
 </ul>
 <p>This can be done using the <code>apply</code> function or using <code>dplyr</code>
-functions. For the latter, see <code>rowwise()</code></p>
+functions. For the latter, see also <code>rowwise()</code>.</p>
+<p>Note that the situation of students that have only presented 3 out of
+4 tests (i.e they have a <code>NA</code> for one test). It is up to you to decide
+whether you simply take the mean of the 3, or whether you prefer to
+drop the worst of 3 and calculate the mean of the 2 best marks. Make
+sure you are aware of what your implementation returns and, ideally,
+state it explicitly in your response.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -367,7 +373,7 @@ functions. For the latter, see <code>rowwise()</code></p>
 <a href="sec-vis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-09-20
+2021-10-03
  using 
 R version 4.1.0 (2021-05-18)
 </p>
