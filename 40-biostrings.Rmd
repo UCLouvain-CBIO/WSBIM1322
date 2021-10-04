@@ -124,9 +124,12 @@ try(DNAStringSet(not_a_dna_sequence))
 
 
 `r msmbstyle::question_begin()`
+
 Why does `DNAStringSet("ACGTMRW")` not create an error, since `MRW`
 are not standard nucleotides? For hints, see the section 'The DNA
-alphabet:" on the help page `?DNAString`.
+alphabet:" in the help page `?DNAString` and the `?IUPAC_CODE_MAP`
+manual.
+
 `r msmbstyle::question_end()`
 
 
