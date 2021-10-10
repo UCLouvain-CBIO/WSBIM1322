@@ -349,10 +349,10 @@ dna[rep(1, 10)] %>%               # DNAStringSet with first sequence 10 times
 
 ## Working with genomes
 
-`BSgenome` packages inside Bioconductor contain whole genome sequences
-as distributed by ENSEMBL, NCBI and others. In this next example we
-will load the whole genome sequence for Drosophila melanogaster from
-UCSC's dm2 build, and calculate the GC content across chromosome 2L.
+`BSgenome` packages contain whole genome sequences as distributed by
+ENSEMBL, NCBI and others. In this next example we will load the whole
+genome sequence for Drosophila melanogaster from UCSC's dm2 build, and
+calculate the GC content across chromosome 2L.
 
 
 ```{r bs1, message = FALSE}
