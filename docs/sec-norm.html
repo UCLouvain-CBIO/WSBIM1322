@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-10-10" />
+<meta name="date" content="2021-10-11" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -601,6 +601,8 @@ the data, you can use the <code>logTransform()</code> and <code>normalize(method
 </p>
 </div>
 </div>
+<p>Note that the <code>scaleTransform()</code> method can also be used to scale
+and/or centre <code>SummarizedExperiment</code> objects.</p>
 <p>Whenever new data is presented, one of the first steps is to assess
 the need for normalisation by verifying the data distributions. Large
 variations thereof should indicate that extra care should be taken and
@@ -687,6 +689,37 @@ of occurences of 1, 2, 3, … missing values.</p>
 </div>
 <p>All the concepts and methods seen in this chapter will be paramount in
 the next ones, once we will test, cluster or classify our data.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Impute the missing data by replacing all NAs with a zero. You can do
+this with the <code>QFeatures::impute()</code> method and setting <code>method = "zero"</code>. See the manual page and references therein (notably
+<code>?MsCoreUtils::impute_matrix</code>) for help and details.</p>
+<p>(Note that imputing by zero isn’t an approach that is generally
+recommended.)</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-30" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-30', 'sol-start-30')"></span>
+</p>
+<div id="sol-body-30" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="sec-norm.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"QFeatures"</span>)</span>
+<span id="cb229-2"><a href="sec-norm.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(se_na2)</span>
+<span id="cb229-3"><a href="sec-norm.html#cb229-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb229-4"><a href="sec-norm.html#cb229-4" aria-hidden="true" tabindex="-1"></a>se_zero <span class="ot">&lt;-</span> <span class="fu">impute</span>(se_na2, <span class="at">method =</span> <span class="st">"zero"</span>)</span>
+<span id="cb229-5"><a href="sec-norm.html#cb229-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anyNA</span>(<span class="fu">assay</span>(se_zero))</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 </div>
 <div id="additional-exercises-4" class="section level2" number="5.5">
 <h2>
@@ -701,7 +734,7 @@ the next ones, once we will test, cluster or classify our data.</p>
 (red) and B (green) with 3 replicates in each) and asked to analyse
 it. What are you thoughts about these data and what are the
 implications for the normalisation step?</p>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-26-1.png" width="672"></p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -716,7 +749,7 @@ implications for the normalisation step?</p>
 <a href="sec-mlintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-10-10
+2021-10-11
  using 
 R version 4.1.0 (2021-05-18)
 </p>
