@@ -393,6 +393,31 @@ hist(row_na)
 All the concepts and methods seen in this chapter will be paramount in
 the next ones, once we will test, cluster or classify our data.
 
+
+`r msmbstyle::question_begin()`
+
+Impute the missing data by replacing all NAs with a zero. You can do
+this with the `QFeatures::impute()` method and setting `method =
+"zero"`. See the manual page and references therein (notably
+`?MsCoreUtils::impute_matrix`) for help and details.
+
+(Note that imputing by zero isn't an approach that is generally
+recommended.)
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+library("QFeatures")
+data(se_na2)
+
+se_zero <- impute(se_na2, method = "zero")
+anyNA(assay(se_zero))
+```
+`r msmbstyle::solution_end()`
+
+
 ## Additional exercises
 
 `r msmbstyle::question_begin()`
