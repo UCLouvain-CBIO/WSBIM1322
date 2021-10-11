@@ -317,6 +317,9 @@ as_tibble(assay(cptac_quant)) %>%
 ```
 `r msmbstyle::solution_end()`
 
+Note that the `scaleTransform()` method can also be used to scale
+and/or centre `SummarizedExperiment` objects.
+
 Whenever new data is presented, one of the first steps is to assess
 the need for normalisation by verifying the data distributions. Large
 variations thereof should indicate that extra care should be taken and
