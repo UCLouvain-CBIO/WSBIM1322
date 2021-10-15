@@ -413,7 +413,7 @@ manually reviewed complete human proteome (containing about 20500
 proteins). Do to so, choose *Proteomes* on the main page, then search
 for *Homo sapiens*, select it among the list of hits, choose the
 reviewed Swiss-Prot release, and download all entries in compressed
-fasta format.
+fasta format (see [video](https://youtu.be/K-MVjwZzSoY)).
 `r msmbstyle::question_end()`
 
 
