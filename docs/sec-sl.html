@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-10-16" />
+<meta name="date" content="2021-10-17" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -245,11 +245,11 @@ otherwise. We can thus split our data in two parts, depending whether
 we have labels, or whether we want to predict them. The former are
 called <strong>labelled</strong>, and the latter <strong>unlabelled</strong>.</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-76"></span>
+<span style="display:block;" id="fig:unnamed-chunk-77"></span>
 <p class="caption marginnote shownote">
 Figure 10.1: In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-76-1.png" alt="In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled." width="1152">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-77-1.png" alt="In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled." width="1152">
 </div>
 <p>In the figure above, the labels represent categories that need to be
 inferred from the predictors. This class of supervised learning is
@@ -317,7 +317,7 @@ unlabelled data will be difficult or easy? Motivate your answer.</p>
 <span id="cb386-2"><a href="sec-sl.html#cb386-2" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">as.character</span>(giris2<span class="sc">$</span>GRADE)</span>
 <span id="cb386-3"><a href="sec-sl.html#cb386-3" aria-hidden="true" tabindex="-1"></a>cls[<span class="fu">is.na</span>(cls)] <span class="ot">&lt;-</span> <span class="st">"unknown"</span></span>
 <span id="cb386-4"><a href="sec-sl.html#cb386-4" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">fviz_pca_ind</span>(pca, <span class="at">col.ind =</span> cls)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-78-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-79-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -444,11 +444,11 @@ interpret the results based on the first PCA.</p>
 <span id="cb392-5"><a href="sec-sl.html#cb392-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
 <span id="cb392-6"><a href="sec-sl.html#cb392-6" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">/</span> p2</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-81"></span>
+<span style="display:block;" id="fig:unnamed-chunk-82"></span>
 <p class="caption marginnote shownote">
 Figure 10.3: Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-81-1.png" alt="Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification." width="672">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-82-1.png" alt="Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification." width="672">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -510,7 +510,7 @@ labelled data.</p></li>
 <span id="cb395-3"><a href="sec-sl.html#cb395-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Number of nearest neighbours"</span>) <span class="sc">+</span></span>
 <span id="cb395-4"><a href="sec-sl.html#cb395-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> grade), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb395-5"><a href="sec-sl.html#cb395-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-82-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-83-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -578,11 +578,11 @@ labelled data.</p>
 <p>Below, we denote the training predictors <span class="math inline">\(X_{tr}\)</span> and labels <span class="math inline">\(Y_{tr}\)</span> and
 the testing predictors <span class="math inline">\(X_{te}\)</span> and labels <span class="math inline">\(Y_{te}\)</span>.</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-84"></span>
+<span style="display:block;" id="fig:unnamed-chunk-85"></span>
 <p class="caption marginnote shownote">
 Figure 10.4: Training and testing sets.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-84-1.png" alt="Training and testing sets." width="672">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-85-1.png" alt="Training and testing sets." width="672">
 </div>
 <p>We are now going to do the following procedure</p>
 <ol style="list-style-type: decimal">
@@ -716,7 +716,7 @@ each fold. This leads to a total test set size that is identical to
 the size of the full dataset but is composed of out-of-sample
 predictions (i.e. a sample is never used for training and testing).</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-88"></span>
+<span style="display:block;" id="fig:unnamed-chunk-89"></span>
 <p class="caption marginnote shownote">
 Figure 10.5: The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model.
 </p>
@@ -871,11 +871,11 @@ accuracy as a function of k.</p>
 <span id="cb417-3"><a href="sec-sl.html#cb417-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb417-4"><a href="sec-sl.html#cb417-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-91"></span>
+<span style="display:block;" id="fig:unnamed-chunk-92"></span>
 <p class="caption marginnote shownote">
 Figure 10.6: Average classification accuracy as a function of the parameter k.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-91-1.png" alt="Average classification accuracy as a function of the parameter k." width="672">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-92-1.png" alt="Average classification accuracy as a function of the parameter k." width="672">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -917,7 +917,7 @@ model complexity. In our example above, we have used accuracy, a
 metric that we want to optimise, while in the prediction error is a
 measure to me minimised.</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-92"></span>
+<span style="display:block;" id="fig:unnamed-chunk-93"></span>
 <p class="caption marginnote shownote">
 Figure 10.7: Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of <span class="math inline">\(k\)</span> while the test error reaches a minimum around <span class="math inline">\(k = 10\)</span> before increasing again. Reproduced with permission from <span class="citation">(<label for="tufte-mn-29" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-29" class="margin-toggle">James et al. 2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Publishing Company, Incorporated.</span>)</span>.
 </p>
@@ -931,7 +931,7 @@ neighbour. The other extreme, when k becomes large, the classification
 will tend to using an average of so many neighbours that doesn’t
 reflect any specificity of our data.</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-93"></span>
+<span style="display:block;" id="fig:unnamed-chunk-94"></span>
 <p class="caption marginnote shownote">
 Figure 10.8: The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from <span class="citation">(<label for="tufte-mn-30" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-30" class="margin-toggle">James et al. 2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Publishing Company, Incorporated.</span>)</span>.
 </p>
@@ -947,11 +947,11 @@ well, but is unable to provide a precise answer. Ideally, we want
 models that achieve good precision while still being applicable and
 accurate with new data.</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-94"></span>
+<span style="display:block;" id="fig:unnamed-chunk-95"></span>
 <p class="caption marginnote shownote">
 Figure 10.9: Precision and accuracy when shooting.
 </p>
-<img src="WSBIM1322_files/figure-html/unnamed-chunk-94-1.png" alt="Precision and accuracy when shooting." width="960">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-95-1.png" alt="Precision and accuracy when shooting." width="960">
 </div>
 </div>
 <div id="additional-exercises-8" class="section level2" number="10.6">
@@ -1053,7 +1053,7 @@ most reliable assignments one, and setting the unreliable ones to
 <a href="sec-biovis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-10-16
+2021-10-17
  using 
 R version 4.1.0 (2021-05-18)
 </p>

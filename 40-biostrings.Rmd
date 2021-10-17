@@ -393,7 +393,7 @@ the mean GC content and highlight the regions that have a GC content >
 0.5 and < 0.35.
 `r msmbstyle::question_end()`
 
-```{r, echo = FALSE)
+```{r, echo = FALSE}
 ## create new range and extract sequence with getSeq() as in course
 rng <- GRanges("chr2L", IRanges(10 * 1e6, 11 * 1e6))
 x <- getSeq(Dmelanogaster, rng)[[1]]
@@ -421,7 +421,7 @@ manually reviewed complete human proteome (containing about 20500
 proteins). Do to so, choose *Proteomes* on the main page, then search
 for *Homo sapiens*, select it among the list of hits, choose the
 reviewed Swiss-Prot release, and download all entries in compressed
-fasta format.
+fasta format (see [video](https://youtu.be/K-MVjwZzSoY)).
 `r msmbstyle::question_end()`
 
 

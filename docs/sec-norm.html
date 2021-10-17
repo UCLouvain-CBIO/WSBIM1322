@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-10-16" />
+<meta name="date" content="2021-10-17" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -455,7 +455,7 @@ values. Visualise and interpret the centred data.</p>
 <span id="cb211-2"><a href="sec-norm.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x))</span>
 <span id="cb211-3"><a href="sec-norm.html#cb211-3" aria-hidden="true" tabindex="-1"></a>    x[, i] <span class="ot">&lt;-</span> x[, i] <span class="sc">-</span> cmns[i]</span>
 <span id="cb211-4"><a href="sec-norm.html#cb211-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(x)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-22-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-23-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -487,7 +487,7 @@ by it. Visualise and interpret the centred data.</p>
 <span id="cb212-2"><a href="sec-norm.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x))</span>
 <span id="cb212-3"><a href="sec-norm.html#cb212-3" aria-hidden="true" tabindex="-1"></a>    x[, i] <span class="ot">&lt;-</span> x[, i] <span class="sc">/</span> csdvs[i]</span>
 <span id="cb212-4"><a href="sec-norm.html#cb212-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(x)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-23-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -673,14 +673,14 @@ of occurences of 1, 2, 3, … missing values.</p>
 ## M2F11A  M2F2B  M2F5B  M2F8B M2F11B 
 ##     45     51     43     57     53</code></pre>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="sec-norm.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(col_na)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="sec-norm.html#cb226-1" aria-hidden="true" tabindex="-1"></a>row_na <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">is.na</span>(<span class="fu">assay</span>(se_na2)))</span>
 <span id="cb226-2"><a href="sec-norm.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(row_na)</span></code></pre></div>
 <pre><code>## row_na
 ##   0   1   2   3   4   8   9  10 
 ## 301 247  91  13   2  23  10   2</code></pre>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="sec-norm.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(row_na)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-2.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-25-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -733,7 +733,7 @@ recommended.)</p>
 (red) and B (green) with 3 replicates in each) and asked to analyse
 it. What are you thoughts about these data and what are the
 implications for the normalisation step?</p>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-26-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -748,7 +748,7 @@ implications for the normalisation step?</p>
 <a href="sec-mlintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-10-16
+2021-10-17
  using 
 R version 4.1.0 (2021-05-18)
 </p>
