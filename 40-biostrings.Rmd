@@ -393,8 +393,14 @@ the mean GC content and highlight the regions that have a GC content >
 0.5 and < 0.35.
 `r msmbstyle::question_end()`
 
+```{r, echo = FALSE)
+## create new range and extract sequence with getSeq() as in course
+rng <- GRanges("chr2L", IRanges(10 * 1e6, 11 * 1e6))
+x <- getSeq(Dmelanogaster, rng)[[1]]
+```
 
 ```{r, echo = FALSE, fig.cap = "GC content for chomosome 2L (10 - 11 Mb)", cache = TRUE}
+## or get subsequence with subset()
 x <- subseq(chr2L_dna[[1]], 10 * 1e6, 11 * 1e6)
 gc_content <- letterFrequencyInSlidingView(x, 5e3,
                                            letters = "GC",
@@ -405,6 +411,8 @@ abline(v = which(gc_content > 0.5), col = "#FF0000")
 abline(v = which(gc_content < 0.35), col = "#0000FF")
 lines(gc_content)
 ```
+
+
 
 `r msmbstyle::question_begin()`
 Visit the UniProt web page at
