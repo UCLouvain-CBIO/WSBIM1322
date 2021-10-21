@@ -18,7 +18,7 @@ bibliography: [refs.bib, packages.bib]
 
 # Preamble {-}
 
-The [WSBIM1322](https://uclouvain.be/cours-2019-wsbim1322.html) course
+The [WSBIM1322](https://uclouvain.be/cours-2021-wsbim1322.html) course
 is teaches the basics of statistical data analysis applied to high
 throughput biology. It is aimed at biology and biomedical students
 that are already familiar with the R langauge (see the pre-requisits
