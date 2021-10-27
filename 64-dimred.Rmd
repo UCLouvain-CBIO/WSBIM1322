@@ -484,9 +484,19 @@ endoderm differentiation in mouse embryonic stem cells* [@Mulvey:2015].
 
 
 `r msmbstyle::question_begin()`
-Load the `mulvey2015` data from the `pRolocdata` package. Check its
-class and familiarise yourself with its experimental design stored in
-the *phenoData* slot that can be accessed with the `pData` function.
+
+Load the `mulvey2015` data from the `pRolocdata` package. The data
+comes as an object of class `MSnSet`, which you can convert to a
+`SummarizedExperiment` as shown below. Familiarise yourself with its
+experimental design stored in the *rowData* slot.
+
+```{r, eval = FALSE}
+library(pRolocdata)
+data(mulvey2015)
+library("SummarizedExperiment")
+mulvey2015 <- as(mulvey2015, "SummarizedExperiment")
+```
+
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
@@ -494,8 +504,11 @@ the *phenoData* slot that can be accessed with the `pData` function.
 ```{r}
 library(pRolocdata)
 data(mulvey2015)
-pData(mulvey2015)
+library("SummarizedExperiment")
+mulvey2015 <- as(mulvey2015, "SummarizedExperiment")
+rowData(mulvey2015)
 ```
+
 `r msmbstyle::solution_end()`
 
 Here, we will want to do a PCA analysis on the samples. We want to remap the
@@ -513,7 +526,7 @@ before passing it to the `prcomp` function.
 `r msmbstyle::solution_begin()`
 
 ```{r}
-pca_mulvey2015 <- prcomp(t(exprs(mulvey2015)), scale. = TRUE)
+pca_mulvey2015 <- prcomp(t(assay(mulvey2015)), scale. = TRUE)
 summary(pca_mulvey2015)
 ```
 
@@ -555,7 +568,7 @@ fviz_screeplot(pca_mulvey2015)
 ```{r, fig.cap = "Biplot and variables PCA plot of the `mulvey2015` data.", fig.width = 8, fig.height = 4}
 fviz_pca(pca_mulvey2015)
 fviz_pca_ind(pca_mulvey2015)
-fviz_pca_ind(pca_mulvey2015, habillage = pData(mulvey2015)$time)
+fviz_pca_ind(pca_mulvey2015, habillage = mulvey2015$time)
 ```
 `r msmbstyle::solution_end()`
 
@@ -607,10 +620,12 @@ mouse pluripotent stem cell by Christoforou *et al.*
 
 
 `r msmbstyle::question_begin()`
-Load the `hyperLOPIT2015` data from the `pRolocdata` package. Check
-its class and familiarise yourself with its experimetnal design and
-its feature annotation stored in the *featureData* slot that can be
-accessed with the `fData` function.
+
+Load the `hyperLOPIT2015` data from the `pRolocdata` package. Convert
+the data to a `SummarizedExperiment` object and familiarise yourself
+with its experimental design and its feature annotation stored in the
+*rowData* slot.
+
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
@@ -618,8 +633,9 @@ accessed with the `fData` function.
 ```{r}
 library(pRolocdata)
 data(hyperLOPIT2015)
-pData(hyperLOPIT2015)
-head(fData(hyperLOPIT2015)[, c("entry.name", "markers")])
+hyperLOPIT2015 <- as(hyperLOPIT2015, "SummarizedExperiment")
+colData(hyperLOPIT2015)
+head(rowData(hyperLOPIT2015)[, c("entry.name", "markers")])
 ```
 `r msmbstyle::solution_end()`
 
@@ -639,7 +655,7 @@ passing it to the `prcomp` function.
 `r msmbstyle::solution_begin()`
 
 ```{r}
-pca_hl <- prcomp(exprs(hyperLOPIT2015), scale. = TRUE)
+pca_hl <- prcomp(assay(hyperLOPIT2015), scale. = TRUE)
 summary(pca_hl)
 ```
 
@@ -702,10 +718,10 @@ cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
          "#9ACD32", "#B0C4DE", "#00008A", "#8B795E", "#E0E0E060")
 
 fviz_pca_ind(pca_hl, geom = "point",
-             habillage = fData(hyperLOPIT2015)$markers,
+             habillage = rowData(hyperLOPIT2015)$markers,
              palette = cls)
 fviz_pca_ind(pca_hl, geom = "point",
-             habillage = fData(hyperLOPIT2015)$final.assignment,
+             habillage = rowData(hyperLOPIT2015)$final.assignment,
              palette = cls)
 ```
 `r msmbstyle::solution_end()`
