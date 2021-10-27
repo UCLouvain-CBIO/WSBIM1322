@@ -34,7 +34,7 @@ the binomial density of an unbiased coin. The vertical line shows the
 number of head observed.
 
 
-```{r tosshist, echo = FALSE, fig.cap = "Binomial density of for an unbiased coin to get 0 to 100 heads. The full area of the histogram sums to 1."}
+```{r tosshist, echo = FALSE, fig.cap = "Binomial density of an unbiased coin to get 0 to 100 heads. The full area of the histogram sums to 1."}
 num_heads <- sum(flips == "H")
 binomial_dens <-
     tibble(k = 0:n) %>%
@@ -162,6 +162,8 @@ Note that the t-test is robust to deviations[^models].
 In R, we do this with
 
 ```{r}
+s1
+s2
 t.test(s1, s2)
 ```
 
