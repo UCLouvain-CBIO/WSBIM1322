@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-10-18" />
+<meta name="date" content="2021-10-27" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -74,7 +74,6 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -375,7 +374,7 @@ us formalise when to call genes differentially expressed.</p>
 <p>There are many more types of patterns that we wold be interested in
 identifying in omics data. Let’s reconsider the linear regression
 model from section <a href="sec-obj.html#sec-lm">3.3</a>. Below is a figure from
-<span class="citation">Majumder, Hofmann, and Cook (<label for="tufte-mn-17" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-17" class="margin-toggle">2013<span class="marginnote">Majumder, Mahbubul, Heike Hofmann, and Dianne Cook. 2013. <span>“Validation of Visual Statistical Inference, Applied to Linear Models.”</span> <em>Journal of the American Statistical Association</em> 108 (503): 942–56. <a href="https://doi.org/10.1080/01621459.2013.808157">https://doi.org/10.1080/01621459.2013.808157</a>.</span>)</span>. Among the 20 scatter plots below, one represents the
+<span class="citation"><label for="tufte-mn-17" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-17" class="margin-toggle">Majumder, Hofmann, and Cook (2013)<span class="marginnote">Majumder, Mahbubul, Heike Hofmann, and Dianne Cook. 2013. <span>“Validation of Visual Statistical Inference, Applied to Linear Models.”</span> <em>Journal of the American Statistical Association</em> 108 (503): 942–56. <a href="https://doi.org/10.1080/01621459.2013.808157">https://doi.org/10.1080/01621459.2013.808157</a>.</span></span>. Among the 20 scatter plots below, one represents the
 actual data, and 19 are simulations that are based on the real
 data.</p>
 <div class="figure fullwidth">
@@ -490,7 +489,7 @@ the <code>cor</code> function.</p>
 <p>Let’s expand the code above and calculate the correlation coefficient
 between hundreds of random vectors and choose the best one (in abolute
 terms) among those. Let’s repeat this procedure 1000 times to obtain
-1000 best correlations (based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. <span>“<span class="nocase">Challenges of Big Data analysis</span>.”</span> <em>National Science Review</em> 1 (2): 293–314. <a href="https://doi.org/10.1093/nsr/nwt032">https://doi.org/10.1093/nsr/nwt032</a>.</span>)</span>). The figure below shows
+1000 best correlations (based on <span class="citation"><label for="tufte-mn-18" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-18" class="margin-toggle">Fan, Han, and Liu (2014)<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. <span>“<span class="nocase">Challenges of Big Data analysis</span>.”</span> <em>National Science Review</em> 1 (2): 293–314. <a href="https://doi.org/10.1093/nsr/nwt032">https://doi.org/10.1093/nsr/nwt032</a>.</span></span>). The figure below shows
 the distribution of these 1000 best correlations when comparing
 vectors of length 800 or 6400. We see that with more (random) data, we
 increase that the risk of obtaining spurious correlations.</p>
@@ -762,7 +761,7 @@ but these are beyond the scope of this course.</p>
 <a href="sec-testing.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-10-18
+2021-10-27
  using 
 R version 4.1.0 (2021-05-18)
 </p>

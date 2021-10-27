@@ -488,7 +488,7 @@ endoderm differentiation in mouse embryonic stem cells* [@Mulvey:2015].
 Load the `mulvey2015` data from the `pRolocdata` package. The data
 comes as an object of class `MSnSet`, which you can convert to a
 `SummarizedExperiment` as shown below. Familiarise yourself with its
-experimental design stored in the *rowData* slot.
+experimental design stored in the *colData* slot.
 
 ```{r, eval = FALSE}
 library(pRolocdata)
@@ -506,7 +506,7 @@ library(pRolocdata)
 data(mulvey2015)
 library("SummarizedExperiment")
 mulvey2015 <- as(mulvey2015, "SummarizedExperiment")
-rowData(mulvey2015)
+colData(mulvey2015)
 ```
 
 `r msmbstyle::solution_end()`
@@ -565,11 +565,13 @@ fviz_screeplot(pca_mulvey2015)
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
+
 ```{r, fig.cap = "Biplot and variables PCA plot of the `mulvey2015` data.", fig.width = 8, fig.height = 4}
 fviz_pca(pca_mulvey2015)
 fviz_pca_ind(pca_mulvey2015)
-fviz_pca_ind(pca_mulvey2015, habillage = mulvey2015$time)
+fviz_pca_ind(pca_mulvey2015, habillage = mulvey2015$times)
 ```
+
 `r msmbstyle::solution_end()`
 
 
@@ -748,7 +750,7 @@ x <- mulvey2015[, mulvey2015$times %in% c(1, 2, 6)]
 sampleNames(x) <-  paste(c("CTRL", "DrugA", "DrugB"),
                          rep(1:3, each = 3))
 x$grp <- sub("[1-3]", "", sampleNames(x))
-p <- prcomp(t(assay(x)), scale = TRUE, center = TRUE)
+p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
 fviz_pca_ind(p, habillage = x$grp)
 ```
 
@@ -765,7 +767,6 @@ library("factoextra")
 library("pRolocdata")
 data(mulvey2015)
 x <- mulvey2015[, mulvey2015$times %in% c(1, 2, 6)]
-
 sampleNames(x) <-  c(paste0("CTRL", 1:3),
                      paste0("DrugA", 1:3),
                      paste0("DrugB", 1:3))
