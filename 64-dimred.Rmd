@@ -748,7 +748,7 @@ x <- mulvey2015[, mulvey2015$times %in% c(1, 2, 6)]
 sampleNames(x) <-  paste(c("CTRL", "DrugA", "DrugB"),
                          rep(1:3, each = 3))
 x$grp <- sub("[1-3]", "", sampleNames(x))
-p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
+p <- prcomp(t(assay(x)), scale = TRUE, center = TRUE)
 fviz_pca_ind(p, habillage = x$grp)
 ```
 
