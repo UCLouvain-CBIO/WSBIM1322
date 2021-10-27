@@ -74,6 +74,7 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -223,7 +224,7 @@ analysis.</li>
 </h2>
 <p>The term <em>object</em> stems from the widely used objet-oriented
 programming (OOP) paradigm. OOP is however outside of scope of this
-course (see part III of <span class="citation"><label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">Wickham (2014)<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced r</em>. Chapman &amp; Hall/CRC the r Series. Taylor &amp; Francis.</span></span>, which is also <a href="https://adv-r.hadley.nz/">freely available
+course (see part III of <span class="citation">Wickham (<label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">2014<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced r</em>. Chapman &amp; Hall/CRC the r Series. Taylor &amp; Francis.</span>)</span>, which is also <a href="https://adv-r.hadley.nz/">freely available
 online</a>). In the <em>R refresher</em> chapter
 <a href="sec-refresher.html#sec-refresher">1</a>, we have seen the base types of R, which we have
 efficiently used in many situations. Sometimes, however, these aren’t
@@ -413,7 +414,7 @@ Figure 3.3: Plotting an instance of class <code>lm</code> produces a set of diag
 </h2>
 <p>We have already briefly seen the <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec-bioconductor">Bioconductor
 project</a>. It
-initiated by Robert Gentleman (<span class="citation"><label for="tufte-mn-14" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-14" class="margin-toggle">Gentleman et al. (2004)<span class="marginnote">Gentleman, Robert C., Vincent J. Carey, Douglas M. Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. <span>“Bioconductor: Open Software Development for Computational Biology and Bioinformatics.”</span> <em>Genome Biol</em> 5 (10): –80. <a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/gb-2004-5-10-r80</a>.</span></span>;<span class="citation"><label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">Huber et al. (2015)<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. <span>“Orchestrating High-Throughput Genomic Analysis with <span>Bioconductor</span>.”</span> <em>Nat Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.</span></span>), one of
+initiated by Robert Gentleman (<span class="citation">Gentleman et al. (<label for="tufte-mn-14" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-14" class="margin-toggle">2004<span class="marginnote">Gentleman, Robert C., Vincent J. Carey, Douglas M. Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. <span>“Bioconductor: Open Software Development for Computational Biology and Bioinformatics.”</span> <em>Genome Biol</em> 5 (10): –80. <a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/gb-2004-5-10-r80</a>.</span>)</span>;<span class="citation">Huber et al. (<label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">2015<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. <span>“Orchestrating High-Throughput Genomic Analysis with <span>Bioconductor</span>.”</span> <em>Nat Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.</span>)</span>), one of
 the two creators of the R language, and centrally offers dedicated R
 packages for bioinformatics.</p>
 <blockquote>
@@ -468,7 +469,7 @@ directly load the packages.</p>
 <span id="cb68-2"><a href="sec-obj.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"airway"</span>)</span></code></pre></div>
 <p>The <code>airway</code> package provides a data for an RNA-Seq experiment on four
 human airway smooth muscle cell lines treated with dexamethason
-published by <span class="citation"><label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">Himes et al. (2014)<span class="marginnote">Himes, B E, X Jiang, P Wagner, R Hu, Q Wang, B Klanderman, R M Whitaker, et al. 2014. <span>“RNA-Seq Transcriptome Profiling Identifies Crispld2 as a Glucocorticoid Responsive Gene That Modulates Cytokine Function in Airway Smooth Muscle Cells.”</span> <em>PLoS One</em> 9 (6): e99625. <a href="https://doi.org/10.1371/journal.pone.0099625">https://doi.org/10.1371/journal.pone.0099625</a>.</span></span>. It contains the RNA expression data for
+published by <span class="citation">Himes et al. (<label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">2014<span class="marginnote">Himes, B E, X Jiang, P Wagner, R Hu, Q Wang, B Klanderman, R M Whitaker, et al. 2014. <span>“RNA-Seq Transcriptome Profiling Identifies Crispld2 as a Glucocorticoid Responsive Gene That Modulates Cytokine Function in Airway Smooth Muscle Cells.”</span> <em>PLoS One</em> 9 (6): e99625. <a href="https://doi.org/10.1371/journal.pone.0099625">https://doi.org/10.1371/journal.pone.0099625</a>.</span>)</span>. It contains the RNA expression data for
 64102 transcripts and 8 samples. These 8 samples correspond to treated
 and untreated condition in 4 different cell lines.</p>
 <p>Objects if the class <code>SummarizedExperiment</code> contain one or more assays
