@@ -193,6 +193,9 @@ packages for bioinformatics.
 > programming language, and is open source and open development. It
 > has two releases each year, and an active user community.
 
+This [video](https://www.youtube.com/watch?v=nzY7bPQOXUs) provides a
+great overview of the project at large.
+
 Bioconductor provides a rich set of [classes for omics
 data](https://bioconductor.org/developers/how-to/commonMethodsAndClasses/),
 summarised below.
