@@ -486,9 +486,15 @@ endoderm differentiation in mouse embryonic stem cells* [@Mulvey:2015].
 `r msmbstyle::question_begin()`
 
 Load the `mulvey2015` data from the `pRolocdata` package. The data
-comes as an object of class `MSnSet`, which you can convert to a
+comes as an object of class `MSnSet`[^msnset], which you can convert to a
 `SummarizedExperiment` as shown below. Familiarise yourself with its
 experimental design stored in the *colData* slot.
+
+[^msnset]: The [`MSnSet`
+    class](https://lgatto.github.io/MSnbase/reference/MSnSet-class.html)
+    is similar to the `SummarizedExperiment`, that we have seen in
+    detail in chapter \@ref(sec-obj).
+
 
 ```{r, eval = FALSE}
 library(pRolocdata)
