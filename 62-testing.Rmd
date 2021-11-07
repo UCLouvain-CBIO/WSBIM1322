@@ -595,10 +595,11 @@ Simulate a dataset of log2 fold-changes measured in triplicate for
 `r msmbstyle::question_begin()`
 
 Load the `tdata2` dataset from the `rWSBIM1322` package. These data
-represent the measurement of a inflammation biomarker in the blood of
+represent the measurement of an inflammation biomarker in the blood of
 15 patients, before and after treatment for a acute liver
 inflammation.  Visualise the data and run a test to verify if the
 treatment has had an effect or not.
+
 `r msmbstyle::question_end()`
 
 ```{r, include = FALSE}
