@@ -130,7 +130,7 @@ points(avg_sample["x"], avg_sample["y"], pch = 19, col = "red", cex = 2)
 dists <- as.matrix(dists)
 d6 <- dists[6, -6]
 which.min(d6) ## closest
-which.max(d6) ## furthers
+which.max(d6) ## furthest
 ```
 `r msmbstyle::solution_end()`
 
