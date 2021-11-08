@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-11-07" />
+<meta name="date" content="2021-11-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -306,7 +306,7 @@ function to regress <em>y</em> onto <em>x</em> (left) and <em>x</em> onto <em>y<
 (right). These regression lines give us an approximate linear
 relationship between the expression of genes <em>x</em> and <em>y</em>. The
 relationship differs depending on which gene we choose to be the
-predictor adn the response.</p>
+predictor and the response.</p>
 <div class="figure">
 <span style="display:block;" id="fig:linreg"></span>
 <p class="caption marginnote shownote">
@@ -528,9 +528,14 @@ analysis as shown above.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>cptac_prot</code> data, scale the data (see below for why scaling
-is important), then perform the PCA analysis and interpret it. Also
-produce a PCA for PCs 2 and 3.</p>
+<p>Load the <code>cptac_prot</code> data<label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
+class</a>
+(defined in the <code>MSnbase</code> package) is similar to
+<code>SummarizedExperiment</code>, that we have seen in detail in chapter
+<a href="sec-obj.html#sec-obj">3</a>. You can convert an <code>MSnSet</code> object to a
+<code>SummarizedExperiment</code> with <code>as(x, "SummarizexExperiment")</code>.</span>, scale the data (see below for
+why scaling is important), then perform the PCA analysis and interpret
+it. Also produce a PCA for PCs 2 and 3.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -710,10 +715,10 @@ investigation of these processes.</p>
 </p>
 <div class="question-body">
 <p>Load the <code>mulvey2015</code> data from the <code>pRolocdata</code> package. The data
-comes as an object of class <code>MSnSet</code><label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
+comes as an object of class <code>MSnSet</code><label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
 class</a>
-is similar to the <code>SummarizedExperiment</code>, that we have seen in
-detail in chapter <a href="sec-obj.html#sec-obj">3</a>.</span>, which you can convert to a
+is similar to the <code>SummarizedExperiment</code> class, that we have seen
+in detail in chapter <a href="sec-obj.html#sec-obj">3</a>.</span>, which you can convert to a
 <code>SummarizedExperiment</code> as shown below. Familiarise yourself with its
 experimental design stored in the <em>colData</em> slot.</p>
 <div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="sec-dimred.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
@@ -1342,7 +1347,7 @@ the labels?</p>
 <a href="sec-ul.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-11-07
+2021-11-08
  using 
 R version 4.1.2 (2021-11-01)
 </p>

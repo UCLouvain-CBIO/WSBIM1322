@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-11-07" />
+<meta name="date" content="2021-11-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -218,7 +218,7 @@ we will focus on <strong>clustering</strong>. The goal of clustering algorithms 
 to find homogeneous subgroups within the data; the grouping is based
 on similiarities (or distance) between observations. The result of a
 clustering algorithm is to group the observations (features) into
-distinct (generally non-overlapping) groups. These groups are, even of
+distinct (generally non-overlapping) groups. These groups are, even if
 imperfect (i.e. ignoring intermediate states) are often very useful in
 interpretation and assessment of the data.</p>
 <p>In this chapter we will:</p>
@@ -361,7 +361,7 @@ Figure 9.2: Visualisation of the average sample, in red.
 <span id="cb360-3"><a href="sec-ul.html#cb360-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(d6) <span class="do">## closest</span></span></code></pre></div>
 <pre><code>## 3 
 ## 3</code></pre>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="sec-ul.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(d6) <span class="do">## furthers</span></span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="sec-ul.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(d6) <span class="do">## furthest</span></span></code></pre></div>
 <pre><code>## 4 
 ## 4</code></pre>
 <p class="solution-end">
@@ -374,7 +374,7 @@ Figure 9.2: Visualisation of the average sample, in red.
 <h2>
 <span class="header-section-number">9.3</span> k-means clustering<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('k-means-clustering')" onmouseout="reset_tooltip('k-means-clustering-tooltip')"><span class="tooltiptext" id="k-means-clustering-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
-<p>The k-means clustering algorithm<label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> We will learn how the algorithm works below.</span> aims at partitioning <em>n</em>
+<p>The k-means clustering algorithm<label for="tufte-sn-13" class="margin-toggle sidenote-number">13</label><input type="checkbox" id="tufte-sn-13" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">13</span> We will learn how the algorithm works below.</span> aims at partitioning <em>n</em>
 observations into a fixed number of <em>k</em> clusters. This algorithm will
 find homogeneous clusters.</p>
 <p>In R, we use</p>
@@ -660,7 +660,7 @@ Figure 9.10: Hierarchical clustering: initialisation (left) and colour-coded res
 <img src="WSBIM1322_files/figure-html/hcldata-1.png" alt="Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right)." width="1152">
 </div>
 <p>The results of hierarchical clustering are typically visualised along
-a <strong>dendrogram</strong><label for="tufte-sn-13" class="margin-toggle sidenote-number">13</label><input type="checkbox" id="tufte-sn-13" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">13</span> Note that dendrograms, or trees in general, are used in
+a <strong>dendrogram</strong><label for="tufte-sn-14" class="margin-toggle sidenote-number">14</label><input type="checkbox" id="tufte-sn-14" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">14</span> Note that dendrograms, or trees in general, are used in
 evolutionary biology to visualise the evolutionary history of
 taxa. In this course, we use them to represent similarities (based
 on distances) and don’t assess any evolutionary relations between
@@ -996,7 +996,7 @@ average marker profiles, such as shown below.</p></li>
 <a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-11-07
+2021-11-08
  using 
 R version 4.1.2 (2021-11-01)
 </p>
