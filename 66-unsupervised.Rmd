@@ -7,7 +7,7 @@ we will focus on **clustering**. The goal of clustering algorithms is
 to find homogeneous subgroups within the data; the grouping is based
 on similiarities (or distance) between observations. The result of a
 clustering algorithm is to group the observations (features) into
-distinct (generally non-overlapping) groups. These groups are, even of
+distinct (generally non-overlapping) groups. These groups are, even if
 imperfect (i.e. ignoring intermediate states) are often very useful in
 interpretation and assessment of the data.
 
