@@ -117,7 +117,7 @@ function to regress *y* onto *x* (left) and *x* onto *y*
 (right). These regression lines give us an approximate linear
 relationship between the expression of genes *x* and *y*. The
 relationship differs depending on which gene we choose to be the
-predictor adn the response.
+predictor and the response.
 
 
 ```{r linreg, echo = FALSE, fig.cap = "Regression of y onto x (left) minimisises the sums of squares of vertical residuals (red). Regression of x onto y (right) minimisises the sums of squares of horizontal residuals (orange).", fig.width = 5, fig.width = 11}
@@ -342,9 +342,11 @@ biplot(pca1)
 `r msmbstyle::solution_end()`
 
 `r msmbstyle::question_begin()`
+
 Load the `cptac_prot` data, scale the data (see below for why scaling
 is important), then perform the PCA analysis and interpret it. Also
 produce a PCA for PCs 2 and 3.
+
 `r msmbstyle::question_end()`
 
 `r msmbstyle::solution_begin()`
