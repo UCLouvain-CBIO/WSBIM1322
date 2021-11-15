@@ -89,8 +89,9 @@ additional details.
 `r msmbstyle::question_begin()`
 
 Generate the 5 data points along 2 dimensions as illustrated below and
-calculate all their Euclidean pairwise distance using `dist`. Interprete the
-output of the function. What class if it?
+calculate all their Euclidean pairwise distance using
+`dist()`. Interprete the output of the function. What class is it?
+
 
 ```{r, fig.cap = "A simulated dataset composed of 5 samples."}
 set.seed(111)
