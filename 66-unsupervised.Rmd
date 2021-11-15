@@ -163,7 +163,7 @@ or C.
 ```{r girisplot, fig.cap = "The *giris* dataset describes 150 patients by the expression of 4 genes. Each patient was assigned a grade A, B or C."}
 library("rWSBIM1322")
 data(giris)
-pairs(giris, col = giris$GRADE)
+pairs(giris[, 1:4], col = giris$GRADE)
 ```
 
 `r msmbstyle::question_begin()`
