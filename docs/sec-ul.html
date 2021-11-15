@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-11-08" />
+<meta name="date" content="2021-11-15" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -283,8 +283,8 @@ additional details.</p>
 </p>
 <div class="question-body">
 <p>Generate the 5 data points along 2 dimensions as illustrated below and
-calculate all their Euclidean pairwise distance using <code>dist</code>. Interprete the
-output of the function. What class if it?</p>
+calculate all their Euclidean pairwise distance using
+<code>dist()</code>. Interprete the output of the function. What class is it?</p>
 <div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="sec-ul.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
 <span id="cb352-2"><a href="sec-ul.html#cb352-2" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
 <span id="cb352-3"><a href="sec-ul.html#cb352-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
@@ -393,7 +393,7 @@ the expression of 4 genes in 150 patients grouped in categories A, B
 or C.</p>
 <div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="sec-ul.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
 <span id="cb365-2"><a href="sec-ul.html#cb365-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(giris)</span>
-<span id="cb365-3"><a href="sec-ul.html#cb365-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(giris, <span class="at">col =</span> giris<span class="sc">$</span>GRADE)</span></code></pre></div>
+<span id="cb365-3"><a href="sec-ul.html#cb365-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(giris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> giris<span class="sc">$</span>GRADE)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:girisplot"></span>
 <p class="caption marginnote shownote">
@@ -996,7 +996,7 @@ average marker profiles, such as shown below.</p></li>
 <a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-11-08
+2021-11-15
  using 
 R version 4.1.2 (2021-11-01)
 </p>
