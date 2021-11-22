@@ -17,7 +17,7 @@ Often, we faced with omics data, we have annotations for some of the
 samples (or features) we have acquired:
 
 - Among the 100s of patient tumours that were assayed using RNA
-  sequencing of microarrays, we know the grade of the tumour for about
+  sequencing or microarrays, we know the grade of the tumour for about
   half. We want to predict the grade of the other half using the gene
   expression profiles.
 
@@ -402,11 +402,11 @@ above:
 1. Test all odd value of k from 1 to 11 (or higher, if deemed useful),
    to have a better granularity of the model parameter we test.
 
-2. Testing more than on training/testing split using. Indeed, relying
-   on a single split we rely on a random split, that could affect that
-   results either overly optimistically, or negatively. We prefer to
-   repeat the split *a certain number of time* and calculate an
-   average performance over all splits.
+2. Testing more than on training/testing split. Indeed, relying on a
+   single random split, we rely on a random configuration, that could
+   affect that results either overly optimistically, or negatively. We
+   prefer to repeat the split *a certain number of time* and calculate
+   an average performance over all splits.
 
 ## k-fold cross-validation
 
@@ -535,13 +535,13 @@ would perform poorly, and hence lead to high variance.
 
 
 This variance and bias trade-off can be illustrated in different
-ways. The figure below shows the prediction error as a function of the
-model complexity. In our example above, we have used accuracy, a
-metric that we want to optimise, while in the prediction error is a
-measure to me minimised.
+ways. The figure below (reproduced with permission from [@ISLR]) shows
+the prediction error as a function of the model complexity. In our
+example above, we have used accuracy, a metric that we want to
+optimise, while in the prediction error is a measure to me minimised.
 
 
-```{r, echo = FALSE, fig.cap = "Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of $k$ while the test error reaches a minimum around $k = 10$ before increasing again. Reproduced with permission from [@ISLR].", out.width='100%', fig.align='center'}
+```{r, echo = FALSE, fig.cap = "Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of $k$ while the test error reaches a minimum around $k = 10$ before increasing again. Reproduced with permission from James *et al.* 2014)", out.width='100%', fig.align='center'}
 knitr::include_graphics("./figs/ISL-2_17.png")
 ```
 
@@ -553,7 +553,7 @@ neighbour. The other extreme, when k becomes large, the classification
 will tend to using an average of so many neighbours that doesn't
 reflect any specificity of our data.
 
-```{r, echo = FALSE, fig.cap = "The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from  [@ISLR].", out.width='100%', fig.align='center'}
+```{r, echo = FALSE, fig.cap = "The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from James *et al.* 2014).", out.width='100%', fig.align='center'}
 knitr::include_graphics("./figs/ISL-2_16.png")
 ```
 
