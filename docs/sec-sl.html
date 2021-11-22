@@ -14,7 +14,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-11-15" />
+<meta name="date" content="2021-11-22" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -74,7 +74,6 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -228,7 +227,7 @@ classifier;</li>
 samples (or features) we have acquired:</p>
 <ul>
 <li><p>Among the 100s of patient tumours that were assayed using RNA
-sequencing of microarrays, we know the grade of the tumour for about
+sequencing or microarrays, we know the grade of the tumour for about
 half. We want to predict the grade of the other half using the gene
 expression profiles.</p></li>
 <li><p>We have performed a spatial proteomics experiment such as in
@@ -691,11 +690,11 @@ above:</p>
 <ol style="list-style-type: decimal">
 <li><p>Test all odd value of k from 1 to 11 (or higher, if deemed useful),
 to have a better granularity of the model parameter we test.</p></li>
-<li><p>Testing more than on training/testing split using. Indeed, relying
-on a single split we rely on a random split, that could affect that
-results either overly optimistically, or negatively. We prefer to
-repeat the split <em>a certain number of time</em> and calculate an
-average performance over all splits.</p></li>
+<li><p>Testing more than on training/testing split. Indeed, relying on a
+single random split, we rely on a random configuration, that could
+affect that results either overly optimistically, or negatively. We
+prefer to repeat the split <em>a certain number of time</em> and calculate
+an average performance over all splits.</p></li>
 </ol>
 </div>
 <div id="k-fold-cross-validation" class="section level2" number="10.4">
@@ -803,7 +802,7 @@ for k=11.</p>
 ► Solution<span id="sol-start-77" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-77', 'sol-start-77')"></span>
 </p>
 <div id="sol-body-77" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="sec-sl.html#cb418-1" aria-hidden="true" tabindex="-1"></a>knn_accuracy <span class="ot">&lt;-</span> <span class="cf">function</span>(fld, <span class="at">k =</span> <span class="dv">11</span>) {</span>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="sec-sl.html#cb418-1" aria-hidden="true" tabindex="-1"></a>knn_accuracy <span class="ot">&lt;-</span> <span class="cf">function</span>(fld, k) {</span>
 <span id="cb418-2"><a href="sec-sl.html#cb418-2" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Uses global variables!</span></span>
 <span id="cb418-3"><a href="sec-sl.html#cb418-3" aria-hidden="true" tabindex="-1"></a>    train <span class="ot">&lt;-</span> giris2_labelled[<span class="sc">-</span>fld, ]</span>
 <span id="cb418-4"><a href="sec-sl.html#cb418-4" aria-hidden="true" tabindex="-1"></a>    test <span class="ot">&lt;-</span> giris2_labelled[fld, ]</span>
@@ -814,7 +813,7 @@ for k=11.</p>
 <span id="cb418-9"><a href="sec-sl.html#cb418-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(test_k <span class="sc">==</span> test[, <span class="dv">5</span>])<span class="sc">/</span><span class="fu">length</span>(test_k)</span>
 <span id="cb418-10"><a href="sec-sl.html#cb418-10" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb418-11"><a href="sec-sl.html#cb418-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb418-12"><a href="sec-sl.html#cb418-12" aria-hidden="true" tabindex="-1"></a>accs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(folds, knn_accuracy)</span>
+<span id="cb418-12"><a href="sec-sl.html#cb418-12" aria-hidden="true" tabindex="-1"></a>accs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(folds, knn_accuracy, <span class="at">k =</span> <span class="dv">11</span>)</span>
 <span id="cb418-13"><a href="sec-sl.html#cb418-13" aria-hidden="true" tabindex="-1"></a>accs</span></code></pre></div>
 <pre><code>##    Fold01    Fold02    Fold03    Fold04    Fold05    Fold06    Fold07    Fold08 
 ## 0.9333333 0.9333333 0.9333333 1.0000000 1.0000000 1.0000000 1.0000000 0.9333333 
@@ -913,16 +912,16 @@ four genes of interest in a specific population of cancer
 patients, for example.</span>, it
 would perform poorly, and hence lead to high variance.</p>
 <p>This variance and bias trade-off can be illustrated in different
-ways. The figure below shows the prediction error as a function of the
-model complexity. In our example above, we have used accuracy, a
-metric that we want to optimise, while in the prediction error is a
-measure to me minimised.</p>
+ways. The figure below (reproduced with permission from <span class="citation">(<label for="tufte-mn-29" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-29" class="margin-toggle">James et al. 2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Publishing Company, Incorporated.</span>)</span>) shows
+the prediction error as a function of the model complexity. In our
+example above, we have used accuracy, a metric that we want to
+optimise, while in the prediction error is a measure to me minimised.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-94"></span>
 <p class="caption marginnote shownote">
-Figure 10.7: Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of <span class="math inline">\(k\)</span> while the test error reaches a minimum around <span class="math inline">\(k = 10\)</span> before increasing again. Reproduced with permission from <span class="citation">(<label for="tufte-mn-29" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-29" class="margin-toggle">James et al. 2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Publishing Company, Incorporated.</span>)</span>.
+Figure 10.7: Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of <span class="math inline">\(k\)</span> while the test error reaches a minimum around <span class="math inline">\(k = 10\)</span> before increasing again. Reproduced with permission from James <em>et al.</em> 2014)
 </p>
-<img src="figs/ISL-2_17.png" alt="Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of $k$ while the test error reaches a minimum around $k = 10$ before increasing again. Reproduced with permission from [@ISLR]." width="100%">
+<img src="figs/ISL-2_17.png" alt="Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of $k$ while the test error reaches a minimum around $k = 10$ before increasing again. Reproduced with permission from James *et al.* 2014)" width="100%">
 </div>
 <p>The model complexity represent the ability of
 the model (or model parameter) to learn/adapt to the training data. In
@@ -934,11 +933,11 @@ reflect any specificity of our data.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-95"></span>
 <p class="caption marginnote shownote">
-Figure 10.8: The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from <span class="citation">(<label for="tufte-mn-30" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-30" class="margin-toggle">James et al. 2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Publishing Company, Incorporated.</span>)</span>.
+Figure 10.8: The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from James <em>et al.</em> 2014).
 </p>
-<img src="figs/ISL-2_16.png" alt="The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from  [@ISLR]." width="100%">
+<img src="figs/ISL-2_16.png" alt="The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from James *et al.* 2014)." width="100%">
 </div>
-<p>This last figure, reproduced from <span class="citation">(<label for="tufte-mn-31" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-31" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>, frames the variance-bias
+<p>This last figure, reproduced from <span class="citation">(<label for="tufte-mn-30" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-30" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>, frames the variance-bias
 trade-off as one between accuracy and precision. An over-fit model with
 high bias and low variance is one that is precise but not accurate:
 it could work extremely well on the training data but miss on new
@@ -1011,7 +1010,7 @@ unlabelled data.</p>
 <div class="question-body">
 <p>Using a contingency table, compare you results with those that were
 obtained using <em>support vector machine</em>, a popular classifier that was
-used in Christoforou <em>et al.</em> <span class="citation">(<label for="tufte-mn-32" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-32" class="margin-toggle">Christoforou et al. 2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>, and available in
+used in Christoforou <em>et al.</em> <span class="citation">(<label for="tufte-mn-31" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-31" class="margin-toggle">Christoforou et al. 2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>, and available in
 the <code>svm.classification</code> feature variable.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1054,7 +1053,7 @@ most reliable assignments one, and setting the unreliable ones to
 <a href="sec-biovis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-11-15
+2021-11-22
  using 
 R version 4.1.2 (2021-11-01)
 </p>
