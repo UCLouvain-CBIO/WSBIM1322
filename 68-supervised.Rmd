@@ -465,7 +465,7 @@ for k=11.
 `r msmbstyle::solution_begin()`
 
 ```{r}
-knn_accuracy <- function(fld, k = 11) {
+knn_accuracy <- function(fld, k) {
     ## Uses global variables!
     train <- giris2_labelled[-fld, ]
     test <- giris2_labelled[fld, ]
@@ -476,7 +476,7 @@ knn_accuracy <- function(fld, k = 11) {
     sum(test_k == test[, 5])/length(test_k)
 }
 
-accs <- sapply(folds, knn_accuracy)
+accs <- sapply(folds, knn_accuracy, k = 11)
 accs
 mean(accs)
 ```
