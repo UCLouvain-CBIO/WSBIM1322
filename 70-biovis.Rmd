@@ -121,7 +121,10 @@ Computing and visualising intersections is a common task in data
 analysis. Venn and Euler diagrams are popular representation when
 comparing sets and their intersection. Two useful R packages to
 generate such plots are
-`r CRANpkg("venneuler")` and `r Githubpkg("js229/Vennerable")`.
+`r CRANpkg("venneuler")` and `r Githubpkg("js229/Vennerable")`[^vennerable].
+
+[^vennerable]: You can install `Vennerable` with
+    `BiocManager::install("js229/Vennerable")`.
 
 We will use the `mulvey2015` feature names to generate a test data:
 
