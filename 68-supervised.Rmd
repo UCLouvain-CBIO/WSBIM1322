@@ -740,7 +740,7 @@ a biological point of view.
 
 Re-run the kNN classifer above, setting `prob = TRUE` to get the
 proportion of votes in favour of the assigned class. These are stored
-as an attribute named *prob*; eead the `knn` manual page to learn how
+as an attribute named *prob*; read the `knn` manual page to learn how
 to extract these from the `knn` output variable.
 
 - Based on these vote proportions, which results to you consider the
