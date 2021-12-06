@@ -70,11 +70,13 @@ demonstrated below.
 
 
 ```{r complexheatmap, fig.fullwidth = TRUE, message = FALSE, fig.cap = "An annotated heatmap produced with the `ComplexHeatmap` Bioconductor package."}
+library("SummarizedExperiment")
 library("ComplexHeatmap")
-x <- MSnbase::exprs(mulvey2015norm)
+mulvey2015norm <- as(mulvey2015norm, "SummarizedExperiment")
+x <- assay(mulvey2015norm)
 hcl <- hclust(dist(x))
 cl <- cutree(hcl, k = 12)
-ha1 <- HeatmapAnnotation(time = mulvey2015norm$time)
+ha1 <- HeatmapAnnotation(time = mulvey2015norm$times)
 ha2 <- HeatmapAnnotation(boxplot = anno_boxplot(x))
 ha3 <- rowAnnotation(cluster = factor(cl))
 Heatmap(x,
@@ -96,18 +98,23 @@ packages can be used to generate interactive heatmaps.
 
 
 ```{r heatmaply, eval = FALSE}
+## prepare the data
+library("pRolocdata")
+data(hyperLOPIT2015)
+hl <- as(hyperLOPIT2015, "SummarizedExperiment")
+## interactive heatmap
 library("heatmaply")
-heatmaply(MSnbase::exprs(hlm)[1:100, ])
+heatmaply(assay(hl)[1:100, ])
 ```
 
 ```{r heatmaply2, eval = FALSE}
-heatmaply(MSnbase::exprs(hlm)[1:100, ],
-          RowSideColors = as.factor(fData(hlm)$markers[1:100]))
+heatmaply(assay(hl)[1:100, ],
+          RowSideColors = as.factor(rowData(hl)$markers[1:100]))
 ```
 
 ```{r d3hm, eval = FALSE}
 library("d3heatmap")
-d3heatmap(MSnbase::exprs(hlm))
+d3heatmap(assay(hl))
 ```
 
 See also *A tutorial in displaying mass spectrometry-based proteomic
