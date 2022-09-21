@@ -6,7 +6,7 @@
 - What are centring and scaling?
 - What is quantile normalisation?
 - How to assess if normalisation worked.
-- Lean about handling of missing values.
+- Learn about handling of missing values.
 
 ## Introduction
 
@@ -27,7 +27,7 @@ thousands).
   cell line, do you expect there to be larger, similar or smaller
   difference than in the example above? Why?
 
-  One would refer to thes two samples as **biological replicates**,
+  One would refer to these two samples as **biological replicates**,
   and the observed differences would be due to **technical** and
   **biological variability**.
 
@@ -45,7 +45,7 @@ thousands).
   variability, and the one produced by the treatment of interest in
   particular, must be larger than the technical variability.
 
-However, to before analysing any data, it is often (always) necessary
+However, before analysing any data, it is often (always) necessary
 to make the samples as comparable as possible by removing the
 technical variability (that should be shared among all samples)
 without removing biological variability (that will differantiate the
@@ -79,8 +79,8 @@ some very high values:
 summary(assay(cptac_se))
 ```
 
-Such data are difficult to visualise and to analyse, because their
-distribution of their skewness. The first step is thus generally (but
+Such data are difficult to visualise and to analyse, because of the skewness of their 
+distribution. The first step is thus generally (but
 not always[^negbinom]) to log-transform the data, as shown below.
 
 [^negbinom]: When analysing count data, such as in the case of RNASeq
@@ -150,7 +150,7 @@ abline(v = c(-1, 1), col = "red")
 In addition to possible transformation of the data, it is necessary to
 further process the data to remove as much as technical variability as
 possible while keeping biological variability. This step is called
-**normalisation**. One of the important requriements of most
+**normalisation**. One of the important requirements of most
 normalisation techniques is that most proteins aren't expected to
 change among biological conditions. In other words, normalisation
 expects only a minority of biological features to be differentially
@@ -212,7 +212,7 @@ boxplot(x)
 scale in the range of 0 and 1 (or -1 and 1). On the figure above, this
 equates to changing the boxes so as to all have similar heights. A
 typical scaling method is to dividing the values by their standard
-devitations.
+deviations.
 
 `r msmbstyle::question_begin()`
 Calculate the standard deviation of each column and divide the values
@@ -243,8 +243,8 @@ operations using `scale`.
 ### Quantile normalisation
 
 Quantile normalisation is a method that will make different data
-distributions identical. The method works shown below using a small
-dataset with quantitation data for three samples (S1, S2, and S3) and
+distributions identical. An example is shown below using a small 
+dataset with quantitative data for three samples (S1, S2, and S3) and
 4 genes (A to D) (example taken from the Wikipedia page).
 
 ```{r quantex1}
@@ -264,7 +264,7 @@ the highest value, gets rank 4. We store these in a new matrix `rnk`.
 (rnk <- apply(x, 2, rank, ties.method = "min"))
 ```
 
-We now arrange the values according to their rang (i.e. sorting) and
+We now arrange the values according to their rank (i.e. sorting) and
 calculate row-wise means: the mean of all lowest values, ... up to the
 mean of all highest values.
 
@@ -275,7 +275,7 @@ cbind(sorted_x, ranked_means)
 ```
 
 The final step is to replace the ranks in `rnk` by the respective
-respective `ranked_means`: the gene with the lowest expression in each
+ `ranked_means`: the gene with the lowest expression in each
 samples gets the lowest ranked mean, ..., the gene with the highest
 expression in each sample get the highest ranked mean.
 
@@ -391,7 +391,7 @@ hist(row_na)
 `r msmbstyle::solution_end()`
 
 All the concepts and methods seen in this chapter will be paramount in
-the next ones, once we will test, cluster or classify our data.
+the next ones, once we test, cluster or classify our data.
 
 
 `r msmbstyle::question_begin()`
@@ -421,9 +421,9 @@ anyNA(assay(se_zero))
 ## Additional exercises
 
 `r msmbstyle::question_begin()`
-You are provided with a dataset show below (2 biological groups A
+You are provided with a dataset shown below (2 biological groups A
 (red) and B (green) with 3 replicates in each) and asked to analyse
-it. What are you thoughts about these data and what are the
+it. What are your thoughts about these data and what are the
 implications for the normalisation step?
 
 ```{r, echo = FALSE}
