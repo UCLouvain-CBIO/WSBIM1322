@@ -45,8 +45,8 @@ This chapter has as objectives to
 
 In this chapter, we are going to learn about dimensionality reduction,
 also called ordination. The goal of dimensionality reduction is to
-transform a high-dimensinal data into data of lesser dimensions while
-minimise the loss of information.
+transform a high-dimensional data into data of lesser dimensions while
+minimising the loss of information.
 
 Dimensionality reduction is used as a data transformation technique
 for input to other machine learning methods such as classifications,
@@ -104,10 +104,10 @@ px <- p +
 py + px
 ```
 
-In general, and in particular in the projections above, we loose
+In general, and in particular in the projections above, we lose
 information when reducing the number of dimensions (above, from 2
-(plane) to 1 (line)). In the first example above (left), we loose all
-the measurements of gene *y*. In the second example (right), we loose
+(plane) to 1 (line)). In the first example above (left), we lose all
+the measurements of gene *y*. In the second example (right), we lose
 all the measurements of gene *x*.
 
 The goal of dimensionality reduction is to limit this loss.
@@ -144,7 +144,7 @@ pline1 + pline2
 ```
 
 We now want a line that minimises distances in both directions, as
-shown below. This line, called **principal compoment**, is also the
+shown below. This line, called **principal component**, is also the
 ones that maximises the variance of the projections along itself.
 
 ```{r pxaex, echo = FALSE, fig.cap = "The first prinicpal component minimises the sum of squares of the orthogonal projections.", fig.height = 5.6, fig.width = 11.5}
@@ -261,7 +261,7 @@ grid()
 ```
 
 In R, we can use the `prcomp` function. A summary of the `prcomp`
-output shows that along PC1 along, we are able to retain close to 92%
+output shows that along PC1, we are able to retain close to 92%
 of the total variability in the data.
 
 
@@ -570,7 +570,7 @@ fviz_screeplot(pca_mulvey2015)
 
 - Visualise your PCA analysis on a biplot. You can use the `fviz_pca`
   function from the `factoextra` package, or the `fviz_pca_ind`
-  function to focus on the individuals (the rows of the orgininal
+  function to focus on the individuals (the rows of the original
   input).
 
 - Use the `habillage` argument of the `fviz_pca_ind` function to
@@ -701,7 +701,7 @@ fviz_screeplot(pca_hl)
 
 - Visualise your PCA analysis on a biplot. You can use the `fviz_pca`
   function from the `factoextra` package, or the `fviz_pca_var`
-  function to focus on the variables (the columns of the orgininal
+  function to focus on the variables (the columns of the original
   input).
 
 - Interpret the variables on the biplot. Which ones are correlated? Is
