@@ -17,7 +17,7 @@ In this chapter we will:
 - Introduce clustering methods.
 - Learn how to use a widely used non-parametric clustering algorithms
   **k-means**.
-- Learn how to use reucrsive clustering approaches known as
+- Learn how to use recursive clustering approaches known as
   **hierarchical clustering**.
 - Observe the influence of clustering parameters and distance metrics
   on the outputs.
