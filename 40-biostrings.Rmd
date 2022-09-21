@@ -37,7 +37,7 @@ sequences[c(1, 3)]
 sample(sequences)
 ```
 
-However, once is we want to perform biologically relevant operations,
+However, once we want to perform biologically relevant operations,
 base R fails us; it has no notion of operations relevant to DNA
 sequences, e.g.,
 
@@ -388,7 +388,7 @@ letterFrequency(chr2L_dna, c("A", "G", "C", "T"), as.prob = TRUE)
 Focusing on the region from base 10 million to 11 million along
 chromosome 2L, calculate the GC content across a sliding window of
 5000 nucleotides (you can use the `letterFrequencyInSlidingView`
-functionn) and visualise it (see an example below). On that plot, show
+function) and visualise it (see an example below). On that plot, show
 the mean GC content and highlight the regions that have a GC content >
 0.5 and < 0.35.
 `r msmbstyle::question_end()`
@@ -418,7 +418,7 @@ lines(gc_content)
 Visit the UniProt web page at
 [https://www.uniprot.org/](https://www.uniprot.org/) and download the
 manually reviewed complete human proteome (containing about 20500
-proteins). Do to so, choose *Proteomes* on the main page, then search
+proteins). To do so, choose *Proteomes* on the main page, then search
 for *Homo sapiens*, select it among the list of hits, choose the
 reviewed Swiss-Prot release, and download all entries in compressed
 fasta format (see [video](https://youtu.be/K-MVjwZzSoY)).
