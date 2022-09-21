@@ -24,8 +24,8 @@ Our **learning objectives** are
 
 - Familiarise ourselves with plotting in R using base graphics and
   `ggplot2`;
-- Understand the concepts behind the gramar of graphics and `ggplot2`;
-- Learn how to visualiste data along 1, 2 or more dimensions;
+- Understand the concepts behind the grammar of graphics and `ggplot2`;
+- Learn how to visualise data along 1, 2 or more dimensions;
 - Learn about `plotly`, one package for producing interactive
   visualisations.
 
@@ -71,8 +71,8 @@ But...
 
 While the *residuals* of the linear regression (see chapter
 \@ref(sec-obj)) clearly indicate fundamental differences in these
-data, the most simple and straightforward approach is *visualisation*
-to highlight the fundamental differences in the datasets.
+data, the most simple and straightforward approach in *visualisation*
+is to highlight the fundamental differences in the datasets.
 
 ```{r anscombefig, echo=FALSE}
 ff <- y ~ x
@@ -145,8 +145,8 @@ plot(DNase$conc, DNase$density,
 abline(v = unique(DNase$conc), lty = "dotted")
 ```
 
-If we wanted to change anything to that figures, we would need to
-repeat all the commands and modify accordingly. Any additinal command
+If we wanted to change anything to the figures, we would need to
+repeat all the commands and modify accordingly. Any additional command
 would be added to the existing canvas.
 
 `r msmbstyle::question_begin()`
@@ -161,7 +161,7 @@ plot(DNase$conc, DNase$density, col = DNase$Run)
 `r msmbstyle::solution_end()`
 
 `r msmbstyle::question_begin()`
-Use the `hist` and `boxplot` functions to produce and
+Use the `hist` and `boxplot` functions to produce a
 histogram of all optical densities and a boxplot of the densities
 split by run.
 `r msmbstyle::question_end()`
@@ -175,7 +175,7 @@ boxplot(density ~ Run, DNase)
 `r msmbstyle::solution_end()`
 
 The base graphics function are very effective to quickly produce out
-of the box figures. However, there is not global overview and
+of the box figures. However, there is no global overview and
 parametrisation of the visualisation. The layout decisions have to be
 made up upfront (and if not adequate, the figure needs to be redrawn)
 and every aspect of the figure is customised locally as function
