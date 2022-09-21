@@ -86,8 +86,8 @@ table(is.na(giris2$GRADE))
 `r msmbstyle::question_begin()`
 
 Visualise the `giris2` data on a PCA plot, highlighting the labels (or
-absence thereof). Using the visualisation, will the classifying of the
-unlabelled data will be difficult or easy? Motivate your answer.
+absence thereof). From the visualisation, do you think classifying the
+unlabelled data will be difficult or easy? Defend your answer.
 
 `r msmbstyle::question_end()`
 
@@ -239,7 +239,7 @@ p1 / p2
 - Can you identify some questionable results? Explore the results for
   patient 167, that was assigned group B.
 
-- Do do so, calculated the distances between sample 167 and all other
+- To do so, calculated the distances between sample 167 and all other
   labelled data.
 
 - Compare the labels of its 15 closest labelled data points.
@@ -538,7 +538,7 @@ This variance and bias trade-off can be illustrated in different
 ways. The figure below (reproduced with permission from [@ISLR]) shows
 the prediction error as a function of the model complexity. In our
 example above, we have used accuracy, a metric that we want to
-optimise, while in the prediction error is a measure to me minimised.
+optimise, while in the prediction error is a measure to be minimised.
 
 
 ```{r, echo = FALSE, fig.cap = "Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of $k$ while the test error reaches a minimum around $k = 10$ before increasing again. Reproduced with permission from James *et al.* 2014)", out.width='100%', fig.align='center'}
@@ -732,7 +732,7 @@ table(fData(hyperLOPIT2015)$svm.classification[unknown],
 `r msmbstyle::question_begin()`
 
 A classification algorithm will assign a class to any unlabelled
-instance, even if it doesn't match any of the prodided classes. This
+instance, even if it doesn't match any of the provided classes. This
 is often the case in omics datasets such as the spatial proteomics
 example above, where not all the sub-cellular niches are annotated or
 known. We thus know that some of these assignments will be wrong from

@@ -18,14 +18,14 @@ bibliography: [refs.bib, packages.bib]
 
 # Preamble {-}
 
-The [WSBIM1322](https://uclouvain.be/cours-2021-wsbim1322.html) course
-is teaches the basics of statistical data analysis applied to high
+The [WSBIM1322](https://uclouvain.be/cours-2021-wsbim1322.html) course 
+teaches the basics of statistical data analysis applied to high
 throughput biology. It is aimed at biology and biomedical students
-that are already familiar with the R langauge (see the pre-requisits
+that are already familiar with the R langauge (see the pre-requisites
 section below). The students will familiarise themselves with
-statitical learning concepts such as unsupervised and supervised
+statistical learning concepts such as unsupervised and supervised
 learning, hypothesis testing, and extend their understanding and
-practive in R data structures and programming and the Bioconductor
+practice in R data structures and programming and the Bioconductor
 project.
 
 The course will be followed by *Omics data analysis*
@@ -38,7 +38,7 @@ Today, it is difficult to overestimate the very broad importance and
 impact of *data*. Given the abundance of data around us, and the
 sophistication of tools for their analysis and interpretation that are
 readily available, data has become a tool of profound social
-change. Resarch in general, and biomedical research in particular, is
+change. Research in general, and biomedical research in particular, is
 at the centre of this evolution. And while bioinformatics has been
 playing a central role in bio-medical research for many years now,
 bioinformatics skills aren't well integrated in life science
@@ -67,7 +67,7 @@ References are provided throughout the course. Several stand out
 however, as they cover large parts of the material or provide
 complementary resources.
 
-- **Modern Statistical for Modern Biology**, by Susan Holmes and
+- **Modern Statistics for Modern Biology**, by Susan Holmes and
   Wolfgang Huber [@MSMB]. A free online version of the book is
   available [here](https://www-huber.embl.de/msmb/).
 
@@ -76,7 +76,7 @@ complementary resources.
   [@ISLR]. A free pdf of the book is available
   [here](http://faculty.marshall.usc.edu/gareth-james/ISL/index.html).
 
-This course is being tought by Prof Laurent Gatto with invaluable
+This course is being taught by Prof Laurent Gatto with invaluable
 assistance from Dr Axelle Loriot at the Faculty of Pharmacy and
 Biomedical Sciences (FASB) at the UCLouvain, Belgium.
 
