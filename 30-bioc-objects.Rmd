@@ -6,13 +6,13 @@
   high-level objects.
 - Understand the concept of high-level object.
 - Know how to learn about objects and access data from them.
-- Learn about import Bioconductor objects widely used in omics data
+- Learn about how to import Bioconductor objects widely used in omics data
   analysis.
 - Become familiar with how objects are implemented.
 
 ## Introduction
 
-The term *object* stems from the widely used objet-oriented
+The term *object* stems from the widely used object-oriented
 programming (OOP) paradigm. OOP is however outside of scope of this
 course (see part III of @advancedR, which is also [freely available
 online](https://adv-r.hadley.nz/)). In the *R refresher* chapter
@@ -27,7 +27,7 @@ and information necessary to produce the figure.
 
 ## Why objects?
 
-- Combine many parts of a complext data, for example store data (and
+- Combine many parts of a complex data, for example store data (and
   possibly different forms thereof (see chapter \@ref(sec-norm)) and
   metadata together.
 
@@ -82,7 +82,7 @@ Class person:
 - Role: a character (student, teaching assistant, instructor)
 ```
 
-An **object** is and instantiation of a class with specific values in
+An **object** is an instantiation of a class with specific values in
 its fields:
 
 ```
@@ -245,7 +245,7 @@ published by @Himes:2014. It contains the RNA expression data for
 64102 transcripts and 8 samples. These 8 samples correspond to treated
 and untreated condition in 4 different cell lines.
 
-Objects if the class `SummarizedExperiment` contain one or more assays
+Objects of the class `SummarizedExperiment` contain one or more assays
 (i.e. sets if quantitative expresson data), each represented by a
 matrix-like object (typically) of numeric mode. The rows represent
 features such as genes, transcripts, proteins or more generally
@@ -256,9 +256,9 @@ represents its anatomy in greater details.
 knitr::include_graphics("./figs/SE.svg")
 ```
 
-- The sample (columns) metadata can be access with the `colData()`
+- The sample (columns) metadata can be accessed with the `colData()`
   function.
-- The features (rows) metadata can be access with the `rowData()`
+- The features (rows) metadata can be accessed with the `rowData()`
   column.
 - If the features represent ranges along genomic coordinates, these
   can be accessed with `rowRanges()`
