@@ -218,7 +218,7 @@ different from the others. One way to define *different* is by
 measuring distances between all the samples, or each sample to a
 virtual *average sample*. Let's try this ourselves for a dataset of 5
 sample that have each been characterised by measuring the expression
-of genes$x$ and $y$.
+of genes $x$ and $y$.
 
 ```{r dist0, fig.cap = "A simulated dataset composed of 5 samples."}
 set.seed(111)
@@ -280,7 +280,7 @@ which.max(dists[6, ])
 ```
 `r msmbstyle::solution_end()`
 
-The concept out outlier is very intuitive, but becomes murky when the
+The concept of outlier is very intuitive, but becomes murky when the
 number of dimensions becomes very high.
 
 ## The curse of dimensionality
