@@ -5,7 +5,7 @@ hypothesis testing as used in bioinformatics. For prerequisites within
 the Biomedical sciences masters degree at the UCLouvain, see
 *WFARM1247* (Traitement statistique des données).
 
-Parts of this chapter are based on chapter 6 from *Modern Statistical
+Parts of this chapter are based on chapter 6 from *Modern Statistics
 for Modern Biology* [@MSMB].
 
 ## Refresher
@@ -56,7 +56,7 @@ We set
 - $H_1$: the coin is baised
 
 If `r num_heads` isn't deemed too *extreme*, then we won't reject
-$H_0$ and conclude that the coin in faire. If `r num_heads` is deemed
+$H_0$ and conclude that the coin in fair. If `r num_heads` is deemed
 too extreme, then we reject $H_0$ and accept $H_1$, and conclude that
 the coin is baised.
 
@@ -312,7 +312,7 @@ In an experiment with enough truly differentially expression features,
 on expects to observe a substantial increase of small p-values
 (anti-conservative). In other words, we expect to see more small
 p-values that at random, or when no statistically significant are
-present (uniform). All other scenarios warrent further inspection, as
+present (uniform). All other scenarios warrant further inspection, as
 they might point to issue with the data of the tests.
 
 When many tests are preformed, the p-values need to be *adjusted*, to
@@ -320,7 +320,7 @@ take into account that many tests have been performed.
 
 ## Adjustment for multiple testing
 
-There are two classes of multiple testing adjumstment methods:
+There are two classes of multiple testing adjustment methods:
 
 - **Family-wise error rate** (FWER) that gives the probability of one
   or more false positives. The **Bonferroni correction** for *m* tests
@@ -367,7 +367,7 @@ min(adj_pvals)
 
 `r msmbstyle::question_begin()`
 The `tdata4` dataset is already log2 and can be processed as
-is. Practice what we have see so far and identify differentiall
+it is. Practice what we have see so far and identify differential
 expressed genes in group A vs B.
 `r msmbstyle::question_end()`
 
@@ -391,7 +391,7 @@ head(sort(adjp))
 
 
 `r msmbstyle::question_begin()`
-Calculate a log2 fold-change between groups A and B. Do do so, you
+Calculate a log2 fold-change between groups A and B. To do so, you
 need to subtract mean expression of group B from mean of group
 A[^l2fc]. Repeat this for all genes. Visualise and interpret the distribution
 of the log2 fold-changes.
@@ -447,7 +447,7 @@ abline(v = c(-1, 1))
 
 [Chapter 6 on
 *testing*](https://www.huber.embl.de/msmb/Chap-Testing.html) of
-*Modern Statistical for Modern Biology* [@MSMB], and in particlar
+*Modern Statistics for Modern Biology* [@MSMB], and in particlar
 section 6.5, provides additional details about the t-test.
 
 The t-test comes in multiple flavors, all of which can be chosen
@@ -475,7 +475,7 @@ about the same. If they are very different, an alternative form,
 called the Welch t-test exist.
 
 An important assumption when performing a t-test is the **independence
-assumption** among the observations in a sample. A additional exercise
+assumption** among the observations in a sample. An additional exercise
 below demonstrate the risk of dependence between samples.
 
 
@@ -493,7 +493,7 @@ Richard Hamming:
 
 To this effect, a [type III
 error](https://en.wikipedia.org/wiki/Type_III_error) has been defined
-that occurs when researchers provide the right answer to the wrong
+as errors that occur when researchers provide the right answer to the wrong
 question.
 
 
@@ -829,7 +829,7 @@ ggplot(binomial_dens) +
 `r msmbstyle::question_end()`
 
 
-The above test already has an easy to use funciton in R:
+The above test already has an easy to use function in R:
 
 ```{r}
 binom.test(x = num_heads, n = n, p = 0.5)
