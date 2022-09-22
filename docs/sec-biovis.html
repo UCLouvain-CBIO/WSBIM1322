@@ -8,13 +8,12 @@
 <meta property="og:title" content="Chapter 11 Visualising biomolecular data | Bioinformatics" />
 <meta property="og:type" content="book" />
 
-
 <meta property="og:description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain." />
 
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-12-06" />
+<meta name="date" content="2022-09-22" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -27,7 +26,6 @@ MathJax.Hub.Config({
 
 <title>Chapter 11 Visualising biomolecular data | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -74,6 +72,7 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -108,7 +107,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -121,7 +120,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -175,23 +174,23 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html">Preamble</a>
-<a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
-<a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
-<a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
-<a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
-<a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
-<a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
-<a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
-<a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
-<a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
-<a id="active-page" href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a><ul class="toc-sections">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a id="active-page" href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a><ul class="toc-sections">
 <li class="toc"><a href="#heatmaps"> Heatmaps</a></li>
 <li class="toc"><a href="#visualising-intersections-between-sets"> Visualising intersections between sets</a></li>
 </ul>
-<a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
-<a href="sec-si.html"><span class="toc-section-number">13</span> Session information</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
 </div>
 </li>
 </ul>
@@ -201,7 +200,8 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec-biovis" class="section level1" number="11">
+<html><body>
+<div id="sec-biovis" class="section level1" number="11">
 <h1>
 <span class="header-section-number">Chapter 11</span> Visualising biomolecular data</h1>
 <p>The goal of this chapter is to learn some additional visualisation
@@ -213,7 +213,7 @@ clustering that was seen in chapter <a href="sec-ul.html#sec-ul">9</a>.</li>
 <li>Visualisation of intersections, in particular <strong>Venn</strong> and <strong>UpSet</strong>
 plots.</li>
 </ul>
-<!-- - The *[Gviz](https://bioconductor.org/packages/3.14/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2" number="11.1">
+<!-- - The *[Gviz](https://bioconductor.org/packages/3.15/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2" number="11.1">
 <h2>
 <span class="header-section-number">11.1</span> Heatmaps<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('heatmaps')" onmouseout="reset_tooltip('heatmaps-tooltip')"><span class="tooltiptext" id="heatmaps-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
@@ -279,8 +279,8 @@ Figure 11.5: Effect of scaling on the heatmap output: scaling along the columns.
 <p>Based on the caveats above, it is essential to present and interpret
 heatmaps with great care.</p>
 <p>There exists several packages that allow to produce heatmaps with
-various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.14/Heatplus">Heatplus</a></em> package, or
-the <em><a href="https://bioconductor.org/packages/3.14/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation
+various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.15/Heatplus">Heatplus</a></em> package, or
+the <em><a href="https://bioconductor.org/packages/3.15/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation
 <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html">here</a>),
 demonstrated below.</p>
 <div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="sec-biovis.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ComplexHeatmap"</span>)</span>
@@ -331,8 +331,7 @@ data (not only proteomics) for a useful reference.</p>
 analysis. Venn and Euler diagrams are popular representation when
 comparing sets and their intersection. Two useful R packages to
 generate such plots are
-<em><a href="https://CRAN.R-project.org/package=venneuler">venneuler</a></em> and <em><a href="https://github.com/js229/Vennerable">Vennerable</a></em><label for="tufte-sn-17" class="margin-toggle sidenote-number">17</label><input type="checkbox" id="tufte-sn-17" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">17</span> You can install <code>Vennerable</code> with
-<code>BiocManager::install("js229/Vennerable")</code>.</span>.</p>
+<em><a href="https://CRAN.R-project.org/package=venneuler">venneuler</a></em> and <em><a href="https://github.com/js229/Vennerable">Vennerable</a></em><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>.</p>
 <p>We will use the <code>mulvey2015norm</code> feature names to generate a test data:</p>
 <div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="sec-biovis.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb435-2"><a href="sec-biovis.html#cb435-2" aria-hidden="true" tabindex="-1"></a>feat_list <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">3</span>,</span>
@@ -449,9 +448,9 @@ relate to each other.</p>
 <p><img src="WSBIM1322_files/figure-html/upset2-8.png" width="672"></p>
 <div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="sec-biovis.html#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">upset</span>(upset_in_4, <span class="at">empty.intersections =</span> <span class="st">"on"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-9.png" width="672">
-Visualising intersections with <code>UpSetR</code> shines with more that 4 sets,
+Visualising intersections with <code>UpSetR</code> shines with more than 4 sets,
 as Venn diagrams become practically useless.</p>
-<p>There is also am UpSetR online app: <a href="https://gehlenborglab.shinyapps.io/upsetr/" class="uri">https://gehlenborglab.shinyapps.io/upsetr/</a></p>
+<p>There is also an UpSetR online app: <a href="https://gehlenborglab.shinyapps.io/upsetr/" class="uri">https://gehlenborglab.shinyapps.io/upsetr/</a></p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -461,7 +460,7 @@ as Venn diagrams become practically useless.</p>
 upset diagrams as shown above.</p>
 <p>When the number of sets become larger, the options above, as well as
 <code>nsets</code>, the number of sets (default is 5) and <code>nintersects</code>, the
-number of intersectios (default is 40) become useful.</p>
+number of intersections (default is 40) become useful.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -486,16 +485,24 @@ number of intersectios (default is 40) become useful.</p>
 <!-- ## Data along genomic coordinates -->
 
 </div>
-</div></body></html>
+</div>
+<div class="footnotes">
+<hr>
+<ol start="17">
+<li id="fn17"><p>You can install <code>Vennerable</code> with
+<code>BiocManager::install("js229/Vennerable")</code>.<a href="sec-biovis.html#fnref17" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+</body></html>
 
 <p style="text-align: center;">
 <a href="sec-sl.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-ccl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-12-06
+2022-09-22
  using 
-R version 4.1.2 (2021-11-01)
+R version 4.2.0 Patched (2022-05-13 r82357)
 </p>
 </div>
 </div>
