@@ -8,13 +8,12 @@
 <meta property="og:title" content="Chapter 2 Data visualisation | Bioinformatics" />
 <meta property="og:type" content="book" />
 
-
 <meta property="og:description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain." />
 
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2021-12-06" />
+<meta name="date" content="2022-09-26" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -27,7 +26,6 @@ MathJax.Hub.Config({
 
 <title>Chapter 2 Data visualisation | Bioinformatics</title>
 
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
 <link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
@@ -919,7 +917,7 @@ of the data.</p>
 <span id="cb37-9"><a href="sec-vis.html#cb37-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(sim, <span class="fu">aes</span>(<span class="fu">log</span>(x))) <span class="sc">+</span></span>
 <span id="cb37-10"><a href="sec-vis.html#cb37-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span>
 <span id="cb37-11"><a href="sec-vis.html#cb37-11" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code></pre></div>
-<pre><code>## Warning: Removed 7921 rows containing non-finite values (stat_bin).</code></pre>
+<pre><code>## Warning: Removed 8064 rows containing non-finite values (stat_bin).</code></pre>
 <div class="figure">
 <span style="display:block;" id="fig:sim"></span>
 <p class="caption marginnote shownote">
@@ -943,7 +941,7 @@ Figure 2.16: Histograms of the same data without (left) and with (right) log-tra
 ## 1415674_a_at     9.974538          8.592410
 ## 1415675_at       9.294144          6.257513</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sec-vis.html#cb41-1" aria-hidden="true" tabindex="-1"></a>scp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hiiragi2013df2,</span>
-<span id="cb41-2"><a href="sec-vis.html#cb41-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">59 E4.5 (PE)</span><span class="st">`</span>,</span>
+<span id="cb41-2"><a href="sec-vis.html#cb41-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">59 E4.5 (PE)</span><span class="st">`</span>,</span>
 <span id="cb41-3"><a href="sec-vis.html#cb41-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> <span class="st">`</span><span class="at">92 E4.5 (FGF4-KO)</span><span class="st">`</span>))</span>
 <span id="cb41-4"><a href="sec-vis.html#cb41-4" aria-hidden="true" tabindex="-1"></a>scp <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
 <div class="figure">
@@ -1165,9 +1163,9 @@ otherwise. Below are some example outputs.</p>
 <a href="sec-obj.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2021-12-06
+2022-09-26
  using 
-R version 4.1.2 (2021-11-01)
+R version 4.2.1 (2022-06-23)
 </p>
 </div>
 </div>

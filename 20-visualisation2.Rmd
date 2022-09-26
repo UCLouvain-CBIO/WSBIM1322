@@ -490,7 +490,7 @@ This also applies to density plots.
 data(hiiragi2013df2)
 head(hiiragi2013df2)
 scp <- ggplot(hiiragi2013df2,
-              aes(x= `59 E4.5 (PE)`,
+              aes(x = `59 E4.5 (PE)`,
                   y = `92 E4.5 (FGF4-KO)`))
 scp + geom_point()
 ```
