@@ -211,7 +211,7 @@ div.csl-indent {
 <li>What are centring and scaling?</li>
 <li>What is quantile normalisation?</li>
 <li>How to assess if normalisation worked.</li>
-<li>Lean about handling of missing values.</li>
+<li>Learn about handling of missing values.</li>
 </ul>
 <div id="introduction-2" class="section level2" number="5.1">
 <h2>
@@ -234,7 +234,7 @@ differences would be solely the result of <strong>technical variability</strong>
 <p>If we now take two independent different cell cultures of the same
 cell line, do you expect there to be larger, similar or smaller
 difference than in the example above? Why?</p>
-<p>One would refer to thes two samples as <strong>biological replicates</strong>,
+<p>One would refer to these two samples as <strong>biological replicates</strong>,
 and the observed differences would be due to <strong>technical</strong> and
 <strong>biological variability</strong>.</p>
 </li>
@@ -253,7 +253,7 @@ variability, and the one produced by the treatment of interest in
 particular, must be larger than the technical variability.</p>
 </li>
 </ul>
-<p>However, to before analysing any data, it is often (always) necessary
+<p>However, before analysing any data, it is often (always) necessary
 to make the samples as comparable as possible by removing the
 technical variability (that should be shared among all samples)
 without removing biological variability (that will differantiate the
@@ -291,8 +291,8 @@ some very high values:</p>
 ##  Mean   :  1677453   Mean   : 1454185   Mean   :  1743025  
 ##  3rd Qu.:   948920   3rd Qu.:  881775   3rd Qu.:  1060350  
 ##  Max.   :112820000   Max.   :94944000   Max.   :128870000</code></pre>
-<p>Such data are difficult to visualise and to analyse, because their
-distribution of their skewness. The first step is thus generally (but
+<p>Such data are difficult to visualise and to analyse, because of the skewness of their
+distribution. The first step is thus generally (but
 not always<label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> When analysing count data, such as in the case of RNASeq
 of spectral counting in proteomics, it is better not to transform
 the data and use dedicated distribution for count-based data. In
@@ -364,7 +364,7 @@ Figure 5.3: Non-symetric fold-changes (left) and symetric log fold-changes (righ
 <p>In addition to possible transformation of the data, it is necessary to
 further process the data to remove as much as technical variability as
 possible while keeping biological variability. This step is called
-<strong>normalisation</strong>. One of the important requriements of most
+<strong>normalisation</strong>. One of the important requirements of most
 normalisation techniques is that most proteins aren’t expected to
 change among biological conditions. In other words, normalisation
 expects only a minority of biological features to be differentially
@@ -463,7 +463,7 @@ values. Visualise and interpret the centred data.</p>
 scale in the range of 0 and 1 (or -1 and 1). On the figure above, this
 equates to changing the boxes so as to all have similar heights. A
 typical scaling method is to dividing the values by their standard
-devitations.</p>
+deviations.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -511,8 +511,8 @@ operations using <code>scale</code>.</p>
 <span class="header-section-number">5.3.2</span> Quantile normalisation<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('quantile-normalisation')" onmouseout="reset_tooltip('quantile-normalisation-tooltip')"><span class="tooltiptext" id="quantile-normalisation-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>Quantile normalisation is a method that will make different data
-distributions identical. The method works shown below using a small
-dataset with quantitation data for three samples (S1, S2, and S3) and
+distributions identical. An example is shown below using a small
+dataset with quantitative data for three samples (S1, S2, and S3) and
 4 genes (A to D) (example taken from the Wikipedia page).</p>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="sec-norm.html#cb213-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">S1 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
 <span id="cb213-2"><a href="sec-norm.html#cb213-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">S2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>),</span>
@@ -534,7 +534,7 @@ the highest value, gets rank 4. We store these in a new matrix <code>rnk</code>.
 ## B  1  1  2
 ## C  2  3  3
 ## D  3  2  4</code></pre>
-<p>We now arrange the values according to their rang (i.e. sorting) and
+<p>We now arrange the values according to their rank (i.e. sorting) and
 calculate row-wise means: the mean of all lowest values, … up to the
 mean of all highest values.</p>
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="sec-norm.html#cb217-1" aria-hidden="true" tabindex="-1"></a>sorted_x <span class="ot">&lt;-</span> <span class="fu">apply</span>(x, <span class="dv">2</span>, sort)</span>
@@ -546,7 +546,7 @@ mean of all highest values.</p>
 ## [3,]  4  4  6     4.666667
 ## [4,]  5  4  8     5.666667</code></pre>
 <p>The final step is to replace the ranks in <code>rnk</code> by the respective
-respective <code>ranked_means</code>: the gene with the lowest expression in each
+<code>ranked_means</code>: the gene with the lowest expression in each
 samples gets the lowest ranked mean, …, the gene with the highest
 expression in each sample get the highest ranked mean.</p>
 <div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="sec-norm.html#cb219-1" aria-hidden="true" tabindex="-1"></a>x_norm <span class="ot">&lt;-</span> <span class="fu">matrix</span>(ranked_means[rnk], <span class="at">ncol =</span> <span class="dv">3</span>)</span>
@@ -685,7 +685,7 @@ of occurences of 1, 2, 3, … missing values.</p>
 </div>
 </div>
 <p>All the concepts and methods seen in this chapter will be paramount in
-the next ones, once we will test, cluster or classify our data.</p>
+the next ones, once we test, cluster or classify our data.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -727,9 +727,9 @@ recommended.)</p>
 ► Question
 </p>
 <div class="question-body">
-<p>You are provided with a dataset show below (2 biological groups A
+<p>You are provided with a dataset shown below (2 biological groups A
 (red) and B (green) with 3 replicates in each) and asked to analyse
-it. What are you thoughts about these data and what are the
+it. What are your thoughts about these data and what are the
 implications for the normalisation step?</p>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
 <p class="question-end">

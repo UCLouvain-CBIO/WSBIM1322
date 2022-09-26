@@ -211,7 +211,7 @@ div.csl-indent {
 hypothesis testing as used in bioinformatics. For prerequisites within
 the Biomedical sciences masters degree at the UCLouvain, see
 <em>WFARM1247</em> (Traitement statistique des données).</p>
-<p>Parts of this chapter are based on chapter 6 from <em>Modern Statistical
+<p>Parts of this chapter are based on chapter 6 from <em>Modern Statistics
 for Modern Biology</em> <span class="citation">(<label for="tufte-mn-19" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-19" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>.</p>
 <div id="refresher" class="section level2" number="7.1">
 <h2>
@@ -245,7 +245,7 @@ probability of <span class="math inline">\(7.8886091\times 10^{-31}\)</span>.</p
 <span class="math inline">\(H_1\)</span>: the coin is baised</li>
 </ul>
 <p>If 62 isn’t deemed too <em>extreme</em>, then we won’t reject
-<span class="math inline">\(H_0\)</span> and conclude that the coin in faire. If 62 is deemed
+<span class="math inline">\(H_0\)</span> and conclude that the coin in fair. If 62 is deemed
 too extreme, then we reject <span class="math inline">\(H_0\)</span> and accept <span class="math inline">\(H_1\)</span>, and conclude that
 the coin is baised.</p>
 <p>To define <em>extreme</em>, we set <span class="math inline">\(\alpha = 0.05\)</span> and rejet <span class="math inline">\(H_0\)</span> if our result is
@@ -585,7 +585,7 @@ Figure 7.6: Expected trends of p-values for different scenarios (<a href="http:/
 on expects to observe a substantial increase of small p-values
 (anti-conservative). In other words, we expect to see more small
 p-values that at random, or when no statistically significant are
-present (uniform). All other scenarios warrent further inspection, as
+present (uniform). All other scenarios warrant further inspection, as
 they might point to issue with the data of the tests.</p>
 <p>When many tests are preformed, the p-values need to be <em>adjusted</em>, to
 take into account that many tests have been performed.</p>
@@ -594,7 +594,7 @@ take into account that many tests have been performed.</p>
 <h2>
 <span class="header-section-number">7.4</span> Adjustment for multiple testing<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('adjustment-for-multiple-testing')" onmouseout="reset_tooltip('adjustment-for-multiple-testing-tooltip')"><span class="tooltiptext" id="adjustment-for-multiple-testing-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
-<p>There are two classes of multiple testing adjumstment methods:</p>
+<p>There are two classes of multiple testing adjustment methods:</p>
 <ul>
 <li><p><strong>Family-wise error rate</strong> (FWER) that gives the probability of one
 or more false positives. The <strong>Bonferroni correction</strong> for <em>m</em> tests
@@ -656,7 +656,7 @@ confirm that none of the features are differentially expressed.</p>
 </p>
 <div class="question-body">
 <p>The <code>tdata4</code> dataset is already log2 and can be processed as
-is. Practice what we have see so far and identify differentiall
+it is. Practice what we have see so far and identify differential
 expressed genes in group A vs B.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -695,7 +695,7 @@ expressed genes in group A vs B.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Calculate a log2 fold-change between groups A and B. Do do so, you
+<p>Calculate a log2 fold-change between groups A and B. To do so, you
 need to subtract mean expression of group B from mean of group
 A<label for="tufte-sn-10" class="margin-toggle sidenote-number">10</label><input type="checkbox" id="tufte-sn-10" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">10</span> We need to subtract the means because the data are already log-transformed and <span class="math inline">\(log\frac{a}{b} = log(a) - log(c)\)</span>.</span>. Repeat this for all genes. Visualise and interpret the distribution
 of the log2 fold-changes.</p>
@@ -762,7 +762,7 @@ computed above.</p>
 </div>
 <p><a href="https://www.huber.embl.de/msmb/Chap-Testing.html">Chapter 6 on
 <em>testing</em></a> of
-<em>Modern Statistical for Modern Biology</em> <span class="citation">(<label for="tufte-mn-20" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-20" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>, and in particlar
+<em>Modern Statistics for Modern Biology</em> <span class="citation">(<label for="tufte-mn-20" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-20" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>, and in particlar
 section 6.5, provides additional details about the t-test.</p>
 <p>The t-test comes in multiple flavors, all of which can be chosen
 through parameters of the <code>t.test</code> function. What we did above is
@@ -783,7 +783,7 @@ expression is most appropriate if the variances within each group are
 about the same. If they are very different, an alternative form,
 called the Welch t-test exist.</p>
 <p>An important assumption when performing a t-test is the <strong>independence
-assumption</strong> among the observations in a sample. A additional exercise
+assumption</strong> among the observations in a sample. An additional exercise
 below demonstrate the risk of dependence between samples.</p>
 <p>Finally, it is important to highlight that all the methods and
 concepts described above will only be relevant if the problem is
@@ -797,7 +797,7 @@ the wrong problem the right way.</p>
 </blockquote>
 <p>To this effect, a <a href="https://en.wikipedia.org/wiki/Type_III_error">type III
 error</a> has been defined
-that occurs when researchers provide the right answer to the wrong
+as errors that occur when researchers provide the right answer to the wrong
 question.</p>
 <!-- ## Linear regression -->
 <!-- Suggested TODO  -->
@@ -1107,7 +1107,7 @@ conclusion now?</li>
 </p>
 </div>
 </div>
-<p>The above test already has an easy to use funciton in R:</p>
+<p>The above test already has an easy to use function in R:</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="sec-testing.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> num_heads, <span class="at">n =</span> n, <span class="at">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Exact binomial test

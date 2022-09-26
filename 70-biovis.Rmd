@@ -227,11 +227,11 @@ head(upset_in_4)
 upset(upset_in_4)
 upset(upset_in_4, empty.intersections = "on")
 ```
-Visualising intersections with `UpSetR` shines with more that 4 sets,
+Visualising intersections with `UpSetR` shines with more than 4 sets,
 as Venn diagrams become practically useless.
 
 
-There is also am UpSetR online app: https://gehlenborglab.shinyapps.io/upsetr/
+There is also an UpSetR online app: https://gehlenborglab.shinyapps.io/upsetr/
 
 `r msmbstyle::question_begin()`
 
@@ -240,7 +240,7 @@ upset diagrams as shown above.
 
 When the number of sets become larger, the options above, as well as
 `nsets`, the number of sets (default is 5) and `nintersects`, the
-number of intersectios (default is 40) become useful.
+number of intersections (default is 40) become useful.
 
 `r msmbstyle::question_end()`
 

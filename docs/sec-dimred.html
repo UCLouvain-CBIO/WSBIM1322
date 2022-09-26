@@ -257,8 +257,8 @@ compoment analysis achieves;</li>
 </h2>
 <p>In this chapter, we are going to learn about dimensionality reduction,
 also called ordination. The goal of dimensionality reduction is to
-transform a high-dimensinal data into data of lesser dimensions while
-minimise the loss of information.</p>
+transform a high-dimensional data into data of lesser dimensions while
+minimising the loss of information.</p>
 <p>Dimensionality reduction is used as a data transformation technique
 for input to other machine learning methods such as classifications,
 or as a very efficient visualisation technique, which is the use case
@@ -292,10 +292,10 @@ Figure 8.2: Projection of the data on the x (left) and y (right) axes.
 </p>
 <img src="WSBIM1322_files/figure-html/linproj-1.png" alt="Projection of the data on the x (left) and y (right) axes." width="1056">
 </div>
-<p>In general, and in particular in the projections above, we loose
+<p>In general, and in particular in the projections above, we lose
 information when reducing the number of dimensions (above, from 2
-(plane) to 1 (line)). In the first example above (left), we loose all
-the measurements of gene <em>y</em>. In the second example (right), we loose
+(plane) to 1 (line)). In the first example above (left), we lose all
+the measurements of gene <em>y</em>. In the second example (right), we lose
 all the measurements of gene <em>x</em>.</p>
 <p>The goal of dimensionality reduction is to limit this loss.</p>
 <p>We know already about <strong>linear regression</strong>. Below, we use the <code>lm</code>
@@ -312,7 +312,7 @@ Figure 8.3: Regression of y onto x (left) minimisises the sums of squares of ver
 <img src="WSBIM1322_files/figure-html/linreg-1.png" alt="Regression of y onto x (left) minimisises the sums of squares of vertical residuals (red). Regression of x onto y (right) minimisises the sums of squares of horizontal residuals (orange)." width="1056">
 </div>
 <p>We now want a line that minimises distances in both directions, as
-shown below. This line, called <strong>principal compoment</strong>, is also the
+shown below. This line, called <strong>principal component</strong>, is also the
 ones that maximises the variance of the projections along itself.</p>
 <div class="figure">
 <span style="display:block;" id="fig:pxaex"></span>
@@ -382,7 +382,7 @@ Figure 8.7: Original data (left). PC1 will maximise the variability while minimi
 </p>
 </div>
 <p>In R, we can use the <code>prcomp</code> function. A summary of the <code>prcomp</code>
-output shows that along PC1 along, we are able to retain close to 92%
+output shows that along PC1, we are able to retain close to 92%
 of the total variability in the data.</p>
 <div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="sec-dimred.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
 <span id="cb297-2"><a href="sec-dimred.html#cb297-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(xy)</span>
@@ -845,7 +845,7 @@ Figure 8.10: Scree plot for the <code>mulvey2015</code> data showing the percent
 <ul>
 <li><p>Visualise your PCA analysis on a biplot. You can use the <code>fviz_pca</code>
 function from the <code>factoextra</code> package, or the <code>fviz_pca_ind</code>
-function to focus on the individuals (the rows of the orgininal
+function to focus on the individuals (the rows of the original
 input).</p></li>
 <li><p>Use the <code>habillage</code> argument of the <code>fviz_pca_ind</code> function to
 highlight the time experimental variable. Interpret the figures in
@@ -1100,7 +1100,7 @@ Figure 8.14: Scree plot for the <code>hyperLOPIT2015</code> data showing the per
 <ul>
 <li><p>Visualise your PCA analysis on a biplot. You can use the <code>fviz_pca</code>
 function from the <code>factoextra</code> package, or the <code>fviz_pca_var</code>
-function to focus on the variables (the columns of the orgininal
+function to focus on the variables (the columns of the original
 input).</p></li>
 <li><p>Interpret the variables on the biplot. Which ones are correlated? Is
 this to be expected in the light of the experimental design.</p></li>

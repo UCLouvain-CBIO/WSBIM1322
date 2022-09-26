@@ -211,7 +211,7 @@ div.csl-indent {
 high-level objects.</li>
 <li>Understand the concept of high-level object.</li>
 <li>Know how to learn about objects and access data from them.</li>
-<li>Learn about import Bioconductor objects widely used in omics data
+<li>Learn about how to import Bioconductor objects widely used in omics data
 analysis.</li>
 <li>Become familiar with how objects are implemented.</li>
 </ul>
@@ -219,7 +219,7 @@ analysis.</li>
 <h2>
 <span class="header-section-number">3.1</span> Introduction<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('introduction-1')" onmouseout="reset_tooltip('introduction-1-tooltip')"><span class="tooltiptext" id="introduction-1-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
-<p>The term <em>object</em> stems from the widely used objet-oriented
+<p>The term <em>object</em> stems from the widely used object-oriented
 programming (OOP) paradigm. OOP is however outside of scope of this
 course (see part III of <span class="citation"><label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">Wickham (2014)<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced r</em>. Chapman &amp; Hall/CRC the r Series. Taylor &amp; Francis.</span></span>, which is also <a href="https://adv-r.hadley.nz/">freely available
 online</a>). In the <em>R refresher</em> chapter
@@ -236,7 +236,7 @@ and information necessary to produce the figure.</p>
 <span class="header-section-number">3.2</span> Why objects?<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('why-objects')" onmouseout="reset_tooltip('why-objects-tooltip')"><span class="tooltiptext" id="why-objects-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <ul>
-<li><p>Combine many parts of a complext data, for example store data (and
+<li><p>Combine many parts of a complex data, for example store data (and
 possibly different forms thereof (see chapter <a href="sec-norm.html#sec-norm">5</a>) and
 metadata together.</p></li>
 <li><p>Objects are <strong>self describing</strong>: an object to store high-throughput
@@ -280,7 +280,7 @@ people in this course as follows:</p>
 - Surname: a character
 - Noma: an optional numeric
 - Role: a character (student, teaching assistant, instructor)</code></pre>
-<p>An <strong>object</strong> is and instantiation of a class with specific values in
+<p>An <strong>object</strong> is an instantiation of a class with specific values in
 its fields:</p>
 <pre><code>Object of class person:
 - Name: Laurent
@@ -471,7 +471,7 @@ human airway smooth muscle cell lines treated with dexamethason
 published by <span class="citation"><label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">Himes et al. (2014)<span class="marginnote">Himes, B E, X Jiang, P Wagner, R Hu, Q Wang, B Klanderman, R M Whitaker, et al. 2014. <span>“RNA-Seq Transcriptome Profiling Identifies Crispld2 as a Glucocorticoid Responsive Gene That Modulates Cytokine Function in Airway Smooth Muscle Cells.”</span> <em>PLoS One</em> 9 (6): e99625. <a href="https://doi.org/10.1371/journal.pone.0099625">https://doi.org/10.1371/journal.pone.0099625</a>.</span></span>. It contains the RNA expression data for
 64102 transcripts and 8 samples. These 8 samples correspond to treated
 and untreated condition in 4 different cell lines.</p>
-<p>Objects if the class <code>SummarizedExperiment</code> contain one or more assays
+<p>Objects of the class <code>SummarizedExperiment</code> contain one or more assays
 (i.e. sets if quantitative expresson data), each represented by a
 matrix-like object (typically) of numeric mode. The rows represent
 features such as genes, transcripts, proteins or more generally
@@ -485,9 +485,9 @@ Figure 3.4: Schematic representation of the anatomy if a <code>SummarizedExperim
 <img src="figs/SE.svg" alt="Schematic representation of the anatomy if a `SummarizedExperiment` object. (Figure taken from the `SummarizedExperiment` package vignette.)">
 </div>
 <ul>
-<li>The sample (columns) metadata can be access with the <code>colData()</code>
+<li>The sample (columns) metadata can be accessed with the <code>colData()</code>
 function.</li>
-<li>The features (rows) metadata can be access with the <code>rowData()</code>
+<li>The features (rows) metadata can be accessed with the <code>rowData()</code>
 column.</li>
 <li>If the features represent ranges along genomic coordinates, these
 can be accessed with <code>rowRanges()</code>

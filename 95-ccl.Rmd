@@ -52,8 +52,8 @@ rWSBIM1322:::dr_summary()
 
 In classification (supervised machine learning), we need labelled
 data, i.e. a set of sample (top on the figures below) or features
-(bottom on the figure below). The classifier uses the data to learn to
-assign labels and applies that learnt model it infer the most likely
+(bottom on the figure below). The classifier uses the data to learn from
+assigned labels and applies that learnt model to infer the most likely
 label of the unlabelled data.
 
 ```{r, echo = FALSE, fig.cap = "Classification of samples (top) or features (bottom).", fig.with = 5, fig.height = 6}

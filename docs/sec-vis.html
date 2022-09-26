@@ -227,8 +227,8 @@ analysis or final results.</li>
 <ul>
 <li>Familiarise ourselves with plotting in R using base graphics and
 <code>ggplot2</code>;</li>
-<li>Understand the concepts behind the gramar of graphics and <code>ggplot2</code>;</li>
-<li>Learn how to visualiste data along 1, 2 or more dimensions;</li>
+<li>Understand the concepts behind the grammar of graphics and <code>ggplot2</code>;</li>
+<li>Learn how to visualise data along 1, 2 or more dimensions;</li>
 <li>Learn about <code>plotly</code>, one package for producing interactive
 visualisations.</li>
 </ul>
@@ -418,8 +418,8 @@ correlation:</p>
 <p>But…</p>
 <p>While the <em>residuals</em> of the linear regression (see chapter
 <a href="sec-obj.html#sec-obj">3</a>) clearly indicate fundamental differences in these
-data, the most simple and straightforward approach is <em>visualisation</em>
-to highlight the fundamental differences in the datasets.</p>
+data, the most simple and straightforward approach in <em>visualisation</em>
+is to highlight the fundamental differences in the datasets.</p>
 <p><img src="WSBIM1322_files/figure-html/anscombefig-1.png" width="672"></p>
 <p>See also another, more recent example:
 <a href="https://www.autodeskresearch.com/publications/samestats">The Datasaurus Dozen dataset</a>.</p>
@@ -489,8 +489,8 @@ Figure 2.2: Customising a base figure using function arguments and overlaying ne
 </p>
 <img src="WSBIM1322_files/figure-html/dnase2-1.png" alt="Customising a base figure using function arguments and overlaying new graphical features." width="672">
 </div>
-<p>If we wanted to change anything to that figures, we would need to
-repeat all the commands and modify accordingly. Any additinal command
+<p>If we wanted to change anything to the figures, we would need to
+repeat all the commands and modify accordingly. Any additional command
 would be added to the existing canvas.</p>
 <div class="question">
 <p class="question-begin">
@@ -521,7 +521,7 @@ using base graphics?</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Use the <code>hist</code> and <code>boxplot</code> functions to produce and
+<p>Use the <code>hist</code> and <code>boxplot</code> functions to produce a
 histogram of all optical densities and a boxplot of the densities
 split by run.</p>
 <p class="question-end">
@@ -549,7 +549,7 @@ split by run.</p>
 </div>
 </div>
 <p>The base graphics function are very effective to quickly produce out
-of the box figures. However, there is not global overview and
+of the box figures. However, there is no global overview and
 parametrisation of the visualisation. The layout decisions have to be
 made up upfront (and if not adequate, the figure needs to be redrawn)
 and every aspect of the figure is customised locally as function
@@ -917,7 +917,7 @@ of the data.</p>
 <span id="cb37-9"><a href="sec-vis.html#cb37-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(sim, <span class="fu">aes</span>(<span class="fu">log</span>(x))) <span class="sc">+</span></span>
 <span id="cb37-10"><a href="sec-vis.html#cb37-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span>
 <span id="cb37-11"><a href="sec-vis.html#cb37-11" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code></pre></div>
-<pre><code>## Warning: Removed 8064 rows containing non-finite values (stat_bin).</code></pre>
+<pre><code>## Warning: Removed 7804 rows containing non-finite values (stat_bin).</code></pre>
 <div class="figure">
 <span style="display:block;" id="fig:sim"></span>
 <p class="caption marginnote shownote">
