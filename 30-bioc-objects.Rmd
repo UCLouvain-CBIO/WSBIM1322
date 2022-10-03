@@ -147,7 +147,7 @@ We can plot the linear regression line with `abline` and passing the
 `fit` variable.
 
 ```{r plotlm, fig.cap = "The regression line modelling the linear regression between the two `x` and `y` variables."}
-plot(y ~ x)
+plot(y ~ x, df)
 abline(fit, col = "red")
 ```
 
@@ -184,7 +184,7 @@ library("BiocStyle")
 
 We have already briefly seen the [Bioconductor
 project](https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec-bioconductor). It
-initiated by Robert Gentleman (@Gentleman:2004;@Huber:2015), one of
+initiated by Robert Gentleman (@Gentleman:2004; @Huber:2015), one of
 the two creators of the R language, and centrally offers dedicated R
 packages for bioinformatics.
 
@@ -367,8 +367,9 @@ Verfiy that the assay data, the column and row metadata and the row
 ranges have been preserved.
 `r msmbstyle::question_end()`
 
-Subsetting can be performed with numberics (as shown above), but also
-with characters of logicals, just like with dataframes or matrices.
+Subsetting can be performed with numeric vectors (as shown above), as
+well as character of logical vectors, just like with dataframes or
+matrices.
 
 `r msmbstyle::question_begin()`
 Create a new object that contains the data for features (rows)
