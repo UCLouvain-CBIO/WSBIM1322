@@ -470,8 +470,8 @@ Below, we create a the `colData` part using the appropriate
 constructor for the class of data needed:
 
 ```{r newse2}
-cd <- DataFrame(Treatment=rep(c("ChIP", "Input"), 3),
-                row.names=LETTERS[1:6])
+cd <- DataFrame(Treatment = rep(c("ChIP", "Input"), 3),
+                row.names = LETTERS[1:6])
 ```
 
 Let's also create some ranges. Here, we will have one range per
