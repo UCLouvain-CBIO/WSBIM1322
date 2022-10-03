@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2022-09-26" />
+<meta name="date" content="2022-10-03" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -221,7 +221,7 @@ analysis.</li>
 </h2>
 <p>The term <em>object</em> stems from the widely used object-oriented
 programming (OOP) paradigm. OOP is however outside of scope of this
-course (see part III of <span class="citation"><label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">Wickham (2014)<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced r</em>. Chapman &amp; Hall/CRC the r Series. Taylor &amp; Francis.</span></span>, which is also <a href="https://adv-r.hadley.nz/">freely available
+course (see part III of <span class="citation"><label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">Wickham (2014)<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced <span>R</span></em>. Chapman &amp; Hall/CRC the r Series. Taylor &amp; Francis.</span></span>, which is also <a href="https://adv-r.hadley.nz/">freely available
 online</a>). In the <em>R refresher</em> chapter
 <a href="sec-refresher.html#sec-refresher">1</a>, we have seen the base types of R, which we have
 efficiently used in many situations. Sometimes, however, these aren’t
@@ -365,7 +365,7 @@ intercept (<span class="math inline">\(\beta_0\)</span>) and the slope (<span cl
 ##    -0.03769      0.99894</code></pre>
 <p>We can plot the linear regression line with <code>abline</code> and passing the
 <code>fit</code> variable.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="sec-obj.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x)</span>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="sec-obj.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, df)</span>
 <span id="cb63-2"><a href="sec-obj.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit, <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:plotlm"></span>
@@ -411,7 +411,7 @@ Figure 3.3: Plotting an instance of class <code>lm</code> produces a set of diag
 </h2>
 <p>We have already briefly seen the <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec-bioconductor">Bioconductor
 project</a>. It
-initiated by Robert Gentleman (<span class="citation"><label for="tufte-mn-14" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-14" class="margin-toggle">Gentleman et al. (2004)<span class="marginnote">Gentleman, Robert C., Vincent J. Carey, Douglas M. Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. <span>“Bioconductor: Open Software Development for Computational Biology and Bioinformatics.”</span> <em>Genome Biol</em> 5 (10): –80. <a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/gb-2004-5-10-r80</a>.</span></span>;<span class="citation"><label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">Huber et al. (2015)<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. <span>“Orchestrating High-Throughput Genomic Analysis with <span>Bioconductor</span>.”</span> <em>Nat Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.</span></span>), one of
+initiated by Robert Gentleman (<span class="citation"><label for="tufte-mn-14" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-14" class="margin-toggle">Gentleman et al. (2004)<span class="marginnote">Gentleman, Robert C., Vincent J. Carey, Douglas M. Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. <span>“Bioconductor: Open Software Development for Computational Biology and Bioinformatics.”</span> <em>Genome Biol</em> 5 (10): –80. <a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/gb-2004-5-10-r80</a>.</span></span>; <span class="citation"><label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">Huber et al. (2015)<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. <span>“Orchestrating High-Throughput Genomic Analysis with <span>Bioconductor</span>.”</span> <em>Nat Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.</span></span>), one of
 the two creators of the R language, and centrally offers dedicated R
 packages for bioinformatics.</p>
 <blockquote>
@@ -756,8 +756,9 @@ ranges have been preserved.</p>
 </p>
 </div>
 </div>
-<p>Subsetting can be performed with numberics (as shown above), but also
-with characters of logicals, just like with dataframes or matrices.</p>
+<p>Subsetting can be performed with numeric vectors (as shown above), as
+well as character of logical vectors, just like with dataframes or
+matrices.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -930,8 +931,8 @@ randomly sample values between 1 and 10000.</p>
 <span id="cb119-3"><a href="sec-obj.html#cb119-3" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(nrows <span class="sc">*</span> ncols, <span class="dv">1</span>, <span class="fl">1e4</span>), nrows)</span></code></pre></div>
 <p>Below, we create a the <code>colData</code> part using the appropriate
 constructor for the class of data needed:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="sec-obj.html#cb120-1" aria-hidden="true" tabindex="-1"></a>cd <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(<span class="at">Treatment=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"ChIP"</span>, <span class="st">"Input"</span>), <span class="dv">3</span>),</span>
-<span id="cb120-2"><a href="sec-obj.html#cb120-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">row.names=</span>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="sec-obj.html#cb120-1" aria-hidden="true" tabindex="-1"></a>cd <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(<span class="at">Treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"ChIP"</span>, <span class="st">"Input"</span>), <span class="dv">3</span>),</span>
+<span id="cb120-2"><a href="sec-obj.html#cb120-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">row.names =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>])</span></code></pre></div>
 <p>Let’s also create some ranges. Here, we will have one range per
 features, as opposed to the <code>airway</code> data, that has multiple ranges
 (exons) per feature (gene). The ranges below to chromosomes 1 and 2
@@ -994,7 +995,7 @@ of class <code>SummarizedExperiment</code>.</p>
 <a href="sec-biostrings.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-09-26
+2022-10-03
  using 
 R version 4.2.1 (2022-06-23)
 </p>
