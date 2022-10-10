@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2022-10-03" />
+<meta name="date" content="2022-10-10" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -242,21 +242,21 @@ and the observed differences would be due to <strong>technical</strong> and
 <p>In biomedical research, experiments aim at measuring biological
 variability by comparing two or more biological conditions in a
 controlled setting. If we now take two independent cell cultures and
-treat one of them using a drug, and them measure the two samples, do
+treat one of them using a drug, and then measure the two samples, do
 you expect there to be larger, similar or smaller difference than in
 the examples above? Why?</p>
 <p>The observed differences between the two samples would comprise
 <strong>technical variability</strong>, <strong>biological variability</strong> and additional
-<strong>biological variability due to the treatment</strong>. The be able to
+<strong>biological variability due to the treatment</strong>. To be able to
 measure any biologically signal in the data, the biological
-variability, and the one produced by the treatment of interest in
-particular, must be larger than the technical variability.</p>
+variability of interest, i.e. the one produced by the treatment,
+must be larger than the technical variability.</p>
 </li>
 </ul>
-<p>However, before analysing any data, it is often (always) necessary
-to make the samples as comparable as possible by removing the
+<p>However, before analysing any data, it is often (always) necessary to
+make the samples as comparable as possible by removing the unwanted
 technical variability (that should be shared among all samples)
-without removing biological variability (that will differantiate the
+without removing biological variability (that will differentiate the
 samples biologically).</p>
 </div>
 <div id="data-transformation" class="section level2" number="5.2">
@@ -266,7 +266,7 @@ samples biologically).</p>
 <p>The very first step in preparing a dataset is to visualise the
 distribution of the values. Below we see the density plots for 6
 proteomics samples and about 4000 peptides from the CPTAC study that
-compares the reproducibility of quantiative mass spectrometry using
+compares the reproducibility of quantitative mass spectrometry using
 human proteins spiked into a yeast proteome background.</p>
 <div class="figure">
 <span style="display:block;" id="fig:logtans"></span>
@@ -293,12 +293,12 @@ some very high values:</p>
 ##  Max.   :112820000   Max.   :94944000   Max.   :128870000</code></pre>
 <p>Such data are difficult to visualise and to analyse, because of the skewness of their
 distribution. The first step is thus generally (but
-not always<label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> When analysing count data, such as in the case of RNASeq
-of spectral counting in proteomics, it is better not to transform
+not always<label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> When analysing count data, such as in the case of RNA-Seq
+or spectral counting in proteomics, it is better not to transform
 the data and use dedicated distribution for count-based data. In
 the cases above, the <a href="https://en.wikipedia.org/wiki/Negative_binomial_distribution">negative binomial
 distribution</a>
-has been show to accurately model technical and biological
+has been shown to accurately model technical and biological
 variability of such experimental data.</span>) to log-transform the data, as shown below.</p>
 <div class="figure">
 <span style="display:block;" id="fig:logtrans2"></span>
@@ -346,9 +346,9 @@ later) and reproduce the figures above. See <code>?cptac</code> for details .</p
 </div>
 </div>
 <p>This is particularly important for fold-changes, as illustrated
-below. Typical threshold are 0.5 and 2 for down- and up-regulation,
-with lack of changes around 1. In log space these become -1 and 1, and
-symmetrically centred around 0.</p>
+below. Typical threshold for down- and up-regulation are 0.5 and 2,
+with the absence of any change around 1. In log2 space, these
+threshold become -1 and 1, and symmetrically centred around 0.</p>
 <div class="figure">
 <span style="display:block;" id="fig:lfc"></span>
 <p class="caption marginnote shownote">
@@ -746,7 +746,7 @@ implications for the normalisation step?</p>
 <a href="sec-mlintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-10-03
+2022-10-10
  using 
 R version 4.2.1 (2022-06-23)
 </p>
