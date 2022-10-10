@@ -34,21 +34,21 @@ thousands).
 - In biomedical research, experiments aim at measuring biological
   variability by comparing two or more biological conditions in a
   controlled setting. If we now take two independent cell cultures and
-  treat one of them using a drug, and them measure the two samples, do
+  treat one of them using a drug, and then measure the two samples, do
   you expect there to be larger, similar or smaller difference than in
   the examples above? Why?
 
   The observed differences between the two samples would comprise
   **technical variability**, **biological variability** and additional
-  **biological variability due to the treatment**. The be able to
+  **biological variability due to the treatment**. To be able to
   measure any biologically signal in the data, the biological
-  variability, and the one produced by the treatment of interest in
-  particular, must be larger than the technical variability.
+  variability of interest, i.e. the one produced by the treatment,
+  must be larger than the technical variability.
 
-However, before analysing any data, it is often (always) necessary
-to make the samples as comparable as possible by removing the
+However, before analysing any data, it is often (always) necessary to
+make the samples as comparable as possible by removing the unwanted
 technical variability (that should be shared among all samples)
-without removing biological variability (that will differantiate the
+without removing biological variability (that will differentiate the
 samples biologically).
 
 ## Data transformation
@@ -56,7 +56,7 @@ samples biologically).
 The very first step in preparing a dataset is to visualise the
 distribution of the values. Below we see the density plots for 6
 proteomics samples and about 4000 peptides from the CPTAC study that
-compares the reproducibility of quantiative mass spectrometry using
+compares the reproducibility of quantitative mass spectrometry using
 human proteins spiked into a yeast proteome background.
 
 ```{r logtans, echo = FALSE, message = FALSE, fig.cap = "Raw quantiation values from the proteomics CPTAC data."}
@@ -79,16 +79,16 @@ some very high values:
 summary(assay(cptac_se))
 ```
 
-Such data are difficult to visualise and to analyse, because of the skewness of their 
+Such data are difficult to visualise and to analyse, because of the skewness of their
 distribution. The first step is thus generally (but
 not always[^negbinom]) to log-transform the data, as shown below.
 
-[^negbinom]: When analysing count data, such as in the case of RNASeq
-    of spectral counting in proteomics, it is better not to transform
+[^negbinom]: When analysing count data, such as in the case of RNA-Seq
+    or spectral counting in proteomics, it is better not to transform
     the data and use dedicated distribution for count-based data. In
     the cases above, the [negative binomial
     distribution](https://en.wikipedia.org/wiki/Negative_binomial_distribution)
-    has been show to accurately model technical and biological
+    has been shown to accurately model technical and biological
     variability of such experimental data.
 
 ```{r logtrans2, echo = FALSE, fig.cap = "CPTAC data after log transformation"}
@@ -128,9 +128,9 @@ as_tibble(assay(cptac_se)) %>%
 `r msmbstyle::solution_end()`
 
 This is particularly important for fold-changes, as illustrated
-below. Typical threshold are 0.5 and 2 for down- and up-regulation,
-with lack of changes around 1. In log space these become -1 and 1, and
-symmetrically centred around 0.
+below. Typical threshold for down- and up-regulation are 0.5 and 2,
+with the absence of any change around 1. In log2 space, these
+threshold become -1 and 1, and symmetrically centred around 0.
 
 
 ```{r lfc, echo = FALSE, fig.cap = "Non-symetric fold-changes (left) and symetric log fold-changes (right) distributions.."}
@@ -243,7 +243,7 @@ operations using `scale`.
 ### Quantile normalisation
 
 Quantile normalisation is a method that will make different data
-distributions identical. An example is shown below using a small 
+distributions identical. An example is shown below using a small
 dataset with quantitative data for three samples (S1, S2, and S3) and
 4 genes (A to D) (example taken from the Wikipedia page).
 
