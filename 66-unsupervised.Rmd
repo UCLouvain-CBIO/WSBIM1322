@@ -167,9 +167,11 @@ pairs(giris[, 1:4], col = giris$GRADE)
 ```
 
 `r msmbstyle::question_begin()`
+
 Run the k-means algorithm on the `giris` data, save the results in a
 new variable `cl`, and explore its output when printed. What is the
 class of `cl`?
+
 `r msmbstyle::question_end()`
 
 
@@ -183,6 +185,7 @@ class(cl)
 
 
 `r msmbstyle::question_begin()`
+
 The actual results of the algorithms, i.e. the cluster membership can
 be accessed in the `cluster` element of the clustering result
 output. Extract and interpret these data.
@@ -363,6 +366,13 @@ tot_within_ss <- sapply(ks, function(k) {
 plot(ks, tot_within_ss, type = "b")
 ```
 `r msmbstyle::solution_end()`
+
+
+See also this interactive [K-Means Clustering Explorable
+Explainer](https://k-means-explorable.vercel.app/) to help you
+understand the algorithm, its parameters and dig into some additional
+details.
+
 
 ## Hierarchical clustering
 
