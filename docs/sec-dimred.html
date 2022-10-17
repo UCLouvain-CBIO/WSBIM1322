@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2022-10-14" />
+<meta name="date" content="2022-10-17" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -72,6 +72,7 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -106,7 +107,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -119,7 +120,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -173,15 +174,15 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html">Preamble</a>
-<a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
-<a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
-<a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
-<a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
-<a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
-<a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
-<a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a id="active-page" href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a><ul class="toc-sections">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a id="active-page" href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a><ul class="toc-sections">
 <li class="toc"><a href="#introduction-3"> Introduction</a></li>
 <li class="toc"><a href="#lower-dimensional-projections"> Lower-dimensional projections</a></li>
 <li class="toc"><a href="#the-new-linear-combinations"> The new linear combinations</a></li>
@@ -191,11 +192,11 @@ div.csl-indent {
 <li class="toc"><a href="#the-full-pca-workflow"> The full PCA workflow</a></li>
 <li class="toc"><a href="#additional-exercises-6"> Additional exercises</a></li>
 </ul>
-<a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
-<a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
-<a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
-<a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
-<a href="sec-si.html"><span class="toc-section-number">13</span> Session information</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
 </div>
 </li>
 </ul>
@@ -205,7 +206,8 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec-dimred" class="section level1" number="8">
+<html><body>
+<div id="sec-dimred" class="section level1" number="8">
 <h1>
 <span class="header-section-number">Chapter 8</span> Unsupervised learning: dimensionality reduction</h1>
 <p>In <strong>unsupervised learning</strong> (UML), no labels are provided, and the
@@ -525,12 +527,7 @@ analysis as shown above.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>cptac_prot</code> data<label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
-class</a>
-(defined in the <code>MSnbase</code> package) is similar to
-<code>SummarizedExperiment</code>, that we have seen in detail in chapter
-<a href="sec-obj.html#sec-obj">3</a>. You can convert an <code>MSnSet</code> object to a
-<code>SummarizedExperiment</code> with <code>as(x, "SummarizexExperiment")</code>.</span>, scale the data (see below for
+<p>Load the <code>cptac_prot</code> data<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>, scale the data (see below for
 why scaling is important), then perform the PCA analysis and interpret
 it. Also produce a PCA for PCs 2 and 3.</p>
 <p class="question-end">
@@ -589,7 +586,7 @@ samples. Interprete the figures.</p>
 <span id="cb322-3"><a href="sec-dimred.html#cb322-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca3)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3    PC4     PC5       PC6
-## Standard deviation     1.9522 1.4632 1.0618 0.9817 0.65186 6.826e-16
+## Standard deviation     1.9522 1.4632 1.0618 0.9817 0.65186 8.723e-16
 ## Proportion of Variance 0.4501 0.2528 0.1331 0.1138 0.05018 0.000e+00
 ## Cumulative Proportion  0.4501 0.7029 0.8360 0.9498 1.00000 1.000e+00</code></pre>
 <div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="sec-dimred.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca3)</span></code></pre></div>
@@ -712,10 +709,7 @@ investigation of these processes.</p>
 </p>
 <div class="question-body">
 <p>Load the <code>mulvey2015</code> data from the <code>pRolocdata</code> package. The data
-comes as an object of class <code>MSnSet</code><label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
-class</a>
-is similar to the <code>SummarizedExperiment</code> class, that we have seen
-in detail in chapter <a href="sec-obj.html#sec-obj">3</a>.</span>, which you can convert to a
+comes as an object of class <code>MSnSet</code><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>, which you can convert to a
 <code>SummarizedExperiment</code> as shown below. Familiarise yourself with its
 experimental design stored in the <em>colData</em> slot.</p>
 <div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="sec-dimred.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
@@ -794,7 +788,7 @@ display a summary of the results.</li>
 ## Proportion of Variance 0.01149 0.0095 0.00857 0.00684 0.00644 0.00533 0.00451
 ## Cumulative Proportion  0.95359 0.9631 0.97166 0.97850 0.98494 0.99027 0.99479
 ##                           PC15    PC16   PC17      PC18
-## Standard deviation     3.04106 1.24069 1.1806 1.636e-14
+## Standard deviation     3.04106 1.24069 1.1806 1.709e-14
 ## Proportion of Variance 0.00396 0.00066 0.0006 0.000e+00
 ## Cumulative Proportion  0.99874 0.99940 1.0000 1.000e+00</code></pre>
 <p class="solution-end">
@@ -1337,16 +1331,32 @@ the labels?</p>
 </div>
 
 </div>
-</div></body></html>
+</div>
+<div class="footnotes">
+<hr>
+<ol start="11">
+<li id="fn11"><p>The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
+class</a>
+(defined in the <code>MSnbase</code> package) is similar to
+<code>SummarizedExperiment</code>, that we have seen in detail in chapter
+<a href="sec-obj.html#sec-obj">3</a>. You can convert an <code>MSnSet</code> object to a
+<code>SummarizedExperiment</code> with <code>as(x, "SummarizexExperiment")</code>.<a href="sec-dimred.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
+class</a>
+is similar to the <code>SummarizedExperiment</code> class, that we have seen
+in detail in chapter <a href="sec-obj.html#sec-obj">3</a>.<a href="sec-dimred.html#fnref12" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+</body></html>
 
 <p style="text-align: center;">
 <a href="sec-testing.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-ul.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-10-14
+2022-10-17
  using 
-R version 4.2.1 (2022-06-23)
+R version 4.2.0 Patched (2022-05-13 r82357)
 </p>
 </div>
 </div>
