@@ -441,8 +441,8 @@ boxplot(x, col = rep(2:3, each = 3))
 
 `r msmbstyle::question_begin()`
 
-Generate a dataset composed of 5000 rows and 6 columns, composed of
-values samples from a normal distribution *N(0, 1)*. Visualise the
+Generate a dataset composed of 5000 rows and 6 columns, containing
+values sampled from a normal distribution *N(0, 1)*. Visualise the
 samples distributions. Scale and center the data, visualising the
 samples distributions at each step. Interpret what you see.
 
