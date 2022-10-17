@@ -150,8 +150,8 @@ size of samples 1 and 2.
 
 A t-test has the following assumptions:
 
-- the data is normally distributed.
-- the data are independent and identically distributed.
+- the data are normally distributed;
+- the data are independent and identically distributed;
 - equal or un-equal (Welch test) variances.
 
 Note that the t-test is robust to deviations[^models].
