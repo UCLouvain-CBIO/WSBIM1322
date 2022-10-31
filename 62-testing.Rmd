@@ -681,7 +681,7 @@ head(sort(p.adjust(pvals2, method = "BH")))
 
 
 `r msmbstyle::question_begin()`
-- Load the `cptac_prot` data and extract the first feature,
+- Load the `cptac_se` data and extract the first feature,
   `P00918ups|CAH2_HUMAN_UPS`, a protein in this case. Perform a
   t-test between the groups 6A and 6B.
 
