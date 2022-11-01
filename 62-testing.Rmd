@@ -681,7 +681,7 @@ head(sort(p.adjust(pvals2, method = "BH")))
 
 
 `r msmbstyle::question_begin()`
-- Load the `cptac_se` data and extract the first feature,
+- Load the `cptac_se_prot` data and extract the first feature,
   `P00918ups|CAH2_HUMAN_UPS`, a protein in this case. Perform a
   t-test between the groups 6A and 6B.
 
@@ -694,10 +694,10 @@ head(sort(p.adjust(pvals2, method = "BH")))
 
 
 ```{r, include = FALSE}
-library("MSnbase")
-data(cptac_prot)
-x1 <- exprs(cptac_prot)[1, 1:3]
-x2 <- exprs(cptac_prot)[1, 4:6]
+library("SummarizedExperiment")
+data(cptac_se_prot)
+x1 <- assay(cptac_se_prot)["P00918ups|CAH2_HUMAN_UPS", 1:3]
+x2 <- assay(cptac_se_prot)["P00918ups|CAH2_HUMAN_UPS", 4:6]
 
 t.test(x1, x2)
 t.test(rep(x1, 2), rep(x2, 2))

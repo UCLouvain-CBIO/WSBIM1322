@@ -525,12 +525,7 @@ analysis as shown above.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>cptac_prot</code> data<label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
-class</a>
-(defined in the <code>MSnbase</code> package) is similar to
-<code>SummarizedExperiment</code>, that we have seen in detail in chapter
-<a href="sec-obj.html#sec-obj">3</a>. You can convert an <code>MSnSet</code> object to a
-<code>SummarizedExperiment</code> with <code>as(x, "SummarizexExperiment")</code>.</span>, scale the data (see below for
+<p>Load the <code>cptac_se_prot</code> data, scale the data (see below for
 why scaling is important), then perform the PCA analysis and interpret
 it. Also produce a PCA for PCs 2 and 3.</p>
 <p class="question-end">
@@ -543,9 +538,9 @@ it. Also produce a PCA for PCs 2 and 3.</p>
 ► Solution<span id="sol-start-43" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-43', 'sol-start-43')"></span>
 </p>
 <div id="sol-body-43" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="sec-dimred.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MSnbase"</span>)</span>
-<span id="cb316-2"><a href="sec-dimred.html#cb316-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cptac_prot)</span>
-<span id="cb316-3"><a href="sec-dimred.html#cb316-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">exprs</span>(cptac_prot))</span>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="sec-dimred.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
+<span id="cb316-2"><a href="sec-dimred.html#cb316-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cptac_se_prot)</span>
+<span id="cb316-3"><a href="sec-dimred.html#cb316-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">assay</span>(cptac_se_prot))</span>
 <span id="cb316-4"><a href="sec-dimred.html#cb316-4" aria-hidden="true" tabindex="-1"></a>pca2 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x)</span>
 <span id="cb316-5"><a href="sec-dimred.html#cb316-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca2)</span></code></pre></div>
 <pre><code>## Importance of components:
@@ -725,11 +720,34 @@ yourself with its experimental design stored in the <em>colData</em> slot.</p>
 </p>
 <div id="sol-body-46" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="sec-dimred.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span></code></pre></div>
+<pre><code>## Loading required package: MSnbase</code></pre>
+<pre><code>## Loading required package: mzR</code></pre>
+<pre><code>## Loading required package: Rcpp</code></pre>
+<pre><code>## Loading required package: ProtGenerics</code></pre>
+<pre><code>## 
+## Attaching package: 'ProtGenerics'</code></pre>
+<pre><code>## The following object is masked from 'package:Hmisc':
+## 
+##     impute</code></pre>
+<pre><code>## The following object is masked from 'package:stats':
+## 
+##     smooth</code></pre>
+<pre><code>## 
+## This is MSnbase version 2.23.2 
+##   Visit https://lgatto.github.io/MSnbase/ to get started.</code></pre>
+<pre><code>## 
+## Attaching package: 'MSnbase'</code></pre>
+<pre><code>## The following object is masked from 'package:Hmisc':
+## 
+##     naplot</code></pre>
+<pre><code>## The following object is masked from 'package:base':
+## 
+##     trimws</code></pre>
 <pre><code>## 
 ## This is pRolocdata version 1.34.0.
 ## Use 'pRolocdata()' to list available data sets.</code></pre>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="sec-dimred.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015_se)</span>
-<span id="cb330-2"><a href="sec-dimred.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mulvey2015_se)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="sec-dimred.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015_se)</span>
+<span id="cb341-2"><a href="sec-dimred.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mulvey2015_se)</span></code></pre></div>
 <pre><code>## DataFrame with 18 rows and 3 columns
 ##                 rep     times      cond
 ##           &lt;numeric&gt; &lt;integer&gt; &lt;numeric&gt;
@@ -772,8 +790,8 @@ display a summary of the results.</li>
 ► Solution<span id="sol-start-47" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-47', 'sol-start-47')"></span>
 </p>
 <div id="sol-body-47" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="sec-dimred.html#cb332-1" aria-hidden="true" tabindex="-1"></a>pca_mulvey2015 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(mulvey2015_se)), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb332-2"><a href="sec-dimred.html#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="sec-dimred.html#cb343-1" aria-hidden="true" tabindex="-1"></a>pca_mulvey2015 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(mulvey2015_se)), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb343-2"><a href="sec-dimred.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_mulvey2015)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                            PC1     PC2     PC3     PC4     PC5     PC6     PC7
 ## Standard deviation     34.2468 24.0808 16.8485 7.37212 6.79981 5.84729 5.50515
@@ -813,8 +831,8 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 ► Solution<span id="sol-start-48" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-48', 'sol-start-48')"></span>
 </p>
 <div id="sol-body-48" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="sec-dimred.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb334-2"><a href="sec-dimred.html#cb334-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="sec-dimred.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb345-2"><a href="sec-dimred.html#cb345-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-53"></span>
 <p class="caption marginnote shownote">
@@ -851,7 +869,7 @@ the light of the experimental design.</p></li>
 ► Solution<span id="sol-start-49" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-49', 'sol-start-49')"></span>
 </p>
 <div id="sol-body-49" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="sec-dimred.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="sec-dimred.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-54-1"></span>
 <p class="caption marginnote shownote">
@@ -859,7 +877,7 @@ Figure 8.11: Biplot and variables PCA plot of the <code>mulvey2015_se</code> dat
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-54-1.png" alt="Biplot and variables PCA plot of the `mulvey2015_se` data." width="768">
 </div>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="sec-dimred.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sec-dimred.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-54-2"></span>
 <p class="caption marginnote shownote">
@@ -867,7 +885,7 @@ Figure 8.12: Biplot and variables PCA plot of the <code>mulvey2015_se</code> dat
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-54-2.png" alt="Biplot and variables PCA plot of the `mulvey2015_se` data." width="768">
 </div>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="sec-dimred.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015, <span class="at">habillage =</span> mulvey2015_se<span class="sc">$</span>times)</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="sec-dimred.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015, <span class="at">habillage =</span> mulvey2015_se<span class="sc">$</span>times)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-54-3"></span>
 <p class="caption marginnote shownote">
@@ -898,12 +916,12 @@ cube along the three first PCs.</p>
 ► Solution<span id="sol-start-50" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-50', 'sol-start-50')"></span>
 </p>
 <div id="sol-body-50" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="sec-dimred.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rgl"</span>)</span>
-<span id="cb338-2"><a href="sec-dimred.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot3d</span>(pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">1</span>],</span>
-<span id="cb338-3"><a href="sec-dimred.html#cb338-3" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">2</span>],</span>
-<span id="cb338-4"><a href="sec-dimred.html#cb338-4" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">3</span>],</span>
-<span id="cb338-5"><a href="sec-dimred.html#cb338-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> mulvey2015_se<span class="sc">$</span>time,</span>
-<span id="cb338-6"><a href="sec-dimred.html#cb338-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="sec-dimred.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rgl"</span>)</span>
+<span id="cb349-2"><a href="sec-dimred.html#cb349-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot3d</span>(pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">1</span>],</span>
+<span id="cb349-3"><a href="sec-dimred.html#cb349-3" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">2</span>],</span>
+<span id="cb349-4"><a href="sec-dimred.html#cb349-4" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">3</span>],</span>
+<span id="cb349-5"><a href="sec-dimred.html#cb349-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> mulvey2015_se<span class="sc">$</span>time,</span>
+<span id="cb349-6"><a href="sec-dimred.html#cb349-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -956,9 +974,9 @@ feature annotation stored in the <em>rowData</em> slot.</p>
 ► Solution<span id="sol-start-51" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-51', 'sol-start-51')"></span>
 </p>
 <div id="sol-body-51" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="sec-dimred.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
-<span id="cb339-2"><a href="sec-dimred.html#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hyperLOPIT2015_se)</span>
-<span id="cb339-3"><a href="sec-dimred.html#cb339-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(hyperLOPIT2015_se)</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="sec-dimred.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
+<span id="cb350-2"><a href="sec-dimred.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hyperLOPIT2015_se)</span>
+<span id="cb350-3"><a href="sec-dimred.html#cb350-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(hyperLOPIT2015_se)</span></code></pre></div>
 <pre><code>## DataFrame with 20 rows and 5 columns
 ##            Replicate TMT.Reagent Acquisiton.Method Gradient.Fraction
 ##            &lt;numeric&gt; &lt;character&gt;          &lt;factor&gt;       &lt;character&gt;
@@ -986,7 +1004,7 @@ feature annotation stored in the <em>rowData</em> slot.</p>
 ## X130N.rep2              24.7
 ## X130C.rep2                NA
 ## X131.rep2               31.9</code></pre>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="sec-dimred.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(hyperLOPIT2015_se)[, <span class="fu">c</span>(<span class="st">"entry.name"</span>, <span class="st">"markers"</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="sec-dimred.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(hyperLOPIT2015_se)[, <span class="fu">c</span>(<span class="st">"entry.name"</span>, <span class="st">"markers"</span>)])</span></code></pre></div>
 <pre><code>## DataFrame with 6 rows and 2 columns
 ##             entry.name       markers
 ##            &lt;character&gt;   &lt;character&gt;
@@ -1025,8 +1043,8 @@ display a summary of the results.</li>
 ► Solution<span id="sol-start-52" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-52', 'sol-start-52')"></span>
 </p>
 <div id="sol-body-52" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="sec-dimred.html#cb343-1" aria-hidden="true" tabindex="-1"></a>pca_hl <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">assay</span>(hyperLOPIT2015_se), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb343-2"><a href="sec-dimred.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_hl)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="sec-dimred.html#cb354-1" aria-hidden="true" tabindex="-1"></a>pca_hl <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">assay</span>(hyperLOPIT2015_se), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb354-2"><a href="sec-dimred.html#cb354-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_hl)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                          PC1    PC2     PC3     PC4     PC5     PC6     PC7
 ## Standard deviation     3.111 2.1843 1.27979 1.10039 0.77542 0.69215 0.66758
@@ -1066,8 +1084,8 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 ► Solution<span id="sol-start-53" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-53', 'sol-start-53')"></span>
 </p>
 <div id="sol-body-53" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="sec-dimred.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb345-2"><a href="sec-dimred.html#cb345-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_hl)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="sec-dimred.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb356-2"><a href="sec-dimred.html#cb356-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_hl)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-58"></span>
 <p class="caption marginnote shownote">
@@ -1112,7 +1130,7 @@ annotate the plot. Compare and interpret the two plots.</p></li>
 ► Solution<span id="sol-start-54" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-54', 'sol-start-54')"></span>
 </p>
 <div id="sol-body-54" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="sec-dimred.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_hl)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="sec-dimred.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_hl)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-59-1"></span>
 <p class="caption marginnote shownote">
@@ -1120,7 +1138,7 @@ Figure 8.15: Biplot and variables PCA plot of the <code>hyperLOPIT2015_se</code>
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-59-1.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015_se` data." width="768">
 </div>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sec-dimred.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca_hl)</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="sec-dimred.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca_hl)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-59-2"></span>
 <p class="caption marginnote shownote">
@@ -1128,15 +1146,15 @@ Figure 8.16: Biplot and variables PCA plot of the <code>hyperLOPIT2015_se</code>
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-59-2.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015_se` data." width="768">
 </div>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="sec-dimred.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual colour palette (from the pRoloc package)</span></span>
-<span id="cb348-2"><a href="sec-dimred.html#cb348-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-3"><a href="sec-dimred.html#cb348-3" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,</span>
-<span id="cb348-4"><a href="sec-dimred.html#cb348-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,</span>
-<span id="cb348-5"><a href="sec-dimred.html#cb348-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</span>
-<span id="cb348-6"><a href="sec-dimred.html#cb348-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-7"><a href="sec-dimred.html#cb348-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb348-8"><a href="sec-dimred.html#cb348-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015_se)<span class="sc">$</span>markers,</span>
-<span id="cb348-9"><a href="sec-dimred.html#cb348-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="sec-dimred.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual colour palette (from the pRoloc package)</span></span>
+<span id="cb359-2"><a href="sec-dimred.html#cb359-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb359-3"><a href="sec-dimred.html#cb359-3" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,</span>
+<span id="cb359-4"><a href="sec-dimred.html#cb359-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,</span>
+<span id="cb359-5"><a href="sec-dimred.html#cb359-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</span>
+<span id="cb359-6"><a href="sec-dimred.html#cb359-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb359-7"><a href="sec-dimred.html#cb359-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb359-8"><a href="sec-dimred.html#cb359-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015_se)<span class="sc">$</span>markers,</span>
+<span id="cb359-9"><a href="sec-dimred.html#cb359-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-60-1"></span>
 <p class="caption marginnote shownote">
@@ -1144,9 +1162,9 @@ Figure 8.17: Biplot and individuals PCA plot of the <code>hyperLOPIT2015_se</cod
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-60-1.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015_se` data showing the sub-cellular localisation of the proteins." width="768">
 </div>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="sec-dimred.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb349-2"><a href="sec-dimred.html#cb349-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015_se)<span class="sc">$</span>final.assignment,</span>
-<span id="cb349-3"><a href="sec-dimred.html#cb349-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="sec-dimred.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb360-2"><a href="sec-dimred.html#cb360-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015_se)<span class="sc">$</span>final.assignment,</span>
+<span id="cb360-3"><a href="sec-dimred.html#cb360-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-60-2"></span>
 <p class="caption marginnote shownote">
