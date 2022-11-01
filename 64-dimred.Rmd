@@ -496,7 +496,7 @@ yourself with its experimental design stored in the *colData* slot.
 
 `r msmbstyle::solution_begin()`
 
-```{r}
+```{r, message = FALSE}
 library(pRolocdata)
 data(mulvey2015_se)
 colData(mulvey2015_se)
