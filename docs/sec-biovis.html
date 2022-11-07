@@ -72,6 +72,7 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -106,7 +107,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -119,7 +120,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -173,23 +174,23 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html">Preamble</a>
-<a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
-<a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
-<a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
-<a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
-<a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
-<a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
-<a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
-<a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
-<a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
-<a id="active-page" href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a><ul class="toc-sections">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a id="active-page" href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a><ul class="toc-sections">
 <li class="toc"><a href="#heatmaps"> Heatmaps</a></li>
 <li class="toc"><a href="#visualising-intersections-between-sets"> Visualising intersections between sets</a></li>
 </ul>
-<a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
-<a href="sec-si.html"><span class="toc-section-number">13</span> Session information</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
 </div>
 </li>
 </ul>
@@ -199,7 +200,8 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec-biovis" class="section level1" number="11">
+<html><body>
+<div id="sec-biovis" class="section level1" number="11">
 <h1>
 <span class="header-section-number">Chapter 11</span> Visualising biomolecular data</h1>
 <p>The goal of this chapter is to learn some additional visualisation
@@ -211,15 +213,13 @@ clustering that was seen in chapter <a href="sec-ul.html#sec-ul">9</a>.</li>
 <li>Visualisation of intersections, in particular <strong>Venn</strong> and <strong>UpSet</strong>
 plots.</li>
 </ul>
-<!-- - The *[Gviz](https://bioconductor.org/packages/3.15/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2" number="11.1">
+<!-- - The *[Gviz](https://bioconductor.org/packages/3.16/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2" number="11.1">
 <h2>
 <span class="header-section-number">11.1</span> Heatmaps<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('heatmaps')" onmouseout="reset_tooltip('heatmaps-tooltip')"><span class="tooltiptext" id="heatmaps-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="sec-biovis.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"pRolocdata"</span>)</span>
-<span id="cb423-2"><a href="sec-biovis.html#cb423-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015norm)</span>
-<span id="cb423-3"><a href="sec-biovis.html#cb423-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb423-4"><a href="sec-biovis.html#cb423-4" aria-hidden="true" tabindex="-1"></a>mulvey2015norm <span class="ot">&lt;-</span> <span class="fu">as</span>(mulvey2015norm, <span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb423-5"><a href="sec-biovis.html#cb423-5" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(<span class="fu">assay</span>(mulvey2015norm))</span></code></pre></div>
+<span id="cb423-2"><a href="sec-biovis.html#cb423-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015norm_se)</span>
+<span id="cb423-3"><a href="sec-biovis.html#cb423-3" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(<span class="fu">assay</span>(mulvey2015norm_se))</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:heatmapmulvey"></span>
 <p class="caption marginnote shownote">
@@ -233,7 +233,7 @@ their similarity) and a intensity matrix. Each of these components is
 subject to parameters and options.</p>
 <p>As we have seen above, the distance used for clustering can have a
 substantial effect on the results, which is conformed below.</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="sec-biovis.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(<span class="fu">assay</span>(mulvey2015norm), <span class="at">distfun =</span> cor.dist)</span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="sec-biovis.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(<span class="fu">assay</span>(mulvey2015norm_se), <span class="at">distfun =</span> cor.dist)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:heatmapcor"></span>
 <p class="caption marginnote shownote">
@@ -277,15 +277,15 @@ Figure 11.5: Effect of scaling on the heatmap output: scaling along the columns.
 <p>Based on the caveats above, it is essential to present and interpret
 heatmaps with great care.</p>
 <p>There exists several packages that allow to produce heatmaps with
-various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.15/Heatplus">Heatplus</a></em> package, or
-the <em><a href="https://bioconductor.org/packages/3.15/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation
+various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.16/Heatplus">Heatplus</a></em> package, or
+the <em><a href="https://bioconductor.org/packages/3.16/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation
 <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html">here</a>),
 demonstrated below.</p>
 <div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="sec-biovis.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ComplexHeatmap"</span>)</span>
-<span id="cb428-2"><a href="sec-biovis.html#cb428-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">assay</span>(mulvey2015norm)</span>
+<span id="cb428-2"><a href="sec-biovis.html#cb428-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">assay</span>(mulvey2015norm_se)</span>
 <span id="cb428-3"><a href="sec-biovis.html#cb428-3" aria-hidden="true" tabindex="-1"></a>hcl <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(x))</span>
 <span id="cb428-4"><a href="sec-biovis.html#cb428-4" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hcl, <span class="at">k =</span> <span class="dv">12</span>)</span>
-<span id="cb428-5"><a href="sec-biovis.html#cb428-5" aria-hidden="true" tabindex="-1"></a>ha1 <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(<span class="at">time =</span> mulvey2015norm<span class="sc">$</span>times)</span>
+<span id="cb428-5"><a href="sec-biovis.html#cb428-5" aria-hidden="true" tabindex="-1"></a>ha1 <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(<span class="at">time =</span> mulvey2015norm_se<span class="sc">$</span>times)</span>
 <span id="cb428-6"><a href="sec-biovis.html#cb428-6" aria-hidden="true" tabindex="-1"></a>ha2 <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(<span class="at">boxplot =</span> <span class="fu">anno_boxplot</span>(x))</span>
 <span id="cb428-7"><a href="sec-biovis.html#cb428-7" aria-hidden="true" tabindex="-1"></a>ha3 <span class="ot">&lt;-</span> <span class="fu">rowAnnotation</span>(<span class="at">cluster =</span> <span class="fu">factor</span>(cl))</span>
 <span id="cb428-8"><a href="sec-biovis.html#cb428-8" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(x,</span>
@@ -308,15 +308,14 @@ Figure 11.6: An annotated heatmap produced with the <code>ComplexHeatmap</code> 
 packages can be used to generate interactive heatmaps.</p>
 <div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="sec-biovis.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="do">## prepare the data</span></span>
 <span id="cb429-2"><a href="sec-biovis.html#cb429-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"pRolocdata"</span>)</span>
-<span id="cb429-3"><a href="sec-biovis.html#cb429-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hyperLOPIT2015)</span>
-<span id="cb429-4"><a href="sec-biovis.html#cb429-4" aria-hidden="true" tabindex="-1"></a>hl <span class="ot">&lt;-</span> <span class="fu">as</span>(hyperLOPIT2015, <span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb429-5"><a href="sec-biovis.html#cb429-5" aria-hidden="true" tabindex="-1"></a><span class="do">## interactive heatmap</span></span>
-<span id="cb429-6"><a href="sec-biovis.html#cb429-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"heatmaply"</span>)</span>
-<span id="cb429-7"><a href="sec-biovis.html#cb429-7" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmaply</span>(<span class="fu">assay</span>(hl)[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, ])</span></code></pre></div>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="sec-biovis.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmaply</span>(<span class="fu">assay</span>(hl)[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, ],</span>
-<span id="cb430-2"><a href="sec-biovis.html#cb430-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">RowSideColors =</span> <span class="fu">as.factor</span>(<span class="fu">rowData</span>(hl)<span class="sc">$</span>markers[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>]))</span></code></pre></div>
+<span id="cb429-3"><a href="sec-biovis.html#cb429-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hyperLOPIT2015_se)</span>
+<span id="cb429-4"><a href="sec-biovis.html#cb429-4" aria-hidden="true" tabindex="-1"></a><span class="do">## interactive heatmap</span></span>
+<span id="cb429-5"><a href="sec-biovis.html#cb429-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"heatmaply"</span>)</span>
+<span id="cb429-6"><a href="sec-biovis.html#cb429-6" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmaply</span>(<span class="fu">assay</span>(hyperLOPIT2015_se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="sec-biovis.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmaply</span>(<span class="fu">assay</span>(hyperLOPIT2015_se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, ],</span>
+<span id="cb430-2"><a href="sec-biovis.html#cb430-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">RowSideColors =</span> <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(<span class="fu">rowData</span>(hyperLOPIT2015_se)<span class="sc">$</span>markers[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>])))</span></code></pre></div>
 <div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="sec-biovis.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"d3heatmap"</span>)</span>
-<span id="cb431-2"><a href="sec-biovis.html#cb431-2" aria-hidden="true" tabindex="-1"></a><span class="fu">d3heatmap</span>(<span class="fu">assay</span>(hl))</span></code></pre></div>
+<span id="cb431-2"><a href="sec-biovis.html#cb431-2" aria-hidden="true" tabindex="-1"></a><span class="fu">d3heatmap</span>(<span class="fu">assay</span>(hyperLOPIT2015_se))</span></code></pre></div>
 <p>See also <em>A tutorial in displaying mass spectrometry-based proteomic
 data using heat maps</em> <span class="citation">(<label for="tufte-mn-32" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-32" class="margin-toggle">Key 2012<span class="marginnote">Key, M. 2012. <span>“A Tutorial in Displaying Mass Spectrometry-Based Proteomic Data Using Heat Maps.”</span> <em>BMC Bioinformatics</em> 13 Suppl 16: S10. <a href="https://doi.org/10.1186/1471-2105-13-S16-S10">https://doi.org/10.1186/1471-2105-13-S16-S10</a>.</span>)</span>, that applies to any type of omics
 data (not only proteomics) for a useful reference.</p>
@@ -329,12 +328,11 @@ data (not only proteomics) for a useful reference.</p>
 analysis. Venn and Euler diagrams are popular representation when
 comparing sets and their intersection. Two useful R packages to
 generate such plots are
-<em><a href="https://CRAN.R-project.org/package=venneuler">venneuler</a></em> and <em><a href="https://github.com/js229/Vennerable">Vennerable</a></em><label for="tufte-sn-15" class="margin-toggle sidenote-number">15</label><input type="checkbox" id="tufte-sn-15" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">15</span> You can install <code>Vennerable</code> with
-<code>BiocManager::install("js229/Vennerable")</code>.</span>.</p>
-<p>We will use the <code>mulvey2015norm</code> feature names to generate a test data:</p>
+<em><a href="https://CRAN.R-project.org/package=venneuler">venneuler</a></em> and <em><a href="https://github.com/js229/Vennerable">Vennerable</a></em><a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>.</p>
+<p>We will use the <code>mulvey2015norm_se</code> feature names to generate a test data:</p>
 <div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="sec-biovis.html#cb432-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb432-2"><a href="sec-biovis.html#cb432-2" aria-hidden="true" tabindex="-1"></a>feat_list <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">3</span>,</span>
-<span id="cb432-3"><a href="sec-biovis.html#cb432-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">sample</span>(<span class="fu">rownames</span>(mulvey2015norm), <span class="dv">555</span>),</span>
+<span id="cb432-3"><a href="sec-biovis.html#cb432-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">sample</span>(<span class="fu">rownames</span>(mulvey2015norm_se), <span class="dv">555</span>),</span>
 <span id="cb432-4"><a href="sec-biovis.html#cb432-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb432-5"><a href="sec-biovis.html#cb432-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(feat_list) <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <p>The <code>Venn</code> function from the <code>Vennerable</code> package takes a list as
@@ -471,7 +469,7 @@ number of intersections (default is 40) become useful.</p>
 </p>
 <div id="sol-body-79" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="sec-biovis.html#cb450-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb450-2"><a href="sec-biovis.html#cb450-2" aria-hidden="true" tabindex="-1"></a>feat_list_10 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10</span>, <span class="fu">sample</span>(<span class="fu">rownames</span>(mulvey2015norm), <span class="dv">555</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb450-2"><a href="sec-biovis.html#cb450-2" aria-hidden="true" tabindex="-1"></a>feat_list_10 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10</span>, <span class="fu">sample</span>(<span class="fu">rownames</span>(mulvey2015norm_se), <span class="dv">555</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb450-3"><a href="sec-biovis.html#cb450-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(feat_list_10) <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
 <span id="cb450-4"><a href="sec-biovis.html#cb450-4" aria-hidden="true" tabindex="-1"></a>feat_list_10 <span class="ot">&lt;-</span> <span class="fu">fromList</span>(feat_list_10)</span>
 <span id="cb450-5"><a href="sec-biovis.html#cb450-5" aria-hidden="true" tabindex="-1"></a><span class="fu">upset</span>(feat_list_10)</span></code></pre></div>
@@ -484,7 +482,15 @@ number of intersections (default is 40) become useful.</p>
 <!-- ## Data along genomic coordinates -->
 
 </div>
-</div></body></html>
+</div>
+<div class="footnotes">
+<hr>
+<ol start="15">
+<li id="fn15"><p>You can install <code>Vennerable</code> with
+<code>BiocManager::install("js229/Vennerable")</code>.<a href="sec-biovis.html#fnref15" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+</body></html>
 
 <p style="text-align: center;">
 <a href="sec-sl.html"><button class="btn btn-default">Previous</button></a>
@@ -493,7 +499,7 @@ number of intersections (default is 40) become useful.</p>
 <p class="build-date">Page built: 
 2022-11-07
  using 
-R version 4.2.1 (2022-06-23)
+R version 4.2.2 Patched (2022-11-02 r83238)
 </p>
 </div>
 </div>

@@ -72,6 +72,7 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -106,7 +107,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -119,7 +120,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -173,26 +174,26 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html">Preamble</a>
-<a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
-<a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
-<a id="active-page" href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a><ul class="toc-sections">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a id="active-page" href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a><ul class="toc-sections">
 <li class="toc"><a href="#introduction-1"> Introduction</a></li>
 <li class="toc"><a href="#why-objects"> Why objects?</a></li>
 <li class="toc"><a href="#sec-lm"> Examples in base R</a></li>
 <li class="toc"><a href="#examples-from-the-bioconductor-project"> Examples from the Bioconductor project</a></li>
 <li class="toc"><a href="#additional-exercises-2"> Additional exercises</a></li>
 </ul>
-<a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
-<a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
-<a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
-<a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
-<a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
-<a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
-<a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
-<a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
-<a href="sec-si.html"><span class="toc-section-number">13</span> Session information</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
 </div>
 </li>
 </ul>
@@ -202,7 +203,8 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec-obj" class="section level1" number="3">
+<html><body>
+<div id="sec-obj" class="section level1" number="3">
 <h1>
 <span class="header-section-number">Chapter 3</span> High-level data structures</h1>
 <p><strong>Learning objectives</strong></p>
@@ -221,7 +223,7 @@ analysis.</li>
 </h2>
 <p>The term <em>object</em> stems from the widely used object-oriented
 programming (OOP) paradigm. OOP is however outside of scope of this
-course (see part III of <span class="citation"><label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">Wickham (2014)<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced <span>R</span></em>. Chapman &amp; Hall/CRC the r Series. Taylor &amp; Francis.</span></span>, which is also <a href="https://adv-r.hadley.nz/">freely available
+course (see part III of <span class="citation">Wickham (<label for="tufte-mn-13" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-13" class="margin-toggle">2014<span class="marginnote">Wickham, Hadley. 2014. <em>Advanced <span>R</span></em>. Chapman &amp; Hall/CRC the r Series. Taylor &amp; Francis.</span>)</span>, which is also <a href="https://adv-r.hadley.nz/">freely available
 online</a>). In the <em>R refresher</em> chapter
 <a href="sec-refresher.html#sec-refresher">1</a>, we have seen the base types of R, which we have
 efficiently used in many situations. Sometimes, however, these aren’t
@@ -244,15 +246,11 @@ sequencing (HTS) data contains high-throughput sequencing
 data. Replace high-throughput sequencing data by DNA sequences (see
 chapter <a href="sec-biostrings.html#sec-biostrings">4</a>), proteomics, … and it will still
 hold.</p></li>
-<li><p>Using object enables <strong>consistency</strong><label for="tufte-sn-4" class="margin-toggle sidenote-number">4</label><input type="checkbox" id="tufte-sn-4" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">4</span> This consistency comes however at the cost of flexibility,
-hence the importance of well designed objects, that fit several
-use cases for the type of data at hand.</span>: whoever prepares the
+<li><p>Using object enables <strong>consistency</strong><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>: whoever prepares the
 HTS data, it will always have the same structure.</p></li>
 </ul>
 <ul>
-<li>If all information is stored in a single object<label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> This idea is consistent with the notion that you would like
-to place all the data relevant to an expriment into a single
-folder.</span>, it is
+<li>If all information is stored in a single object<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>, it is
 easier to save it, to share it with others, and to use it as an
 input to a function.</li>
 </ul>
@@ -411,7 +409,7 @@ Figure 3.3: Plotting an instance of class <code>lm</code> produces a set of diag
 </h2>
 <p>We have already briefly seen the <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec-bioconductor">Bioconductor
 project</a>. It
-initiated by Robert Gentleman (<span class="citation"><label for="tufte-mn-14" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-14" class="margin-toggle">Gentleman et al. (2004)<span class="marginnote">Gentleman, Robert C., Vincent J. Carey, Douglas M. Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. <span>“Bioconductor: Open Software Development for Computational Biology and Bioinformatics.”</span> <em>Genome Biol</em> 5 (10): –80. <a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/gb-2004-5-10-r80</a>.</span></span>; <span class="citation"><label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">Huber et al. (2015)<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. <span>“Orchestrating High-Throughput Genomic Analysis with <span>Bioconductor</span>.”</span> <em>Nat Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.</span></span>), one of
+initiated by Robert Gentleman (<span class="citation">Gentleman et al. (<label for="tufte-mn-14" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-14" class="margin-toggle">2004<span class="marginnote">Gentleman, Robert C., Vincent J. Carey, Douglas M. Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. <span>“Bioconductor: Open Software Development for Computational Biology and Bioinformatics.”</span> <em>Genome Biol</em> 5 (10): –80. <a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/gb-2004-5-10-r80</a>.</span>)</span>; <span class="citation">Huber et al. (<label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">2015<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. <span>“Orchestrating High-Throughput Genomic Analysis with <span>Bioconductor</span>.”</span> <em>Nat Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.</span>)</span>), one of
 the two creators of the R language, and centrally offers dedicated R
 packages for bioinformatics.</p>
 <blockquote>
@@ -430,19 +428,19 @@ summarised below.</p>
 <span class="header-section-number">3.4.1</span> Common Bioconductor classes<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('common-bioconductor-classes')" onmouseout="reset_tooltip('common-bioconductor-classes-tooltip')"><span class="tooltiptext" id="common-bioconductor-classes-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <ul>
-<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.15/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, …)</li>
-<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.15/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
-<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.15/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
+<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.16/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, …)</li>
+<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.16/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
+<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.16/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
 </li>
-<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.15/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.15/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
+<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.16/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.16/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
 </li>
-<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.15/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
+<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.16/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
 </li>
-<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.15/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
+<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.16/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
 </li>
-<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.15/Spectra">Spectra</a></em><code>::Spectra()</code>
+<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.16/Spectra">Spectra</a></em><code>::Spectra()</code>
 </li>
-<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.15/QFeatures">QFeatures</a></em><code>::QFeatures()</code>
+<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.16/QFeatures">QFeatures</a></em><code>::QFeatures()</code>
 </li>
 </ul>
 </div>
@@ -450,13 +448,8 @@ summarised below.</p>
 <h3>
 <span class="header-section-number">3.4.2</span> The <code>SummarizedExperiment</code> class<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('the-summarizedexperiment-class')" onmouseout="reset_tooltip('the-summarizedexperiment-class-tooltip')"><span class="tooltiptext" id="the-summarizedexperiment-class-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
-<p>Let’s start by installing<label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> Before installing the package, we first check if they are
-available with <code>require</code>. If they are missing, the call to
-<code>require</code> will return <code>FALSE</code>, otherwise it returns <code>TRUE</code> and
-loads the packages. Given that we negate the return value of
-<code>require</code> using <code>!</code>, the packages will be installed only when
-missing.</span> the<em><a href="https://bioconductor.org/packages/3.15/SummarizedExperiment">SummarizedExperiment</a></em>
-package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.15/airway">airway</a></em>
+<p>Let’s start by installing<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> the<em><a href="https://bioconductor.org/packages/3.16/SummarizedExperiment">SummarizedExperiment</a></em>
+package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.16/airway">airway</a></em>
 data package, that provides an RNA-Seq example data.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="sec-obj.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"SummarizedExperiment"</span>))</span>
 <span id="cb67-2"><a href="sec-obj.html#cb67-2" aria-hidden="true" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"SummarizedExperiment"</span>)</span>
@@ -468,7 +461,7 @@ directly load the packages.</p>
 <span id="cb68-2"><a href="sec-obj.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"airway"</span>)</span></code></pre></div>
 <p>The <code>airway</code> package provides a data for an RNA-Seq experiment on four
 human airway smooth muscle cell lines treated with dexamethason
-published by <span class="citation"><label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">Himes et al. (2014)<span class="marginnote">Himes, B E, X Jiang, P Wagner, R Hu, Q Wang, B Klanderman, R M Whitaker, et al. 2014. <span>“RNA-Seq Transcriptome Profiling Identifies Crispld2 as a Glucocorticoid Responsive Gene That Modulates Cytokine Function in Airway Smooth Muscle Cells.”</span> <em>PLoS One</em> 9 (6): e99625. <a href="https://doi.org/10.1371/journal.pone.0099625">https://doi.org/10.1371/journal.pone.0099625</a>.</span></span>. It contains the RNA expression data for
+published by <span class="citation">Himes et al. (<label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">2014<span class="marginnote">Himes, B E, X Jiang, P Wagner, R Hu, Q Wang, B Klanderman, R M Whitaker, et al. 2014. <span>“RNA-Seq Transcriptome Profiling Identifies CRISPLD2 as a Glucocorticoid Responsive Gene That Modulates Cytokine Function in Airway Smooth Muscle Cells.”</span> <em>PLoS One</em> 9 (6): e99625. <a href="https://doi.org/10.1371/journal.pone.0099625">https://doi.org/10.1371/journal.pone.0099625</a>.</span>)</span>. It contains the RNA expression data for
 64102 transcripts and 8 samples. These 8 samples correspond to treated
 and untreated condition in 4 different cell lines.</p>
 <p>Objects of the class <code>SummarizedExperiment</code> contain one or more assays
@@ -637,8 +630,7 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 </div>
 </div>
 <p>The row and column metadata are stored as a special <code>data.frame</code>
-implementation<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Like the <code>tibble</code>, that is an implememtation specific to the
-<code>tidyverse</code> packages.</span>, that has been developed in the Bioconductor
+implementation<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, that has been developed in the Bioconductor
 project. It behaves like like a classical <code>data.frame</code>.</p>
 <div class="question">
 <p class="question-begin">
@@ -988,7 +980,27 @@ of class <code>SummarizedExperiment</code>.</p>
 </div>
 
 </div>
-</div></body></html>
+</div>
+<div class="footnotes">
+<hr>
+<ol start="4">
+<li id="fn4"><p>This consistency comes however at the cost of flexibility,
+hence the importance of well designed objects, that fit several
+use cases for the type of data at hand.<a href="sec-obj.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>This idea is consistent with the notion that you would like
+to place all the data relevant to an expriment into a single
+folder.<a href="sec-obj.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Before installing the package, we first check if they are
+available with <code>require</code>. If they are missing, the call to
+<code>require</code> will return <code>FALSE</code>, otherwise it returns <code>TRUE</code> and
+loads the packages. Given that we negate the return value of
+<code>require</code> using <code>!</code>, the packages will be installed only when
+missing.<a href="sec-obj.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Like the <code>tibble</code>, that is an implememtation specific to the
+<code>tidyverse</code> packages.<a href="sec-obj.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+</body></html>
 
 <p style="text-align: center;">
 <a href="sec-vis.html"><button class="btn btn-default">Previous</button></a>
@@ -997,7 +1009,7 @@ of class <code>SummarizedExperiment</code>.</p>
 <p class="build-date">Page built: 
 2022-11-07
  using 
-R version 4.2.1 (2022-06-23)
+R version 4.2.2 Patched (2022-11-02 r83238)
 </p>
 </div>
 </div>

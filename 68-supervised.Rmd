@@ -621,7 +621,7 @@ abline(h = 8)
 ## Additional exercises
 
 
-Load the `hyperLOPIT2015` data from the `pRolocdata` package. See
+Load the `hyperLOPIT2015_se` data from the `pRolocdata` package. See
 section \@ref(sec-dimred02)) for details. The features variable column
 `markers` defines the proteins for which the sub-cellular localisation
 is known - these are the labelled data. Those that are marked
@@ -636,15 +636,15 @@ unlabelled data were assigned to any of the 14 classes?
 
 ```{r echo = FALSE, include = FALSE}
 suppressPackageStartupMessages(library("pRolocdata"))
-data(hyperLOPIT2015)
+data(hyperLOPIT2015_se)
 library("class")
 
-markers <- fData(hyperLOPIT2015)$markers != "unknown"
-unknown <- fData(hyperLOPIT2015)$markers == "unknown"
+markers <- rowData(hyperLOPIT2015_se)$markers != "unknown"
+unknown <- rowData(hyperLOPIT2015_se)$markers == "unknown"
 
-knn5 <- knn(exprs(hyperLOPIT2015)[markers, ],
-            exprs(hyperLOPIT2015)[unknown, ],
-            fData(hyperLOPIT2015)$markers[markers],
+knn5 <- knn(assay(hyperLOPIT2015_se)[markers, ],
+            assay(hyperLOPIT2015_se)[unknown, ],
+            rowData(hyperLOPIT2015_se)$markers[markers],
             k = 5)
 
 table(knn5)
@@ -665,18 +665,18 @@ cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
 `r msmbstyle::question_end()`
 
 ```{r, echo = FALSE, include = FALSE}
-pca <- prcomp(exprs(hyperLOPIT2015), scale. = TRUE)
+pca <- prcomp(assay(hyperLOPIT2015_se), scale. = TRUE)
 library("factoextra")
 
 cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
          "#333333", "#00CED1", "#A65628", "#F781BF", "#984EA3",
          "#9ACD32", "#B0C4DE", "#00008A", "#8B795E", "#E0E0E060")
 
-all_labels <- fData(hyperLOPIT2015)$markers
+all_labels <- rowData(hyperLOPIT2015_se)$markers
 all_labels[unknown] <- as.character(knn5)
 
 fviz_pca_ind(pca, geom = "point",
-             habillage = fData(hyperLOPIT2015)$markers,
+             habillage = rowData(hyperLOPIT2015_se)$markers,
              palette = cls)
 
 fviz_pca_ind(pca, geom = "point",
@@ -690,8 +690,8 @@ Asses the choice of k=5 used above.
 
 
 ```{r, echo = FALSE, include = FALSE}
-hyper_preds <- exprs(hyperLOPIT2015)[markers, ]
-hyper_labels <- fData(hyperLOPIT2015)[markers, "markers"]
+hyper_preds <- assay(hyperLOPIT2015_se)[markers, ]
+hyper_labels <- rowData(hyperLOPIT2015_se)[markers, "markers"]
 folds <- caret::createFolds(hyper_labels, k = 10)
 
 knn_accuracy <- function(fld, k = 5) {
@@ -725,7 +725,7 @@ the `svm.classification` feature variable.
 `r msmbstyle::question_end()`
 
 ```{r, echo = FALSE, include = FALSE}
-table(fData(hyperLOPIT2015)$svm.classification[unknown],
+table(rowData(hyperLOPIT2015_se)$svm.classification[unknown],
       all_labels[unknown])
 ```
 
@@ -753,9 +753,9 @@ to extract these from the `knn` output variable.
 `r msmbstyle::question_end()`
 
 ```{r, echo = FALSE, include = FALSE}
-knn5 <- knn(exprs(hyperLOPIT2015)[markers, ],
-            exprs(hyperLOPIT2015)[unknown, ],
-            fData(hyperLOPIT2015)$markers[markers],
+knn5 <- knn(assay(hyperLOPIT2015_se)[markers, ],
+            assay(hyperLOPIT2015_se)[unknown, ],
+            rowData(hyperLOPIT2015_se)$markers[markers],
             k = 5,
             prob = TRUE)
 
@@ -771,7 +771,7 @@ table(knn_res)
 ```
 
 ```{r echo = FALSE, include = FALSE}
-all_labels <- fData(hyperLOPIT2015)$markers
+all_labels <- rowData(hyperLOPIT2015_se)$markers
 all_labels[all_labels == "unknown"] <- knn_res
 
 fviz_pca_ind(pca, geom = "point",

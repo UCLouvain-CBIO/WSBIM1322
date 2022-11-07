@@ -16,10 +16,8 @@ that are widely used in biomedical data analysis, namely
 
 ```{r heatmapmulvey, cache = TRUE, fig.cap = "Heatmap of the (normalised) Mulvey et al. 2015 proteomic data."}
 library("pRolocdata")
-data(mulvey2015norm)
-library("SummarizedExperiment")
-mulvey2015norm <- as(mulvey2015norm, "SummarizedExperiment")
-heatmap(assay(mulvey2015norm))
+data(mulvey2015norm_se)
+heatmap(assay(mulvey2015norm_se))
 ```
 
 A heatmap is composed of two hierarchical clusters (one along the
@@ -32,7 +30,7 @@ substantial effect on the results, which is conformed below.
 
 
 ```{r heatmapcor, cache = TRUE, fig.cap = "Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances."}
-heatmap(assay(mulvey2015norm), distfun = cor.dist)
+heatmap(assay(mulvey2015norm_se), distfun = cor.dist)
 ```
 
 
@@ -74,10 +72,10 @@ demonstrated below.
 
 ```{r complexheatmap, fig.fullwidth = TRUE, message = FALSE, fig.cap = "An annotated heatmap produced with the `ComplexHeatmap` Bioconductor package."}
 library("ComplexHeatmap")
-x <- assay(mulvey2015norm)
+x <- assay(mulvey2015norm_se)
 hcl <- hclust(dist(x))
 cl <- cutree(hcl, k = 12)
-ha1 <- HeatmapAnnotation(time = mulvey2015norm$times)
+ha1 <- HeatmapAnnotation(time = mulvey2015norm_se$times)
 ha2 <- HeatmapAnnotation(boxplot = anno_boxplot(x))
 ha3 <- rowAnnotation(cluster = factor(cl))
 Heatmap(x,
@@ -101,21 +99,20 @@ packages can be used to generate interactive heatmaps.
 ```{r heatmaply, eval = FALSE}
 ## prepare the data
 library("pRolocdata")
-data(hyperLOPIT2015)
-hl <- as(hyperLOPIT2015, "SummarizedExperiment")
+data(hyperLOPIT2015_se)
 ## interactive heatmap
 library("heatmaply")
-heatmaply(assay(hl)[1:100, ])
+heatmaply(assay(hyperLOPIT2015_se)[1:100, ])
 ```
 
 ```{r heatmaply2, eval = FALSE}
-heatmaply(assay(hl)[1:100, ],
-          RowSideColors = as.factor(rowData(hl)$markers[1:100]))
+heatmaply(assay(hyperLOPIT2015_se)[1:100, ],
+          RowSideColors = as.numeric(as.factor(rowData(hyperLOPIT2015_se)$markers[1:100])))
 ```
 
 ```{r d3hm, eval = FALSE}
 library("d3heatmap")
-d3heatmap(assay(hl))
+d3heatmap(assay(hyperLOPIT2015_se))
 ```
 
 See also *A tutorial in displaying mass spectrometry-based proteomic
@@ -134,12 +131,12 @@ generate such plots are
 [^vennerable]: You can install `Vennerable` with
     `BiocManager::install("js229/Vennerable")`.
 
-We will use the `mulvey2015norm` feature names to generate a test data:
+We will use the `mulvey2015norm_se` feature names to generate a test data:
 
 ```{r venndat}
 set.seed(123)
 feat_list <- replicate(3,
-                       sample(rownames(mulvey2015norm), 555),
+                       sample(rownames(mulvey2015norm_se), 555),
                        simplify = FALSE)
 names(feat_list) <- LETTERS[1:3]
 ```
@@ -248,7 +245,7 @@ number of intersections (default is 40) become useful.
 
 ```{r upsetchallenge}
 set.seed(123)
-feat_list_10 <- replicate(10, sample(rownames(mulvey2015norm), 555), simplify = FALSE)
+feat_list_10 <- replicate(10, sample(rownames(mulvey2015norm_se), 555), simplify = FALSE)
 names(feat_list_10) <- LETTERS[1:10]
 feat_list_10 <- fromList(feat_list_10)
 upset(feat_list_10)
