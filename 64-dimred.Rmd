@@ -404,15 +404,28 @@ scaling. Compare and interpret the results.
 `r msmbstyle::solution_begin()`
 
 ```{r scalepcasol, fig.with=12, fig.cap=""}
-par(mfrow = c(1, 2))
-biplot(prcomp(mtcars, scale = FALSE), main = "No scaling")  ## 1
-biplot(prcomp(mtcars, scale = TRUE), main = "With scaling") ## 2
+par(mfrow = c(1, 3))
+prcomp(mtcars) |> biplot() ## no scaling
+prcomp(mtcars, scale = TRUE) |> biplot() ## prcomp() scales the data
+scale(mtcars) |> prcomp() |> biplot() ## scaling (and centering) before by hand
 ```
+
+Note that `prcomp()` centers the data by default - see `?prcomp` for
+details.
 
 Without scaling, `disp` and `hp` are the features with the highest
 loadings along PC1 and 2 (all others are negligible), which are also
 those with the highest units of measurement. Scaling removes this
 effect.
+
+Options two and three in the code chunk above are equivalent - the
+only difference is that the data are centered twice in the last
+option, once by `scale()` and once by `prcomp(). These two options
+however aren't equivalent at all if the transposed data used for
+PCA. In our applications, we always normalise our data prior to any
+analysis. The scaling during PCA should only be necessary if we want
+to remove the effect of some features being (much more) highly
+expressed than others.
 
 `r msmbstyle::solution_end()`
 
