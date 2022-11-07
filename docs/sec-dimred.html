@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2022-11-01" />
+<meta name="date" content="2022-11-07" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -623,14 +623,25 @@ scaling. Compare and interpret the results.</p>
 ► Solution<span id="sol-start-45" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-45', 'sol-start-45')"></span>
 </p>
 <div id="sol-body-45" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="sec-dimred.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb326-2"><a href="sec-dimred.html#cb326-2" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">FALSE</span>), <span class="at">main =</span> <span class="st">"No scaling"</span>)  <span class="do">## 1</span></span>
-<span id="cb326-3"><a href="sec-dimred.html#cb326-3" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">TRUE</span>), <span class="at">main =</span> <span class="st">"With scaling"</span>) <span class="do">## 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="sec-dimred.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb326-2"><a href="sec-dimred.html#cb326-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prcomp</span>(mtcars) <span class="sc">|&gt;</span> <span class="fu">biplot</span>() <span class="do">## no scaling</span></span>
+<span id="cb326-3"><a href="sec-dimred.html#cb326-3" aria-hidden="true" tabindex="-1"></a><span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">biplot</span>() <span class="do">## prcomp() scales the data</span></span>
+<span id="cb326-4"><a href="sec-dimred.html#cb326-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale</span>(mtcars) <span class="sc">|&gt;</span> <span class="fu">prcomp</span>() <span class="sc">|&gt;</span> <span class="fu">biplot</span>() <span class="do">## scaling (and centering) before by hand</span></span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/scalepcasol-1.png" width="672"></p>
+<p>Note that <code>prcomp()</code> centers the data by default - see <code>?prcomp</code> for
+details.</p>
 <p>Without scaling, <code>disp</code> and <code>hp</code> are the features with the highest
 loadings along PC1 and 2 (all others are negligible), which are also
 those with the highest units of measurement. Scaling removes this
 effect.</p>
+<p>Options two and three in the code chunk above are equivalent - the
+only difference is that the data are centered twice in the last
+option, once by <code>scale()</code> and once by `prcomp(). These two options
+however aren’t equivalent at all if the transposed data used for
+PCA. In our applications, we always normalise our data prior to any
+analysis. The scaling during PCA should only be necessary if we want
+to remove the effect of some features being (much more) highly
+expressed than others.</p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1324,7 +1335,7 @@ the labels?</p>
 <a href="sec-ul.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-11-01
+2022-11-07
  using 
 R version 4.2.1 (2022-06-23)
 </p>
