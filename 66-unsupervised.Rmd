@@ -445,7 +445,7 @@ obsevation (for example *(3, 5)* and *1* above), or between cluster
 (for example (*(2, 4)* and *(1, (3, 5))* above) are computed.
 
 The **complete linkage** (default) method defines the distances
-between clusters as the largest one between any to observations in
+between clusters as the largest one between any two observations in
 them, while the **single linkage** (also called nearest neighbour
 method) will use the smallest distance between observations. The
 **average linkage** method is halfways between the two. **Ward's**
