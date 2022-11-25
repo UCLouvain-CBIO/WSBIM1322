@@ -319,7 +319,7 @@ legend("bottomleft", legend = 1:5, pch = 1, col = 1:5)
 `r msmbstyle::question_begin()`
 
 Load the `recapSE1` data available in the `rWSBIM1322` package
-(version >= 0.3.0) with `data(recapSE1)`. The data contains
+(version >= 0.3.1) with `data(recapSE1)`. The data contains
 quantitative proteomics data. You are asked to:
 
 - Familiarise yourself with the experimental design.
@@ -337,7 +337,7 @@ quantitative proteomics data. You are asked to:
 `r msmbstyle::question_begin()`
 
 Load the `recapSE2` data available in the `rWSBIM1322` package
-(version >= 0.3.0) with `data(recapSE2)`. The data contains
+(version >= 0.3.2) with `data(recapSE2)`. The data contains
 quantitative proteomics data. You are asked to:
 
 - Familiarise yourself with the experimental design.
