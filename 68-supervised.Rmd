@@ -341,11 +341,11 @@ We are now going to do the following procedure
 
 1. hide the testing labels $Y_{te}$,
 2. train a classifier model using $X_{tr}$ and $Y_{tr}$,
-3. apply in on $X_{te}$ to obtain a new $Y_{tr}^{predicted}$, and
-4. compare $Y_{tr}$ to $Y_{tr}^{predicted}$.
+3. apply it on $X_{te}$ to obtain a new $Y_{te}^{predicted}$, and
+4. compare $Y_{te}$ to $Y_{te}^{predicted}$.
 
 There are numerous different ways to measure the performance of a
-classifier using $Y_{tr}$ and $Y_{tr}^{predicted}$.
+classifier using $Y_{te}$ and $Y_{te}^{predicted}$.
 We are going to focus on the **classification accuracy**, counting the
 proportion of correct results.
 
