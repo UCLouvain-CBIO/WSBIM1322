@@ -18,7 +18,7 @@ bibliography: [refs.bib, packages.bib]
 
 # Preamble {-}
 
-The [WSBIM1322](https://uclouvain.be/cours-2021-wsbim1322.html) course 
+The [WSBIM1322](https://uclouvain.be/cours-2021-wsbim1322.html) course
 teaches the basics of statistical data analysis applied to high
 throughput biology. It is aimed at biology and biomedical students
 that are already familiar with the R langauge (see the pre-requisites
@@ -60,6 +60,24 @@ notebooks](https://jupyter.org/) would also have been a good fit. One
 motivation of this choice is the availability of numerous
 R/[Bionductor](https://www.bioconductor.org/) packages [@Huber:2015]
 for the analysis of high throughput biology data.
+
+Below, you can find three short videos (in French, with subtitles in
+multiple languages) by PhD students that assist in the teaching of
+this course. They will provide you with real-work applications of some
+of the concepts taught in this course.
+
+- [Julie Devis](https://youtu.be/MOa9fCHqKko) is pursuing a PhD in the
+  Computational Biology and Bioinformatics Unit with Prof Laurent
+  Gatto. She uses R and Bioconductor to study the methylation if
+  cancer germ-line genes.
+- [Valentine Robaux](https://youtu.be/XUiOQ0LRKxc) is pursuing a PhD
+  in the Cardiovascular Research Unit with Profs Sandrine Horman and
+  Christophe Beauloye. She uses R and Bioconductor to investigate
+  platelet function.
+- [Jean Fain](https://youtu.be/XC6HDdPzPac) is pursuing a PhD in the
+  Epigenetics Unit with Prof Charles De Smet. He uses R and
+  Bioconductor to study DNA methylation and its role in cancer.
+
 
 ## References and credits {-}
 

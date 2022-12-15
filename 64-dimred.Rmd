@@ -732,6 +732,11 @@ fviz_pca_ind(pca_hl, geom = "point",
 ```
 `r msmbstyle::solution_end()`
 
+
+A [short video](https://youtu.be/rUPgXiOVKtg) (in French, with
+subtitles in multiple languages) summarises the solution for this
+spatial proteomics PCA application.
+
 ## Additional exercises
 
 
