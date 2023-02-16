@@ -87,7 +87,7 @@ complementary resources.
 
 - **Modern Statistics for Modern Biology**, by Susan Holmes and
   Wolfgang Huber [@MSMB]. A free online version of the book is
-  available [here](https://www-huber.embl.de/msmb/).
+  available [here](https://www.huber.embl.de/msmb/).
 
 - **An Introduction to Statistical Learning with Applications in R**
   by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani
