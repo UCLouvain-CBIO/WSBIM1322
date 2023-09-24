@@ -20,11 +20,15 @@ body {
     text-align: center;
 }
 
-.proposition, .question-begin, .question-end, .exercise {
+.proposition, .question-begin, .question-end, span.exercise {
   font-size: 1.4rem;
   font-weight: bold;
   margin-top: 1.2rem;
   color: green;
+}
+
+span.exercise {
+  display: block;
 }
 
 .solution, .solution-begin, .solution-end {
@@ -408,6 +412,22 @@ pre {
   align-items: center;
 }
 
+.eqn-mouseover > p{
+  width:0;
+}
+
+/* References */
+
+.references {
+  width: 55%;
+}
+
+.csl-entry {
+   margin: 5px;
+}
+
+/* References end */
+
 @media (max-width: 760px) {
     body {
         padding-left: 0;
@@ -448,5 +468,10 @@ pre {
     #TOC {
         max-width: 100%;
     }
+    .references {
+        width: 100%;
+    }
 
 }
+
+
