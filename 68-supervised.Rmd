@@ -310,7 +310,7 @@ There is no way to decide which set of results above, using k=1, 2,
 ... 11 or any other value for k is better. At least not while
 proceeding as above. To be able to make an informed decision about the
 **model parameter** k, we need to to measure the **performance** of
-the kNN classifier for different values of k. Do do so, we are going to
+the kNN classifier for different values of k. To do so, we are going to
 create **training** and **testing** sets using the labelled data. Each
 of these will be composed by a certain proportion of the original
 labelled data.

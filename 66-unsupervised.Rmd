@@ -30,7 +30,7 @@ into context.
 
 ## How to measure similarities?
 
-Clustering algorithms reply on a measurement of similarity between
+Clustering algorithms rely on a measurement of similarity between
 between features to group them into clusters. An important step is
 thus to decide how to measure these similarities. A range of distance
 measurements are available:

@@ -82,7 +82,7 @@ us formalise when to call genes differentially expressed.
 
 ## Handling more data
 
-There are many more types of patterns that we wold be interested in
+There are many more types of patterns that we would be interested in
 identifying in omics data. Let's reconsider the linear regression
 model from section \@ref(sec-lm). Below is a figure from
 @Majumder2013. Among the 20 scatter plots below, one represents the
