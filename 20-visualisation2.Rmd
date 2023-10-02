@@ -293,31 +293,42 @@ gg + geom_point(aes(colour = as.character(Run)))
 ```
 `r msmbstyle::solution_end()`
 
-Below is an example of more elaborated composition, overlaying points
-and a non-linear *loess* regression. But first, let's load a object
-containing microarray data from the `hiiragi2013df1` data. The data is
-originally available from the
-[`Hiiragi2013`](http://bioconductor.org/packages/release/data/experiment/html/Hiiragi2013.html)
-package and describes the cell-to-cell expression variability followed
-by signal reinforcement progressively segregates early mouse lineages
-[@Ohnishi:2014].
+Finally, we can model easily model and visualise the relation relation
+between concentration and optical density using a *smoothing geom*:
 
-
-```{r gg4, fig.cap = "Modelling the relation between the expression of X1426642_at and X1418765_at."}
-library("rWSBIM1322")
-data(hiiragi2013df1)
-ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at)) +
-    geom_point(shape = 1) +
+```{r dnasmooth, fig.cap = "Modelling the relation between concentration and optical density."}
+ggplot(data = DNase,
+       mapping = aes(x = conc,
+                     y = density)) +
+    geom_point(aes(colour = as.character(Run))) +
     geom_smooth(method = "loess")
 ```
 
-And, adding colours representing the different samples
+<!-- Below is an example of more elaborated composition, overlaying points -->
+<!-- and a non-linear *loess* regression. But first, let's load a object -->
+<!-- containing microarray data from the `hiiragi2013df1` data. The data is -->
+<!-- originally available from the -->
+<!-- [`Hiiragi2013`](http://bioconductor.org/packages/release/data/experiment/html/Hiiragi2013.html) -->
+<!-- package and describes the cell-to-cell expression variability followed -->
+<!-- by signal reinforcement progressively segregates early mouse lineages -->
+<!-- [@Ohnishi:2014]. -->
 
-```{r gg5, fig.cap = "Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples."}
-ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at))  +
-  geom_point(aes(color = sampleColour), shape = 19) +
-  geom_smooth(method = "loess")
-```
+
+<!-- ```{r gg4, fig.cap = "Modelling the relation between the expression of X1426642_at and X1418765_at."} -->
+<!-- library("rWSBIM1322") -->
+<!-- data(hiiragi2013df1) -->
+<!-- ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at)) + -->
+<!--     geom_point(shape = 1) + -->
+<!--     geom_smooth(method = "loess") -->
+<!-- ``` -->
+
+<!-- And, adding colours representing the different samples -->
+
+<!-- ```{r gg5, fig.cap = "Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples."} -->
+<!-- ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at))  + -->
+<!--   geom_point(aes(color = sampleColour), shape = 19) + -->
+<!--   geom_smooth(method = "loess") -->
+<!-- ``` -->
 
 ## Visualising 1D data
 
@@ -326,6 +337,17 @@ very relevant for omics data such as transcriptomics or quantitative
 proteomics, when contrasting the expression values across multiple
 samples.
 
+We will be using data from the
+[`Hiiragi2013`](http://bioconductor.org/packages/release/data/experiment/html/Hiiragi2013.html)
+package and describes the cell-to-cell expression variability followed
+by signal reinforcement progressively segregates early mouse lineages
+[@Ohnishi:2014].
+
+```{r hiiragi}
+library("rWSBIM1322")
+data(hiiragi2013df1)
+head(hiiragi2013df1)
+```
 
 First, we convert a microarray gene expression data to a data.frame,
 fit for some `ggplot2` visualisation, focusing on genes Fgf4 (probeset

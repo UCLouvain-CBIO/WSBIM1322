@@ -74,6 +74,28 @@ BiocManager::install("UCLouvain-CBIO/rWSBIM1322")
 ## Additional exercises
 
 `r msmbstyle::question_begin()`
+
+Complete the following function. It is supposed to take two inputs,
+`x` and `y` and, depending whether the `x > y` or `x <= y`, it
+generates the permutation `sample(x, y)` in the first case or draws a
+sample from `rnorm(1000, x, y)` in the second case. Finally, it
+returns the sum of all values.
+
+```{r, eval = FALSE}
+fun <- function(x, y) {
+    res <- NA
+    if () { ## 1
+        res <- sample(,) ## 2
+    } else {
+        res <- rnorm(, , ) ## 3
+    }
+    return() ## 4
+}
+```
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::question_begin()`
 Read the `interro2.rds` from the `rWSBIM1207` package (version 0.1.9
 of later) file into R. The path to the file can be found with the
 `rWSBIM1207::interro2.rds()` function.

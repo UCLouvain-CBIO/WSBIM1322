@@ -317,6 +317,30 @@ functions</a></li>
 ► Question
 </p>
 <div class="question-body">
+<p>Complete the following function. It is supposed to take two inputs,
+<code>x</code> and <code>y</code> and, depending whether the <code>x &gt; y</code> or <code>x &lt;= y</code>, it
+generates the permutation <code>sample(x, y)</code> in the first case or draws a
+sample from <code>rnorm(1000, x, y)</code> in the second case. Finally, it
+returns the sum of all values.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sec-refresher.html#cb6-1" aria-hidden="true"></a>fun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {</span>
+<span id="cb6-2"><a href="sec-refresher.html#cb6-2" aria-hidden="true"></a>    res &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb6-3"><a href="sec-refresher.html#cb6-3" aria-hidden="true"></a>    <span class="cf">if</span> () { <span class="co">## 1</span></span>
+<span id="cb6-4"><a href="sec-refresher.html#cb6-4" aria-hidden="true"></a>        res &lt;-<span class="st"> </span><span class="kw">sample</span>(,) <span class="co">## 2</span></span>
+<span id="cb6-5"><a href="sec-refresher.html#cb6-5" aria-hidden="true"></a>    } <span class="cf">else</span> {</span>
+<span id="cb6-6"><a href="sec-refresher.html#cb6-6" aria-hidden="true"></a>        res &lt;-<span class="st"> </span><span class="kw">rnorm</span>(, , ) <span class="co">## 3</span></span>
+<span id="cb6-7"><a href="sec-refresher.html#cb6-7" aria-hidden="true"></a>    }</span>
+<span id="cb6-8"><a href="sec-refresher.html#cb6-8" aria-hidden="true"></a>    <span class="kw">return</span>() <span class="co">## 4</span></span>
+<span id="cb6-9"><a href="sec-refresher.html#cb6-9" aria-hidden="true"></a>}</span></code></pre></div>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
 <p>Read the <code>interro2.rds</code> from the <code>rWSBIM1207</code> package (version 0.1.9
 of later) file into R. The path to the file can be found with the
 <code>rWSBIM1207::interro2.rds()</code> function.</p>
