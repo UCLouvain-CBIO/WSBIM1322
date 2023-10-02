@@ -89,8 +89,7 @@ for (i in 1:4) {
 See also another, more recent example:
 [The Datasaurus Dozen dataset](https://www.autodeskresearch.com/publications/samestats).
 
-![](https://d2f99xq7vri1nk.cloudfront.net/DinoSequentialSmaller.gif)
-
+![](https://www.research.autodesk.com/app/uploads/2023/03/AllDinos-2.png)
 
 Throughout this course we will focus on producing visualisations that
 will enable **understanding important features** of biomolecular data
