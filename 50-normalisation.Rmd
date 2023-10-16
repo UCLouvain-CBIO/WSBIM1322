@@ -170,7 +170,7 @@ the effect of the methods.
    *N(4,2)*, *N(4, 1)*, *N(7, 3)* and create a matrix or dataframe
    with rownames `gene1` to `gene1000` and colnames `sample1` to
    `sample4`. Visualise these data and discuss whether these samples
-   could be compared against each other. Do assure replication of this
+   could be compared against each other. To assure replication of this
    simulation, set the random number generation seed to 123.
 `r msmbstyle::question_end()`
 
