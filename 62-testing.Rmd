@@ -454,20 +454,18 @@ The t-test comes in multiple flavors, all of which can be chosen
 through parameters of the `t.test` function. What we did above is
 called a two-sided two-sample unpaired test with unequal
 variance. **Two-sided** refers to the fact that we were open to reject
-the null hypothesis if the weight of the treated plants was either
-larger or smaller than that of the untreated ones.
-
+the null hypothesis if the expression in the first group was either
+larger or smaller than that in the second one.
 
 **Two-sample** indicates that we compared the means of two groups to
 each other; another option is to compare the mean of one group against
 a given, fixed number.
 
-
 **Unpaired** means that there was no direct 1:1 mapping between the
 measurements in the two groups. If, on the other hand, the data had
-been measured on the same plants before and after treatment, then a
+been measured on the same patients before and after treatment, then a
 paired test would be more appropriate, as it looks at the change of
-weight within each plant, rather than their absolute weights.
+expression within each patient, rather than their absolute expression.
 
 **Equal variance** refers to the way the statistic is calculated. That
 expression is most appropriate if the variances within each group are
@@ -477,8 +475,6 @@ called the Welch t-test exist.
 An important assumption when performing a t-test is the **independence
 assumption** among the observations in a sample. An additional exercise
 below demonstrate the risk of dependence between samples.
-
-
 
 
 Finally, it is important to highlight that all the methods and
