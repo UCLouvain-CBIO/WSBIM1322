@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2023-10-16" />
+<meta name="date" content="2023-10-23" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -775,16 +775,16 @@ section 6.5, provides additional details about the t-test.</p>
 through parameters of the <code>t.test</code> function. What we did above is
 called a two-sided two-sample unpaired test with unequal
 variance. <strong>Two-sided</strong> refers to the fact that we were open to reject
-the null hypothesis if the weight of the treated plants was either
-larger or smaller than that of the untreated ones.</p>
+the null hypothesis if the expression in the first group was either
+larger or smaller than that in the second one.</p>
 <p><strong>Two-sample</strong> indicates that we compared the means of two groups to
 each other; another option is to compare the mean of one group against
 a given, fixed number.</p>
 <p><strong>Unpaired</strong> means that there was no direct 1:1 mapping between the
 measurements in the two groups. If, on the other hand, the data had
-been measured on the same plants before and after treatment, then a
+been measured on the same patients before and after treatment, then a
 paired test would be more appropriate, as it looks at the change of
-weight within each plant, rather than their absolute weights.</p>
+expression within each patient, rather than their absolute expression.</p>
 <p><strong>Equal variance</strong> refers to the way the statistic is calculated. That
 expression is most appropriate if the variances within each group are
 about the same. If they are very different, an alternative form,
@@ -1145,7 +1145,7 @@ conclusion now?</li>
 <a href="sec-dimred.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2023-10-16
+2023-10-23
  using 
 R version 4.3.1 Patched (2023-07-10 r84676)
 </p>
