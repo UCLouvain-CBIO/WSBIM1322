@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2023-10-23" />
+<meta name="date" content="2023-11-01" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -221,7 +221,7 @@ and data structures that will be needed for the following chapters.</p>
 packages from CRAN and
 <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec-bioconductor">Bioconductor</a>.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="sec-refresher.html#cb5-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"UCLouvain-CBIO/rWSBIM1322"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sec-refresher.html#cb3-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"UCLouvain-CBIO/rWSBIM1322"</span>)</span></code></pre></div>
 <ul>
 <li>
 <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up">Avoid saving and loading your
@@ -345,15 +345,15 @@ functions</a></li>
 generates the permutation <code>sample(x, y)</code> in the first case or draws a
 sample from <code>rnorm(1000, x, y)</code> in the second case. Finally, it
 returns the sum of all values.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sec-refresher.html#cb6-1" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb6-2"><a href="sec-refresher.html#cb6-2" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb6-3"><a href="sec-refresher.html#cb6-3" tabindex="-1"></a>    <span class="cf">if</span> () { <span class="do">## 1</span></span>
-<span id="cb6-4"><a href="sec-refresher.html#cb6-4" tabindex="-1"></a>        res <span class="ot">&lt;-</span> <span class="fu">sample</span>(,) <span class="do">## 2</span></span>
-<span id="cb6-5"><a href="sec-refresher.html#cb6-5" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb6-6"><a href="sec-refresher.html#cb6-6" tabindex="-1"></a>        res <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(, , ) <span class="do">## 3</span></span>
-<span id="cb6-7"><a href="sec-refresher.html#cb6-7" tabindex="-1"></a>    }</span>
-<span id="cb6-8"><a href="sec-refresher.html#cb6-8" tabindex="-1"></a>    <span class="fu">return</span>() <span class="do">## 4</span></span>
-<span id="cb6-9"><a href="sec-refresher.html#cb6-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="sec-refresher.html#cb4-1" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb4-2"><a href="sec-refresher.html#cb4-2" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb4-3"><a href="sec-refresher.html#cb4-3" tabindex="-1"></a>    <span class="cf">if</span> () { <span class="do">## 1</span></span>
+<span id="cb4-4"><a href="sec-refresher.html#cb4-4" tabindex="-1"></a>        res <span class="ot">&lt;-</span> <span class="fu">sample</span>(,) <span class="do">## 2</span></span>
+<span id="cb4-5"><a href="sec-refresher.html#cb4-5" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb4-6"><a href="sec-refresher.html#cb4-6" tabindex="-1"></a>        res <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(, , ) <span class="do">## 3</span></span>
+<span id="cb4-7"><a href="sec-refresher.html#cb4-7" tabindex="-1"></a>    }</span>
+<span id="cb4-8"><a href="sec-refresher.html#cb4-8" tabindex="-1"></a>    <span class="fu">return</span>() <span class="do">## 4</span></span>
+<span id="cb4-9"><a href="sec-refresher.html#cb4-9" tabindex="-1"></a>}</span></code></pre></div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -395,7 +395,7 @@ state it explicitly in your response.</p>
 <a href="sec-vis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2023-10-23
+2023-11-01
  using 
 R version 4.3.1 Patched (2023-07-10 r84676)
 </p>
