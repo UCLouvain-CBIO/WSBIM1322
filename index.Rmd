@@ -164,20 +164,3 @@ and then loaded with
 ```{r rwsbim1322, message = FALSE, warning = FALSE}
 library("rWSBIM1322")
 ```
-
-To build this book, you'll need `bookdown` [@R-bookdown] and a
-fork[^msmbfork] of [`msmbstyle`
-style](https://github.com/grimbough/msmbstyle/) [@R-msmbstyle].
-
-[^msmbfork]: https://github.com/lgatto/msmbstyle
-
-```{r combilebook1, eval=FALSE}
-install.packages("bookdown")
-devtools::install_github("lgatto/msmbstyle")
-```
-
-In the course's work directory, simply type
-
-```{r combilebook2, eval=FALSE}
-bookdown::render_book(".")
-```
