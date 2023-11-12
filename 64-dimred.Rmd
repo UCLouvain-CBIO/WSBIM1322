@@ -564,11 +564,17 @@ fviz_screeplot(pca_mulvey2015)
   function to focus on the individuals (the rows of the original
   input).
 
-- Use the `habillage` argument of the `fviz_pca_ind` function to
-  highlight the time experimental variable. Interpret the figures in
-  the light of the experimental design.
+- Use the `habillage` or `col.ind` arguments[^hab] of the
+  `fviz_pca_ind()` function to highlight the time experimental
+  variable. Interpret the figures in the light of the experimental
+  design.
 
 `r msmbstyle::question_end()`
+
+[^hab]: The `habillage` only uses (or converts to) factors, and is
+    this appropriate for categories. If the variable to be
+    highlighted on the PCA plot is continuous, then `col.ind` should
+    be used. See `?fviz_pca_ind` for details.
 
 `r msmbstyle::solution_begin()`
 
