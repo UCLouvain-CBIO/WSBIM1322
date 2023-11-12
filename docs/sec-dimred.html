@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2023-11-01" />
+<meta name="date" content="2023-11-12" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -206,7 +206,8 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><div id="sec-dimred" class="section level1" number="8">
+<html><body>
+<div id="sec-dimred" class="section level1" number="8">
 <h1>
 <span class="header-section-number">Chapter 8</span> Unsupervised learning: dimensionality reduction</h1>
 <p>In <strong>unsupervised learning</strong> (UML), no labels are provided, and the
@@ -841,9 +842,10 @@ Figure 8.10: Scree plot for the <code>mulvey2015_se</code> data showing the perc
 function from the <code>factoextra</code> package, or the <code>fviz_pca_ind</code>
 function to focus on the individuals (the rows of the original
 input).</p></li>
-<li><p>Use the <code>habillage</code> argument of the <code>fviz_pca_ind</code> function to
-highlight the time experimental variable. Interpret the figures in
-the light of the experimental design.</p></li>
+<li><p>Use the <code>habillage</code> or <code>col.ind</code> arguments<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> of the
+<code>fviz_pca_ind()</code> function to highlight the time experimental
+variable. Interpret the figures in the light of the experimental
+design.</p></li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1332,14 +1334,24 @@ the labels?</p>
 </div>
 
 </div>
-</div></body></html>
+</div>
+<div class="footnotes">
+<hr>
+<ol start="10">
+<li id="fn10"><p>The <code>habillage</code> only uses (or converts to) factors, and is
+this appropriate for categories. If the variable to be
+highlighted on the PCA plot is continuous, then <code>col.ind</code> should
+be used. See <code>?fviz_pca_ind</code> for details.<a href="sec-dimred.html#fnref10" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+</body></html>
 
 <p style="text-align: center;">
 <a href="sec-testing.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-ul.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2023-11-01
+2023-11-12
  using 
 R version 4.3.1 Patched (2023-07-10 r84676)
 </p>
