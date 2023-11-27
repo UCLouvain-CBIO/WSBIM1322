@@ -424,8 +424,9 @@ The figure below illustrates the cross validation procedure, creating
 size of the data permits it). We split the data into 3 random and
 complementary folds, so that each data point appears exactly once in
 each fold. This leads to a total test set size that is identical to
-the size of the full dataset but is composed of out-of-sample
-predictions (i.e. a sample is never used for training and testing).
+the size of the full annotated dataset but is composed of
+out-of-sample predictions (i.e. a sample is never used for training
+and testing).
 
 ```{r, echo = FALSE, fig.cap = "The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model.", out.width='100%', fig.align='center'}
 knitr::include_graphics("./figs/xval.png")
