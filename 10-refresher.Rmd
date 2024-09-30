@@ -147,3 +147,29 @@ interro2 |>
     summarise(m = moy(score)) |>
     full_join(interro2)
 ```
+
+
+
+`r msmbstyle::question_begin()`
+
+- Create a matrix of dimenions 100 by 100 containing data from a
+  normal distribution of mean 0 and standard deviation 1.
+
+- Compute the means of each row and each column using the `apply()`
+  and `rowMeans()` and `colMeans()` function. Confirm that both
+  provide the same results.
+
+- Compute the difference between the column means and the row means.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+- Using the data `kem2_se` data from the `rWSBIM1322` data, compute de
+  delta values measured for each gene (delta is the difference between
+  the highest and lowest values). To do this, write a function
+  `delta()` that takes a vector of numerics as input and returns the
+  delta value, and apply it on the object's assay.
+
+`r msmbstyle::question_end()`
