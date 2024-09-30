@@ -357,13 +357,13 @@ fit for some `ggplot2` visualisation, focusing on genes Fgf4 (probeset
 
 ```{r pivot_longer, message = FALSE}
 library("tidyverse")
-genes  <- rename(hiiragi2013df1,
-                 Fgf4 = X1420085_at,
-                 Gata4 = X1418863_at,
-                 Gata6 = X1425463_at,
-                 Sox2 = X1416967_at) %>%
+genes  <- dplyr::rename(hiiragi2013df1,
+                        Fgf4 = X1420085_at,
+                        Gata4 = X1418863_at,
+                        Gata6 = X1425463_at,
+                        Sox2 = X1416967_at) |>
     select(Fgf4, Gata4,
-           Gata6, Sox2) %>%
+           Gata6, Sox2) |>
     pivot_longer(names_to = "gene",
                  values_to = "expression",
                  everything())
@@ -374,8 +374,8 @@ head(genes)
 ### Histogram
 
 ```{r hist, fig.cap = "Distribution of the Gata4 expression"}
-genes %>%
-    filter(gene == "Gata4") %>%
+genes |>
+    filter(gene == "Gata4") |>
     ggplot(aes(x = expression)) + geom_histogram()
 ```
 

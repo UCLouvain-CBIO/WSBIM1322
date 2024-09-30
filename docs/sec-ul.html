@@ -13,14 +13,14 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2023-11-27" />
+<meta name="date" content="2024-09-30" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="/usr/share/javascript/mathjax/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
@@ -65,14 +65,14 @@ function reset_tooltip(id) {
   tooltip.innerHTML = 'Copy link';
 }
 </script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -107,7 +107,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -120,7 +120,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -135,28 +135,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -174,16 +152,16 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html" id="toc-preamble">Preamble</a>
-<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
-<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
-<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
-<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
-<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
-<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
-<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
-<a id="active-page" href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a><ul class="toc-sections">
+<a href="index.html">Preamble</a>
+<a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a id="active-page" href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a><ul class="toc-sections">
 <li class="toc"><a href="#introduction-4"> Introduction</a></li>
 <li class="toc"><a href="#how-to-measure-similarities"> How to measure similarities?</a></li>
 <li class="toc"><a href="#k-means-clustering"> k-means clustering</a></li>
@@ -191,10 +169,10 @@ div.csl-indent {
 <li class="toc"><a href="#pre-processing"> Pre-processing</a></li>
 <li class="toc"><a href="#additional-exercises-7"> Additional exercises</a></li>
 </ul>
-<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
-<a href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
-<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
-<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
+<a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
+<a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html"><span class="toc-section-number">13</span> Session information</a>
 </div>
 </li>
 </ul>
@@ -203,8 +181,6 @@ div.csl-indent {
 </div>
 <div class="row">
 <div class="col-sm-12">
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
 <div id="sec-ul" class="section level1" number="9">
 <h1>
 <span class="header-section-number">Chapter 9</span> Unsupervised learning: clustering</h1>
@@ -233,7 +209,7 @@ on the outputs.</li>
 </ul>
 <p>Clustering is a widely used techniques in many areas of omics data
 analysis. The <em>How does gene expression clustering work?</em>
-<span class="citation">(<label for="tufte-mn-23" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-23" class="margin-toggle">D’haeseleer 2005<span class="marginnote">D’haeseleer, P. 2005. <span>“How Does Gene Expression Clustering Work?”</span> <em>Nat Biotechnol</em> 23 (12): 1499–1501. <a href="https://doi.org/10.1038/nbt1205-1499">https://doi.org/10.1038/nbt1205-1499</a>.</span>)</span> is a useful reading to put the following chapter
+<span class="citation">(D’haeseleer <label for="tufte-mn-23" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-23" class="margin-toggle">2005<span class="marginnote">D’haeseleer, P. 2005. “How Does Gene Expression Clustering Work?” <em>Nat Biotechnol</em> 23 (12): 1499–1501. <a href="https://doi.org/10.1038/nbt1205-1499">https://doi.org/10.1038/nbt1205-1499</a>.</span>)</span> is a useful reading to put the following chapter
 into context.</p>
 </div>
 <div id="how-to-measure-similarities" class="section level2" number="9.2">
@@ -264,8 +240,8 @@ amongst those in which at least one is on. For example, the binary
 distance between vectors <code>x</code> and <code>y</code> is 0.4 because out of the 5 pairs
 of bits that have at least on <em>1</em> (all but the second elements), 2
 have only on (the first and fifth).</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sec-ul.html#cb347-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb347-2"><a href="sec-ul.html#cb347-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="sec-ul.html#cb354-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb354-2"><a href="sec-ul.html#cb354-2" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p>The <strong>canberra</strong> distance, that computes the sum of the difference to
 the sum of each the elements of vectors:</p>
 <p><span class="math display">\[ \sum{ \frac{ | x_{i} - y_{i} | }{ | x_{i} | + | y_{i} | } } \]</span></p>
@@ -274,7 +250,7 @@ the sum of each the elements of vectors:</p>
 and transform it in into a distance metric:</p>
 <p><span class="math display">\[ d(A, B) = 1 - cor(A, B) \]</span></p>
 <p>These are some of the distances available in the <code>dist</code> function, or
-in the <code>bioDist</code> package. See also section 5.3 from <span class="citation">(<label for="tufte-mn-24" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-24" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for
+in the <code>bioDist</code> package. See also section 5.3 from <span class="citation">(Holmes and Huber <label for="tufte-mn-24" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-24" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for
 additional details.</p>
 <div class="question">
 <p class="question-begin">
@@ -284,11 +260,11 @@ additional details.</p>
 <p>Generate the 5 data points along 2 dimensions as illustrated below and
 calculate all their Euclidean pairwise distance using
 <code>dist()</code>. Interprete the output of the function. What class is it?</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="sec-ul.html#cb348-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
-<span id="cb348-2"><a href="sec-ul.html#cb348-2" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb348-3"><a href="sec-ul.html#cb348-3" tabindex="-1"></a>                      <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb348-4"><a href="sec-ul.html#cb348-4" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
-<span id="cb348-5"><a href="sec-ul.html#cb348-5" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="sec-ul.html#cb355-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">111</span>)</span>
+<span id="cb355-2"><a href="sec-ul.html#cb355-2" aria-hidden="true"></a>samples &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb355-3"><a href="sec-ul.html#cb355-3" aria-hidden="true"></a>                      <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
+<span id="cb355-4"><a href="sec-ul.html#cb355-4" aria-hidden="true"></a><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb355-5"><a href="sec-ul.html#cb355-5" aria-hidden="true"></a><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-68"></span>
 <p class="caption marginnote shownote">
@@ -306,13 +282,13 @@ Figure 9.1: A simulated dataset composed of 5 samples.
 ► Solution<span id="sol-start-55" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-55', 'sol-start-55')"></span>
 </p>
 <div id="sol-body-55" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="sec-ul.html#cb349-1" tabindex="-1"></a><span class="fu">dist</span>(samples)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="sec-ul.html#cb356-1" aria-hidden="true"></a><span class="kw">dist</span>(samples)</span></code></pre></div>
 <pre><code>##           1         2         3         4
 ## 2 1.7327389                              
 ## 3 1.2738181 0.4876129                    
 ## 4 2.7612729 2.0466051 1.9916782          
 ## 5 0.7531106 1.0161181 0.5350696 2.1793910</code></pre>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="sec-ul.html#cb351-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">dist</span>(samples))</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="sec-ul.html#cb358-1" aria-hidden="true"></a><span class="kw">class</span>(<span class="kw">dist</span>(samples))</span></code></pre></div>
 <pre><code>## [1] "dist"</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -337,10 +313,10 @@ to the <em>average sample</em>?</p>
 ► Solution<span id="sol-start-56" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-56', 'sol-start-56')"></span>
 </p>
 <div id="sol-body-56" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="sec-ul.html#cb353-1" tabindex="-1"></a>avg_sample <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(samples)</span>
-<span id="cb353-2"><a href="sec-ul.html#cb353-2" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
-<span id="cb353-3"><a href="sec-ul.html#cb353-3" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb353-4"><a href="sec-ul.html#cb353-4" tabindex="-1"></a><span class="fu">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="sec-ul.html#cb360-1" aria-hidden="true"></a>avg_sample &lt;-<span class="st"> </span><span class="kw">colMeans</span>(samples)</span>
+<span id="cb360-2"><a href="sec-ul.html#cb360-2" aria-hidden="true"></a><span class="kw">plot</span>(samples, <span class="dt">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb360-3"><a href="sec-ul.html#cb360-3" aria-hidden="true"></a><span class="kw">text</span>(samples<span class="op">$</span>x, samples<span class="op">$</span>y, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb360-4"><a href="sec-ul.html#cb360-4" aria-hidden="true"></a><span class="kw">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-70"></span>
 <p class="caption marginnote shownote">
@@ -348,19 +324,19 @@ Figure 9.2: Visualisation of the average sample, in red.
 </p>
 <img src="WSBIM1322_files/figure-html/unnamed-chunk-70-1.png" alt="Visualisation of the average sample, in red." width="672">
 </div>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="sec-ul.html#cb354-1" tabindex="-1"></a>(dists <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">rbind</span>(samples, avg_sample)))</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="sec-ul.html#cb361-1" aria-hidden="true"></a>(dists &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">rbind</span>(samples, avg_sample)))</span></code></pre></div>
 <pre><code>##           1         2         3         4         5
 ## 2 1.7327389                                        
 ## 3 1.2738181 0.4876129                              
 ## 4 2.7612729 2.0466051 1.9916782                    
 ## 5 0.7531106 1.0161181 0.5350696 2.1793910          
 ## 6 1.2133510 0.7753119 0.3627020 1.7363209 0.4858024</code></pre>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="sec-ul.html#cb356-1" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dists)</span>
-<span id="cb356-2"><a href="sec-ul.html#cb356-2" tabindex="-1"></a>d6 <span class="ot">&lt;-</span> dists[<span class="dv">6</span>, <span class="sc">-</span><span class="dv">6</span>]</span>
-<span id="cb356-3"><a href="sec-ul.html#cb356-3" tabindex="-1"></a><span class="fu">which.min</span>(d6) <span class="do">## closest</span></span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="sec-ul.html#cb363-1" aria-hidden="true"></a>dists &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(dists)</span>
+<span id="cb363-2"><a href="sec-ul.html#cb363-2" aria-hidden="true"></a>d6 &lt;-<span class="st"> </span>dists[<span class="dv">6</span>, <span class="dv">-6</span>]</span>
+<span id="cb363-3"><a href="sec-ul.html#cb363-3" aria-hidden="true"></a><span class="kw">which.min</span>(d6) <span class="co">## closest</span></span></code></pre></div>
 <pre><code>## 3 
 ## 3</code></pre>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="sec-ul.html#cb358-1" tabindex="-1"></a><span class="fu">which.max</span>(d6) <span class="do">## furthest</span></span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="sec-ul.html#cb365-1" aria-hidden="true"></a><span class="kw">which.max</span>(d6) <span class="co">## furthest</span></span></code></pre></div>
 <pre><code>## 4 
 ## 4</code></pre>
 <p class="solution-end">
@@ -373,11 +349,11 @@ Figure 9.2: Visualisation of the average sample, in red.
 <h2>
 <span class="header-section-number">9.3</span> k-means clustering<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('k-means-clustering')" onmouseout="reset_tooltip('k-means-clustering-tooltip')"><span class="tooltiptext" id="k-means-clustering-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
-<p>The k-means clustering algorithm<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> aims at partitioning <em>n</em>
+<p>The k-means clustering algorithm<label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> We will learn how the algorithm works below.</span> aims at partitioning <em>n</em>
 observations into a fixed number of <em>k</em> clusters. This algorithm will
 find homogeneous clusters.</p>
 <p>In R, we use</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="sec-ul.html#cb360-1" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">kmeans</span>(x, <span class="at">centers =</span> <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="sec-ul.html#cb367-1" aria-hidden="true"></a>stats<span class="op">::</span><span class="kw">kmeans</span>(x, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>where</p>
 <ul>
 <li>
@@ -390,9 +366,9 @@ find homogeneous clusters.</p>
 <p>To learn about k-means, let’s use the <code>giris</code> dataset, that provides
 the expression of 4 genes in 150 patients grouped in categories A, B
 or C.</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="sec-ul.html#cb361-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb361-2"><a href="sec-ul.html#cb361-2" tabindex="-1"></a><span class="fu">data</span>(giris)</span>
-<span id="cb361-3"><a href="sec-ul.html#cb361-3" tabindex="-1"></a><span class="fu">pairs</span>(giris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> giris<span class="sc">$</span>GRADE)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="sec-ul.html#cb368-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb368-2"><a href="sec-ul.html#cb368-2" aria-hidden="true"></a><span class="kw">data</span>(giris)</span>
+<span id="cb368-3"><a href="sec-ul.html#cb368-3" aria-hidden="true"></a><span class="kw">pairs</span>(giris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">col =</span> giris<span class="op">$</span>GRADE)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:girisplot"></span>
 <p class="caption marginnote shownote">
@@ -418,8 +394,8 @@ class of <code>cl</code>?</p>
 ► Solution<span id="sol-start-57" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-57', 'sol-start-57')"></span>
 </p>
 <div id="sol-body-57" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="sec-ul.html#cb362-1" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(giris[, <span class="sc">-</span><span class="dv">5</span>], <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">10</span>)</span>
-<span id="cb362-2"><a href="sec-ul.html#cb362-2" tabindex="-1"></a><span class="fu">class</span>(cl)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="sec-ul.html#cb369-1" aria-hidden="true"></a>cl &lt;-<span class="st"> </span><span class="kw">kmeans</span>(giris[, <span class="dv">-5</span>], <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">10</span>)</span>
+<span id="cb369-2"><a href="sec-ul.html#cb369-2" aria-hidden="true"></a><span class="kw">class</span>(cl)</span></code></pre></div>
 <pre><code>## [1] "kmeans"</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -444,7 +420,7 @@ output. Extract and interpret these data.</p>
 ► Solution<span id="sol-start-58" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-58', 'sol-start-58')"></span>
 </p>
 <div id="sol-body-58" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="sec-ul.html#cb364-1" tabindex="-1"></a>cl<span class="sc">$</span>cluster</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="sec-ul.html#cb371-1" aria-hidden="true"></a>cl<span class="op">$</span>cluster</span></code></pre></div>
 <pre><code>##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 ##  [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ##  [75] 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
@@ -472,18 +448,18 @@ two plots.</p>
 ► Solution<span id="sol-start-59" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-59', 'sol-start-59')"></span>
 </p>
 <div id="sol-body-59" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="sec-ul.html#cb366-1" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(giris[, <span class="sc">-</span><span class="dv">5</span>], <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">center =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb366-2"><a href="sec-ul.html#cb366-2" tabindex="-1"></a><span class="fu">summary</span>(pca)</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="sec-ul.html#cb373-1" aria-hidden="true"></a>pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(giris[, <span class="dv">-5</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">center =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb373-2"><a href="sec-ul.html#cb373-2" aria-hidden="true"></a><span class="kw">summary</span>(pca)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4
 ## Standard deviation     1.7084 0.9560 0.38309 0.14393
 ## Proportion of Variance 0.7296 0.2285 0.03669 0.00518
 ## Cumulative Proportion  0.7296 0.9581 0.99482 1.00000</code></pre>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="sec-ul.html#cb368-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb368-2"><a href="sec-ul.html#cb368-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
-<span id="cb368-3"><a href="sec-ul.html#cb368-3" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">fviz_pca</span>(pca, <span class="at">habillage =</span> giris<span class="sc">$</span>GRADE)</span>
-<span id="cb368-4"><a href="sec-ul.html#cb368-4" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">fviz_pca</span>(pca, <span class="at">habillage =</span> cl<span class="sc">$</span>cluster)</span>
-<span id="cb368-5"><a href="sec-ul.html#cb368-5" tabindex="-1"></a>p1 <span class="sc">/</span> p2</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="sec-ul.html#cb375-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb375-2"><a href="sec-ul.html#cb375-2" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb375-3"><a href="sec-ul.html#cb375-3" aria-hidden="true"></a>p1 &lt;-<span class="st"> </span><span class="kw">fviz_pca</span>(pca, <span class="dt">habillage =</span> giris<span class="op">$</span>GRADE)</span>
+<span id="cb375-4"><a href="sec-ul.html#cb375-4" aria-hidden="true"></a>p2 &lt;-<span class="st"> </span><span class="kw">fviz_pca</span>(pca, <span class="dt">habillage =</span> cl<span class="op">$</span>cluster)</span>
+<span id="cb375-5"><a href="sec-ul.html#cb375-5" aria-hidden="true"></a>p1 <span class="op">/</span><span class="st"> </span>p2</span></code></pre></div>
 <div class="figure fullwidth">
 <span style="display:block;" id="fig:solkmcl3"></span>
 <img src="WSBIM1322_files/figure-html/solkmcl3-1.png" alt="PCA analysis of the `giris` data, highlighting the original groups (left) and the clustering results (right)." width="960"><p class="caption marginnote shownote">
@@ -512,7 +488,7 @@ matches/mismatches.</p>
 ► Solution<span id="sol-start-60" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-60', 'sol-start-60')"></span>
 </p>
 <div id="sol-body-60" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="sec-ul.html#cb369-1" tabindex="-1"></a><span class="fu">table</span>(giris<span class="sc">$</span>GRADE, cl<span class="sc">$</span>cluster)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="sec-ul.html#cb376-1" aria-hidden="true"></a><span class="kw">table</span>(giris<span class="op">$</span>GRADE, cl<span class="op">$</span>cluster)</span></code></pre></div>
 <pre><code>##    
 ##      1  2  3
 ##   A  0 50  0
@@ -523,7 +499,7 @@ matches/mismatches.</p>
 </p>
 </div>
 </div>
-<div id="how-does-k-means-work" class="section level3 unnumbered">
+<div id="how-does-k-means-work" class="section level3 unnumbered" number="">
 <h3>How does k-means work<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('how-does-k-means-work')" onmouseout="reset_tooltip('how-does-k-means-work-tooltip')"><span class="tooltiptext" id="how-does-k-means-work-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>The algorithm starts from a matrix of <em>n</em> features in <em>p</em> observations
@@ -620,12 +596,12 @@ Figure 9.9: Total within sum of squared distances for different values is <em>k<
 ► Solution<span id="sol-start-61" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-61', 'sol-start-61')"></span>
 </p>
 <div id="sol-body-61" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="sec-ul.html#cb371-1" tabindex="-1"></a>ks <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb371-2"><a href="sec-ul.html#cb371-2" tabindex="-1"></a>tot_within_ss <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ks, <span class="cf">function</span>(k) {</span>
-<span id="cb371-3"><a href="sec-ul.html#cb371-3" tabindex="-1"></a>    cl <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(giris[, <span class="sc">-</span><span class="dv">5</span>], k, <span class="at">nstart =</span> <span class="dv">10</span>)</span>
-<span id="cb371-4"><a href="sec-ul.html#cb371-4" tabindex="-1"></a>    cl<span class="sc">$</span>tot.withinss</span>
-<span id="cb371-5"><a href="sec-ul.html#cb371-5" tabindex="-1"></a>})</span>
-<span id="cb371-6"><a href="sec-ul.html#cb371-6" tabindex="-1"></a><span class="fu">plot</span>(ks, tot_within_ss, <span class="at">type =</span> <span class="st">"b"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="sec-ul.html#cb378-1" aria-hidden="true"></a>ks &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
+<span id="cb378-2"><a href="sec-ul.html#cb378-2" aria-hidden="true"></a>tot_within_ss &lt;-<span class="st"> </span><span class="kw">sapply</span>(ks, <span class="cf">function</span>(k) {</span>
+<span id="cb378-3"><a href="sec-ul.html#cb378-3" aria-hidden="true"></a>    cl &lt;-<span class="st"> </span><span class="kw">kmeans</span>(giris[, <span class="dv">-5</span>], k, <span class="dt">nstart =</span> <span class="dv">10</span>)</span>
+<span id="cb378-4"><a href="sec-ul.html#cb378-4" aria-hidden="true"></a>    cl<span class="op">$</span>tot.withinss</span>
+<span id="cb378-5"><a href="sec-ul.html#cb378-5" aria-hidden="true"></a>})</span>
+<span id="cb378-6"><a href="sec-ul.html#cb378-6" aria-hidden="true"></a><span class="kw">plot</span>(ks, tot_within_ss, <span class="dt">type =</span> <span class="st">"b"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/solkmelbow-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -655,6 +631,8 @@ n-1 clusters</li>
 single cluster</li>
 </ol>
 <p><strong>Termination:</strong> All observations are grouped within a single cluster.</p>
+<pre><code>## Warning in plot.xy(xy, type, ...): semi-transparency is not supported on this
+## device: reported only once per page</code></pre>
 <div class="figure">
 <span style="display:block;" id="fig:hcldata"></span>
 <p class="caption marginnote shownote">
@@ -663,7 +641,11 @@ Figure 9.10: Hierarchical clustering: initialisation (left) and colour-coded res
 <img src="WSBIM1322_files/figure-html/hcldata-1.png" alt="Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right)." width="1152">
 </div>
 <p>The results of hierarchical clustering are typically visualised along
-a <strong>dendrogram</strong><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>, where the distance between the clusters is
+a <strong>dendrogram</strong><label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> Note that dendrograms, or trees in general, are used in
+evolutionary biology to visualise the evolutionary history of
+taxa. In this course, we use them to represent similarities (based
+on distances) and don’t assess any evolutionary relations between
+features or samples.</span>, where the distance between the clusters is
 proportional to the branch lengths.</p>
 <div class="figure">
 <span style="display:block;" id="fig:hcldendro"></span>
@@ -696,9 +678,9 @@ dendrogram using the dedicated <code>plot</code> method.</p>
 ► Solution<span id="sol-start-62" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-62', 'sol-start-62')"></span>
 </p>
 <div id="sol-body-62" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="sec-ul.html#cb372-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">dist</span>(giris[, <span class="sc">-</span><span class="dv">5</span>])</span>
-<span id="cb372-2"><a href="sec-ul.html#cb372-2" tabindex="-1"></a>hcl <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d)</span>
-<span id="cb372-3"><a href="sec-ul.html#cb372-3" tabindex="-1"></a>hcl</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="sec-ul.html#cb380-1" aria-hidden="true"></a>d &lt;-<span class="st"> </span><span class="kw">dist</span>(giris[, <span class="dv">-5</span>])</span>
+<span id="cb380-2"><a href="sec-ul.html#cb380-2" aria-hidden="true"></a>hcl &lt;-<span class="st"> </span><span class="kw">hclust</span>(d)</span>
+<span id="cb380-3"><a href="sec-ul.html#cb380-3" aria-hidden="true"></a>hcl</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## hclust(d = d)
@@ -706,7 +688,7 @@ dendrogram using the dedicated <code>plot</code> method.</p>
 ## Cluster method   : complete 
 ## Distance         : euclidean 
 ## Number of objects: 150</code></pre>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="sec-ul.html#cb374-1" tabindex="-1"></a><span class="fu">plot</span>(hcl)</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="sec-ul.html#cb382-1" aria-hidden="true"></a><span class="kw">plot</span>(hcl)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/hclsol-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -725,7 +707,7 @@ method) will use the smallest distance between observations. The
 method takes an analysis of variance approach, and aims at minimising
 the variance within clusters.</p>
 <p>See <a href="https://www.huber.embl.de/msmb/Chap-Clustering.html#hierarchical-clustering">section 5.6</a>
-of <em>Modern Statistics of Modern Biology</em> <span class="citation">(<label for="tufte-mn-25" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-25" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for further details.</p>
+of <em>Modern Statistics of Modern Biology</em> <span class="citation">(Holmes and Huber <label for="tufte-mn-25" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-25" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for further details.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -742,16 +724,16 @@ of <em>Modern Statistics of Modern Biology</em> <span class="citation">(<label f
 ► Solution<span id="sol-start-63" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-63', 'sol-start-63')"></span>
 </p>
 <div id="sol-body-63" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="sec-ul.html#cb375-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">dist</span>(giris[, <span class="sc">-</span><span class="dv">5</span>])</span>
-<span id="cb375-2"><a href="sec-ul.html#cb375-2" tabindex="-1"></a>hcl_complete <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">"complete"</span>)</span>
-<span id="cb375-3"><a href="sec-ul.html#cb375-3" tabindex="-1"></a>hcl_single <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">"single"</span>)</span>
-<span id="cb375-4"><a href="sec-ul.html#cb375-4" tabindex="-1"></a>hcl_average <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">"average"</span>)</span>
-<span id="cb375-5"><a href="sec-ul.html#cb375-5" tabindex="-1"></a>hcl_ward <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">"ward.D"</span>)</span>
-<span id="cb375-6"><a href="sec-ul.html#cb375-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb375-7"><a href="sec-ul.html#cb375-7" tabindex="-1"></a><span class="fu">plot</span>(hcl_complete)</span>
-<span id="cb375-8"><a href="sec-ul.html#cb375-8" tabindex="-1"></a><span class="fu">plot</span>(hcl_single)</span>
-<span id="cb375-9"><a href="sec-ul.html#cb375-9" tabindex="-1"></a><span class="fu">plot</span>(hcl_average)</span>
-<span id="cb375-10"><a href="sec-ul.html#cb375-10" tabindex="-1"></a><span class="fu">plot</span>(hcl_ward)</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="sec-ul.html#cb383-1" aria-hidden="true"></a>d &lt;-<span class="st"> </span><span class="kw">dist</span>(giris[, <span class="dv">-5</span>])</span>
+<span id="cb383-2"><a href="sec-ul.html#cb383-2" aria-hidden="true"></a>hcl_complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"complete"</span>)</span>
+<span id="cb383-3"><a href="sec-ul.html#cb383-3" aria-hidden="true"></a>hcl_single &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"single"</span>)</span>
+<span id="cb383-4"><a href="sec-ul.html#cb383-4" aria-hidden="true"></a>hcl_average &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"average"</span>)</span>
+<span id="cb383-5"><a href="sec-ul.html#cb383-5" aria-hidden="true"></a>hcl_ward &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">"ward.D"</span>)</span>
+<span id="cb383-6"><a href="sec-ul.html#cb383-6" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb383-7"><a href="sec-ul.html#cb383-7" aria-hidden="true"></a><span class="kw">plot</span>(hcl_complete)</span>
+<span id="cb383-8"><a href="sec-ul.html#cb383-8" aria-hidden="true"></a><span class="kw">plot</span>(hcl_single)</span>
+<span id="cb383-9"><a href="sec-ul.html#cb383-9" aria-hidden="true"></a><span class="kw">plot</span>(hcl_average)</span>
+<span id="cb383-10"><a href="sec-ul.html#cb383-10" aria-hidden="true"></a><span class="kw">plot</span>(hcl_ward)</span></code></pre></div>
 <div class="figure fullwidth">
 <span style="display:block;" id="fig:linkcomp"></span>
 <img src="WSBIM1322_files/figure-html/linkcomp-1.png" alt="Effect of using different linkage methods." width="768"><p class="caption marginnote shownote">
@@ -808,20 +790,20 @@ the same results.</p></li>
 ► Solution<span id="sol-start-64" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-64', 'sol-start-64')"></span>
 </p>
 <div id="sol-body-64" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="sec-ul.html#cb376-1" tabindex="-1"></a><span class="fu">plot</span>(hcl)</span>
-<span id="cb376-2"><a href="sec-ul.html#cb376-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">3.9</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="sec-ul.html#cb384-1" aria-hidden="true"></a><span class="kw">plot</span>(hcl)</span>
+<span id="cb384-2"><a href="sec-ul.html#cb384-2" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">3.9</span>, <span class="dt">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/cuthclsol-1.png" width="672"></p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="sec-ul.html#cb377-1" tabindex="-1"></a><span class="fu">cutree</span>(hcl, <span class="at">k =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="sec-ul.html#cb385-1" aria-hidden="true"></a><span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 3 2 3 2 3 2 3 3 3 3 2 3 2 3 3 2 3 2 3 2 2
 ##  [75] 2 2 2 2 2 3 3 3 3 2 3 2 2 2 3 3 3 2 3 3 3 3 3 2 3 3
 ##  [ reached getOption("max.print") -- omitted 50 entries ]</code></pre>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="sec-ul.html#cb379-1" tabindex="-1"></a><span class="fu">cutree</span>(hcl, <span class="at">h =</span> <span class="fl">3.9</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="sec-ul.html#cb387-1" aria-hidden="true"></a><span class="kw">cutree</span>(hcl, <span class="dt">h =</span> <span class="fl">3.9</span>)</span></code></pre></div>
 <pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 3 2 3 2 3 2 3 3 3 3 2 3 2 3 3 2 3 2 3 2 2
 ##  [75] 2 2 2 2 2 3 3 3 3 2 3 2 2 2 3 3 3 2 3 3 3 3 3 2 3 3
 ##  [ reached getOption("max.print") -- omitted 50 entries ]</code></pre>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="sec-ul.html#cb381-1" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">cutree</span>(hcl, <span class="at">k =</span> <span class="dv">3</span>), <span class="fu">cutree</span>(hcl, <span class="at">h =</span> <span class="fl">3.9</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="sec-ul.html#cb389-1" aria-hidden="true"></a><span class="kw">identical</span>(<span class="kw">cutree</span>(hcl, <span class="dt">k =</span> <span class="dv">3</span>), <span class="kw">cutree</span>(hcl, <span class="dt">h =</span> <span class="fl">3.9</span>))</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -860,13 +842,13 @@ original and scaled data.</p>
 ► Solution<span id="sol-start-65" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-65', 'sol-start-65')"></span>
 </p>
 <div id="sol-body-65" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="sec-ul.html#cb383-1" tabindex="-1"></a><span class="fu">boxplot</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="sec-ul.html#cb391-1" aria-hidden="true"></a><span class="kw">boxplot</span>(mtcars)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/scalesol-1.png" width="1152"></p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="sec-ul.html#cb384-1" tabindex="-1"></a>hcl1 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(mtcars))</span>
-<span id="cb384-2"><a href="sec-ul.html#cb384-2" tabindex="-1"></a>hcl2 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(<span class="fu">scale</span>(mtcars)))</span>
-<span id="cb384-3"><a href="sec-ul.html#cb384-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb384-4"><a href="sec-ul.html#cb384-4" tabindex="-1"></a><span class="fu">plot</span>(hcl1, <span class="at">main =</span> <span class="st">"original data"</span>)</span>
-<span id="cb384-5"><a href="sec-ul.html#cb384-5" tabindex="-1"></a><span class="fu">plot</span>(hcl2, <span class="at">main =</span> <span class="st">"scaled data"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="sec-ul.html#cb392-1" aria-hidden="true"></a>hcl1 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(mtcars))</span>
+<span id="cb392-2"><a href="sec-ul.html#cb392-2" aria-hidden="true"></a>hcl2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(mtcars)))</span>
+<span id="cb392-3"><a href="sec-ul.html#cb392-3" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb392-4"><a href="sec-ul.html#cb392-4" aria-hidden="true"></a><span class="kw">plot</span>(hcl1, <span class="dt">main =</span> <span class="st">"original data"</span>)</span>
+<span id="cb392-5"><a href="sec-ul.html#cb392-5" aria-hidden="true"></a><span class="kw">plot</span>(hcl2, <span class="dt">main =</span> <span class="st">"scaled data"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/scalesol-2.png" width="1152"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -989,27 +971,14 @@ average marker profiles, such as shown below.</p></li>
 
 </div>
 </div>
-<div class="footnotes">
-<hr>
-<ol start="11">
-<li id="fn11"><p>We will learn how the algorithm works below.<a href="sec-ul.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p>Note that dendrograms, or trees in general, are used in
-evolutionary biology to visualise the evolutionary history of
-taxa. In this course, we use them to represent similarities (based
-on distances) and don’t assess any evolutionary relations between
-features or samples.<a href="sec-ul.html#fnref12" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-</body></html>
-
 <p style="text-align: center;">
 <a href="sec-dimred.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2023-11-27
+2024-09-30
  using 
-R version 4.3.1 Patched (2023-07-10 r84676)
+R version 4.4.1 (2024-06-14)
 </p>
 </div>
 </div>
