@@ -128,7 +128,6 @@ moy <- function(x) {
     mean(x, na.rm = TRUE)
 }
 
-
 interro2 <- readRDS(rWSBIM1207::interro2.rds())
 interro2$m <- apply(interro2[, -1], 1, moy)
 
@@ -137,13 +136,14 @@ interro2 <- readRDS(rWSBIM1207::interro2.rds())
 
 library("tidyverse")
 
-interro2 %>%
-    rowwise() %>%
+interro2 |>
+    rowwise() |>
     mutate(m = moy(c(interro1, interro2, interro3, interro4)))
 
-interro2 %>%
-    gather(key = interro, value = score, -noma) %>%
-    group_by(noma) %>%
-    summarise(m = moy(score)) %>%
+interro2 |>
+    pivot_longer(names_to = "interro",
+                 values_to = "score", -noma) |>
+    group_by(noma) |>
+    summarise(m = moy(score)) |>
     full_join(interro2)
 ```
