@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2024-09-30" />
+<meta name="date" content="2024-10-01" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -372,9 +372,10 @@ state it explicitly in your response.</p>
 <li><p>Create a matrix of dimenions 100 by 100 containing data from a
 normal distribution of mean 0 and standard deviation 1.</p></li>
 <li><p>Compute the means of each row and each column using the <code>apply()</code>
-and <code>rowMeans()</code> and <code>colMeans()</code> function. Confirm that both
-provide the same results.</p></li>
-<li><p>Compute the difference between the column means and the row means.</p></li>
+and <code>rowMeans()</code>/<code>colMeans()</code> functions. Confirm that both provide
+the same results.</p></li>
+<li><p>Compute the difference between the column means and the row
+means. Does the result make sense?</p></li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -387,11 +388,12 @@ provide the same results.</p></li>
 </p>
 <div class="question-body">
 <ul>
-<li>Using the data <code>kem2_se</code> data from the <code>rWSBIM1322</code> data, compute de
-delta values measured for each gene (delta is the difference between
-the highest and lowest values). To do this, write a function
-<code>delta()</code> that takes a vector of numerics as input and returns the
-delta value, and apply it on the object’s assay.</li>
+<li><p>Using the data <code>kem2_se</code> data from the <code>rWSBIM1322</code> package, compute
+de delta values or each gene (delta is the difference between the
+highest and lowest values). To do this, write a function <code>delta()</code>
+that takes a vector of numerics as input and returns the delta
+value, and apply it on the object’s assay.</p></li>
+<li><p>Re-use your <code>delta()</code> function and apply it on each sample.</p></li>
 </ul>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -406,7 +408,7 @@ delta value, and apply it on the object’s assay.</li>
 <a href="sec-vis.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2024-09-30
+2024-10-01
  using 
 R version 4.4.1 (2024-06-14)
 </p>

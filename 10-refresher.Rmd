@@ -156,20 +156,23 @@ interro2 |>
   normal distribution of mean 0 and standard deviation 1.
 
 - Compute the means of each row and each column using the `apply()`
-  and `rowMeans()` and `colMeans()` function. Confirm that both
-  provide the same results.
+  and `rowMeans()`/`colMeans()` functions. Confirm that both provide
+  the same results.
 
-- Compute the difference between the column means and the row means.
+- Compute the difference between the column means and the row
+  means. Does the result make sense?
 
 `r msmbstyle::question_end()`
 
 
 `r msmbstyle::question_begin()`
 
-- Using the data `kem2_se` data from the `rWSBIM1322` data, compute de
-  delta values measured for each gene (delta is the difference between
-  the highest and lowest values). To do this, write a function
-  `delta()` that takes a vector of numerics as input and returns the
-  delta value, and apply it on the object's assay.
+- Using the data `kem2_se` data from the `rWSBIM1322` package, compute
+  de delta values or each gene (delta is the difference between the
+  highest and lowest values). To do this, write a function `delta()`
+  that takes a vector of numerics as input and returns the delta
+  value, and apply it on the object's assay.
+
+- Re-use your `delta()` function and apply it on each sample.
 
 `r msmbstyle::question_end()`
