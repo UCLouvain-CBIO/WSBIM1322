@@ -13,14 +13,14 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2024-10-01" />
+<meta name="date" content="2024-10-28" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="/usr/share/javascript/mathjax/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
 
@@ -65,14 +65,14 @@ function reset_tooltip(id) {
   tooltip.innerHTML = 'Copy link';
 }
 </script>
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -107,7 +107,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -120,7 +120,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -135,6 +135,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -152,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a id="active-page" href="index.html">Preamble</a><ul class="toc-sections">
+<a id="active-page" href="index.html" id="toc-preamble">Preamble</a><ul class="toc-sections">
 <li class="toc"><a href="#motivation">Motivation</a></li>
 <li class="toc"><a href="#references-and-credits">References and credits</a></li>
 <li class="toc"><a href="#pre-requisites">Pre-requisites</a></li>
@@ -161,19 +183,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="toc"><a href="#license">License</a></li>
 <li class="toc"><a href="#setup">Setup</a></li>
 </ul>
-<a href="sec-refresher.html"><span class="toc-section-number">1</span> R refresher</a>
-<a href="sec-vis.html"><span class="toc-section-number">2</span> Data visualisation</a>
-<a href="sec-obj.html"><span class="toc-section-number">3</span> High-level data structures</a>
-<a href="sec-biostrings.html"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
-<a href="sec-norm.html"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
-<a href="sec-mlintro.html"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
-<a href="sec-testing.html"><span class="toc-section-number">7</span> Hypothesis testing</a>
-<a href="sec-dimred.html"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
-<a href="sec-ul.html"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
-<a href="sec-sl.html"><span class="toc-section-number">10</span> Supervised learning</a>
-<a href="sec-biovis.html"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
-<a href="sec-ccl.html"><span class="toc-section-number">12</span> Conclusions</a>
-<a href="sec-si.html"><span class="toc-section-number">13</span> Session information</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
 </div>
 </li>
 </ul>
@@ -182,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="row">
 <div class="col-sm-12">
-<div id="preamble" class="section level1 unnumbered" number="">
+<div id="preamble" class="section level1 unnumbered">
 <h1>Preamble</h1>
 <p>The <a href="https://uclouvain.be/cours-2021-wsbim1322.html">WSBIM1322</a> course
 teaches the basics of statistical data analysis applied to high
@@ -195,7 +217,7 @@ practice in R data structures and programming and the Bioconductor
 project.</p>
 <p>The course will be followed by <em>Omics data analysis</em>
 (<a href="https://github.com/UCLouvain-CBIO/WSBIM2122">WSBIM2122</a>).</p>
-<div id="motivation" class="section level2 unnumbered" number="">
+<div id="motivation" class="section level2 unnumbered">
 <h2>Motivation<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('motivation')" onmouseout="reset_tooltip('motivation-tooltip')"><span class="tooltiptext" id="motivation-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>Today, it is difficult to overestimate the very broad importance and
@@ -207,20 +229,20 @@ at the centre of this evolution. And while bioinformatics has been
 playing a central role in bio-medical research for many years now,
 bioinformatics skills aren’t well integrated in life science
 curricula, limiting students in their career prospects and research
-horizon <span class="citation">(Wilson Sayres et al. <label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle">2018<span class="marginnote">Wilson Sayres, M A, C Hauser, M Sierk, S Robic, A G Rosenwald, T M Smith, E W Triplett, et al. 2018. “Bioinformatics Core Competencies for Undergraduate Life Sciences Education.” <em>PLoS One</em> 13 (6): e0196878. <a href="https://doi.org/10.1371/journal.pone.0196878">https://doi.org/10.1371/journal.pone.0196878</a>.</span>)</span>. It is important for young researchers to
+horizon <span class="citation">(<label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle">Wilson Sayres et al. 2018<span class="marginnote">Wilson Sayres, M A, C Hauser, M Sierk, S Robic, A G Rosenwald, T M Smith, E W Triplett, et al. 2018. <span>“Bioinformatics Core Competencies for Undergraduate Life Sciences Education.”</span> <em>PLoS One</em> 13 (6): e0196878. <a href="https://doi.org/10.1371/journal.pone.0196878">https://doi.org/10.1371/journal.pone.0196878</a>.</span>)</span>. It is important for young researchers to
 acquire quantitative, computational and data skills to address the
 challenges that lie
 <a href="https://uclouvain-cbio.github.io/WSBIM1207/#motivation">ahead</a>.</p>
 <p>This course will focus on the application of data analysis methods and
 algorithms, and the interpretation of their outputs. We will be using
-the <a href="https://www.R-project.org/">R</a> language and environment <span class="citation">(R Core Team <label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle">2019<span class="marginnote">R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</span>)</span> and
+the <a href="https://www.R-project.org/">R</a> language and environment <span class="citation">(<label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle">R Core Team 2019<span class="marginnote">R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</span>)</span> and
 the <a href="https://www.rstudio.com/products/RStudio/">RStudio integrated development
 environment</a> to acquire
 these data skills. Other interactive language such as
 <a href="https://www.R-project.org/">Python</a> and the interactive <a href="https://jupyter.org/">jupyer
 notebooks</a> would also have been a good fit. One
 motivation of this choice is the availability of numerous
-R/<a href="https://www.bioconductor.org/">Bionductor</a> packages <span class="citation">(Huber et al. <label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle">2015<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. “Orchestrating High-Throughput Genomic Analysis with Bioconductor.” <em>Nat Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.</span>)</span>
+R/<a href="https://www.bioconductor.org/">Bionductor</a> packages <span class="citation">(<label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle">Huber et al. 2015<span class="marginnote">Huber, W, V J Carey, R Gentleman, S Anders, M Carlson, B S Carvalho, H C Bravo, et al. 2015. <span>“Orchestrating High-Throughput Genomic Analysis with <span>Bioconductor</span>.”</span> <em>Nat Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.</span>)</span>
 for the analysis of high throughput biology data.</p>
 <p>Below, you can find three short videos (in French, with subtitles in
 multiple languages) by PhD students that assist in the teaching of
@@ -243,7 +265,7 @@ Epigenetics Unit with Prof Charles De Smet. He uses R and
 Bioconductor to study DNA methylation and its role in cancer.</li>
 </ul>
 </div>
-<div id="references-and-credits" class="section level2 unnumbered" number="">
+<div id="references-and-credits" class="section level2 unnumbered">
 <h2>References and credits<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('references-and-credits')" onmouseout="reset_tooltip('references-and-credits-tooltip')"><span class="tooltiptext" id="references-and-credits-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>References are provided throughout the course. Several stand out
@@ -251,18 +273,18 @@ however, as they cover large parts of the material or provide
 complementary resources.</p>
 <ul>
 <li><p><strong>Modern Statistics for Modern Biology</strong>, by Susan Holmes and
-Wolfgang Huber <span class="citation">(Holmes and Huber <label for="tufte-mn-4" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle">2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>. A free online version of the book is
+Wolfgang Huber <span class="citation">(<label for="tufte-mn-4" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>. A free online version of the book is
 available <a href="https://www.huber.embl.de/msmb/">here</a>.</p></li>
 <li><p><strong>An Introduction to Statistical Learning with Applications in R</strong>
 by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani
-<span class="citation">(James et al. <label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle">2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in R</em>. Springer Publishing Company, Incorporated.</span>)</span>. A free pdf of the book is available
+<span class="citation">(<label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle">James et al. 2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Publishing Company, Incorporated.</span>)</span>. A free pdf of the book is available
 <a href="http://faculty.marshall.usc.edu/gareth-james/ISL/index.html">here</a>.</p></li>
 </ul>
 <p>This course is being taught by Prof Laurent Gatto with invaluable
 assistance from Dr Axelle Loriot at the Faculty of Pharmacy and
 Biomedical Sciences (FASB) at the UCLouvain, Belgium.</p>
 </div>
-<div id="pre-requisites" class="section level2 unnumbered" number="">
+<div id="pre-requisites" class="section level2 unnumbered">
 <h2>Pre-requisites<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('pre-requisites')" onmouseout="reset_tooltip('pre-requisites-tooltip')"><span class="tooltiptext" id="pre-requisites-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>Students taking this course should be familiar with data analysis and
@@ -273,11 +295,11 @@ chapter provides a refresher of the R skills needed for the rest of
 the course.</p>
 <p>Software requirements are documented in the <em>Setup</em> section below.</p>
 </div>
-<div id="about-this-course-material" class="section level2 unnumbered" number="">
+<div id="about-this-course-material" class="section level2 unnumbered">
 <h2>About this course material<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('about-this-course-material')" onmouseout="reset_tooltip('about-this-course-material-tooltip')"><span class="tooltiptext" id="about-this-course-material-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
-<p>This material is written in R markdown <span class="citation">(Allaire et al. <label for="tufte-mn-6" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle">2024<span class="marginnote">Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, et al. 2024. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.</span>)</span> and compiled as a
-book using <code>knitr</code> <span class="citation">(Xie <label for="tufte-mn-7" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-7" class="margin-toggle">2024b)<span class="marginnote">Xie, Yihui. 2024b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.</span></span> <code>bookdown</code> <span class="citation">(Xie <label for="tufte-mn-8" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-8" class="margin-toggle">2024a)<span class="marginnote">Xie, Yihui. 2024a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</span></span>. The source
+<p>This material is written in R markdown <span class="citation">(<label for="tufte-mn-6" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle">Allaire et al. 2024<span class="marginnote">Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, et al. 2024. <em>Rmarkdown: Dynamic Documents for r</em>. <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.</span>)</span> and compiled as a
+book using <code>knitr</code> <span class="citation">(<label for="tufte-mn-7" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-7" class="margin-toggle">Xie 2024b<span class="marginnote">Xie, Yihui. 2024b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.</span>)</span> <code>bookdown</code> <span class="citation">(<label for="tufte-mn-8" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-8" class="margin-toggle">Xie 2024a<span class="marginnote">Xie, Yihui. 2024a. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</span>)</span>. The source
 code is publicly available in a Github repository
 <a href="https://github.com/uclouvain-cbio/WSBIM1322">https://github.com/uclouvain-cbio/WSBIM1322</a>
 and the compiled material can be read at <a href="http://bit.ly/WSBIM1322" class="uri">http://bit.ly/WSBIM1322</a>.</p>
@@ -288,7 +310,7 @@ familiarise yourself with the <a href="https://github.com/UCLouvain-CBIO/WSBIM13
 conduct</a>. By
 participating in this project you agree to abide by its terms.</p>
 </div>
-<div id="citation" class="section level2 unnumbered" number="">
+<div id="citation" class="section level2 unnumbered">
 <h2>Citation<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('citation')" onmouseout="reset_tooltip('citation-tooltip')"><span class="tooltiptext" id="citation-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>If you use this course, please cite it as</p>
@@ -297,14 +319,14 @@ participating in this project you agree to abide by its terms.</p>
 <a href="https://github.com/UCLouvain-CBIO/WSBIM1322" class="uri">https://github.com/UCLouvain-CBIO/WSBIM1322</a>.</p>
 </blockquote>
 </div>
-<div id="license" class="section level2 unnumbered" number="">
+<div id="license" class="section level2 unnumbered">
 <h2>License<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('license')" onmouseout="reset_tooltip('license-tooltip')"><span class="tooltiptext" id="license-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>This material is licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
 Attribution-ShareAlike 4.0
 License</a>.</p>
 </div>
-<div id="setup" class="section level2 unnumbered" number="">
+<div id="setup" class="section level2 unnumbered">
 <h2>Setup<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('setup')" onmouseout="reset_tooltip('setup-tooltip')"><span class="tooltiptext" id="setup-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <p>We will be using the <a href="https://www.r-project.org/">R environment for statistical
@@ -317,9 +339,9 @@ easy to install and works on all major operating systems.</p>
 installed. See section <a href="sec-si.html#sec-setup2">13.1</a> for details.</p>
 <p>The <code>rWSBIM1322</code> package provides some pre-formatted data used in this
 course. It can be installed with</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">"UCLouvain-CBIO/rWSBIM1322"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"UCLouvain-CBIO/rWSBIM1322"</span>)</span></code></pre></div>
 <p>and then loaded with</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">"rWSBIM1322"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span></code></pre></div>
 
 </div>
 </div>
@@ -327,7 +349,7 @@ course. It can be installed with</p>
 <a href="sec-refresher.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2024-10-01
+2024-10-28
  using 
 R version 4.4.1 (2024-06-14)
 </p>

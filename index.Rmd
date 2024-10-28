@@ -12,9 +12,14 @@ output:
     split_by: chapter
     split_bib: no
     css: style.css
+    mathjax: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js
 link-citations: yes
 bibliography: [refs.bib, packages.bib]
 ---
+
+```{r globalOptions, echo = FALSE}
+knitr::opts_chunk$set(dev = "CairoPNG")
+```
 
 # Preamble {-}
 
