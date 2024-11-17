@@ -61,9 +61,9 @@ data(xy)
 ```
 
 We are going to use the following dataset to illustrate some important
-concepts that are scale and central to PCA. The small dataset show
-below represents the measurement of genes *x* and *y* in 20
-samples. We will be using the scaled and centred version of this data.
+concepts related to PCA. The small dataset show below represents the
+measurement of genes *x* and *y* in 20 samples. We will be using the
+scaled and centred version of this dataset.
 
 ```{r xyplot, echo = FALSE, fig.cap = "Raw (left) and scale/centred (right) expression data for genes *x* and *y* in 20 samples", fig.height = 5, fig.width = 11}
 library("ggplot2")
@@ -195,8 +195,9 @@ pca + pca2
 var <- .pca$sdev^2
 pve <- var/sum(var)
 ```
+
 In the example above the variance, the variance along the PCs are
-`r round(var[1], 2)` and `r round(var[2], 2)`. The first one explains
+`r round(var[1], 2)` and `r round(var[2], 2)` respectively. The first one explains
 `r round(pve[1] * 100, 1)`% or that variance, and the second one merely
 `r round(pve[2] * 100, 1)`%. This is also reflected in the different
 scales along the x and y axis.
@@ -220,15 +221,14 @@ pca_final
 Principal components are linear combinations of the variables that
 were originally measured, they provide a new coordinate system. The
 PC in the previous example is a linear combination of *gene_x* and
-*gene_y*, more specifically
+*gene_y*:
 
 $$ PC = c_{1} ~ gene_{x} + c_{2} ~ gene_{y} $$
 
 It has coefficients $(c_1, c_2)$, also called loading.
 
-PCA in general will find linear combinations of the original
-variables. These new linear combinations will maximise the variance
-of the data.
+PCA will find linear combinations of the original variables. These new
+linear combinations will maximise the variance of the data.
 
 ## Summary and application
 
@@ -430,7 +430,7 @@ expressed than others.
 `r msmbstyle::solution_end()`
 
 Real datasets often come with *missing values*. In R, these should be
-encoded using `NA`. Unfortunately, PCA cannot deal with missing
+encoded using `NA`. Unfortunately, `prcomp()` cannot deal with missing
 values, and observations containing `NA` values will be dropped
 automatically. This is a viable solution only when the proportion of
 missing values is low. Otherwise, it is possible to impute missing

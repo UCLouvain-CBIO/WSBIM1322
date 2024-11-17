@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2024-10-28" />
+<meta name="date" content="2024-11-17" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -430,19 +430,19 @@ summarised below.</p>
 <span class="header-section-number">3.4.1</span> Common Bioconductor classes<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('common-bioconductor-classes')" onmouseout="reset_tooltip('common-bioconductor-classes-tooltip')"><span class="tooltiptext" id="common-bioconductor-classes-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <ul>
-<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.19/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, …)</li>
-<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.19/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
-<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.19/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
+<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.20/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, …)</li>
+<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.20/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
+<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.20/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
 </li>
-<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.19/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.19/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
+<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.20/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.20/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
 </li>
-<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.19/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
+<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.20/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
 </li>
-<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.19/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
+<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.20/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
 </li>
-<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.19/Spectra">Spectra</a></em><code>::Spectra()</code>
+<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.20/Spectra">Spectra</a></em><code>::Spectra()</code>
 </li>
-<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.19/QFeatures">QFeatures</a></em><code>::QFeatures()</code>
+<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.20/QFeatures">QFeatures</a></em><code>::QFeatures()</code>
 </li>
 </ul>
 </div>
@@ -455,8 +455,8 @@ available with <code>require</code>. If they are missing, the call to
 <code>require</code> will return <code>FALSE</code>, otherwise it returns <code>TRUE</code> and
 loads the packages. Given that we negate the return value of
 <code>require</code> using <code>!</code>, the packages will be installed only when
-missing.</span> the<em><a href="https://bioconductor.org/packages/3.19/SummarizedExperiment">SummarizedExperiment</a></em>
-package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.19/airway">airway</a></em>
+missing.</span> the<em><a href="https://bioconductor.org/packages/3.20/SummarizedExperiment">SummarizedExperiment</a></em>
+package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.20/airway">airway</a></em>
 data package, that provides an RNA-Seq example data.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="sec-obj.html#cb66-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"SummarizedExperiment"</span>))</span>
 <span id="cb66-2"><a href="sec-obj.html#cb66-2" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"SummarizedExperiment"</span>)</span>
@@ -1029,7 +1029,7 @@ of class <code>SummarizedExperiment</code>.</p>
 <a href="sec-biostrings.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2024-10-28
+2024-11-17
  using 
 R version 4.4.1 (2024-06-14)
 </p>
