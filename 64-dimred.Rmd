@@ -23,7 +23,7 @@ existing domain knowledge) the results of any clustering algorithm.
   variables. A typical example in omics is to summarise (and
   visualise) the relation between samples along two dimensions (which
   can easily be plotted) even if the data consists of tens of
-  thousands of dimensions ( genes). Dimensionality reduction is often
+  thousands of dimensions (genes). Dimensionality reduction is often
   used to facilitate visualisation of the data, as well as a
   pre-processing method before supervised learning.
 
