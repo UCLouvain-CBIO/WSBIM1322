@@ -13,7 +13,7 @@ chapter, you will learn
 
 ## Introduction
 
-Often, we faced with omics data, we have annotations for some of the
+Often, when faced with omics data, we have annotations for some of the
 samples (or features) we have acquired:
 
 - Among the 100s of patient tumours that were assayed using RNA
