@@ -92,7 +92,7 @@ Other powerful packages to generate and customise heatmaps are
 
 
 Finally, the `r Githubpkg("talgalili/heatmaply")`,
-`r Githubpkg("rstudio/d3heatmap")` and [`iheatmapr`](https://ropensci.github.io/iheatmapr/index.html)
+`r Githubpkg("rstudio/d3heatmap")` and [*iheatmapr*](https://ropensci.github.io/iheatmapr/index.html)
 packages can be used to generate interactive heatmaps.
 
 
@@ -198,10 +198,10 @@ upset_in <- fromList(feat_list)
 upset(upset_in)
 ```
 
-The following
-[tweet](https://twitter.com/ngehlenborg/status/986354574989709312) by
-the author of the package illustrates how Venn and upset diagrams
-relate to each other.
+<!-- The following -->
+<!-- [tweet](https://twitter.com/ngehlenborg/status/986354574989709312) by -->
+<!-- the author of the package illustrates how Venn and upset diagrams -->
+<!-- relate to each other. -->
 
 
 ```{r upset2}
