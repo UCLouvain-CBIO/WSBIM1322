@@ -421,11 +421,11 @@ effect.
 Options two and three in the code chunk above are equivalent - the
 only difference is that the data are centered twice in the last
 option, once by `scale()` and once by `prcomp(). These two options
-however aren't equivalent at all if the transposed data used for
-PCA. In our applications, we always normalise our data prior to any
-analysis. The scaling during PCA should only be necessary if we want
-to remove the effect of some features being (much more) highly
-expressed than others.
+however aren't equivalent at all if the transposed data is used for
+PCA. In our omics applications, we always normalise our data along the
+columns/samples prior to any analysis. The scaling during PCA should
+only be necessary if we want to remove the effect of some features
+being (much more) highly expressed than others.
 
 `r msmbstyle::solution_end()`
 
