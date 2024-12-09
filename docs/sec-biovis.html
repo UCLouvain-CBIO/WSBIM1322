@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2024-11-25" />
+<meta name="date" content="2024-12-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -302,7 +302,7 @@ Figure 11.6: An annotated heatmap produced with the <code>ComplexHeatmap</code> 
 <a href="https://rlbarter.github.io/superheat/">superheat</a> and
 <a href="https://github.com/raivokolde/pheatmap">pheatmap</a>.</p>
 <p>Finally, the <em><a href="https://github.com/talgalili/heatmaply">heatmaply</a></em>,
-<em><a href="https://github.com/rstudio/d3heatmap">d3heatmap</a></em> and <a href="https://ropensci.github.io/iheatmapr/index.html"><code>iheatmapr</code></a>
+<em><a href="https://github.com/rstudio/d3heatmap">d3heatmap</a></em> and <a href="https://ropensci.github.io/iheatmapr/index.html"><em>iheatmapr</em></a>
 packages can be used to generate interactive heatmaps.</p>
 <div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="sec-biovis.html#cb430-1" tabindex="-1"></a><span class="do">## prepare the data</span></span>
 <span id="cb430-2"><a href="sec-biovis.html#cb430-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"pRolocdata"</span>)</span>
@@ -410,10 +410,10 @@ to a <code>UpSetR</code> compatible input and then generate the figure:</p>
 <span id="cb439-2"><a href="sec-biovis.html#cb439-2" tabindex="-1"></a>upset_in <span class="ot">&lt;-</span> <span class="fu">fromList</span>(feat_list)</span>
 <span id="cb439-3"><a href="sec-biovis.html#cb439-3" tabindex="-1"></a><span class="fu">upset</span>(upset_in)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset1-1.png" width="672"></p>
-<p>The following
-<a href="https://twitter.com/ngehlenborg/status/986354574989709312">tweet</a> by
-the author of the package illustrates how Venn and upset diagrams
-relate to each other.</p>
+<!-- The following -->
+<!-- [tweet](https://twitter.com/ngehlenborg/status/986354574989709312) by -->
+<!-- the author of the package illustrates how Venn and upset diagrams -->
+<!-- relate to each other. -->
 <div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="sec-biovis.html#cb440-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in, <span class="at">order.by =</span> <span class="st">"freq"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/upset2-1.png" width="672"></p>
 <div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="sec-biovis.html#cb441-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in, <span class="at">order.by =</span> <span class="st">"degree"</span>)</span></code></pre></div>
@@ -487,7 +487,7 @@ number of intersections (default is 40) become useful.</p>
 <a href="sec-ccl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2024-11-25
+2024-12-08
  using 
 R version 4.4.1 (2024-06-14)
 </p>
