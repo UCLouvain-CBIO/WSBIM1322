@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 6 Introduction to statistical machine learning | Bioinformatics" />
+<meta property="og:type" content="book" />
+
+<meta property="og:description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain." />
+
+
+<meta name="author" content="Laurent Gatto" />
+
+<meta name="date" content="2024-12-09" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
+
+<title>Chapter 6 Introduction to statistical machine learning | Bioinformatics</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+<script>
+function copy_link(id) {
+  var dummy = document.createElement('input'),
+  text = window.location.href.split(/[?#]/)[0] + '#' + id;
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
+  
+  var tooltip = document.getElementById(id + '-tooltip');
+  tooltip.innerHTML = 'Copied!';
+}
+
+function reset_tooltip(id) {
+  var tooltip = document.getElementById(id);
+  tooltip.innerHTML = 'Copy link';
+}
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">Bioinformatics<p><p class="author">Laurent Gatto</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a id="active-page" href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a><ul class="toc-sections">
+<li class="toc"><a href="#hypothesis-testing"> Hypothesis testing</a></li>
+<li class="toc"><a href="#handling-more-data"> Handling more data</a></li>
+<li class="toc"><a href="#whats-an-outlier"> What’s an outlier</a></li>
+<li class="toc"><a href="#the-curse-of-dimensionality"> The curse of dimensionality</a></li>
+<li class="toc"><a href="#machine-learning"> Machine learning</a></li>
+</ul>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="sec-mlintro" class="section level1" number="6">
+<h1>
+<span class="header-section-number">Chapter 6</span> Introduction to statistical machine learning</h1>
+<p>The next chapters will focus on concepts from statistical (hypothesis
+testing in chapter <a href="sec-testing.html#sec-testing">7</a>) and general machine learning
+(chapters <a href="sec-ul.html#sec-ul">9</a>, <a href="sec-dimred.html#sec-dimred">8</a> and <a href="sec-sl.html#sec-sl">10</a>). Before
+diving into the technical details, it is useful to learn (or remind
+ourselves) why these techniques are so incredibly important when
+analysing (i.e. looking to understand) high throughput biomedical
+data. The goals of these chapters is to</p>
+<ul>
+<li>understanding what these techniques do, how to apply them, and their
+respective limitations;</li>
+<li>learn to frame the questions more accurately in the light of
+available analysis techniques;</li>
+<li>be in a position to formalise a research question and define what
+data is needed before generating it;</li>
+<li>to ultimately extracting meaningful results from a dataset.</li>
+</ul>
+<div id="hypothesis-testing" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Hypothesis testing<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('hypothesis-testing')" onmouseout="reset_tooltip('hypothesis-testing-tooltip')"><span class="tooltiptext" id="hypothesis-testing-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Let’s start with the following experiment. Researchers are interested
+in the expression of three genes,
+<a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=A1CF">A1CF</a>,
+<a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=BRCA1">BRCA1</a> and
+<a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=TP53">TP53</a> in the
+absence and presence of a certain drug in a model cell line. The
+expression of these genes is measured four times.</p>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-29"></span>
+<p class="caption marginnote shownote">
+Figure 6.1: Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-29-1.png" alt="Distributions of the expression of the genes A1CF, BRCA1 and TP53 under the control (no drug) and drug at concentrations 1 and 5." width="768">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Make sure you understand the visualisation above.</p>
+<ol style="list-style-type: decimal">
+<li><p>What genes would you call differentially expressed, i.e. that show
+different expressions between any condition.</p></li>
+<li><p>What criteria do you rely on to conclude whether the genes are or
+aren’t differentially expressed?</p></li>
+</ol>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Now imagine if instead of having 3 genes, we had 20000!</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Formalise the experiemental design, i.e. all the variables that define
+what the experiment measures using a table.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-31" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-31', 'sol-start-31')"></span>
+</p>
+<div id="sol-body-31" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="sec-mlintro.html#cb230-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(expd)</span></code></pre></div>
+<table>
+<thead><tr class="header">
+<th align="left">sample</th>
+<th align="left">group</th>
+<th align="left">concentration</th>
+<th align="right">replicate</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">S1</td>
+<td align="left">CTRL</td>
+<td align="left">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">S2</td>
+<td align="left">CTRL</td>
+<td align="left">0</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">S3</td>
+<td align="left">CTRL</td>
+<td align="left">0</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">S4</td>
+<td align="left">CTRL</td>
+<td align="left">0</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">S5</td>
+<td align="left">DRUG</td>
+<td align="left">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">S6</td>
+<td align="left">DRUG</td>
+<td align="left">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">S7</td>
+<td align="left">DRUG</td>
+<td align="left">1</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">S8</td>
+<td align="left">DRUG</td>
+<td align="left">1</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">S9</td>
+<td align="left">DRUG</td>
+<td align="left">5</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">S10</td>
+<td align="left">DRUG</td>
+<td align="left">5</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">S11</td>
+<td align="left">DRUG</td>
+<td align="left">5</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">S12</td>
+<td align="left">DRUG</td>
+<td align="left">5</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Statistical hypothesis testing (chapter <a href="sec-testing.html#sec-testing">7</a>) will help
+us formalise when to call genes differentially expressed.</p>
+</div>
+<div id="handling-more-data" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Handling more data<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('handling-more-data')" onmouseout="reset_tooltip('handling-more-data-tooltip')"><span class="tooltiptext" id="handling-more-data-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>There are many more types of patterns that we would be interested in
+identifying in omics data. Let’s reconsider the linear regression
+model from section <a href="sec-obj.html#sec-lm">3.3</a>. Below is a figure from
+<span class="citation">Majumder, Hofmann, and Cook (<label for="tufte-mn-15" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-15" class="margin-toggle">2013<span class="marginnote">Majumder, Mahbubul, Heike Hofmann, and Dianne Cook. 2013. <span>“Validation of Visual Statistical Inference, Applied to Linear Models.”</span> <em>Journal of the American Statistical Association</em> 108 (503): 942–56. <a href="https://doi.org/10.1080/01621459.2013.808157">https://doi.org/10.1080/01621459.2013.808157</a>.</span>)</span>. Among the 20 scatter plots below, one represents the
+actual data, and 19 are simulations that are based on the real
+data.</p>
+<div class="figure fullwidth">
+<span style="display:block;" id="fig:regsim"></span>
+<img src="figs/uasa_a_808157_o_f0004g.png" alt="One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect ($H_{0}$ is true)." width="250"><p class="caption marginnote shownote">
+Figure 6.2: One of these plots is the plot of the actual data, and the remaining are null plots, produced by simulating data from a null model that assumes no effect (<span class="math inline">\(H_{0}\)</span> is true).
+</p>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Which plot is the most different from the others, in the sense that
+there is the steepest slope?</p></li>
+<li><p>Do you think this is the real data? If it is not, what would you
+conclude as to whether the trend in the real data is relevant or
+not?</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question" id="">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+
+
+<p>Imagine that instead of 20 correlations, we have thousands thereof!
+How would you address that challenge?</p>
+<div class="question" id="">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+
+
+
+<p>An additionnal complication with large data is the appearance of
+spurious positive results, called <strong>false positives</strong>. In the example
+below, we calculate <a href="https://en.m.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearon correlation
+coefficients</a>
+between two vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>:</p>
+<p><span class="math display">\[r_{xy} = \frac{\sum_{i = 1}^{n}(x_{i} - \bar x)(y_{i} - \bar y)}{\sqrt{\sum_{i = 1}^{n}(x_{i} - \bar x)^{2}} \sqrt{\sum_{i = 1}^{n}(y_{i} - \bar y)^{2}}}\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the length of the vector, <span class="math inline">\(x_{i}\)</span> and <span class="math inline">\(y_{i}\)</span> are the <span class="math inline">\(i_{th}\)</span>
+elements of the <span class="math inline">\(x\)</span> and y$ vectors, <span class="math inline">\(\bar x\)</span> and <span class="math inline">\(\bar y\)</span> are the respective means.</p>
+<p>A correlation coefficient ranges between -1 (for anti-correlated
+vectors) to 1 (for perfectly correlated vectors). Non-correlated data
+have a correlation coefficient close to 0.</p>
+<div class="figure">
+<span style="display:block;" id="fig:corfig"></span>
+<p class="caption marginnote shownote">
+Figure 6.3: Example of correlation, anti-correlation and lack thereof.
+</p>
+<img src="WSBIM1322_files/figure-html/corfig-1.png" alt="Example of correlation, anti-correlation and lack thereof." width="768">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Generate two random vectors <code>x</code> and <code>y</code> of length 60 using
+<code>rnorm</code>. Plot them, add a linear regression line, find the slope of
+the regression line, and calculate their correlation coefficient using
+the <code>cor</code> function.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-32" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-32', 'sol-start-32')"></span>
+</p>
+<div id="sol-body-32" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="sec-mlintro.html#cb231-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb231-2"><a href="sec-mlintro.html#cb231-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb231-3"><a href="sec-mlintro.html#cb231-3" tabindex="-1"></a></span>
+<span id="cb231-4"><a href="sec-mlintro.html#cb231-4" tabindex="-1"></a><span class="do">## fit linear model</span></span>
+<span id="cb231-5"><a href="sec-mlintro.html#cb231-5" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb231-6"><a href="sec-mlintro.html#cb231-6" tabindex="-1"></a></span>
+<span id="cb231-7"><a href="sec-mlintro.html#cb231-7" tabindex="-1"></a><span class="do">## slope</span></span>
+<span id="cb231-8"><a href="sec-mlintro.html#cb231-8" tabindex="-1"></a>fit</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Coefficients:
+## (Intercept)            x  
+##     0.14254     -0.01783</code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="sec-mlintro.html#cb233-1" tabindex="-1"></a><span class="do">## correlation</span></span>
+<span id="cb233-2"><a href="sec-mlintro.html#cb233-2" tabindex="-1"></a><span class="fu">cor</span>(x, y)</span></code></pre></div>
+<pre><code>## [1] -0.02063402</code></pre>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="sec-mlintro.html#cb235-1" tabindex="-1"></a><span class="do">## with base graphics</span></span>
+<span id="cb235-2"><a href="sec-mlintro.html#cb235-2" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb235-3"><a href="sec-mlintro.html#cb235-3" tabindex="-1"></a><span class="fu">abline</span>(fit)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/corex1-1.png" width="672"></p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="sec-mlintro.html#cb236-1" tabindex="-1"></a><span class="do">## or with ggplot2</span></span>
+<span id="cb236-2"><a href="sec-mlintro.html#cb236-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x, y),</span>
+<span id="cb236-3"><a href="sec-mlintro.html#cb236-3" tabindex="-1"></a>       <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb236-4"><a href="sec-mlintro.html#cb236-4" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/corex1-2.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Let’s expand the code above and calculate the correlation coefficient
+between hundreds of random vectors and choose the best one (in abolute
+terms) among those. Let’s repeat this procedure 1000 times to obtain
+1000 best correlations (based on <span class="citation">Fan, Han, and Liu (<label for="tufte-mn-16" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-16" class="margin-toggle">2014<span class="marginnote">Fan, Jianqing, Fang Han, and Han Liu. 2014. <span>“<span class="nocase">Challenges of Big Data analysis</span>.”</span> <em>National Science Review</em> 1 (2): 293–314. <a href="https://doi.org/10.1093/nsr/nwt032">https://doi.org/10.1093/nsr/nwt032</a>.</span>)</span>). The figure below shows
+the distribution of these 1000 best correlations when comparing
+vectors of length 800 or 6400. We see that with more (random) data, we
+increase that the risk of obtaining spurious correlations.</p>
+<div class="figure">
+<span style="display:block;" id="fig:spurcor"></span>
+<p class="caption marginnote shownote">
+Figure 6.4: Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions.
+</p>
+<img src="figs/spurcor.png" alt="Illustration of spurious correlation. Distribution of the maximum absolute sample correlation coefficients between a vector of length and 800 of 6400 others. Based on 1000 repetitions." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Calculate 100 correlation coefficients for pairs of random vectors or
+length 10. What are the mean, maximum and minumum of your simulated
+coefficients? Out of those 100 coefficients, how many would you
+consider of interest if you didn’t know they were produced by random
+data?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-33" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-33', 'sol-start-33')"></span>
+</p>
+<div id="sol-body-33" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="sec-mlintro.html#cb237-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb237-2"><a href="sec-mlintro.html#cb237-2" tabindex="-1"></a>rs <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">100</span>, <span class="fu">cor</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>)))</span>
+<span id="cb237-3"><a href="sec-mlintro.html#cb237-3" tabindex="-1"></a><span class="fu">summary</span>(rs)</span></code></pre></div>
+<pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+## -0.8194367 -0.2280550 -0.0009475  0.0055000  0.2118503  0.7977295</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="sec-mlintro.html#cb239-1" tabindex="-1"></a><span class="do">## Assuming a totally arbitrary value of 0.75, we would get</span></span>
+<span id="cb239-2"><a href="sec-mlintro.html#cb239-2" tabindex="-1"></a>rs[<span class="fu">abs</span>(rs) <span class="sc">&gt;</span> .<span class="dv">75</span>]</span></code></pre></div>
+<pre><code>## [1]  0.7941876  0.7977295 -0.8194367</code></pre>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="sec-mlintro.html#cb241-1" tabindex="-1"></a><span class="fu">hist</span>(rs)</span>
+<span id="cb241-2"><a href="sec-mlintro.html#cb241-2" tabindex="-1"></a><span class="fu">rug</span>(rs)</span>
+<span id="cb241-3"><a href="sec-mlintro.html#cb241-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> rs[<span class="fu">abs</span>(rs) <span class="sc">&gt;</span> .<span class="dv">75</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/corex2-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="whats-an-outlier" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> What’s an outlier<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('whats-an-outlier')" onmouseout="reset_tooltip('whats-an-outlier-tooltip')"><span class="tooltiptext" id="whats-an-outlier-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>We are often interested in identifying outliers, i.e. points that are
+different from the others. One way to define <em>different</em> is by
+measuring distances between all the samples, or each sample to a
+virtual <em>average sample</em>. Let’s try this ourselves for a dataset of 5
+sample that have each been characterised by measuring the expression
+of genes <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="sec-mlintro.html#cb242-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
+<span id="cb242-2"><a href="sec-mlintro.html#cb242-2" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb242-3"><a href="sec-mlintro.html#cb242-3" tabindex="-1"></a>                      <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
+<span id="cb242-4"><a href="sec-mlintro.html#cb242-4" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb242-5"><a href="sec-mlintro.html#cb242-5" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dist0"></span>
+<p class="caption marginnote shownote">
+Figure 6.5: A simulated dataset composed of 5 samples.
+</p>
+<img src="WSBIM1322_files/figure-html/dist0-1.png" alt="A simulated dataset composed of 5 samples." width="672">
+</div>
+<p>Visually, we could consider sample 4 to be an outlier. Let’s start by
+calculating all pairwise <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean
+distances</a> with the
+<code>dist</code>.</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="sec-mlintro.html#cb243-1" tabindex="-1"></a><span class="fu">dist</span>(samples)</span></code></pre></div>
+<pre><code>##           1         2         3         4
+## 2 1.7327389                              
+## 3 1.2738181 0.4876129                    
+## 4 2.7612729 2.0466051 1.9916782          
+## 5 0.7531106 1.0161181 0.5350696 2.1793910</code></pre>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li>Familiarise yourself with the Euclidean distance.</li>
+<li>What other distances can be calculated with the <code>dist</code> function?</li>
+<li>What can you say about our assumption that sample 4 is an outlier
+given the distance matrix above?</li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>An alternative approach would be to calculate the distance of each
+sample to an average samples, represented by a red point on the figure
+below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:avgsample"></span>
+<p class="caption marginnote shownote">
+Figure 6.6: The average sample is shown as a red point among the 5 samples simulated above.
+</p>
+<img src="WSBIM1322_files/figure-html/avgsample-1.png" alt="The average sample is shown as a red point among the 5 samples simulated above." width="672">
+</div>
+<ul>
+<li>Compute such an average sample and visualise it as suggested above.</li>
+<li>Calculate the distance between that average sample and each of the 5
+real data points.</li>
+<li>Verify that sample 4 is still an outlier.</li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-34" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-34', 'sol-start-34')"></span>
+</p>
+<div id="sol-body-34" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="sec-mlintro.html#cb245-1" tabindex="-1"></a>avg_sample <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(samples)</span>
+<span id="cb245-2"><a href="sec-mlintro.html#cb245-2" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb245-3"><a href="sec-mlintro.html#cb245-3" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb245-4"><a href="sec-mlintro.html#cb245-4" tabindex="-1"></a><span class="fu">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/dist2-1.png" width="672"></p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="sec-mlintro.html#cb246-1" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">rbind</span>(samples, avg_sample))</span>
+<span id="cb246-2"><a href="sec-mlintro.html#cb246-2" tabindex="-1"></a><span class="do">## convert the object of `dist` to a matrix that we can subset easily</span></span>
+<span id="cb246-3"><a href="sec-mlintro.html#cb246-3" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dists)</span>
+<span id="cb246-4"><a href="sec-mlintro.html#cb246-4" tabindex="-1"></a>dists[<span class="dv">6</span>, ]</span></code></pre></div>
+<pre><code>##         1         2         3         4         5         6 
+## 1.2133510 0.7753119 0.3627020 1.7363209 0.4858024 0.0000000</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="sec-mlintro.html#cb248-1" tabindex="-1"></a><span class="fu">which.max</span>(dists[<span class="dv">6</span>, ])</span></code></pre></div>
+<pre><code>## 4 
+## 4</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>The concept of outlier is very intuitive, but becomes murky when the
+number of dimensions becomes very high.</p>
+</div>
+<div id="the-curse-of-dimensionality" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> The curse of dimensionality<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('the-curse-of-dimensionality')" onmouseout="reset_tooltip('the-curse-of-dimensionality-tooltip')"><span class="tooltiptext" id="the-curse-of-dimensionality-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>There is one very well documented feature of high dimension data,
+known as the curse of dimensionality. When the numbers of dimensions
+increase, data become increasingly sparse, the definition of distance
+or density becomes difficult to define and more and more points become
+outliers.</p>
+<p>Below, we demonstrate how the number of outliers increases with the
+number of dimenstion (<a href="https://lgatto.github.io/curse-dimensionality/">source</a>):</p>
+<blockquote>
+<p>The simulation generates N points in hypercubes of d dimensions and
+counts how many of those points are outliers, defined as being in
+the 1% outer shell of the space. In 1 dimension, we have 1% of the
+uniformely distributed points that are outliers. In 50 dimension,
+there are already 60% of the points that are outliers; in 100
+dimensions, almost 90% of the points are outliers.</p>
+</blockquote>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-mlintro.html#cb250-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">200</span></span>
+<span id="cb250-2"><a href="sec-mlintro.html#cb250-2" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb250-3"><a href="sec-mlintro.html#cb250-3" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">lapply</span>(d, <span class="cf">function</span>(i) <span class="fu">replicate</span>(i, <span class="fu">runif</span>(N)))</span>
+<span id="cb250-4"><a href="sec-mlintro.html#cb250-4" tabindex="-1"></a>nout <span class="ot">&lt;-</span> <span class="cf">function</span>(m) <span class="fu">mean</span>(<span class="fu">apply</span>(m, <span class="dv">1</span>, <span class="cf">function</span>(i) <span class="fu">any</span>(i <span class="sc">&lt;</span> <span class="fl">0.01</span> <span class="sc">|</span> i <span class="sc">&gt;</span> <span class="fl">0.99</span>)))</span>
+<span id="cb250-5"><a href="sec-mlintro.html#cb250-5" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">sapply</span>(dat, nout)</span>
+<span id="cb250-6"><a href="sec-mlintro.html#cb250-6" tabindex="-1"></a><span class="fu">plot</span>(res, <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb250-7"><a href="sec-mlintro.html#cb250-7" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of dimensions"</span>,</span>
+<span id="cb250-8"><a href="sec-mlintro.html#cb250-8" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of 1% outliers"</span>,</span>
+<span id="cb250-9"><a href="sec-mlintro.html#cb250-9" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Curse of Dimensionality"</span>)</span>
+<span id="cb250-10"><a href="sec-mlintro.html#cb250-10" tabindex="-1"></a><span class="fu">grid</span>()</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/curse-1.png" width="672"></p>
+</div>
+<div id="machine-learning" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Machine learning<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('machine-learning')" onmouseout="reset_tooltip('machine-learning-tooltip')"><span class="tooltiptext" id="machine-learning-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>The dataset below is composed of 100 data points (samples). For each
+data point, we have measured values x and y (two genes). We have a
+dataset of 100 points in 2 dimensions.</p>
+<div class="figure">
+<span style="display:block;" id="fig:unlabex"></span>
+<p class="caption marginnote shownote">
+Figure 6.7: A dataset of 100 unlabelled points measured along two dimensions.
+</p>
+<img src="WSBIM1322_files/figure-html/unlabex-1.png" alt="A dataset of 100 unlabelled points measured along two dimensions." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li>How many groups do you think there are among these 100 observations?</li>
+<li>How would you intuitively define them?</li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Now imagine that we know about number of group (which would be called
+classes in this setting) and the label of each point. In the figure
+below, we have two classes, red and black, and we know exactly which
+points below to the red class and the black class.</p>
+<div class="figure">
+<span style="display:block;" id="fig:labex"></span>
+<p class="caption marginnote shownote">
+Figure 6.8: A dataset of 100 labelled points measured along two dimensions.
+</p>
+<img src="WSBIM1322_files/figure-html/labex-1.png" alt="A dataset of 100 labelled points measured along two dimensions." width="672">
+</div>
+<p>We now obtain data for three new points (samples), annotated as 1, 2,
+and 3 below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:labex2"></span>
+<p class="caption marginnote shownote">
+Figure 6.9: A dataset of 100 labelled and three new, unlalled, points.
+</p>
+<img src="WSBIM1322_files/figure-html/labex2-1.png" alt="A dataset of 100 labelled and three new, unlalled, points." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>To what class (red or black) should points 1, 2, and 3 be assigned to?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>The examples presented above fall squarely into the discipline of
+machine learning. The first example is a case of <strong>unsupervised
+learning</strong>. In unsupervised learning we aim at find patterns in a
+dataset without the help of any additional information or
+labels. Typical applications of unsupervised learning is clustering
+(as in our first example and chapter <a href="sec-ul.html#sec-ul">9</a>) or dimensionality
+reduction (chapter <a href="sec-dimred.html#sec-dimred">8</a>)</p>
+<p>In our second example, we were given labels for each observation. This
+is an example of <strong>supervised learning</strong>, that aims at learning inputs
+and mapping them to certain target outputs with the help of known
+labels. Example of supervised learning are classification as in the
+example above (see chapter <a href="sec-sl.html#sec-sl">10</a>) and regression, where the
+target isn’t a category, but a value.</p>
+<p>There are additional types of machine learning, such as
+semi-supervised learning (combining the two approaches above),
+self-supervised learning (supervised without any labels, i.e. where
+they need to be identified automatically), reinforcement learning
+(automatic tuning of the learning when new information is received),
+but these are beyond the scope of this course.</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="sec-norm.html"><button class="btn btn-default">Previous</button></a>
+<a href="sec-testing.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2024-12-09
+ using 
+R version 4.4.1 (2024-06-14)
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

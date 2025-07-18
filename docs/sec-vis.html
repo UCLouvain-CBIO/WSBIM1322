@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 2 Data visualisation | Bioinformatics" />
+<meta property="og:type" content="book" />
+
+<meta property="og:description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain." />
+
+
+<meta name="author" content="Laurent Gatto" />
+
+<meta name="date" content="2024-12-09" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
+
+<title>Chapter 2 Data visualisation | Bioinformatics</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+<script>
+function copy_link(id) {
+  var dummy = document.createElement('input'),
+  text = window.location.href.split(/[?#]/)[0] + '#' + id;
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
+  
+  var tooltip = document.getElementById(id + '-tooltip');
+  tooltip.innerHTML = 'Copied!';
+}
+
+function reset_tooltip(id) {
+  var tooltip = document.getElementById(id);
+  tooltip.innerHTML = 'Copy link';
+}
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">Bioinformatics<p><p class="author">Laurent Gatto</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a id="active-page" href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a><ul class="toc-sections">
+<li class="toc"><a href="#introduction"> Introduction</a></li>
+<li class="toc"><a href="#base-plotting"> Base plotting</a></li>
+<li class="toc"><a href="#the-ggplot2-package"> The <code>ggplot2</code> package</a></li>
+<li class="toc"><a href="#visualising-1d-data"> Visualising 1D data</a></li>
+<li class="toc"><a href="#number-of-modes"> Number of modes</a></li>
+<li class="toc"><a href="#visualising-2d-data"> Visualising 2D data</a></li>
+<li class="toc"><a href="#visualising-data-along-more-dimensions"> Visualising data along more dimensions</a></li>
+<li class="toc"><a href="#interactive-visualisation"> Interactive visualisation</a></li>
+<li class="toc"><a href="#additional-exercises-1"> Additional exercises</a></li>
+</ul>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="sec-vis" class="section level1" number="2">
+<h1>
+<span class="header-section-number">Chapter 2</span> Data visualisation</h1>
+<p>This chapter is based on Chapter 3 <a href="https://www-huber.embl.de/msmb/Chap-Graphics.html"><em>High Quality Graphics in
+R</em></a> of the <em>Modern
+Statistics for Modern Biology</em> book <span class="citation">(<label for="tufte-mn-9" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-9" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>.</p>
+<div id="introduction" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Introduction<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('introduction')" onmouseout="reset_tooltip('introduction-tooltip')"><span class="tooltiptext" id="introduction-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>The <strong>goal</strong> of data visualisation is to</p>
+<ul>
+<li>interactively explore and understand data, i.e. <em>exploratory data
+analysis</em>;</li>
+<li>to present and <em>communicate results</em>, whether as a preliminary
+analysis or final results.</li>
+</ul>
+<p>Our <strong>learning objectives</strong> are</p>
+<ul>
+<li>Familiarise ourselves with plotting in R using base graphics and
+<code>ggplot2</code>;</li>
+<li>Understand the concepts behind the grammar of graphics and <code>ggplot2</code>;</li>
+<li>Learn how to visualise data along 1, 2 or more dimensions;</li>
+<li>Learn about <code>plotly</code>, one package for producing interactive
+visualisations.</li>
+</ul>
+<p>The difference between this chapter, and the <a href="ttps://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html"><em>Data
+Visualisation</em></a>
+of the introductory WSBIM1207 course is that here we focus on
+understanding and communicating data through visualisation, rather
+than on the syntax of the plotting packages. Here are a couple couple
+of <a href="./horror.pdf"><em>visualisation horror picture show</em></a> from a lecture
+by Wolfgang Huber to illustrate what not to do.</p>
+<p>Let’s use the famous <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet"><em>Anscombe’s
+quartet</em></a> data as
+a motivating example. This data is composed of 4 pairs of
+values, <span class="math inline">\((x_1, y_1)\)</span> to <span class="math inline">\((x_4, y_4)\)</span>:</p>
+<table>
+<thead><tr class="header">
+<th align="right">x1</th>
+<th align="right">x2</th>
+<th align="right">x3</th>
+<th align="right">x4</th>
+<th align="right">y1</th>
+<th align="right">y2</th>
+<th align="right">y3</th>
+<th align="right">y4</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">8</td>
+<td align="right">8.04</td>
+<td align="right">9.14</td>
+<td align="right">7.46</td>
+<td align="right">6.58</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">8</td>
+<td align="right">8</td>
+<td align="right">8</td>
+<td align="right">6.95</td>
+<td align="right">8.14</td>
+<td align="right">6.77</td>
+<td align="right">5.76</td>
+</tr>
+<tr class="odd">
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="right">8</td>
+<td align="right">7.58</td>
+<td align="right">8.74</td>
+<td align="right">12.74</td>
+<td align="right">7.71</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="right">8</td>
+<td align="right">8.81</td>
+<td align="right">8.77</td>
+<td align="right">7.11</td>
+<td align="right">8.84</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="right">8</td>
+<td align="right">8.33</td>
+<td align="right">9.26</td>
+<td align="right">7.81</td>
+<td align="right">8.47</td>
+</tr>
+<tr class="even">
+<td align="right">14</td>
+<td align="right">14</td>
+<td align="right">14</td>
+<td align="right">8</td>
+<td align="right">9.96</td>
+<td align="right">8.10</td>
+<td align="right">8.84</td>
+<td align="right">7.04</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">8</td>
+<td align="right">7.24</td>
+<td align="right">6.13</td>
+<td align="right">6.08</td>
+<td align="right">5.25</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">19</td>
+<td align="right">4.26</td>
+<td align="right">3.10</td>
+<td align="right">5.39</td>
+<td align="right">12.50</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">12</td>
+<td align="right">12</td>
+<td align="right">8</td>
+<td align="right">10.84</td>
+<td align="right">9.13</td>
+<td align="right">8.15</td>
+<td align="right">5.56</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">4.82</td>
+<td align="right">7.26</td>
+<td align="right">6.42</td>
+<td align="right">7.91</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">8</td>
+<td align="right">5.68</td>
+<td align="right">4.74</td>
+<td align="right">5.73</td>
+<td align="right">6.89</td>
+</tr>
+</tbody>
+</table>
+<p>Each of these <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> sets have the same variance, mean and
+correlation:</p>
+<table>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+<th align="right">4</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">var(x)</td>
+<td align="right">11.0000000</td>
+<td align="right">11.0000000</td>
+<td align="right">11.0000000</td>
+<td align="right">11.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">mean(x)</td>
+<td align="right">9.0000000</td>
+<td align="right">9.0000000</td>
+<td align="right">9.0000000</td>
+<td align="right">9.0000000</td>
+</tr>
+<tr class="odd">
+<td align="left">var(y)</td>
+<td align="right">4.1272691</td>
+<td align="right">4.1276291</td>
+<td align="right">4.1226200</td>
+<td align="right">4.1232491</td>
+</tr>
+<tr class="even">
+<td align="left">mean(y)</td>
+<td align="right">7.5009091</td>
+<td align="right">7.5009091</td>
+<td align="right">7.5000000</td>
+<td align="right">7.5009091</td>
+</tr>
+<tr class="odd">
+<td align="left">cor(x,y)</td>
+<td align="right">0.8164205</td>
+<td align="right">0.8162365</td>
+<td align="right">0.8162867</td>
+<td align="right">0.8165214</td>
+</tr>
+</tbody>
+</table>
+<p>But…</p>
+<p>While the <em>residuals</em> of the linear regression (see chapter
+<a href="sec-obj.html#sec-obj">3</a>) clearly indicate fundamental differences in these
+data, the most simple and straightforward approach in <em>visualisation</em>
+is to highlight the fundamental differences in the datasets.</p>
+<p><img src="WSBIM1322_files/figure-html/anscombefig-1.png" width="672"></p>
+<p>See also another, more recent example:
+<a href="https://www.autodeskresearch.com/publications/samestats">The Datasaurus Dozen dataset</a>.</p>
+<p><img src="https://www.research.autodesk.com/app/uploads/2023/03/AllDinos-2.png"></p>
+<p>Throughout this course we will focus on producing visualisations that
+will enable <strong>understanding important features</strong> of biomolecular data
+or the effect of their transformation and analyses. With this in mind,
+the beauty of the visualisations we will produce won’t be assessed by
+how visually attractive the figures are, but how they advance our
+understanding the data. In the process of data exploration and data
+analysis, we want to be able to quickly generate and interpret
+figures. It is of course important to polish the graphics to make them
+visually appealing and improve communication with the audience, once a
+useful figure has been chosen as a means of communication.</p>
+<p>An important aspect of data visualisation is data <strong>manipulation</strong>,
+transformation and the format of the data: as seen in
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html">WSBIM1207</a>,
+its scale (see below) and normalisation of the data (see chapter
+<a href="sec-norm.html#sec-norm">5</a>).</p>
+<p>A last feature of data that is intimately associated with its
+manipulation and visualisation is its <strong>structure</strong>: long and wide
+dataframes (as introduced in
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html">WSBIM1207</a>
+or dedicated objects (see chapter <a href="sec-obj.html#sec-obj">3</a>). Some visualisations
+will be much easier when the data is formatted in a certain way.</p>
+</div>
+<div id="base-plotting" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Base plotting<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('base-plotting')" onmouseout="reset_tooltip('base-plotting-tooltip')"><span class="tooltiptext" id="base-plotting-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>The default graphics system that comes with R, often called base R
+graphics is simple and fast. It is based on the painter’s model or
+canvas, where different output are directly overlaid on top of each
+other.</p>
+<p>Below, we display the relation between the optical density of the
+deoxyribonuclease (DNase) protein as measure by an enzyme-linked
+immunosorbent assay (ELISA) assay for all observations.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="sec-vis.html#cb5-1" tabindex="-1"></a><span class="fu">head</span>(DNase)</span></code></pre></div>
+<pre><code>##   Run       conc density
+## 1   1 0.04882812   0.017
+## 2   1 0.04882812   0.018
+## 3   1 0.19531250   0.121
+## 4   1 0.19531250   0.124
+## 5   1 0.39062500   0.206
+## 6   1 0.39062500   0.215</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="sec-vis.html#cb7-1" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>conc, DNase<span class="sc">$</span>density)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dnase"></span>
+<p class="caption marginnote shownote">
+Figure 2.1: The default base <code>plot</code> function on the <code>DNase</code> data.
+</p>
+<img src="WSBIM1322_files/figure-html/dnase-1.png" alt="The default base `plot` function on the `DNase` data." width="672">
+</div>
+<p>We can add some features on the plot, such vertical dotted lines for
+all observed observations and customise the look and feel of the plot
+by setting specific arguments to the <code>plot</code> function.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="sec-vis.html#cb8-1" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>conc, DNase<span class="sc">$</span>density,</span>
+<span id="cb8-2"><a href="sec-vis.html#cb8-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"DNase concentration (ng/ml)"</span>,</span>
+<span id="cb8-3"><a href="sec-vis.html#cb8-3" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Optical density"</span>,</span>
+<span id="cb8-4"><a href="sec-vis.html#cb8-4" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">1</span>,</span>
+<span id="cb8-5"><a href="sec-vis.html#cb8-5" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb8-6"><a href="sec-vis.html#cb8-6" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">unique</span>(DNase<span class="sc">$</span>conc), <span class="at">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dnase2"></span>
+<p class="caption marginnote shownote">
+Figure 2.2: Customising a base figure using function arguments and overlaying new graphical features.
+</p>
+<img src="WSBIM1322_files/figure-html/dnase2-1.png" alt="Customising a base figure using function arguments and overlaying new graphical features." width="672">
+</div>
+<p>If we wanted to change anything to the figures, we would need to
+repeat all the commands and modify accordingly. Any additional command
+would be added to the existing canvas.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>How would you produce a figure that differentiates the different runs
+using base graphics?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-1" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-1', 'sol-start-1')"></span>
+</p>
+<div id="sol-body-1" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="sec-vis.html#cb9-1" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>conc, DNase<span class="sc">$</span>density, <span class="at">col =</span> DNase<span class="sc">$</span>Run)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/colbyrun-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Use the <code>hist</code> and <code>boxplot</code> functions to produce a
+histogram of all optical densities and a boxplot of the densities
+split by run.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-2" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-2', 'sol-start-2')"></span>
+</p>
+<div id="sol-body-2" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sec-vis.html#cb10-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb10-2"><a href="sec-vis.html#cb10-2" tabindex="-1"></a><span class="fu">hist</span>(DNase<span class="sc">$</span>density)</span>
+<span id="cb10-3"><a href="sec-vis.html#cb10-3" tabindex="-1"></a><span class="fu">boxplot</span>(density <span class="sc">~</span> Run, DNase)</span></code></pre></div>
+<div class="figure">
+<p class="caption marginnote shownote">
+(#fig:hist_boxplot)The base <code>hist</code> and <code>boxplot</code> functions, the latter using the formula interface.
+</p>
+<img src="WSBIM1322_files/figure-html/hist_boxplot-1.png" alt="The base `hist` and `boxplot` functions, the latter using the formula interface." width="1344">
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>The base graphics function are very effective to quickly produce out
+of the box figures. However, there is no global overview and
+parametrisation of the visualisation. The layout decisions have to be
+made up upfront (and if not adequate, the figure needs to be redrawn)
+and every aspect of the figure is customised locally as function
+arguments.</p>
+<p>More generally, base graphics functions will work with various inputs:
+above we have worked with a <code>data.frame</code>, vectors and a formula. There
+is no unified type of data across all functions which makes it
+efficient for some types of data (if they match), but also very
+heterogeneous in terms of interface, leading to a lot of customisation
+code.</p>
+<p>Finally, defaults, and colours in particular, are poorly chosen.</p>
+</div>
+<div id="the-ggplot2-package" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> The <code>ggplot2</code> package<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('the-ggplot2-package')" onmouseout="reset_tooltip('the-ggplot2-package-tooltip')"><span class="tooltiptext" id="the-ggplot2-package-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p><strong><code>ggplot2</code></strong> is a plotting package that makes it simple to create
+complex plots from data in a data frame. It provides a more
+programmatic interface for specifying what variables to plot, how they
+are displayed, and general visual properties. The theoretical
+foundation that supports the <code>ggplot2</code> is the <em>Grammar of
+Graphics</em><label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> Wilkinson, Leland. 2005. The Grammar of Graphics (Statistics
+and Computing). Berlin, Heidelberg: Springer-Verlag.</span>. Instead of producing the figure, the user defines and
+assembles the visual components into an object that is the
+displayed. There is a book about ggplot2<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> Wickham, Hadley. 2016. ggplot2: Elegant Graphics for Data
+Analysis. Springer-Verlag New York.</span> that provides a good
+overview, but it is outdated. The ggplot2 web page
+(<a href="https://ggplot2.tidyverse.org" class="uri">https://ggplot2.tidyverse.org</a>) provides ample documentation.</p>
+<p>To build a ggplot, we will use the following basic template that can
+be used for different types of plots:</p>
+<pre><code>ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) +  &lt;GEOM_FUNCTION&gt;()</code></pre>
+<p>We need first to load the <code>ggplot2</code> package:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="sec-vis.html#cb12-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span></code></pre></div>
+<ul>
+<li>use the <code>ggplot()</code> function and bind the plot to a specific data frame using the
+<code>data</code> argument</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sec-vis.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> DNase)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:gg0"></span>
+<p class="caption marginnote shownote">
+Figure 2.3: We have only specified the data, and there’s nothing to display yet.
+</p>
+<img src="WSBIM1322_files/figure-html/gg0-1.png" alt="We have only specified the data, and there's nothing to display yet." width="672">
+</div>
+<ul>
+<li>define a mapping (using the aesthetic (<code>aes</code>) function), by
+selecting the variables to be plotted and specifying how to present
+them in the graph, e.g. as x/y positions or characteristics such as
+size, shape, colour, etc.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sec-vis.html#cb14-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> DNase,</span>
+<span id="cb14-2"><a href="sec-vis.html#cb14-2" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> conc, <span class="at">y =</span> density))</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:gg1"></span>
+<p class="caption marginnote shownote">
+Figure 2.4: <code>ggplot2</code> can now generate the axes, ticks and ranges based on the data.
+</p>
+<img src="WSBIM1322_files/figure-html/gg1-1.png" alt="`ggplot2` can now generate the axes, ticks and ranges based on the data." width="672">
+</div>
+<ul>
+<li>add <em>geoms</em> – graphical representations of the data in the plot
+(points, lines, bars). To add a geom to the plot use the <code>+</code>
+operator. Because we have two continuous variables, let’s use
+<code>geom_point()</code> first:</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="sec-vis.html#cb15-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> DNase,</span>
+<span id="cb15-2"><a href="sec-vis.html#cb15-2" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> conc, <span class="at">y =</span> density)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="sec-vis.html#cb15-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:gg2"></span>
+<p class="caption marginnote shownote">
+Figure 2.5: Final figures with rendering of the data as a scatter plot.
+</p>
+<img src="WSBIM1322_files/figure-html/gg2-1.png" alt="Final figures with rendering of the data as a scatter plot." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Compare the <code>ggplot2</code> and base graphics version of the density
+vs. concentration plot. Which one do you prefer, and why?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>It is possible to store the output of the <code>ggplot</code> function into a
+variable that can be visualised by either typing its name in the
+console or explicitly printing it (like any other variable).</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sec-vis.html#cb16-1" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> DNase,</span>
+<span id="cb16-2"><a href="sec-vis.html#cb16-2" tabindex="-1"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> conc, <span class="at">y =</span> density)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="sec-vis.html#cb16-3" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span>
+<span id="cb16-4"><a href="sec-vis.html#cb16-4" tabindex="-1"></a><span class="fu">print</span>(gg)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:ggobj"></span>
+<p class="caption marginnote shownote">
+Figure 2.6: Saving and printing an object.
+</p>
+<img src="WSBIM1322_files/figure-html/ggobj-1.png" alt="Saving and printing an object." width="672">
+</div>
+<p>Let’s immediately customise this visualisation to</p>
+<ul>
+<li><p>highlight how to re-use the <code>gg</code> object without repeating the
+plotting code and</p></li>
+<li><p>how we can add additional (identical or different) <em>geoms</em> to a
+plot.</p></li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="sec-vis.html#cb17-1" tabindex="-1"></a>gg <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> Run))</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:gg3"></span>
+<p class="caption marginnote shownote">
+Figure 2.7: Adding another <code>geom_point</code> with its own (local) aesthetics.
+</p>
+<img src="WSBIM1322_files/figure-html/gg3-1.png" alt="Adding another `geom_point` with its own (local) aesthetics. " width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>What do you think of the colours used to differentiate the different
+runs above?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-3" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-3', 'sol-start-3')"></span>
+</p>
+<div id="sol-body-3" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sec-vis.html#cb18-1" tabindex="-1"></a>gg <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">as.character</span>(Run)))</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:ggex"></span>
+<p class="caption marginnote shownote">
+Figure 2.8: Setting the Run to a category by coercing it to a character, rather than a numeric.
+</p>
+<img src="WSBIM1322_files/figure-html/ggex-1.png" alt="Setting the Run to a category by coercing it to a character, rather than a numeric." width="672">
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>Finally, we can model easily model and visualise the relation relation
+between concentration and optical density using a <em>smoothing geom</em>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="sec-vis.html#cb19-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> DNase,</span>
+<span id="cb19-2"><a href="sec-vis.html#cb19-2" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> conc,</span>
+<span id="cb19-3"><a href="sec-vis.html#cb19-3" tabindex="-1"></a>                     <span class="at">y =</span> density)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="sec-vis.html#cb19-4" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">as.character</span>(Run))) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="sec-vis.html#cb19-5" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = 'y ~ x'</code></pre>
+<div class="figure">
+<span style="display:block;" id="fig:dnasmooth"></span>
+<p class="caption marginnote shownote">
+Figure 2.9: Modelling the relation between concentration and optical density.
+</p>
+<img src="WSBIM1322_files/figure-html/dnasmooth-1.png" alt="Modelling the relation between concentration and optical density." width="672">
+</div>
+<!-- Below is an example of more elaborated composition, overlaying points -->
+<!-- and a non-linear *loess* regression. But first, let's load a object -->
+<!-- containing microarray data from the `hiiragi2013df1` data. The data is -->
+<!-- originally available from the -->
+<!-- [`Hiiragi2013`](http://bioconductor.org/packages/release/data/experiment/html/Hiiragi2013.html) -->
+<!-- package and describes the cell-to-cell expression variability followed -->
+<!-- by signal reinforcement progressively segregates early mouse lineages -->
+<!-- [@Ohnishi:2014]. -->
+<!-- ```{r gg4, fig.cap = "Modelling the relation between the expression of X1426642_at and X1418765_at."} -->
+<!-- library("rWSBIM1322") -->
+<!-- data(hiiragi2013df1) -->
+<!-- ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at)) + -->
+<!--     geom_point(shape = 1) + -->
+<!--     geom_smooth(method = "loess") -->
+<!-- ``` -->
+<!-- And, adding colours representing the different samples -->
+<!-- ```{r gg5, fig.cap = "Modelling the relation between the expression of X1426642_at and X1418765_at and annotating samples."} -->
+<!-- ggplot(hiiragi2013df1, aes(x = X1426642_at, y = X1418765_at))  + -->
+<!--   geom_point(aes(color = sampleColour), shape = 19) + -->
+<!--   geom_smooth(method = "loess") -->
+<!-- ``` -->
+</div>
+<div id="visualising-1d-data" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Visualising 1D data<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('visualising-1d-data')" onmouseout="reset_tooltip('visualising-1d-data-tooltip')"><span class="tooltiptext" id="visualising-1d-data-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Let’s start by exploring some 1 dimensional visualisation. This is
+very relevant for omics data such as transcriptomics or quantitative
+proteomics, when contrasting the expression values across multiple
+samples.</p>
+<p>We will be using data from the
+<a href="http://bioconductor.org/packages/release/data/experiment/html/Hiiragi2013.html"><code>Hiiragi2013</code></a>
+package and describes the cell-to-cell expression variability followed
+by signal reinforcement progressively segregates early mouse lineages
+<span class="citation">(<label for="tufte-mn-10" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-10" class="margin-toggle">Ohnishi et al. 2014<span class="marginnote">Ohnishi, Y, W Huber, A Tsumura, M Kang, P Xenopoulos, K Kurimoto, A K Oleś, et al. 2014. <span>“Cell-to-Cell Expression Variability Followed by Signal Reinforcement Progressively Segregates Early Mouse Lineages.”</span> <em>Nat Cell Biol</em> 16 (1): 27–37. <a href="https://doi.org/10.1038/ncb2881">https://doi.org/10.1038/ncb2881</a>.</span>)</span>.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="sec-vis.html#cb21-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb21-2"><a href="sec-vis.html#cb21-2" tabindex="-1"></a><span class="fu">data</span>(hiiragi2013df1)</span>
+<span id="cb21-3"><a href="sec-vis.html#cb21-3" tabindex="-1"></a><span class="fu">head</span>(hiiragi2013df1)</span></code></pre></div>
+<pre><code>##         X1426642_at X1418765_at X1420085_at X1418863_at X1425463_at X1416967_at
+## 1 E3.25    6.608374    11.95630    3.027715    4.843137    5.500618    1.731217
+## 2 E3.25    7.385253     9.23306    9.293016    5.530016    6.160900    9.697038
+## 3 E3.25    5.683255    11.24337    2.940142    4.418059    4.584961    4.161240
+## 4 E3.25    6.394760    10.81817    9.715243    5.982314    4.753439    9.540123
+## 5 E3.25    7.874155    10.09790    8.924228    4.923580    4.629728    8.705340
+## 6 E3.25    6.104932    10.39018   11.325952    4.068520    4.165692    8.696228
+##         File.name Embryonic.day Total.number.of.cells lineage genotype
+## 1 E3.25  1_C32_IN         E3.25                    32               WT
+## 2 E3.25  2_C32_IN         E3.25                    32               WT
+## 3 E3.25  3_C32_IN         E3.25                    32               WT
+## 4 E3.25  4_C32_IN         E3.25                    32               WT
+## 5 E3.25  5_C32_IN         E3.25                    32               WT
+## 6 E3.25  6_C32_IN         E3.25                    32               WT
+##           ScanDate sampleGroup sampleColour
+## 1 E3.25 2011-03-16       E3.25      #CAB2D6
+## 2 E3.25 2011-03-16       E3.25      #CAB2D6
+## 3 E3.25 2011-03-16       E3.25      #CAB2D6
+## 4 E3.25 2011-03-16       E3.25      #CAB2D6
+## 5 E3.25 2011-03-16       E3.25      #CAB2D6
+## 6 E3.25 2011-03-16       E3.25      #CAB2D6</code></pre>
+<p>First, we convert a microarray gene expression data to a data.frame,
+fit for some <code>ggplot2</code> visualisation, focusing on genes Fgf4 (probeset
+<code>X1420085_at</code>), Gata4 (<code>X1418863_at</code>), Gata6 (<code>X1425463_at</code>) and Sox2
+(<code>X1416967_at</code>).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="sec-vis.html#cb23-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb23-2"><a href="sec-vis.html#cb23-2" tabindex="-1"></a>genes  <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(hiiragi2013df1,</span>
+<span id="cb23-3"><a href="sec-vis.html#cb23-3" tabindex="-1"></a>                        <span class="at">Fgf4 =</span> X1420085_at,</span>
+<span id="cb23-4"><a href="sec-vis.html#cb23-4" tabindex="-1"></a>                        <span class="at">Gata4 =</span> X1418863_at,</span>
+<span id="cb23-5"><a href="sec-vis.html#cb23-5" tabindex="-1"></a>                        <span class="at">Gata6 =</span> X1425463_at,</span>
+<span id="cb23-6"><a href="sec-vis.html#cb23-6" tabindex="-1"></a>                        <span class="at">Sox2 =</span> X1416967_at) <span class="sc">|&gt;</span></span>
+<span id="cb23-7"><a href="sec-vis.html#cb23-7" tabindex="-1"></a>    <span class="fu">select</span>(Fgf4, Gata4,</span>
+<span id="cb23-8"><a href="sec-vis.html#cb23-8" tabindex="-1"></a>           Gata6, Sox2) <span class="sc">|&gt;</span></span>
+<span id="cb23-9"><a href="sec-vis.html#cb23-9" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"gene"</span>,</span>
+<span id="cb23-10"><a href="sec-vis.html#cb23-10" tabindex="-1"></a>                 <span class="at">values_to =</span> <span class="st">"expression"</span>,</span>
+<span id="cb23-11"><a href="sec-vis.html#cb23-11" tabindex="-1"></a>                 <span class="fu">everything</span>())</span>
+<span id="cb23-12"><a href="sec-vis.html#cb23-12" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="sec-vis.html#cb23-13" tabindex="-1"></a><span class="fu">head</span>(genes)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+##   gene  expression
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 Fgf4        3.03
+## 2 Gata4       4.84
+## 3 Gata6       5.50
+## 4 Sox2        1.73
+## 5 Fgf4        9.29
+## 6 Gata4       5.53</code></pre>
+<div id="histogram" class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> Histogram<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('histogram')" onmouseout="reset_tooltip('histogram-tooltip')"><span class="tooltiptext" id="histogram-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="sec-vis.html#cb25-1" tabindex="-1"></a>genes <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="sec-vis.html#cb25-2" tabindex="-1"></a>    <span class="fu">filter</span>(gene <span class="sc">==</span> <span class="st">"Gata4"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="sec-vis.html#cb25-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> expression)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<div class="figure">
+<span style="display:block;" id="fig:hist"></span>
+<p class="caption marginnote shownote">
+Figure 2.10: Distribution of the Gata4 expression
+</p>
+<img src="WSBIM1322_files/figure-html/hist-1.png" alt="Distribution of the Gata4 expression" width="672">
+</div>
+</div>
+<div id="box-plots" class="section level3" number="2.4.2">
+<h3>
+<span class="header-section-number">2.4.2</span> Box plots<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('box-plots')" onmouseout="reset_tooltip('box-plots-tooltip')"><span class="tooltiptext" id="box-plots-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="sec-vis.html#cb27-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(genes, <span class="fu">aes</span>(<span class="at">x =</span> gene, <span class="at">y =</span> expression, <span class="at">fill =</span> gene))</span>
+<span id="cb27-2"><a href="sec-vis.html#cb27-2" tabindex="-1"></a>bxplot <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span>
+<span id="cb27-3"><a href="sec-vis.html#cb27-3" tabindex="-1"></a>bxplot</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:boxplot"></span>
+<p class="caption marginnote shownote">
+Figure 2.11: A boxplot of expression values.
+</p>
+<img src="WSBIM1322_files/figure-html/boxplot-1.png" alt="A boxplot of expression values." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Repeat the above figure replacing the boxes by violins using the
+<code>geom_violin</code>. Which one do you think does a better job?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-4" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-4', 'sol-start-4')"></span>
+</p>
+<div id="sol-body-4" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sec-vis.html#cb28-1" tabindex="-1"></a>vlnplot <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_violin</span>()</span>
+<span id="cb28-2"><a href="sec-vis.html#cb28-2" tabindex="-1"></a>vlnplot</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:violin"></span>
+<p class="caption marginnote shownote">
+Figure 2.12: A violin plot of expression values.
+</p>
+<img src="WSBIM1322_files/figure-html/violin-1.png" alt="A violin plot of expression values." width="672">
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>See this post, <a href="https://www.data-to-viz.com/caveat/boxplot.html">The Boxplot and its
+pitfalls</a> for more
+detail about boxplots and how to improve them using jitter, violin
+plots, and information about the sample size.</p>
+</div>
+<div id="dot-plots-and-beeswarm-plots" class="section level3" number="2.4.3">
+<h3>
+<span class="header-section-number">2.4.3</span> Dot plots and beeswarm plots<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('dot-plots-and-beeswarm-plots')" onmouseout="reset_tooltip('dot-plots-and-beeswarm-plots-tooltip')"><span class="tooltiptext" id="dot-plots-and-beeswarm-plots-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>When the data aren’t too large, it is also possibly to visualise all
+points to get a sense of their distribution.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="sec-vis.html#cb29-1" tabindex="-1"></a>jtrplot <span class="ot">&lt;-</span> p <span class="sc">+</span></span>
+<span id="cb29-2"><a href="sec-vis.html#cb29-2" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">colour =</span> gene)) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="sec-vis.html#cb29-3" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<p>In a dotplot, the position of the points along the y axis is
+discretised into bins (set as 1/6 below) and the points are then
+stacked next to each other.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="sec-vis.html#cb30-1" tabindex="-1"></a>dotplot <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">"y"</span>, <span class="at">binwidth =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>,</span>
+<span id="cb30-2"><a href="sec-vis.html#cb30-2" tabindex="-1"></a>                            <span class="at">stackdir =</span> <span class="st">"center"</span>, <span class="at">stackratio =</span> <span class="fl">0.75</span>,</span>
+<span id="cb30-3"><a href="sec-vis.html#cb30-3" tabindex="-1"></a>                            <span class="fu">aes</span>(<span class="at">color =</span> gene)) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="sec-vis.html#cb30-4" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<p>The beeswarm algorithms tries to avoid overlapping points: if a point
+were to overlap an existing point, it is shifted along the <span class="math inline">\(x\)</span>-axis
+by a small amount sufficient to avoid overlap.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="sec-vis.html#cb31-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggbeeswarm"</span>)</span>
+<span id="cb31-2"><a href="sec-vis.html#cb31-2" tabindex="-1"></a>beeplot <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_beeswarm</span>(<span class="fu">aes</span>(<span class="at">color =</span> gene)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="sec-vis.html#cb31-3" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="sec-vis.html#cb32-1" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb32-2"><a href="sec-vis.html#cb32-2" tabindex="-1"></a>jtrplot <span class="sc">+</span> dotplot <span class="sc">+</span> beeplot</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:showdots"></span>
+<p class="caption marginnote shownote">
+Figure 2.13: Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot.
+</p>
+<img src="WSBIM1322_files/figure-html/showdots-1.png" alt="Showing all expression values using jittering (left), a dotplot (centre) and a beeswarn plot." width="672">
+</div>
+</div>
+<div id="density-and-ecdf-plots" class="section level3" number="2.4.4">
+<h3>
+<span class="header-section-number">2.4.4</span> Density and ecdf plots<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('density-and-ecdf-plots')" onmouseout="reset_tooltip('density-and-ecdf-plots-tooltip')"><span class="tooltiptext" id="density-and-ecdf-plots-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sec-vis.html#cb33-1" tabindex="-1"></a>densplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(genes, <span class="fu">aes</span>(<span class="at">x =</span> expression, <span class="at">color =</span> gene)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="sec-vis.html#cb33-2" tabindex="-1"></a>    <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb33-3"><a href="sec-vis.html#cb33-3" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sec-vis.html#cb34-1" tabindex="-1"></a>ecdfplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(genes, <span class="fu">aes</span>(<span class="at">x =</span> expression, <span class="at">color =</span> gene)) <span class="sc">+</span></span>
+<span id="cb34-2"><a href="sec-vis.html#cb34-2" tabindex="-1"></a>    <span class="fu">stat_ecdf</span>() <span class="sc">+</span></span>
+<span id="cb34-3"><a href="sec-vis.html#cb34-3" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sec-vis.html#cb35-1" tabindex="-1"></a>densplot <span class="sc">+</span> ecdfplot</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<p class="caption marginnote shownote">
+Figure 2.14: Density and cumulative density functions of expression values.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-5-1.png" alt="Density and cumulative density functions of expression values." width="672">
+</div>
+</div>
+<div id="summary" class="section level3" number="2.4.5">
+<h3>
+<span class="header-section-number">2.4.5</span> Summary<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('summary')" onmouseout="reset_tooltip('summary-tooltip')"><span class="tooltiptext" id="summary-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<ul>
+<li><p><strong>Boxplot</strong> makes sense for unimodal distributions (see below).</p></li>
+<li><p><strong>Histogram</strong> requires definition of bins (width, positions) and can
+create visual artefacts especially if the number of data points is
+not large.</p></li>
+<li><p><strong>Density</strong> requires the choice of bandwidth; obscures the sample
+size (i.e. the uncertainty of the estimate).</p></li>
+<li><p><strong>ecdf</strong> does not have these problems; but is more abstract and
+interpretation requires more training. Good for reading off
+quantiles and shifts in location in comparative plots.</p></li>
+<li><p><strong>beeswarm</strong>: for up to a few dozens of points, just show the data.</p></li>
+</ul>
+</div>
+</div>
+<div id="number-of-modes" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> Number of modes<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('number-of-modes')" onmouseout="reset_tooltip('number-of-modes-tooltip')"><span class="tooltiptext" id="number-of-modes-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>The number of modes of a distribution depends on scale transformation
+of the data.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sec-vis.html#cb36-1" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">exp</span>(<span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fl">1e5</span>,</span>
+<span id="cb36-2"><a href="sec-vis.html#cb36-2" tabindex="-1"></a>                                <span class="at">mean =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb36-3"><a href="sec-vis.html#cb36-3" tabindex="-1"></a>                                              <span class="at">size =</span> <span class="fl">1e5</span>,</span>
+<span id="cb36-4"><a href="sec-vis.html#cb36-4" tabindex="-1"></a>                                              <span class="at">replace =</span> <span class="cn">TRUE</span>))))</span>
+<span id="cb36-5"><a href="sec-vis.html#cb36-5" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="sec-vis.html#cb36-6" tabindex="-1"></a>p1 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(sim, <span class="fu">aes</span>(x)) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="sec-vis.html#cb36-7" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">boundary =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb36-8"><a href="sec-vis.html#cb36-8" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">400</span>)</span>
+<span id="cb36-9"><a href="sec-vis.html#cb36-9" tabindex="-1"></a>p2 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(sim, <span class="fu">aes</span>(<span class="fu">log</span>(x))) <span class="sc">+</span></span>
+<span id="cb36-10"><a href="sec-vis.html#cb36-10" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span>
+<span id="cb36-11"><a href="sec-vis.html#cb36-11" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code></pre></div>
+<pre><code>## Warning: Removed 7964 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
+<div class="figure">
+<span style="display:block;" id="fig:sim"></span>
+<p class="caption marginnote shownote">
+Figure 2.15: Histograms of the same data without (left) and with (right) log-transformation.
+</p>
+<img src="WSBIM1322_files/figure-html/sim-1.png" alt="Histograms of the same data without (left) and with (right) log-transformation." width="672">
+</div>
+<p>This also applies to density plots.</p>
+</div>
+<div id="visualising-2d-data" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> Visualising 2D data<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('visualising-2d-data')" onmouseout="reset_tooltip('visualising-2d-data-tooltip')"><span class="tooltiptext" id="visualising-2d-data-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sec-vis.html#cb38-1" tabindex="-1"></a><span class="fu">data</span>(hiiragi2013df2)</span>
+<span id="cb38-2"><a href="sec-vis.html#cb38-2" tabindex="-1"></a><span class="fu">head</span>(hiiragi2013df2)</span></code></pre></div>
+<pre><code>##              59 E4.5 (PE) 92 E4.5 (FGF4-KO)
+## 1415670_at       9.503289          8.359740
+## 1415671_at      11.458339         11.175453
+## 1415672_at       6.699087         10.885286
+## 1415673_at       6.765473          4.957310
+## 1415674_a_at     9.974538          8.592410
+## 1415675_at       9.294144          6.257513</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="sec-vis.html#cb40-1" tabindex="-1"></a>scp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hiiragi2013df2,</span>
+<span id="cb40-2"><a href="sec-vis.html#cb40-2" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">59 E4.5 (PE)</span><span class="st">`</span>,</span>
+<span id="cb40-3"><a href="sec-vis.html#cb40-3" tabindex="-1"></a>                  <span class="at">y =</span> <span class="st">`</span><span class="at">92 E4.5 (FGF4-KO)</span><span class="st">`</span>))</span>
+<span id="cb40-4"><a href="sec-vis.html#cb40-4" tabindex="-1"></a>scp <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:sc1"></span>
+<p class="caption marginnote shownote">
+Figure 2.16: Scatter plot comparing the expression of a wild-type vs. FGF4 KO.
+</p>
+<img src="WSBIM1322_files/figure-html/sc1-1.png" alt="Scatter plot comparing the expression of a wild-type vs. FGF4 KO." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>The over-plotting of the dots stops us from learning anything about
+the density of the different regions of the plot. Use the <code>alpha</code>
+parameter to <code>geom_points</code> between 0 (full transparency) to 1 (opaque,
+default).</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-5" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-5', 'sol-start-5')"></span>
+</p>
+<div id="sol-body-5" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sec-vis.html#cb41-1" tabindex="-1"></a>scp <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:scp2"></span>
+<p class="caption marginnote shownote">
+Figure 2.17: Transparency can help distinguish regions of different densities.
+</p>
+<img src="WSBIM1322_files/figure-html/scp2-1.png" alt="Transparency can help distinguish regions of different densities." width="672">
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sec-vis.html#cb42-1" tabindex="-1"></a>scp <span class="sc">+</span> <span class="fu">geom_density2d</span>(<span class="at">h =</span> <span class="fl">0.5</span>, <span class="at">bins =</span> <span class="dv">60</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:scp3"></span>
+<p class="caption marginnote shownote">
+Figure 2.18: Focusing on contours rather that individual values.
+</p>
+<img src="WSBIM1322_files/figure-html/scp3-1.png" alt="Focusing on contours rather that individual values." width="672">
+</div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sec-vis.html#cb43-1" tabindex="-1"></a>scp <span class="sc">+</span> <span class="fu">geom_hex</span>()</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:scp5"></span>
+<p class="caption marginnote shownote">
+Figure 2.19: Local density summaries.
+</p>
+<img src="WSBIM1322_files/figure-html/scp5-1.png" alt="Local density summaries." width="672">
+</div>
+</div>
+<div id="visualising-data-along-more-dimensions" class="section level2" number="2.7">
+<h2>
+<span class="header-section-number">2.7</span> Visualising data along more dimensions<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('visualising-data-along-more-dimensions')" onmouseout="reset_tooltip('visualising-data-along-more-dimensions-tooltip')"><span class="tooltiptext" id="visualising-data-along-more-dimensions-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>When visualising data along additional dimension, we can parameterise
+the points by setting their shape, colour, size and transparency, that
+can be set with point aesthetics such as <code>fill</code>, <code>color</code> (or
+<code>colour</code>), <code>shape</code>, <code>size</code> and <code>alpha</code>.</p>
+<p>A very powerful way to represent data along additional dimensions is
+facetting, i.e. producing sub-plots for different subsets of the
+data. Below, we first re-annotate the data using some regular
+expressions</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sec-vis.html#cb44-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hiiragi2013df1, <span class="fu">aes</span>(<span class="at">x =</span> X1426642_at, <span class="at">y =</span> X1418765_at, <span class="at">colour =</span> lineage)) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="sec-vis.html#cb44-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb44-3"><a href="sec-vis.html#cb44-3" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hiiragi2013df1, <span class="fu">aes</span>(<span class="at">x =</span> X1426642_at, <span class="at">y =</span> X1418765_at)) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="sec-vis.html#cb44-4" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb44-5"><a href="sec-vis.html#cb44-5" tabindex="-1"></a>    <span class="fu">facet_grid</span>( . <span class="sc">~</span> lineage )</span>
+<span id="cb44-6"><a href="sec-vis.html#cb44-6" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:facet1"></span>
+<p class="caption marginnote shownote">
+Figure 2.20: Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages.
+</p>
+<img src="WSBIM1322_files/figure-html/facet1-1.png" alt="Different sub-plots for different lineages using colours (left) of facets (right) to distinguish the different lineages." width="672">
+</div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="sec-vis.html#cb45-1" tabindex="-1"></a><span class="fu">ggplot</span>(hiiragi2013df1,</span>
+<span id="cb45-2"><a href="sec-vis.html#cb45-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> X1426642_at, <span class="at">y =</span> X1418765_at)) <span class="sc">+</span></span>
+<span id="cb45-3"><a href="sec-vis.html#cb45-3" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb45-4"><a href="sec-vis.html#cb45-4" tabindex="-1"></a>    <span class="fu">facet_grid</span>( Embryonic.day <span class="sc">~</span> lineage )</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:facet2"></span>
+<p class="caption marginnote shownote">
+Figure 2.21: Different sub-plots for different lineages and embryonic stages.
+</p>
+<img src="WSBIM1322_files/figure-html/facet2-1.png" alt="Different sub-plots for different lineages and embryonic stages." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Use facets to visualise the distribution of the four Fgf4, Gata4,
+Gata6 and Sox2 genes in the <code>genes</code> data using histograms.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-6" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-6', 'sol-start-6')"></span>
+</p>
+<div id="sol-body-6" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="sec-vis.html#cb46-1" tabindex="-1"></a><span class="fu">ggplot</span>(genes, <span class="fu">aes</span>(<span class="at">x =</span> expression)) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="sec-vis.html#cb46-2" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb46-3"><a href="sec-vis.html#cb46-3" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> gene)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="WSBIM1322_files/figure-html/hist2-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="interactive-visualisation" class="section level2" number="2.8">
+<h2>
+<span class="header-section-number">2.8</span> Interactive visualisation<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('interactive-visualisation')" onmouseout="reset_tooltip('interactive-visualisation-tooltip')"><span class="tooltiptext" id="interactive-visualisation-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="sec-vis.html#cb48-1" tabindex="-1"></a>scp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hiiragi2013df2[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, ],</span>
+<span id="cb48-2"><a href="sec-vis.html#cb48-2" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">59 E4.5 (PE)</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">92 E4.5 (FGF4-KO)</span><span class="st">`</span>))</span>
+<span id="cb48-3"><a href="sec-vis.html#cb48-3" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="sec-vis.html#cb48-4" tabindex="-1"></a>scp2 <span class="ot">&lt;-</span> scp <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p>Once we have stored ggplot object in a variable, we can simply pass it
+to the <code>plotly::ggplotly</code> function to generate an interactive figure.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sec-vis.html#cb49-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"plotly"</span>)</span>
+<span id="cb49-2"><a href="sec-vis.html#cb49-2" tabindex="-1"></a><span class="fu">ggplotly</span>(scp2)</span></code></pre></div>
+<p>See <a href="https://plot.ly/r" class="uri">https://plot.ly/r</a> for examples of interactive graphics online.</p>
+</div>
+<div id="additional-exercises-1" class="section level2" number="2.9">
+<h2>
+<span class="header-section-number">2.9</span> Additional exercises<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('additional-exercises-1')" onmouseout="reset_tooltip('additional-exercises-1-tooltip')"><span class="tooltiptext" id="additional-exercises-1-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Load the <code>barley</code> data that comes with the <code>lattice</code> package (that is
+already installed on your computer). The data describe the yield from
+a Minnesota barley trial as a data frame with 120 observations on the
+following 4 variables.</p>
+<ul>
+<li><p><code>yield</code> Yield (averaged across three blocks) in bushels/acre.</p></li>
+<li><p><code>variety</code> Factor with levels <code>Svansota</code>, <code>No. 462</code>, <code>Manchuria</code>,
+<code>No. 475</code>, <code>Velvet</code>, <code>Peatland</code>, <code>Glabron</code>, <code>No. 457</code>, <code>Wisconsin No. 38</code>
+and <code>Trebi</code>.</p></li>
+<li><p><code>year</code> Factor with levels <code>1932</code> and <code>1931</code>.</p></li>
+<li><p><code>site</code> Factor with 6 levels: <code>Grand Rapids</code>, <code>Duluth</code>,
+<code>University Farm</code>, <code>Morris</code>, <code>Crookston</code>, <code>Waseca</code>.</p></li>
+</ul>
+<p>Familiarise yourself with the data</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Visualise the yield for each variety on all site in 1932 and 1931
+using <code>ggplot2</code>. Try to generate a figure on your own. If you
+struggle, discuss with your fellow students. If you need additional
+help, or as a check, execute the code in the <code>barley</code> manual page
+example.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Can you spot an issue with the data?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Write a function named <code>(gg)plot_probe_sets</code> that takes two probe sets
+and the <code>hiiragi2013df1</code> data (from the <code>rWSBIM1322</code> package) as input
+and produces a scatterplot. Your function should test if the provided
+probe sets are valid before producing the plot and inform
+otherwise. Below are some example outputs.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sec-vis.html#cb50-1" tabindex="-1"></a><span class="fu">plot_probe_sets</span>(<span class="st">"X1426642_at"</span>, <span class="st">"X1420085_at"</span>, <span class="at">data =</span> hiiragi2013df1)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/visfun-1.png" width="768"></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sec-vis.html#cb51-1" tabindex="-1"></a><span class="fu">ggplot_probe_sets</span>(<span class="st">"X1426642_at"</span>, <span class="st">"X1420085_at"</span>, <span class="at">data =</span> hiiragi2013df1)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/visfun-2.png" width="768"></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="sec-vis.html#cb52-1" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">plot_probe_sets</span>(<span class="st">"X1416967_at"</span>, <span class="st">"123_at"</span>))</span></code></pre></div>
+<pre><code>## Error in plot_probe_sets("X1416967_at", "123_at") : 
+##   y %in% colnames(hiiragi2013df1)[1:6] is not TRUE</code></pre>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="sec-refresher.html"><button class="btn btn-default">Previous</button></a>
+<a href="sec-obj.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2024-12-09
+ using 
+R version 4.4.1 (2024-06-14)
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

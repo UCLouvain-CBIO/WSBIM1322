@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 10 Supervised learning | Bioinformatics" />
+<meta property="og:type" content="book" />
+
+<meta property="og:description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain." />
+
+
+<meta name="author" content="Laurent Gatto" />
+
+<meta name="date" content="2024-12-09" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
+
+<title>Chapter 10 Supervised learning | Bioinformatics</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+<script>
+function copy_link(id) {
+  var dummy = document.createElement('input'),
+  text = window.location.href.split(/[?#]/)[0] + '#' + id;
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
+  
+  var tooltip = document.getElementById(id + '-tooltip');
+  tooltip.innerHTML = 'Copied!';
+}
+
+function reset_tooltip(id) {
+  var tooltip = document.getElementById(id);
+  tooltip.innerHTML = 'Copy link';
+}
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">Bioinformatics<p><p class="author">Laurent Gatto</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a id="active-page" href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a><ul class="toc-sections">
+<li class="toc"><a href="#introduction-5"> Introduction</a></li>
+<li class="toc"><a href="#k-nearest-neighbours-classifier"> K-nearest neighbours classifier</a></li>
+<li class="toc"><a href="#model-selection-1"> Model selection</a></li>
+<li class="toc"><a href="#k-fold-cross-validation"> k-fold cross-validation</a></li>
+<li class="toc"><a href="#variance-and-bias-trade-off"> Variance and bias trade-off</a></li>
+<li class="toc"><a href="#additional-exercises-8"> Additional exercises</a></li>
+</ul>
+<a href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="sec-sl" class="section level1" number="10">
+<h1>
+<span class="header-section-number">Chapter 10</span> Supervised learning</h1>
+<p>The goal of this last chapter about machine learning will be
+supervised learning, and in particular <strong>classification</strong>. In this
+chapter, you will learn</p>
+<ul>
+<li>learn what classification is;</li>
+<li>learn about labelled, unlabelled, training and testing data;</li>
+<li>learn about and apply k-nearest neighbour, a simple non-parametric
+classifier;</li>
+<li>see why and how to use cross-validation;</li>
+<li>and learn about model complexity and generalisation.</li>
+</ul>
+<div id="introduction-5" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> Introduction<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('introduction-5')" onmouseout="reset_tooltip('introduction-5-tooltip')"><span class="tooltiptext" id="introduction-5-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Often, when faced with omics data, we have annotations for some of the
+samples (or features) we have acquired:</p>
+<ul>
+<li><p>Among the 100s of patient tumours that were assayed using RNA
+sequencing or microarrays, we know the grade of the tumour for about
+half. We want to predict the grade of the other half using the gene
+expression profiles.</p></li>
+<li><p>We have performed a spatial proteomics experiment such as in
+Christoforou <em>et al.</em> <span class="citation">(<label for="tufte-mn-26" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-26" class="margin-toggle">Christoforou et al. 2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span> (see section
+<a href="sec-dimred.html#sec-dimred02">8.7.2</a>) and know the sub-cellular localisation of some
+proteins. We want to predict the sub-cellular localisation of the
+other proteins using the protein profiles.</p></li>
+</ul>
+<p>In both of these examples, the quantitative data are the data that we
+want to use to predict properties about samples or features; these are
+called the <strong>predictors</strong>. The grade of the samples in the first
+example and the protein sub-cellular localisation in the second one
+are the <strong>labels</strong> that we have in some cases, and want to predict
+otherwise. We can thus split our data in two parts, depending whether
+we have labels, or whether we want to predict them. The former are
+called <strong>labelled</strong>, and the latter <strong>unlabelled</strong>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-78"></span>
+<p class="caption marginnote shownote">
+Figure 10.1: In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-78-1.png" alt="In supervised learning, the data are split in labelled or unlabelled data. The same applies when some of the columns are labelled." width="1152">
+</div>
+<p>In the figure above, the labels represent categories that need to be
+inferred from the predictors. This class of supervised learning is
+called <strong>classification</strong>. Classification are also split into <strong>binary
+classification</strong> when there are only two classes, or <strong>multi-label</strong>
+problem when, like above, there are more than two. The latter is a
+generalisation of the binary task. When the annotations are continuous
+values, the situation is referred to as a <strong>regression</strong> problem.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Load the <code>giris2</code> data from the <code>rWSBIM1322</code> package (requires version
+&gt;= 0.1.13). Identify the labelled and unlabelled data; how many are
+there respectively.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-66" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-66', 'sol-start-66')"></span>
+</p>
+<div id="sol-body-66" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="sec-sl.html#cb387-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb387-2"><a href="sec-sl.html#cb387-2" tabindex="-1"></a><span class="fu">data</span>(giris2)</span>
+<span id="cb387-3"><a href="sec-sl.html#cb387-3" tabindex="-1"></a><span class="fu">summary</span>(giris2)</span></code></pre></div>
+<pre><code>##      BRCA1           BRCA2            TP53             A1CF         GRADE    
+##  Min.   :3.870   Min.   :1.888   Min.   :0.4919   Min.   :0.1000   A   : 50  
+##  1st Qu.:5.115   1st Qu.:2.700   1st Qu.:1.6242   1st Qu.:0.3044   B   : 50  
+##  Median :5.800   Median :3.000   Median :4.3276   Median :1.3327   C   : 50  
+##  Mean   :5.853   Mean   :3.058   Mean   :3.7796   Mean   :1.2111   NA's:100  
+##  3rd Qu.:6.400   3rd Qu.:3.400   3rd Qu.:5.1885   3rd Qu.:1.8000             
+##  Max.   :8.116   Max.   :4.400   Max.   :7.1766   Max.   :2.5685</code></pre>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="sec-sl.html#cb389-1" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(giris2<span class="sc">$</span>GRADE))</span></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##   150   100</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Visualise the <code>giris2</code> data on a PCA plot, highlighting the labels (or
+absence thereof). From the visualisation, do you think classifying the
+unlabelled data will be difficult or easy? Defend your answer.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-67" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-67', 'sol-start-67')"></span>
+</p>
+<div id="sol-body-67" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="sec-sl.html#cb391-1" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(giris2[, <span class="sc">-</span><span class="dv">5</span>], <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb391-2"><a href="sec-sl.html#cb391-2" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">as.character</span>(giris2<span class="sc">$</span>GRADE)</span>
+<span id="cb391-3"><a href="sec-sl.html#cb391-3" tabindex="-1"></a>cls[<span class="fu">is.na</span>(cls)] <span class="ot">&lt;-</span> <span class="st">"unknown"</span></span>
+<span id="cb391-4"><a href="sec-sl.html#cb391-4" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">fviz_pca_ind</span>(pca, <span class="at">col.ind =</span> cls)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-80-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="k-nearest-neighbours-classifier" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> K-nearest neighbours classifier<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('k-nearest-neighbours-classifier')" onmouseout="reset_tooltip('k-nearest-neighbours-classifier-tooltip')"><span class="tooltiptext" id="k-nearest-neighbours-classifier-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>In this chapter, we’ll use a simple, but useful classification
+algorithm, k-nearest neighbours (kNN) to classify the <em>giris2</em>
+patients. We will use the <code>knn</code> function from the
+<em><a href="https://CRAN.R-project.org/package=class">class</a></em> package.</p>
+<p>K-nearest neighbours works by directly measuring the (Euclidean)
+distance between observations and inferring the class of unlabelled data
+from the class of its nearest neighbours. In the figure below, the
+unlabelled instances <em>1</em> and <em>2</em> will be assigned classes <em>A</em> (blue)
+and <em>B</em> (red) as their closest neighbours are red and blue,
+respectively.</p>
+<div class="figure">
+<span style="display:block;" id="fig:knnex"></span>
+<p class="caption marginnote shownote">
+Figure 10.2: Schematic illustrating the k nearest neighbours algorithm.
+</p>
+<img src="WSBIM1322_files/figure-html/knnex-1.png" alt="Schematic illustrating the k nearest neighbours algorithm." width="672">
+</div>
+<p>Typically in machine learning, there are two clear steps, where one
+first <strong>trains</strong> a model and then uses the model to <strong>predict</strong> new
+outputs (class labels in this case). In kNN, these two steps are
+combined into a single function call to <code>knn</code>.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Separate the <code>giris2</code> data into two new datasets, one containing the
+labelled data that will be used to train the model and named
+<code>giris2_labelled</code>, and a second one containing the unlabelled data called
+<code>giris2_unlabelled</code>.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-68" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-68', 'sol-start-68')"></span>
+</p>
+<div id="sol-body-68" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="sec-sl.html#cb392-1" tabindex="-1"></a>giris2_labelled <span class="ot">&lt;-</span> giris2[<span class="sc">!</span><span class="fu">is.na</span>(giris2<span class="sc">$</span>GRADE), ]</span>
+<span id="cb392-2"><a href="sec-sl.html#cb392-2" tabindex="-1"></a>giris2_unlabelled <span class="ot">&lt;-</span> giris2[<span class="fu">is.na</span>(giris2<span class="sc">$</span>GRADE), ]</span></code></pre></div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>The <code>knn</code> function takes, among others<label for="tufte-sn-13" class="margin-toggle sidenote-number">13</label><input type="checkbox" id="tufte-sn-13" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">13</span> we will see additional ones later.</span>, the following arguments:</p>
+<ol style="list-style-type: decimal">
+<li>the labelled predictors, that will be used to <em>train</em> the model,</li>
+<li>the unlabelled predictors, on which the model will be applied (see
+below why this is called <em>test</em>),</li>
+<li>the labels (the length of this vector must match the number of rows
+of the labelled predictors).</li>
+</ol>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Apply the kNN classifier on the <code>giris2</code> prepared in the previous
+exercise.</p></li>
+<li><p>What is the class of the output?</p></li>
+<li><p>How many of the unlabelled data have been assigned to the different
+grades?</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-69" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-69', 'sol-start-69')"></span>
+</p>
+<div id="sol-body-69" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="sec-sl.html#cb393-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"class"</span>)</span>
+<span id="cb393-2"><a href="sec-sl.html#cb393-2" tabindex="-1"></a>knn_res <span class="ot">&lt;-</span> <span class="fu">knn</span>(giris2_labelled[, <span class="sc">-</span><span class="dv">5</span>],</span>
+<span id="cb393-3"><a href="sec-sl.html#cb393-3" tabindex="-1"></a>               giris2_unlabelled[, <span class="sc">-</span><span class="dv">5</span>],</span>
+<span id="cb393-4"><a href="sec-sl.html#cb393-4" tabindex="-1"></a>               giris2_labelled[, <span class="dv">5</span>])</span>
+<span id="cb393-5"><a href="sec-sl.html#cb393-5" tabindex="-1"></a><span class="fu">class</span>(knn_res)</span></code></pre></div>
+<pre><code>## [1] "factor"</code></pre>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="sec-sl.html#cb395-1" tabindex="-1"></a><span class="fu">table</span>(knn_res)</span></code></pre></div>
+<pre><code>## knn_res
+##  A  B  C 
+## 31 38 31</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Visualise the results of the kNN classification on a PCA plot and
+interpret the results based on the first PCA.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-70" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-70', 'sol-start-70')"></span>
+</p>
+<div id="sol-body-70" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="sec-sl.html#cb397-1" tabindex="-1"></a>giris2_res <span class="ot">&lt;-</span> giris2</span>
+<span id="cb397-2"><a href="sec-sl.html#cb397-2" tabindex="-1"></a>giris2_res[<span class="fu">is.na</span>(giris2<span class="sc">$</span>GRADE), <span class="dv">5</span>] <span class="ot">&lt;-</span> knn_res</span>
+<span id="cb397-3"><a href="sec-sl.html#cb397-3" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> factoextra<span class="sc">::</span><span class="fu">fviz_pca_ind</span>(pca, <span class="at">col.ind =</span> cls)</span>
+<span id="cb397-4"><a href="sec-sl.html#cb397-4" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> factoextra<span class="sc">::</span><span class="fu">fviz_pca_ind</span>(pca, <span class="at">col.ind =</span> giris2_res<span class="sc">$</span>GRADE)</span>
+<span id="cb397-5"><a href="sec-sl.html#cb397-5" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb397-6"><a href="sec-sl.html#cb397-6" tabindex="-1"></a>p1 <span class="sc">/</span> p2</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-83"></span>
+<p class="caption marginnote shownote">
+Figure 10.3: Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-83-1.png" alt="Visualisation of the labelled and unlabelled data before (top) and after (bottom) classification." width="672">
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Can you identify some questionable results? Explore the results for
+patient 167, that was assigned group B.</p></li>
+<li><p>To do so, calculated the distances between sample 167 and all other
+labelled data.</p></li>
+<li><p>Compare the labels of its 15 closest labelled data points.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-71" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-71', 'sol-start-71')"></span>
+</p>
+<div id="sol-body-71" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="sec-sl.html#cb398-1" tabindex="-1"></a><span class="do">## all pairwise distances</span></span>
+<span id="cb398-2"><a href="sec-sl.html#cb398-2" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(giris2[, <span class="sc">-</span><span class="dv">5</span>]))</span>
+<span id="cb398-3"><a href="sec-sl.html#cb398-3" tabindex="-1"></a><span class="do">## extract only those for sample 167</span></span>
+<span id="cb398-4"><a href="sec-sl.html#cb398-4" tabindex="-1"></a>giris2<span class="sc">$</span>dist_167 <span class="ot">&lt;-</span> dd[<span class="dv">167</span>, ]</span>
+<span id="cb398-5"><a href="sec-sl.html#cb398-5" tabindex="-1"></a></span>
+<span id="cb398-6"><a href="sec-sl.html#cb398-6" tabindex="-1"></a><span class="do">## look at the 15 nearest neighbours</span></span>
+<span id="cb398-7"><a href="sec-sl.html#cb398-7" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb398-8"><a href="sec-sl.html#cb398-8" tabindex="-1"></a>vote <span class="ot">&lt;-</span> giris2 <span class="sc">%&gt;%</span></span>
+<span id="cb398-9"><a href="sec-sl.html#cb398-9" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">150</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb398-10"><a href="sec-sl.html#cb398-10" tabindex="-1"></a>    <span class="fu">arrange</span>(dist_167) <span class="sc">%&gt;%</span></span>
+<span id="cb398-11"><a href="sec-sl.html#cb398-11" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb398-12"><a href="sec-sl.html#cb398-12" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">vote =</span> <span class="fu">cumsum</span>(<span class="at">count =</span> <span class="fu">ifelse</span>(GRADE <span class="sc">==</span> <span class="st">"C"</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb398-13"><a href="sec-sl.html#cb398-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">ifelse</span>(vote <span class="sc">&lt;=</span> <span class="dv">0</span>, <span class="st">"B"</span>, <span class="st">"C"</span>))</span>
+<span id="cb398-14"><a href="sec-sl.html#cb398-14" tabindex="-1"></a>vote</span></code></pre></div>
+<pre><code>##    BRCA1 BRCA2 TP53 A1CF GRADE  dist_167 vote grade
+## 1    6.8   2.8  4.8  1.4     B 0.7239656   -1     B
+## 2    6.7   3.0  5.0  1.7     B 0.7922045   -2     B
+## 3    6.9   3.1  4.9  1.5     B 0.8065525   -3     B
+## 4    6.7   2.5  5.8  1.8     C 0.8444024   -2     B
+## 5    7.2   3.0  5.8  1.6     C 0.8592955   -1     B
+## 6    6.9   3.1  5.4  2.1     C 0.8892644    0     B
+## 7    6.8   3.0  5.5  2.1     C 0.8956019    1     C
+## 8    6.4   2.7  5.3  1.9     C 0.9116501    2     C
+## 9    7.0   3.2  4.7  1.4     B 0.9623517    1     C
+## 10   6.9   3.1  5.1  2.3     C 0.9723507    2     C
+## 11   6.3   2.5  5.0  1.9     C 0.9726503    3     C
+## 12   6.5   3.0  5.2  2.0     C 0.9802555    4     C
+##  [ reached 'max' / getOption("max.print") -- omitted 3 rows ]</code></pre>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="sec-sl.html#cb400-1" tabindex="-1"></a>vote <span class="sc">%&gt;%</span></span>
+<span id="cb400-2"><a href="sec-sl.html#cb400-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">y =</span> vote)) <span class="sc">+</span></span>
+<span id="cb400-3"><a href="sec-sl.html#cb400-3" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Number of nearest neighbours"</span>) <span class="sc">+</span></span>
+<span id="cb400-4"><a href="sec-sl.html#cb400-4" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> grade), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb400-5"><a href="sec-sl.html#cb400-5" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-84-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>As we have seen, the number of nearest neighbours <em>k</em> has an important
+influence on the classification results. We can now refine our
+understanding of the <code>knn</code> function; it has the following arguments:</p>
+<ol style="list-style-type: decimal">
+<li>the labelled predictors, that will be used to <em>train</em> the model,</li>
+<li>the unlabelled predictors, on which the model will be applied (see
+below why this is called <em>test</em>),</li>
+<li>the labels (the length of this vector must match the number of rows
+of the labelled predictors),</li>
+<li>the number of neighbours to use,</li>
+<li>when set to <code>TRUE</code>, the <code>prob</code> argument also return the proportion
+of votes in favour of the assigned class.</li>
+</ol>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Repeat the kNN search comparing k=1 (as in our first attempt) and
+k=11 and compare the result.</p></li>
+<li><p>Which one is correct?</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-72" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-72', 'sol-start-72')"></span>
+</p>
+<div id="sol-body-72" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="sec-sl.html#cb401-1" tabindex="-1"></a>knn_1 <span class="ot">&lt;-</span> <span class="fu">knn</span>(giris2_labelled[, <span class="sc">-</span><span class="dv">5</span>], giris2_unlabelled[, <span class="sc">-</span><span class="dv">5</span>], giris2_labelled[, <span class="dv">5</span>], <span class="at">k =</span> <span class="dv">1</span>)</span>
+<span id="cb401-2"><a href="sec-sl.html#cb401-2" tabindex="-1"></a>knn_11 <span class="ot">&lt;-</span> <span class="fu">knn</span>(giris2_labelled[, <span class="sc">-</span><span class="dv">5</span>], giris2_unlabelled[, <span class="sc">-</span><span class="dv">5</span>], giris2_labelled[, <span class="dv">5</span>], <span class="at">k =</span> <span class="dv">11</span>)</span>
+<span id="cb401-3"><a href="sec-sl.html#cb401-3" tabindex="-1"></a><span class="fu">table</span>(knn_1, knn_11)</span></code></pre></div>
+<pre><code>##      knn_11
+## knn_1  A  B  C
+##     A 31  0  0
+##     B  0 34  4
+##     C  0  3 28</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="model-selection-1" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Model selection<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('model-selection-1')" onmouseout="reset_tooltip('model-selection-1-tooltip')"><span class="tooltiptext" id="model-selection-1-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>There is no way to decide which set of results above, using k=1, 2,
+… 11 or any other value for k is better. At least not while
+proceeding as above. To be able to make an informed decision about the
+<strong>model parameter</strong> k, we need to to measure the <strong>performance</strong> of
+the kNN classifier for different values of k. To do so, we are going to
+create <strong>training</strong> and <strong>testing</strong> sets using the labelled data. Each
+of these will be composed by a certain proportion of the original
+labelled data.</p>
+<p>Below, we denote the training predictors <span class="math inline">\(X_{tr}\)</span> and labels <span class="math inline">\(Y_{tr}\)</span> and
+the testing predictors <span class="math inline">\(X_{te}\)</span> and labels <span class="math inline">\(Y_{te}\)</span>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-86"></span>
+<p class="caption marginnote shownote">
+Figure 10.4: Training and testing sets.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-86-1.png" alt="Training and testing sets." width="672">
+</div>
+<p>We are now going to do the following procedure</p>
+<ol style="list-style-type: decimal">
+<li>hide the testing labels <span class="math inline">\(Y_{te}\)</span>,</li>
+<li>train a classifier model using <span class="math inline">\(X_{tr}\)</span> and <span class="math inline">\(Y_{tr}\)</span>,</li>
+<li>apply it on <span class="math inline">\(X_{te}\)</span> to obtain a new <span class="math inline">\(Y_{te}^{predicted}\)</span>, and</li>
+<li>compare <span class="math inline">\(Y_{te}\)</span> to <span class="math inline">\(Y_{te}^{predicted}\)</span>.</li>
+</ol>
+<p>There are numerous different ways to measure the performance of a
+classifier using <span class="math inline">\(Y_{te}\)</span> and <span class="math inline">\(Y_{te}^{predicted}\)</span>.
+We are going to focus on the <strong>classification accuracy</strong>, counting the
+proportion of correct results.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Choose 100 random labelled data points to define the training
+data. Use the 50 others as test data.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-73" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-73', 'sol-start-73')"></span>
+</p>
+<div id="sol-body-73" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="sec-sl.html#cb403-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb403-2"><a href="sec-sl.html#cb403-2" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">150</span>, <span class="dv">100</span>)</span>
+<span id="cb403-3"><a href="sec-sl.html#cb403-3" tabindex="-1"></a>giris2_train <span class="ot">&lt;-</span> giris2_labelled[i, ]</span>
+<span id="cb403-4"><a href="sec-sl.html#cb403-4" tabindex="-1"></a>giris2_test <span class="ot">&lt;-</span> giris2_labelled[<span class="sc">-</span>i, ]</span></code></pre></div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Run two kNN classifications, one with k = 1, then one with k = 11 and
+compare each to the true results. A good way to assess the results is
+to generate a contingency table (using the <code>table</code> function) that
+tallies matches and mis-matches between the predictions and expected
+assignments. Interpret these results.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-74" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-74', 'sol-start-74')"></span>
+</p>
+<div id="sol-body-74" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="sec-sl.html#cb404-1" tabindex="-1"></a>test_1 <span class="ot">&lt;-</span> <span class="fu">knn</span>(giris2_train[, <span class="sc">-</span><span class="dv">5</span>], giris2_test[, <span class="sc">-</span><span class="dv">5</span>], giris2_train[, <span class="dv">5</span>], <span class="at">k =</span> <span class="dv">1</span>)</span>
+<span id="cb404-2"><a href="sec-sl.html#cb404-2" tabindex="-1"></a>test_11 <span class="ot">&lt;-</span> <span class="fu">knn</span>(giris2_train[, <span class="sc">-</span><span class="dv">5</span>], giris2_test[, <span class="sc">-</span><span class="dv">5</span>], giris2_train[, <span class="dv">5</span>], <span class="at">k =</span> <span class="dv">11</span>)</span>
+<span id="cb404-3"><a href="sec-sl.html#cb404-3" tabindex="-1"></a><span class="fu">table</span>(giris2_test[, <span class="dv">5</span>], test_1)</span></code></pre></div>
+<pre><code>##    test_1
+##      A  B  C
+##   A 16  0  0
+##   B  0 18  1
+##   C  0  1 14</code></pre>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="sec-sl.html#cb406-1" tabindex="-1"></a><span class="fu">table</span>(giris2_test[, <span class="dv">5</span>], test_11)</span></code></pre></div>
+<pre><code>##    test_11
+##      A  B  C
+##   A 16  0  0
+##   B  0 19  0
+##   C  0  1 14</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Calculate the classification accuracy of the two classifiers above.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-75" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-75', 'sol-start-75')"></span>
+</p>
+<div id="sol-body-75" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="sec-sl.html#cb408-1" tabindex="-1"></a><span class="fu">sum</span>(test_1 <span class="sc">==</span> giris2_test[, <span class="dv">5</span>])<span class="sc">/</span><span class="fu">length</span>(test_1)</span></code></pre></div>
+<pre><code>## [1] 0.96</code></pre>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="sec-sl.html#cb410-1" tabindex="-1"></a><span class="fu">sum</span>(test_11 <span class="sc">==</span> giris2_test[, <span class="dv">5</span>])<span class="sc">/</span><span class="fu">length</span>(test_11)</span></code></pre></div>
+<pre><code>## [1] 0.98</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>There are now two adjustments that we can do improve on the procedure
+above:</p>
+<ol style="list-style-type: decimal">
+<li><p>Test all odd value of k from 1 to 11 (or higher, if deemed useful),
+to have a better granularity of the model parameter we test.</p></li>
+<li><p>Testing more than on training/testing split. Indeed, relying on a
+single random split, we rely on a random configuration, that could
+affect that results either overly optimistically, or negatively. We
+prefer to repeat the split <em>a certain number of time</em> and calculate
+an average performance over all splits.</p></li>
+</ol>
+</div>
+<div id="k-fold-cross-validation" class="section level2" number="10.4">
+<h2>
+<span class="header-section-number">10.4</span> k-fold cross-validation<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('k-fold-cross-validation')" onmouseout="reset_tooltip('k-fold-cross-validation-tooltip')"><span class="tooltiptext" id="k-fold-cross-validation-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>There exist several principled ways to split data into training and
+testing partitions. Here, we are going to focus on k-fold
+cross-validation, where data of size <span class="math inline">\(n\)</span> a repeatedly split into a training
+set of size around <span class="math inline">\(\frac{n (k - 1)}{k}\)</span> and a testing set of size around <span class="math inline">\(\frac{n}{k}\)</span>.</p>
+<p>In practice, the data are split into k partitions of size <span class="math inline">\(\frac{n}{k}\)</span>,
+and the training/testing procedure is repeated <span class="math inline">\(k\)</span> times using <span class="math inline">\(k - 1\)</span> partition
+as training data and 1 partition as testing data.</p>
+<p>The figure below illustrates the cross validation procedure, creating
+3 folds. One would typically do a 10-fold cross validation (if the
+size of the data permits it). We split the data into 3 random and
+complementary folds, so that each data point appears exactly once in
+each fold. This leads to a total test set size that is identical to
+the size of the full annotated dataset but is composed of
+out-of-sample predictions (i.e. a sample is never used for training
+and testing).</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-90"></span>
+<p class="caption marginnote shownote">
+Figure 10.5: The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model.
+</p>
+<img src="figs/xval.png" alt="The data is split into 3 folds. At each training/testing iteration, a different fold is used as test partition (white) and the two other ones (blue) are used to train the model." width="100%">
+</div>
+<p>After cross-validation, all models used within each fold are
+discarded, and a new model is built using the whole labelled dataset,
+with the best model parameter(s), i.e those that generalised over all
+folds. This makes cross-validation quite time consuming, as it takes
+x+1 (where x in the number of cross-validation folds) times as long as
+fitting a single model, but is essential.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Use the <code>createFolds</code> function from the <code>caret</code> package, passing it
+the labelled tags, to create 10 folds. Verify that each sample is
+present only once.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-76" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-76', 'sol-start-76')"></span>
+</p>
+<div id="sol-body-76" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="sec-sl.html#cb412-1" tabindex="-1"></a>folds <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">createFolds</span>(giris2_labelled[[<span class="dv">5</span>]], <span class="at">k =</span> <span class="dv">10</span>)</span>
+<span id="cb412-2"><a href="sec-sl.html#cb412-2" tabindex="-1"></a>folds</span></code></pre></div>
+<pre><code>## $Fold01
+##  [1]   2   9  11  15  40  51  54  62  76  95 103 107 115 140 143
+## 
+## $Fold02
+##  [1]   1  20  21  41  48  63  66  71  78  80 104 111 135 136 142
+## 
+## $Fold03
+##  [1]   3  31  34  39  46  74  89  90  94  96 105 117 120 131 139
+## 
+## $Fold04
+##  [1]  17  18  27  28  49  59  64  75  97  99 112 121 134 141 144
+## 
+## $Fold05
+##  [1]   8  29  35  37  42  53  69  79  81  82 108 110 119 123 125
+## 
+## $Fold06
+##  [1]  13  19  22  24  50  55  68  72  91 100 116 122 127 132 137
+## 
+## $Fold07
+##  [1]   6  10  33  38  43  52  56  65  73  87 101 114 124 126 130
+## 
+## $Fold08
+##  [1]   5  12  23  45  47  57  77  84  85  88 106 109 146 149 150
+## 
+## $Fold09
+##  [1]   4  14  16  26  44  58  61  92  93  98 102 118 129 138 147
+## 
+## $Fold10
+##  [1]   7  25  30  32  36  60  67  70  83  86 113 128 133 145 148</code></pre>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="sec-sl.html#cb414-1" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">sort</span>(<span class="fu">unlist</span>(folds)) <span class="sc">==</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Focusing now k=11 and using the folds above, calculate the
+classification accuracy in each case and compute the average accuracy
+for k=11.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-77" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-77', 'sol-start-77')"></span>
+</p>
+<div id="sol-body-77" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="sec-sl.html#cb416-1" tabindex="-1"></a>knn_accuracy <span class="ot">&lt;-</span> <span class="cf">function</span>(fld, k) {</span>
+<span id="cb416-2"><a href="sec-sl.html#cb416-2" tabindex="-1"></a>    <span class="do">## Uses global variables!</span></span>
+<span id="cb416-3"><a href="sec-sl.html#cb416-3" tabindex="-1"></a>    train <span class="ot">&lt;-</span> giris2_labelled[<span class="sc">-</span>fld, ]</span>
+<span id="cb416-4"><a href="sec-sl.html#cb416-4" tabindex="-1"></a>    test <span class="ot">&lt;-</span> giris2_labelled[fld, ]</span>
+<span id="cb416-5"><a href="sec-sl.html#cb416-5" tabindex="-1"></a>    test_k <span class="ot">&lt;-</span> <span class="fu">knn</span>(train[, <span class="sc">-</span><span class="dv">5</span>],</span>
+<span id="cb416-6"><a href="sec-sl.html#cb416-6" tabindex="-1"></a>                  test[, <span class="sc">-</span><span class="dv">5</span>],</span>
+<span id="cb416-7"><a href="sec-sl.html#cb416-7" tabindex="-1"></a>                  train[, <span class="dv">5</span>],</span>
+<span id="cb416-8"><a href="sec-sl.html#cb416-8" tabindex="-1"></a>                  k)</span>
+<span id="cb416-9"><a href="sec-sl.html#cb416-9" tabindex="-1"></a>    <span class="fu">sum</span>(test_k <span class="sc">==</span> test[, <span class="dv">5</span>])<span class="sc">/</span><span class="fu">length</span>(test_k)</span>
+<span id="cb416-10"><a href="sec-sl.html#cb416-10" tabindex="-1"></a>}</span>
+<span id="cb416-11"><a href="sec-sl.html#cb416-11" tabindex="-1"></a></span>
+<span id="cb416-12"><a href="sec-sl.html#cb416-12" tabindex="-1"></a>accs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(folds, knn_accuracy, <span class="at">k =</span> <span class="dv">11</span>)</span>
+<span id="cb416-13"><a href="sec-sl.html#cb416-13" tabindex="-1"></a>accs</span></code></pre></div>
+<pre><code>##    Fold01    Fold02    Fold03    Fold04    Fold05    Fold06    Fold07    Fold08 
+## 0.9333333 0.9333333 0.9333333 1.0000000 1.0000000 1.0000000 1.0000000 0.9333333 
+##    Fold09    Fold10 
+## 1.0000000 1.0000000</code></pre>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="sec-sl.html#cb418-1" tabindex="-1"></a><span class="fu">mean</span>(accs)</span></code></pre></div>
+<pre><code>## [1] 0.9733333</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Repeat the above for k=1, 3, 5, … to 30 and plot the average
+accuracy as a function of k.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-78" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-78', 'sol-start-78')"></span>
+</p>
+<div id="sol-body-78" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="sec-sl.html#cb420-1" tabindex="-1"></a>accs <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">k =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb420-2"><a href="sec-sl.html#cb420-2" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb420-3"><a href="sec-sl.html#cb420-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">acc =</span> <span class="fu">mean</span>(<span class="fu">sapply</span>(folds, knn_accuracy, k))) <span class="sc">%&gt;%</span></span>
+<span id="cb420-4"><a href="sec-sl.html#cb420-4" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb420-5"><a href="sec-sl.html#cb420-5" tabindex="-1"></a>accs</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 2
+##        k   acc
+##    &lt;dbl&gt; &lt;dbl&gt;
+##  1     1 0.953
+##  2     3 0.96 
+##  3     5 0.967
+##  4     7 0.98 
+##  5     9 0.96 
+##  6    11 0.98 
+##  7    13 0.98 
+##  8    15 0.973
+##  9    17 0.973
+## 10    19 0.98 
+## 11    21 0.98 
+## 12    23 0.98 
+## 13    25 0.96 
+## 14    27 0.967
+## 15    29 0.953</code></pre>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="sec-sl.html#cb422-1" tabindex="-1"></a>accs <span class="sc">%&gt;%</span></span>
+<span id="cb422-2"><a href="sec-sl.html#cb422-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> acc)) <span class="sc">+</span></span>
+<span id="cb422-3"><a href="sec-sl.html#cb422-3" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb422-4"><a href="sec-sl.html#cb422-4" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-93"></span>
+<p class="caption marginnote shownote">
+Figure 10.6: Average classification accuracy as a function of the parameter k.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-93-1.png" alt="Average classification accuracy as a function of the parameter k." width="672">
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>As we can see from the last exercise, most values of k give a good
+classification accuracy, ranging from 96% to 98%, and it would be
+difficult to identify a single best value for k. Indeed, the three
+groups we are typing to assign new data to are relatively well
+separated and the little uncertainty that we observe is most likely
+due to some instances that lie at the boundary between classes B and C.</p>
+<p>There exist a variety of packages (for example <code>caret</code>, <code>tidymodels</code>
+or <code>mlr</code>) that automate model and parameter selection using
+cross-validation procedures as illustrated above, so that in practice,
+these tasks can be automated. This becomes particularly useful when
+more than one model parameter (called hyper-parameters) need to tuned,
+different classifiers need to be assessed, and/or several model
+performance metrics are to be computed.</p>
+</div>
+<div id="variance-and-bias-trade-off" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> Variance and bias trade-off<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('variance-and-bias-trade-off')" onmouseout="reset_tooltip('variance-and-bias-trade-off-tooltip')"><span class="tooltiptext" id="variance-and-bias-trade-off-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>A recurrent goal in machine learning is to find a trade-off between
+variance and bias when fitting models. It is important to build a
+good model using the data at hand, i.e. that learns from the data, but
+not too much. If the model is too specific for the data that was used
+to build it (the model would be said to be <strong>over fitting the data</strong>)
+and would not be applicable to new data (the model would have high
+bias). On the other hand, a model that is too general, that wouldn’t
+be applicable enough to the data, or type of data at hand<label for="tufte-sn-14" class="margin-toggle sidenote-number">14</label><input type="checkbox" id="tufte-sn-14" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">14</span> In our example, this would equate to the expression of the
+four genes of interest in a specific population of cancer
+patients, for example.</span>, it
+would perform poorly, and hence lead to high variance.</p>
+<p>This variance and bias trade-off can be illustrated in different
+ways. The figure below (reproduced with permission from <span class="citation">(<label for="tufte-mn-27" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-27" class="margin-toggle">James et al. 2014<span class="marginnote">James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2014. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Publishing Company, Incorporated.</span>)</span>) shows
+the prediction error as a function of the model complexity. In our
+example above, we have used accuracy, a metric that we want to
+optimise, while in the prediction error is a measure to be minimised.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-94"></span>
+<p class="caption marginnote shownote">
+Figure 10.7: Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of <span class="math inline">\(k\)</span> while the test error reaches a minimum around <span class="math inline">\(k = 10\)</span> before increasing again. Reproduced with permission from James <em>et al.</em> 2014)
+</p>
+<img src="figs/ISL-2_17.png" alt="Effect of model complexity on the prediction error (lower is better) on the training and testing data. The former decreases for lower values of $k$ while the test error reaches a minimum around $k = 10$ before increasing again. Reproduced with permission from James *et al.* 2014)" width="100%">
+</div>
+<p>The model complexity represent the ability of
+the model (or model parameter) to learn/adapt to the training data. In
+our case, the complexity would be illustrated by<span class="math inline">\(\frac{1}{k}\)</span>: when k=1,
+the model becomes very complex as it adapts to every single
+neighbour. The other extreme, when k becomes large, the classification
+will tend to using an average of so many neighbours that doesn’t
+reflect any specificity of our data.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-95"></span>
+<p class="caption marginnote shownote">
+Figure 10.8: The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from James <em>et al.</em> 2014).
+</p>
+<img src="figs/ISL-2_16.png" alt="The kNN classifier using k=1 (left, solid classification boundaries) and k=100 (right, solid classification boundaries) compared the Bayes decision boundaries (see original material for details). Reproduced with permission from James *et al.* 2014)." width="100%">
+</div>
+<p>This last figure, reproduced from <span class="citation">(<label for="tufte-mn-28" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-28" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span>, frames the variance-bias
+trade-off as one between accuracy and precision. An over-fit model with
+high bias and low variance is one that is precise but not accurate:
+it could work extremely well on the training data but miss on new
+data, thus lacking in generalisation power. Conversely, an under-fit
+model could be accurate but with low precision: on average, it works
+well, but is unable to provide a precise answer. Ideally, we want
+models that achieve good precision while still being applicable and
+accurate with new data.</p>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-96"></span>
+<p class="caption marginnote shownote">
+Figure 10.9: Precision and accuracy when shooting.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-96-1.png" alt="Precision and accuracy when shooting." width="960">
+</div>
+</div>
+<div id="additional-exercises-8" class="section level2" number="10.6">
+<h2>
+<span class="header-section-number">10.6</span> Additional exercises<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('additional-exercises-8')" onmouseout="reset_tooltip('additional-exercises-8-tooltip')"><span class="tooltiptext" id="additional-exercises-8-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Load the <code>hyperLOPIT2015_se</code> data from the <code>pRolocdata</code> package. See
+section <a href="sec-dimred.html#sec-dimred02">8.7.2</a>) for details. The features variable column
+<code>markers</code> defines the proteins for which the sub-cellular localisation
+is known - these are the labelled data. Those that are marked
+<code>unknown</code> are of unknown location - these are the unlabelled data.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Perform a kNN classification using 5 nearest neighbours. How many
+unlabelled data were assigned to any of the 14 classes?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>To assess the results of this classification, visualise the data on
+two PCA plots, one before and one after classification.</p>
+<p>You can use the following colour palette that uses grey for the
+unlabelled data.</p>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="sec-sl.html#cb423-1" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,</span>
+<span id="cb423-2"><a href="sec-sl.html#cb423-2" tabindex="-1"></a>         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,</span>
+<span id="cb423-3"><a href="sec-sl.html#cb423-3" tabindex="-1"></a>         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</span></code></pre></div>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Asses the choice of k=5 used above.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Using a contingency table, compare you results with those that were
+obtained using <em>support vector machine</em>, a popular classifier that was
+used in Christoforou <em>et al.</em> <span class="citation">(<label for="tufte-mn-29" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-29" class="margin-toggle">Christoforou et al. 2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>, and available in
+the <code>svm.classification</code> feature variable.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>A classification algorithm will assign a class to any unlabelled
+instance, even if it doesn’t match any of the provided classes. This
+is often the case in omics datasets such as the spatial proteomics
+example above, where not all the sub-cellular niches are annotated or
+known. We thus know that some of these assignments will be wrong from
+a biological point of view.</p>
+<p>Re-run the kNN classifer above, setting <code>prob = TRUE</code> to get the
+proportion of votes in favour of the assigned class. These are stored
+as an attribute named <em>prob</em>; read the <code>knn</code> manual page to learn how
+to extract these from the <code>knn</code> output variable.</p>
+<ul>
+<li><p>Based on these vote proportions, which results to you consider the
+most reliable?</p></li>
+<li><p>Re-generate a PCA plot keeping the classification results for the
+most reliable assignments one, and setting the unreliable ones to
+<code>unknown</code>. Interpret this figure.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="sec-ul.html"><button class="btn btn-default">Previous</button></a>
+<a href="sec-biovis.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2024-12-09
+ using 
+R version 4.4.1 (2024-06-14)
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 1 R refresher | Bioinformatics" />
+<meta property="og:type" content="book" />
+
+<meta property="og:description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain." />
+
+
+<meta name="author" content="Laurent Gatto" />
+
+<meta name="date" content="2024-12-09" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
+
+<title>Chapter 1 R refresher | Bioinformatics</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+<script>
+function copy_link(id) {
+  var dummy = document.createElement('input'),
+  text = window.location.href.split(/[?#]/)[0] + '#' + id;
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
+  
+  var tooltip = document.getElementById(id + '-tooltip');
+  tooltip.innerHTML = 'Copied!';
+}
+
+function reset_tooltip(id) {
+  var tooltip = document.getElementById(id);
+  tooltip.innerHTML = 'Copy link';
+}
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">Bioinformatics<p><p class="author">Laurent Gatto</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a id="active-page" href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a><ul class="toc-sections">
+<li class="toc"><a href="#administration"> Administration</a></li>
+<li class="toc"><a href="#basic-data-structures-and-operations"> Basic data structures and operations</a></li>
+<li class="toc"><a href="#tidyverse"> Tidyverse</a></li>
+<li class="toc"><a href="#saving-and-exporting"> Saving and exporting</a></li>
+<li class="toc"><a href="#programming"> Programming</a></li>
+<li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
+</ul>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="sec-refresher" class="section level1" number="1">
+<h1>
+<span class="header-section-number">Chapter 1</span> R refresher</h1>
+<p>The objectives of this chapter is to review some R syntax, functions
+and data structures that will be needed for the following chapters.</p>
+<div id="administration" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Administration<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('administration')" onmouseout="reset_tooltip('administration-tooltip')"><span class="tooltiptext" id="administration-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<ul>
+<li>Setting up an <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up">RStudio project</a>
+</li>
+<li>
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#r-packages">Install</a>
+packages from CRAN and
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-bioinfo.html#sec-bioconductor">Bioconductor</a>.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sec-refresher.html#cb3-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"UCLouvain-CBIO/rWSBIM1322"</span>)</span></code></pre></div>
+<ul>
+<li>
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up">Avoid saving and loading your
+workspace</a>
+(the <code>.RData</code> file).</li>
+<li>
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#getting-set-up">UTF-8 character encoding</a>.</li>
+<li>Starting a markdown document.</li>
+</ul>
+</div>
+<div id="basic-data-structures-and-operations" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Basic data structures and operations<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('basic-data-structures-and-operations')" onmouseout="reset_tooltip('basic-data-structures-and-operations-tooltip')"><span class="tooltiptext" id="basic-data-structures-and-operations-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<ul>
+<li>
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#introduction-to-r">vectors</a>,
+generating and subsetting vectors.</li>
+<li>Missing values.</li>
+<li><a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#factors">Factors</a></li>
+<li>
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startr.html#introduction-to-r">Dataframes</a> (and tibbles)</li>
+<li><a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#matrices">Matrices</a></li>
+<li>Arrays</li>
+<li><a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-startdata.html#lists">Lists</a></li>
+</ul>
+<p><strong>Summary</strong></p>
+<table>
+<thead><tr class="header">
+<th></th>
+<th>number of dimensions</th>
+<th>number of data types</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>vector</strong></td>
+<td>1 (length)</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><strong>matrix</strong></td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><strong>array</strong></td>
+<td>n</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><strong>dataframe</strong></td>
+<td>2</td>
+<td>n</td>
+</tr>
+<tr class="odd">
+<td><strong>list</strong></td>
+<td>1 (length)</td>
+<td>n</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tidyverse" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Tidyverse<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('tidyverse')" onmouseout="reset_tooltip('tidyverse-tooltip')"><span class="tooltiptext" id="tidyverse-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<ul>
+<li>The <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html">dplyr</a> package</li>
+<li><a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#pipes">Piping</a></li>
+<li>Wide and long data, and their conversion with the <code>pivot_longer</code> and
+<code>pivot_wider</code> functions.</li>
+</ul>
+</div>
+<div id="saving-and-exporting" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Saving and exporting<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('saving-and-exporting')" onmouseout="reset_tooltip('saving-and-exporting-tooltip')"><span class="tooltiptext" id="saving-and-exporting-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<ul>
+<li>
+<code>saveRDS()</code> and <code>readRDS()</code> binary data.</li>
+<li>
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-dplyr.html#exporting-data-1">Exporting
+data</a>
+with <code>write.csv</code> and <code>read.csv</code> (or <code>write_csv</code> and <code>read_csv</code>) and
+same for other types of spreadsheets.</li>
+<li>
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-vis.html#exporting-plots">Saving
+figures</a>
+(<code>ggsave</code> and file devices such as <code>png()</code>, <code>pdf()</code>, …).</li>
+<li>Package versions: <code>sessionInfo()</code>
+</li>
+</ul>
+</div>
+<div id="programming" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Programming<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('programming')" onmouseout="reset_tooltip('programming-tooltip')"><span class="tooltiptext" id="programming-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<ul>
+<li><a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-prog.html#writing-new-functions">Writing
+functions</a></li>
+<li>
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-prog.html#conditionals">Conditionals</a>
+<code>if</code>/<code>else</code>
+</li>
+<li>
+<a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-prog.html#iteration">Iteration</a>:
+<code>for</code> loops and <code>apply</code> functions</li>
+</ul>
+</div>
+<div id="additional-exercises" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> Additional exercises<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('additional-exercises')" onmouseout="reset_tooltip('additional-exercises-tooltip')"><span class="tooltiptext" id="additional-exercises-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Complete the following function. It is supposed to take two inputs,
+<code>x</code> and <code>y</code> and, depending whether the <code>x &gt; y</code> or <code>x &lt;= y</code>, it
+generates the permutation <code>sample(x, y)</code> in the first case or draws a
+sample from <code>rnorm(1000, x, y)</code> in the second case. Finally, it
+returns the sum of all values.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="sec-refresher.html#cb4-1" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb4-2"><a href="sec-refresher.html#cb4-2" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb4-3"><a href="sec-refresher.html#cb4-3" tabindex="-1"></a>    <span class="cf">if</span> () { <span class="do">## 1</span></span>
+<span id="cb4-4"><a href="sec-refresher.html#cb4-4" tabindex="-1"></a>        res <span class="ot">&lt;-</span> <span class="fu">sample</span>(,) <span class="do">## 2</span></span>
+<span id="cb4-5"><a href="sec-refresher.html#cb4-5" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb4-6"><a href="sec-refresher.html#cb4-6" tabindex="-1"></a>        res <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(, , ) <span class="do">## 3</span></span>
+<span id="cb4-7"><a href="sec-refresher.html#cb4-7" tabindex="-1"></a>    }</span>
+<span id="cb4-8"><a href="sec-refresher.html#cb4-8" tabindex="-1"></a>    <span class="fu">return</span>() <span class="do">## 4</span></span>
+<span id="cb4-9"><a href="sec-refresher.html#cb4-9" tabindex="-1"></a>}</span></code></pre></div>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Read the <code>interro2.rds</code> from the <code>rWSBIM1207</code> package (version 0.1.9
+of later) file into R. The path to the file can be found with the
+<code>rWSBIM1207::interro2.rds()</code> function.</p>
+<p>This dataframe provides the scores for 4 tests for 10 students.</p>
+<ul>
+<li>Write a function that calculates the average score for the 3 best
+tests.</li>
+<li>Calculate this average score for the 10 students.</li>
+</ul>
+<p>This can be done using the <code>apply</code> function or using <code>dplyr</code>
+functions. For the latter, see also <code>rowwise()</code>.</p>
+<p>Note the situation of students that have only presented 3 out of
+4 tests (i.e they have a <code>NA</code> for one test). It is up to you to decide
+whether you simply take the mean of the 3, or whether you prefer to
+drop the worst of 3 and calculate the mean of the 2 best marks. Make
+sure you are aware of what your implementation returns and, ideally,
+state it explicitly in your response.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Create a matrix of dimenions 100 by 100 containing data from a
+normal distribution of mean 0 and standard deviation 1.</p></li>
+<li><p>Compute the means of each row and each column using the <code>apply()</code>
+and <code>rowMeans()</code>/<code>colMeans()</code> functions. Confirm that both provide
+the same results.</p></li>
+<li><p>Compute the difference between the column means and the row
+means. Does the result make sense?</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Using the data <code>kem2_se</code> data from the <code>rWSBIM1322</code> package, compute
+de delta values or each gene (delta is the difference between the
+highest and lowest values). To do this, write a function <code>delta()</code>
+that takes a vector of numerics as input and returns the delta
+value, and apply it on the object’s assay.</p></li>
+<li><p>Re-use your <code>delta()</code> function and apply it on each sample.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="index.html"><button class="btn btn-default">Previous</button></a>
+<a href="sec-vis.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2024-12-09
+ using 
+R version 4.4.1 (2024-06-14)
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

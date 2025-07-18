@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 9 Unsupervised learning: clustering | Bioinformatics" />
+<meta property="og:type" content="book" />
+
+<meta property="og:description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain." />
+
+
+<meta name="author" content="Laurent Gatto" />
+
+<meta name="date" content="2024-12-09" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
+
+<title>Chapter 9 Unsupervised learning: clustering | Bioinformatics</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+<script>
+function copy_link(id) {
+  var dummy = document.createElement('input'),
+  text = window.location.href.split(/[?#]/)[0] + '#' + id;
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
+  
+  var tooltip = document.getElementById(id + '-tooltip');
+  tooltip.innerHTML = 'Copied!';
+}
+
+function reset_tooltip(id) {
+  var tooltip = document.getElementById(id);
+  tooltip.innerHTML = 'Copy link';
+}
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">Bioinformatics<p><p class="author">Laurent Gatto</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a id="active-page" href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a><ul class="toc-sections">
+<li class="toc"><a href="#introduction-4"> Introduction</a></li>
+<li class="toc"><a href="#how-to-measure-similarities"> How to measure similarities?</a></li>
+<li class="toc"><a href="#k-means-clustering"> k-means clustering</a></li>
+<li class="toc"><a href="#hierarchical-clustering"> Hierarchical clustering</a></li>
+<li class="toc"><a href="#pre-processing"> Pre-processing</a></li>
+<li class="toc"><a href="#additional-exercises-7"> Additional exercises</a></li>
+</ul>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="sec-ul" class="section level1" number="9">
+<h1>
+<span class="header-section-number">Chapter 9</span> Unsupervised learning: clustering</h1>
+<div id="introduction-4" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Introduction<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('introduction-4')" onmouseout="reset_tooltip('introduction-4-tooltip')"><span class="tooltiptext" id="introduction-4-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>After learing about dimensionality reduction and PCA, in this chapter
+we will focus on <strong>clustering</strong>. The goal of clustering algorithms is
+to find homogeneous subgroups within the data; the grouping is based
+on similiarities (or distance) between observations. The result of a
+clustering algorithm is to group the observations (features) into
+distinct (generally non-overlapping) groups. These groups are, even if
+imperfect (i.e. ignoring intermediate states) are often very useful in
+interpretation and assessment of the data.</p>
+<p>In this chapter we will:</p>
+<ul>
+<li>Introduce clustering methods.</li>
+<li>Learn how to apply a widely used non-parametric clustering
+algorithms <strong>k-means</strong>.</li>
+<li>Learn how to use recursive clustering approaches known as
+<strong>hierarchical clustering</strong>.</li>
+<li>Observe the influence of clustering parameters and distance metrics
+on the outputs.</li>
+<li>Provide real-life example of how to apply clustering on omics data.</li>
+</ul>
+<p>Clustering is a widely used techniques in many areas of omics data
+analysis. The <em>How does gene expression clustering work?</em>
+<span class="citation">(<label for="tufte-mn-23" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-23" class="margin-toggle">D’haeseleer 2005<span class="marginnote">D’haeseleer, P. 2005. <span>“How Does Gene Expression Clustering Work?”</span> <em>Nat Biotechnol</em> 23 (12): 1499–1501. <a href="https://doi.org/10.1038/nbt1205-1499">https://doi.org/10.1038/nbt1205-1499</a>.</span>)</span> is a useful reading to put the following chapter
+into context.</p>
+</div>
+<div id="how-to-measure-similarities" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> How to measure similarities?<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('how-to-measure-similarities')" onmouseout="reset_tooltip('how-to-measure-similarities-tooltip')"><span class="tooltiptext" id="how-to-measure-similarities-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Clustering algorithms rely on a measurement of similarity between
+between features to group them into clusters. An important step is
+thus to decide how to measure these similarities. A range of distance
+measurements are available:</p>
+<p>The <strong>Euclidean</strong> distance between two points <span class="math inline">\(A = (a_{1}, \ldots , a_{p})\)</span> and
+<span class="math inline">\(B = (b_{1}, \ldots , b_{p})\)</span> in a <span class="math inline">\(p\)</span>-dimensional space (for the <span class="math inline">\(p\)</span> features)
+is the square root of the sum of squares of the differences in all
+<span class="math inline">\(p\)</span> coordinate directions:</p>
+<p><span class="math display">\[ d(A, B) = \sqrt{ (a_{1} - b_{1})^{2} + (a_{2} - b_{2})^{2} + \ldots + (a_{p} - b_{p})^{2} } \]</span></p>
+<p>The <strong>Minkovski</strong> allows the exponent to be <span class="math inline">\(m\)</span> instead of 2, as in the Euclidean distance:</p>
+<p><span class="math display">\[ d(A, B) = ( (a_{1} - b_{1})^{m} + (a_{2} - b_{2})^{m} + \ldots + (a_{p} - b_{p})^{m} )^{\frac{1}{m}} \]</span></p>
+<p>The <strong>maximum</strong> (or <span class="math inline">\(L_{\inf}\)</span>) distance is the maximum of the absolute differences
+between coordinates:</p>
+<p><span class="math display">\[ d(A, B) = max_{i} | a_{i} − b_{i} | \]</span></p>
+<p>The <strong>Manhattan</strong> (or City Block, Taxicab or <span class="math inline">\(L_{1}\)</span>) distance takes the sum of the
+absolute differences in all coordinates:</p>
+<p><span class="math display">\[ d(A, B) = | a_{1} − b_{1} | + | a_{2} − b_{2} | + \ldots + |a_{p} − b_{p}| \]</span></p>
+<p>When computing a <strong>binary</strong> distance, the vectors are regarded as
+binary bits, with non-zero elements are <em>on</em> and zero elements are
+<em>off</em>. The distance is the proportion of bits in which only one is on
+amongst those in which at least one is on. For example, the binary
+distance between vectors <code>x</code> and <code>y</code> is 0.4 because out of the 5 pairs
+of bits that have at least a single <em>1</em> (all but the second elements),
+2 have only one (the first and fifth).</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sec-ul.html#cb347-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb347-2"><a href="sec-ul.html#cb347-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<p>The <strong>canberra</strong> distance, that computes the sum of the difference to
+the sum of each the elements of vectors:</p>
+<p><span class="math display">\[ \sum{ \frac{ | x_{i} - y_{i} | }{ | x_{i} | + | y_{i} | } } \]</span></p>
+<p><strong>Correlation based distance</strong> uses the Pearson correlation (see the
+<code>cor()</code> function and chapter <a href="sec-mlintro.html#sec-mlintro">6</a>) or its absolute value
+and transform it in into a distance metric:</p>
+<p><span class="math display">\[ d(A, B) = 1 - cor(A, B) \]</span></p>
+<p>These are some of the distances available in the <code>dist</code> function, or
+in the <code>bioDist</code> package. See also section 5.3 from <span class="citation">(<label for="tufte-mn-24" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-24" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for
+additional details.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Generate the 5 data points along 2 dimensions as illustrated below and
+calculate all their Euclidean pairwise distance using
+<code>dist()</code>. Interprete the output of the function. What class is it?</p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="sec-ul.html#cb348-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
+<span id="cb348-2"><a href="sec-ul.html#cb348-2" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb348-3"><a href="sec-ul.html#cb348-3" tabindex="-1"></a>                      <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
+<span id="cb348-4"><a href="sec-ul.html#cb348-4" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb348-5"><a href="sec-ul.html#cb348-5" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-68"></span>
+<p class="caption marginnote shownote">
+Figure 9.1: A simulated dataset composed of 5 samples.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-68-1.png" alt="A simulated dataset composed of 5 samples." width="672">
+</div>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-55" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-55', 'sol-start-55')"></span>
+</p>
+<div id="sol-body-55" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="sec-ul.html#cb349-1" tabindex="-1"></a><span class="fu">dist</span>(samples)</span></code></pre></div>
+<pre><code>##           1         2         3         4
+## 2 1.7327389                              
+## 3 1.2738181 0.4876129                    
+## 4 2.7612729 2.0466051 1.9916782          
+## 5 0.7531106 1.0161181 0.5350696 2.1793910</code></pre>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="sec-ul.html#cb351-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">dist</span>(samples))</span></code></pre></div>
+<pre><code>## [1] "dist"</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Calculate the position of the <em>average sample</em>, visualise it on the
+figure above. Which samples are respectively the closest and furthers
+to the <em>average sample</em>?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-56" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-56', 'sol-start-56')"></span>
+</p>
+<div id="sol-body-56" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="sec-ul.html#cb353-1" tabindex="-1"></a>avg_sample <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(samples)</span>
+<span id="cb353-2"><a href="sec-ul.html#cb353-2" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb353-3"><a href="sec-ul.html#cb353-3" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb353-4"><a href="sec-ul.html#cb353-4" tabindex="-1"></a><span class="fu">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-70"></span>
+<p class="caption marginnote shownote">
+Figure 9.2: Visualisation of the average sample, in red.
+</p>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-70-1.png" alt="Visualisation of the average sample, in red." width="672">
+</div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="sec-ul.html#cb354-1" tabindex="-1"></a>(dists <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">rbind</span>(samples, avg_sample)))</span></code></pre></div>
+<pre><code>##           1         2         3         4         5
+## 2 1.7327389                                        
+## 3 1.2738181 0.4876129                              
+## 4 2.7612729 2.0466051 1.9916782                    
+## 5 0.7531106 1.0161181 0.5350696 2.1793910          
+## 6 1.2133510 0.7753119 0.3627020 1.7363209 0.4858024</code></pre>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="sec-ul.html#cb356-1" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dists)</span>
+<span id="cb356-2"><a href="sec-ul.html#cb356-2" tabindex="-1"></a>d6 <span class="ot">&lt;-</span> dists[<span class="dv">6</span>, <span class="sc">-</span><span class="dv">6</span>]</span>
+<span id="cb356-3"><a href="sec-ul.html#cb356-3" tabindex="-1"></a><span class="fu">which.min</span>(d6) <span class="do">## closest</span></span></code></pre></div>
+<pre><code>## 3 
+## 3</code></pre>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="sec-ul.html#cb358-1" tabindex="-1"></a><span class="fu">which.max</span>(d6) <span class="do">## furthest</span></span></code></pre></div>
+<pre><code>## 4 
+## 4</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="k-means-clustering" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> k-means clustering<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('k-means-clustering')" onmouseout="reset_tooltip('k-means-clustering-tooltip')"><span class="tooltiptext" id="k-means-clustering-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>The k-means clustering algorithm<label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> We will learn how the algorithm works below.</span> aims at partitioning <em>n</em>
+observations into a fixed number of <em>k</em> clusters. This algorithm will
+find homogeneous clusters.</p>
+<p>In R, we use</p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="sec-ul.html#cb360-1" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">kmeans</span>(x, <span class="at">centers =</span> <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">10</span>)</span></code></pre></div>
+<p>where</p>
+<ul>
+<li>
+<code>x</code> is a numeric data matrix</li>
+<li>
+<code>centers</code> is the pre-defined number of clusters</li>
+<li>the k-means algorithm has a random component and can be repeated
+<code>nstart</code> times to improve the returned model</li>
+</ul>
+<p>To learn about k-means, let’s use the <code>giris</code> dataset, that provides
+the expression of 4 genes in 150 patients grouped in categories A, B
+or C.</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="sec-ul.html#cb361-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb361-2"><a href="sec-ul.html#cb361-2" tabindex="-1"></a><span class="fu">data</span>(giris)</span>
+<span id="cb361-3"><a href="sec-ul.html#cb361-3" tabindex="-1"></a><span class="fu">pairs</span>(giris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> giris<span class="sc">$</span>GRADE)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:girisplot"></span>
+<p class="caption marginnote shownote">
+Figure 9.3: The <em>giris</em> dataset describes 150 patients by the expression of 4 genes. Each patient was assigned a grade A, B or C.
+</p>
+<img src="WSBIM1322_files/figure-html/girisplot-1.png" alt="The *giris* dataset describes 150 patients by the expression of 4 genes. Each patient was assigned a grade A, B or C." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Run the k-means algorithm on the <code>giris</code> data, save the results in a
+new variable <code>cl</code>, and explore its output when printed. What is the
+class of <code>cl</code>?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-57" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-57', 'sol-start-57')"></span>
+</p>
+<div id="sol-body-57" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="sec-ul.html#cb362-1" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(giris[, <span class="sc">-</span><span class="dv">5</span>], <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">10</span>)</span>
+<span id="cb362-2"><a href="sec-ul.html#cb362-2" tabindex="-1"></a><span class="fu">class</span>(cl)</span></code></pre></div>
+<pre><code>## [1] "kmeans"</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>The actual results of the algorithms, i.e. the cluster membership can
+be accessed in the <code>cluster</code> element of the clustering result
+output. Extract and interpret these data.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-58" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-58', 'sol-start-58')"></span>
+</p>
+<div id="sol-body-58" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="sec-ul.html#cb364-1" tabindex="-1"></a>cl<span class="sc">$</span>cluster</span></code></pre></div>
+<pre><code>##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [75] 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [ reached getOption("max.print") -- omitted 50 entries ]</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Produce 2 PCA plots, colouring one with the original grade, and the
+other one with the results of the clustering algorithm. Compare the
+two plots.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-59" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-59', 'sol-start-59')"></span>
+</p>
+<div id="sol-body-59" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="sec-ul.html#cb366-1" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(giris[, <span class="sc">-</span><span class="dv">5</span>], <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">center =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb366-2"><a href="sec-ul.html#cb366-2" tabindex="-1"></a><span class="fu">summary</span>(pca)</span></code></pre></div>
+<pre><code>## Importance of components:
+##                           PC1    PC2     PC3     PC4
+## Standard deviation     1.7084 0.9560 0.38309 0.14393
+## Proportion of Variance 0.7296 0.2285 0.03669 0.00518
+## Cumulative Proportion  0.7296 0.9581 0.99482 1.00000</code></pre>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="sec-ul.html#cb368-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb368-2"><a href="sec-ul.html#cb368-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb368-3"><a href="sec-ul.html#cb368-3" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">fviz_pca</span>(pca, <span class="at">habillage =</span> giris<span class="sc">$</span>GRADE)</span>
+<span id="cb368-4"><a href="sec-ul.html#cb368-4" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">fviz_pca</span>(pca, <span class="at">habillage =</span> cl<span class="sc">$</span>cluster)</span>
+<span id="cb368-5"><a href="sec-ul.html#cb368-5" tabindex="-1"></a>p1 <span class="sc">/</span> p2</span></code></pre></div>
+<div class="figure fullwidth">
+<span style="display:block;" id="fig:solkmcl3"></span>
+<img src="WSBIM1322_files/figure-html/solkmcl3-1.png" alt="PCA analysis of the `giris` data, highlighting the original groups (left) and the clustering results (right)." width="960"><p class="caption marginnote shownote">
+Figure 9.4: PCA analysis of the <code>giris</code> data, highlighting the original groups (left) and the clustering results (right).
+</p>
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Compare the categories and clustering results and count the number of
+matches/mismatches.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-60" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-60', 'sol-start-60')"></span>
+</p>
+<div id="sol-body-60" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="sec-ul.html#cb369-1" tabindex="-1"></a><span class="fu">table</span>(giris<span class="sc">$</span>GRADE, cl<span class="sc">$</span>cluster)</span></code></pre></div>
+<pre><code>##    
+##      1  2  3
+##   A  0 50  0
+##   B 48  0  2
+##   C 14  0 36</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div id="how-does-k-means-work" class="section level3 unnumbered">
+<h3>How does k-means work<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('how-does-k-means-work')" onmouseout="reset_tooltip('how-does-k-means-work-tooltip')"><span class="tooltiptext" id="how-does-k-means-work-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>The algorithm starts from a matrix of <em>n</em> features in <em>p</em> observations
+and proceeds as follows:</p>
+<p><strong>Initialisation</strong>: randomly assign the <em>p</em> obervations to <em>k</em> clusters.</p>
+<div class="figure">
+<span style="display:block;" id="fig:kmworksinit"></span>
+<p class="caption marginnote shownote">
+Figure 9.5: k-means random intialisation
+</p>
+<img src="WSBIM1322_files/figure-html/kmworksinit-1.png" alt="k-means random intialisation" width="864">
+</div>
+<p><strong>Iteration</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>Calculate the centre of each subgroup as the average position of
+all observations is that subgroup.</li>
+<li>Each observation is then assigned to the group of its nearest
+centre.</li>
+</ol>
+<p>It’s also possible to stop the algorithm after a certain number of
+iterations, or once the centres move less than a certain distance.</p>
+<div class="figure fullwidth">
+<span style="display:block;" id="fig:kmworksiter"></span>
+<img src="WSBIM1322_files/figure-html/kmworksiter-1.png" alt="k-means iteration: calculate centers (left) and assign new cluster membership (right)" width="960"><p class="caption marginnote shownote">
+Figure 9.6: k-means iteration: calculate centers (left) and assign new cluster membership (right)
+</p>
+</div>
+<p><strong>Termination</strong>: Repeat the iteration steps until no point changes its
+cluster membership.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-73"></span>
+<p class="caption marginnote shownote">
+Figure 9.7: k-means convergence (credit Wikipedia).
+</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif" alt="k-means convergence (credit Wikipedia)." width="100%">
+</div>
+</div>
+<div id="model-selection" class="section level3" number="9.3.1">
+<h3>
+<span class="header-section-number">9.3.1</span> Model selection<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('model-selection')" onmouseout="reset_tooltip('model-selection-tooltip')"><span class="tooltiptext" id="model-selection-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Due to the random initialisation, one can obtain different clustering
+results.</p>
+<div class="figure fullwidth">
+<span style="display:block;" id="fig:unnamed-chunk-74"></span>
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-74-1.png" alt="Different k-means results on the same `girsi` data" width="960"><p class="caption marginnote shownote">
+Figure 9.8: Different k-means results on the same <code>girsi</code> data
+</p>
+</div>
+<p>When k-means is run multiple times (as set by <code>nstart</code>), the best
+outcome, i.e. the one that generates the smallest <em>total within
+cluster sum of squares (SS)</em>, is selected. The total within SS is
+calculated as:</p>
+<p>For each cluster results:</p>
+<ul>
+<li>for each observation, determine the squared euclidean distance to
+centre of cluster</li>
+<li>sum all distances</li>
+</ul>
+<p>This value is available as <code>tot.withinss</code> in a <code>kmeans</code> result:</p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="sec-ul.html#cb371-1" tabindex="-1"></a>cl<span class="sc">$</span>tot.withinss</span></code></pre></div>
+<pre><code>## [1] 78.85144</code></pre>
+<p>Note that this is a <strong>local minimum</strong>; there is no guarantee to obtain
+a global minimum.</p>
+</div>
+<div id="how-to-determine-the-number-of-clusters" class="section level3" number="9.3.2">
+<h3>
+<span class="header-section-number">9.3.2</span> How to determine the number of clusters<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('how-to-determine-the-number-of-clusters')" onmouseout="reset_tooltip('how-to-determine-the-number-of-clusters-tooltip')"><span class="tooltiptext" id="how-to-determine-the-number-of-clusters-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Run k-means with <code>k=1</code>, <code>k=2</code>, …, <code>k=n</code>
+</li>
+<li>Record total within SS for each value of k.</li>
+<li>Choose k at the <em>elbow</em> position, as illustrated below.</li>
+</ol>
+<div class="figure">
+<span style="display:block;" id="fig:kmelbow"></span>
+<p class="caption marginnote shownote">
+Figure 9.9: Total within sum of squared distances for different values is <em>k</em>.
+</p>
+<img src="WSBIM1322_files/figure-html/kmelbow-1.png" alt="Total within sum of squared distances for different values is *k*." width="672">
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Calculate the total within sum of squares for k from 1 to 5 for our
+<code>giris</code> test data, and reproduce the figure above.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-61" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-61', 'sol-start-61')"></span>
+</p>
+<div id="sol-body-61" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="sec-ul.html#cb373-1" tabindex="-1"></a>ks <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb373-2"><a href="sec-ul.html#cb373-2" tabindex="-1"></a>tot_within_ss <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ks, <span class="cf">function</span>(k) {</span>
+<span id="cb373-3"><a href="sec-ul.html#cb373-3" tabindex="-1"></a>    cl <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(giris[, <span class="sc">-</span><span class="dv">5</span>], k, <span class="at">nstart =</span> <span class="dv">10</span>)</span>
+<span id="cb373-4"><a href="sec-ul.html#cb373-4" tabindex="-1"></a>    cl<span class="sc">$</span>tot.withinss</span>
+<span id="cb373-5"><a href="sec-ul.html#cb373-5" tabindex="-1"></a>})</span>
+<span id="cb373-6"><a href="sec-ul.html#cb373-6" tabindex="-1"></a><span class="fu">plot</span>(ks, tot_within_ss, <span class="at">type =</span> <span class="st">"b"</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/solkmelbow-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>See also this interactive <a href="https://k-means-explorable.vercel.app/">K-Means Clustering Explorable
+Explainer</a> to help you
+understand the algorithm, its parameters and dig into some additional
+details.</p>
+</div>
+</div>
+<div id="hierarchical-clustering" class="section level2" number="9.4">
+<h2>
+<span class="header-section-number">9.4</span> Hierarchical clustering<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('hierarchical-clustering')" onmouseout="reset_tooltip('hierarchical-clustering-tooltip')"><span class="tooltiptext" id="hierarchical-clustering-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div id="how-does-hierarchical-clustering-work" class="section level3" number="9.4.1">
+<h3>
+<span class="header-section-number">9.4.1</span> How does hierarchical clustering work<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('how-does-hierarchical-clustering-work')" onmouseout="reset_tooltip('how-does-hierarchical-clustering-work-tooltip')"><span class="tooltiptext" id="how-does-hierarchical-clustering-work-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p><strong>Initialisation</strong>: Starts by assigning each of the n points its own cluster</p>
+<p><strong>Iteration</strong></p>
+<ol style="list-style-type: decimal">
+<li>Find the two nearest clusters, and join them together, leading to
+n-1 clusters</li>
+<li>Continue the cluster merging process until all are grouped into a
+single cluster</li>
+</ol>
+<p><strong>Termination:</strong> All observations are grouped within a single cluster.</p>
+<div class="figure">
+<span style="display:block;" id="fig:hcldata"></span>
+<p class="caption marginnote shownote">
+Figure 9.10: Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right).
+</p>
+<img src="WSBIM1322_files/figure-html/hcldata-1.png" alt="Hierarchical clustering: initialisation (left) and colour-coded results after iteration (right)." width="1152">
+</div>
+<p>The results of hierarchical clustering are typically visualised along
+a <strong>dendrogram</strong><label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> Note that dendrograms, or trees in general, are used in
+evolutionary biology to visualise the evolutionary history of
+taxa. In this course, we use them to represent similarities (based
+on distances) and don’t assess any evolutionary relations between
+features or samples.</span>, where the distance between the clusters is
+proportional to the branch lengths.</p>
+<div class="figure">
+<span style="display:block;" id="fig:hcldendro"></span>
+<p class="caption marginnote shownote">
+Figure 9.11: Visualisation of the hierarchical clustering results on a dendrogram
+</p>
+<img src="WSBIM1322_files/figure-html/hcldendro-1.png" alt="Visualisation of the hierarchical clustering results on a dendrogram" width="672">
+</div>
+<p>In R:</p>
+<ul>
+<li>Calculate the distance using <code>dist</code>, typically the Euclidean
+distance.</li>
+<li>Apply hierarchical clustering on this distance matrix using
+<code>hclust</code>.</li>
+</ul>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Apply hierarchical clustering on the <code>giris</code> data and generate a
+dendrogram using the dedicated <code>plot</code> method.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-62" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-62', 'sol-start-62')"></span>
+</p>
+<div id="sol-body-62" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="sec-ul.html#cb374-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">dist</span>(giris[, <span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb374-2"><a href="sec-ul.html#cb374-2" tabindex="-1"></a>hcl <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d)</span>
+<span id="cb374-3"><a href="sec-ul.html#cb374-3" tabindex="-1"></a>hcl</span></code></pre></div>
+<pre><code>## 
+## Call:
+## hclust(d = d)
+## 
+## Cluster method   : complete 
+## Distance         : euclidean 
+## Number of objects: 150</code></pre>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="sec-ul.html#cb376-1" tabindex="-1"></a><span class="fu">plot</span>(hcl)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/hclsol-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p>The <code>method</code> argument to <code>hclust</code> defines how the clusters are grouped
+together, which depends on how distances between a cluster and an
+obsevation (for example <em>(3, 5)</em> and <em>1</em> above), or between cluster
+(for example (<em>(2, 4)</em> and <em>(1, (3, 5))</em> above) are computed.</p>
+<p>The <strong>complete linkage</strong> (default) method defines the distances
+between clusters as the largest one between any two observations in
+them, while the <strong>single linkage</strong> (also called nearest neighbour
+method) will use the smallest distance between observations. The
+<strong>average linkage</strong> method is halfways between the two. <strong>Ward’s</strong>
+method takes an analysis of variance approach, and aims at minimising
+the variance within clusters.</p>
+<p>See <a href="https://www.huber.embl.de/msmb/Chap-Clustering.html#hierarchical-clustering">section 5.6</a>
+of <em>Modern Statistics of Modern Biology</em> <span class="citation">(<label for="tufte-mn-25" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-25" class="margin-toggle">Holmes and Huber 2019<span class="marginnote">Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. Cambridge Univeristy Press.</span>)</span> for further details.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Using the <code>giris</code> example, compare the linkage methods presented above.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-63" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-63', 'sol-start-63')"></span>
+</p>
+<div id="sol-body-63" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="sec-ul.html#cb377-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">dist</span>(giris[, <span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb377-2"><a href="sec-ul.html#cb377-2" tabindex="-1"></a>hcl_complete <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">"complete"</span>)</span>
+<span id="cb377-3"><a href="sec-ul.html#cb377-3" tabindex="-1"></a>hcl_single <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">"single"</span>)</span>
+<span id="cb377-4"><a href="sec-ul.html#cb377-4" tabindex="-1"></a>hcl_average <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">"average"</span>)</span>
+<span id="cb377-5"><a href="sec-ul.html#cb377-5" tabindex="-1"></a>hcl_ward <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">"ward.D"</span>)</span>
+<span id="cb377-6"><a href="sec-ul.html#cb377-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb377-7"><a href="sec-ul.html#cb377-7" tabindex="-1"></a><span class="fu">plot</span>(hcl_complete)</span>
+<span id="cb377-8"><a href="sec-ul.html#cb377-8" tabindex="-1"></a><span class="fu">plot</span>(hcl_single)</span>
+<span id="cb377-9"><a href="sec-ul.html#cb377-9" tabindex="-1"></a><span class="fu">plot</span>(hcl_average)</span>
+<span id="cb377-10"><a href="sec-ul.html#cb377-10" tabindex="-1"></a><span class="fu">plot</span>(hcl_ward)</span></code></pre></div>
+<div class="figure fullwidth">
+<span style="display:block;" id="fig:linkcomp"></span>
+<img src="WSBIM1322_files/figure-html/linkcomp-1.png" alt="Effect of using different linkage methods." width="768"><p class="caption marginnote shownote">
+Figure 9.12: Effect of using different linkage methods.
+</p>
+</div>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="defining-clusters" class="section level3" number="9.4.2">
+<h3>
+<span class="header-section-number">9.4.2</span> Defining clusters<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('defining-clusters')" onmouseout="reset_tooltip('defining-clusters-tooltip')"><span class="tooltiptext" id="defining-clusters-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>After producing the hierarchical clustering result, we need to <em>cut
+the tree (dendrogram)</em> at a specific height to defined the
+clusters. For example, on our test dataset above, we could decide to
+cut it at a distance around 1.5, with would produce 2 clusters.</p>
+<div class="figure">
+<span style="display:block;" id="fig:cuthcl"></span>
+<p class="caption marginnote shownote">
+Figure 9.13: Cutting the dendrogram at height 1.5.
+</p>
+<img src="WSBIM1322_files/figure-html/cuthcl-1.png" alt="Cutting the dendrogram at height 1.5." width="672">
+</div>
+<p>In R we can us the <code>cutree</code> function to</p>
+<ul>
+<li>cut the tree at a specific height: <code>cutree(hcl, h = 1.5)</code>
+</li>
+<li>cut the tree to get a certain number of clusters: <code>cutree(hcl, k = 3)</code>
+</li>
+</ul>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Cut the iris hierarchical clustering result at a height to obtain
+3 clusters by setting <code>h</code>.</p></li>
+<li><p>Cut the iris hierarchical clustering result at a height to obtain
+3 clusters by setting directly <code>k</code>, and verify that both provide
+the same results.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-64" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-64', 'sol-start-64')"></span>
+</p>
+<div id="sol-body-64" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="sec-ul.html#cb378-1" tabindex="-1"></a><span class="fu">plot</span>(hcl)</span>
+<span id="cb378-2"><a href="sec-ul.html#cb378-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">3.9</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/cuthclsol-1.png" width="672"></p>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="sec-ul.html#cb379-1" tabindex="-1"></a><span class="fu">cutree</span>(hcl, <span class="at">k =</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 3 2 3 2 3 2 3 3 3 3 2 3 2 3 3 2 3 2 3 2 2
+##  [75] 2 2 2 2 2 3 3 3 3 2 3 2 2 2 3 3 3 2 3 3 3 3 3 2 3 3
+##  [ reached getOption("max.print") -- omitted 50 entries ]</code></pre>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="sec-ul.html#cb381-1" tabindex="-1"></a><span class="fu">cutree</span>(hcl, <span class="at">h =</span> <span class="fl">3.9</span>)</span></code></pre></div>
+<pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 3 2 3 2 3 2 3 3 3 3 2 3 2 3 3 2 3 2 3 2 2
+##  [75] 2 2 2 2 2 3 3 3 3 2 3 2 2 2 3 3 3 2 3 3 3 3 3 2 3 3
+##  [ reached getOption("max.print") -- omitted 50 entries ]</code></pre>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="sec-ul.html#cb383-1" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">cutree</span>(hcl, <span class="at">k =</span> <span class="dv">3</span>), <span class="fu">cutree</span>(hcl, <span class="at">h =</span> <span class="fl">3.9</span>))</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="pre-processing" class="section level2" number="9.5">
+<h2>
+<span class="header-section-number">9.5</span> Pre-processing<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('pre-processing')" onmouseout="reset_tooltip('pre-processing-tooltip')"><span class="tooltiptext" id="pre-processing-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Many of the machine learning methods that are regularly used are
+sensitive to difference scales. This applies to unsupervised methods
+as well as supervised methods.</p>
+<p>A typical way to pre-process the data prior to learning is to scale
+the data (see chapter <a href="sec-norm.html#sec-norm">5</a>), or apply principal component
+analysis (see chapter <a href="sec-dimred.html#sec-dimred">8</a>).</p>
+<p>In R, scaling is done with the <code>scale</code> function.</p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Using the <code>mtcars</code> data as an example, verify that the variables are
+of different scales, then scale the data. To observe the effect
+different scales, compare the hierarchical clusters obtained on the
+original and scaled data.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-65" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-65', 'sol-start-65')"></span>
+</p>
+<div id="sol-body-65" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="sec-ul.html#cb385-1" tabindex="-1"></a><span class="fu">boxplot</span>(mtcars)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/scalesol-1.png" width="1152"></p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="sec-ul.html#cb386-1" tabindex="-1"></a>hcl1 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(mtcars))</span>
+<span id="cb386-2"><a href="sec-ul.html#cb386-2" tabindex="-1"></a>hcl2 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(<span class="fu">scale</span>(mtcars)))</span>
+<span id="cb386-3"><a href="sec-ul.html#cb386-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb386-4"><a href="sec-ul.html#cb386-4" tabindex="-1"></a><span class="fu">plot</span>(hcl1, <span class="at">main =</span> <span class="st">"original data"</span>)</span>
+<span id="cb386-5"><a href="sec-ul.html#cb386-5" tabindex="-1"></a><span class="fu">plot</span>(hcl2, <span class="at">main =</span> <span class="st">"scaled data"</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/scalesol-2.png" width="1152"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+</div>
+<div id="additional-exercises-7" class="section level2" number="9.6">
+<h2>
+<span class="header-section-number">9.6</span> Additional exercises<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('additional-exercises-7')" onmouseout="reset_tooltip('additional-exercises-7-tooltip')"><span class="tooltiptext" id="additional-exercises-7-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Load the small <code>g3</code> data set that provides expression profiles of
+genes 1 to 3 in samples 1 to 5 and visualise these.</p></li>
+<li><p>Compute and compare the distances between the genes using the
+Euclidean and correlation distances (these can be calculated, for
+example, with the <code>euc</code> and <code>cor.dist</code> from the <code>bioDist</code>
+package). Interpret these distances based on the visualisation
+above.</p></li>
+<li><p>Compare the effect of scaling on these distances. Visualise the
+scaled and unscaled profiles to help interpret the distances.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Following up the exercise above, produce and interpret the four
+hierarchical clusterings, build using Euclidean and correlation
+distances (these can be calculated, for example, with the <code>euc</code> and
+<code>cor.dist</code> from the <code>bioDist</code> package).</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>An important caveat of clustering is that a clustering algorithm such
+as <em>k-means</em> will always find clusters, even when there is
+none. Illustrate this by creating a 2-dimensional random data by
+generation a matrix of 100 rows and 2 columns from <em>N(0, 1)</em> and
+searching for 2, 3, 4, 5 and 6 cluster. Visualise these results and assess
+whether they look convincing or not.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Using the same value <code>k = 3</code>, verify if k-means and hierarchical clustering
+produce the similar or identical results on the <code>giris</code> data. Visualise the
+two sets of results on PCA plots.</p>
+<p>Which one, if any, is correct?</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<ul>
+<li><p>Load the <code>mulvey2015_se</code> data from the <code>pRolocdata</code> package. The goal
+of this exercise is to identify proteins that have a specific
+expression pattern over the cell development time. Do do so,
+permform a k-means clustering setting k = 12.</p></li>
+<li><p>Visualise the expression profiles over the development time for the
+12 clusters identified above. See below for an example of such a
+visualisation.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="figure fullwidth">
+<img src="WSBIM1322_files/figure-html/unnamed-chunk-76-1.png" alt=" " width="1152"><p class="caption marginnote shownote">
+</p>
+</div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Using the <code>hyperLOPIT2015_se</code> data from the <code>pRolocdata</code> package:</p>
+<ul>
+<li><p>Filter out all features that have an <code>unknown</code> under the feature
+variable <code>markers</code>.</p></li>
+<li><p>Then, for all the marker classes (organelles), calculate an average
+profile by computing the mean value for each column.</p></li>
+<li><p>Perform a hierarchical clustering showing the relation between the
+average marker profiles, such as shown below.</p></li>
+</ul>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-77-1.png" width="672"></p>
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="sec-dimred.html"><button class="btn btn-default">Previous</button></a>
+<a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2024-12-09
+ using 
+R version 4.4.1 (2024-06-14)
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 11 Visualising biomolecular data | Bioinformatics" />
+<meta property="og:type" content="book" />
+
+<meta property="og:description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain." />
+
+
+<meta name="author" content="Laurent Gatto" />
+
+<meta name="date" content="2024-12-09" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Course material for the Bbioinformatics (WSBIM1322) course at UCLouvain.">
+
+<title>Chapter 11 Visualising biomolecular data | Bioinformatics</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+<script>
+function copy_link(id) {
+  var dummy = document.createElement('input'),
+  text = window.location.href.split(/[?#]/)[0] + '#' + id;
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
+  
+  var tooltip = document.getElementById(id + '-tooltip');
+  tooltip.innerHTML = 'Copied!';
+}
+
+function reset_tooltip(id) {
+  var tooltip = document.getElementById(id);
+  tooltip.innerHTML = 'Copy link';
+}
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">Bioinformatics<p><p class="author">Laurent Gatto</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="sec-refresher.html" id="toc-sec-refresher"><span class="toc-section-number">1</span> R refresher</a>
+<a href="sec-vis.html" id="toc-sec-vis"><span class="toc-section-number">2</span> Data visualisation</a>
+<a href="sec-obj.html" id="toc-sec-obj"><span class="toc-section-number">3</span> High-level data structures</a>
+<a href="sec-biostrings.html" id="toc-sec-biostrings"><span class="toc-section-number">4</span> Manipulating sequences with Biostrings</a>
+<a href="sec-norm.html" id="toc-sec-norm"><span class="toc-section-number">5</span> Data normalisation: centring, scaling, quantile normalisation</a>
+<a href="sec-mlintro.html" id="toc-sec-mlintro"><span class="toc-section-number">6</span> Introduction to statistical machine learning</a>
+<a href="sec-testing.html" id="toc-sec-testing"><span class="toc-section-number">7</span> Hypothesis testing</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">8</span> Unsupervised learning: dimensionality reduction</a>
+<a href="sec-ul.html" id="toc-sec-ul"><span class="toc-section-number">9</span> Unsupervised learning: clustering</a>
+<a href="sec-sl.html" id="toc-sec-sl"><span class="toc-section-number">10</span> Supervised learning</a>
+<a id="active-page" href="sec-biovis.html" id="toc-sec-biovis"><span class="toc-section-number">11</span> Visualising biomolecular data</a><ul class="toc-sections">
+<li class="toc"><a href="#heatmaps"> Heatmaps</a></li>
+<li class="toc"><a href="#visualising-intersections-between-sets"> Visualising intersections between sets</a></li>
+</ul>
+<a href="sec-ccl.html" id="toc-sec-ccl"><span class="toc-section-number">12</span> Conclusions</a>
+<a href="sec-si.html" id="toc-sec-si"><span class="toc-section-number">13</span> Session information</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="sec-biovis" class="section level1" number="11">
+<h1>
+<span class="header-section-number">Chapter 11</span> Visualising biomolecular data</h1>
+<p>The goal of this chapter is to learn some additional visualisation
+that are widely used in biomedical data analysis, namely</p>
+<ul>
+<li>
+<strong>Heatmaps</strong>, including an application of the hierarchical
+clustering that was seen in chapter <a href="sec-ul.html#sec-ul">9</a>.</li>
+<li>Visualisation of intersections, in particular <strong>Venn</strong> and <strong>UpSet</strong>
+plots.</li>
+</ul>
+<!-- - The *[Gviz](https://bioconductor.org/packages/3.20/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> Heatmaps<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('heatmaps')" onmouseout="reset_tooltip('heatmaps-tooltip')"><span class="tooltiptext" id="heatmaps-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="sec-biovis.html#cb424-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"pRolocdata"</span>)</span>
+<span id="cb424-2"><a href="sec-biovis.html#cb424-2" tabindex="-1"></a><span class="fu">data</span>(mulvey2015norm_se)</span>
+<span id="cb424-3"><a href="sec-biovis.html#cb424-3" tabindex="-1"></a><span class="fu">heatmap</span>(<span class="fu">assay</span>(mulvey2015norm_se))</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:heatmapmulvey"></span>
+<p class="caption marginnote shownote">
+Figure 11.1: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data.
+</p>
+<img src="WSBIM1322_files/figure-html/heatmapmulvey-1.png" alt="Heatmap of the (normalised) Mulvey et al. 2015 proteomic data." width="672">
+</div>
+<p>A heatmap is composed of two hierarchical clusters (one along the
+rows, one along the columns, leading to their re-ordering based on
+their similarity) and a intensity matrix. Each of these components is
+subject to parameters and options.</p>
+<p>As we have seen above, the distance used for clustering can have a
+substantial effect on the results, which is conformed below.</p>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="sec-biovis.html#cb425-1" tabindex="-1"></a><span class="fu">heatmap</span>(<span class="fu">assay</span>(mulvey2015norm_se), <span class="at">distfun =</span> cor.dist)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:heatmapcor"></span>
+<p class="caption marginnote shownote">
+Figure 11.2: Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances.
+</p>
+<img src="WSBIM1322_files/figure-html/heatmapcor-1.png" alt="Heatmap of the (normalised) Mulvey et al. 2015 proteomic data using correlation distances." width="672">
+</div>
+<p>Another important argument, <code>scale</code> controls whether rows, columns or
+none are scaled. Let’s re-use the toy data from the hierarchical
+clustering section below.</p>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="sec-biovis.html#cb426-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb426-2"><a href="sec-biovis.html#cb426-2" tabindex="-1"></a><span class="fu">data</span>(g3)</span>
+<span id="cb426-3"><a href="sec-biovis.html#cb426-3" tabindex="-1"></a><span class="fu">heatmap</span>(g3, <span class="at">scale =</span> <span class="st">"none"</span>, <span class="at">main =</span> <span class="st">"No scaling"</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:heatmapscale1"></span>
+<p class="caption marginnote shownote">
+Figure 11.3: Effect of scaling on the heatmap output: no scaling.
+</p>
+<img src="WSBIM1322_files/figure-html/heatmapscale1-1.png" alt="Effect of scaling on the heatmap output: no scaling." width="672">
+</div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="sec-biovis.html#cb427-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb427-2"><a href="sec-biovis.html#cb427-2" tabindex="-1"></a><span class="fu">data</span>(g3)</span>
+<span id="cb427-3"><a href="sec-biovis.html#cb427-3" tabindex="-1"></a><span class="fu">heatmap</span>(g3, <span class="at">scale =</span> <span class="st">"row"</span>, <span class="at">main =</span> <span class="st">"Scaling along rows"</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:heatmapscale2"></span>
+<p class="caption marginnote shownote">
+Figure 11.4: Effect of scaling on the heatmap output: scaling along the rows.
+</p>
+<img src="WSBIM1322_files/figure-html/heatmapscale2-1.png" alt="Effect of scaling on the heatmap output: scaling along the rows." width="672">
+</div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="sec-biovis.html#cb428-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb428-2"><a href="sec-biovis.html#cb428-2" tabindex="-1"></a><span class="fu">data</span>(g3)</span>
+<span id="cb428-3"><a href="sec-biovis.html#cb428-3" tabindex="-1"></a><span class="fu">heatmap</span>(g3, <span class="at">scale =</span> <span class="st">"column"</span>, <span class="at">main =</span> <span class="st">"Scaling along columns"</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:heatmapscale3"></span>
+<p class="caption marginnote shownote">
+Figure 11.5: Effect of scaling on the heatmap output: scaling along the columns.
+</p>
+<img src="WSBIM1322_files/figure-html/heatmapscale3-1.png" alt="Effect of scaling on the heatmap output: scaling along the columns." width="672">
+</div>
+<p>Based on the caveats above, it is essential to present and interpret
+heatmaps with great care.</p>
+<p>There exists several packages that allow to produce heatmaps with
+various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.20/Heatplus">Heatplus</a></em> package, or
+the <em><a href="https://bioconductor.org/packages/3.20/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation
+<a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html">here</a>),
+demonstrated below.</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="sec-biovis.html#cb429-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ComplexHeatmap"</span>)</span>
+<span id="cb429-2"><a href="sec-biovis.html#cb429-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">assay</span>(mulvey2015norm_se)</span>
+<span id="cb429-3"><a href="sec-biovis.html#cb429-3" tabindex="-1"></a>hcl <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(x))</span>
+<span id="cb429-4"><a href="sec-biovis.html#cb429-4" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hcl, <span class="at">k =</span> <span class="dv">12</span>)</span>
+<span id="cb429-5"><a href="sec-biovis.html#cb429-5" tabindex="-1"></a>ha1 <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(<span class="at">time =</span> mulvey2015norm_se<span class="sc">$</span>times)</span>
+<span id="cb429-6"><a href="sec-biovis.html#cb429-6" tabindex="-1"></a>ha2 <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(<span class="at">boxplot =</span> <span class="fu">anno_boxplot</span>(x))</span>
+<span id="cb429-7"><a href="sec-biovis.html#cb429-7" tabindex="-1"></a>ha3 <span class="ot">&lt;-</span> <span class="fu">rowAnnotation</span>(<span class="at">cluster =</span> <span class="fu">factor</span>(cl))</span>
+<span id="cb429-8"><a href="sec-biovis.html#cb429-8" tabindex="-1"></a><span class="fu">Heatmap</span>(x,</span>
+<span id="cb429-9"><a href="sec-biovis.html#cb429-9" tabindex="-1"></a>        <span class="at">top_annotation =</span> ha1,</span>
+<span id="cb429-10"><a href="sec-biovis.html#cb429-10" tabindex="-1"></a>        <span class="at">bottom_annotation =</span> ha2,</span>
+<span id="cb429-11"><a href="sec-biovis.html#cb429-11" tabindex="-1"></a>        <span class="at">column_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">8</span>),</span>
+<span id="cb429-12"><a href="sec-biovis.html#cb429-12" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb429-13"><a href="sec-biovis.html#cb429-13" tabindex="-1"></a>    ha3</span></code></pre></div>
+<div class="figure fullwidth">
+<span style="display:block;" id="fig:complexheatmap"></span>
+<img src="WSBIM1322_files/figure-html/complexheatmap-1.png" alt="An annotated heatmap produced with the `ComplexHeatmap` Bioconductor package." width="672"><p class="caption marginnote shownote">
+Figure 11.6: An annotated heatmap produced with the <code>ComplexHeatmap</code> Bioconductor package.
+</p>
+</div>
+<p>Other powerful packages to generate and customise heatmaps are
+<a href="https://rlbarter.github.io/superheat/">superheat</a> and
+<a href="https://github.com/raivokolde/pheatmap">pheatmap</a>.</p>
+<p>Finally, the <em><a href="https://github.com/talgalili/heatmaply">heatmaply</a></em>,
+<em><a href="https://github.com/rstudio/d3heatmap">d3heatmap</a></em> and <a href="https://ropensci.github.io/iheatmapr/index.html"><em>iheatmapr</em></a>
+packages can be used to generate interactive heatmaps.</p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="sec-biovis.html#cb430-1" tabindex="-1"></a><span class="do">## prepare the data</span></span>
+<span id="cb430-2"><a href="sec-biovis.html#cb430-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"pRolocdata"</span>)</span>
+<span id="cb430-3"><a href="sec-biovis.html#cb430-3" tabindex="-1"></a><span class="fu">data</span>(hyperLOPIT2015_se)</span>
+<span id="cb430-4"><a href="sec-biovis.html#cb430-4" tabindex="-1"></a><span class="do">## interactive heatmap</span></span>
+<span id="cb430-5"><a href="sec-biovis.html#cb430-5" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"heatmaply"</span>)</span>
+<span id="cb430-6"><a href="sec-biovis.html#cb430-6" tabindex="-1"></a><span class="fu">heatmaply</span>(<span class="fu">assay</span>(hyperLOPIT2015_se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="sec-biovis.html#cb431-1" tabindex="-1"></a><span class="fu">heatmaply</span>(<span class="fu">assay</span>(hyperLOPIT2015_se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, ],</span>
+<span id="cb431-2"><a href="sec-biovis.html#cb431-2" tabindex="-1"></a>          <span class="at">RowSideColors =</span> <span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(<span class="fu">rowData</span>(hyperLOPIT2015_se)<span class="sc">$</span>markers[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>])))</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="sec-biovis.html#cb432-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"d3heatmap"</span>)</span>
+<span id="cb432-2"><a href="sec-biovis.html#cb432-2" tabindex="-1"></a><span class="fu">d3heatmap</span>(<span class="fu">assay</span>(hyperLOPIT2015_se))</span></code></pre></div>
+<p>See also <em>A tutorial in displaying mass spectrometry-based proteomic
+data using heat maps</em> <span class="citation">(<label for="tufte-mn-30" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-30" class="margin-toggle">Key 2012<span class="marginnote">Key, M. 2012. <span>“A Tutorial in Displaying Mass Spectrometry-Based Proteomic Data Using Heat Maps.”</span> <em>BMC Bioinformatics</em> 13 Suppl 16: S10. <a href="https://doi.org/10.1186/1471-2105-13-S16-S10">https://doi.org/10.1186/1471-2105-13-S16-S10</a>.</span>)</span>, that applies to any type of omics
+data (not only proteomics) for a useful reference.</p>
+</div>
+<div id="visualising-intersections-between-sets" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> Visualising intersections between sets<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('visualising-intersections-between-sets')" onmouseout="reset_tooltip('visualising-intersections-between-sets-tooltip')"><span class="tooltiptext" id="visualising-intersections-between-sets-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Computing and visualising intersections is a common task in data
+analysis. Venn and Euler diagrams are popular representation when
+comparing sets and their intersection. Two useful R packages to
+generate such plots are
+<em><a href="https://CRAN.R-project.org/package=venneuler">venneuler</a></em> and <em><a href="https://github.com/js229/Vennerable">Vennerable</a></em><label for="tufte-sn-15" class="margin-toggle sidenote-number">15</label><input type="checkbox" id="tufte-sn-15" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">15</span> You can install <code>Vennerable</code> with
+<code>BiocManager::install("js229/Vennerable")</code>.</span>.</p>
+<p>We will use the <code>mulvey2015norm_se</code> feature names to generate a test data:</p>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="sec-biovis.html#cb433-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb433-2"><a href="sec-biovis.html#cb433-2" tabindex="-1"></a>feat_list <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">3</span>,</span>
+<span id="cb433-3"><a href="sec-biovis.html#cb433-3" tabindex="-1"></a>                       <span class="fu">sample</span>(<span class="fu">rownames</span>(mulvey2015norm_se), <span class="dv">555</span>),</span>
+<span id="cb433-4"><a href="sec-biovis.html#cb433-4" tabindex="-1"></a>                       <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb433-5"><a href="sec-biovis.html#cb433-5" tabindex="-1"></a><span class="fu">names</span>(feat_list) <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<p>The <code>Venn</code> function from the <code>Vennerable</code> package takes a list as
+input, and computes all possible intersections between these elements
+of the list. In the output below</p>
+<ul>
+<li>
+<code>000</code> refers to the empty set that are present in none of the
+element of the list;</li>
+<li>
+<code>001</code> is the set of items that are unique to the third element
+(named <code>C</code>) of our list;</li>
+<li>…</li>
+<li>
+<code>011</code> is the set of items that is shared by the second (<code>B</code>) and
+third (<code>C</code>) element (and absent from the first one) of our list;</li>
+<li>
+<code>111</code> is the set of items that are shared between all elements of
+our list.</li>
+</ul>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="sec-biovis.html#cb434-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"Vennerable"</span>)</span>
+<span id="cb434-2"><a href="sec-biovis.html#cb434-2" tabindex="-1"></a>(v <span class="ot">&lt;-</span> <span class="fu">Venn</span>(feat_list))</span></code></pre></div>
+<pre><code>## A Venn object on 3 sets named
+## A,B,C 
+## 000 100 010 110 001 101 011 111 
+##   0 336 317 105 340  82 101  32</code></pre>
+<p>Each of these intersections can be accessed using through the
+<code>IntersectionSets</code> slot.</p>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="sec-biovis.html#cb436-1" tabindex="-1"></a><span class="do">## access the identifiers</span></span>
+<span id="cb436-2"><a href="sec-biovis.html#cb436-2" tabindex="-1"></a>v<span class="sc">@</span>IntersectionSets[[<span class="st">"110"</span>]]</span></code></pre></div>
+<pre><code>##   [1] "Q8BXZ1"   "Q571H0"   "Q9D1C9"   "P43274"   "Q0VG62"   "Q8CE90-4"
+##   [7] "Q99LI8"   "P30416"   "Q8C7X2-2" "Q9JI13-2" "Q8BJF9"   "Q6P5E4"  
+##  [13] "P51881"   "Q8BGT7"   "Q8K2F0"   "P25206"   "Q921E6-3" "Q8BWR8"  
+##  [19] "Q76MZ3"   "Q9WV32"   "O70493"   "Q62393-2" "Q9JIH2"   "Q9DCT2"  
+##  [25] "Q80U49"   "P68254-2" "Q01730"   "Q9DBE9"   "Q9Z2U0"   "Q91WM2"  
+##  [31] "Q8BNU0"   "Q8BRN9"   "Q08024-2" "Q8R1Q8"   "Q921F4"   "P60898"  
+##  [37] "Q64213-2" "P36552"   "P61358"   "P83887"   "P61957"   "Q05816"  
+##  [43] "Q9QXA5"   "Q52KI8-2" "Q62422"   "Q3UMF0-4" "Q9EQQ9"   "Q1PSW8"  
+##  [49] "Q61183-4" "P08752"   "Q64511"   "P83940"   "Q60854"   "Q91W97"  
+##  [55] "P24788"   "Q6ZWN5"   "Q9CQ62"   "Q9D7H3"   "Q8BGW1-3" "O88508"  
+##  [61] "Q6PAR5-5" "P10107"   "Q99L04"   "Q8JZQ9"   "Q922S8"   "Q8C878"  
+##  [67] "Q62241"   "Q9CZ15"   "P57780"   "P62897"   "Q9CY62"   "Q8R1N0"  
+##  [73] "P63085"   "Q569Z5"   "Q9D0E1-2" "Q8BMP6"   "Q8CJ26"   "Q9R0P5"  
+##  [79] "Q64373-2" "Q61464-4" "Q7TQK4"   "P61982"   "P51150"   "P84091"  
+##  [85] "Q80XI4"   "Q8CFV9"   "Q8BTZ4-2" "Q8R326-2" "Q811J3"   "Q9D753"  
+##  [91] "P51410"   "Q9D1H7"   "Q9CXK8"   "Q99LB6-2" "P62862"   "Q9WVB0"  
+##  [97] "P62267"   "O88322"   "Q923E4"   "O54984"  
+##  [ reached getOption("max.print") -- omitted 5 entries ]</code></pre>
+<p>And finally, the <code>Venn</code> object can directly be plotted (albeit with a
+suspicious set of colours) with</p>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="sec-biovis.html#cb438-1" tabindex="-1"></a><span class="fu">plot</span>(v)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:venn3"></span>
+<p class="caption marginnote shownote">
+Figure 11.7: A Venn diagram representing the size of all intersections of the three elements of out <code>feat_list</code> input.
+</p>
+<img src="WSBIM1322_files/figure-html/venn3-1.png" alt="A Venn diagram representing the size of all intersections of the three elements of out `feat_list` input." width="672">
+</div>
+<p>Venn diagrams are however limited to two to three, possibly four
+sets. The <em><a href="https://CRAN.R-project.org/package=UpSetR">UpSetR</a></em> package is a great solution when
+more sets need to be compared.
+The <em><a href="https://CRAN.R-project.org/package=UpSetR">UpSetR</a></em> visualises intersections of sets as a matrix
+in which the rows represent the sets and the columns represent their
+intersection sizes. For each set that is part of a given intersection,
+a black filled circle is placed in the corresponding matrix cell. If a
+set is not part of the intersection, a light grey circle is shown. A
+vertical black line connects the topmost black circle with the
+bottom most black circle in each column to emphasise the column-based
+relationships. The size of the intersections is shown as a bar chart
+placed on top of the matrix so that each column lines up with exactly
+one bar. A second bar chart showing the size of the each set is shown
+to the left of the matrix.</p>
+<p>We will first make use of the <code>fromList</code> function to convert our list
+to a <code>UpSetR</code> compatible input and then generate the figure:</p>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="sec-biovis.html#cb439-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"UpSetR"</span>)</span>
+<span id="cb439-2"><a href="sec-biovis.html#cb439-2" tabindex="-1"></a>upset_in <span class="ot">&lt;-</span> <span class="fu">fromList</span>(feat_list)</span>
+<span id="cb439-3"><a href="sec-biovis.html#cb439-3" tabindex="-1"></a><span class="fu">upset</span>(upset_in)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset1-1.png" width="672"></p>
+<!-- The following -->
+<!-- [tweet](https://twitter.com/ngehlenborg/status/986354574989709312) by -->
+<!-- the author of the package illustrates how Venn and upset diagrams -->
+<!-- relate to each other. -->
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="sec-biovis.html#cb440-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in, <span class="at">order.by =</span> <span class="st">"freq"</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-1.png" width="672"></p>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="sec-biovis.html#cb441-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in, <span class="at">order.by =</span> <span class="st">"degree"</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-2.png" width="672"></p>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="sec-biovis.html#cb442-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in, <span class="at">order.by =</span> <span class="fu">c</span>(<span class="st">"freq"</span>, <span class="st">"degree"</span>))</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-3.png" width="672"></p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="sec-biovis.html#cb443-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in, <span class="at">order.by =</span> <span class="fu">c</span>(<span class="st">"degree"</span>, <span class="st">"freq"</span>))</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-4.png" width="672"></p>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="sec-biovis.html#cb444-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in, <span class="at">sets =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>))</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-5.png" width="672"></p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="sec-biovis.html#cb445-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in, <span class="at">sets =</span> <span class="fu">c</span>(<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"A"</span>), <span class="at">keep.order =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-6.png" width="672"></p>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="sec-biovis.html#cb446-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in, <span class="at">group.by =</span> <span class="st">"sets"</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-7.png" width="672"></p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="sec-biovis.html#cb447-1" tabindex="-1"></a><span class="do">## Add set D with a single intersection</span></span>
+<span id="cb447-2"><a href="sec-biovis.html#cb447-2" tabindex="-1"></a>upset_in_4 <span class="ot">&lt;-</span> upset_in</span>
+<span id="cb447-3"><a href="sec-biovis.html#cb447-3" tabindex="-1"></a>upset_in_4<span class="sc">$</span>D <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb447-4"><a href="sec-biovis.html#cb447-4" tabindex="-1"></a>upset_in_4[<span class="dv">1</span>, <span class="st">"D"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb447-5"><a href="sec-biovis.html#cb447-5" tabindex="-1"></a><span class="fu">head</span>(upset_in_4)</span></code></pre></div>
+<pre><code>##   A B C D
+## 1 1 0 1 1
+## 2 1 0 0 0
+## 3 1 1 1 0
+## 4 1 1 0 0
+## 5 1 0 0 0
+## 6 1 1 0 0</code></pre>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="sec-biovis.html#cb449-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in_4)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-8.png" width="672"></p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="sec-biovis.html#cb450-1" tabindex="-1"></a><span class="fu">upset</span>(upset_in_4, <span class="at">empty.intersections =</span> <span class="st">"on"</span>)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upset2-9.png" width="672">
+Visualising intersections with <code>UpSetR</code> shines with more than 4 sets,
+as Venn diagrams become practically useless.</p>
+<p>There is also an UpSetR online app: <a href="https://gehlenborglab.shinyapps.io/upsetr/" class="uri">https://gehlenborglab.shinyapps.io/upsetr/</a></p>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Generate a bigger dataset containing 10 sets. Try to generate Venn and
+upset diagrams as shown above.</p>
+<p>When the number of sets become larger, the options above, as well as
+<code>nsets</code>, the number of sets (default is 5) and <code>nintersects</code>, the
+number of intersections (default is 40) become useful.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-79" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-79', 'sol-start-79')"></span>
+</p>
+<div id="sol-body-79" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="sec-biovis.html#cb451-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb451-2"><a href="sec-biovis.html#cb451-2" tabindex="-1"></a>feat_list_10 <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10</span>, <span class="fu">sample</span>(<span class="fu">rownames</span>(mulvey2015norm_se), <span class="dv">555</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb451-3"><a href="sec-biovis.html#cb451-3" tabindex="-1"></a><span class="fu">names</span>(feat_list_10) <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb451-4"><a href="sec-biovis.html#cb451-4" tabindex="-1"></a>feat_list_10 <span class="ot">&lt;-</span> <span class="fu">fromList</span>(feat_list_10)</span>
+<span id="cb451-5"><a href="sec-biovis.html#cb451-5" tabindex="-1"></a><span class="fu">upset</span>(feat_list_10)</span></code></pre></div>
+<p><img src="WSBIM1322_files/figure-html/upsetchallenge-1.png" width="672"></p>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<!-- ## Data along genomic coordinates -->
+
+</div>
+</div>
+<p style="text-align: center;">
+<a href="sec-sl.html"><button class="btn btn-default">Previous</button></a>
+<a href="sec-ccl.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2024-12-09
+ using 
+R version 4.4.1 (2024-06-14)
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>
