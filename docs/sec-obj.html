@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2024-12-09" />
+<meta name="date" content="2025-07-22" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -430,19 +430,19 @@ summarised below.</p>
 <span class="header-section-number">3.4.1</span> Common Bioconductor classes<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('common-bioconductor-classes')" onmouseout="reset_tooltip('common-bioconductor-classes-tooltip')"><span class="tooltiptext" id="common-bioconductor-classes-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <ul>
-<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.20/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, …)</li>
-<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.20/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
-<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.20/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
+<li>Rectangular feature x sample data – <em><a href="https://bioconductor.org/packages/3.21/SummarizedExperiment">SummarizedExperiment</a></em><code>::SummarizedExperiment()</code> (RNAseq count matrix, microarray, …)</li>
+<li>Genomic coordinates – <em><a href="https://bioconductor.org/packages/3.21/GenomicRanges">GenomicRanges</a></em><code>::GRanges()</code> (1-based, closed interval)</li>
+<li>DNA / RNA / AA sequences – <em><a href="https://bioconductor.org/packages/3.21/Biostrings">Biostrings</a></em><code>::*StringSet()</code>
 </li>
-<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.20/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.20/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
+<li>Gene sets – <em><a href="https://bioconductor.org/packages/3.21/GSEABase">GSEABase</a></em><code>::GeneSet()</code> <em><a href="https://bioconductor.org/packages/3.21/GSEABase">GSEABase</a></em><code>::GeneSetCollection()</code>
 </li>
-<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.20/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
+<li>Multi-omics data – <em><a href="https://bioconductor.org/packages/3.21/MultiAssayExperiment">MultiAssayExperiment</a></em><code>::MultiAssayExperiment()</code>
 </li>
-<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.20/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
+<li>Single cell data – <em><a href="https://bioconductor.org/packages/3.21/SingleCellExperiment">SingleCellExperiment</a></em><code>::SingleCellExperiment()</code>
 </li>
-<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.20/Spectra">Spectra</a></em><code>::Spectra()</code>
+<li>Mass spectrometry data – <em><a href="https://bioconductor.org/packages/3.21/Spectra">Spectra</a></em><code>::Spectra()</code>
 </li>
-<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.20/QFeatures">QFeatures</a></em><code>::QFeatures()</code>
+<li>Quantitative proteomics data – <em><a href="https://bioconductor.org/packages/3.21/QFeatures">QFeatures</a></em><code>::QFeatures()</code>
 </li>
 </ul>
 </div>
@@ -455,8 +455,8 @@ available with <code>require</code>. If they are missing, the call to
 <code>require</code> will return <code>FALSE</code>, otherwise it returns <code>TRUE</code> and
 loads the packages. Given that we negate the return value of
 <code>require</code> using <code>!</code>, the packages will be installed only when
-missing.</span> the<em><a href="https://bioconductor.org/packages/3.20/SummarizedExperiment">SummarizedExperiment</a></em>
-package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.20/airway">airway</a></em>
+missing.</span> the<em><a href="https://bioconductor.org/packages/3.21/SummarizedExperiment">SummarizedExperiment</a></em>
+package, that implements the class, and the <em><a href="https://bioconductor.org/packages/3.21/airway">airway</a></em>
 data package, that provides an RNA-Seq example data.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="sec-obj.html#cb66-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"SummarizedExperiment"</span>))</span>
 <span id="cb66-2"><a href="sec-obj.html#cb66-2" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"SummarizedExperiment"</span>)</span>
@@ -571,7 +571,7 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 ## ENSG00000001167        584        360        269
 ## ENSG00000001460        210        155        177
 ## ENSG00000001461       2751       2467       2905
-##  [ reached getOption("max.print") -- omitted 63665 rows ]</code></pre>
+##  [ reached 'max' / getOption("max.print") -- omitted 63665 rows ]</code></pre>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="sec-obj.html#cb74-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">assay</span>(airway))</span></code></pre></div>
 <pre><code>## [1] "matrix" "array"</code></pre>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="sec-obj.html#cb76-1" tabindex="-1"></a><span class="fu">colData</span>(airway)</span></code></pre></div>
@@ -635,7 +635,7 @@ these individual parts of the <code>SummarizedExperiment</code> object.</p>
 ## ENSG00000273489               NA RP11-180C16.1
 ## ENSG00000273490               NA        TSEN34
 ## ENSG00000273491               NA  RP11-138A9.2
-##  [ reached getOption("max.print") -- omitted 2 rows ]</code></pre>
+##  [ reached 'max' / getOption("max.print") -- omitted 2 rows ]</code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="sec-obj.html#cb82-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">rowData</span>(airway))</span></code></pre></div>
 <pre><code>## [1] "DFrame"
 ## attr(,"package")
@@ -1029,9 +1029,9 @@ of class <code>SummarizedExperiment</code>.</p>
 <a href="sec-biostrings.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2024-12-09
+2025-07-22
  using 
-R version 4.4.1 (2024-06-14)
+R version 4.5.0 (2025-04-11)
 </p>
 </div>
 </div>

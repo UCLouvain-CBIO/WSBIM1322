@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2024-12-09" />
+<meta name="date" content="2025-07-22" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -446,7 +446,7 @@ output. Extract and interpret these data.</p>
 <pre><code>##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 ##  [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ##  [75] 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-##  [ reached getOption("max.print") -- omitted 50 entries ]</code></pre>
+##  [ reached 'max' / getOption("max.print") -- omitted 50 entries ]</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -820,12 +820,12 @@ the same results.</p></li>
 <pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 3 2 3 2 3 2 3 3 3 3 2 3 2 3 3 2 3 2 3 2 2
 ##  [75] 2 2 2 2 2 3 3 3 3 2 3 2 2 2 3 3 3 2 3 3 3 3 3 2 3 3
-##  [ reached getOption("max.print") -- omitted 50 entries ]</code></pre>
+##  [ reached 'max' / getOption("max.print") -- omitted 50 entries ]</code></pre>
 <div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="sec-ul.html#cb381-1" tabindex="-1"></a><span class="fu">cutree</span>(hcl, <span class="at">h =</span> <span class="fl">3.9</span>)</span></code></pre></div>
 <pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 3 2 3 2 3 2 3 3 3 3 2 3 2 3 3 2 3 2 3 2 2
 ##  [75] 2 2 2 2 2 3 3 3 3 2 3 2 2 2 3 3 3 2 3 3 3 3 3 2 3 3
-##  [ reached getOption("max.print") -- omitted 50 entries ]</code></pre>
+##  [ reached 'max' / getOption("max.print") -- omitted 50 entries ]</code></pre>
 <div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="sec-ul.html#cb383-1" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">cutree</span>(hcl, <span class="at">k =</span> <span class="dv">3</span>), <span class="fu">cutree</span>(hcl, <span class="at">h =</span> <span class="fl">3.9</span>))</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p class="solution-end">
@@ -999,9 +999,9 @@ average marker profiles, such as shown below.</p></li>
 <a href="sec-sl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2024-12-09
+2025-07-22
  using 
-R version 4.4.1 (2024-06-14)
+R version 4.5.0 (2025-04-11)
 </p>
 </div>
 </div>

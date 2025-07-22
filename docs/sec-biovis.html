@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2024-12-09" />
+<meta name="date" content="2025-07-22" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -211,7 +211,7 @@ clustering that was seen in chapter <a href="sec-ul.html#sec-ul">9</a>.</li>
 <li>Visualisation of intersections, in particular <strong>Venn</strong> and <strong>UpSet</strong>
 plots.</li>
 </ul>
-<!-- - The *[Gviz](https://bioconductor.org/packages/3.20/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2" number="11.1">
+<!-- - The *[Gviz](https://bioconductor.org/packages/3.21/Gviz)* to visualise genomic data. --><div id="heatmaps" class="section level2" number="11.1">
 <h2>
 <span class="header-section-number">11.1</span> Heatmaps<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('heatmaps')" onmouseout="reset_tooltip('heatmaps-tooltip')"><span class="tooltiptext" id="heatmaps-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
@@ -275,8 +275,8 @@ Figure 11.5: Effect of scaling on the heatmap output: scaling along the columns.
 <p>Based on the caveats above, it is essential to present and interpret
 heatmaps with great care.</p>
 <p>There exists several packages that allow to produce heatmaps with
-various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.20/Heatplus">Heatplus</a></em> package, or
-the <em><a href="https://bioconductor.org/packages/3.20/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation
+various levels of sophistication, such as <code>heatmap.2</code> from the <code>r CRANpkg("gplots")</code> package, the <em><a href="https://bioconductor.org/packages/3.21/Heatplus">Heatplus</a></em> package, or
+the <em><a href="https://bioconductor.org/packages/3.21/ComplexHeatmap">ComplexHeatmap</a></em> packages (full documentation
 <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/index.html">here</a>),
 demonstrated below.</p>
 <div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="sec-biovis.html#cb429-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ComplexHeatmap"</span>)</span>
@@ -379,7 +379,7 @@ our list.</li>
 ##  [85] "Q80XI4"   "Q8CFV9"   "Q8BTZ4-2" "Q8R326-2" "Q811J3"   "Q9D753"  
 ##  [91] "P51410"   "Q9D1H7"   "Q9CXK8"   "Q99LB6-2" "P62862"   "Q9WVB0"  
 ##  [97] "P62267"   "O88322"   "Q923E4"   "O54984"  
-##  [ reached getOption("max.print") -- omitted 5 entries ]</code></pre>
+##  [ reached 'max' / getOption("max.print") -- omitted 5 entries ]</code></pre>
 <p>And finally, the <code>Venn</code> object can directly be plotted (albeit with a
 suspicious set of colours) with</p>
 <div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="sec-biovis.html#cb438-1" tabindex="-1"></a><span class="fu">plot</span>(v)</span></code></pre></div>
@@ -487,9 +487,9 @@ number of intersections (default is 40) become useful.</p>
 <a href="sec-ccl.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2024-12-09
+2025-07-22
  using 
-R version 4.4.1 (2024-06-14)
+R version 4.5.0 (2025-04-11)
 </p>
 </div>
 </div>
