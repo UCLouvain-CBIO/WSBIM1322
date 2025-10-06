@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2025-07-22" />
+<meta name="date" content="2025-10-06" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -259,7 +259,7 @@ Figure 7.2: Binomial density of for an unbiased coin to get 0 to 100 heads. The 
 </div>
 <p>We can also compute the p-value, the tells us how likely we are to see
 such a extreme or more extreme value under <span class="math inline">\(H_0\)</span>.</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="sec-testing.html#cb252-1" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> <span class="dv">62</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="sec-testing.html#cb253-1" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> <span class="dv">62</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Exact binomial test
 ## 
@@ -378,11 +378,11 @@ size of samples 1 and 2.</p>
 </ul>
 <p>Note that the t-test is robust to deviations<label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> All models are wrong. Some are useful.</span>.</p>
 <p>In R, we do this with</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="sec-testing.html#cb254-1" tabindex="-1"></a>s1</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="sec-testing.html#cb255-1" tabindex="-1"></a>s1</span></code></pre></div>
 <pre><code>## [1] 5.327429 5.723787 7.870450</code></pre>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="sec-testing.html#cb256-1" tabindex="-1"></a>s2</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="sec-testing.html#cb257-1" tabindex="-1"></a>s2</span></code></pre></div>
 <pre><code>## [1] 11.10576 11.19393 13.57260</code></pre>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="sec-testing.html#cb258-1" tabindex="-1"></a><span class="fu">t.test</span>(s1, s2)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="sec-testing.html#cb259-1" tabindex="-1"></a><span class="fu">t.test</span>(s1, s2)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -420,9 +420,9 @@ applied to RNA-Seq count data.</p>
 <p>Let’s now use the <code>tdata1</code> dataset from the <code>rWSBIM1322</code> package that
 provide gene expression data for 100 genes and 6 samples, three in
 group A and 3 in group B.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="sec-testing.html#cb260-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb260-2"><a href="sec-testing.html#cb260-2" tabindex="-1"></a><span class="fu">data</span>(tdata1)</span>
-<span id="cb260-3"><a href="sec-testing.html#cb260-3" tabindex="-1"></a><span class="fu">head</span>(tdata1)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="sec-testing.html#cb261-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb261-2"><a href="sec-testing.html#cb261-2" tabindex="-1"></a><span class="fu">data</span>(tdata1)</span>
+<span id="cb261-3"><a href="sec-testing.html#cb261-3" tabindex="-1"></a><span class="fu">head</span>(tdata1)</span></code></pre></div>
 <pre><code>##                 A1         A2         A3         B1         B2        B3
 ## feature1  429.6721   433.3133  1806.2773  3534.6396  4541.2757 1139.8326
 ## feature2 1320.8827  1085.5660 10643.9541   239.7528 14177.4412  678.5271
@@ -447,10 +447,10 @@ log-transform it.</p>
 ► Solution<span id="sol-start-35" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-35', 'sol-start-35')"></span>
 </p>
 <div id="sol-body-35" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="sec-testing.html#cb262-1" tabindex="-1"></a>log_tdata1 <span class="ot">&lt;-</span> <span class="fu">log2</span>(tdata1)</span>
-<span id="cb262-2"><a href="sec-testing.html#cb262-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb262-3"><a href="sec-testing.html#cb262-3" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(tdata1)</span>
-<span id="cb262-4"><a href="sec-testing.html#cb262-4" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(log_tdata1)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="sec-testing.html#cb263-1" tabindex="-1"></a>log_tdata1 <span class="ot">&lt;-</span> <span class="fu">log2</span>(tdata1)</span>
+<span id="cb263-2"><a href="sec-testing.html#cb263-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb263-3"><a href="sec-testing.html#cb263-3" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(tdata1)</span>
+<span id="cb263-4"><a href="sec-testing.html#cb263-4" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(log_tdata1)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/tex1-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -460,8 +460,8 @@ log-transform it.</p>
 <p>We are now going to apply a t-test to feature (row) 73, comparing the
 expression intensities in groups A and B. As we have seen, this can be
 done with the <code>t.test</code> function:</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="sec-testing.html#cb263-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> log_tdata1[<span class="dv">73</span>, ]</span>
-<span id="cb263-2"><a href="sec-testing.html#cb263-2" tabindex="-1"></a><span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="sec-testing.html#cb264-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> log_tdata1[<span class="dv">73</span>, ]</span>
+<span id="cb264-2"><a href="sec-testing.html#cb264-2" tabindex="-1"></a><span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -511,15 +511,15 @@ What features are of possible biological interest?</p></li>
 ► Solution<span id="sol-start-36" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-36', 'sol-start-36')"></span>
 </p>
 <div id="sol-body-36" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="sec-testing.html#cb265-1" tabindex="-1"></a>my_t_test <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb265-2"><a href="sec-testing.html#cb265-2" tabindex="-1"></a>    <span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])<span class="sc">$</span>p.value</span>
-<span id="cb265-3"><a href="sec-testing.html#cb265-3" tabindex="-1"></a>}</span>
-<span id="cb265-4"><a href="sec-testing.html#cb265-4" tabindex="-1"></a>pvals <span class="ot">&lt;-</span> <span class="fu">apply</span>(log_tdata1, <span class="dv">1</span>, my_t_test)</span>
-<span id="cb265-5"><a href="sec-testing.html#cb265-5" tabindex="-1"></a><span class="fu">table</span>(pvals <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="sec-testing.html#cb266-1" tabindex="-1"></a>my_t_test <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb266-2"><a href="sec-testing.html#cb266-2" tabindex="-1"></a>    <span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])<span class="sc">$</span>p.value</span>
+<span id="cb266-3"><a href="sec-testing.html#cb266-3" tabindex="-1"></a>}</span>
+<span id="cb266-4"><a href="sec-testing.html#cb266-4" tabindex="-1"></a>pvals <span class="ot">&lt;-</span> <span class="fu">apply</span>(log_tdata1, <span class="dv">1</span>, my_t_test)</span>
+<span id="cb266-5"><a href="sec-testing.html#cb266-5" tabindex="-1"></a><span class="fu">table</span>(pvals <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##    98     2</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="sec-testing.html#cb267-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(pvals))</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="sec-testing.html#cb268-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(pvals))</span></code></pre></div>
 <pre><code>##  feature19  feature61  feature20  feature84   feature1   feature7 
 ## 0.02967230 0.03595002 0.08576252 0.08958506 0.10645476 0.10832969</code></pre>
 <p class="solution-end">
@@ -566,9 +566,9 @@ many time.</p>
 is to visualise the distribution of computed p-values. Below, we see
 the histogram of the <code>tdata1</code> data and 100 values drawn from a uniform
 distribution between 0 and 1. Both are very similar; they are flat.</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="sec-testing.html#cb269-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb269-2"><a href="sec-testing.html#cb269-2" tabindex="-1"></a><span class="fu">hist</span>(pvals)</span>
-<span id="cb269-3"><a href="sec-testing.html#cb269-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">runif</span>(<span class="dv">100</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="sec-testing.html#cb270-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb270-2"><a href="sec-testing.html#cb270-2" tabindex="-1"></a><span class="fu">hist</span>(pvals)</span>
+<span id="cb270-3"><a href="sec-testing.html#cb270-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">runif</span>(<span class="dv">100</span>))</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:pvalhist"></span>
 <p class="caption marginnote shownote">
@@ -624,7 +624,7 @@ Figure 7.7: Principle behind the false discovery rate p-value adjustment (<a hre
 adjust the p-values for multiple testing. Below we apply the
 Benjamini-Hochberg FDR procedure using the <code>p.adjust</code> function and
 confirm that none of the features are differentially expressed.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="sec-testing.html#cb270-1" tabindex="-1"></a>adj_pvals <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals, <span class="at">method =</span> <span class="st">"BH"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="sec-testing.html#cb271-1" tabindex="-1"></a>adj_pvals <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals, <span class="at">method =</span> <span class="st">"BH"</span>)</span></code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -641,9 +641,9 @@ confirm that none of the features are differentially expressed.</p>
 ► Solution<span id="sol-start-37" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-37', 'sol-start-37')"></span>
 </p>
 <div id="sol-body-37" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="sec-testing.html#cb271-1" tabindex="-1"></a><span class="fu">any</span>(adj_pvals <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="sec-testing.html#cb272-1" tabindex="-1"></a><span class="fu">any</span>(adj_pvals <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="sec-testing.html#cb273-1" tabindex="-1"></a><span class="fu">min</span>(adj_pvals)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="sec-testing.html#cb274-1" tabindex="-1"></a><span class="fu">min</span>(adj_pvals)</span></code></pre></div>
 <pre><code>## [1] 0.899736</code></pre>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -673,21 +673,21 @@ expressed genes in group A vs B.</p>
 ► Solution<span id="sol-start-38" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-38', 'sol-start-38')"></span>
 </p>
 <div id="sol-body-38" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="sec-testing.html#cb275-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb275-2"><a href="sec-testing.html#cb275-2" tabindex="-1"></a><span class="fu">data</span>(tdata4)</span>
-<span id="cb275-3"><a href="sec-testing.html#cb275-3" tabindex="-1"></a></span>
-<span id="cb275-4"><a href="sec-testing.html#cb275-4" tabindex="-1"></a>my_t_test <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
-<span id="cb275-5"><a href="sec-testing.html#cb275-5" tabindex="-1"></a>    <span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])<span class="sc">$</span>p.value</span>
-<span id="cb275-6"><a href="sec-testing.html#cb275-6" tabindex="-1"></a></span>
-<span id="cb275-7"><a href="sec-testing.html#cb275-7" tabindex="-1"></a>pvals <span class="ot">&lt;-</span> <span class="fu">apply</span>(tdata4, <span class="dv">1</span>, my_t_test)</span>
-<span id="cb275-8"><a href="sec-testing.html#cb275-8" tabindex="-1"></a><span class="fu">hist</span>(pvals)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="sec-testing.html#cb276-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb276-2"><a href="sec-testing.html#cb276-2" tabindex="-1"></a><span class="fu">data</span>(tdata4)</span>
+<span id="cb276-3"><a href="sec-testing.html#cb276-3" tabindex="-1"></a></span>
+<span id="cb276-4"><a href="sec-testing.html#cb276-4" tabindex="-1"></a>my_t_test <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
+<span id="cb276-5"><a href="sec-testing.html#cb276-5" tabindex="-1"></a>    <span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])<span class="sc">$</span>p.value</span>
+<span id="cb276-6"><a href="sec-testing.html#cb276-6" tabindex="-1"></a></span>
+<span id="cb276-7"><a href="sec-testing.html#cb276-7" tabindex="-1"></a>pvals <span class="ot">&lt;-</span> <span class="fu">apply</span>(tdata4, <span class="dv">1</span>, my_t_test)</span>
+<span id="cb276-8"><a href="sec-testing.html#cb276-8" tabindex="-1"></a><span class="fu">hist</span>(pvals)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/tdata4ex1-1.png" width="672"></p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="sec-testing.html#cb276-1" tabindex="-1"></a><span class="fu">table</span>(pvals <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="sec-testing.html#cb277-1" tabindex="-1"></a><span class="fu">table</span>(pvals <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## 
 ## FALSE  TRUE 
 ##    91     9</code></pre>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="sec-testing.html#cb278-1" tabindex="-1"></a>adjp <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals, <span class="at">method =</span> <span class="st">"BH"</span>)</span>
-<span id="cb278-2"><a href="sec-testing.html#cb278-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(adjp))</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="sec-testing.html#cb279-1" tabindex="-1"></a>adjp <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pvals, <span class="at">method =</span> <span class="st">"BH"</span>)</span>
+<span id="cb279-2"><a href="sec-testing.html#cb279-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(adjp))</span></code></pre></div>
 <pre><code>##  feature87  feature34  feature39  feature68  feature43  feature51 
 ## 0.02927868 0.09032688 0.09032688 0.09032688 0.21467090 0.25799641</code></pre>
 <p class="solution-end">
@@ -714,10 +714,10 @@ of the log2 fold-changes.</p>
 ► Solution<span id="sol-start-39" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-39', 'sol-start-39')"></span>
 </p>
 <div id="sol-body-39" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="sec-testing.html#cb280-1" tabindex="-1"></a>my_lfc <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
-<span id="cb280-2"><a href="sec-testing.html#cb280-2" tabindex="-1"></a>    <span class="fu">mean</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]) <span class="sc">-</span> <span class="fu">mean</span>(x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])</span>
-<span id="cb280-3"><a href="sec-testing.html#cb280-3" tabindex="-1"></a>lfc <span class="ot">&lt;-</span> <span class="fu">apply</span>(tdata4, <span class="dv">1</span>, my_lfc)</span>
-<span id="cb280-4"><a href="sec-testing.html#cb280-4" tabindex="-1"></a><span class="fu">hist</span>(lfc)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="sec-testing.html#cb281-1" tabindex="-1"></a>my_lfc <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
+<span id="cb281-2"><a href="sec-testing.html#cb281-2" tabindex="-1"></a>    <span class="fu">mean</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]) <span class="sc">-</span> <span class="fu">mean</span>(x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])</span>
+<span id="cb281-3"><a href="sec-testing.html#cb281-3" tabindex="-1"></a>lfc <span class="ot">&lt;-</span> <span class="fu">apply</span>(tdata4, <span class="dv">1</span>, my_lfc)</span>
+<span id="cb281-4"><a href="sec-testing.html#cb281-4" tabindex="-1"></a><span class="fu">hist</span>(lfc)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/tdata4ex2-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -755,10 +755,10 @@ computed above.</p>
 ► Solution<span id="sol-start-40" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-40', 'sol-start-40')"></span>
 </p>
 <div id="sol-body-40" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="sec-testing.html#cb281-1" tabindex="-1"></a><span class="fu">plot</span>(lfc, <span class="sc">-</span><span class="fu">log10</span>(adjp))</span>
-<span id="cb281-2"><a href="sec-testing.html#cb281-2" tabindex="-1"></a><span class="fu">grid</span>()</span>
-<span id="cb281-3"><a href="sec-testing.html#cb281-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>))</span>
-<span id="cb281-4"><a href="sec-testing.html#cb281-4" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="sec-testing.html#cb282-1" tabindex="-1"></a><span class="fu">plot</span>(lfc, <span class="sc">-</span><span class="fu">log10</span>(adjp))</span>
+<span id="cb282-2"><a href="sec-testing.html#cb282-2" tabindex="-1"></a><span class="fu">grid</span>()</span>
+<span id="cb282-3"><a href="sec-testing.html#cb282-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>))</span>
+<span id="cb282-4"><a href="sec-testing.html#cb282-4" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/volcex-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -973,25 +973,25 @@ new results.</p></li>
 <h3>The coin example, step by step<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('the-coin-example-step-by-step')" onmouseout="reset_tooltip('the-coin-example-step-by-step-tooltip')"><span class="tooltiptext" id="the-coin-example-step-by-step-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h3>
 <p>The following code chunk simulates 100 coin toss from a biased coin.</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="sec-testing.html#cb282-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb282-2"><a href="sec-testing.html#cb282-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb282-3"><a href="sec-testing.html#cb282-3" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.59</span></span>
-<span id="cb282-4"><a href="sec-testing.html#cb282-4" tabindex="-1"></a>flips <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"H"</span>, <span class="st">"T"</span>), <span class="at">size =</span> n,</span>
-<span id="cb282-5"><a href="sec-testing.html#cb282-5" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb282-6"><a href="sec-testing.html#cb282-6" tabindex="-1"></a>                <span class="at">prob =</span> <span class="fu">c</span>(p, <span class="dv">1</span> <span class="sc">-</span> p))</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="sec-testing.html#cb283-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb283-2"><a href="sec-testing.html#cb283-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb283-3"><a href="sec-testing.html#cb283-3" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.59</span></span>
+<span id="cb283-4"><a href="sec-testing.html#cb283-4" tabindex="-1"></a>flips <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"H"</span>, <span class="st">"T"</span>), <span class="at">size =</span> n,</span>
+<span id="cb283-5"><a href="sec-testing.html#cb283-5" tabindex="-1"></a>                <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb283-6"><a href="sec-testing.html#cb283-6" tabindex="-1"></a>                <span class="at">prob =</span> <span class="fu">c</span>(p, <span class="dv">1</span> <span class="sc">-</span> p))</span></code></pre></div>
 <p>If the coin were unbiased we expect roughly 50 heads. Let us see how
 many heads and tails there are.</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="sec-testing.html#cb283-1" tabindex="-1"></a><span class="fu">table</span>(flips)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="sec-testing.html#cb284-1" tabindex="-1"></a><span class="fu">table</span>(flips)</span></code></pre></div>
 <pre><code>## flips
 ##  H  T 
 ## 62 38</code></pre>
 <p>We calculate the binomial statistic for a number of flips between 0
 and 100. This is the binomial density for an unbiased coin.</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="sec-testing.html#cb285-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
-<span id="cb285-2"><a href="sec-testing.html#cb285-2" tabindex="-1"></a>num_heads <span class="ot">&lt;-</span> <span class="fu">sum</span>(flips <span class="sc">==</span> <span class="st">"H"</span>)</span>
-<span id="cb285-3"><a href="sec-testing.html#cb285-3" tabindex="-1"></a>binomial_dens <span class="ot">&lt;-</span></span>
-<span id="cb285-4"><a href="sec-testing.html#cb285-4" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">k =</span> <span class="dv">0</span><span class="sc">:</span>n) <span class="sc">%&gt;%</span></span>
-<span id="cb285-5"><a href="sec-testing.html#cb285-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">dbinom</span>(k, <span class="at">size =</span> n, <span class="at">prob =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="sec-testing.html#cb286-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb286-2"><a href="sec-testing.html#cb286-2" tabindex="-1"></a>num_heads <span class="ot">&lt;-</span> <span class="fu">sum</span>(flips <span class="sc">==</span> <span class="st">"H"</span>)</span>
+<span id="cb286-3"><a href="sec-testing.html#cb286-3" tabindex="-1"></a>binomial_dens <span class="ot">&lt;-</span></span>
+<span id="cb286-4"><a href="sec-testing.html#cb286-4" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">k =</span> <span class="dv">0</span><span class="sc">:</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb286-5"><a href="sec-testing.html#cb286-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">dbinom</span>(k, <span class="at">size =</span> n, <span class="at">prob =</span> <span class="fl">0.5</span>))</span></code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -1010,10 +1010,10 @@ to <span class="math inline">\(1\)</span>.</p></li>
 </div>
 <p>The following code chunk plots the binomial statistic and the number
 of heads observed is marked in blue.</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="sec-testing.html#cb286-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb286-2"><a href="sec-testing.html#cb286-2" tabindex="-1"></a><span class="fu">ggplot</span>(binomial_dens, <span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> p)) <span class="sc">+</span></span>
-<span id="cb286-3"><a href="sec-testing.html#cb286-3" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb286-4"><a href="sec-testing.html#cb286-4" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> num_heads)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="sec-testing.html#cb287-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb287-2"><a href="sec-testing.html#cb287-2" tabindex="-1"></a><span class="fu">ggplot</span>(binomial_dens, <span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> p)) <span class="sc">+</span></span>
+<span id="cb287-3"><a href="sec-testing.html#cb287-3" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb287-4"><a href="sec-testing.html#cb287-4" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> num_heads)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-44-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
@@ -1031,7 +1031,7 @@ what do you notice about how the distribution is centered?</li>
 </div>
 <p>Now, we set the size of the reject threshold, this is a choice and
 corresponds to how many false discoveries we are happy to allow.</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="sec-testing.html#cb287-1" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="sec-testing.html#cb288-1" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span></code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -1055,14 +1055,14 @@ observe?</p></li>
 ► Solution<span id="sol-start-41" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-41', 'sol-start-41')"></span>
 </p>
 <div id="sol-body-41" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="sec-testing.html#cb288-1" tabindex="-1"></a>binomial_dens <span class="sc">%&gt;%</span></span>
-<span id="cb288-2"><a href="sec-testing.html#cb288-2" tabindex="-1"></a>    <span class="fu">filter</span>(p <span class="sc">==</span> <span class="fu">max</span>(p))</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="sec-testing.html#cb289-1" tabindex="-1"></a>binomial_dens <span class="sc">%&gt;%</span></span>
+<span id="cb289-2"><a href="sec-testing.html#cb289-2" tabindex="-1"></a>    <span class="fu">filter</span>(p <span class="sc">==</span> <span class="fu">max</span>(p))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##       k      p
 ##   &lt;int&gt;  &lt;dbl&gt;
 ## 1    50 0.0796</code></pre>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="sec-testing.html#cb290-1" tabindex="-1"></a>binomial_dens <span class="sc">%&gt;%</span></span>
-<span id="cb290-2"><a href="sec-testing.html#cb290-2" tabindex="-1"></a>    <span class="fu">filter</span>(p <span class="sc">==</span> <span class="fu">min</span>(p))</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="sec-testing.html#cb291-1" tabindex="-1"></a>binomial_dens <span class="sc">%&gt;%</span></span>
+<span id="cb291-2"><a href="sec-testing.html#cb291-2" tabindex="-1"></a>    <span class="fu">filter</span>(p <span class="sc">==</span> <span class="fu">min</span>(p))</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##       k        p
 ##   &lt;int&gt;    &lt;dbl&gt;
@@ -1081,21 +1081,21 @@ observe?</p></li>
 <ul>
 <li>What does the following code chunk do?</li>
 </ul>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="sec-testing.html#cb292-1" tabindex="-1"></a>binomial_dens <span class="ot">&lt;-</span></span>
-<span id="cb292-2"><a href="sec-testing.html#cb292-2" tabindex="-1"></a>    <span class="fu">arrange</span>(binomial_dens, p) <span class="sc">%&gt;%</span></span>
-<span id="cb292-3"><a href="sec-testing.html#cb292-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">reject =</span> (<span class="fu">cumsum</span>(p) <span class="sc">&lt;=</span> alpha))</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="sec-testing.html#cb293-1" tabindex="-1"></a>binomial_dens <span class="ot">&lt;-</span></span>
+<span id="cb293-2"><a href="sec-testing.html#cb293-2" tabindex="-1"></a>    <span class="fu">arrange</span>(binomial_dens, p) <span class="sc">%&gt;%</span></span>
+<span id="cb293-3"><a href="sec-testing.html#cb293-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">reject =</span> (<span class="fu">cumsum</span>(p) <span class="sc">&lt;=</span> alpha))</span></code></pre></div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
 </div>
 </div>
 <p>Let us plot the reject region in red</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="sec-testing.html#cb293-1" tabindex="-1"></a><span class="fu">ggplot</span>(binomial_dens) <span class="sc">+</span></span>
-<span id="cb293-2"><a href="sec-testing.html#cb293-2" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> p, <span class="at">fill =</span> reject), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb293-3"><a href="sec-testing.html#cb293-3" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb293-4"><a href="sec-testing.html#cb293-4" tabindex="-1"></a>        <span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"#5a5a5a"</span>)) <span class="sc">+</span></span>
-<span id="cb293-5"><a href="sec-testing.html#cb293-5" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> num_heads, <span class="at">col =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb293-6"><a href="sec-testing.html#cb293-6" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="sec-testing.html#cb294-1" tabindex="-1"></a><span class="fu">ggplot</span>(binomial_dens) <span class="sc">+</span></span>
+<span id="cb294-2"><a href="sec-testing.html#cb294-2" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> p, <span class="at">fill =</span> reject), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb294-3"><a href="sec-testing.html#cb294-3" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb294-4"><a href="sec-testing.html#cb294-4" tabindex="-1"></a>        <span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"#5a5a5a"</span>)) <span class="sc">+</span></span>
+<span id="cb294-5"><a href="sec-testing.html#cb294-5" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> num_heads, <span class="at">col =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb294-6"><a href="sec-testing.html#cb294-6" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/unnamed-chunk-48-1.png" width="672"></p>
 <div class="question">
 <p class="question-begin">
@@ -1113,7 +1113,7 @@ conclusion now?</li>
 </div>
 </div>
 <p>The above test already has an easy to use function in R:</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="sec-testing.html#cb294-1" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> num_heads, <span class="at">n =</span> n, <span class="at">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="sec-testing.html#cb295-1" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> num_heads, <span class="at">n =</span> n, <span class="at">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Exact binomial test
 ## 
@@ -1134,7 +1134,7 @@ conclusion now?</li>
 <a href="sec-dimred.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2025-07-22
+2025-10-06
  using 
 R version 4.5.0 (2025-04-11)
 </p>
