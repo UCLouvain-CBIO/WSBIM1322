@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2025-10-06" />
+<meta name="date" content="2025-10-14" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -778,6 +778,7 @@ respectively nucleotides 1 to 1, 1 to 2, 1 to 3, …, 1 to 10.</p>
 ENSEMBL, NCBI and others. In this next example we will load the whole
 genome sequence for Drosophila melanogaster from UCSC’s dm2 build, and
 calculate the GC content across chromosome 2L.</p>
+<p>We first define the genomic range corresponding to chromosome 2L:</p>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sec-biostrings.html#cb196-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"Biostrings"</span>)</span>
 <span id="cb196-2"><a href="sec-biostrings.html#cb196-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"BSgenome.Dmelanogaster.UCSC.dm2"</span>)</span>
 <span id="cb196-3"><a href="sec-biostrings.html#cb196-3" tabindex="-1"></a></span>
@@ -789,12 +790,31 @@ calculate the GC content across chromosome 2L.</p>
 ##   [1]    chr2L 1-22407834      *
 ##   -------
 ##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sec-biostrings.html#cb198-1" tabindex="-1"></a>chr2L_dna <span class="ot">&lt;-</span> <span class="fu">getSeq</span>(Dmelanogaster, chr2L_range)</span>
-<span id="cb198-2"><a href="sec-biostrings.html#cb198-2" tabindex="-1"></a>chr2L_dna</span></code></pre></div>
+<p>We can now use the <code>getSeq()</code> fonction to extract the actual sequence
+for the genome as a <code>DNAStringSet</code> object. We can use it as is to get
+the whole genome …</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sec-biostrings.html#cb198-1" tabindex="-1"></a><span class="fu">getSeq</span>(Dmelanogaster)</span></code></pre></div>
+<pre><code>## DNAStringSet object of length 13:
+##         width seq                                           names               
+##  [1] 22407834 CGACAATGCACGACAGAGGAA...TTAGTTGAAGGTGAGGGTGCT chr2L
+##  [2] 20766785 CAGGTACAGTATTCAGTACAG...CTGTTTGCATTCTAGGAATTC chr2R
+##  [3] 23771897 TAGGGAGAAATATGATCGCGT...AAAGAGAAGCCTATACTTGGG chr3L
+##  [4] 27905053 GAATTCTCTCTTGTTGTAGTC...CTGTTCGCATTCTAGGAATTC chr3R
+##  [5]  1281640 GAATTCGCGTCCGCTTACCCA...ATGTAGTATTTTTGTAAGCTT chr4
+##  ...      ... ...
+##  [9]  1694122 ATTTTACGATACTGCTTATTT...CTAGGAAATTGGCAAAAACTC chr2h
+## [10]  2955737 ACCTCAGGAGTCCGAAGTATG...AGATATCTCCATGATACTGAG chr3h
+## [11]    88110 ACAAGGCAAGGCAAGGCAAGG...AGTTCGTCAAATGATTAAAAA chr4h
+## [12]   359526 ATGCCAAAAAATTGGAATTTC...AGATAGATAGATAGATAGATA chrXh
+## [13]   396896 CCAAAGGTTATCCAATCCGGA...ACTATAATAGACTTTATCCTA chrYh</code></pre>
+<p>… or extract the region of interest with the <code>GRranges</code> object
+previously defined:</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="sec-biostrings.html#cb200-1" tabindex="-1"></a>chr2L_dna <span class="ot">&lt;-</span> <span class="fu">getSeq</span>(Dmelanogaster, chr2L_range)</span>
+<span id="cb200-2"><a href="sec-biostrings.html#cb200-2" tabindex="-1"></a>chr2L_dna</span></code></pre></div>
 <pre><code>## DNAStringSet object of length 1:
 ##        width seq
 ## [1] 22407834 CGACAATGCACGACAGAGGAAGCAGAACAGAT...AAAGTTTCGAGTTAGTTGAAGGTGAGGGTGCT</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="sec-biostrings.html#cb200-1" tabindex="-1"></a><span class="fu">letterFrequency</span>(chr2L_dna, <span class="st">"GC"</span>, <span class="at">as.prob =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="sec-biostrings.html#cb202-1" tabindex="-1"></a><span class="fu">letterFrequency</span>(chr2L_dna, <span class="st">"GC"</span>, <span class="at">as.prob =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##            G|C
 ## [1,] 0.4190165</code></pre>
 <div class="question">
@@ -814,10 +834,10 @@ and T nucleotides in chromosome 2L.</p>
 ► Solution<span id="sol-start-23" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-23', 'sol-start-23')"></span>
 </p>
 <div id="sol-body-23" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="sec-biostrings.html#cb202-1" tabindex="-1"></a><span class="fu">letterFrequency</span>(chr2L_dna, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="sec-biostrings.html#cb204-1" tabindex="-1"></a><span class="fu">letterFrequency</span>(chr2L_dna, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>))</span></code></pre></div>
 <pre><code>##            A       G       C       T
 ## [1,] 6512712 4697776 4691476 6505770</code></pre>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="sec-biostrings.html#cb204-1" tabindex="-1"></a><span class="fu">letterFrequency</span>(chr2L_dna, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>), <span class="at">as.prob =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="sec-biostrings.html#cb206-1" tabindex="-1"></a><span class="fu">letterFrequency</span>(chr2L_dna, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"C"</span>, <span class="st">"T"</span>), <span class="at">as.prob =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##              A         G         C         T
 ## [1,] 0.2906444 0.2096488 0.2093677 0.2903346</code></pre>
 <p class="solution-end">
@@ -937,7 +957,7 @@ proteins.</p>
 <a href="sec-norm.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2025-10-06
+2025-10-14
  using 
 R version 4.5.0 (2025-04-11)
 </p>

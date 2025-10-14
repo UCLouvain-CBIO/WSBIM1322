@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2025-10-06" />
+<meta name="date" content="2025-10-14" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -274,7 +274,7 @@ what the experiment measures using a table.</p>
 ► Solution<span id="sol-start-31" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-31', 'sol-start-31')"></span>
 </p>
 <div id="sol-body-31" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="sec-mlintro.html#cb231-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(expd)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="sec-mlintro.html#cb233-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(expd)</span></code></pre></div>
 <table>
 <thead><tr class="header">
 <th align="left">sample</th>
@@ -452,14 +452,14 @@ the <code>cor</code> function.</p>
 ► Solution<span id="sol-start-32" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-32', 'sol-start-32')"></span>
 </p>
 <div id="sol-body-32" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="sec-mlintro.html#cb232-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">60</span>)</span>
-<span id="cb232-2"><a href="sec-mlintro.html#cb232-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">60</span>)</span>
-<span id="cb232-3"><a href="sec-mlintro.html#cb232-3" tabindex="-1"></a></span>
-<span id="cb232-4"><a href="sec-mlintro.html#cb232-4" tabindex="-1"></a><span class="do">## fit linear model</span></span>
-<span id="cb232-5"><a href="sec-mlintro.html#cb232-5" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
-<span id="cb232-6"><a href="sec-mlintro.html#cb232-6" tabindex="-1"></a></span>
-<span id="cb232-7"><a href="sec-mlintro.html#cb232-7" tabindex="-1"></a><span class="do">## slope</span></span>
-<span id="cb232-8"><a href="sec-mlintro.html#cb232-8" tabindex="-1"></a>fit</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="sec-mlintro.html#cb234-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb234-2"><a href="sec-mlintro.html#cb234-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">60</span>)</span>
+<span id="cb234-3"><a href="sec-mlintro.html#cb234-3" tabindex="-1"></a></span>
+<span id="cb234-4"><a href="sec-mlintro.html#cb234-4" tabindex="-1"></a><span class="do">## fit linear model</span></span>
+<span id="cb234-5"><a href="sec-mlintro.html#cb234-5" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb234-6"><a href="sec-mlintro.html#cb234-6" tabindex="-1"></a></span>
+<span id="cb234-7"><a href="sec-mlintro.html#cb234-7" tabindex="-1"></a><span class="do">## slope</span></span>
+<span id="cb234-8"><a href="sec-mlintro.html#cb234-8" tabindex="-1"></a>fit</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x)
@@ -467,17 +467,17 @@ the <code>cor</code> function.</p>
 ## Coefficients:
 ## (Intercept)            x  
 ##     0.14254     -0.01783</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="sec-mlintro.html#cb234-1" tabindex="-1"></a><span class="do">## correlation</span></span>
-<span id="cb234-2"><a href="sec-mlintro.html#cb234-2" tabindex="-1"></a><span class="fu">cor</span>(x, y)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="sec-mlintro.html#cb236-1" tabindex="-1"></a><span class="do">## correlation</span></span>
+<span id="cb236-2"><a href="sec-mlintro.html#cb236-2" tabindex="-1"></a><span class="fu">cor</span>(x, y)</span></code></pre></div>
 <pre><code>## [1] -0.02063402</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="sec-mlintro.html#cb236-1" tabindex="-1"></a><span class="do">## with base graphics</span></span>
-<span id="cb236-2"><a href="sec-mlintro.html#cb236-2" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
-<span id="cb236-3"><a href="sec-mlintro.html#cb236-3" tabindex="-1"></a><span class="fu">abline</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="sec-mlintro.html#cb238-1" tabindex="-1"></a><span class="do">## with base graphics</span></span>
+<span id="cb238-2"><a href="sec-mlintro.html#cb238-2" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb238-3"><a href="sec-mlintro.html#cb238-3" tabindex="-1"></a><span class="fu">abline</span>(fit)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/corex1-1.png" width="672"></p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="sec-mlintro.html#cb237-1" tabindex="-1"></a><span class="do">## or with ggplot2</span></span>
-<span id="cb237-2"><a href="sec-mlintro.html#cb237-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x, y),</span>
-<span id="cb237-3"><a href="sec-mlintro.html#cb237-3" tabindex="-1"></a>       <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb237-4"><a href="sec-mlintro.html#cb237-4" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="sec-mlintro.html#cb239-1" tabindex="-1"></a><span class="do">## or with ggplot2</span></span>
+<span id="cb239-2"><a href="sec-mlintro.html#cb239-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x, y),</span>
+<span id="cb239-3"><a href="sec-mlintro.html#cb239-3" tabindex="-1"></a>       <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb239-4"><a href="sec-mlintro.html#cb239-4" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/corex1-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -518,17 +518,17 @@ data?</p>
 ► Solution<span id="sol-start-33" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-33', 'sol-start-33')"></span>
 </p>
 <div id="sol-body-33" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="sec-mlintro.html#cb238-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb238-2"><a href="sec-mlintro.html#cb238-2" tabindex="-1"></a>rs <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">100</span>, <span class="fu">cor</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>)))</span>
-<span id="cb238-3"><a href="sec-mlintro.html#cb238-3" tabindex="-1"></a><span class="fu">summary</span>(rs)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="sec-mlintro.html#cb240-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb240-2"><a href="sec-mlintro.html#cb240-2" tabindex="-1"></a>rs <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">100</span>, <span class="fu">cor</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>)))</span>
+<span id="cb240-3"><a href="sec-mlintro.html#cb240-3" tabindex="-1"></a><span class="fu">summary</span>(rs)</span></code></pre></div>
 <pre><code>##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
 ## -0.8194367 -0.2280550 -0.0009475  0.0055001  0.2118503  0.7977295</code></pre>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="sec-mlintro.html#cb240-1" tabindex="-1"></a><span class="do">## Assuming a totally arbitrary value of 0.75, we would get</span></span>
-<span id="cb240-2"><a href="sec-mlintro.html#cb240-2" tabindex="-1"></a>rs[<span class="fu">abs</span>(rs) <span class="sc">&gt;</span> .<span class="dv">75</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="sec-mlintro.html#cb242-1" tabindex="-1"></a><span class="do">## Assuming a totally arbitrary value of 0.75, we would get</span></span>
+<span id="cb242-2"><a href="sec-mlintro.html#cb242-2" tabindex="-1"></a>rs[<span class="fu">abs</span>(rs) <span class="sc">&gt;</span> .<span class="dv">75</span>]</span></code></pre></div>
 <pre><code>## [1]  0.7941876  0.7977295 -0.8194367</code></pre>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="sec-mlintro.html#cb242-1" tabindex="-1"></a><span class="fu">hist</span>(rs)</span>
-<span id="cb242-2"><a href="sec-mlintro.html#cb242-2" tabindex="-1"></a><span class="fu">rug</span>(rs)</span>
-<span id="cb242-3"><a href="sec-mlintro.html#cb242-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> rs[<span class="fu">abs</span>(rs) <span class="sc">&gt;</span> .<span class="dv">75</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="sec-mlintro.html#cb244-1" tabindex="-1"></a><span class="fu">hist</span>(rs)</span>
+<span id="cb244-2"><a href="sec-mlintro.html#cb244-2" tabindex="-1"></a><span class="fu">rug</span>(rs)</span>
+<span id="cb244-3"><a href="sec-mlintro.html#cb244-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> rs[<span class="fu">abs</span>(rs) <span class="sc">&gt;</span> .<span class="dv">75</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/corex2-1.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -546,11 +546,11 @@ measuring distances between all the samples, or each sample to a
 virtual <em>average sample</em>. Let’s try this ourselves for a dataset of 5
 sample that have each been characterised by measuring the expression
 of genes <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="sec-mlintro.html#cb243-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
-<span id="cb243-2"><a href="sec-mlintro.html#cb243-2" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb243-3"><a href="sec-mlintro.html#cb243-3" tabindex="-1"></a>                      <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb243-4"><a href="sec-mlintro.html#cb243-4" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
-<span id="cb243-5"><a href="sec-mlintro.html#cb243-5" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="sec-mlintro.html#cb245-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
+<span id="cb245-2"><a href="sec-mlintro.html#cb245-2" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb245-3"><a href="sec-mlintro.html#cb245-3" tabindex="-1"></a>                      <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
+<span id="cb245-4"><a href="sec-mlintro.html#cb245-4" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb245-5"><a href="sec-mlintro.html#cb245-5" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:dist0"></span>
 <p class="caption marginnote shownote">
@@ -562,7 +562,7 @@ Figure 6.5: A simulated dataset composed of 5 samples.
 calculating all pairwise <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean
 distances</a> with the
 <code>dist</code>.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="sec-mlintro.html#cb244-1" tabindex="-1"></a><span class="fu">dist</span>(samples)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="sec-mlintro.html#cb246-1" tabindex="-1"></a><span class="fu">dist</span>(samples)</span></code></pre></div>
 <pre><code>##           1         2         3         4
 ## 2 1.7327389                              
 ## 3 1.2738181 0.4876129                    
@@ -615,18 +615,18 @@ real data points.</li>
 ► Solution<span id="sol-start-34" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-34', 'sol-start-34')"></span>
 </p>
 <div id="sol-body-34" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="sec-mlintro.html#cb246-1" tabindex="-1"></a>avg_sample <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(samples)</span>
-<span id="cb246-2"><a href="sec-mlintro.html#cb246-2" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
-<span id="cb246-3"><a href="sec-mlintro.html#cb246-3" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb246-4"><a href="sec-mlintro.html#cb246-4" tabindex="-1"></a><span class="fu">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="sec-mlintro.html#cb248-1" tabindex="-1"></a>avg_sample <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(samples)</span>
+<span id="cb248-2"><a href="sec-mlintro.html#cb248-2" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb248-3"><a href="sec-mlintro.html#cb248-3" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb248-4"><a href="sec-mlintro.html#cb248-4" tabindex="-1"></a><span class="fu">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/dist2-1.png" width="672"></p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="sec-mlintro.html#cb247-1" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">rbind</span>(samples, avg_sample))</span>
-<span id="cb247-2"><a href="sec-mlintro.html#cb247-2" tabindex="-1"></a><span class="do">## convert the object of `dist` to a matrix that we can subset easily</span></span>
-<span id="cb247-3"><a href="sec-mlintro.html#cb247-3" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dists)</span>
-<span id="cb247-4"><a href="sec-mlintro.html#cb247-4" tabindex="-1"></a>dists[<span class="dv">6</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="sec-mlintro.html#cb249-1" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">rbind</span>(samples, avg_sample))</span>
+<span id="cb249-2"><a href="sec-mlintro.html#cb249-2" tabindex="-1"></a><span class="do">## convert the object of `dist` to a matrix that we can subset easily</span></span>
+<span id="cb249-3"><a href="sec-mlintro.html#cb249-3" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dists)</span>
+<span id="cb249-4"><a href="sec-mlintro.html#cb249-4" tabindex="-1"></a>dists[<span class="dv">6</span>, ]</span></code></pre></div>
 <pre><code>##         1         2         3         4         5         6 
 ## 1.2133510 0.7753119 0.3627020 1.7363209 0.4858024 0.0000000</code></pre>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="sec-mlintro.html#cb249-1" tabindex="-1"></a><span class="fu">which.max</span>(dists[<span class="dv">6</span>, ])</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="sec-mlintro.html#cb251-1" tabindex="-1"></a><span class="fu">which.max</span>(dists[<span class="dv">6</span>, ])</span></code></pre></div>
 <pre><code>## 4 
 ## 4</code></pre>
 <p class="solution-end">
@@ -656,16 +656,16 @@ uniformely distributed points that are outliers. In 50 dimension,
 there are already 60% of the points that are outliers; in 100
 dimensions, almost 90% of the points are outliers.</p>
 </blockquote>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="sec-mlintro.html#cb251-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">200</span></span>
-<span id="cb251-2"><a href="sec-mlintro.html#cb251-2" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb251-3"><a href="sec-mlintro.html#cb251-3" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">lapply</span>(d, <span class="cf">function</span>(i) <span class="fu">replicate</span>(i, <span class="fu">runif</span>(N)))</span>
-<span id="cb251-4"><a href="sec-mlintro.html#cb251-4" tabindex="-1"></a>nout <span class="ot">&lt;-</span> <span class="cf">function</span>(m) <span class="fu">mean</span>(<span class="fu">apply</span>(m, <span class="dv">1</span>, <span class="cf">function</span>(i) <span class="fu">any</span>(i <span class="sc">&lt;</span> <span class="fl">0.01</span> <span class="sc">|</span> i <span class="sc">&gt;</span> <span class="fl">0.99</span>)))</span>
-<span id="cb251-5"><a href="sec-mlintro.html#cb251-5" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">sapply</span>(dat, nout)</span>
-<span id="cb251-6"><a href="sec-mlintro.html#cb251-6" tabindex="-1"></a><span class="fu">plot</span>(res, <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb251-7"><a href="sec-mlintro.html#cb251-7" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of dimensions"</span>,</span>
-<span id="cb251-8"><a href="sec-mlintro.html#cb251-8" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of 1% outliers"</span>,</span>
-<span id="cb251-9"><a href="sec-mlintro.html#cb251-9" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Curse of Dimensionality"</span>)</span>
-<span id="cb251-10"><a href="sec-mlintro.html#cb251-10" tabindex="-1"></a><span class="fu">grid</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="sec-mlintro.html#cb253-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">200</span></span>
+<span id="cb253-2"><a href="sec-mlintro.html#cb253-2" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb253-3"><a href="sec-mlintro.html#cb253-3" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">lapply</span>(d, <span class="cf">function</span>(i) <span class="fu">replicate</span>(i, <span class="fu">runif</span>(N)))</span>
+<span id="cb253-4"><a href="sec-mlintro.html#cb253-4" tabindex="-1"></a>nout <span class="ot">&lt;-</span> <span class="cf">function</span>(m) <span class="fu">mean</span>(<span class="fu">apply</span>(m, <span class="dv">1</span>, <span class="cf">function</span>(i) <span class="fu">any</span>(i <span class="sc">&lt;</span> <span class="fl">0.01</span> <span class="sc">|</span> i <span class="sc">&gt;</span> <span class="fl">0.99</span>)))</span>
+<span id="cb253-5"><a href="sec-mlintro.html#cb253-5" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">sapply</span>(dat, nout)</span>
+<span id="cb253-6"><a href="sec-mlintro.html#cb253-6" tabindex="-1"></a><span class="fu">plot</span>(res, <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb253-7"><a href="sec-mlintro.html#cb253-7" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of dimensions"</span>,</span>
+<span id="cb253-8"><a href="sec-mlintro.html#cb253-8" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of 1% outliers"</span>,</span>
+<span id="cb253-9"><a href="sec-mlintro.html#cb253-9" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Curse of Dimensionality"</span>)</span>
+<span id="cb253-10"><a href="sec-mlintro.html#cb253-10" tabindex="-1"></a><span class="fu">grid</span>()</span></code></pre></div>
 <p><img src="WSBIM1322_files/figure-html/curse-1.png" width="672"></p>
 </div>
 <div id="machine-learning" class="section level2" number="6.5">
@@ -758,7 +758,7 @@ but these are beyond the scope of this course.</p>
 <a href="sec-testing.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2025-10-06
+2025-10-14
  using 
 R version 4.5.0 (2025-04-11)
 </p>
