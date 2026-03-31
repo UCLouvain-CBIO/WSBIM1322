@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2026-02-26" />
+<meta name="date" content="2026-03-31" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -643,17 +643,17 @@ graphics <code>hist()</code> and <code>plot(density())</code>, and using <code>g
 </p>
 <div id="sol-body-21" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="sec-biostrings.html#cb177-1" tabindex="-1"></a><span class="fu">hist</span>(gc_content)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/letterfreqex3a-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/letterfreqex3a-1.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="sec-biostrings.html#cb178-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(gc_content))</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/letterfreqex3a-2.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/letterfreqex3a-2.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-biostrings.html#cb179-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
 <span id="cb179-2"><a href="sec-biostrings.html#cb179-2" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(gc_content) <span class="sc">%&gt;%</span></span>
 <span id="cb179-3"><a href="sec-biostrings.html#cb179-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">G|C</span><span class="st">`</span>))</span>
 <span id="cb179-4"><a href="sec-biostrings.html#cb179-4" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
-<p><img src="WSBIM1322_files/figure-html/letterfreqex3b-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/letterfreqex3b-1.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="sec-biostrings.html#cb181-1" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/letterfreqex3b-2.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/letterfreqex3b-2.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -961,7 +961,7 @@ proteins.</p>
 <a href="sec-norm.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-02-26
+2026-03-31
  using 
 R version 4.5.0 (2025-04-11)
 </p>

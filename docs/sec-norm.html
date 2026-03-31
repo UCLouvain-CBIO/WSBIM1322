@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2026-02-26" />
+<meta name="date" content="2026-03-31" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -453,7 +453,7 @@ values. Visualise and interpret the centred data.</p>
 <span id="cb212-2"><a href="sec-norm.html#cb212-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x))</span>
 <span id="cb212-3"><a href="sec-norm.html#cb212-3" tabindex="-1"></a>    x[, i] <span class="ot">&lt;-</span> x[, i] <span class="sc">-</span> cmns[i]</span>
 <span id="cb212-4"><a href="sec-norm.html#cb212-4" tabindex="-1"></a><span class="fu">boxplot</span>(x)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-24-1.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -485,7 +485,7 @@ by it. Visualise and interpret the centred data.</p>
 <span id="cb213-2"><a href="sec-norm.html#cb213-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x))</span>
 <span id="cb213-3"><a href="sec-norm.html#cb213-3" tabindex="-1"></a>    x[, i] <span class="ot">&lt;-</span> x[, i] <span class="sc">/</span> csdvs[i]</span>
 <span id="cb213-4"><a href="sec-norm.html#cb213-4" tabindex="-1"></a><span class="fu">boxplot</span>(x)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-25-1.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -586,13 +586,13 @@ the data, you can use the <code>logTransform()</code> and <code>normalize(method
 <span id="cb222-8"><a href="sec-norm.html#cb222-8" tabindex="-1"></a>                 <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
 <span id="cb222-9"><a href="sec-norm.html#cb222-9" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> expression, <span class="at">colour =</span> sample)) <span class="sc">+</span></span>
 <span id="cb222-10"><a href="sec-norm.html#cb222-10" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/quantnormex-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/quantnormex-1.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="sec-norm.html#cb223-1" tabindex="-1"></a><span class="fu">as_tibble</span>(<span class="fu">assay</span>(cptac_quant)) <span class="sc">%&gt;%</span></span>
 <span id="cb223-2"><a href="sec-norm.html#cb223-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"sample"</span>, <span class="at">values_to =</span> <span class="st">"expression"</span>,</span>
 <span id="cb223-3"><a href="sec-norm.html#cb223-3" tabindex="-1"></a>                 <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
 <span id="cb223-4"><a href="sec-norm.html#cb223-4" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> expression, <span class="at">colour =</span> sample)) <span class="sc">+</span></span>
 <span id="cb223-5"><a href="sec-norm.html#cb223-5" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/quantnormex-2.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/quantnormex-2.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -671,14 +671,14 @@ of occurences of 1, 2, 3, … missing values.</p>
 ## M2F11A  M2F2B  M2F5B  M2F8B M2F11B 
 ##     45     51     43     57     53</code></pre>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="sec-norm.html#cb226-1" tabindex="-1"></a><span class="fu">barplot</span>(col_na)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-26-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-26-1.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="sec-norm.html#cb227-1" tabindex="-1"></a>row_na <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">is.na</span>(<span class="fu">assay</span>(se_na2)))</span>
 <span id="cb227-2"><a href="sec-norm.html#cb227-2" tabindex="-1"></a><span class="fu">table</span>(row_na)</span></code></pre></div>
 <pre><code>## row_na
 ##   0   1   2   3   4   8   9  10 
 ## 301 247  91  13   2  23  10   2</code></pre>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="sec-norm.html#cb229-1" tabindex="-1"></a><span class="fu">hist</span>(row_na)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-26-2.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-26-2.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -731,7 +731,7 @@ recommended.)</p>
 (red) and B (green) with 3 replicates in each) and asked to analyse
 it. What are your thoughts about these data and what are the
 implications for the normalisation step?</p>
-<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/unnamed-chunk-28-1.png" alt="" width="672"></p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -759,7 +759,7 @@ samples distributions at each step. Interpret what you see.</p>
 <a href="sec-mlintro.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-02-26
+2026-03-31
  using 
 R version 4.5.0 (2025-04-11)
 </p>

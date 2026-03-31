@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2026-02-26" />
+<meta name="date" content="2026-03-31" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -473,12 +473,12 @@ the <code>cor</code> function.</p>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="sec-mlintro.html#cb237-1" tabindex="-1"></a><span class="do">## with base graphics</span></span>
 <span id="cb237-2"><a href="sec-mlintro.html#cb237-2" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
 <span id="cb237-3"><a href="sec-mlintro.html#cb237-3" tabindex="-1"></a><span class="fu">abline</span>(fit)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/corex1-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/corex1-1.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="sec-mlintro.html#cb238-1" tabindex="-1"></a><span class="do">## or with ggplot2</span></span>
 <span id="cb238-2"><a href="sec-mlintro.html#cb238-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(x, y),</span>
 <span id="cb238-3"><a href="sec-mlintro.html#cb238-3" tabindex="-1"></a>       <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
 <span id="cb238-4"><a href="sec-mlintro.html#cb238-4" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/corex1-2.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/corex1-2.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -529,7 +529,7 @@ data?</p>
 <div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="sec-mlintro.html#cb243-1" tabindex="-1"></a><span class="fu">hist</span>(rs)</span>
 <span id="cb243-2"><a href="sec-mlintro.html#cb243-2" tabindex="-1"></a><span class="fu">rug</span>(rs)</span>
 <span id="cb243-3"><a href="sec-mlintro.html#cb243-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> rs[<span class="fu">abs</span>(rs) <span class="sc">&gt;</span> .<span class="dv">75</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="st">"dotted"</span>)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/corex2-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/corex2-1.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -619,7 +619,7 @@ real data points.</li>
 <span id="cb247-2"><a href="sec-mlintro.html#cb247-2" tabindex="-1"></a><span class="fu">plot</span>(samples, <span class="at">cex =</span> <span class="dv">3</span>)</span>
 <span id="cb247-3"><a href="sec-mlintro.html#cb247-3" tabindex="-1"></a><span class="fu">text</span>(samples<span class="sc">$</span>x, samples<span class="sc">$</span>y, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
 <span id="cb247-4"><a href="sec-mlintro.html#cb247-4" tabindex="-1"></a><span class="fu">points</span>(avg_sample[<span class="st">"x"</span>], avg_sample[<span class="st">"y"</span>], <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/dist2-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/dist2-1.png" alt="" width="672"></p>
 <div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="sec-mlintro.html#cb248-1" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">dist</span>(<span class="fu">rbind</span>(samples, avg_sample))</span>
 <span id="cb248-2"><a href="sec-mlintro.html#cb248-2" tabindex="-1"></a><span class="do">## convert the object of `dist` to a matrix that we can subset easily</span></span>
 <span id="cb248-3"><a href="sec-mlintro.html#cb248-3" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dists)</span>
@@ -666,7 +666,7 @@ dimensions, almost 90% of the points are outliers.</p>
 <span id="cb252-8"><a href="sec-mlintro.html#cb252-8" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of 1% outliers"</span>,</span>
 <span id="cb252-9"><a href="sec-mlintro.html#cb252-9" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Curse of Dimensionality"</span>)</span>
 <span id="cb252-10"><a href="sec-mlintro.html#cb252-10" tabindex="-1"></a><span class="fu">grid</span>()</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/curse-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/curse-1.png" alt="" width="672"></p>
 </div>
 <div id="machine-learning" class="section level2" number="6.5">
 <h2>
@@ -758,7 +758,7 @@ but these are beyond the scope of this course.</p>
 <a href="sec-testing.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-02-26
+2026-03-31
  using 
 R version 4.5.0 (2025-04-11)
 </p>

@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto" />
 
-<meta name="date" content="2026-02-26" />
+<meta name="date" content="2026-03-31" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -420,7 +420,7 @@ correlation:</p>
 <a href="sec-obj.html#sec-obj">3</a>) clearly indicate fundamental differences in these
 data, the most simple and straightforward approach in <em>visualisation</em>
 is to highlight the fundamental differences in the datasets.</p>
-<p><img src="WSBIM1322_files/figure-html/anscombefig-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/anscombefig-1.png" alt="" width="672"></p>
 <p>See also another, more recent example:
 <a href="https://www.autodeskresearch.com/publications/samestats">The Datasaurus Dozen dataset</a>.</p>
 <p><img src="https://www.research.autodesk.com/app/uploads/2023/03/AllDinos-2.png"></p>
@@ -510,7 +510,7 @@ using base graphics?</p>
 </p>
 <div id="sol-body-1" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="sec-vis.html#cb9-1" tabindex="-1"></a><span class="fu">plot</span>(DNase<span class="sc">$</span>conc, DNase<span class="sc">$</span>density, <span class="at">col =</span> DNase<span class="sc">$</span>Run)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/colbyrun-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/colbyrun-1.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -949,7 +949,7 @@ of the data.</p>
 <span id="cb36-9"><a href="sec-vis.html#cb36-9" tabindex="-1"></a>p2 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(sim, <span class="fu">aes</span>(<span class="fu">log</span>(x))) <span class="sc">+</span></span>
 <span id="cb36-10"><a href="sec-vis.html#cb36-10" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>)</span>
 <span id="cb36-11"><a href="sec-vis.html#cb36-11" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code></pre></div>
-<pre><code>## Warning: Removed 8159 rows containing non-finite outside the scale range
+<pre><code>## Warning: Removed 7864 rows containing non-finite outside the scale range
 ## (`stat_bin()`).</code></pre>
 <div class="figure">
 <span style="display:block;" id="fig:sim"></span>
@@ -1090,7 +1090,7 @@ Gata6 and Sox2 genes in the <code>genes</code> data using histograms.</p>
 <span id="cb46-2"><a href="sec-vis.html#cb46-2" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb46-3"><a href="sec-vis.html#cb46-3" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> gene)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
-<p><img src="WSBIM1322_files/figure-html/hist2-1.png" width="672"></p>
+<p><img src="WSBIM1322_files/figure-html/hist2-1.png" alt="" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -1176,9 +1176,9 @@ and produces a scatterplot. Your function should test if the provided
 probe sets are valid before producing the plot and inform
 otherwise. Below are some example outputs.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sec-vis.html#cb50-1" tabindex="-1"></a><span class="fu">plot_probe_sets</span>(<span class="st">"X1426642_at"</span>, <span class="st">"X1420085_at"</span>, <span class="at">data =</span> hiiragi2013df1)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/visfun-1.png" width="768"></p>
+<p><img src="WSBIM1322_files/figure-html/visfun-1.png" alt="" width="768"></p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sec-vis.html#cb51-1" tabindex="-1"></a><span class="fu">ggplot_probe_sets</span>(<span class="st">"X1426642_at"</span>, <span class="st">"X1420085_at"</span>, <span class="at">data =</span> hiiragi2013df1)</span></code></pre></div>
-<p><img src="WSBIM1322_files/figure-html/visfun-2.png" width="768"></p>
+<p><img src="WSBIM1322_files/figure-html/visfun-2.png" alt="" width="768"></p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="sec-vis.html#cb52-1" tabindex="-1"></a><span class="fu">try</span>(<span class="fu">plot_probe_sets</span>(<span class="st">"X1416967_at"</span>, <span class="st">"123_at"</span>))</span></code></pre></div>
 <pre><code>## Error in plot_probe_sets("X1416967_at", "123_at") : 
 ##   y %in% colnames(hiiragi2013df1)[1:6] is not TRUE</code></pre>
@@ -1195,7 +1195,7 @@ otherwise. Below are some example outputs.</p>
 <a href="sec-obj.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2026-02-26
+2026-03-31
  using 
 R version 4.5.0 (2025-04-11)
 </p>
